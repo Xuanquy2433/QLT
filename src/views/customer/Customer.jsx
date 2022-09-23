@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Button } from '@mui/material';
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
@@ -28,35 +29,60 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'density',
-        label: 'Density',
+        id: 'update',
+        label: 'update',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toFixed(2),
     },
+    {
+        id: 'delete',
+        label: 'delete',
+        minWidth: 170,
+        align: 'right',
+    },
 ];
 
-function createData(name, code, population, size) {
+function createData(name, code, population, size, update) {
     const density = population / size;
-    return { name, code, population, size, density };
+    return { name, code, population, size, density, update };
 }
 
 const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-    createData('United States', 'US', 327167434, 9833520),
-    createData('Canada', 'CA', 37602103, 9984670),
-    createData('Australia', 'AU', 25475400, 7692024),
-    createData('Germany', 'DE', 83019200, 357578),
-    createData('Ireland', 'IE', 4857000, 70273),
-    createData('Mexico', 'MX', 126577691, 1972550),
-    createData('Japan', 'JP', 126317000, 377973),
-    createData('France', 'FR', 67022000, 640679),
-    createData('United Kingdom', 'GB', 67545757, 242495),
-    createData('Russia', 'RU', 146793744, 17098246),
-    createData('Nigeria', 'NG', 200962417, 923768),
-    createData('Brazil', 'BR', 210147125, 8515767),
+    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },
+    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },
+    // createData('India', 'IN', 1324171354, 3287263, <Button variant="contained">Contained</Button>),
+    // createData('China', 'CN', 1403500365, 9596961, <Button variant="contained">Contained</Button>),
+    // createData('Italy', 'IT', 60483973, 301340, <Button variant="contained">Contained</Button>),
+    // createData('India', 'IN', 1324171354, 3287263, <Button variant="contained">Contained</Button>),
 ];
 
 export default function PostCustomer() {
@@ -96,23 +122,16 @@ export default function PostCustomer() {
                             <TableBody>
                                 {rows
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((row) => {
-                                        return (
-                                            <TableRow hover role="checkbox">
-                                                {columns.map((column) => {
-                                                    const value = row[column.id];
-                                                    return (
-                                                        <TableCell key={column.id} align={column.align}>
-                                                            {column.format && typeof value === 'number'
-                                                                ? column.format(value)
-                                                                : value}
-                                                              
-                                                        </TableCell>
-                                                    );
-                                                })}
-                                            </TableRow>
-                                        );
-                                    })}
+                                    .map((item, index) => (
+                                        <TableRow hover role="checkbox">
+                                            <TableCell>{item.name}</TableCell>
+                                            <TableCell > {item.code} </TableCell>
+                                            <TableCell sx={{ textAlign: 'right'}}>  {item.density} </TableCell>
+                                            <TableCell  sx={{ textAlign: 'right'}}> {item.size}</TableCell>
+                                            <TableCell  sx={{ textAlign: 'right'}}><Button variant="contained">update</Button></TableCell>
+                                            <TableCell  sx={{ textAlign: 'right'}}><Button variant="contained">delete</Button></TableCell>
+                                        </TableRow>
+                                    ))}
                             </TableBody>
                         </Table>
                     </TableContainer>

@@ -1,5 +1,5 @@
 import React from 'react'
-import PostCustomer from './PostCustomer'
+import PostCustomer from './Customer'
 
 export default function ListPostCustomer() {
   return (
