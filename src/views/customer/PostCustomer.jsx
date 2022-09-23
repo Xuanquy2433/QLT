@@ -10,6 +10,12 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import InputBase from '@mui/material/InputBase';
+import Divider from '@mui/material/Divider';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import { Button, IconButton } from '@mui/material';
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
@@ -75,15 +81,27 @@ export default function PostCustomer() {
         <>
             <div style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8">
 
-                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                    <TextField sx={{ mt: "7px" }} id="outlined-basic" label="Search" variant="outlined" />
+                <Paper sx={{ width: '100%', overflow: 'hidden', padding: '15px' }}>
+                    <Button sx={{ mt: "7px" }} id="outlined-basic" variant="outlined">Add</Button>
 
-                    <TableContainer sx={{ maxHeight: 505 }}>
-                        <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
+                    <IconButton sx={{ p: '10px' }} aria-label="menu">
+                    </IconButton>
+                    <InputBase
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search Google Maps"
+                        inputProps={{ 'aria-label': 'search google maps' }}
+                    />
+                    <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                    <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
+                    <TableContainer >
+                        <Table aria-label="sticky table">
+                            <TableHead >
+                                <TableRow >
                                     {columns.map((column) => (
-                                        <TableCell
+                                        <TableCell sx={{ color: 'black', fontWeight: '550', fontSize: '17px' }}
                                             key={column.id}
                                             align={column.align}
                                             style={{ minWidth: column.minWidth }}
@@ -106,7 +124,7 @@ export default function PostCustomer() {
                                                             {column.format && typeof value === 'number'
                                                                 ? column.format(value)
                                                                 : value}
-                                                              
+
                                                         </TableCell>
                                                     );
                                                 })}
