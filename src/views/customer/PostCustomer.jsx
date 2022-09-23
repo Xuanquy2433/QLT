@@ -87,12 +87,12 @@ export default function PostCustomer() {
                     <IconButton sx={{ p: '10px' }} aria-label="menu">
                     </IconButton>
                     <InputBase
-                        sx={{ ml: 1, flex: 1 }}
+                        sx={{ ml: 1, flex: 1,border: '1px solid #ddd',padding: '5px' }}
                         placeholder="Search Google Maps"
                         inputProps={{ 'aria-label': 'search google maps' }}
                     />
-                    <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                        <SearchIcon />
+                    <IconButton type="button" sx={{ p: '10px'}} >
+                        <SearchIcon sx={{borderRadius: '0'}} />
                     </IconButton>
                     <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
