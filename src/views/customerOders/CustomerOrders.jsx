@@ -85,7 +85,7 @@ const rows = [
     // createData('India', 'IN', 1324171354, 3287263, <Button variant="contained">Contained</Button>),
 ];
 
-export default function Customer() {
+export default function CustomerOrders() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

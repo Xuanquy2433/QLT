@@ -23,6 +23,8 @@ import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import AdminCustomer from "views/controller/AdminCustomer";
+import AdminCustomerOrders from "views/controller/AdminCustomerOrders";
+import AdminPillar from "views/controller/AdminPillar";
 
 var routes = [
   {
@@ -40,10 +42,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/icons",
+    path: "/pillars",
     name: "Trụ",
     icon: "ni ni-archive-2 text-pink",
-    component: Icons,
+    component: AdminPillar,
     layout: "/admin"
   },
   {
@@ -61,10 +63,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/icons",
+    path: "/customerOrders",
     name: "Khách đã thuê",
     icon: "ni ni-calendar-grid-58 text-green",
-    component: Icons,
+    component: AdminCustomerOrders,
     layout: "/admin"
   },
   {

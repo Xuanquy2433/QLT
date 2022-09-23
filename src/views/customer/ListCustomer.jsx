@@ -1,10 +1,10 @@
 import React from 'react'
-import PostCustomer from './Customer'
+import Customer from './Customer'
 
-export default function ListPostCustomer() {
+export default function ListCustomer() {
   return (
     <div>
-        <PostCustomer/>
+        <Customer/>
     </div>
   )
 }
