@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
@@ -133,12 +134,15 @@ export default function Customer() {
                                                             href="#pablo"
                                                             onClick={(e) => e.preventDefault()}
                                                         >
+                                                            <i className='ni ni-fat-delete'></i>
+
                                                             Delete
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
                                                             onClick={(e) => e.preventDefault()}
                                                         >
+                                                            <EditIcon></EditIcon>
                                                             Update
                                                         </DropdownItem>
                                                     </DropdownMenu>
