@@ -99,6 +99,7 @@ export default function Pillar() {
     };
     return (
         <>
+        
             <div style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8">
 
                 <Paper sx={{ width: '100%', overflow: 'hidden' }}>
