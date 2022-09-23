@@ -22,6 +22,7 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+import AdminCustomer from "views/controller/AdminCustomer";
 
 var routes = [
   {
@@ -67,10 +68,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/icons",
+    path: "/customers",
     name: "Khách hàng",
     icon: "ni ni-badge text-red",
-    component: Icons,
+    component: AdminCustomer,
     layout: "/admin"
   },
   {
