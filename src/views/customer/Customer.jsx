@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@mui/material';
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
@@ -27,19 +28,6 @@ const columns = [
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'update',
-        label: 'update',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toFixed(2),
-    },
-    {
-        id: 'delete',
-        label: 'delete',
-        minWidth: 170,
-        align: 'right',
     },
 ];
 
@@ -128,8 +116,34 @@ export default function Customer() {
                                             <TableCell > {item.code} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}>  {item.density} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}> {item.size}</TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}><Button variant="contained">update</Button></TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}><Button variant="contained">delete</Button></TableCell>
+                                            <TableCell>
+                                                <UncontrolledDropdown>
+                                                    <DropdownToggle
+                                                        className="btn-icon-only text-light"
+                                                        href="#pablo"
+                                                        role="button"
+                                                        size="sm"
+                                                        color=""
+                                                        onClick={(e) => e.preventDefault()}
+                                                    >
+                                                        <i className="fas fa-ellipsis-v" />
+                                                    </DropdownToggle>
+                                                    <DropdownMenu className="dropdown-menu-arrow" right>
+                                                        <DropdownItem
+                                                            href="#pablo"
+                                                            onClick={(e) => e.preventDefault()}
+                                                        >
+                                                            Delete
+                                                        </DropdownItem>
+                                                        <DropdownItem
+                                                            href="#pablo"
+                                                            onClick={(e) => e.preventDefault()}
+                                                        >
+                                                            Update
+                                                        </DropdownItem>
+                                                    </DropdownMenu>
+                                                </UncontrolledDropdown>
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                             </TableBody>
