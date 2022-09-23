@@ -84,12 +84,10 @@ export default function PostCustomer() {
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '15px' }}>
                     <Button sx={{ mt: "7px" }} id="outlined-basic" variant="outlined">Add</Button>
 
-                    <IconButton sx={{ p: '10px' }} aria-label="menu">
-                    </IconButton>
                     <InputBase
                         sx={{ ml: 1, flex: 1,border: '1px solid #ddd',padding: '5px' }}
-                        placeholder="Search Google Maps"
-                        inputProps={{ 'aria-label': 'search google maps' }}
+                        placeholder="Search name"
+                        inputProps={{ 'aria-label': 'search name' }}
                     />
                     <IconButton type="button" sx={{ p: '10px'}} >
                         <SearchIcon sx={{borderRadius: '0'}} />
