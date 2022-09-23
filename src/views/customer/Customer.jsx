@@ -12,6 +12,8 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
+import DeleteIcon  from '@mui/icons-material/Delete';
+
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
@@ -112,7 +114,7 @@ export default function Customer() {
                                 {rows
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
-                                        <TableRow hover role="checkbox">
+                                        <TableRow key={index} hover role="checkbox">
                                             <TableCell>{item.name}</TableCell>
                                             <TableCell > {item.code} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}>  {item.density} </TableCell>
@@ -134,8 +136,7 @@ export default function Customer() {
                                                             href="#pablo"
                                                             onClick={(e) => e.preventDefault()}
                                                         >
-                                                            <i className='ni ni-fat-delete'></i>
-
+                                                           <DeleteIcon></DeleteIcon> 
                                                             Delete
                                                         </DropdownItem>
                                                         <DropdownItem
