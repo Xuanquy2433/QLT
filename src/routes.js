@@ -39,6 +39,41 @@ var routes = [
     layout: "/admin"
   },
   {
+    path: "/icons",
+    name: "Trụ",
+    icon: "ni ni-archive-2 text-pink",
+    component: Icons,
+    layout: "/admin"
+  },
+  {
+    path: "/icons",
+    name: "Trụ đã cho thuê",
+    icon: "ni ni-delivery-fast text-blue",
+    component: Icons,
+    layout: "/admin"
+  },
+  {
+    path: "/icons",
+    name: "Trụ chưa cho thuê",
+    icon: "ni ni-money-coins text-black",
+    component: Icons,
+    layout: "/admin"
+  },
+  {
+    path: "/icons",
+    name: "Khách đã thuê",
+    icon: "ni ni-calendar-grid-58 text-green",
+    component: Icons,
+    layout: "/admin"
+  },
+  {
+    path: "/icons",
+    name: "Khách hàng",
+    icon: "ni ni-badge text-red",
+    component: Icons,
+    layout: "/admin"
+  },
+  {
     path: "/maps",
     name: "Maps",
     icon: "ni ni-pin-3 text-orange",

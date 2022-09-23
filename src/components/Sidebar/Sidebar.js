@@ -73,7 +73,7 @@ const Sidebar = (props) => {
   console.log('local , ', local.role);
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (local.role === 'user' && prop.path !== '/login') {
+      if (local.role === 'user' && prop.path !== '/login' && prop.path !== '/register') {
         return (
           <NavItem key={key}>
             <NavLink
