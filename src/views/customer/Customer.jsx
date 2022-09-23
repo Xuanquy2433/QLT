@@ -10,16 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-<<<<<<< HEAD:src/views/customer/Customer.jsx
 import { Button } from '@mui/material';
-=======
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import { Button, IconButton } from '@mui/material';
->>>>>>> 0d6f7b8b47bcd6492879841b0fa2eea32783cc27:src/views/customer/PostCustomer.jsx
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
@@ -110,25 +101,15 @@ export default function PostCustomer() {
         <>
             <div style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8">
 
-                <Paper sx={{ width: '100%', overflow: 'hidden', padding: '15px' }}>
-                    <Button sx={{ mt: "7px" }} id="outlined-basic" variant="outlined">Add</Button>
+                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                    <TextField sx={{ mt: "7px" }} id="outlined-basic" label="Search" variant="outlined" />
 
-                    <InputBase
-                        sx={{ ml: 1, flex: 1,border: '1px solid #ddd',padding: '5px' }}
-                        placeholder="Search name"
-                        inputProps={{ 'aria-label': 'search name' }}
-                    />
-                    <IconButton type="button" sx={{ p: '10px'}} >
-                        <SearchIcon sx={{borderRadius: '0'}} />
-                    </IconButton>
-                    <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-
-                    <TableContainer >
-                        <Table aria-label="sticky table">
-                            <TableHead >
-                                <TableRow >
+                    <TableContainer sx={{ maxHeight: 505 }}>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
                                     {columns.map((column) => (
-                                        <TableCell sx={{ color: 'black', fontWeight: '550', fontSize: '17px' }}
+                                        <TableCell
                                             key={column.id}
                                             align={column.align}
                                             style={{ minWidth: column.minWidth }}
@@ -141,7 +122,6 @@ export default function PostCustomer() {
                             <TableBody>
                                 {rows
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-<<<<<<< HEAD:src/views/customer/Customer.jsx
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox">
                                             <TableCell>{item.name}</TableCell>
@@ -152,25 +132,6 @@ export default function PostCustomer() {
                                             <TableCell  sx={{ textAlign: 'right'}}><Button variant="contained">delete</Button></TableCell>
                                         </TableRow>
                                     ))}
-=======
-                                    .map((row) => {
-                                        return (
-                                            <TableRow hover role="checkbox">
-                                                {columns.map((column) => {
-                                                    const value = row[column.id];
-                                                    return (
-                                                        <TableCell key={column.id} align={column.align}>
-                                                            {column.format && typeof value === 'number'
-                                                                ? column.format(value)
-                                                                : value}
-
-                                                        </TableCell>
-                                                    );
-                                                })}
-                                            </TableRow>
-                                        );
-                                    })}
->>>>>>> 0d6f7b8b47bcd6492879841b0fa2eea32783cc27:src/views/customer/PostCustomer.jsx
                             </TableBody>
                         </Table>
                     </TableContainer>
