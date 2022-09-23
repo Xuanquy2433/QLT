@@ -27,7 +27,7 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
+localStorage.setItem("data", JSON.stringify({ role: 'user', name: 'abc' }))
 root.render(
   <BrowserRouter>
     <Switch>

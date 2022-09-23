@@ -69,21 +69,25 @@ const Sidebar = (props) => {
     setCollapseOpen(false);
   };
   // creates the links that appear in the left menu / Sidebar
+  let local = JSON.parse(localStorage.getItem('data'))
+  console.log('local , ', local.role);
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      return (
-        <NavItem key={key}>
-          <NavLink
-            to={prop.layout + prop.path}
-            tag={NavLinkRRD}
-            onClick={closeCollapse}
-            activeClassName="active"
-          >
-            <i className={prop.icon} />
-            {prop.name}
-          </NavLink>
-        </NavItem>
-      );
+      if (local.role === 'user' && prop.path !== '/login') {
+        return (
+          <NavItem key={key}>
+            <NavLink
+              to={prop.layout + prop.path}
+              tag={NavLinkRRD}
+              onClick={closeCollapse}
+              activeClassName="active"
+            >
+              <i className={prop.icon} />
+              {prop.name}
+            </NavLink>
+          </NavItem>
+        );
+      }else return null
     });
   };
 
@@ -120,6 +124,7 @@ const Sidebar = (props) => {
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
             <img
+            style={{width: '70%'}}
               alt={logo.imgAlt}
               className="navbar-brand-img"
               src={logo.imgSrc}
@@ -156,7 +161,7 @@ const Sidebar = (props) => {
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
               <DropdownItem className="noti-title" header tag="div">
-                <h6 className="text-overflow m-0">Welcome!</h6>
+                <h6 className="text-overflow m-0">Welcomeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!</h6>
               </DropdownItem>
               <DropdownItem to="/admin/user-profile" tag={Link}>
                 <i className="ni ni-single-02" />
@@ -255,14 +260,14 @@ const Sidebar = (props) => {
               </NavLink>
             </NavItem>
           </Nav>
-          <Nav className="mb-md-3" navbar>
+          {/* <Nav className="mb-md-3" navbar>
             <NavItem className="active-pro active">
               <NavLink href="https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=adr-admin-sidebar">
                 <i className="ni ni-spaceship" />
                 Upgrade to PRO
               </NavLink>
             </NavItem>
-          </Nav>
+          </Nav> */}
         </Collapse>
       </Container>
     </Navbar>
