@@ -126,13 +126,12 @@ export default function Customer() {
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
-                    <div style={{ width: '100%', display: "flex",flexDirection: "row"
-                    }}>
-                        <Button sx={{padding:"10px", marginRight: '2%', height: '3.2em', width:"20%"}} variant="contained" color="success">
+                    <div style={{ width: '100%', display: "flex",flexDirection: "row"}}>
+                        <Button sx={{padding:"10px 5px", marginRight: '2%', height: '3.2em', width:"15%"}} variant="contained" color="success">
                             Add customer
                         </Button>
                         <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
-                            <IconButton type="button" sx={{ p: '10px', }} aria-label="search">
+                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
