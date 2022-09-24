@@ -34,7 +34,7 @@ const Register = () => {
   const onSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(API_SIGNUP + user)
+      const response = await axios.post(API_SIGNUP, user)
       if (response && response.status === 200) {
         toast.success('Signup success', {
           autoClose: 3000
