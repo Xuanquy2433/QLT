@@ -34,6 +34,9 @@ function HomePage() {
             </div>
 
             <Link to={'admin/index'} className="button">Back dashboard</Link>
+            <Link to={'signin'} className="button">Sign in</Link>
+            <Link to={'signup'} className="button">Sign up</Link>
+
         </>
 
     )

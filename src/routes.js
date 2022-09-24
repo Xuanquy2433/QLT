@@ -25,6 +25,7 @@ import Icons from "views/examples/Icons.js";
 import AdminCustomer from "views/controller/AdminCustomer";
 import AdminCustomerOrders from "views/controller/AdminCustomerOrders";
 import AdminPillar from "views/controller/AdminPillar";
+import HomePage from "user/HomePage";
 
 var routes = [
   {
@@ -109,7 +110,7 @@ var routes = [
     name: "Login",
     icon: "ni ni-key-25 text-info",
     component: Login,
-    layout: "/auth"
+    layout: "/user"
   },
   {
     path: "/register",
@@ -117,6 +118,13 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: Register,
     layout: "/auth"
+  },
+  {
+    path: "/homePage",
+    name: "Home Page",
+    icon: "ni ni-circle-08 text-pink",
+    component: HomePage,
+    layout: "/user"
   }
 ];
 export default routes;
