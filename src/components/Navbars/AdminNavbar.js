@@ -42,7 +42,7 @@ const AdminNavbar = (props) => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     history.push('/auth/homePage')
-    window.location.reload(false)
+    // window.location.reload(false)
 
   }
   let decoded;
@@ -116,9 +116,9 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="#pablo" onClick={logout}>
                   <i className="ni ni-user-run" />
-                  <span onClick={logout} >Logout</span>
+                  <span  >Logout</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
