@@ -138,9 +138,9 @@ const Login = () => {
             <Form role="form">
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
+                  {/* <InputGroupAddon addonType="prepend">
 
-                  </InputGroupAddon>
+                  </InputGroupAddon> */}
 
                   <PhoneInput
                     style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
