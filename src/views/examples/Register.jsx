@@ -148,12 +148,12 @@ console.log(user);
                 </InputGroup>
               </FormGroup>
               <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    {/* <InputGroupText>
+                {/* <InputGroup className="input-group-alternative mb-3"> */}
+                  {/* <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
                       <PhoneBluetoothSpeakerIcon style={{ fontSize: '1.3em' }}></PhoneBluetoothSpeakerIcon>
-                    </InputGroupText> */}
-                  </InputGroupAddon>
+                    </InputGroupText>
+                  </InputGroupAddon> */}
                   <PhoneInput
                     style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
                     defaultCountry="VN"
@@ -161,7 +161,7 @@ console.log(user);
                     onChange={(value) => {
                       setUser({ ...user, phoneNumber: value })
                     }} />
-                </InputGroup>
+                {/* </InputGroup> */}
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
@@ -180,10 +180,10 @@ console.log(user);
                 </InputGroup>
               </FormGroup>
               <div className="text-muted font-italic">
-                <small>
+                {/* <small>
                   password strength:{" "}
                   <span className="text-success font-weight-700">strong</span>
-                </small>
+                </small> */}
               </div>
               <Row className="my-4">
                 <Col xs="12">
