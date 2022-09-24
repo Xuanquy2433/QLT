@@ -61,7 +61,7 @@ const Register = () => {
       }
     }
   }
-console.log(user);
+
   return (
     <>
       <Col lg="6" md="8">
