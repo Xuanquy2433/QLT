@@ -87,7 +87,7 @@ const Sidebar = (props) => {
             </NavLink>
           </NavItem>
         );
-      }else return null
+      } else return null
     });
   };
 
@@ -123,12 +123,15 @@ const Sidebar = (props) => {
         {/* Brand */}
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
-            <img
-            style={{width: '70%'}}
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
+            <div className="music-waves-2">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </NavbarBrand>
         ) : null}
         {/* User */}

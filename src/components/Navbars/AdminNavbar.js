@@ -44,7 +44,9 @@ const AdminNavbar = (props) => {
             to="/"
           >
             {props.brandText}
+           
           </Link>
+      
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
               <InputGroup className="input-group-alternative">
@@ -68,10 +70,10 @@ const AdminNavbar = (props) => {
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
-                    <span  className="mb-0  text-sm font-weight-bold">
+                    <span className="mb-0  text-sm font-weight-bold">
                       Giang Fam
                     </span>
-                   <i className="ni ni-bold-down ml-1"></i>
+                    <i className="ni ni-bold-down ml-1"></i>
                   </Media>
                 </Media>
               </DropdownToggle>

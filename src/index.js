@@ -25,6 +25,7 @@ import "assets/scss/argon-dashboard-react.scss";
 
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
+import HomePage from "user/HomePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 localStorage.setItem("data", JSON.stringify({ role: 'user', name: 'abc' }))
@@ -33,6 +34,7 @@ root.render(
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+      <Route path="/user/homePage" render={(props) => <HomePage />} />
       <Redirect from="/" to="/admin/index" />
     </Switch>
   </BrowserRouter>
