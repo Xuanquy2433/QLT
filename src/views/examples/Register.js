@@ -1,22 +1,4 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// reactstrap components
+import { useState } from "react";
 import {
   Button,
   Card,
@@ -33,6 +15,19 @@ import {
 } from "reactstrap";
 
 const Register = () => {
+  const [user, setUser] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    password: ""
+  })
+
+  const onchange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value })
+    console.log("onchange: ", e.target.value);
+  }
+
   return (
     <>
       <Col lg="6" md="8">
@@ -90,7 +85,32 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" />
+                  <Input onChange={onchange} placeholder="First name" type="text" name="firstName" />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-hat-3" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input onChange={onchange} placeholder="Last name" type="text" name="lastName" />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-email-83" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input onChange={onchange}
+                    name="email"
+                    placeholder="Email"
+                    type="email"
+                    autoComplete="new-email"
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -101,8 +121,10 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Email"
-                    type="email"
+                    onChange={onchange}
+                    name="phoneNumber"
+                    placeholder="Phone number"
+                    type="number"
                     autoComplete="new-email"
                   />
                 </InputGroup>
@@ -115,8 +137,10 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    onChange={onchange}
+                    name="password"
                     placeholder="Password"
-                    type="password"
+                    type="text"
                     autoComplete="new-password"
                   />
                 </InputGroup>
