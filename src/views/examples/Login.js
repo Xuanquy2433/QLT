@@ -77,6 +77,11 @@ const Login = () => {
             autoClose: 2000
           })
         }
+        else if (error.response.data.error && error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
         else {
           toast.error('Error', {
             autoClose: 2000
