@@ -48,7 +48,7 @@ const Auth = (props) => {
       <div className="main-content" ref={mainContent}>
         <AuthNavbar />
         <div className="header bg-gradient-info py-7 py-lg-8">
-          <Container>
+          <Container >
             <div className="header-body text-center mb-7">
               <Row className="justify-content-center">
                 <Col lg="5" md="6">
@@ -78,8 +78,8 @@ const Auth = (props) => {
           </div>
         </div>
 
-        <Container className="mt--8 pb-5">
-          <Row className="justify-content-center">
+        <Container  className="mt--8 pb-5">
+          <Row  className="justify-content-center">
             <Switch>
               {getRoutes(routes)}
               <Redirect from="*" to="/auth/login" />
