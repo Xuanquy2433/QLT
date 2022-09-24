@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button, IconButton, InputBase } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
@@ -126,7 +127,7 @@ export default function Customer() {
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
                     <div sx={{ width: '100%' }}>
-                        <Button sx={{ width: '15%', display: 'inline-block', marginRight: '2%',height: '3.2em' }} variant="contained" color="success">
+                        <Button sx={{ width: '15%', display: 'inline-block', marginRight: '2%', height: '3.2em' }} variant="contained" color="success">
                             Thêm khách hàng
                         </Button>
                         <Paper sx={{ border: "1px solid #ddd", display: 'inline-block', padding: '7px 7px 3px 7px', width: '82%', marginBottom: '20px', borderRadius: '7px' }}>
@@ -143,7 +144,7 @@ export default function Customer() {
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}
                     <TableContainer sx={{ minHeight: '29em' }}>
-                        <Table  aria-label="sticky table">
+                        <Table aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (
@@ -182,16 +183,13 @@ export default function Customer() {
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}
-                                                        >
-                                                            <i className='ni ni-fat-delete'></i>
-
+                                                            onClick={(e) => e.preventDefault()}>
+                                                            <DeleteIcon></DeleteIcon>
                                                             Delete
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}
-                                                        >
+                                                            onClick={(e) => e.preventDefault()}>
                                                             <EditIcon></EditIcon>
                                                             Update
                                                         </DropdownItem>
@@ -204,7 +202,7 @@ export default function Customer() {
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[6,10, 25, 100]}
+                        rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
                         count={rows.length}
                         rowsPerPage={rowsPerPage}
