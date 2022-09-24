@@ -13,13 +13,79 @@ import {
   Row,
   Col
 } from "reactstrap";
-import   { useHistory }  from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { API_SIGNIN } from "utils/const";
+import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
+import PhoneInput from 'react-phone-number-input';
 
 const Login = () => {
   const history = useHistory();
-  const test = () => {
-    history.push('/admin/index');
+  const [data, setData] = useState({
+    phoneNumber: "",
+    password: "",
+  });
+  console.log('data ,', data);
+  const onLogin = async (e) => {
+    e.preventDefault();
+    if (data.phoneNumber === '') {
+      toast.error('Phone number cannot be null', {
+        autoClose: 2000
+      })
+    } else if (data.password === '') {
+      toast.error('Password cannot be null', {
+        autoClose: 2000
+      })
+    }
+    else if (data.password.length < 8) {
+      toast.error('Password must have at least 8 characters', {
+        autoClose: 2000
+      })
+    }
+    else {
+      try {
+        const response = await axios.post(API_SIGNIN, data);
+        if (response && response.status === 200) {
+          console.log("Login success, ", response.data);
+          // alert("Login success");
+          localStorage.setItem("token", response?.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data));
+          toast.success('Login success', {
+            autoClose: 3000
+          })
+          if (response.data.role === 'ROLE_USER') {
+            history.push('/auth/homePage')
+          }
+          else if (response.data.role === 'ROLE_ADMIN') {
+            history.push('/admin/index')
+          }
+          // setTimeout(() => {
+          //     window.location.reload()
+          // }, 1000);
+        };
+      } catch (error) {
+        console.log(error.response.data)
+        if (error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error) {
+          toast.error(`${error.response.data.error}`, {
+            autoClose: 2000
+          })
+        }
+        else {
+          toast.error('Error', {
+            autoClose: 2000
+          })
+        }
+      }
+    }
   }
+
   return (
     <>
       <Col lg="5" md="7">
@@ -73,15 +139,25 @@ const Login = () => {
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
+
                   </InputGroupAddon>
-                  <Input
-                    placeholder="Email"
-                    type="email"
+
+                  <PhoneInput
+                    style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
+                    defaultCountry="VN"
+                    placeholder="Enter your phone number"
+                    onChange={(value) => {
+                      setData({ ...data, phoneNumber: value })
+                    }} />
+                  {/* <Input
+                    onChange={(e) => {
+                      setData({ ...data, phoneNumber: e.target.value })
+                    }
+                    }
+                    placeholder="Phone number"
+                    type="text"
                     autoComplete="new-email"
-                  />
+                  /> */}
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -92,6 +168,10 @@ const Login = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    onChange={(e) => {
+                      setData({ ...data, password: e.target.value })
+                    }
+                    }
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
@@ -112,7 +192,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button" onClick={test}>
+                <Button className="my-4" color="primary" type="button" onClick={(e) => onLogin(e)}>
                   Sign in
                 </Button>
               </div>

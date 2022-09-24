@@ -16,6 +16,8 @@ import {
   Col
 } from "reactstrap";
 import { API_SIGNUP } from "utils/const";
+import PhoneBluetoothSpeakerIcon from '@mui/icons-material/PhoneBluetoothSpeaker';
+import PhoneInput from 'react-phone-number-input';
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -59,7 +61,7 @@ const Register = () => {
       }
     }
   }
-
+console.log(user);
   return (
     <>
       <Col lg="6" md="8">
@@ -148,17 +150,17 @@ const Register = () => {
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
+                    {/* <InputGroupText>
+                      <PhoneBluetoothSpeakerIcon style={{ fontSize: '1.3em' }}></PhoneBluetoothSpeakerIcon>
+                    </InputGroupText> */}
                   </InputGroupAddon>
-                  <Input
-                    onChange={onchange}
-                    name="phoneNumber"
-                    placeholder="Phone number"
-                    type="number"
-                    autoComplete="new-email"
-                  />
+                  <PhoneInput
+                    style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
+                    defaultCountry="VN"
+                    placeholder="Enter your phone number"
+                    onChange={(value) => {
+                      setUser({ ...user, phoneNumber: value })
+                    }} />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -172,7 +174,7 @@ const Register = () => {
                     onChange={onchange}
                     name="password"
                     placeholder="Password"
-                    type="text"
+                    type="password"
                     autoComplete="new-password"
                   />
                 </InputGroup>
