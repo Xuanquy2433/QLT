@@ -35,7 +35,7 @@ root.render(
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route path="/user/homePage" render={(props) => <HomePage />} />
-      <Redirect from="/" to="/admin/index" />
+      <Redirect from="/" to="/user/homePage" />
     </Switch>
   </BrowserRouter>
 );
