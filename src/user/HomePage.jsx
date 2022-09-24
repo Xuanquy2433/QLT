@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,NavLink } from 'react-router-dom'
 import './css.css'
 
 function HomePage() {
@@ -34,8 +34,8 @@ function HomePage() {
             </div>
 
             <Link to={'admin/index'} className="button">Back dashboard</Link>
-            <Link to={'signin'} className="button">Sign in</Link>
-            <Link to={'signup'} className="button">Sign up</Link>
+            <NavLink to={'login'} className="button">Sign in</NavLink>
+            <NavLink to={'register'} className="button">Sign up</NavLink>
 
         </>
 
