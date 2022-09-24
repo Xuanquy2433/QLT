@@ -1,10 +1,10 @@
 import React from 'react'
 import Pillar from './Pillar'
 
-export default function ListPillar() {
+export default function ListPillar({data}) {
   return (
     <div>
-        <Pillar/>
+        <Pillar data={data}/>
     </div>
   )
 }
