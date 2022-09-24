@@ -11,10 +11,9 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button } from '@mui/material';
-import DeleteIcon  from '@mui/icons-material/Delete';
-
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import { Button, IconButton, InputBase } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
@@ -70,6 +69,39 @@ const rows = [
         density: "density"
 
     },
+    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },
+    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },
+    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },
+    {
+        name: 'Population',
+        code: 'IN',
+        population: 12321,
+        size: 123,
+        density: "density"
+
+    },
+
     // createData('India', 'IN', 1324171354, 3287263, <Button variant="contained">Contained</Button>),
     // createData('China', 'CN', 1403500365, 9596961, <Button variant="contained">Contained</Button>),
     // createData('Italy', 'IT', 60483973, 301340, <Button variant="contained">Contained</Button>),
@@ -78,7 +110,7 @@ const rows = [
 
 export default function Customer() {
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -90,17 +122,33 @@ export default function Customer() {
     };
     return (
         <>
-            <div style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8">
+            <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
+                <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
-                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                    <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" />
+                    <div sx={{ width: '100%' }}>
+                        <Button sx={{ width: '15%', display: 'inline-block', marginRight: '2%',height: '3.2em' }} variant="contained" color="success">
+                            Thêm khách hàng
+                        </Button>
+                        <Paper sx={{ border: "1px solid #ddd", display: 'inline-block', padding: '7px 7px 3px 7px', width: '82%', marginBottom: '20px', borderRadius: '7px' }}>
+                            <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                                <SearchIcon />
+                            </IconButton>
+                            <InputBase
+                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                placeholder="Search Name Customer"
+                            />
+                        </Paper>
+                    </div>
 
-                    <TableContainer sx={{ maxHeight: 505 }}>
+                    {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
+
+                    <TableContainer sx={{ minHeight: '29em' }}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (
                                         <TableCell
+                                            sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                             key={column.id}
                                             align={column.align}
                                             style={{ minWidth: column.minWidth }}
@@ -114,7 +162,7 @@ export default function Customer() {
                                 {rows
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
-                                        <TableRow key={index} hover role="checkbox">
+                                        <TableRow hover role="checkbox">
                                             <TableCell>{item.name}</TableCell>
                                             <TableCell > {item.code} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}>  {item.density} </TableCell>
@@ -136,7 +184,8 @@ export default function Customer() {
                                                             href="#pablo"
                                                             onClick={(e) => e.preventDefault()}
                                                         >
-                                                           <DeleteIcon></DeleteIcon> 
+                                                            <i className='ni ni-fat-delete'></i>
+
                                                             Delete
                                                         </DropdownItem>
                                                         <DropdownItem
@@ -155,7 +204,7 @@ export default function Customer() {
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[10, 25, 100]}
+                        rowsPerPageOptions={[6,10, 25, 100]}
                         component="div"
                         count={rows.length}
                         rowsPerPage={rowsPerPage}
@@ -164,7 +213,7 @@ export default function Customer() {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
-            </div>
+            </Container>
         </>
     )
 }
