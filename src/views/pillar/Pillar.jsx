@@ -121,7 +121,7 @@ export default function Pillar({data}) {
 
                     <div style={{ width: '100%', display: "flex",flexDirection: "row"}}>
                         <Button sx={{padding:"10px 5px", marginRight: '2%', height: '3.2em', width:"15%"}} variant="contained" color="success">
-                            Add customer
+                            Add pillar
                         </Button>
                         <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
@@ -129,7 +129,7 @@ export default function Pillar({data}) {
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search Name Customer"
+                                placeholder="Search"
                             />
                         </Paper>
                     </div>
