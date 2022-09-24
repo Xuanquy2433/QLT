@@ -1,3 +1,4 @@
+import HomeTest from 'layouts/home'
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './css.css'
@@ -5,7 +6,7 @@ import './css.css'
 function HomePage() {
     return (
         <>
-            {/* <HomeTest /> */}
+            <HomeTest />
 
 
         </>
