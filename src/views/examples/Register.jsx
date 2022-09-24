@@ -1,4 +1,6 @@
-import { useState } from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import {
   Button,
   Card,
@@ -13,6 +15,7 @@ import {
   Row,
   Col
 } from "reactstrap";
+import { API_SIGNUP } from "utils/const";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -26,6 +29,35 @@ const Register = () => {
   const onchange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value })
     console.log("onchange: ", e.target.value);
+  }
+
+  const onSignup = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(API_SIGNUP + user)
+      if (response && response.status === 200) {
+        toast.success('Signup success', {
+          autoClose: 3000
+        })
+      }
+    } catch (error) {
+      console.log(error.response.data)
+      if (error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error) {
+        toast.error(`${error.response.data.error}`, {
+          autoClose: 2000
+        })
+      }
+      else {
+        toast.error('Error', {
+          autoClose: 2000
+        })
+      }
+    }
   }
 
   return (
@@ -174,7 +206,7 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" type="button">
+                <Button onClick={onSignup} className="mt-4" color="primary" type="button">
                   Create account
                 </Button>
               </div>
