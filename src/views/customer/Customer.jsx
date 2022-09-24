@@ -141,9 +141,9 @@ export default function Customer() {
                     </div>
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
-
+                    {/* stickyHeader */}
                     <TableContainer sx={{ minHeight: '29em' }}>
-                        <Table stickyHeader aria-label="sticky table">
+                        <Table  aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (

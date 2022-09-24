@@ -64,12 +64,12 @@ const AdminNavbar = (props) => {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={require("../../assets/img/theme/react.jpg")}
+                      src={require("../../assets/img/theme/gp.jpg")}
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span  className="mb-0  text-sm font-weight-bold">
-                      Admin
+                      Giang Fam
                     </span>
                    <i className="ni ni-bold-down ml-1"></i>
                   </Media>
