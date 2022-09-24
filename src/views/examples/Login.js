@@ -20,6 +20,7 @@ import axios from "axios";
 import { API_SIGNIN } from "utils/const";
 import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
 import PhoneInput from 'react-phone-number-input';
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const history = useHistory();
@@ -27,6 +28,13 @@ const Login = () => {
     phoneNumber: "",
     password: "",
   });
+  let decoded;
+  let token = localStorage.getItem("token");
+  if (token !== null) {
+    decoded = jwt_decode(token);
+  }
+  console.log('decoded', decoded);
+
   console.log('data ,', data);
   const onLogin = async (e) => {
     e.preventDefault();
@@ -48,18 +56,20 @@ const Login = () => {
       try {
         const response = await axios.post(API_SIGNIN, data);
         if (response && response.status === 200) {
-          console.log("Login success, ", response.data);
+          console.log("Login success, ", response?.data.token);
           // alert("Login success");
           localStorage.setItem("token", response?.data.token);
           localStorage.setItem("user", JSON.stringify(response.data));
           toast.success('Login success', {
             autoClose: 3000
           })
-          if (response.data.role === 'ROLE_USER') {
+          if (jwt_decode(response?.data.token).roles === '[ROLE_USER]') {
             history.push('/auth/homePage')
           }
-          else if (response.data.role === 'ROLE_ADMIN') {
+          else if (jwt_decode(response?.data.token).roles === '[ROLE_ADMIN]') {
             history.push('/admin/index')
+          } else {
+            history.push('/auth/homePage')
           }
           // setTimeout(() => {
           //     window.location.reload()

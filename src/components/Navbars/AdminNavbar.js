@@ -33,10 +33,24 @@ import {
   Container,
   Media
 } from "reactstrap";
+import jwt_decode from "jwt-decode";
 
 const AdminNavbar = (props) => {
-const history = useHistory();
+  const history = useHistory();
+  const logout = () => {
+    // alert("ok")
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    history.push('/auth/homePage')
+    window.location.reload(false)
 
+  }
+  let decoded;
+  console.log("ccccccccccccccccc ", decoded);
+  let token = localStorage.getItem("token");
+  if (token !== null) {
+    decoded = jwt_decode(token);
+  }
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -46,9 +60,9 @@ const history = useHistory();
             to="/"
           >
             {props.brandText}
-           
+
           </Link>
-      
+
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
               <InputGroup className="input-group-alternative">
@@ -72,9 +86,11 @@ const history = useHistory();
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
-                    <span className="mb-0  text-sm font-weight-bold">
+                    {token && decoded ? <span className="mb-0  text-sm font-weight-bold">
+                      {decoded.firstName + ' ' + decoded.lastName}
+                    </span> : <span className="mb-0  text-sm font-weight-bold">
                       Giang Fam
-                    </span>
+                    </span>}
                     <i className="ni ni-bold-down ml-1"></i>
                   </Media>
                 </Media>
@@ -102,9 +118,7 @@ const history = useHistory();
                 <DropdownItem divider />
                 <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
-                  <span onClick={() => {
-                  history.push('/auth/homePage');
-                }} >Logout</span>
+                  <span onClick={logout} >Logout</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
