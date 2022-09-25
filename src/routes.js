@@ -26,6 +26,7 @@ import AdminCustomer from "views/controller/AdminCustomer";
 import AdminCustomerOrders from "views/controller/AdminCustomerOrders";
 import AdminPillar from "views/controller/AdminPillar";
 import HomePage from "Home/HomePage";
+import AdminProduct from "views/controller/AdminProduct";
 
 var routes = [
   {
@@ -50,10 +51,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/icons",
-    name: "Trụ đã cho thuê",
+    path: "/product",
+    name: "Trụ",
     icon: "ni ni-delivery-fast text-blue",
-    component: Icons,
+    component: AdminProduct,
     layout: "/admin"
   },
   {

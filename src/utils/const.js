@@ -12,6 +12,9 @@ export const API_DELETE_PILLAR = `${API}/admin/address/delete?id=`;
 
 export const API_EDIT_PILLAR = `${API}/admin/address/edit`;
 
+export const API_GET_PRODUCT = `${API}/product/`;
+
+
 
 
 
