@@ -15,7 +15,7 @@ export default function AdminPillar() {
   const [selected, setSelected] = useState(undefined)
 
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -46,7 +46,7 @@ export default function AdminPillar() {
         const response = await axios.post(API_ADD_PILLAR, data)
         if (response && response.status === 201) {
           toast.success("Thêm thành công", { autoClose: 1500 });
-          setOpenEdit(false)
+          setOpenEdit(false);
           fetchAPI();
         }
 
@@ -157,7 +157,7 @@ export default function AdminPillar() {
     <div>
       <CreatePillar onSubmit={onSubmit} open={open} setOpen={setOpen} />
       {selected && <EditPillar item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
-      <ListPillar open={open} setOpen={setOpen} data={data} onSubmit={onSubmit} onDelete={onDelete} onEdit={onEdit} />
+      <ListPillar open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} />
     </div>
   )
 }

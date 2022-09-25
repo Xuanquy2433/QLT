@@ -40,7 +40,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ data, onSubmit, onDelete, onEdit, open,setOpen }) {
+export default function Pillar({ data, onDelete, onEdit, open,setOpen }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const style = {
@@ -64,7 +64,6 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit, open,setOpen 
     };
 
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     const onClickEdit = (data) => {
         onEdit(data)

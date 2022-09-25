@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-export default function CreatePillar({data, onSubmit, open, setOpen}) {
+export default function CreatePillar({ data, onSubmit, open, setOpen }) {
 
     const [dataAddress, setDataAddress] = useState(data || {
         city: '',
@@ -16,9 +16,10 @@ export default function CreatePillar({data, onSubmit, open, setOpen}) {
 
     const onClickAdd = (event) => {
         onSubmit(dataAddress)
-        // setOpen(false)
+        setOpen(false)
     }
 
+    const handleClose = () => setOpen(false);
 
     return (
         <div>
@@ -43,9 +44,13 @@ export default function CreatePillar({data, onSubmit, open, setOpen}) {
                         <TextField onChange={onChangeText} defaultValue='' name="street" style={{ margin: '5px' }} fullWidth label='Street' />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
+                        <Button sx={{marginRight:"5px"}} onClick={handleClose} variant="contained" color="success">
+                            Close
+                        </Button>
                         <Button onClick={onClickAdd} variant="contained" color="success">
                             Submit
-                        </Button></div>
+                        </Button>
+                    </div>
 
                 </Box>
 
