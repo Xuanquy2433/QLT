@@ -24,9 +24,9 @@ import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import AdminCustomer from "views/controller/AdminCustomer";
 import AdminCustomerOrders from "views/controller/AdminCustomerOrders";
-import AdminPillar from "views/controller/AdminPillar";
+import AdminAddress from "views/controller/AdminAddress";
 import HomePage from "Home/HomePage";
-import AdminProduct from "views/controller/AdminProduct";
+import AdminPillar from "views/controller/AdminPillar";
 
 var routes = [
   {
@@ -47,14 +47,14 @@ var routes = [
     path: "/pillars",
     name: " Địa chỉ",
     icon: "ni ni-archive-2 text-pink",
-    component: AdminPillar,
+    component: AdminAddress,
     layout: "/admin"
   },
   {
     path: "/product",
     name: "Trụ",
     icon: "ni ni-delivery-fast text-blue",
-    component: AdminProduct,
+    component: AdminPillar,
     layout: "/admin"
   },
   {
