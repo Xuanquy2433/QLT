@@ -1,10 +1,10 @@
 import React from 'react'
-import Product from './Product'
+import Pillar from './Pillar'
 
 function ListProduct({data}) {
   return (
     <div>
-        <Product data={data}/>
+        <Pillar data={data}/>
     </div>
   )
 }
