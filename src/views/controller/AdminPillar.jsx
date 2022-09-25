@@ -65,37 +65,37 @@ export default function AdminPillar() {
   }
 
   const onEdit = async (data) => {
-    try {
-      const response = await axios.put(API_EDIT_PILLAR, data)
-      if (response && response.status === 201) {
-        toast.success("Cập nhập thành công", { autoClose: 1500 });
-        fetchAPI();
-      }
+    // try {
+    //   const response = await axios.put(API_EDIT_PILLAR, data)
+    //   if (response && response.status === 201) {
+    //     toast.success("Cập nhập thành công", { autoClose: 1500 });
+    //     fetchAPI();
+    //   }
 
-      //catch show error
-    } catch (error) {
-      console.log(error.response.data)
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
-      }
-    }
+    //   //catch show error
+    // } catch (error) {
+    //   console.log(error.response.data)
+    //   if (error.response.data.message) {
+    //     toast.error(`${error.response.data.message}`, {
+    //       autoClose: 2000
+    //     })
+    //   }
+    //   else if (error.response.data.error) {
+    //     toast.error(`${error.response.data.error}`, {
+    //       autoClose: 2000
+    //     })
+    //   }
+    //   else if (error.response.data.error && error.response.data.message) {
+    //     toast.error(`${error.response.data.message}`, {
+    //       autoClose: 2000
+    //     })
+    //   }
+    //   else {
+    //     toast.error('Error', {
+    //       autoClose: 2000
+    //     })
+    //   }
+    // }
   }
 
   const onDelete = async (id) => {
