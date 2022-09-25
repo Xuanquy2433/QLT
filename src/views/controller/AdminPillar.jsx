@@ -4,22 +4,22 @@ import { API_GET_PILLAR } from 'utils/const'
 import ListPillar from 'views/pillar/ListPillar'
 
 export default function AdminPillar() {
-  const [data,setdata]= useState([])
+  const [data, setdata] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchAPI()
-  },[])
-  const fetchAPI = async (e)=>{
+  }, [])
+  const fetchAPI = async (e) => {
     const response = await axios.get(API_GET_PILLAR)
-    if(response){
+    if (response) {
       setdata(response.data)
     }
     console.log("response", response.data);
   }
-  
+
   return (
     <div>
-        <ListPillar data={data}/> 
+      <ListPillar data={data} />
     </div>
   )
 }
