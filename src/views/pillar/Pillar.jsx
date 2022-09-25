@@ -102,18 +102,110 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
     return (
         <>
 
-            <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                    Add pillar
-                    <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
-                        <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-                            <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                                <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                                    Thêm địa chỉ
+            <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
+                <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
+                    <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
+                        <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
+                            Thêm địa chỉ
+                        </Button>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box className='form-add-product'
+                                sx={{
+                                    maxWidth: '50%',
+                                    margin: '0 auto',
+                                    marginTop: ' 150px',
+                                    backgroundColor: 'white',
+                                    padding: '10px'
+                                }}
+                            >
+                                <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
+                                <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
+                                    <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
+                                    <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
+                                </div>
+                                <Button onClick={onClickAdd} variant="contained" color="success">
+                                    Submit
                                 </Button>
+                            </Box>
+
+                        </Modal>
+
+
+                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                                <SearchIcon />
+                            </IconButton>
+                            <InputBase
+                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                placeholder="Search Name Customer"
+                            />
+                        </Paper>
+                    </div>
+
+                    {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
+                    {/* stickyHeader */}
+                    <TableContainer sx={{ minHeight: '29em' }}>
+                        <Table aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map((column) => (
+                                        <TableCell
+                                            sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                            key={column.id}
+                                            align={column.align}
+                                            style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
+                                        >
+                                            {column.label}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {data
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((item, index) => (
+                                        <TableRow hover role="checkbox" key={index}>
+                                            <TableCell>{item.id}</TableCell>
+                                            <TableCell > {item.city} </TableCell>
+                                            <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
+                                            <TableCell sx={{ textAlign: "right" }}>
+                                                <UncontrolledDropdown>
+                                                    <DropdownToggle
+                                                        className="btn-icon-only text-light"
+                                                        href="#pablo"
+                                                        role="button"
+                                                        size="sm"
+                                                        color=""
+                                                        onClick={(e) => e.preventDefault()}
+                                                    >
+                                                        <i className="fas fa-ellipsis-v" />
+                                                    </DropdownToggle>
+                                                    <DropdownMenu className="dropdown-menu-arrow" right>
+                                                        <DropdownItem
+                                                            href="#pablo"
+                                                            onClick={(e) => onDelete(item.id)}>
+                                                            <DeleteIcon></DeleteIcon>
+                                                            Delete
+                                                        </DropdownItem>
+                                                        <DropdownItem
+                                                            href="#pablo"
+                                                            onClick={(e) => onClickEdit(item.id)}>
+                                                            <EditIcon></EditIcon>
+                                                            Update
+                                                        </DropdownItem>
+                                                    </DropdownMenu>
+                                                </UncontrolledDropdown>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
                                 <Modal
-                                    open={open}
-                                    onClose={handleClose}
+                                    open={openEdit}
+                                    onClose={handleCloseEdit}
                                     aria-labelledby="modal-modal-title"
                                     aria-describedby="modal-modal-description"
                                 >
@@ -131,7 +223,7 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
                                             <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
                                             <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
                                         </div>
-                                        <Button onClick={onClickAdd} variant="contained" color="success">
+                                        <Button variant="contained" color="success">
                                             Submit
                                         </Button>
                                     </Box>
@@ -139,120 +231,25 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
                                 </Modal>
 
 
-                                <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
-                                    <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                                        <SearchIcon />
-                                    </IconButton>
-                                    <InputBase
-                                        sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                        placeholder="Search"
-                                    />
-                                </Paper>
-                            </div>
-
-                            {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
-                            {/* stickyHeader */}
-                            <TableContainer sx={{ minHeight: '29em' }}>
-                                <Table aria-label="sticky table">
-                                    <TableHead>
-                                        <TableRow>
-                                            {columns.map((column) => (
-                                                <TableCell
-                                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                                    key={column.id}
-                                                    align={column.align}
-                                                    style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
-                                                >
-                                                    {column.label}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {data
-                                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                            .map((item, index) => (
-                                                <TableRow hover role="checkbox" key={index}>
-                                                    <TableCell>{item.id}</TableCell>
-                                                    <TableCell > {item.city} </TableCell>
-                                                    <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
-                                                    <TableCell sx={{ textAlign: "right" }}>
-                                                        <UncontrolledDropdown>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={(e) => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" right>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={(e) => onDelete(item.id)}>
-                                                                    <DeleteIcon></DeleteIcon>
-                                                                    Delete
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={(e) => onClickEdit(item.id)}>
-                                                                    <EditIcon></EditIcon>
-                                                                    Update
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                        <Modal
-                                            open={openEdit}
-                                            onClose={handleCloseEdit}
-                                            aria-labelledby="modal-modal-title"
-                                            aria-describedby="modal-modal-description"
-                                        >
-                                            <Box className='form-add-product'
-                                                sx={{
-                                                    maxWidth: '50%',
-                                                    margin: '0 auto',
-                                                    marginTop: ' 150px',
-                                                    backgroundColor: 'white',
-                                                    padding: '10px'
-                                                }}
-                                            >
-                                                <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
-                                                <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
-                                                    <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
-                                                    <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
-                                                </div>
-                                                <Button variant="contained" color="success">
-                                                    Submit
-                                                </Button>
-                                            </Box>
-
-                                        </Modal>
-
-
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                            <TablePagination
-                                rowsPerPageOptions={[6, 10, 25, 100]}
-                                component="div"
-                                count={data.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                            />
-                        </Paper>
-                    </Container>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[6, 10, 25, 100]}
+                        component="div"
+                        count={data.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
+            </Container>
 
 
 
 
 
-                </>
-                )
+        </>
+    )
 }
