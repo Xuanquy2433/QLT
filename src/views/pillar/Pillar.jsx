@@ -40,9 +40,9 @@ const columns = [
     },
 ];
 
-export default function Pillar({ data, onSubmit }) {
+export default function Pillar({ data, onSubmit, onDelete }) {
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const style = {
         position: 'absolute',
         top: '50%',
@@ -82,6 +82,10 @@ export default function Pillar({ data, onSubmit }) {
         handleClose()
     }
 
+    const onClickDelete = (id) => {
+        console.log("id ", id);
+        onDelete(id)
+    }
 
 
     return (
@@ -110,8 +114,8 @@ export default function Pillar({ data, onSubmit }) {
                             >
                                 <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
                                 <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
-                                    <TextField onChange={onChangeText} name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
-                                    <TextField onChange={onChangeText} name="street" fullWidth label='Street' />
+                                    <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
+                                    <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
                                 </div>
                                 <Button onClick={onClickAdd} variant="contained" color="success">
                                     Submit
@@ -121,7 +125,7 @@ export default function Pillar({ data, onSubmit }) {
                         </Modal>
 
 
-                        <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
@@ -173,7 +177,7 @@ export default function Pillar({ data, onSubmit }) {
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
+                                                            onClick={(e) => onClickDelete(item.id)}>
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
                                                         </DropdownItem>
