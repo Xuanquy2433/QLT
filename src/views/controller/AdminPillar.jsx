@@ -9,6 +9,7 @@ import ListPillar from 'views/pillar/ListPillar'
 
 export default function AdminPillar() {
   const [data, setdata] = useState([])
+
   useEffect(() => {
     fetchAPI()
   }, [])
@@ -19,6 +20,7 @@ export default function AdminPillar() {
     }
     console.log("response", response.data);
   }
+
 
   const onSubmit = async (data) => {
     if (data.city === '') {
@@ -130,7 +132,6 @@ export default function AdminPillar() {
 
     }
   }
-
   return (
     <div>
       <ListPillar data={data} onSubmit={onSubmit} onDelete={onDelete} onEdit={onEdit} />
