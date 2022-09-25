@@ -40,7 +40,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ data, onSubmit, onDelete }) {
+export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const style = {
@@ -67,24 +67,35 @@ export default function Pillar({ data, onSubmit, onDelete }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [openEdit, setOpenEdit] = React.useState(false);
+    const handleOpenEdit = () => setOpen(true);
+    const handleCloseEdit = () => setOpen(false);
 
-    const [dataAdddress, setDataAddress] = useState(data || {
+
+    const [dataAddress, setDataAddress] = useState(data || {
         city: '',
-        street: ''
+        street: '',
     })
-    console.log(dataAdddress);
+    console.log(dataAddress);
     const onChangeText = (event) => {
-        setDataAddress({ ...dataAdddress, [event.target.name]: event.target.value })
+        setDataAddress({ ...dataAddress, [event.target.name]: event.target.value })
     }
 
     const onClickAdd = (event) => {
-        onSubmit(dataAdddress)
+        onSubmit(dataAddress)
         handleClose()
     }
 
-    const onClickDelete = (id) => {
-        console.log("id ", id);
-        onDelete(id)
+    const [dataAddressEdit, setDataAddressEdit] = useState(data || {
+        city: '',
+        street: '',
+        id: 0
+    })
+    const onClickEdit = (id) => {
+        onEdit(dataAddressEdit)
+        handleOpenEdit()
+        console.log("dayaaaaaaa ", dataAddress);
+        // handleClose()
     }
 
 
@@ -177,13 +188,13 @@ export default function Pillar({ data, onSubmit, onDelete }) {
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => onClickDelete(item.id)}>
+                                                            onClick={(e) => onDelete(item.id)}>
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
+                                                            onClick={(e) => onClickEdit(item.id)}>
                                                             <EditIcon></EditIcon>
                                                             Update
                                                         </DropdownItem>
@@ -192,6 +203,34 @@ export default function Pillar({ data, onSubmit, onDelete }) {
                                             </TableCell>
                                         </TableRow>
                                     ))}
+                                <Modal
+                                    open={openEdit}
+                                    onClose={handleCloseEdit}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box className='form-add-product'
+                                        sx={{
+                                            maxWidth: '50%',
+                                            margin: '0 auto',
+                                            marginTop: ' 150px',
+                                            backgroundColor: 'white',
+                                            padding: '10px'
+                                        }}
+                                    >
+                                        <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
+                                        <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
+                                            <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
+                                            <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
+                                        </div>
+                                        <Button variant="contained" color="success">
+                                            Submit
+                                        </Button>
+                                    </Box>
+
+                                </Modal>
+
+
                             </TableBody>
                         </Table>
                     </TableContainer>
