@@ -218,7 +218,7 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
                                             padding: '10px'
                                         }}
                                     >
-                                        <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
+                                        <h2 style={{ textAlign: 'center' }}>Edit ADDRESS</h2>
                                         <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
                                             <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
                                             <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
