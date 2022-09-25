@@ -144,9 +144,6 @@ export default function Pillar({ data, onDelete, onEdit, open,setOpen }) {
                                             </TableCell>
                                         </TableRow>
                                     ))}
-
-
-
                             </TableBody>
                         </Table>
                     </TableContainer>
