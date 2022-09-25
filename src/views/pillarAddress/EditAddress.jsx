@@ -13,6 +13,8 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
     street: item.street || '',
   })
 
+  const { city, street } = item
+
   // useEffect(() => {
   //   setDataAddressEdit(item)
   // }, [item])
@@ -45,11 +47,11 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
         >
           <h2 style={{ textAlign: 'center' }}>Edit address</h2>
           <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
-            <TextField onChange={onChangeText} defaultValue='' name="city" style={{ margin: '5px' }} fullWidth label='City' />
-            <TextField onChange={onChangeText} defaultValue='' name="street" style={{ margin: '5px' }} fullWidth label='Street' />
+            <TextField onChange={onChangeText} defaultValue={city} name="city" style={{ margin: '5px' }} fullWidth label='City' />
+            <TextField onChange={onChangeText} defaultValue={street} name="street" style={{ margin: '5px' }} fullWidth label='Street' />
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button sx={{marginRight:"5px"}} onClick={handleCloseEdit} variant="contained" color="success">
+            <Button sx={{ marginRight: "5px" }} onClick={handleCloseEdit} variant="contained" color="success">
               Close
             </Button>
             <Button onClick={onClickEdit} variant="contained" color="success">

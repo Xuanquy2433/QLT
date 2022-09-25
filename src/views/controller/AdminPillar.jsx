@@ -10,7 +10,7 @@ function AdminProduct() {
     getAllProduct()
   }, [])
   const getAllProduct = async (e) => {
-    const response = await axios.post(API_GET_PRODUCT)
+    const response = await axios.get(API_GET_PRODUCT)
     if (response) {
       setData(response.data)
     }

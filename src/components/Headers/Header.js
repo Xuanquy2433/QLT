@@ -17,9 +17,24 @@
 */
 
 // reactstrap components
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import { API_GET_OVERVIEW } from "utils/const";
 
 const Header = () => {
+  const [dataOverview, setDataOverview] = useState([])
+  useEffect(() => {
+    overview()
+  }, [])
+
+  const overview = async (e) => {
+    const response = await axios.get(API_GET_OVERVIEW)
+    if (response) {
+      setDataOverview(response.data)
+    }
+  }
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -39,12 +54,12 @@ const Header = () => {
                           Số lượng trụ
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                         600
+                          {dataOverview.totalProduct}
                         </span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
+                          <NavLink to={'/admin/product'} style={{ color: 'white' }}> <i className="fas fa-chart-bar" /></NavLink>
                         </div>
                       </Col>
                     </Row>
@@ -68,7 +83,7 @@ const Header = () => {
                         >
                           Số lượng đã thuê
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">102</span>
+                        <span className="h2 font-weight-bold mb-0">{dataOverview.totalNotAvailable}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -96,7 +111,7 @@ const Header = () => {
                         >
                           Số lượng chưa thuê
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">508</span>
+                        <span className="h2 font-weight-bold mb-0">{dataOverview.totalAvailable}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -122,9 +137,9 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Số lượng khách 
+                          Số lượng khách
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">100.000</span>
+                        <span className="h2 font-weight-bold mb-0">{dataOverview.totalUser}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-info text-white rounded-circle shadow">

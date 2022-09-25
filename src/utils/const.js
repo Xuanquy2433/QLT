@@ -14,6 +14,12 @@ export const API_EDIT_PILLAR = `${API}/admin/address/edit`;
 
 export const API_GET_PRODUCT = `${API}/product/`;
 
+export const API_FIND_BY_PRODUCT_ID = `${API}/admin/address/`;
+
+export const API_GET_OVERVIEW = `${API}/admin/overview`;
+
+
+
 
 
 

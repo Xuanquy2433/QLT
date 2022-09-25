@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 // javascipt plugin for creating charts
@@ -47,6 +47,8 @@ import {
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
+import { API_GET_OVERVIEW } from "utils/const";
+import axios from "axios";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
@@ -61,6 +63,17 @@ const Index = (props) => {
     setActiveNav(index);
     setChartExample1Data("data" + index);
   };
+  const [dataOverview, setDataOverview] = useState([])
+  useEffect(() => {
+    overview()
+  }, [])
+
+  const overview = async (e) => {
+    const response = await axios.get(API_GET_OVERVIEW)
+    if (response) {
+      setDataOverview(response.data)
+    }
+  }
   return (
     <>
       <Header />
