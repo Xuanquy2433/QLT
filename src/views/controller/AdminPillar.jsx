@@ -5,14 +5,27 @@ import { API_EDIT_PILLAR } from 'utils/const'
 import { API_ADD_PILLAR } from 'utils/const'
 import { API_DELETE_PILLAR } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
+import CreatePillar from 'views/pillar/CreatePillar'
+import EditPillar from 'views/pillar/EditPillar'
 import ListPillar from 'views/pillar/ListPillar'
+
 
 export default function AdminPillar() {
   const [data, setdata] = useState([])
+  const [selected, setSelected] = useState(undefined)
+
+
+  const [open, setOpen] = useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
 
   useEffect(() => {
     fetchAPI()
   }, [])
+
+  const [openEdit, setOpenEdit] = useState(false);
+
   const fetchAPI = async (e) => {
     const response = await axios.get(API_GET_PILLAR)
     if (response) {
@@ -20,7 +33,6 @@ export default function AdminPillar() {
     }
     console.log("response", response.data);
   }
-
 
   const onSubmit = async (data) => {
     if (data.city === '') {
@@ -34,6 +46,7 @@ export default function AdminPillar() {
         const response = await axios.post(API_ADD_PILLAR, data)
         if (response && response.status === 201) {
           toast.success("Thêm thành công", { autoClose: 1500 });
+          setOpenEdit(false)
           fetchAPI();
         }
 
@@ -62,40 +75,48 @@ export default function AdminPillar() {
         }
       }
     }
+
   }
 
-  const onEdit = async (data) => {
-    // try {
-    //   const response = await axios.put(API_EDIT_PILLAR, data)
-    //   if (response && response.status === 201) {
-    //     toast.success("Cập nhập thành công", { autoClose: 1500 });
-    //     fetchAPI();
-    //   }
+  const onEdit = async (post) => {
+    setSelected(post)
+    console.log("selected", post);
+    setOpenEdit(true)
+  }
 
-    //   //catch show error
-    // } catch (error) {
-    //   console.log(error.response.data)
-    //   if (error.response.data.message) {
-    //     toast.error(`${error.response.data.message}`, {
-    //       autoClose: 2000
-    //     })
-    //   }
-    //   else if (error.response.data.error) {
-    //     toast.error(`${error.response.data.error}`, {
-    //       autoClose: 2000
-    //     })
-    //   }
-    //   else if (error.response.data.error && error.response.data.message) {
-    //     toast.error(`${error.response.data.message}`, {
-    //       autoClose: 2000
-    //     })
-    //   }
-    //   else {
-    //     toast.error('Error', {
-    //       autoClose: 2000
-    //     })
-    //   }
-    // }
+  const onSubmitEdit = async (data) => {
+    try {
+      const response = await axios.put(API_EDIT_PILLAR, data)
+      if (response && response.status === 201) {
+        toast.success("Cập nhập thành công", { autoClose: 1500 });
+        fetchAPI();
+        setOpenEdit(false)
+      }
+
+      //catch show error
+    } catch (error) {
+      console.log(error.response.data)
+      if (error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error) {
+        toast.error(`${error.response.data.error}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error && error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else {
+        toast.error('Error', {
+          autoClose: 2000
+        })
+      }
+    }
   }
 
   const onDelete = async (id) => {
@@ -134,7 +155,9 @@ export default function AdminPillar() {
   }
   return (
     <div>
-      <ListPillar data={data} onSubmit={onSubmit} onDelete={onDelete} onEdit={onEdit} />
+      <CreatePillar onSubmit={onSubmit} open={open} setOpen={setOpen} />
+      {selected && <EditPillar item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
+      <ListPillar open={open} setOpen={setOpen} data={data} onSubmit={onSubmit} onDelete={onDelete} onEdit={onEdit} />
     </div>
   )
 }

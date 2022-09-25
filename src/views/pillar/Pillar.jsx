@@ -40,7 +40,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
+export default function Pillar({ data, onSubmit, onDelete, onEdit, open,setOpen }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const style = {
@@ -63,78 +63,20 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
         setPage(0);
     };
 
-    const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [openEdit, setOpenEdit] = React.useState(false);
-    const handleOpenEdit = () => setOpen(true);
-    const handleCloseEdit = () => setOpen(false);
-
-
-    const [dataAddress, setDataAddress] = useState(data || {
-        city: '',
-        street: '',
-    })
-    console.log(dataAddress);
-    const onChangeText = (event) => {
-        setDataAddress({ ...dataAddress, [event.target.name]: event.target.value })
+    const onClickEdit = (data) => {
+        onEdit(data)
     }
-
-    const onClickAdd = (event) => {
-        onSubmit(dataAddress)
-        handleClose()
-    }
-
-    const [dataAddressEdit, setDataAddressEdit] = useState(data || {
-        city: '',
-        street: '',
-        id: 0
-    })
-    const onClickEdit = (id) => {
-        onEdit(dataAddressEdit)
-        handleOpenEdit()
-        console.log("dayaaaaaaa ", dataAddress);
-        // handleClose()
-    }
-
-
     return (
         <>
-
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
                     <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
                         <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm địa chỉ
                         </Button>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box className='form-add-product'
-                                sx={{
-                                    maxWidth: '50%',
-                                    margin: '0 auto',
-                                    marginTop: ' 150px',
-                                    backgroundColor: 'white',
-                                    padding: '10px'
-                                }}
-                            >
-                                <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
-                                <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
-                                    <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
-                                    <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
-                                </div>
-                                <Button onClick={onClickAdd} variant="contained" color="success">
-                                    Submit
-                                </Button>
-                            </Box>
-
-                        </Modal>
-
 
                         <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
@@ -194,7 +136,7 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => onClickEdit(item.id)}>
+                                                            onClick={(e) => onClickEdit(item)}>
                                                             <EditIcon></EditIcon>
                                                             Update
                                                         </DropdownItem>
@@ -203,32 +145,7 @@ export default function Pillar({ data, onSubmit, onDelete, onEdit }) {
                                             </TableCell>
                                         </TableRow>
                                     ))}
-                                <Modal
-                                    open={openEdit}
-                                    onClose={handleCloseEdit}
-                                    aria-labelledby="modal-modal-title"
-                                    aria-describedby="modal-modal-description"
-                                >
-                                    <Box className='form-add-product'
-                                        sx={{
-                                            maxWidth: '50%',
-                                            margin: '0 auto',
-                                            marginTop: ' 150px',
-                                            backgroundColor: 'white',
-                                            padding: '10px'
-                                        }}
-                                    >
-                                        <h2 style={{ textAlign: 'center' }}>Edit ADDRESS</h2>
-                                        <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
-                                            <TextField onChange={onChangeText} defaultValue='' name="city" style={{ marginRight: '5px' }} fullWidth label='City' />
-                                            <TextField onChange={onChangeText} defaultValue='' name="street" fullWidth label='Street' />
-                                        </div>
-                                        <Button variant="contained" color="success">
-                                            Submit
-                                        </Button>
-                                    </Box>
 
-                                </Modal>
 
 
                             </TableBody>
