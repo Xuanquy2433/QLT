@@ -158,7 +158,7 @@ const Login = () => {
                   </InputGroupAddon> */}
 
                   <PhoneInput
-                    style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
+                    style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%",outline: 'none' }}
                     defaultCountry="VN"
                     placeholder="Enter your phone number"
                     onChange={(value) => {
