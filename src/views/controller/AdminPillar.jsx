@@ -5,9 +5,9 @@ import { API_EDIT_PILLAR } from 'utils/const'
 import { API_ADD_PILLAR } from 'utils/const'
 import { API_DELETE_PILLAR } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
-import CreatePillar from 'views/pillar/CreatePillar'
-import EditPillar from 'views/pillar/EditPillar'
-import ListPillar from 'views/pillar/ListPillar'
+import CreateAddress from 'views/pillarAddress/CreateAddress'
+import EditAddress from 'views/pillarAddress/EditAddress'
+import ListAddress from 'views/pillarAddress/ListAddress'
 
 
 export default function AdminPillar() {
@@ -155,9 +155,9 @@ export default function AdminPillar() {
   }
   return (
     <div>
-      <CreatePillar onSubmit={onSubmit} open={open} setOpen={setOpen} />
-      {selected && <EditPillar item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
-      <ListPillar open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} />
+      <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />
+      {selected && <EditAddress item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
+      <ListAddress open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} />
     </div>
   )
 }
