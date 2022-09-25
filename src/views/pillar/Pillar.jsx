@@ -18,90 +18,90 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+    { id: 'Id', label: 'Id', minWidth: 170 },
+    { id: 'City', label: 'City', minWidth: 100 },
     {
-        id: 'population',
-        label: 'Population',
+        id: 'Street',
+        label: 'Street',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'size',
-        label: 'Size\u00a0(km\u00b2)',
-        minWidth: 170,
+        id: 'Action',
+        label: 'Action',
+        maxWidth: 70,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
 ];
 
-const rows = [
-    {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+// const rows = [
+//     {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    },
-    {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+//     },
+//     {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    }, {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+//     }, {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    }, {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+//     }, {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    },
-    {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+//     },
+//     {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    },
-    {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+//     },
+//     {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    },
-    {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+//     },
+//     {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    },
-    {
-        name: 'Population',
-        code: 'IN',
-        population: 12321,
-        size: 123,
-        density: "density"
+//     },
+//     {
+//         name: 'Population',
+//         code: 'IN',
+//         population: 12321,
+//         size: 123,
+//         density: "density"
 
-    },
+//     },
 
-];
-export default function Pillar() {
+// ];
+export default function Pillar({ data }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -115,12 +115,12 @@ export default function Pillar() {
     };
     return (
         <>
-        
-        <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
+
+            <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
-                    <div style={{ width: '100%', display: "flex",flexDirection: "row"}}>
-                        <Button sx={{padding:"10px 5px", marginRight: '2%', height: '3.2em', width:"15%"}} variant="contained" color="success">
+                    <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
+                        <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Add customer
                         </Button>
                         <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
@@ -145,7 +145,7 @@ export default function Pillar() {
                                             sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                             key={column.id}
                                             align={column.align}
-                                            style={{ minWidth: column.minWidth }}
+                                            style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
                                         >
                                             {column.label}
                                         </TableCell>
@@ -153,15 +153,14 @@ export default function Pillar() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows
+                                {data
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox">
-                                            <TableCell>{item.name}</TableCell>
-                                            <TableCell > {item.code} </TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}>  {item.density} </TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}> {item.size}</TableCell>
-                                            <TableCell>
+                                            <TableCell>{item.id}</TableCell>
+                                            <TableCell > {item.city} </TableCell>
+                                            <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
+                                            <TableCell sx={{ textAlign: "right" }}>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
                                                         className="btn-icon-only text-light"
@@ -197,7 +196,7 @@ export default function Pillar() {
                     <TablePagination
                         rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
-                        count={rows.length}
+                        count={data.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

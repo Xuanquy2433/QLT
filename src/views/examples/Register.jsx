@@ -18,8 +18,11 @@ import {
 import { API_SIGNUP } from "utils/const";
 import PhoneBluetoothSpeakerIcon from '@mui/icons-material/PhoneBluetoothSpeaker';
 import PhoneInput from 'react-phone-number-input';
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
+  const history = useHistory();
+
   const [user, setUser] = useState({
     email: "",
     firstName: "",
@@ -37,10 +40,12 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(API_SIGNUP, user)
-      if (response && response.status === 200) {
+      if (response && response.status === 201) {
         toast.success('Signup success', {
           autoClose: 3000
         })
+        history.push('/auth/login')
+
       }
     } catch (error) {
       console.log(error.response.data)
@@ -51,6 +56,11 @@ const Register = () => {
       }
       else if (error.response.data.error) {
         toast.error(`${error.response.data.error}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error && error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
           autoClose: 2000
         })
       }
@@ -149,18 +159,18 @@ const Register = () => {
               </FormGroup>
               <FormGroup>
                 {/* <InputGroup className="input-group-alternative mb-3"> */}
-                  {/* <InputGroupAddon addonType="prepend">
+                {/* <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <PhoneBluetoothSpeakerIcon style={{ fontSize: '1.3em' }}></PhoneBluetoothSpeakerIcon>
                     </InputGroupText>
                   </InputGroupAddon> */}
-                  <PhoneInput
-                    style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
-                    defaultCountry="VN"
-                    placeholder="Enter your phone number"
-                    onChange={(value) => {
-                      setUser({ ...user, phoneNumber: value })
-                    }} />
+                <PhoneInput
+                  style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
+                  defaultCountry="VN"
+                  placeholder="Enter your phone number"
+                  onChange={(value) => {
+                    setUser({ ...user, phoneNumber: value })
+                  }} />
                 {/* </InputGroup> */}
               </FormGroup>
               <FormGroup>

@@ -28,8 +28,16 @@ import {
   Row,
   Col
 } from "reactstrap";
+import jwt_decode from "jwt-decode";
+
 
 const AdminNavbar = () => {
+  let decoded;
+  console.log("ccccccccccccccccc ", decoded);
+  let token = localStorage.getItem("token");
+  if (token !== null) {
+    decoded = jwt_decode(token);
+  }
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -92,7 +100,7 @@ const AdminNavbar = () => {
                   tag={Link}
                 >
                   <i className="ni ni-single-02" />
-                  <span className="nav-link-inner--text">Profile</span>
+                  {token && decoded ? <span className="nav-link-inner--text">{decoded.firstName + ' ' + decoded.lastName}</span> : <span className="nav-link-inner--text">Profile</span>}
                 </NavLink>
               </NavItem>
             </Nav>

@@ -44,7 +44,7 @@ var routes = [
   },
   {
     path: "/pillars",
-    name: "Trụ",
+    name: " Địa chỉ",
     icon: "ni ni-archive-2 text-pink",
     component: AdminPillar,
     layout: "/admin"
