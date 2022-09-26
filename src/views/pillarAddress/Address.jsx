@@ -40,7 +40,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ data, onDelete, onEdit, open,setOpen }) {
+export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const style = {
@@ -73,94 +73,94 @@ export default function Pillar({ data, onDelete, onEdit, open,setOpen }) {
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-                    <div style={{ width: '100%', display: "flex", flexDirection: "row",alignItems:"center",  }}>
+                    <div style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", }}>
                         <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm địa chỉ
                         </Button>
 
                         {/* <TextField sx={{display: 'flex',padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }} id="outlined-basic" label="Search" variant="outlined" /> */}
 
-                        <Paper sx={{boxShadow:"none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px', "&:focus":"border 1px solid #444" }}>
-                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                            <InputBase
-                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search Name Customer"
-                            />
-                        </Paper>
-                    </div>
-
-                    {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
-                    {/* stickyHeader */}
-                    <TableContainer sx={{ minHeight: '29em' }}>
-                        <Table aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
-                                    {columns.map((column) => (
-                                        <TableCell
-                                            sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                            key={column.id}
-                                            align={column.align}
-                                            style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
-                                        >
-                                            {column.label}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {data
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((item, index) => (
-                                        <TableRow hover role="checkbox" key={index}>
-                                            <TableCell>{item.id}</TableCell>
-                                            <TableCell > {item.city} </TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
-                                            <TableCell sx={{ textAlign: "right" }}>
-                                                <UncontrolledDropdown>
-                                                    <DropdownToggle
-                                                        className="btn-icon-only text-light"
-                                                        href="#pablo"
-                                                        role="button"
-                                                        size="sm"
-                                                        color=""
-                                                        onClick={(e) => e.preventDefault()}
-                                                    >
-                                                        <i className="fas fa-ellipsis-v" />
-                                                    </DropdownToggle>
-                                                    <DropdownMenu className="dropdown-menu-arrow" right>
-                                                        <DropdownItem
-                                                            href="#pablo"
-                                                            onClick={(e) => onDelete(item.id)}>
-                                                            <DeleteIcon></DeleteIcon>
-                                                            Delete
-                                                        </DropdownItem>
-                                                        <DropdownItem
-                                                            href="#pablo"
-                                                            onClick={(e) => onClickEdit(item)}>
-                                                            <EditIcon></EditIcon>
-                                                            Update
-                                                        </DropdownItem>
-                                                    </DropdownMenu>
-                                                </UncontrolledDropdown>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <TablePagination
-                        rowsPerPageOptions={[6, 10, 25, 100]}
-                        component="div"
-                        count={data.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
+                        <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px', '&:focus':{border:"1px solid blue"} }}>
+                        <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                            <SearchIcon />
+                        </IconButton>
+                        <InputBase
+                            sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                            placeholder="Search Name Customer"
+                        />
                 </Paper>
-            </Container>
+            </div>
+
+            {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
+            {/* stickyHeader */}
+            <TableContainer sx={{ minHeight: '29em' }}>
+                <Table aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            {columns.map((column) => (
+                                <TableCell
+                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
+                                >
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((item, index) => (
+                                <TableRow hover role="checkbox" key={index}>
+                                    <TableCell>{item.id}</TableCell>
+                                    <TableCell > {item.city} </TableCell>
+                                    <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
+                                    <TableCell sx={{ textAlign: "right" }}>
+                                        <UncontrolledDropdown>
+                                            <DropdownToggle
+                                                className="btn-icon-only text-light"
+                                                href="#pablo"
+                                                role="button"
+                                                size="sm"
+                                                color=""
+                                                onClick={(e) => e.preventDefault()}
+                                            >
+                                                <i className="fas fa-ellipsis-v" />
+                                            </DropdownToggle>
+                                            <DropdownMenu className="dropdown-menu-arrow" right>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    onClick={(e) => onDelete(item.id)}>
+                                                    <DeleteIcon></DeleteIcon>
+                                                    Delete
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    onClick={(e) => onClickEdit(item)}>
+                                                    <EditIcon></EditIcon>
+                                                    Update
+                                                </DropdownItem>
+                                            </DropdownMenu>
+                                        </UncontrolledDropdown>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[6, 10, 25, 100]}
+                component="div"
+                count={data.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+        </Paper>
+            </Container >
 
 
 
