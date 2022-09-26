@@ -32,6 +32,12 @@ const columns = [
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
+    {
+        id: 'Action',
+        label: 'Action',
+        minWidth: 70,
+        align: 'right',
+    },
 ];
 
 const rows = [
@@ -159,7 +165,7 @@ export default function Customer() {
                                             <TableCell > {item.code} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}>  {item.density} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}> {item.size}</TableCell>
-                                            <TableCell>
+                                            <TableCell sx={{ textAlign: 'right' }}>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
                                                         className="btn-icon-only text-light"
