@@ -65,9 +65,10 @@ export default function Pillar({ data, onDelete, onEdit, open,setOpen }) {
 
     const handleOpen = () => setOpen(true);
 
-    const onClickEdit = (data) => {
+    const onClickEdit = () => {
         onEdit(data)
     }
+
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
