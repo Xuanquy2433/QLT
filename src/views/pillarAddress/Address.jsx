@@ -65,7 +65,7 @@ export default function Pillar({ data, onDelete, onEdit, open,setOpen }) {
 
     const handleOpen = () => setOpen(true);
 
-    const onClickEdit = () => {
+    const onClickEdit = (data) => {
         onEdit(data)
     }
 
