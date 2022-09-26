@@ -99,7 +99,7 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
-                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                    sx={{  fontSize: '16px' }}
                                     key={column.id}
                                     align={column.align}
                                     style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
