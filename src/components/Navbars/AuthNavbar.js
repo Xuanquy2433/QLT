@@ -94,6 +94,12 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
               <NavItem>
+                <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
+                  <i className="ni ni-cart" />
+                  <span className="nav-link-inner--text">Cart</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink
                   className="nav-link-icon"
                   to="/admin/user-profile"

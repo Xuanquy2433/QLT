@@ -18,6 +18,12 @@ export const API_FIND_BY_PRODUCT_ID = `${API}/admin/address/`;
 
 export const API_GET_OVERVIEW = `${API}/admin/overview`;
 
+export const API_ADD_CART = `${API}/cart/addtocart/`;
+
+export const API_GET_CART = `${API}/cart/`;
+
+
+
 
 
 

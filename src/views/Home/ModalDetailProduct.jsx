@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import './css.css'
 import axios from 'axios';
 import { API_GET_PILLAR } from 'utils/const';
@@ -17,6 +17,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { toast } from 'react-toastify';
+import { API_ADD_CART } from 'utils/const';
 
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170 },
@@ -35,6 +37,13 @@ const columns = [
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
+    {
+        id: 'button',
+        label: '',
+        minWidth: 170,
+        align: 'right',
+        format: (value) => value.toLocaleString('en-US'),
+    },
 ];
 function ModalDetailProduct({ dataDetail }) {
     const [page, setPage] = React.useState(0);
@@ -48,16 +57,80 @@ function ModalDetailProduct({ dataDetail }) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const [data, setData] = useState([])
-    useEffect(() => {
-        getAllAddRess()
-    }, [])
 
-    const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_PILLAR)
-        if (response) {
-            setData(response.data)
+    //handle
+    // const [data, setData] = useState([])
+    // useEffect(() => {
+    //     getAllAddRess()
+    // }, [])
+
+    // const getAllAddRess = async (e) => {
+    //     const response = await axios.get(API_GET_PILLAR)
+    //     if (response) {
+    //         setData(response.data)
+    //     }
+    // }
+
+    const history = useHistory()
+
+    let token = localStorage.getItem('token')
+
+    const order = async (id) => {
+        console.log("idddddddddddd ", id);
+        try {
+            if (token) {
+                const response = await axios.post(API_ADD_CART, {
+                    month: 1,
+                    productId: id
+                }, {
+                    headers: {
+                        'authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response && response.status === 201) {
+                    toast.success('Thêm vào giỏ hàng thành công', {
+                        autoClose: 3000
+                    })
+                    history.push('/auth/cart')
+                };
+            } else {
+                toast.success('Please login', {
+                    autoClose: 3000
+                })
+                history.push('/auth/login')
+            }
+
+
+        } catch (error) {
+            console.log(error.response.data)
+            if (error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error) {
+                toast.error(`${error.response.data.error}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error && error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else {
+                toast.error('Error', {
+                    autoClose: 2000
+                })
+            }
         }
+    }
+
+
+    const clickOrder = (id) => {
+
     }
 
 
@@ -94,22 +167,18 @@ function ModalDetailProduct({ dataDetail }) {
                         <TableBody>
                             {dataDetail.length > 0 ?
                                 dataDetail.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((row, index) => {
-                                        return (
-                                            <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                                                {columns.map((column) => {
-                                                    const value = row[column.id];
-                                                    return (
-                                                        <TableCell key={column.id} align={column.align}>
-                                                            {column.format && typeof value === 'number'
-                                                                ? column.format(value)
-                                                                : value}
-                                                        </TableCell>
-                                                    );
-                                                })}
-                                            </TableRow>
-                                        );
-                                    }) : <h5 style={{fontStyle: 'italic',marginTop: '8px',width: '180px'}} > Đường này chưa có trụ nào !</h5>}
+                                    .map((item, index) => (
+                                        <TableRow hover role="checkbox" key={index}>
+                                            <TableCell>{item.id}</TableCell>
+                                            <TableCell > {item.name} </TableCell>
+                                            <TableCell style={{ textAlign: 'right' }}> {item.price} </TableCell>
+                                            <TableCell style={{ textAlign: 'right' }} > {item.description} </TableCell>
+                                            <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => order(item.id)} variant="contained" color="success">
+                                                Order
+                                            </Button> </TableCell>
+                                        </TableRow>
+                                    )) : <h5 style={{ fontStyle: 'italic', marginTop: '8px', width: '180px' }} > Đường này chưa có trụ nào !</h5>}
+                            {/* <h5 style={{fontStyle: 'italic',marginTop: '8px',width: '180px'}} > Đường này chưa có trụ nào !</h5> */}
                         </TableBody>
                     </Table>
                 </TableContainer>

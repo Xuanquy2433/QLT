@@ -25,8 +25,9 @@ import Icons from "views/examples/Icons.js";
 import AdminCustomer from "views/controller/AdminCustomer";
 import AdminCustomerOrders from "views/controller/AdminCustomerOrders";
 import AdminAddress from "views/controller/AdminAddress";
-import HomePage from "Home/HomePage";
 import AdminPillar from "views/controller/AdminPillar";
+import Cart from "views/cart/Cart";
+import HomePage from "views/Home/HomePage";
 
 var routes = [
   {
@@ -125,6 +126,13 @@ var routes = [
     name: "Home Page",
     icon: "ni ni-circle-08 text-pink",
     component: HomePage,
+    layout: "/auth"
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    icon: "ni ni-circle-08 text-pink",
+    component: Cart,
     layout: "/auth"
   }
 ];
