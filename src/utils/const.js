@@ -22,6 +22,9 @@ export const API_ADD_CART = `${API}/cart/addtocart/`;
 
 export const API_GET_CART = `${API}/cart/`;
 
+export const API_USERS = `${API}/admin/user`;
+
+
 
 
 

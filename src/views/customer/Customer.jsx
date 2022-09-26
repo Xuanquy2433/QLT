@@ -16,18 +16,25 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+    { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
+    { id: 'Created date', label: 'Created date', minWidth: 150 ,align: 'center',},
     {
-        id: 'population',
-        label: 'Population',
+        id: 'Name',
+        label: 'Name',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'size',
-        label: 'Size\u00a0(km\u00b2)',
+        id: 'Email',
+        label: 'Email',
+        minWidth: 170,
+        align: 'right',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'Phone number',
+        label: 'Phone number',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
@@ -149,7 +156,7 @@ export default function Customer() {
                                             sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                             key={column.id}
                                             align={column.align}
-                                            style={{ minWidth: column.minWidth }}
+                                            style={{ minWidth: column.minWidth, maxWidth: column.maxWidth}}
                                         >
                                             {column.label}
                                         </TableCell>
@@ -162,9 +169,11 @@ export default function Customer() {
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox">
                                             <TableCell>{item.name}</TableCell>
-                                            <TableCell > {item.code} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.code} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}>  {item.density} </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}> {item.size}</TableCell>
+                                            <TableCell sx={{ textAlign: 'right' }}> {item.size}</TableCell>
+
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
