@@ -23,7 +23,7 @@ export default function AdminCustomer() {
 
   return (
     <div>
-      <ListCustomer data={data}/>
+      <ListCustomer data={data} />
     </div>
   )
 }

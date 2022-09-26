@@ -45,9 +45,8 @@ const columns = [
     {
         id: 'action',
         label: 'Action',
-        minWidth: 170,
+        minWidth: 70,
         align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
     },
 ];
 
@@ -137,8 +136,8 @@ export default function Product({ data }) {
                                             </TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}> {item.name}</TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}> {item.price}</TableCell>
-                                            <TableCell sx={{ textAlign: "right" }}></TableCell>
-                                            <TableCell>
+                                            {/* <TableCell sx={{ textAlign: "right" }}></TableCell> */}
+                                            <TableCell sx={{ textAlign: 'right' }}>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
                                                         className="btn-icon-only text-light"

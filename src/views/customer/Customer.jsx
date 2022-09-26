@@ -102,7 +102,7 @@ export default function Customer({ data }) {
                                 {data
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
-                                        <TableRow hover role="checkbox">
+                                        <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> <Moment format='MMMM Do YYYY, h:mm:ss a'>{item.createdDate}</Moment></TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.firtName} +" "+ {item.lastName} </TableCell>
