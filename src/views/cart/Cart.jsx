@@ -5,6 +5,7 @@ import './cart.css'
 
 function Cart() {
     const [data, setData] = useState([])
+    const [month, setMonth] = useState(1)
     useEffect(() => {
         getAllCart()
     }, [])
@@ -21,7 +22,17 @@ function Cart() {
             setData(response.data)
         }
     }
+
     console.log("cart ", data);
+    const handleUpdateMonth = () => {
+        setMonth(month + 1)
+    }
+
+    const HandleMonth = () => {
+        if (month > 1) {
+            setMonth(month - 1)
+        }
+    }
     let sum = 0
     data.map((item) => {
         sum += (Number(item.product.price))
@@ -82,10 +93,32 @@ function Cart() {
                                                             {/* <h6 className="text-muted">Shirt</h6> */}
                                                             <h6 className="text-black mb-0">{item.product && item.product.name}</h6>
                                                         </div>
-                                                        <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            {/* <h6 className="text-muted">Month</h6> */}
-                                                            <h6 className="text-black mb-0">{item.month}</h6>
+                                                        <div style={{ alignItems: "center" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
+                                                            <button
+                                                                className="btn btn-link px-2"
+                                                                onClick={HandleMonth}
+                                                            >
+                                                                <i className="fas fa-minus" />
+                                                            </button>
+                                                            <input
+                                                                style={{ width: '50px' }}
+                                                                id="form1"
+                                                                min={1}
+                                                                name="quantity"
+                                                                value={month}
+                                                                type="number"
+                                                                className="form-control form-control-sm"
+                                                            />
+                                                            <button
+                                                                className="btn btn-link px-2"
+                                                                onClick={handleUpdateMonth}
+                                                            >
+                                                                <i className="fas fa-plus" />
+                                                            </button>
                                                         </div>
+                                                        {/* <div className="col-md-3 col-lg-3 col-xl-3">
+                                                            <h6 className="text-black mb-0">{item.month}</h6>
+                                                        </div> */}
                                                         {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
