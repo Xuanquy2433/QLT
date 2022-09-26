@@ -174,7 +174,7 @@ function ModalDetailProduct({ dataDetail }) {
                                             <TableCell style={{ textAlign: 'right' }}> {item.price} </TableCell>
                                             <TableCell style={{ textAlign: 'right' }} > {item.description} </TableCell>
                                             <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => order(item.id)} variant="contained" color="success">
-                                                Order
+                                                Add cart
                                             </Button> </TableCell>
                                         </TableRow>
                                     )) : <h5 style={{ fontStyle: 'italic', marginTop: '8px', width: '180px' }} > Đường này chưa có trụ nào !</h5>}

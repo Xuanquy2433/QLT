@@ -1,14 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { API_PLACE_ORDER } from 'utils/const'
 import { API_GET_CART } from 'utils/const'
 import './cart.css'
 
 function Cart() {
+
     const [data, setData] = useState([])
     const [month, setMonth] = useState(1)
-    useEffect(() => {
-        getAllCart()
-    }, [])
+    const history = useHistory()
+    let token = localStorage.getItem('token')
+
+
 
     const getAllCart = async (e) => {
         const response = await axios.get(API_GET_CART, {
@@ -37,12 +42,72 @@ function Cart() {
     data.map((item) => {
         sum += (Number(item.product.price))
     })
-    console.log("sum", sum);
+
+    const [idOrder, setIdOrder] = useState()
+
+
+    const clickOrder = async () => {
+        console.log('checkout token ', token);
+        try {
+            if (token) {
+
+                const response = await axios.post(API_PLACE_ORDER, {}, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response && response.status === 200) {
+                    toast.success('Success', {
+                        autoClose: 3000
+                    })
+                    console.log("da vao ", idOrder);
+                    setTimeout(() => {
+                        history.push('/auth/order/?id=' + response.data.message.replace(/\D/g, ""))
+                    }, 2000);
+
+                };
+            } else {
+                toast.success('Please login', {
+                    autoClose: 3000
+                })
+                history.push('/auth/login')
+            }
+        } catch (error) {
+            console.log(error.response.data)
+            if (error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error) {
+                toast.error(`${error.response.data.error}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error && error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else {
+                toast.error('Error', {
+                    autoClose: 2000
+                })
+            }
+        }
+    }
+    console.log("iddddddddddddddddddddddddđ ", idOrder);
+
+    useEffect(() => {
+        getAllCart()
+    }, [])
 
     return (
-        <div style={{ marginTop: '150px' }} >
+        <div style={{ marginTop: '20px' }} >
             <section className="h-100 h-custom" style={{ backgroundColor: "#d2c9ff" }}>
-                <div className="container py-5 h-100">
+                <div>
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-12">
                             <div
@@ -80,11 +145,11 @@ function Cart() {
                                                         <h6 className="text-muted"></h6>                                                        </div>
                                                 </div>
                                                 <hr className="my-4" />
-                                                {data.map((item) => (
+                                                {data.length ? data.map((item) => (
                                                     <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                         <div className="col-md-2 col-lg-2 col-xl-2">
                                                             <img
-                                                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
+                                                                src="https://onlinecrm.vn/media/default.jpg"
                                                                 className="img-fluid rounded-3"
                                                                 alt="Cotton T-shirt"
                                                             />
@@ -133,7 +198,13 @@ function Cart() {
                                                             </a>
                                                         </div>
                                                     </div>
-                                                ))}
+                                                )) :
+                                                    <div style={{ width: "100%" }} >
+                                                        <div style={{ width: '500px', clear: 'both',textAlign: 'center' }}>
+                                                            <p>Chưa có sản phẩm nào !</p>
+                                                        </div>
+                                                    </div>
+                                                }
                                                 <hr className="my-4" />
 
                                                 {/* <div className="row mb-4 d-flex justify-content-between align-items-center">
@@ -247,7 +318,9 @@ function Cart() {
                                                     type="button"
                                                     className="btn btn-dark btn-block btn-lg"
                                                     data-mdb-ripple-color="dark"
+                                                    onClick={clickOrder}
                                                 >
+
                                                     Orders
                                                 </button>
                                             </div>

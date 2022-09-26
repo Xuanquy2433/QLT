@@ -15,7 +15,7 @@ import { ToastContainer } from "react-toastify";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 localStorage.setItem("data", JSON.stringify({ role: 'user', name: 'abc' }))
 
-var hours = 1;
+var hours = 2;
 var now = new Date().getTime();
 var setupTime = localStorage.getItem('setupTime');
 if (setupTime == null) {

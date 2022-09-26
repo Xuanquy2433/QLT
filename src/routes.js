@@ -28,6 +28,8 @@ import AdminAddress from "views/controller/AdminAddress";
 import AdminPillar from "views/controller/AdminPillar";
 import Cart from "views/cart/Cart";
 import HomePage from "views/Home/HomePage";
+import Checkout from "views/cart/Checkout";
+import OrderDetail from "views/cart/OrderDetail";
 
 var routes = [
   {
@@ -134,6 +136,13 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: Cart,
     layout: "/auth"
-  }
+  },
+  {
+    path: "/order/",
+    name: "OrderDetail",
+    icon: "ni ni-circle-08 text-pink",
+    component: OrderDetail,
+    layout: "/auth"
+  },
 ];
 export default routes;

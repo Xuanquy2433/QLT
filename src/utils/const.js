@@ -24,6 +24,15 @@ export const API_GET_CART = `${API}/cart/`;
 
 export const API_GET_USERS = `${API}/admin/user/`;
 
+export const API_PLACE_ORDER = `${API}/place_order`;
+
+export const API_GET_ORDER_DETAIL = `${API}/user/order/`;
+
+export const API_CONFIRM_PAYMENT = `${API}/user_confirm_payment/`;
+
+
+
+
 
 
 
