@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import Moment from 'react-moment';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import { data } from 'jquery';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     { id: 'Created date', label: 'Created date', minWidth: 150, align: 'center', },
@@ -55,6 +56,7 @@ export default function Customer({ data }) {
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
+    let name = data.lastName 
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
@@ -105,7 +107,7 @@ export default function Customer({ data }) {
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> <Moment format='MMMM Do YYYY, h:mm:ss a'>{item.createdDate}</Moment></TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>  {item.firtName} +" "+ {item.lastName} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>  {item.lastName} {item.firstName} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.email}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
 
