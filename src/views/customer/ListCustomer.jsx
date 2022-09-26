@@ -1,10 +1,10 @@
 import React from 'react'
 import Customer from './Customer'
 
-export default function ListCustomer() {
+export default function ListCustomer({data}) {
   return (
     <div>
-        <Customer/>
+        <Customer data={data}/>
     </div>
   )
 }
