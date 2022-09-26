@@ -9,7 +9,6 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
         city: '',
         street: '',
     })
-    console.log(dataAddress);
     const onChangeText = (event) => {
         setDataAddress({ ...dataAddress, [event.target.name]: event.target.value })
     }
