@@ -131,14 +131,14 @@ function Cart() {
                                                     <div className="col-md-3 col-lg-3 col-xl-3">
                                                         <h6 className="text-muted">Name pillar</h6>
                                                     </div>
-                                                    <div className="col-md-3 col-lg-3 col-xl-3">
+                                                    <div style={{display:"flex", justifyContent:"center"}} className="col-md-3 col-lg-3 col-xl-3">
                                                         <h6 className="text-muted">Month</h6>
                                                     </div>
                                                     {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
                                                         </div> */}
-                                                    <div className="col-md-3 col-lg-3 col-xl-3">
+                                                    <div style={{display:"flex", justifyContent:"center"}} className="col-md-3 col-lg-3 col-xl-3">
                                                         <h6 className="text-muted">Price</h6>
                                                     </div>
                                                     <div className="col-md-1 col-lg-1 col-xl-1">
@@ -158,7 +158,7 @@ function Cart() {
                                                             {/* <h6 className="text-muted">Shirt</h6> */}
                                                             <h6 className="text-black mb-0">{item.product && item.product.name}</h6>
                                                         </div>
-                                                        <div style={{ alignItems: "center" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
+                                                        <div style={{ alignItems: "center" , justifyContent:"end"}} className="col-md-3 col-lg-3 col-xl-3 d-flex">
                                                             <button
                                                                 className="btn btn-link px-2"
                                                                 onClick={HandleMonth}
@@ -188,7 +188,7 @@ function Cart() {
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
                                                         </div> */}
-                                                        <div className="col-md-3 col-lg-3 col-xl-3">
+                                                        <div style={{display:"flex", justifyContent:"center"}} className="col-md-3 col-lg-3 col-xl-3">
                                                             {/* <h6 className="text-muted">Price</h6> */}
                                                             <h6 className="text-black mb-0">{item.product.price}</h6>
                                                         </div>
