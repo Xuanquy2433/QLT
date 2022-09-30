@@ -36,6 +36,8 @@ export const API_PRODUCT_ADD = `${API}/product/add`;
 
 export const API_PRODUCT_EDIT = `${API}/product/edit`;
 
+export const API_PRODUCT_DELETE = `${API}/product/delete?id=`;
+
 
 
 

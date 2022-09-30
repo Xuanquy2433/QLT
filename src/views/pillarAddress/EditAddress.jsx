@@ -28,6 +28,8 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
     onSubmitEdit({ ...item, ...dataAddressEdit, id: item.id })
   }
 
+  console.log(dataAddressEdit);
+
   return (
     <div>
       <Modal

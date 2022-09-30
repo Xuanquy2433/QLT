@@ -83,7 +83,7 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress }) {
             >
                 <h2 style={{ textAlign: 'center' }}>Thêm trụ</h2>
                 <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
-                    <FormControl fullWidth sx={{ margin: "5px" }}>
+                    {/* <FormControl fullWidth sx={{ margin: "5px" }}>
                         <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
@@ -97,7 +97,7 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress }) {
                             ))}
 
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
                     <FormControl fullWidth sx={{ margin: "5px" }}>
                         <InputLabel id="demo-simple-select-label">Mã địa chỉ</InputLabel>
                         <Select

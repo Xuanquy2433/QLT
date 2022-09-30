@@ -19,25 +19,38 @@ import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 170 },
+    { id: 'id', label: 'Id', minWidth: 10, maxWidth: 10 },
     {
         id: 'name',
-        label: 'Name',
+        label: 'Tên',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'price',
-        label: 'Price',
-        minWidth: 170,
+        label: 'Giá',
+        minWidth: 130,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
+        id: 'Description',
+        label: 'Chú thích',
+        minWidth: 130,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'AddreddId',
+        label: 'Mã địa chỉ',
+        minWidth: 70,
+        align: 'center',
+    },
+    {
         id: 'Status',
-        label: 'Status',
-        minWidth: 170,
+        label: 'Trạng thái',
+        minWidth: 100,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -49,7 +62,7 @@ const columns = [
     },
 ];
 
-export default function Product({ data, open, setOpen }) {
+export default function Product({ data, open, setOpen, onDelete, onEdit }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
@@ -64,6 +77,9 @@ export default function Product({ data, open, setOpen }) {
 
     //handle
     const handleOpen = () => setOpen(true)
+    const onClickEdit = (data) => {
+        onEdit(data)
+    }
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -79,7 +95,7 @@ export default function Product({ data, open, setOpen }) {
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search Name pro"
+                                placeholder="Tìm kiếm thông tin trụ"
                             />
                         </Paper>
                     </div>
@@ -95,7 +111,7 @@ export default function Product({ data, open, setOpen }) {
                                             sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                             key={column.id}
                                             align={column.align}
-                                            style={{ minWidth: column.minWidth }}
+                                            style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
                                         >
                                             {column.label}
                                         </TableCell>
@@ -110,7 +126,11 @@ export default function Product({ data, open, setOpen }) {
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.price}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.address && item.address.id}</TableCell>
+
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
+
 
                                             {/* <TableCell sx={{ textAlign: "right" }}></TableCell> */}
                                             <TableCell sx={{ textAlign: 'right' }}>
@@ -128,13 +148,13 @@ export default function Product({ data, open, setOpen }) {
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
+                                                            onClick={(e) => onDelete(item.id)}>
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
+                                                            onClick={(e) => onClickEdit(item)}>
                                                             <EditIcon></EditIcon>
                                                             Update
                                                         </DropdownItem>
