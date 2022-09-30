@@ -1,4 +1,4 @@
-import { Grid, IconButton, InputBase } from '@mui/material';
+import { Grid, IconButton, InputBase, Switch } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,16 +28,6 @@ import { API_FIND_BY_PRODUCT_ID } from 'utils/const';
 import { API_ADDRESS_FILTER } from 'utils/const';
 import { toast } from 'react-toastify';
 
-const columns = [
-    { id: 'id', label: 'Id', minWidth: 170 },
-    { id: 'city', label: 'City', minWidth: 100 },
-    { id: 'street', label: 'Street', minWidth: 100 },
-];
-
-function createData(name, code, population, size) {
-    const density = population / size;
-    return { name, code, population, size, density };
-}
 const style = {
     position: 'absolute',
     top: '40%',
@@ -50,24 +40,15 @@ const style = {
     p: 4,
 };
 function TableAddress() {
-    const [openView, setOpenView] = React.useState(false);
-    const handleOpenView = () => setOpen(true);
-    const handleCloseView = () => setOpen(false);
 
+    const [checked, setChecked] = React.useState(true);
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+    const handleChangeChecked = (event) => {
+        setChecked(event.target.checked);
     };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+    // show hide popup
     const [open, setOpen] = React.useState(false);
-
     const [dataDetail, setDataDetail] = useState([])
     const handleOpen = async (id) => {
         console.log(id);
@@ -79,39 +60,28 @@ function TableAddress() {
         setOpen(true)
     };
     const handleClose = () => setOpen(false);
-    const [data, setData] = useState([])
-    const [dataAll, setDataAll] = useState([])
 
+    // getFirstPageForHome
+    const [data, setData] = useState([])
     const [sort, setSort] = React.useState('');
     const [field, setField] = React.useState('');
     const [keyword, setKeyword] = React.useState('');
-
-
-    const handleChange = (event) => {
-        setSort(event.target.value);
-    };
-
     const handleChangeField = (event) => {
         setField(event.target.value);
     };
-
-    console.log("cbb ", sort);
-
-
 
     const getAllAddRess = async (e) => {
         const response = await axios.get(API_GET_PILLAR)
         if (response) {
             setData(response.data)
-            // setDataAll(response.data[0].product)
         }
     }
-    console.log("dataa ", data);
 
+    // ONCHANGE FILTER
     const onclickFilter = async (e) => {
-        if (sort === '') {
-            setSort('asc')
-        }
+        if (checked === true) {
+            setSort('desc')
+        } else setSort('asc')
         if (field === '') {
             setField('street')
         }
@@ -121,19 +91,15 @@ function TableAddress() {
             toast.success('Success', {
                 autoClose: 300
             })
-            // setDataAll(response.data[0].product)
         }
     }
 
-    console.log("data filet ", keyword, " ", sort, " ", field);
 
     useEffect(() => {
         getAllAddRess()
     }, [])
     return (
         <React.Fragment>
-
-            {/* <div style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", marginBottom: '30px' }}> */}
             <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }}>
                 <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
                     <SearchIcon />
@@ -149,17 +115,11 @@ function TableAddress() {
             </Paper>
 
             <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
-                <InputLabel sx={{ color: 'black' }} id="demo-select-small">Sắp xếp</InputLabel>
-                <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    value={sort}
-                    label="Age"
-                    onChange={handleChange}
-                >
-                    <MenuItem value={'asc'}>Tăng dần</MenuItem>
-                    <MenuItem value={'desc'}>Giảm dần</MenuItem>
-                </Select>
+                <Switch
+                    checked={checked}
+                    onChange={handleChangeChecked}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />
             </FormControl>
             <FormControl sx={{ width: '11%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
                 <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
@@ -168,13 +128,10 @@ function TableAddress() {
                     id="demo-select-small"
                     value={field}
                     label="Field"
-                    onChange={handleChangeField}
-                >
-
+                    onChange={handleChangeField}>
                     <MenuItem value={'street'}>Đường</MenuItem>
                     <MenuItem value={'city'}>Thành phố</MenuItem>
                     <MenuItem value={'description'}>Mô tả</MenuItem>
-
                 </Select>
             </FormControl>
             <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
