@@ -59,7 +59,6 @@ function AdminProduct() {
 
   }
 
-
   const onSubmitEdit = async (data) => {
     try {
       const response = await axios.put(API_PRODUCT_EDIT, data)

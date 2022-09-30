@@ -28,7 +28,7 @@ const columns = [
         id: 'Street',
         label: 'Street',
         minWidth: 170,
-        align: 'right',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
@@ -116,7 +116,7 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell > {item.city} </TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>  {item.street} </TableCell>
                                             <TableCell sx={{ textAlign: "right" }}>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle

@@ -22,15 +22,15 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
 
     const statusO = [
         {
-            value: "ENABLE",
+            value: "ENABLED",
             name: "Đã cho thuê"
         },
         {
-            value: "AVAIABLE",
+            value: "AVAILABLE",
             name: "Có sẵn"
         },
         {
-            value: "STOPWORKING",
+            value: "DISABLED",
             name: "Dừng hoạt động"
         },
     ]
