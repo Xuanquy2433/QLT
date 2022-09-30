@@ -29,9 +29,9 @@ export default function AdminPillar() {
   const fetchAPI = async (e) => {
     const response = await axios.get(API_GET_PILLAR)
     if (response) {
-      setdata(response.data)
+      setdata(response.data.content)
     }
-    console.log("response", response.data);
+    console.log("response", response.data.content);
   }
 
   const onSubmit = async (data) => {
