@@ -23,7 +23,7 @@ function HomePage() {
             <hr />
             <TableAddress />
             <hr />
-            <TableProduct />
+            {/* <TableProduct /> */}
 
         </div>
 
