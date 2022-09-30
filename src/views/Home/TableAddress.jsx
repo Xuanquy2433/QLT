@@ -27,6 +27,7 @@ import ModalDetailProduct from './ModalDetailProduct';
 import { API_FIND_BY_PRODUCT_ID } from 'utils/const';
 import { API_ADDRESS_FILTER } from 'utils/const';
 import { toast } from 'react-toastify';
+import NorthIcon from '@mui/icons-material/North';
 
 const style = {
     position: 'absolute',
@@ -80,17 +81,14 @@ function TableAddress() {
     // ONCHANGE FILTER
     const onclickFilter = async (e) => {
         if (checked === true) {
-            setSort('desc')
-        } else setSort('asc')
+            setSort('asc')
+        } else setSort('desc')
         if (field === '') {
             setField('street')
         }
         const response = await axios.get(API_ADDRESS_FILTER + "keyword=" + keyword + '&quantity=1&sort=' + sort + '&sortField=' + field)
         if (response) {
             setData(response.data)
-            toast.success('Success', {
-                autoClose: 300
-            })
         }
     }
 
@@ -100,26 +98,15 @@ function TableAddress() {
     }, [])
     return (
         <React.Fragment>
-            <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }}>
-                <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
-                <InputBase
-                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                    placeholder="Tìm theo từ khóa"
-                    onChange={(e) => {
-                        setKeyword(e.target.value)
-                        onclickFilter()
-                    }}
-                />
-            </Paper>
-
             <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
-                <Switch
-                    checked={checked}
-                    onChange={handleChangeChecked}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                />
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3> <NorthIcon sx={{ mt: 0.5 }} />
+                    <Switch
+                        checked={checked}
+                        onChange={handleChangeChecked}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                </div>
             </FormControl>
             <FormControl sx={{ width: '11%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
                 <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
@@ -134,13 +121,26 @@ function TableAddress() {
                     <MenuItem value={'description'}>Mô tả</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
+            {/* <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
                 <Button variant="contained" onClick={onclickFilter} color="primary">
                     Tìm kiếm
                 </Button>
-            </FormControl>
+            </FormControl> */}
+            <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }}>
+                <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
+                    <SearchIcon />
+                </IconButton>
+                <InputBase
+                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                    placeholder="Tìm theo từ khóa"
+                    onChange={(e) => {
+                        setKeyword(e.target.value)
+                        onclickFilter()
+                    }}
+                />
+            </Paper>
 
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '100%', mt: 2 }}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {data && data.map((item, index) => (
                         <Grid item xs={6} key={index} >
