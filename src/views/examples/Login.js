@@ -163,7 +163,9 @@ const Login = () => {
                     placeholder="Enter your phone number"
                     onChange={(value) => {
                       setData({ ...data, phoneNumber: value })
-                    }} />
+                    }} 
+                 
+                    />
                   {/* <Input
                     onChange={(e) => {
                       setData({ ...data, phoneNumber: e.target.value })

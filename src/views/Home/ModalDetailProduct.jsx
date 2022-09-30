@@ -128,12 +128,6 @@ function ModalDetailProduct({ dataDetail }) {
         }
     }
 
-
-    const clickOrder = (id) => {
-
-    }
-
-
     return (
         <React.Fragment>
             <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
@@ -169,11 +163,11 @@ function ModalDetailProduct({ dataDetail }) {
                                 dataDetail.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
-                                            <TableCell>{item.id}</TableCell>
-                                            <TableCell > {item.name} </TableCell>
-                                            <TableCell style={{ textAlign: 'right' }}> {item.price} </TableCell>
-                                            <TableCell style={{ textAlign: 'right' }} > {item.description} </TableCell>
-                                            <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => order(item.id)} variant="contained" color="success">
+                                            <TableCell>{item.product.id}</TableCell>
+                                            <TableCell > {item.product.name} </TableCell>
+                                            <TableCell style={{ textAlign: 'right' }}> {item.product.price} </TableCell>
+                                            <TableCell style={{ textAlign: 'right' }} > {item.product.description} </TableCell>
+                                            <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => order(item.product.id)} variant="contained" color="success">
                                                 Add cart
                                             </Button> </TableCell>
                                         </TableRow>

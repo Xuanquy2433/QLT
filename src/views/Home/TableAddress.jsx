@@ -62,11 +62,13 @@ function TableAddress() {
         if (response) {
             setDataDetail(response.data)
         }
-        console.log('ccccc ', dataDetail);
+        console.log('data detail ', dataDetail);
         setOpen(true)
     };
     const handleClose = () => setOpen(false);
     const [data, setData] = useState([])
+    const [dataAll, setDataAll] = useState([])
+
     useEffect(() => {
         getAllAddRess()
     }, [])
@@ -74,7 +76,8 @@ function TableAddress() {
     const getAllAddRess = async (e) => {
         const response = await axios.get(API_GET_PILLAR)
         if (response) {
-            setData(response.data)
+            setData(response.data.content)
+            setDataAll(response.data)
         }
     }
 

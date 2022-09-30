@@ -43,10 +43,11 @@ const AdminNavbar = () => {
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
-            <img
+            {/* <img
               alt="..."
-              src={require("../../assets/img/brand/argon-react-white.png")}
-            />
+              src={require("../../assets/img/brand/logoDev.png")}
+            /> */}
+           <h3 style={{fontSize:"2.5em",fontWeight: 800,color: 'white'}}>LOGO</h3>
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />

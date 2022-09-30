@@ -71,7 +71,7 @@ export default function Product({ data }) {
 
                     <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
                         <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                            Thêm product
+                            Thêm Trụ
                         </Button>
                         <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
