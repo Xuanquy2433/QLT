@@ -23,6 +23,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import ModalDetailProduct from './ModalDetailProduct';
 import { API_FIND_BY_PRODUCT_ID } from 'utils/const';
+import { API_ADDRESS_FILTER } from 'utils/const';
+import { toast } from 'react-toastify';
 
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170 },
@@ -74,14 +76,21 @@ function TableAddress() {
     const [dataAll, setDataAll] = useState([])
 
     const [sort, setSort] = React.useState('');
+    const [field, setField] = React.useState('');
+    const [keyword, setKeyword] = React.useState('');
+
 
     const handleChange = (event) => {
         setSort(event.target.value);
     };
 
-    useEffect(() => {
-        getAllAddRess()
-    }, [])
+    const handleChangeField = (event) => {
+        setField(event.target.value);
+    };
+
+    console.log("cbb ", sort);
+
+
 
     const getAllAddRess = async (e) => {
         const response = await axios.get(API_GET_PILLAR)
@@ -90,40 +99,80 @@ function TableAddress() {
             // setDataAll(response.data[0].product)
         }
     }
-    console.log(data);
-    // console.log(dataAll);
+    console.log("dataa ", data);
 
+    const onclickFilter = async (e) => {
+        if (sort === '') {
+            setSort('asc')
+        }
+        if (field === '') {
+            setField('street')
+        }
+        const response = await axios.get(API_ADDRESS_FILTER + "keyword=" + keyword + '&quantity=1&sort=' + sort + '&sortField=' + field)
+        if (response) {
+            setData(response.data)
+            toast.success('Success', {
+                autoClose: 2000
+            })
+            // setDataAll(response.data[0].product)
+        }
+    }
+
+    console.log("data filet ", keyword, " ", sort, " ", field);
+
+    useEffect(() => {
+        getAllAddRess()
+    }, [])
     return (
         <React.Fragment>
 
-            <div style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", marginBottom: '30px' }}>
-                <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }}>
-                    <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                    <InputBase
-                        sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                        placeholder="Search Name Customer"
-                    />
-                </Paper>
+            {/* <div style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", marginBottom: '30px' }}> */}
+            <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }}>
+                <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
+                    <SearchIcon />
+                </IconButton>
+                <InputBase
+                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                    placeholder="Tìm theo từ khóa"
+                    onChange={(e) => setKeyword(e.target.value)}
+                />
+            </Paper>
 
-                <FormControl sx={{ minWidth: 120, backgroundColor: 'white', mb: 1 }} size="small">
-                    <InputLabel sx={{ color: 'blue' }} id="demo-select-small">Sắp xếp</InputLabel>
-                    <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        value={sort}
-                        label="Age"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Tăng dần</MenuItem>
-                        <MenuItem value={20}>Giảm dần</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
+            <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
+                <InputLabel sx={{ color: 'black' }} id="demo-select-small">Sắp xếp</InputLabel>
+                <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={sort}
+                    label="Age"
+                    onChange={handleChange}
+                >
+                    <MenuItem value={'asc'}>Tăng dần</MenuItem>
+                    <MenuItem value={'desc'}>Giảm dần</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl sx={{ width: '11%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
+                <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
+                <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={field}
+                    label="Field"
+                    onChange={handleChangeField}
+                >
+
+                    <MenuItem value={'street'}>Đường</MenuItem>
+                    <MenuItem value={'city'}>Thành phố</MenuItem>
+                    <MenuItem value={'description'}>Mô tả</MenuItem>
+
+                </Select>
+            </FormControl>
+            <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
+                <Button variant="contained" onClick={onclickFilter} color="primary">
+                    Tìm kiếm
+                </Button>
+            </FormControl>
+
             <Box sx={{ width: '100%' }}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {data && data.map((item, index) => (

@@ -40,6 +40,9 @@ export const API_GET_ORDER_ADMIN_USER_CONFIRMED= `${API}/admin/order/?status=USE
 
 export const API_PRODUCT_DELETE = `${API}/product/delete?id=`;
 
+export const API_ADDRESS_FILTER = `${API}/address/page/1?`;
+
+
 
 
 
