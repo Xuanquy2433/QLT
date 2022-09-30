@@ -59,7 +59,10 @@ const AdminNavbar = () => {
               alt="..."
               src={require("../../assets/img/brand/logoDev.png")}
             /> */}
-            <h3 style={{ fontSize: "2.5em", fontWeight: 800, color: 'white' }}>LOGO</h3>
+            {/* <h3 style={{ fontSize: "2.5em", fontWeight: 800, color: 'white' }}>LOGO</h3> */}
+            <div class="typed-animation">
+              <h1 style={{ color: 'white' }} class="typed-out">LOGO</h1>
+            </div>
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />

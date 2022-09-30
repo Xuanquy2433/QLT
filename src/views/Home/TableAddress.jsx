@@ -15,6 +15,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import './css.css'
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
 import axios from 'axios';
 import { API_GET_PILLAR } from 'utils/const';
 import Box from '@mui/material/Box';
@@ -48,6 +50,11 @@ const style = {
     p: 4,
 };
 function TableAddress() {
+    const [openView, setOpenView] = React.useState(false);
+    const handleOpenView = () => setOpen(true);
+    const handleCloseView = () => setOpen(false);
+
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -112,7 +119,7 @@ function TableAddress() {
         if (response) {
             setData(response.data)
             toast.success('Success', {
-                autoClose: 2000
+                autoClose: 300
             })
             // setDataAll(response.data[0].product)
         }
@@ -134,7 +141,10 @@ function TableAddress() {
                 <InputBase
                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                     placeholder="Tìm theo từ khóa"
-                    onChange={(e) => setKeyword(e.target.value)}
+                    onChange={(e) => {
+                        setKeyword(e.target.value)
+                        onclickFilter()
+                    }}
                 />
             </Paper>
 
@@ -186,38 +196,31 @@ function TableAddress() {
                                     <p>Thành Phố: {item.city} </p>
                                     <p>Mô tả: {item.description}</p>
 
+                                    <Button onClick={() => handleOpen(item.id)} variant="contained" color="success">
+                                        View more
+                                    </Button>
+                                    {/* 
                                     {item.product.length > 0 ? item.product.map((itemDetail, index) => (
                                         <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
                                             <h2>{itemDetail.name}</h2>
                                         </div>
                                     )) : <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '50px', backgroundColor: '#FF4433' }}>
                                         <h2 style={{ color: 'white' }}>Khu vực này đã thuê hết</h2>
-                                    </div>}
-                                    {/* <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
-                                        <h2>product name</h2>
-                                    </div>
-                                    <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
-                                        <h2>product name</h2>
-                                    </div> */}
+                                    </div>} */}
                                 </div>
                             </div>
-
                         </Grid>
                     ))}
-
-
-
-
-
-                    {/* <Grid item xs={6}>
-                        <h2 style={{ color: 'white', textAlign: 'center' }}>ok</h2>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <h2 style={{ color: 'white', textAlign: 'center' }}>ok</h2>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <h2 style={{ color: 'white', textAlign: 'center' }}>ok</h2>
-                    </Grid> */}
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <ModalDetailProduct dataDetail={dataDetail} />
+                        </Box>
+                    </Modal>
                 </Grid>
             </Box>
 
