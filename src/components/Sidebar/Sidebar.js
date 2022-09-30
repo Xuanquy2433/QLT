@@ -34,6 +34,8 @@ import {
   Row,
   Col
 } from "reactstrap";
+import jwt_decode from "jwt-decode";
+
 var ps;
 
 const Sidebar = (props) => {
@@ -50,14 +52,20 @@ const Sidebar = (props) => {
   const closeCollapse = () => {
     setCollapseOpen(false);
   };
-const history = useHistory();
+  const history = useHistory();
 
   // creates the links that appear in the left menu / Sidebar
-  let local = JSON.parse(localStorage.getItem('data'))
-  console.log('local , ', local.role);
+  let decoded;
+  let token = localStorage.getItem("token");
+  if (token !== null) {
+    decoded = jwt_decode(token);
+  }
+
+  console.log('decoded ', decoded);
+
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (local.role === 'user' && prop.path !== '/register') {
+      if (decoded.roles === `[Role{id=1, name='ROLE_ADMIN'}]` && prop.path !== '/register' && prop.path !== '/login') {
         return (
           <NavItem key={key}>
             <NavLink
@@ -71,7 +79,10 @@ const history = useHistory();
             </NavLink>
           </NavItem>
         );
-      } else return null
+      } else if (decoded.roles === `[Role{id=2, name='ROLE_USER'}]`) {
+        history.push('/auth/homePage')
+      }
+      else return null
     });
   };
 

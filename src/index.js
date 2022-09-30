@@ -13,7 +13,7 @@ import { ToastContainer } from "react-toastify";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-localStorage.setItem("data", JSON.stringify({ role: 'user', name: 'abc' }))
+// localStorage.setItem("data", JSON.stringify({ role: 'admin', name: 'abc' }))
 
 var hours = 2;
 var now = new Date().getTime();
