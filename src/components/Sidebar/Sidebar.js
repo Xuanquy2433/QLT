@@ -57,9 +57,9 @@ const Sidebar = (props) => {
   // creates the links that appear in the left menu / Sidebar
   let decoded;
   let token = localStorage.getItem("token");
-  if (token !== null) {
-    decoded = jwt_decode(token);
-  }
+  if (token === null) {
+    history.push('/auth/login')
+  } else decoded = jwt_decode(token);
 
   console.log('decoded ', decoded);
 
@@ -80,6 +80,9 @@ const Sidebar = (props) => {
           </NavItem>
         );
       } else if (decoded.roles === `[Role{id=2, name='ROLE_USER'}]`) {
+        history.push('/auth/homePage')
+      }
+      else if (!decoded) {
         history.push('/auth/homePage')
       }
       else return null
