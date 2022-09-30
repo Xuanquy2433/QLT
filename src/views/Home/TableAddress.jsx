@@ -1,4 +1,4 @@
-import { IconButton, InputBase } from '@mui/material';
+import { Grid, IconButton, InputBase } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,6 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { Link, NavLink } from 'react-router-dom'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import './css.css'
 import axios from 'axios';
 import { API_GET_PILLAR } from 'utils/const';
@@ -69,6 +73,12 @@ function TableAddress() {
     const [data, setData] = useState([])
     const [dataAll, setDataAll] = useState([])
 
+    const [sort, setSort] = React.useState('');
+
+    const handleChange = (event) => {
+        setSort(event.target.value);
+    };
+
     useEffect(() => {
         getAllAddRess()
     }, [])
@@ -76,24 +86,93 @@ function TableAddress() {
     const getAllAddRess = async (e) => {
         const response = await axios.get(API_GET_PILLAR)
         if (response) {
-            setData(response.data.content)
-            setDataAll(response.data)
+            setData(response.data)
+            // setDataAll(response.data[0].product)
         }
     }
+    console.log(data);
+    // console.log(dataAll);
 
     return (
         <React.Fragment>
-            {/* <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
-                <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
-                <InputBase
-                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                    placeholder="Search Name Customer"
-                />
-            </Paper> */}
 
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            <div style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", marginBottom: '30px' }}>
+                <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }}>
+                    <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                    <InputBase
+                        sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                        placeholder="Search Name Customer"
+                    />
+                </Paper>
+
+                <FormControl sx={{ minWidth: 120, backgroundColor: 'white', mb: 1 }} size="small">
+                    <InputLabel sx={{ color: 'blue' }} id="demo-select-small">Sắp xếp</InputLabel>
+                    <Select
+                        labelId="demo-select-small"
+                        id="demo-select-small"
+                        value={sort}
+                        label="Age"
+                        onChange={handleChange}
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={10}>Tăng dần</MenuItem>
+                        <MenuItem value={20}>Giảm dần</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+            <Box sx={{ width: '100%' }}>
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    {data && data.map((item, index) => (
+                        <Grid item xs={6} key={index} >
+                            <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
+                                <div style={{ width: '46%' }}>
+                                    <img style={{ width: '100%', border: '1px solid #ddd' }} src="https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg" alt="" />
+                                </div>
+                                <div style={{ width: '46%', marginLeft: '4%' }}>
+                                    <p>Đường:  {item.street}</p>
+                                    <p>Thành Phố: {item.city} </p>
+                                    <p>Mô tả: {item.description}</p>
+
+                                    {item.product.length > 0 ? item.product.map((itemDetail, index) => (
+                                        <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
+                                            <h2>{itemDetail.name}</h2>
+                                        </div>
+                                    )) : <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '50px', backgroundColor: '#FF4433' }}>
+                                        <h2 style={{ color: 'white' }}>Khu vực này đã thuê hết</h2>
+                                    </div>}
+                                    {/* <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
+                                        <h2>product name</h2>
+                                    </div>
+                                    <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
+                                        <h2>product name</h2>
+                                    </div> */}
+                                </div>
+                            </div>
+
+                        </Grid>
+                    ))}
+
+
+
+
+
+                    {/* <Grid item xs={6}>
+                        <h2 style={{ color: 'white', textAlign: 'center' }}>ok</h2>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <h2 style={{ color: 'white', textAlign: 'center' }}>ok</h2>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <h2 style={{ color: 'white', textAlign: 'center' }}>ok</h2>
+                    </Grid> */}
+                </Grid>
+            </Box>
+
+            {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ height: '400px' }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -151,7 +230,10 @@ function TableAddress() {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-            </Paper>
+            </Paper> */}
+
+
+
         </React.Fragment>
     )
 }

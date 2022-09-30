@@ -21,7 +21,9 @@ function HomePage() {
         <div  >
             <BannerSlide />
             <hr />
-            <TableAddress />
+           <div>
+           <TableAddress />
+           </div>
             <hr />
             {/* <TableProduct /> */}
 

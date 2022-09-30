@@ -30,11 +30,12 @@ import Cart from "views/cart/Cart";
 import HomePage from "views/Home/HomePage";
 import Checkout from "views/cart/Checkout";
 import OrderDetail from "views/cart/OrderDetail";
+import OrderPlace from "views/orderPlace/OrderPlace";
 
 var routes = [
   {
     path: "/index",
-    name: "Dashboard",
+    name: "Bảng điều khiển",
     icon: "ni ni-tv-2 text-primary",
     component: Index,
     layout: "/admin"
@@ -82,10 +83,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/maps",
+    path: "/orderPlace",
     name: "Đơn đặt trụ",
     icon: "ni ni-single-copy-04 text-cyan",
-    component: Maps,
+    component: OrderPlace,
     layout: "/admin"
   },
   {

@@ -231,7 +231,7 @@ function OrderDetail() {
                                                                         style={{ color: 'black', backgroundColor: 'white',fontWeight: 600 }}
                                                                     > {data.orderCode}</p >
                                                                     <label className="form-label" htmlFor="typeText">
-                                                                        Order Code
+                                                                        Mã đặt hàng
                                                                     </label>
                                                                 </div>
                                                             </div>

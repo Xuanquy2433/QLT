@@ -23,17 +23,17 @@ import { IconButton, InputBase } from '@mui/material';
 
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 170 },
-    { id: 'City', label: 'City', minWidth: 100 },
+    { id: 'City', label: 'Thành phố', minWidth: 100 },
     {
         id: 'Street',
-        label: 'Street',
+        label: 'Đường',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'Action',
-        label: 'Action',
+        label: 'Hành động',
         maxWidth: 70,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
@@ -99,7 +99,7 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
                                 <TableRow>
                                     {columns.map((column) => (
                                         <TableCell
-                                            sx={{ fontSize: '16px' }}
+                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                             key={column.id}
                                             align={column.align}
                                             style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
