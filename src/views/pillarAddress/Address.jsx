@@ -80,86 +80,86 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
 
                         {/* <TextField sx={{display: 'flex',padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }} id="outlined-basic" label="Search" variant="outlined" /> */}
 
-                        <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px', '&:focus':{border:"1px solid blue"} }}>
-                        <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                            <SearchIcon />
-                        </IconButton>
-                        <InputBase
-                            sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                            placeholder="Search Name Customer"
-                        />
-                </Paper>
-            </div>
+                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px', '&:focus': { border: "1px solid blue" } }}>
+                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                                <SearchIcon />
+                            </IconButton>
+                            <InputBase
+                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                placeholder="Search Name Customer"
+                            />
+                        </Paper>
+                    </div>
 
-            {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
-            {/* stickyHeader */}
-            <TableContainer sx={{ minHeight: '29em' }}>
-                <Table aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    sx={{  fontSize: '16px' }}
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((item, index) => (
-                                <TableRow hover role="checkbox" key={index}>
-                                    <TableCell>{item.id}</TableCell>
-                                    <TableCell > {item.city} </TableCell>
-                                    <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
-                                    <TableCell sx={{ textAlign: "right" }}>
-                                        <UncontrolledDropdown>
-                                            <DropdownToggle
-                                                className="btn-icon-only text-light"
-                                                href="#pablo"
-                                                role="button"
-                                                size="sm"
-                                                color=""
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                <i className="fas fa-ellipsis-v" />
-                                            </DropdownToggle>
-                                            <DropdownMenu className="dropdown-menu-arrow" right>
-                                                <DropdownItem
-                                                    href="#pablo"
-                                                    onClick={(e) => onDelete(item.id)}>
-                                                    <DeleteIcon></DeleteIcon>
-                                                    Delete
-                                                </DropdownItem>
-                                                <DropdownItem
-                                                    href="#pablo"
-                                                    onClick={(e) => onClickEdit(item)}>
-                                                    <EditIcon></EditIcon>
-                                                    Update
-                                                </DropdownItem>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                    </TableCell>
+                    {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
+                    {/* stickyHeader */}
+                    <TableContainer sx={{ minHeight: '29em' }}>
+                        <Table aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map((column) => (
+                                        <TableCell
+                                            sx={{ fontSize: '16px' }}
+                                            key={column.id}
+                                            align={column.align}
+                                            style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
+                                        >
+                                            {column.label}
+                                        </TableCell>
+                                    ))}
                                 </TableRow>
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[6, 10, 25, 100]}
-                component="div"
-                count={data.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper>
+                            </TableHead>
+                            <TableBody>
+                                {data
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((item, index) => (
+                                        <TableRow hover role="checkbox" key={index}>
+                                            <TableCell>{item.id}</TableCell>
+                                            <TableCell > {item.city} </TableCell>
+                                            <TableCell sx={{ textAlign: 'right' }}>  {item.street} </TableCell>
+                                            <TableCell sx={{ textAlign: "right" }}>
+                                                <UncontrolledDropdown>
+                                                    <DropdownToggle
+                                                        className="btn-icon-only text-light"
+                                                        href="#pablo"
+                                                        role="button"
+                                                        size="sm"
+                                                        color=""
+                                                        onClick={(e) => e.preventDefault()}
+                                                    >
+                                                        <i className="fas fa-ellipsis-v" />
+                                                    </DropdownToggle>
+                                                    <DropdownMenu className="dropdown-menu-arrow" right>
+                                                        <DropdownItem
+                                                            href="#pablo"
+                                                            onClick={(e) => onDelete(item.id)}>
+                                                            <DeleteIcon></DeleteIcon>
+                                                            Delete
+                                                        </DropdownItem>
+                                                        <DropdownItem
+                                                            href="#pablo"
+                                                            onClick={(e) => onClickEdit(item)}>
+                                                            <EditIcon></EditIcon>
+                                                            Update
+                                                        </DropdownItem>
+                                                    </DropdownMenu>
+                                                </UncontrolledDropdown>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[6, 10, 25, 100]}
+                        component="div"
+                        count={data.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
             </Container >
 
 

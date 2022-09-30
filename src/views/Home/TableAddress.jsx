@@ -83,7 +83,7 @@ function TableAddress() {
 
     return (
         <React.Fragment>
-            <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+            {/* <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                 <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
                     <SearchIcon />
                 </IconButton>
@@ -91,7 +91,7 @@ function TableAddress() {
                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                     placeholder="Search Name Customer"
                 />
-            </Paper>
+            </Paper> */}
 
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ height: '400px' }}>

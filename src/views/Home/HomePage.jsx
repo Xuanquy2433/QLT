@@ -13,12 +13,14 @@ import { Link, NavLink } from 'react-router-dom'
 import './css.css'
 import TableAddress from './TableAddress';
 import TableProduct from './TableProduct';
+import BannerSlide from './BannerSlide';
 
 function HomePage() {
 
     return (
-        <div style={{ marginTop: '150px' }} >
-
+        <div  >
+            <BannerSlide />
+            <hr />
             <TableAddress />
             <hr />
             <TableProduct />

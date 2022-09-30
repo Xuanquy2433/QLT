@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { API_EDIT_PILLAR } from 'utils/const'
+import { API_GET_ADMIN_ADDRESS } from 'utils/const'
 import { API_ADD_PILLAR } from 'utils/const'
 import { API_DELETE_PILLAR } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
@@ -27,7 +28,7 @@ export default function AdminPillar() {
   const [openEdit, setOpenEdit] = useState(false);
 
   const fetchAPI = async (e) => {
-    const response = await axios.get(API_GET_PILLAR)
+    const response = await axios.get(API_GET_ADMIN_ADDRESS)
     if (response) {
       setdata(response.data.content)
     }

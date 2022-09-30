@@ -35,6 +35,7 @@ import {
   Col
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 
 var ps;
 
@@ -58,14 +59,13 @@ const Sidebar = (props) => {
   let decoded;
   let token = localStorage.getItem("token");
   if (token === null) {
-    history.push('/auth/login')
+    history.push('/auth/homePage')
   } else decoded = jwt_decode(token);
 
-  console.log('decoded ', decoded);
-
+  console.log(decoded);
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (decoded.roles === `[Role{id=1, name='ROLE_ADMIN'}]` && prop.path !== '/register' && prop.path !== '/login') {
+      if (decoded.roles === `[ROLE_ADMIN]` && prop.path !== '/register' && prop.path !== '/login') {
         return (
           <NavItem key={key}>
             <NavLink
@@ -79,7 +79,7 @@ const Sidebar = (props) => {
             </NavLink>
           </NavItem>
         );
-      } else if (decoded.roles === `[Role{id=2, name='ROLE_USER'}]`) {
+      } else if (decoded.roles === `[ROLE_USER]`) {
         history.push('/auth/homePage')
       }
       else if (!decoded) {
@@ -244,7 +244,7 @@ const Sidebar = (props) => {
           <h6 className="navbar-heading text-muted">Documentation</h6>
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
-            <NavItem>
+            {/* <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
                 <i className="ni ni-spaceship" />
                 Getting started
@@ -261,7 +261,7 @@ const Sidebar = (props) => {
                 <i className="ni ni-ui-04" />
                 Components
               </NavLink>
-            </NavItem>
+            </NavItem> */}
           </Nav>
           {/* <Nav className="mb-md-3" navbar>
             <NavItem className="active-pro active">

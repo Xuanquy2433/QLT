@@ -165,7 +165,7 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon> */}
                 <PhoneInput
-                  style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
+                  style={{ border: "1px solid #ddd", backgroundColor: 'white' ,borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
                   defaultCountry="VN"
                   placeholder="Enter your phone number"
                   onChange={(value) => {

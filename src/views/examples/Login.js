@@ -63,10 +63,10 @@ const Login = () => {
           toast.success('Login success', {
             autoClose: 3000
           })
-          if (jwt_decode(response?.data.token).roles === '[ROLE_USER]') {
+          if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
             history.push('/auth/homePage')
           }
-          else if (jwt_decode(response?.data.token).roles === '[ROLE_ADMIN]') {
+          else if (jwt_decode(response?.data.token).roles === `[ROLE_ADMIN]`) {
             history.push('/admin/index')
           } else {
             history.push('/auth/homePage')
@@ -158,14 +158,14 @@ const Login = () => {
                   </InputGroupAddon> */}
 
                   <PhoneInput
-                    style={{ border: "1px solid #ddd", borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%",outline: 'none' }}
+                    style={{ border: "1px solid #ddd", backgroundColor: 'white' ,borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%", outline: 'none' }}
                     defaultCountry="VN"
                     placeholder="Enter your phone number"
                     onChange={(value) => {
                       setData({ ...data, phoneNumber: value })
-                    }} 
-                 
-                    />
+                    }}
+
+                  />
                   {/* <Input
                     onChange={(e) => {
                       setData({ ...data, phoneNumber: e.target.value })
