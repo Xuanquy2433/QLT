@@ -56,7 +56,7 @@ export default function Customer({ data }) {
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
-    let name = data.lastName 
+    let name = data.lastName
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
