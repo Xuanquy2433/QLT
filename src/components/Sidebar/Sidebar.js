@@ -62,9 +62,10 @@ const Sidebar = (props) => {
     history.push('/auth/homePage')
   } else decoded = jwt_decode(token);
 
+  console.log(decoded);
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (decoded.roles === `[Role{id=1, name='ROLE_ADMIN'}]` && prop.path !== '/register' && prop.path !== '/login') {
+      if (decoded.roles === `[ROLE_ADMIN]` && prop.path !== '/register' && prop.path !== '/login') {
         return (
           <NavItem key={key}>
             <NavLink
@@ -78,7 +79,7 @@ const Sidebar = (props) => {
             </NavLink>
           </NavItem>
         );
-      } else if (decoded.roles === `[Role{id=2, name='ROLE_USER'}]`) {
+      } else if (decoded.roles === `[ROLE_USER]`) {
         history.push('/auth/homePage')
       }
       else if (!decoded) {
