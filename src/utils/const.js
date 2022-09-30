@@ -30,6 +30,12 @@ export const API_GET_ORDER_DETAIL = `${API}/user/order/`;
 
 export const API_CONFIRM_PAYMENT = `${API}/user_confirm_payment/`;
 
+export const API_PRODUCT_ADD = `${API}/product/add`;
+
+export const API_PRODUCT_EDIT = `${API}/product/edit`;
+
+
+
 
 
 

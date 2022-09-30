@@ -20,26 +20,25 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170 },
-    { id: 'enabled', label: 'Enabled', minWidth: 100 },
-    {
-        id: 'available',
-        label: 'Available',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
     {
         id: 'name',
         label: 'Name',
         minWidth: 170,
-        align: 'right',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'price',
         label: 'Price',
         minWidth: 170,
-        align: 'right',
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'Status',
+        label: 'Status',
+        minWidth: 170,
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
@@ -50,7 +49,7 @@ const columns = [
     },
 ];
 
-export default function Product({ data }) {
+export default function Product({ data, open, setOpen }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
@@ -64,13 +63,14 @@ export default function Product({ data }) {
     };
 
     //handle
+    const handleOpen = () => setOpen(true)
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
                     <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                        <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
+                        <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button>
                         <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
@@ -108,34 +108,10 @@ export default function Product({ data }) {
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}>
-                                                <FormControlLabel
-                                                    sx={{
-                                                        display: 'block',
-                                                    }}
-                                                    control={
-                                                        <Switch sx={{
-                                                            color: 'green'
-                                                        }} checked={item.enabled} name="loading" color="secondary" />
-                                                        // onChange={() => setLoading(!loading)}
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}>
-                                                <FormControlLabel
-                                                    sx={{
-                                                        display: 'block',
-                                                    }}
-                                                    control={
-                                                        <Switch sx={{
-                                                            color: 'green'
-                                                        }} checked={item.available} name="loading" color="warning" />
-                                                        // onChange={() => setLoading(!loading)}
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}> {item.name}</TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}> {item.price}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.price}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
+
                                             {/* <TableCell sx={{ textAlign: "right" }}></TableCell> */}
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <UncontrolledDropdown>
