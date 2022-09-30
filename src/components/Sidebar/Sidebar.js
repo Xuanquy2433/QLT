@@ -35,6 +35,7 @@ import {
   Col
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 
 var ps;
 
@@ -58,10 +59,8 @@ const Sidebar = (props) => {
   let decoded;
   let token = localStorage.getItem("token");
   if (token === null) {
-    history.push('/auth/login')
+    history.push('/auth/homePage')
   } else decoded = jwt_decode(token);
-
-  console.log('decoded ', decoded);
 
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
