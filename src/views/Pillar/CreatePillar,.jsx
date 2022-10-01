@@ -107,8 +107,8 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                             label="Mã địa chỉ"
                             onChange={handleChange}
                         >
-                            {dataa.map((item, index) => (
-                                <MenuItem key={index} value={item.address.id}>{item.address.fullAddress}</MenuItem>
+                            {dataAddress.map((item, index) => (
+                                <MenuItem key={index} value={item.id}>{item.street}</MenuItem>
                             ))}
 
                         </Select>
