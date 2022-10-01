@@ -20,6 +20,8 @@ function AdminProduct() {
   const [open, setOpen] = useState(false);
 
   const [openEdit, setOpenEdit] = useState(false);
+  const [page, setPage] = React.useState(1);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
   useEffect(() => {
     getAllProduct()
@@ -55,8 +57,7 @@ function AdminProduct() {
     }
   }
 
-  const [page, setPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+
   const getAllProduct = async (e) => {
     const response = await axios.get(API_GET_PRODUCT + page + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=name")
     if (response) {
