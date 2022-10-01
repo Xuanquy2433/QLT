@@ -79,11 +79,12 @@ function TableAddress() {
 
     // getFirstPageForHome
     const [data, setData] = useState([])
-    const [sort, setSort] = React.useState('desc');
+    const [sort, setSort] = React.useState('asc');
     const [field, setField] = React.useState('street');
     const [keyword, setKeyword] = React.useState('');
     const handleChangeField = (event) => {
         setField(event.target.value);
+        onclickFilter()
     };
 
     const getAllAddRess = async (e) => {
@@ -106,6 +107,7 @@ function TableAddress() {
             setData(response.data)
         }
     }
+    console.log('s ', sort);
     useEffect(() => {
         getAllAddRess()
     }, [])
@@ -113,23 +115,23 @@ function TableAddress() {
         <React.Fragment>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={9}>
+                    <Grid item xs={8}>
                         <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
-                                <SearchIcon />
+                                <SearchIcon onClick={onclickFilter} />
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                 placeholder="Tìm theo từ khóa"
                                 onChange={(e) => {
                                     setKeyword(e.target.value)
-                                    onclickFilter()
+                                    // onclickFilter()
                                 }}
                             />
                         </Paper>
                     </Grid>
-                    <Grid item xs={3} >
-                        <FormControl sx={{ width: '35%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
+                    <Grid item xs={4} >
+                        <FormControl sx={{ width: '28%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
                             <div style={{ display: 'flex', flexDirection: 'row' }}>
                                 <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sort  </h3>
                                 <ToggleButton
@@ -138,13 +140,14 @@ function TableAddress() {
                                     selected={selected}
                                     onChange={() => {
                                         setSelected(!selected);
+                                        onclickFilter()
                                     }}
                                 >
                                     <NorthIcon />
                                 </ToggleButton>
                             </div>
                         </FormControl>
-                        <FormControl sx={{ backgroundColor: 'white', height: '45px', ml: 2, borderRadius: '5px' }} size="small">
+                        <FormControl sx={{ width: '31%', backgroundColor: 'white', height: '45px', ml: 2, borderRadius: '5px' }} size="small">
                             <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
                             <Select
                                 style={{ height: '45px', }}
@@ -158,11 +161,11 @@ function TableAddress() {
                                 <MenuItem value={'description'}>Mô tả</MenuItem>
                             </Select>
                         </FormControl>
-                        {/* <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
-                <Button variant="contained" onClick={onclickFilter} color="primary">
-                    Tìm kiếm
-                </Button>
-            </FormControl> */}
+                      
+                            <Button sx={{ width: '31%',ml: 2, borderRadius: '5px',height: '45px', }} variant="contained" onClick={onclickFilter} color="primary">
+                                Tìm kiếm
+                            </Button>
+                        
                     </Grid>
                 </Grid>
             </Box>
