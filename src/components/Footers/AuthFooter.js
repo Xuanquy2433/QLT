@@ -28,21 +28,21 @@ const Login = () => {
           <Row className="align-items-center justify-content-xl-between">
             <Col xl="6">
               <div className="copyright text-center text-xl-left text-muted">
-                © {new Date().getFullYear()}{" "}
+              Copyright   © {new Date().getFullYear()}{" "} 
                 <a
                   className="font-weight-bold ml-1"
                   
                   target="_blank"
                 >
-                 Dawn
+                   All Rights Reserved
                 </a>
               </div>
             </Col>
             <Col xl="6">
-              <Nav className="nav-footer justify-content-center justify-content-xl-end">
+              <Nav className="nav-footer justify-content-center justify-content-xl-end" >
                 <NavItem>
                   <NavLink
-                    
+                    style={{color: 'white'}}
                     target="_blank"
                   >
                     Dawn
@@ -50,7 +50,7 @@ const Login = () => {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                  
+                  style={{color: 'white'}}
                     target="_blank"
                   >
                     About Us
@@ -58,7 +58,7 @@ const Login = () => {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                  
+                  style={{color: 'white'}}
                     target="_blank"
                   >
                     Blog
@@ -66,7 +66,7 @@ const Login = () => {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                   
+                   style={{color: 'white'}}
                     target="_blank"
                   >
                     MIT License
