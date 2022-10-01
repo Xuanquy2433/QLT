@@ -46,11 +46,22 @@ const style = {
 function TableAddress() {
 
     const [selected, setSelected] = React.useState(false);
-    const [checked, setChecked] = React.useState(true);
+    const ToggleButton = styled(ToggleButtonMui)({
+        "&.Mui-selected, &.Mui-selected:hover": {
+            color: "white",
+            backgroundColor: '#00BFFF',
+        }
+    });
 
     const handleChangeChecked = (event) => {
-        setChecked(event.target.checked);
+        setSelected(event.target.checked);
     };
+
+
+    // const [checked, setChecked] = React.useState(true);
+    // const handleChangeChecked = (event) => {
+    //     setChecked(event.target.checked);
+    // };
 
     // show hide popup
     const [open, setOpen] = React.useState(false);
@@ -68,8 +79,8 @@ function TableAddress() {
 
     // getFirstPageForHome
     const [data, setData] = useState([])
-    const [sort, setSort] = React.useState('');
-    const [field, setField] = React.useState('');
+    const [sort, setSort] = React.useState('desc');
+    const [field, setField] = React.useState('street');
     const [keyword, setKeyword] = React.useState('');
     const handleChangeField = (event) => {
         setField(event.target.value);
@@ -84,9 +95,9 @@ function TableAddress() {
 
     // ONCHANGE FILTER
     const onclickFilter = async (e) => {
-        if (checked === true) {
-            setSort('asc')
-        } else setSort('desc')
+        if (selected === false) {
+            setSort('desc')
+        } else setSort('asc')
         if (field === '') {
             setField('street')
         }
@@ -95,69 +106,67 @@ function TableAddress() {
             setData(response.data)
         }
     }
-    // const ToggleButton = styled(ToggleButtonMui)({
-    //     "&.Mui-selected, &.Mui-selected:hover": {
-    //         color: "white",
-    //         backgroundColor: '#00ff00'
-    //     }
-    // });
-
     useEffect(() => {
         getAllAddRess()
     }, [])
     return (
         <React.Fragment>
-            <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3>
-                    {/* <Switch
-                        checked={checked}
-                        onChange={handleChangeChecked}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    /> */}
-                    <ToggleButtonMui
-                        selectedColor="#00abc0"
-                        value="check"
-                        selected={selected}
-                        onChange={() => {
-                            setSelected(!selected);
-                        }}
-                    >
-                        <CheckIcon />
-                    </ToggleButtonMui>
-                </div>
-            </FormControl>
-            <FormControl sx={{ width: '11%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
-                <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
-                <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    value={field}
-                    label="Field"
-                    onChange={handleChangeField}>
-                    <MenuItem value={'street'}>Đường</MenuItem>
-                    <MenuItem value={'city'}>Thành phố</MenuItem>
-                    <MenuItem value={'description'}>Mô tả</MenuItem>
-                </Select>
-            </FormControl>
-            {/* <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={9}>
+                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
+                            <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
+                                <SearchIcon />
+                            </IconButton>
+                            <InputBase
+                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                placeholder="Tìm theo từ khóa"
+                                onChange={(e) => {
+                                    setKeyword(e.target.value)
+                                    onclickFilter()
+                                }}
+                            />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={3} >
+                        <FormControl sx={{ width: '35%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
+                            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sort  </h3>
+                                <ToggleButton
+                                    sx={{ height: '73%' }}
+                                    value="check"
+                                    selected={selected}
+                                    onChange={() => {
+                                        setSelected(!selected);
+                                    }}
+                                >
+                                    <NorthIcon />
+                                </ToggleButton>
+                            </div>
+                        </FormControl>
+                        <FormControl sx={{ backgroundColor: 'white', height: '45px', ml: 2, borderRadius: '5px' }} size="small">
+                            <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
+                            <Select
+                                style={{ height: '45px', }}
+                                labelId="demo-select-small"
+                                id="demo-select-small"
+                                value={field}
+                                label="Field"
+                                onChange={handleChangeField}>
+                                <MenuItem value={'street'}>Đường</MenuItem>
+                                <MenuItem value={'city'}>Thành phố</MenuItem>
+                                <MenuItem value={'description'}>Mô tả</MenuItem>
+                            </Select>
+                        </FormControl>
+                        {/* <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
                 <Button variant="contained" onClick={onclickFilter} color="primary">
                     Tìm kiếm
                 </Button>
             </FormControl> */}
-            <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }}>
-                <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
-                <InputBase
-                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                    placeholder="Tìm theo từ khóa"
-                    onChange={(e) => {
-                        setKeyword(e.target.value)
-                        onclickFilter()
-                    }}
-                />
-            </Paper>
+                    </Grid>
+                </Grid>
+            </Box>
+
 
             <Box sx={{ width: '100%', mt: 2 }} className='hoverBut' >
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
