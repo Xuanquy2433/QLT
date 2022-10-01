@@ -79,7 +79,7 @@ function TableAddress() {
     }
 
     // ONCHANGE FILTER
-    const onchangeFilter = async (e) => {
+    const onclickFilter = async (e) => {
         if (checked === true) {
             setSort('asc')
         } else setSort('desc')
@@ -95,14 +95,12 @@ function TableAddress() {
 
     useEffect(() => {
         getAllAddRess()
-        onchangeFilter()
     }, [])
     return (
         <React.Fragment>
             <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3> 
-                    {/* <NorthIcon sx={{ mt: 0.5 }} /> */}
+                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3> <NorthIcon sx={{ mt: 0.5 }} />
                     <Switch
                         checked={checked}
                         onChange={handleChangeChecked}
@@ -137,7 +135,7 @@ function TableAddress() {
                     placeholder="Tìm theo từ khóa"
                     onChange={(e) => {
                         setKeyword(e.target.value)
-                        onchangeFilter()
+                        onclickFilter()
                     }}
                 />
             </Paper>
@@ -147,8 +145,11 @@ function TableAddress() {
                     {data && data.map((item, index) => (
                         <Grid item xs={6} key={index} >
                             <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
-                                <div style={{ width: '46%' }}>
-                                    <img style={{ width: '100%', border: '1px solid #ddd' }} src="https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg" alt="" />
+                                <div style={{
+                                    width: '46%', height: '230px'
+                                }} >
+                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src="https://cdn.brvn.vn/editor/2020/04/quangcaopanobillboardngoaitroi30_1585971255.jpg" alt="" />
+
                                 </div>
                                 <div style={{ width: '46%', marginLeft: '4%' }}>
                                     <p>Đường:  {item.street}</p>
