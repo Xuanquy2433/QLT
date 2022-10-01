@@ -100,7 +100,7 @@ function TableAddress() {
         <React.Fragment>
             <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3> <NorthIcon sx={{ mt: 0.5 }} />
+                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3>
                     <Switch
                         checked={checked}
                         onChange={handleChangeChecked}
@@ -156,7 +156,7 @@ function TableAddress() {
                                     <p>Thành Phố: {item.city} </p>
                                     <p>Mô tả: {item.description}</p>
 
-                                    <Button onClick={() => handleOpen(item.id)} variant="contained" color="success">
+                                    <Button sx={{mt:6}} onClick={() => handleOpen(item.id)} variant="contained" color="success">
                                         View more
                                     </Button>
                                     {/* 
