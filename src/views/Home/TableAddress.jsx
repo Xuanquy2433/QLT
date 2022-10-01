@@ -79,7 +79,7 @@ function TableAddress() {
     }
 
     // ONCHANGE FILTER
-    const onclickFilter = async (e) => {
+    const onchangeFilter = async (e) => {
         if (checked === true) {
             setSort('asc')
         } else setSort('desc')
@@ -95,12 +95,14 @@ function TableAddress() {
 
     useEffect(() => {
         getAllAddRess()
+        onchangeFilter()
     }, [])
     return (
         <React.Fragment>
             <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3> <NorthIcon sx={{ mt: 0.5 }} />
+                    <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3> 
+                    {/* <NorthIcon sx={{ mt: 0.5 }} /> */}
                     <Switch
                         checked={checked}
                         onChange={handleChangeChecked}
@@ -135,7 +137,7 @@ function TableAddress() {
                     placeholder="Tìm theo từ khóa"
                     onChange={(e) => {
                         setKeyword(e.target.value)
-                        onclickFilter()
+                        onchangeFilter()
                     }}
                 />
             </Paper>
