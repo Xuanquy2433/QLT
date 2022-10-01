@@ -144,7 +144,7 @@ function TableAddress() {
             <Box sx={{ width: '100%', mt: 2 }} className='hoverBut' >
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {data && data.map((item, index) => (
-                        <Grid item xs={6} key={index} >
+                        <Grid item xs={6} sx={{mt:1}} key={index} >
                             <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
                                 <div style={{
                                     width: '46%', height: '230px'
