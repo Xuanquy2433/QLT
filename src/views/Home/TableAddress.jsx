@@ -84,7 +84,7 @@ function TableAddress() {
     const [keyword, setKeyword] = React.useState('');
     const handleChangeField = (event) => {
         setField(event.target.value);
-        onclickFilter()
+        // onclickFilter()
     };
 
     const getAllAddRess = async (e) => {
@@ -140,7 +140,7 @@ function TableAddress() {
                                     selected={selected}
                                     onChange={() => {
                                         setSelected(!selected);
-                                        onclickFilter()
+                                        // onclickFilter()
                                     }}
                                 >
                                     <NorthIcon />
