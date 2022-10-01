@@ -1,10 +1,10 @@
 import React from 'react'
 import Pillar from './Pillar'
 
-function ListProduct({ handleChangeRowsPerPage, pagin, data, onDelete, open, setOpen, onEdit, page, rowsPerPage, setPage, setRowsPerPage, handleChangePageUp }) {
+function ListProduct({ handleChangeRowsPerPage, totalPages, data, onDelete, setOpen, onEdit, page, rowsPerPage, handleChangePage }) {
   return (
     <div>
-      <Pillar handleChangeRowsPerPage={handleChangeRowsPerPage} pagin={pagin} handleChangePageUp={handleChangePageUp} setPage={setPage} setRowsPerPage={setRowsPerPage} page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} data={data} open={open} setOpen={setOpen} onEdit={onEdit} />
+      <Pillar handleChangeRowsPerPage={handleChangeRowsPerPage} totalPages={totalPages} handleChangePage={handleChangePage} page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} data={data} setOpen={setOpen} onEdit={onEdit} />
     </div>
   )
 }

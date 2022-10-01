@@ -49,19 +49,8 @@ const columns = [
     },
 ];
 
-export default function Customer({ data }) {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+export default function Customer({ data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-    let name = data.lastName
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -102,7 +91,7 @@ export default function Customer({ data }) {
                             </TableHead>
                             <TableBody>
                                 {data
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
@@ -147,7 +136,7 @@ export default function Customer({ data }) {
                     <TablePagination
                         rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
-                        count={data.length}
+                        count={totalPages}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

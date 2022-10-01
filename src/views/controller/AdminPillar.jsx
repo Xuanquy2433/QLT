@@ -14,7 +14,7 @@ import ListPillar from 'views/Pillar/ListPillar'
 function AdminProduct() {
   const [keyword, setKeyword] = useState('')
   const [data, setData] = useState([])
-  const [pagin, setPagin] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
   const [dataAddress, setDataAddress] = useState([])
   const [selected, setSelected] = useState(undefined)
   const [open, setOpen] = useState(false);
@@ -42,13 +42,13 @@ function AdminProduct() {
     if (response) {
       setData(response.data.content)
       setPage(0);
-      setPagin(response.data.totalElements)
+      setTotalPages(response.data.totalElements)
       setRowsPerPage(+event.target.value);
       console.log('data,', response.data.content);
     }
   };
 
-  const handleChangePageUp = async (event, newPage) => {
+  const handleChangePage = async (event, newPage) => {
     const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=name")
     if (response) {
       setPage(newPage)
@@ -57,11 +57,10 @@ function AdminProduct() {
     }
   }
 
-
   const getAllProduct = async (e) => {
     const response = await axios.get(API_GET_PRODUCT + page + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=name")
     if (response) {
-      setPagin(response.data.totalElements)
+      setTotalPages(response.data.totalElements)
       setData(response.data.content)
       console.log('data,', response.data.content);
     }
@@ -130,7 +129,7 @@ function AdminProduct() {
     <div>
       <CreatePillar dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
-      <ListPillar setPage={setPage} setRowsPerPage={setRowsPerPage} page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} open={open} setOpen={setOpen} handleChangePageUp={handleChangePageUp} pagin={pagin}
+      <ListPillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen} handleChangePage={handleChangePage} totalPages={totalPages}
         handleChangeRowsPerPage={handleChangeRowsPerPage} />
     </div>
   )

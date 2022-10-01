@@ -62,7 +62,7 @@ const columns = [
     },
 ];
 
-export default function Product({ handleChangeRowsPerPage, pagin, data, open, setOpen, onDelete, onEdit, page, rowsPerPage, setPage, setRowsPerPage, handleChangePageUp }) {
+export default function Product({ handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
 
 
     const handleOpen = () => setOpen(true)
@@ -157,11 +157,11 @@ export default function Product({ handleChangeRowsPerPage, pagin, data, open, se
                     <TablePagination
                         rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
-                        count={pagin}
+                        count={totalPages}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         // pageSize={1}
-                        onPageChange={handleChangePageUp}
+                        onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
