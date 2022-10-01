@@ -1,123 +1,122 @@
-@import url("https://fonts.googleapis.com/css?family=Oswald:300,400,500,700");
-
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
-
-$gr-1: linear-gradient(170deg, #01e4f8 0%, #1d3ede 100%);
-$gr-2: linear-gradient(170deg, #b4ec51 0%, #429321 100%);
-$gr-3: linear-gradient(170deg, #c86dd7 0%, #3023ae 100%);
-$gr-5: linear-gradient(170deg, #ffffff 0%, #dfdfdf 100%);
-
-.gr-1 {
-    background: $gr-1;
-}
-.gr-2 {
-    background: $gr-2;
-}
-.gr-3 {
-    background: $gr-3;
-}
-.gr-5 {
-    background: $gr-5;
-}
-* {
-    transition: 0.5s;
+.fill:hover,
+.fill:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
 }
 
-.h-100 {
-    height: 100vh !important;
-}
-.align-middle {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+// Animate the size, outside
+.pulse:hover, 
+.pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#fff,0);
 }
 
-.column {
-    margin-top: 3rem;
-    padding-left: 3rem;
-    &:hover {
-        padding-left: 0;
-        .card .txt {
-            margin-left: 1rem;
-            h1,
-            p {
-                color: black;
-                opacity: 1;
-            }
-        }
-        a {
-            color: black;
-            &:after {
-                width: 10%;
-            }
-        }
-    }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--hover); }
 }
-.card {
-    min-height: 170px;
-    margin: 0;
-    padding: 1.7rem 1.2rem;
-    border: none;
-    border-radius: 0;
-    color: rgba(0, 0, 0, 1);
-    letter-spacing: 0.05rem;
-    font-family: "Oswald", sans-serif;
-    box-shadow: 0 0 21px rgba(0, 0, 0, 0.27);
-    .txt {
-        margin-left: -3rem;
-        z-index: 1;
-        h1 {
-            font-size: 1.5rem;
-            color: #1d3ede;
-            font-weight: 300;
-            text-transform: uppercase;
-        }
-        p {
-            font-size: 0.7rem;
-            font-family: "Open Sans", sans-serif;
-            letter-spacing: 0rem;
-            margin-top: 33px;
-            opacity: 0;
-            color: rgba(255, 255, 255, 1);
-        }
-    }
-    a {
-        z-index: 3;
-        font-size: 0.7rem;
-        color: rgba(0, 0, 0, 1);
-        margin-left: 1rem;
-        position: relative;
-        bottom: -0.5rem;
-        text-transform: uppercase;
-        &:after {
-            content: "";
-            display: inline-block;
-            height: 0.5em;
-            width: 0;
-            margin-right: -100%;
-            margin-left: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 1);
-            transition: 0.5s;
-        }
-    }
-    .ico-card {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-    i {
-        position: relative;
-        right: -50%;
-        top: 60%;
-        font-size: 12rem;
-        line-height: 0;
-        opacity: 0.2;
-        color: rgba(255, 255, 255, 1);
-        z-index: 0;
-    }
+
+// Stack multiple shadows, one from the left, the other from the right
+.close:hover,
+.close:focus {
+  box-shadow: 
+    inset -3.5em 0 0 0 var(--hover),
+    inset 3.5em 0 0 0 var(--hover);  
+}
+
+// Size can also be negative; see how it's smaller than the element
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+// Animating from the bottom
+.up:hover,
+.up:focus {
+  box-shadow: inset 0 -3.25em 0 0 var(--hover);
+}
+
+// And from the left
+.slide:hover,
+.slide:focus {
+  box-shadow: inset 6.5em 0 0 0 var(--hover);
+}
+
+// Multiple shadows, one on the outside, another on the inside
+.offset {  
+  box-shadow: 
+    0.3em 0.3em 0 0 var(--color),
+    inset 0.3em 0.3em 0 0 var(--color);
+  
+  &:hover,
+  &:focus {
+    box-shadow: 
+      0 0 0 0 var(--hover),
+      inset 6em 3.5em 0 0 var(--hover);
+  }
+}
+
+//=== Set button colors
+// If you wonder why use Sass vars or CSS custom properties...
+  // Make a map with the class names and matching colors
+$colors: (
+  fill: #a972cb,
+  pulse: #ef6eae, 
+  close: #ff7f82, 
+  raise: #ffa260, 
+  up: #e4cb58, 
+  slide: #8fc866, 
+  offset: #19bc8b
+);
+
+// Sass variables compile to a static string; CSS variables are dynamic and inherited
+  // Loop through the map and set CSS custom properties using Sass variables
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{adjust-hue($color, 45deg)};
+  }
+}
+
+// Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
+.hoverBut button {  
+  color: var(--color);
+  transition: 0.25s;
+  
+  &:hover,
+  &:focus { 
+    border-color: var(--hover);
+    color: #fff;
+  }
+}
+
+//=== Pen styling, ignore
+.hoverBut {
+  color: #fff;
+  background: hsl(227, 10%, 10%);
+  font: 300 1em 'Fira Sans', sans-serif;
+  
+  // Center everything ever
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+}
+
+// Basic button styles
+.hoverBut  button {
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+h1 { font-weight: 400; }
+
+.hoverBut  code { 
+  color: #e4cb58;
+  font: inherit;
 }

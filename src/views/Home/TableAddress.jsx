@@ -28,6 +28,7 @@ import { API_FIND_BY_PRODUCT_ID } from 'utils/const';
 import { API_ADDRESS_FILTER } from 'utils/const';
 import { toast } from 'react-toastify';
 import NorthIcon from '@mui/icons-material/North';
+import './scss.scss'
 
 const style = {
     position: 'absolute',
@@ -140,7 +141,7 @@ function TableAddress() {
                 />
             </Paper>
 
-            <Box sx={{ width: '100%', mt: 2 }}>
+            <Box sx={{ width: '100%', mt: 2 }} className='hoverBut' >
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {data && data.map((item, index) => (
                         <Grid item xs={6} key={index} >
@@ -151,12 +152,12 @@ function TableAddress() {
                                     <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src="https://cdn.brvn.vn/editor/2020/04/quangcaopanobillboardngoaitroi30_1585971255.jpg" alt="" />
 
                                 </div>
-                                <div style={{ width: '46%', marginLeft: '4%' }}>
+                                <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
                                     <p>Đường:  {item.street}</p>
                                     <p>Thành Phố: {item.city} </p>
                                     <p>Mô tả: {item.description}</p>
 
-                                    <Button sx={{mt:6}} onClick={() => handleOpen(item.id)} variant="contained" color="success">
+                                    <Button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} variant="contained" class="offset" color="success">
                                         View more
                                     </Button>
                                     {/* 
