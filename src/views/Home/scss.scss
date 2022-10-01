@@ -92,7 +92,7 @@ $colors: (
 //=== Pen styling, ignore
 .hoverBut {
   color: #fff;
-  background: hsl(227, 10%, 10%);
+//   background: hsl(227, 10%, 10%);
   font: 300 1em 'Fira Sans', sans-serif;
   
   // Center everything ever
@@ -101,7 +101,7 @@ $colors: (
   align-items: center;
   text-align: center;
   min-height: 100vh;
-  display: flex;
+//   display: flex;
 }
 
 // Basic button styles
