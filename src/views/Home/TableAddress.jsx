@@ -157,9 +157,9 @@ function TableAddress() {
                                     <p>Thành Phố: {item.city} </p>
                                     <p>Mô tả: {item.description}</p>
 
-                                    <Button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} variant="contained" class="offset" color="success">
+                                    <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)}  class="offset" >
                                         View more
-                                    </Button>
+                                    </button>
                                     {/* 
                                     {item.product.length > 0 ? item.product.map((itemDetail, index) => (
                                         <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
