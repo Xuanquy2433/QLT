@@ -12,6 +12,7 @@ import EditPillar from 'views/Pillar/EditPillar'
 import ListPillar from 'views/Pillar/ListPillar'
 
 function AdminProduct() {
+  const [keyword, setKeyword] = useState('')
   const [data, setData] = useState([])
   const [dataAddress, setDataAddress] = useState([])
   const [selected, setSelected] = useState(undefined)
@@ -28,19 +29,20 @@ function AdminProduct() {
   const getAddress = async (e) => {
     const response = await axios.get(API_GET_PILLAR)
     if (response) {
-      setDataAddress(response.data.content)
+      setDataAddress(response.data)
     }
     console.log("data address", response.data);
   }
 
-
+  const [page, setPage] = React.useState(1);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
   const getAllProduct = async (e) => {
-    const response = await axios.get(API_GET_PRODUCT)
+    const response = await axios.get(API_GET_PRODUCT + page + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=name")
     if (response) {
-      setData(response.data)
+      setData(response.data.content)
+      console.log('data,', response);
     }
   }
-  console.log('data,', data);
 
 
   const onEdit = async (item) => {
@@ -56,7 +58,6 @@ function AdminProduct() {
       getAllProduct()
       setOpen(false)
     }
-
   }
 
   const onSubmitEdit = async (data) => {
@@ -99,7 +100,6 @@ function AdminProduct() {
     if (response.status === 200) {
       toast.success("Xóa thành công", { autoClose: 1500 })
       getAllProduct()
-
     }
   }
 
@@ -107,7 +107,7 @@ function AdminProduct() {
     <div>
       <CreatePillar onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
-      <ListPillar onDelete={onDelete} onEdit={onEdit} data={data} open={open} setOpen={setOpen} />
+      <ListPillar setPage={setPage} setRowsPerPage={setRowsPerPage} page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} open={open} setOpen={setOpen} />
     </div>
   )
 }

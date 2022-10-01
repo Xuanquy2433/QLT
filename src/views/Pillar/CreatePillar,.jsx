@@ -13,7 +13,7 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress }) {
     const [data, setData] = useState({
         addressId: 0,
         description: "",
-        status: "",
+        status: "AVAILABLE",
         name: "",
         price: 0
     })
