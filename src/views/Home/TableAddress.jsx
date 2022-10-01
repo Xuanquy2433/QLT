@@ -1,4 +1,4 @@
-import { Grid, IconButton, InputBase, Switch } from '@mui/material';
+import { Grid, IconButton, InputBase, styled, Switch } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,6 +28,8 @@ import { API_FIND_BY_PRODUCT_ID } from 'utils/const';
 import { API_ADDRESS_FILTER } from 'utils/const';
 import { toast } from 'react-toastify';
 import NorthIcon from '@mui/icons-material/North';
+import CheckIcon from '@mui/icons-material/Check';
+import ToggleButtonMui from '@mui/material/ToggleButton';
 import './scss.scss'
 
 const style = {
@@ -43,6 +45,7 @@ const style = {
 };
 function TableAddress() {
 
+    const [selected, setSelected] = React.useState(false);
     const [checked, setChecked] = React.useState(true);
 
     const handleChangeChecked = (event) => {
@@ -92,7 +95,12 @@ function TableAddress() {
             setData(response.data)
         }
     }
-
+    // const ToggleButton = styled(ToggleButtonMui)({
+    //     "&.Mui-selected, &.Mui-selected:hover": {
+    //         color: "white",
+    //         backgroundColor: '#00ff00'
+    //     }
+    // });
 
     useEffect(() => {
         getAllAddRess()
@@ -102,11 +110,21 @@ function TableAddress() {
             <FormControl sx={{ width: '10%', backgroundColor: 'white', mb: 1, mt: 1, borderRadius: '5px' }} size="small">
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <h3 style={{ color: 'black', width: '50%', marginLeft: '10%', marginTop: '5px' }} id="demo-select-small">Sort  </h3>
-                    <Switch
+                    {/* <Switch
                         checked={checked}
                         onChange={handleChangeChecked}
                         inputProps={{ 'aria-label': 'controlled' }}
-                    />
+                    /> */}
+                    <ToggleButtonMui
+                        selectedColor="#00abc0"
+                        value="check"
+                        selected={selected}
+                        onChange={() => {
+                            setSelected(!selected);
+                        }}
+                    >
+                        <CheckIcon />
+                    </ToggleButtonMui>
                 </div>
             </FormControl>
             <FormControl sx={{ width: '11%', backgroundColor: 'white', mb: 1, mt: 1, ml: 2, borderRadius: '5px' }} size="small">
@@ -144,7 +162,7 @@ function TableAddress() {
             <Box sx={{ width: '100%', mt: 2 }} className='hoverBut' >
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {data && data.map((item, index) => (
-                        <Grid item xs={6} sx={{mt:1}} key={index} >
+                        <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                             <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
                                 <div style={{
                                     width: '46%', height: '230px'
@@ -157,7 +175,7 @@ function TableAddress() {
                                     <p>Thành Phố: {item.city} </p>
                                     <p>Mô tả: {item.description}</p>
 
-                                    <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)}  class="offset" >
+                                    <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} class="offset" >
                                         View more
                                     </button>
                                     {/* 
