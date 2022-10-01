@@ -62,19 +62,9 @@ const columns = [
     },
 ];
 
-export default function Product({ data, open, setOpen, onDelete, onEdit, page, rowsPerPage, setPage, setRowsPerPage }) {
+export default function Product({ handleChangeRowsPerPage, pagin, data, open, setOpen, onDelete, onEdit, page, rowsPerPage, setPage, setRowsPerPage, handleChangePageUp }) {
 
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(1);
-    };
-
-    //handle
     const handleOpen = () => setOpen(true)
     const onClickEdit = (data) => {
         onEdit(data)
@@ -167,11 +157,11 @@ export default function Product({ data, open, setOpen, onDelete, onEdit, page, r
                     <TablePagination
                         rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
-                        count={data.length}
+                        count={pagin}
                         rowsPerPage={rowsPerPage}
                         page={page}
-                        // pageSize={rowsPerPage}
-                        onPageChange={handleChangePage}
+                        // pageSize={1}
+                        onPageChange={handleChangePageUp}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
