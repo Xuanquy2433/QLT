@@ -36,9 +36,9 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
     ]
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [item])
+    // }, [item])
 
     const handleClose = () => setOpenEdit(false);
 
