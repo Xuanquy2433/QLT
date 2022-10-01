@@ -91,7 +91,7 @@ export default function Customer({ data, page, rowsPerPage, totalPages, handleCh
                             </TableHead>
                             <TableBody>
                                 {data
-                                    // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
