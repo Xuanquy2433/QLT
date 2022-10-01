@@ -71,7 +71,7 @@ export default function Product({ data, open, setOpen, onDelete, onEdit, page, r
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        setPage(0);
+        setPage(1);
     };
 
     //handle

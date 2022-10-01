@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function CreatePillar({ onSubmit, open, setOpen, dataAddress }) {
+export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddress }) {
 
     const [data, setData] = useState({
         addressId: 0,
@@ -107,8 +107,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress }) {
                             label="Mã địa chỉ"
                             onChange={handleChange}
                         >
-                            {dataAddress.map((item, index) => (
-                                <MenuItem key={index} value={item.id}>{item.id}</MenuItem>
+                            {dataa.map((item, index) => (
+                                <MenuItem key={index} value={item.address.id}>{item.address.fullAddress}</MenuItem>
                             ))}
 
                         </Select>
