@@ -56,7 +56,7 @@ const columns = [
     },
     {
         id: 'action',
-        label: 'Action',
+        label: 'Hành động',
         minWidth: 70,
         align: 'right',
     },
@@ -119,7 +119,7 @@ export default function Product({ data, open, setOpen, onDelete, onEdit, page, r
                             </TableHead>
                             <TableBody>
                                 {data
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
@@ -170,6 +170,7 @@ export default function Product({ data, open, setOpen, onDelete, onEdit, page, r
                         count={data.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
+                        // pageSize={rowsPerPage}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />

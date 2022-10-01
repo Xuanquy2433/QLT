@@ -40,10 +40,10 @@ function AdminProduct() {
     const response = await axios.get(API_GET_PRODUCT + page + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=name")
     if (response) {
       setData(response.data.content)
-      console.log('data,', response);
+      console.log('data,', response.data.content);
     }
   }
-
+  console.log("page", page);
 
   const onEdit = async (item) => {
     setSelected(item)
@@ -106,7 +106,7 @@ function AdminProduct() {
   return (
     <div>
       <CreatePillar onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
-      {selected && <EditPillar item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
+      {selected && <EditPillar data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
       <ListPillar setPage={setPage} setRowsPerPage={setRowsPerPage} page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} open={open} setOpen={setOpen} />
     </div>
   )

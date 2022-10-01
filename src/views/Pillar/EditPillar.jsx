@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, onSubmitEdit }) {
+export default function EditPillar({ item, data, dataAddress, openEdit, setOpenEdit, onSubmitEdit }) {
 
     const { addressId, description, status, name, price } = item
 
@@ -35,6 +35,10 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
         },
     ]
 
+
+    useEffect(() => {
+
+    }, [item])
 
     const handleClose = () => setOpenEdit(false);
 
@@ -109,10 +113,9 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                             label="Mã địa chỉ"
                             onChange={handleChange}
                         >
-                            {dataAddress.map((item, index) => (
-                                <MenuItem key={index} value={item.id}>{item.id}</MenuItem>
+                            {data.map((item, index) => (
+                                <MenuItem key={index} value={item.address.id}>{item.address.fullAddress}</MenuItem>
                             ))}
-
                         </Select>
                     </FormControl>
 
