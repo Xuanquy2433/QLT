@@ -14,7 +14,7 @@ export const API_DELETE_PILLAR = `${API}/admin/address/delete?id=`;
 
 export const API_EDIT_PILLAR = `${API}/admin/address/edit`;
 
-export const API_GET_PRODUCT = `${API}/product/`;
+export const API_GET_PRODUCT = `${API}/product/page/`;
 
 export const API_FIND_BY_PRODUCT_ID = `${API}/address/`;
 
@@ -36,9 +36,9 @@ export const API_PRODUCT_ADD = `${API}/product/add`;
 
 export const API_PRODUCT_EDIT = `${API}/product/edit`;
 
-export const API_GET_ORDER_ADMIN_USER_CONFIRMED= `${API}/admin/order/?status=USER_CONFIRMED`;
+export const API_GET_ORDER_ADMIN_USER_CONFIRMED = `${API}/admin/order/?status=USER_CONFIRMED`;
 
-export const API_PRODUCT_DELETE = `${API}/product/delete?id=`;
+export const API_PRODUCT_DELETE = `${API}/product/delete/`;
 
 export const API_ADDRESS_FILTER = `${API}/address/page/1?`;
 

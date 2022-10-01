@@ -43,7 +43,7 @@ const columns = [
     },
     {
         id: 'AddreddId',
-        label: 'Mã địa chỉ',
+        label: 'Địa chỉ',
         minWidth: 70,
         align: 'center',
     },
@@ -62,9 +62,8 @@ const columns = [
     },
 ];
 
-export default function Product({ data, open, setOpen, onDelete, onEdit }) {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+export default function Product({ data, open, setOpen, onDelete, onEdit, page, rowsPerPage, setPage, setRowsPerPage }) {
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -127,12 +126,11 @@ export default function Product({ data, open, setOpen, onDelete, onEdit }) {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.price}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.address && item.address.id}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.address && item.address.fullAddress}</TableCell>
 
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
 
 
-                                            {/* <TableCell sx={{ textAlign: "right" }}></TableCell> */}
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
