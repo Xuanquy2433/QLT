@@ -14,13 +14,21 @@ export default function AdminCustomer() {
     fetchAPI()
   }, [])
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handleChangePage = async (event, newPage) => {
+    const response = await axios.get(API_GET_USERS + (newPage + 1) + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage)
+    if (response) {
+      setData(response.data.content)
+      setPage(newPage);
+    }
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    // setPage(0);
+  const handleChangeRowsPerPage = async (event) => {
+    const response = await axios.get(API_GET_USERS + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + event.target.value)
+    if (response) {
+      setData(response.data.content)
+      setPage(0);
+      setRowsPerPage(+event.target.value);
+    }
   };
 
   const fetchAPI = async () => {

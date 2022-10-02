@@ -28,7 +28,6 @@ function AdminProduct() {
     getAddress()
   }, [])
 
-
   const getAddress = async (e) => {
     const response = await axios.get(API_GET_PILLAR)
     if (response) {
@@ -42,7 +41,7 @@ function AdminProduct() {
     if (response) {
       setData(response.data.content)
       setPage(0);
-      setTotalPages(response.data.totalElements)
+      // setTotalPages(response.data.totalElements)
       setRowsPerPage(+event.target.value);
       console.log('data,', response.data.content);
     }
