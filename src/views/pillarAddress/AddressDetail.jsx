@@ -203,8 +203,8 @@ function AddressDetail() {
                             {dataAddressProduct
                                 .map((item, index) => (
                                     <TableRow hover role="checkbox" key={index}>
-                                        <TableCell>{item.product.name}</TableCell>
-                                        <TableCell sx={{ textAlign: 'right' }}> {item.product.name}</TableCell>
+                                        <TableCell>{item.name}</TableCell>
+                                        <TableCell sx={{ textAlign: 'right' }}> {item.name}</TableCell>
                                     </TableRow>
                                 ))}
                         </TableBody>
