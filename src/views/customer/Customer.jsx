@@ -60,9 +60,9 @@ export default function Customer({ onEdit, data, page, rowsPerPage, totalPages, 
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
                     <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                        <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
+                        {/* <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Add customer
-                        </Button>
+                        </Button> */}
                         <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
