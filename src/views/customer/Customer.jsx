@@ -19,7 +19,6 @@ import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDrop
 import { data } from 'jquery';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
-    { id: 'Created date', label: 'Created date', minWidth: 150, align: 'center', },
     {
         id: 'Name',
         label: 'Name',
@@ -41,6 +40,8 @@ const columns = [
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
+    { id: 'Created date', label: 'Created date', minWidth: 150, align: 'center', },
+
     {
         id: 'Action',
         label: 'Action',
@@ -95,10 +96,10 @@ export default function Customer({ data, page, rowsPerPage, totalPages, handleCh
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> <Moment format='MMMM Do YYYY, h:mm:ss a'>{item.createdDate}</Moment></TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.lastName} {item.firstName} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.email}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> <Moment format='MMMM Do YYYY, h:mm:ss a'>{item.createdDate}</Moment></TableCell>
 
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <UncontrolledDropdown>
