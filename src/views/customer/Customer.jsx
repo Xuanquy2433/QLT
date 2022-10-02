@@ -41,7 +41,6 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     { id: 'Created date', label: 'Created date', minWidth: 150, align: 'center', },
-
     {
         id: 'Action',
         label: 'Action',
