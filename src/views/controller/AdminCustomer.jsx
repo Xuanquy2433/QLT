@@ -55,12 +55,41 @@ export default function AdminCustomer() {
   const [role, setRole] = useState('')
 
   const onSubmitEdit = async () => {
-    const response = await axios.put(API_UPDATE_ROLE + id + "/update?roleName=" + role)
-    if (response && response.status === 200) {
-      toast.success("Sửa thành công", { autoClose: "1500" })
-      fetchAPI();
+    try {
+      const response = await axios.put(API_UPDATE_ROLE + id + "/update?roleName=" + role)
+      if (response && response.status === 200) {
+        toast.success("Sửa thành công", { autoClose: "1500" })
+        fetchAPI();
+        setOpenEdit(false)
+
+      } else if (response && response.status === 400) {
+        toast.error("Người dùng đã có vai trò này!", { autoClose: "1500" })
+      }
+
+      //catch show error
+    } catch (error) {
+      console.log(error.response.data)
+      if (error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error) {
+        toast.error(`${error.response.data.error}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error && error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else {
+        toast.error('Error', {
+          autoClose: 2000
+        })
+      }
     }
-    setOpenEdit(false)
 
   }
 
