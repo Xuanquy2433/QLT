@@ -27,45 +27,40 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'Email',
-        label: 'Email',
+        id: 'price',
+        label: 'Price',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'Phone number',
-        label: 'Phone number',
+        id: 'status',
+        label: 'Status',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
-    { id: 'Created date', label: 'Created date', minWidth: 150, align: 'center', },
-    {
-        id: 'Action',
-        label: 'Action',
-        minWidth: 70,
-        align: 'right',
-    },
+    { id: 'description', label: 'Description', minWidth: 150, align: 'center', },
+    { id: 'address', label: 'Address', minWidth: 150, align: 'center', },
+    // { id: 'street', label: 'street', minWidth: 150, align: 'center', },
+    { id: 'action', label: 'Hành động', minWidth: 150, align: 'right', },
 ];
 
-export default function Customer({ data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
+export default function AvailablePillar({ data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
+
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
                     <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                        <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                            Add customer
-                        </Button>
                         <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search Name Customer"
+                                placeholder="Search"
                             />
                         </Paper>
                     </div>
@@ -94,39 +89,14 @@ export default function Customer({ data, page, rowsPerPage, totalPages, handleCh
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>  {item.lastName} {item.firstName} </TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.email}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> <Moment format='MMMM Do YYYY, h:mm:ss a'>{item.createdDate}</Moment></TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>  {item.name} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.price}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.address.fullAddress}</TableCell>
+                                            <TableCell sx={{ textAlign: 'right' }}><Button variant="contained" color='success' >Accept</Button></TableCell>
 
-                                            <TableCell sx={{ textAlign: 'right' }}>
-                                                <UncontrolledDropdown>
-                                                    <DropdownToggle
-                                                        className="btn-icon-only text-light"
-                                                        href="#pablo"
-                                                        role="button"
-                                                        size="sm"
-                                                        color=""
-                                                        onClick={(e) => e.preventDefault()}
-                                                    >
-                                                        <i className="fas fa-ellipsis-v" />
-                                                    </DropdownToggle>
-                                                    <DropdownMenu className="dropdown-menu-arrow" right>
-                                                        <DropdownItem
-                                                            href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
-                                                            <DeleteIcon></DeleteIcon>
-                                                            Delete
-                                                        </DropdownItem>
-                                                        <DropdownItem
-                                                            href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
-                                                            <EditIcon></EditIcon>
-                                                            Update
-                                                        </DropdownItem>
-                                                    </DropdownMenu>
-                                                </UncontrolledDropdown>
-                                            </TableCell>
+
                                         </TableRow>
                                     ))}
                             </TableBody>

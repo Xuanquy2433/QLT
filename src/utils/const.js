@@ -44,6 +44,12 @@ export const API_PRODUCT_DELETE = `${API}/product/delete/`;
 
 export const API_ADDRESS_FILTER = `${API}/address/page/1?`;
 
+export const API_GET_PRODUCT_AVAILABLE = `${API}/admin/product/page/`;
+
+export const API_GET_PRODUCT_HIRING = `${API}/admin/product/page/`;
+
+
+
 
 
 

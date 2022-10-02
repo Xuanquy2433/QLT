@@ -32,6 +32,8 @@ import Checkout from "views/cart/Checkout";
 import OrderDetail from "views/cart/OrderDetail";
 import OrderPlace from "views/orderPlace/OrderPlace";
 import AddressDetail from "views/pillarAddress/AddressDetail";
+import AdminAvailablePillar from "views/controller/AdminAvailablePillar";
+import AdminHiringPillar from "views/controller/AdminHiringPillar";
 
 var routes = [
   {
@@ -63,17 +65,17 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/icons",
+    path: "/availablePillar",
     name: "Trụ chưa cho thuê",
     icon: "ni ni-money-coins text-black",
-    component: Icons,
+    component: AdminAvailablePillar,
     layout: "/admin"
   },
   {
-    path: "/customerOrders",
-    name: "Khách đã thuê",
+    path: "/hiringPillar",
+    name: "Trụ đã cho thuê",
     icon: "ni ni-calendar-grid-58 text-green",
-    component: AdminCustomerOrders,
+    component: AdminHiringPillar,
     layout: "/admin"
   },
   {
