@@ -114,7 +114,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                             onChange={handleChange}
                         >
                             {dataAddress.map((item, index) => (
-                                <MenuItem key={index} value={item.id}>{item.street}</MenuItem>
+                                <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>

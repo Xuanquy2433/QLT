@@ -14,25 +14,43 @@ import ListAddress from 'views/pillarAddress/ListAddress'
 export default function AdminPillar() {
   const [data, setdata] = useState([])
   const [selected, setSelected] = useState(undefined)
-
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-
+  const [page, setPage] = React.useState(1);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     fetchAPI()
   }, [])
 
-  const [openEdit, setOpenEdit] = useState(false);
-
-  const fetchAPI = async (e) => {
-    const response = await axios.get(API_GET_ADMIN_ADDRESS)
+  const handleChangePage = async (event, newPage) => {
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=street")
     if (response) {
+      setPage(newPage);
       setdata(response.data.content)
     }
-    console.log("response", response.data.content);
+  };
+
+  const handleChangeRowsPerPage = async (event) => {
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=street")
+    if (response) {
+      setdata(response.data.content)
+      setPage(0);
+      setRowsPerPage(+event.target.value);
+
+    }
+  };
+
+  const fetchAPI = async (e) => {
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + page + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=street")
+    if (response) {
+      setdata(response.data.content)
+      setTotalPages(response.data.totalElements)
+
+    }
+    console.log("response", response.data);
   }
 
   const onSubmit = async (data) => {
@@ -158,7 +176,8 @@ export default function AdminPillar() {
     <div>
       <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />
       {selected && <EditAddress item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
-      <ListAddress open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} />
+      <ListAddress open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
+        page={page} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} rowsPerPage={rowsPerPage} />
     </div>
   )
 }

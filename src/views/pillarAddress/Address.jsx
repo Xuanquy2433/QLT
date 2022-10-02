@@ -32,6 +32,13 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
+        id: 'fullAddress',
+        label: 'Địa chỉ',
+        minWidth: 170,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
         id: 'Action',
         label: 'Hành động',
         maxWidth: 70,
@@ -40,9 +47,8 @@ const columns = [
     },
 ];
 
-export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+export default function Pillar({ rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -53,14 +59,6 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-    };
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
     };
 
     const handleOpen = () => setOpen(true);
@@ -99,7 +97,7 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
                                 <TableRow>
                                     {columns.map((column) => (
                                         <TableCell
-                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                            sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                             key={column.id}
                                             align={column.align}
                                             style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
@@ -111,12 +109,14 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
                             </TableHead>
                             <TableBody>
                                 {data
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell > {item.city} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.street} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>  {item.fullAddress} </TableCell>
+
                                             <TableCell sx={{ textAlign: "right" }}>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
@@ -153,7 +153,7 @@ export default function Pillar({ data, onDelete, onEdit, open, setOpen }) {
                     <TablePagination
                         rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
-                        count={data.length}
+                        count={totalPages}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

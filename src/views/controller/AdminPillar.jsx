@@ -129,7 +129,8 @@ function AdminProduct() {
     <div>
       <CreatePillar dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
-      <ListPillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen} handleChangePage={handleChangePage} totalPages={totalPages}
+      <ListPillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
+        handleChangePage={handleChangePage} totalPages={totalPages}
         handleChangeRowsPerPage={handleChangeRowsPerPage} />
     </div>
   )
