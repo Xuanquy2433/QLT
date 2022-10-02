@@ -48,6 +48,8 @@ export const API_GET_PRODUCT_AVAILABLE = `${API}/admin/product/page/`;
 
 export const API_GET_PRODUCT_HIRING = `${API}/admin/product/page/`;
 
+export const API_UPDATE_ROLE = `${API}/admin/user/`;
+
 
 
 

@@ -1,7 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-export default function EditCustomer() {
+export default function EditCustomer({ setId, setRole, item, openEdit, setOpenEdit, handleCloseEdit, onSubmitEdit }) {
+  const roles = [
+    {
+      value: "ROLE_USER",
+      name: "User"
+    },
+    {
+      value: "ROLE_ADMIN",
+      name: "Admin"
+    }
+  ]
+
+  const [valueState, setValueState] = useState('')
+  // const [data, setData] = useState(item || {
+  //   id: setId,
+  //   roleName: setRole
+  // })
+
+  const handleChange = (event) => {
+    const value = event.target.value
+    setValueState(event.target.value)
+    setRole(value)
+    setId(item.id)
+    console.log((item.id));
+    console.log(value);
+  }
+
+  const onClickEdit = () => {
+    onSubmitEdit();
+  }
+  // console.log(data);
   return (
+
+
     <div>
       <Modal
         open={openEdit}
@@ -20,8 +60,21 @@ export default function EditCustomer() {
         >
           <h2 style={{ textAlign: 'center' }}>Edit address</h2>
           <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
-            <TextField onChange={onChangeText} defaultValue={city} name="city" style={{ margin: '5px' }} fullWidth label='City' />
-            <TextField onChange={onChangeText} defaultValue={street} name="street" style={{ margin: '5px' }} fullWidth label='Street' />
+            <FormControl fullWidth sx={{ margin: "5px" }}>
+              <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={valueState}
+                label="Mã địa chỉ"
+                onChange={handleChange}
+              >
+                {roles.map((item, index) => (
+                  <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
+                ))}
+
+              </Select>
+            </FormControl>
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button sx={{ marginRight: "5px" }} onClick={handleCloseEdit} variant="contained" color="success">
@@ -34,6 +87,6 @@ export default function EditCustomer() {
         </Box>
 
       </Modal>
-    </div>
+    </div >
   )
 }

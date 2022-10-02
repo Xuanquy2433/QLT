@@ -17,6 +17,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Moment from 'react-moment';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { data } from 'jquery';
+import { OndemandVideoTwoTone } from '@mui/icons-material';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
@@ -49,7 +50,10 @@ const columns = [
     },
 ];
 
-export default function Customer({ data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
+export default function Customer({ onEdit, data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
+    const onClickEdit = (data) => {
+        onEdit(data);
+    }
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -120,7 +124,7 @@ export default function Customer({ data, page, rowsPerPage, totalPages, handleCh
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
+                                                            onClick={(e) => onClickEdit(item)}>
                                                             <EditIcon></EditIcon>
                                                             Update
                                                         </DropdownItem>
