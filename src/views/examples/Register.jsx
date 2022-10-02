@@ -39,13 +39,18 @@ const Register = () => {
   const onSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(API_SIGNUP, user)
-      if (response && response.status === 201) {
-        toast.success('Signup success', {
+      if (user.phoneNumber.length < 10) {
+        toast.error('Phone number must 10 character', {
           autoClose: 3000
         })
-        history.push('/auth/login')
-
+      } else {
+        const response = await axios.post(API_SIGNUP, user)
+        if (response && response.status === 201) {
+          toast.success('Signup success', {
+            autoClose: 3000
+          })
+          history.push('/auth/login')
+        }
       }
     } catch (error) {
       console.log(error.response.data)
@@ -165,7 +170,7 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon> */}
                 <PhoneInput
-                  style={{ border: "1px solid #ddd", backgroundColor: 'white' ,borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
+                  style={{ border: "1px solid #ddd", backgroundColor: 'white', borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
                   defaultCountry="VN"
                   placeholder="Enter your phone number"
                   onChange={(value) => {

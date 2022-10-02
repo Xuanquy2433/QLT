@@ -116,7 +116,7 @@ function OrderDetail() {
                                     <div className="row">
                                         <div className="col-lg-7">
                                             <h5 className="mb-3">
-                                                <NavLink  to={'/auth/cart'} className="text-body">
+                                                <NavLink to={'/auth/cart'} className="text-body">
                                                     <i className="fas fa-long-arrow-alt-left me-2" />
                                                     Continue shopping
                                                 </NavLink>
@@ -197,7 +197,7 @@ function OrderDetail() {
                                                         <div className="form-outline form-white mb-4">
                                                             <p
                                                                 className="form-control form-control-lg"
-                                                                style={{ color: 'black', backgroundColor: 'white' ,fontWeight: 600}}
+                                                                style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                                             > NGUYEN VAN A</p >
                                                             <label className="form-label" htmlFor="typeName">
                                                                 Cardholder's Name
@@ -206,7 +206,7 @@ function OrderDetail() {
                                                         <div className="form-outline form-white mb-4">
                                                             <p
                                                                 className="form-control form-control-lg"
-                                                                style={{ color: 'black', backgroundColor: 'white' ,fontWeight: 600}}
+                                                                style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                                             > 123 5678 89099 899</p >
                                                             <label className="form-label" htmlFor="typeText">
                                                                 Card Number
@@ -217,7 +217,7 @@ function OrderDetail() {
                                                                 <div className="form-outline form-white">
                                                                     <p
                                                                         className="form-control form-control-lg"
-                                                                        style={{ color: 'black', backgroundColor: 'white',fontWeight: 600 }}
+                                                                        style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                                                     > MB BANK</p >
                                                                     <label className="form-label" htmlFor="typeExp">
                                                                         Bank
@@ -228,7 +228,7 @@ function OrderDetail() {
                                                                 <div className="form-outline form-white">
                                                                     <p
                                                                         className="form-control form-control-lg"
-                                                                        style={{ color: 'black', backgroundColor: 'white',fontWeight: 600 }}
+                                                                        style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                                                     > {data.orderCode}</p >
                                                                     <label className="form-label" htmlFor="typeText">
                                                                         Mã đặt hàng
@@ -263,15 +263,15 @@ function OrderDetail() {
                                                         </div>}
 
                                                         {data.status === 'USER_CONFIRMED' &&
-                                                            <div className="d-flex justify-content-between">
+                                                            <div style={{ color: 'yellow' }} className="d-flex justify-content-between">
                                                                 <span>
-                                                                    Vui lòng chờ admin duyệt đơn hàng của bạn !
+                                                                    Vui lòng chờ admin phê duyệt đơn hàng của bạn !
                                                                 </span>
                                                             </div>
                                                         }
 
                                                         {data.status === 'CANCELLED' &&
-                                                            <div className="d-flex justify-content-between">
+                                                            <div style={{ color: 'yellow' }} className="d-flex justify-content-between">
                                                                 <span>
                                                                     Bạn đã hủy đơn hàng này !
                                                                 </span>

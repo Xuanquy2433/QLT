@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { API_PLACE_ORDER } from 'utils/const'
 import { API_GET_CART } from 'utils/const'
@@ -260,10 +260,10 @@ function Cart() {
                                                 {/* this */}
                                                 <div className="pt-5">
                                                     <h6 className="mb-0">
-                                                        <a href="#!" className="text-body">
+                                                        <NavLink to={'/auth/homePage'} className="text-body">
                                                             <i className="fas fa-long-arrow-alt-left me-2" />
                                                             Back to shop
-                                                        </a>
+                                                        </NavLink>
                                                     </h6>
                                                 </div>
                                             </div>
