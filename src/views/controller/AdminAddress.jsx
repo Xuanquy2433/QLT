@@ -39,7 +39,6 @@ export default function AdminPillar() {
       setdata(response.data.content)
       setPage(0);
       setRowsPerPage(+event.target.value);
-
     }
   };
 
@@ -48,7 +47,6 @@ export default function AdminPillar() {
     if (response) {
       setdata(response.data.content)
       setTotalPages(response.data.totalElements)
-
     }
     console.log("response", response.data);
   }
