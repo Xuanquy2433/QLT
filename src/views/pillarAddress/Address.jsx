@@ -47,7 +47,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
+export default function Address({ rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
 
     const style = {
         position: 'absolute',

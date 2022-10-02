@@ -9,7 +9,7 @@ import { API_GET_PILLAR } from 'utils/const'
 import { API_GET_PRODUCT } from 'utils/const'
 import CreatePillar from 'views/Pillar/CreatePillar,'
 import EditPillar from 'views/Pillar/EditPillar'
-import ListPillar from 'views/Pillar/ListPillar'
+import Pillar from 'views/Pillar/Pillar'
 
 function AdminProduct() {
   const [keyword, setKeyword] = useState('')
@@ -128,7 +128,7 @@ function AdminProduct() {
     <div>
       <CreatePillar dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
-      <ListPillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
+      <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages}
         handleChangeRowsPerPage={handleChangeRowsPerPage} />
     </div>

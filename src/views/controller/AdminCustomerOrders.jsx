@@ -1,10 +1,10 @@
 import React from 'react'
-import ListCustomerOrders from 'views/customerOders/ListCustomerOrders'
+import CustomerOrders from 'views/customerOders/CustomerOrders'
 
 export default function AdminCustomerOrders() {
   return (
     <div>
-        <ListCustomerOrders/>
+      <CustomerOrders />
     </div>
   )
 }

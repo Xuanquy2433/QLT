@@ -62,7 +62,7 @@ const columns = [
     },
 ];
 
-export default function Product({ handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
+export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
 
 
     const handleOpen = () => setOpen(true)

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { API_GET_PRODUCT_AVAILABLE } from 'utils/const';
 import { API_GET_USERS } from 'utils/const';
 import AvailablePillar from 'views/availablePillar/AvailablePillar';
-import ListCustomer from '../customer/ListCustomer';
 
 export default function AdminAvailablePillar() {
 

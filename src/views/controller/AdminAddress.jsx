@@ -6,9 +6,9 @@ import { API_GET_ADMIN_ADDRESS } from 'utils/const'
 import { API_ADD_PILLAR } from 'utils/const'
 import { API_DELETE_PILLAR } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
+import Address from 'views/pillarAddress/Address'
 import CreateAddress from 'views/pillarAddress/CreateAddress'
 import EditAddress from 'views/pillarAddress/EditAddress'
-import ListAddress from 'views/pillarAddress/ListAddress'
 
 
 export default function AdminPillar() {
@@ -174,7 +174,7 @@ export default function AdminPillar() {
     <div>
       <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />
       {selected && <EditAddress item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
-      <ListAddress open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
+      <Address open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
         page={page} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} rowsPerPage={rowsPerPage} />
     </div>
   )

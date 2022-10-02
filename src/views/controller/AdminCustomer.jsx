@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { API_GET_USERS } from 'utils/const';
-import ListCustomer from '../customer/ListCustomer';
+import Customer from 'views/customer/Customer';
 
 export default function AdminCustomer() {
 
@@ -43,7 +43,7 @@ export default function AdminCustomer() {
 
   return (
     <div>
-      <ListCustomer handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} data={data} page={page} rowsPerPage={rowsPerPage} totalPages={totalPages} />
+      <Customer handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} data={data} page={page} rowsPerPage={rowsPerPage} totalPages={totalPages} />
     </div>
   )
 }
