@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import { ToastContainer } from "react-toastify";
+import AddressDetail from "views/pillarAddress/AddressDetail";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

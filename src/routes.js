@@ -31,6 +31,7 @@ import HomePage from "views/Home/HomePage";
 import Checkout from "views/cart/Checkout";
 import OrderDetail from "views/cart/OrderDetail";
 import OrderPlace from "views/orderPlace/OrderPlace";
+import AddressDetail from "views/pillarAddress/AddressDetail";
 
 var routes = [
   {
@@ -143,6 +144,13 @@ var routes = [
     name: "OrderDetail",
     icon: "ni ni-circle-08 text-pink",
     component: OrderDetail,
+    layout: "/auth"
+  },
+  {
+    path: "/address/:id",
+    name: "AddressDetail",
+    icon: "ni ni-circle-08 text-pink",
+    component: AddressDetail,
     layout: "/auth"
   },
 ];
