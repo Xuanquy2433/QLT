@@ -20,6 +20,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import axios from 'axios';
 import { API_GET_ORDER_ADMIN_USER_CONFIRMED } from 'utils/const';
+import { API_CONFIRM_ORDER } from 'utils/const';
+import { toast } from 'react-toastify';
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170 },
     {
@@ -74,7 +76,6 @@ function OrderPlace() {
 
 
     useEffect(() => {
-
         getOrderUserConfirmed()
     }, [])
 
@@ -85,11 +86,19 @@ function OrderPlace() {
         if (response) {
             setData(response.data)
         }
-        console.log("data confirmed", response.data);
     }
 
     //handle
     const handleOpen = () => setOpen(true)
+    console.log(data);
+
+    const confirmOrder = async (id) => {
+        const response = await axios.put(API_CONFIRM_ORDER + id + '/true')
+        if (response.status === 200) {
+            toast.success('Thao tác thành công ! ', { autoClose: 2000 })
+            getOrderUserConfirmed()
+        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+    }
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -105,7 +114,7 @@ function OrderPlace() {
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search Name pro"
+                                placeholder="Tìm kiếm mã đơn hàng"
                             />
                         </Paper>
                     </div>
@@ -129,23 +138,23 @@ function OrderPlace() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data
+                                {data.length > 0 ? data
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.mapOrderCode.order_place}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.total}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
 
                                             <TableCell sx={{ textAlign: 'right' }}>
-                                                <Button variant="contained" color="success">
+                                                <Button variant="contained" onClick={() => confirmOrder(item.id)} color="success">
                                                     Accept
                                                 </Button>
                                             </TableCell>
                                         </TableRow>
-                                    ))}
+                                    )) : <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4>}
                             </TableBody>
                         </Table>
                     </TableContainer>
