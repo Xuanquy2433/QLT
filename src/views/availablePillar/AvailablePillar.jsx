@@ -20,30 +20,29 @@ import { data } from 'jquery';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
-        id: 'Name',
-        label: 'Name',
+        id: 'name',
+        label: 'Tên trụ',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'price',
-        label: 'Price',
+        label: 'Giá tiền',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'status',
-        label: 'Status',
+        label: 'Trạng thái',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
-    { id: 'description', label: 'Description', minWidth: 150, align: 'center', },
-    { id: 'address', label: 'Address', minWidth: 150, align: 'center', },
+    { id: 'description', label: 'Mô tả', minWidth: 150, align: 'center', },
+    { id: 'address', label: 'Địa chỉ', minWidth: 150, align: 'center', },
     // { id: 'street', label: 'street', minWidth: 150, align: 'center', },
-    { id: 'action', label: 'Hành động', minWidth: 150, align: 'right', },
 ];
 
 export default function AvailablePillar({ data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
@@ -93,10 +92,7 @@ export default function AvailablePillar({ data, page, rowsPerPage, totalPages, h
                                             <TableCell sx={{ textAlign: 'center' }}> {item.price}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.address.fullAddress}</TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}><Button variant="contained" color='success' >Accept</Button></TableCell>
-
-
+                                            <TableCell sx={{ textAlign: 'center', height: '65px' }}> {item.address.fullAddress}</TableCell>
                                         </TableRow>
                                     ))}
                             </TableBody>

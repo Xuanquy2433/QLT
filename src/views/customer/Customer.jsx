@@ -22,7 +22,7 @@ const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
         id: 'Name',
-        label: 'Name',
+        label: 'Tên khách hàng',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
@@ -36,21 +36,21 @@ const columns = [
     },
     {
         id: 'Phone number',
-        label: 'Phone number',
+        label: 'Số điện thoại',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'Role',
-        label: 'Role',
+        label: 'Vai trò',
         minWidth: 170,
         align: 'center',
     },
-    { id: 'Created date', label: 'Created date', minWidth: 150, align: 'center', },
+    { id: 'Created date', label: 'Ngày tạo', minWidth: 150, align: 'center', },
     {
         id: 'Action',
-        label: 'Action',
+        label: 'Hành động',
         minWidth: 70,
         align: 'right',
     },
@@ -75,7 +75,7 @@ export default function Customer({ onEdit, data, page, rowsPerPage, totalPages, 
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search Name Customer"
+                                placeholder="Tìm kiếm tên khách hàng"
                             />
                         </Paper>
                     </div>
