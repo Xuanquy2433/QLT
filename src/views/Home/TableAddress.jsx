@@ -177,12 +177,12 @@ function TableAddress() {
                     {data && data.map((item, index) => (
                         <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                             <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
-                                <NavLink to={'/auth/address/' + item.id} style={{
+                                <p style={{
                                     width: '46%', height: '230px'
                                 }}  >
                                     <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src="https://cdn.brvn.vn/editor/2020/04/quangcaopanobillboardngoaitroi30_1585971255.jpg" alt="" />
 
-                                </NavLink>
+                                </p>
                                 <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
                                     <p>Đường:  {item.street}</p>
                                     <p>Thành Phố: {item.city} </p>

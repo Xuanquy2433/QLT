@@ -64,7 +64,6 @@ function AddressDetail() {
 
     const getAddress = async (e) => {
         let path = window.location.pathname;
-
         if (path.match(/(\d+)/)[0]) {
             const response = await axios.get(API_GET_PILLAR + path.match(/(\d+)/)[0])
             if (response) {
