@@ -31,6 +31,7 @@ import NorthIcon from '@mui/icons-material/North';
 import CheckIcon from '@mui/icons-material/Check';
 import ToggleButtonMui from '@mui/material/ToggleButton';
 import './scss.scss'
+import AddressDetail from 'views/pillarAddress/AddressDetail';
 
 const style = {
     position: 'absolute',
@@ -161,11 +162,11 @@ function TableAddress() {
                                 <MenuItem value={'description'}>Mô tả</MenuItem>
                             </Select>
                         </FormControl>
-                      
-                            <Button sx={{ width: '31%',ml: 2, borderRadius: '5px',height: '45px', }} variant="contained" onClick={onclickFilter} color="primary">
-                                Tìm kiếm
-                            </Button>
-                        
+
+                        <Button sx={{ width: '31%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickFilter} color="primary">
+                            Tìm kiếm
+                        </Button>
+
                     </Grid>
                 </Grid>
             </Box>
@@ -176,7 +177,7 @@ function TableAddress() {
                     {data && data.map((item, index) => (
                         <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                             <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
-                                <NavLink to={'/auth/address/'+item.id} style={{
+                                <NavLink to={'/auth/address/' + item.id} style={{
                                     width: '46%', height: '230px'
                                 }}  >
                                     <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src="https://cdn.brvn.vn/editor/2020/04/quangcaopanobillboardngoaitroi30_1585971255.jpg" alt="" />
@@ -274,7 +275,7 @@ function TableAddress() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper> */}
-
+            <AddressDetail />
 
 
         </React.Fragment>

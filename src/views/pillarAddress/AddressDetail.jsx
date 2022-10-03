@@ -53,8 +53,7 @@ const rows = [
 
 function AddressDetail() {
 
-    let path = window.location.pathname;
-    let idInPath = path.match(/(\d+)/)[0];
+
 
 
     const [dataAddressProduct, setDataAddressProduct] = useState([])
@@ -64,16 +63,21 @@ function AddressDetail() {
     }, [])
 
     const getAddress = async (e) => {
-        const response = await axios.get(API_GET_PILLAR + idInPath)
-        if (response) {
-            setDataAddressProduct(response.data)
+        let path = window.location.pathname;
+
+        if (path.match(/(\d+)/)[0]) {
+            const response = await axios.get(API_GET_PILLAR + path.match(/(\d+)/)[0])
+            if (response) {
+                setDataAddressProduct(response.data)
+            }
         }
     }
 
     console.log("data address detail ", dataAddressProduct);
 
     return (
-        <div className='de' style={{width: '80%',marginTop:'76px' }} >
+        // style={{width: '80%',marginTop:'76px' }}
+        <div className='de'  >
             {/* <div className="container mt-5 mb-5">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-10">
@@ -182,7 +186,7 @@ function AddressDetail() {
                 </div>
             </div> */}
 
-            <Paper sx={{ width: '100%', overflow: 'hidden'}}>
+            <Paper sx={{ width: '100%', overflow: 'hidden', mt: 3 }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
