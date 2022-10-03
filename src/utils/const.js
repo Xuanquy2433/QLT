@@ -52,6 +52,9 @@ export const API_UPDATE_ROLE = `${API}/admin/user/`;
 
 export const API_CONFIRM_ORDER = `${API}/admin/order/`;
 
+export const API_GET_DETAIL_ORDER = `${API}/admin/order/`;
+
+
 
 
 

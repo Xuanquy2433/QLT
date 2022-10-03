@@ -22,6 +22,10 @@ import axios from 'axios';
 import { API_GET_ORDER_ADMIN_USER_CONFIRMED } from 'utils/const';
 import { API_CONFIRM_ORDER } from 'utils/const';
 import { toast } from 'react-toastify';
+import { API_GET_DETAIL_ORDER } from 'utils/const';
+import Modal from '@mui/material/Modal';
+import OrderDetailPopup from './OrderDetailPopup';
+
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170 },
     {
@@ -59,6 +63,7 @@ const columns = [
         align: 'right',
     },
 ];
+
 
 function OrderPlace() {
     const [page, setPage] = React.useState(0);
@@ -99,6 +104,21 @@ function OrderPlace() {
             getOrderUserConfirmed()
         } else toast.error('Thất bại ! ', { autoClose: 2000 })
     }
+
+    //handle click detail
+    const [openDetail, setOpenDetail] = React.useState(false);
+    const [dataDetail, setDataDetail] = useState([])
+    const handleCloseDetailOrder = () => setOpenDetail(false);
+
+    const handleOpenDetailOrder = async (id) => {
+        console.log(id);
+        const response = await axios.get(API_GET_DETAIL_ORDER + id)
+        if (response.status === 200) {
+            setDataDetail(response.data.orderDetail)
+        }
+        setOpenDetail(true)
+    };
+    console.log(dataDetail);
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -141,7 +161,7 @@ function OrderPlace() {
                                 {data.length > 0 ? data
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
-                                        <TableRow hover role="checkbox" key={index}>
+                                        <TableRow hover sx={{ cursor: 'pointer' }} onClick={() => handleOpenDetailOrder(item.id)} role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.mapOrderCode.order_place}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
@@ -155,18 +175,17 @@ function OrderPlace() {
                                             </TableCell>
                                         </TableRow>
                                     )) : <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4>}
+                                <Modal
+                                    open={openDetail}
+                                    onClose={handleCloseDetailOrder}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <OrderDetailPopup dataDetail={dataDetail} />
+                                </Modal>
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <TablePagination
-                        rowsPerPageOptions={[6, 10, 25, 100]}
-                        component="div"
-                        count={data.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
                 </Paper>
             </Container>
         </>
