@@ -107,7 +107,7 @@ function TableAddress() {
             setData(response.data)
         }
     }
-    console.log('s ', sort);
+    console.log('datade ', dataDetail);
     useEffect(() => {
         getAllAddRess()
     }, [])

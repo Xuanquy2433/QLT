@@ -39,7 +39,7 @@ const columns = [
     },
     {
         id: 'button',
-        label: '',
+        label: 'Hành động',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
@@ -142,7 +142,7 @@ function ModalDetailProduct({ dataDetail }) {
                         />
                     </Paper>
                 </div>
-                <TableContainer sx={{ maxHeight: 440 }}>
+                <TableContainer sx={{ height: '350px' }}>
                     <Table aria-label="sticky table">
                         <TableHead>
                             <TableRow>
@@ -151,8 +151,7 @@ function ModalDetailProduct({ dataDetail }) {
                                         sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
-                                    >
+                                        style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}>
                                         {column.label}
                                     </TableCell>
                                 ))}
@@ -160,23 +159,23 @@ function ModalDetailProduct({ dataDetail }) {
                         </TableHead>
                         <TableBody>
                             {dataDetail.length > 0 ?
-                                dataDetail.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((item, index) => (
-                                        <TableRow hover role="checkbox" key={index}>
-                                            <TableCell>{item.product.id}</TableCell>
-                                            <TableCell > {item.product.name} </TableCell>
-                                            <TableCell style={{ textAlign: 'right' }}> {item.product.price} </TableCell>
-                                            <TableCell style={{ textAlign: 'right' }} > {item.product.description} </TableCell>
-                                            <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => order(item.product.id)} variant="contained" color="success">
-                                                Add cart
-                                            </Button> </TableCell>
-                                        </TableRow>
-                                    )) : <h5 style={{ fontStyle: 'italic', marginTop: '8px', width: '180px' }} > Đường này chưa có trụ nào !</h5>}
+                                // dataDetail.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                dataDetail.map((item, index) => (
+                                    <TableRow hover role="checkbox" key={index}>
+                                        <TableCell>{item.id}</TableCell>
+                                        <TableCell > {item.name} </TableCell>
+                                        <TableCell style={{ textAlign: 'right' }}> {item.price} </TableCell>
+                                        <TableCell style={{ textAlign: 'right' }} > {item.description} </TableCell>
+                                        <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => order(item.id)} variant="contained" color="success">
+                                            Add cart
+                                        </Button> </TableCell>
+                                    </TableRow>
+                                )) : <h5 style={{ fontStyle: 'italic', marginTop: '8px', width: '180px' }} > Đường này chưa có trụ nào !</h5>}
                             {/* <h5 style={{fontStyle: 'italic',marginTop: '8px',width: '180px'}} > Đường này chưa có trụ nào !</h5> */}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
+                {/* <TablePagination
                     rowsPerPageOptions={[6, 10, 25, 100]}
                     component="div"
                     count={dataDetail.length}
@@ -184,7 +183,7 @@ function ModalDetailProduct({ dataDetail }) {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
-                />
+                /> */}
             </Paper>
         </React.Fragment>
     )
