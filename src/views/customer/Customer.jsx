@@ -41,6 +41,12 @@ const columns = [
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
+    {
+        id: 'Role',
+        label: 'Role',
+        minWidth: 170,
+        align: 'center',
+    },
     { id: 'Created date', label: 'Created date', minWidth: 150, align: 'center', },
     {
         id: 'Action',
@@ -101,6 +107,8 @@ export default function Customer({ onEdit, data, page, rowsPerPage, totalPages, 
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.lastName} {item.firstName} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.email}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.roles}</TableCell>
+
                                             <TableCell sx={{ textAlign: 'center' }}> <Moment format='MMMM Do YYYY, h:mm:ss a'>{item.createdDate}</Moment></TableCell>
 
                                             <TableCell sx={{ textAlign: 'right' }}>
