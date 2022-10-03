@@ -73,8 +73,8 @@ function AddressDetail() {
     console.log("data address detail ", dataAddressProduct);
 
     return (
-        <div className='de' >
-            <div className="container mt-5 mb-5">
+        <div className='de' style={{width: '80%',marginTop:'76px' }} >
+            {/* <div className="container mt-5 mb-5">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-10">
                         <div className="card">
@@ -180,9 +180,9 @@ function AddressDetail() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            <Paper sx={{ width: '100%', overflow: 'hidden'}}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
