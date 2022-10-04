@@ -17,6 +17,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Moment from 'react-moment';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { data } from 'jquery';
+import { formatMoney } from './../../common/formatMoney';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
@@ -89,7 +90,7 @@ export default function HiringPillar({ data, page, rowsPerPage, totalPages, hand
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.name} </TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.price}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
                                             <TableCell sx={{ textAlign: 'center', height: '65px' }}> {item.address.fullAddress}</TableCell>

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { API_PLACE_ORDER } from 'utils/const'
+import { API_CART_REMOVE } from 'utils/const'
 import { API_GET_CART } from 'utils/const'
 import './cart.css'
+import { formatMoney } from './../../common/formatMoney';
 
 function Cart() {
 
@@ -33,15 +35,11 @@ function Cart() {
         setMonth(month + 1)
     }
 
-    const HandleMonth = () => {
+    const handleMonth = () => {
         if (month > 1) {
             setMonth(month - 1)
         }
     }
-    let sum = 0
-    data.map((item) => {
-        sum += (Number(item.product.price))
-    })
 
     const [idOrder, setIdOrder] = useState()
 
@@ -102,11 +100,25 @@ function Cart() {
         }
     }
     console.log("iddddddddddddddddddddddddđ ", idOrder);
+    let sum = 0
+    data.map((item) => {
+        sum += (Number(item.product.price) * Number(item.month))
+    })
 
     useEffect(() => {
+
+
         getAllCart()
     }, [])
 
+    const onClickRemoveItemCart = async (id) => {
+        const response = axios.put(API_CART_REMOVE + id)
+        if (response && response.status === 200) {
+            toast.success("Xoá thành công", { autoClose: "1500" })
+        }
+    }
+
+    console.log(month);
 
     return (
         <div style={{ marginTop: '20px' }} >
@@ -161,12 +173,12 @@ function Cart() {
                                                         </div>
                                                         <div className="col-md-3 col-lg-3 col-xl-3">
                                                             {/* <h6 className="text-muted">Shirt</h6> */}
-                                                            <h6 className="text-black mb-0">{item.product && item.product.name}</h6>
+                                                            <h6 className="text-black mb-0">{item.product.name.substring(0, 17)}</h6>
                                                         </div>
                                                         <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
                                                             <button
                                                                 className="btn btn-link px-2"
-                                                                onClick={HandleMonth}
+                                                                onClick={handleMonth}
                                                             >
                                                                 <i className="fas fa-minus" />
                                                             </button>
@@ -175,7 +187,7 @@ function Cart() {
                                                                 id="form1"
                                                                 min={1}
                                                                 name="quantity"
-                                                                value={month}
+                                                                value={item.month}
                                                                 type="number"
                                                                 className="form-control form-control-sm"
                                                             />
@@ -195,11 +207,11 @@ function Cart() {
                                                         </div> */}
                                                         <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                             {/* <h6 className="text-muted">Price</h6> */}
-                                                            <h6 className="text-black mb-0">{item.product.price}</h6>
+                                                            <h6 className="text-black mb-0">{formatMoney(item.product.price)}</h6>
                                                         </div>
                                                         <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                                                             <a href="#!" className="text-muted">
-                                                                <i className="fas fa-times" />
+                                                                <i onClick={() => onClickRemoveItemCart(item.id)} className="fas fa-times" />
                                                             </a>
                                                         </div>
                                                     </div>
@@ -234,8 +246,8 @@ function Cart() {
                                                     {
                                                         data.map((item) => (
                                                             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                                <h5 className="text-uppercase">{item.product.name}</h5>
-                                                                <h5>{item.product.price}</h5>
+                                                                <h5 className="text-uppercase">{item.product.name.substring(0, 15)}</h5>
+                                                                <h5>{formatMoney(item.product.price)}</h5>
                                                             </div>
                                                         ))
                                                     }

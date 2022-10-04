@@ -18,6 +18,7 @@ import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDrop
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { formatMoney } from './../../common/formatMoney';
 const columns = [
     { id: 'id', label: 'Id', minWidth: 10, maxWidth: 10 },
     {
@@ -114,7 +115,7 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.price}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.address && item.address.fullAddress}</TableCell>
 

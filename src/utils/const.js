@@ -54,6 +54,10 @@ export const API_CONFIRM_ORDER = `${API}/admin/order/`;
 
 export const API_GET_DETAIL_ORDER = `${API}/admin/order/`;
 
+export const API_CART_REMOVE = `${API}/cart/remove/`;
+
+
+
 
 
 
