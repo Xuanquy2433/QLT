@@ -10,10 +10,10 @@ function Cart() {
 
     const [data, setData] = useState([])
     const [month, setMonth] = useState(1)
+    const [btnOrders, setBtnOrders] = useState('Đặt hàng')
+    const [btnDisabled, setBtnDisabled] = useState(false)
     const history = useHistory()
     let token = localStorage.getItem('token')
-
-
 
     const getAllCart = async (e) => {
         const response = await axios.get(API_GET_CART, {
@@ -47,6 +47,8 @@ function Cart() {
 
 
     const clickOrder = async () => {
+        setBtnOrders('Vui lòng chờ...')
+        setBtnDisabled(true)
         console.log('checkout token ', token);
         try {
             if (token) {
@@ -68,6 +70,7 @@ function Cart() {
                     }, 2000);
 
                 };
+                // setBtnOrders('Vui lòng chờ...')
             } else {
                 toast.success('Please login', {
                     autoClose: 3000
@@ -104,6 +107,7 @@ function Cart() {
         getAllCart()
     }, [])
 
+
     return (
         <div style={{ marginTop: '20px' }} >
             <section className="h-100 h-custom" style={{ backgroundColor: "#d2c9ff" }}>
@@ -122,28 +126,29 @@ function Cart() {
                                                     <h1 className="fw-bold mb-0 text-black">Shopping Cart</h1>
                                                     <h6 className="mb-0 text-muted">{data.length} items</h6>
                                                 </div>
-                                                <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
-                                                    <div className="col-md-2 col-lg-2 col-xl-2">
-                                                        <img
+                                                {data.length ?
+                                                    <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
+                                                        <div className="col-md-2 col-lg-2 col-xl-2">
+                                                            <img
 
-                                                        />
-                                                    </div>
-                                                    <div className="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 className="text-muted">Name pillar</h6>
-                                                    </div>
-                                                    <div style={{display:"flex", justifyContent:"center"}} className="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 className="text-muted">Month</h6>
-                                                    </div>
-                                                    {/* <div className="col-md-3 col-lg-3 col-xl-3">
+                                                            />
+                                                        </div>
+                                                        <div className="col-md-3 col-lg-3 col-xl-3">
+                                                            <h6 className="text-muted">Name pillar</h6>
+                                                        </div>
+                                                        <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
+                                                            <h6 className="text-muted">Month</h6>
+                                                        </div>
+                                                        {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
                                                         </div> */}
-                                                    <div style={{display:"flex", justifyContent:"center"}} className="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 className="text-muted">Price</h6>
-                                                    </div>
-                                                    <div className="col-md-1 col-lg-1 col-xl-1">
-                                                        <h6 className="text-muted"></h6>                                                        </div>
-                                                </div>
+                                                        <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
+                                                            <h6 className="text-muted">Price</h6>
+                                                        </div>
+                                                        <div className="col-md-1 col-lg-1 col-xl-1">
+                                                            <h6 className="text-muted"></h6>                                                        </div>
+                                                    </div> : ''}
                                                 <hr className="my-4" />
                                                 {data.length ? data.map((item) => (
                                                     <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
@@ -158,7 +163,7 @@ function Cart() {
                                                             {/* <h6 className="text-muted">Shirt</h6> */}
                                                             <h6 className="text-black mb-0">{item.product && item.product.name}</h6>
                                                         </div>
-                                                        <div style={{ alignItems: "center" , justifyContent:"end"}} className="col-md-3 col-lg-3 col-xl-3 d-flex">
+                                                        <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
                                                             <button
                                                                 className="btn btn-link px-2"
                                                                 onClick={HandleMonth}
@@ -188,7 +193,7 @@ function Cart() {
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
                                                         </div> */}
-                                                        <div style={{display:"flex", justifyContent:"center"}} className="col-md-3 col-lg-3 col-xl-3">
+                                                        <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                             {/* <h6 className="text-muted">Price</h6> */}
                                                             <h6 className="text-black mb-0">{item.product.price}</h6>
                                                         </div>
@@ -200,64 +205,13 @@ function Cart() {
                                                     </div>
                                                 )) :
                                                     <div style={{ width: "100%" }} >
-                                                        <div style={{ width: '500px', clear: 'both',textAlign: 'center' }}>
+                                                        <div style={{ width: '500px', clear: 'both', textAlign: 'center' }}>
                                                             <p>Chưa có sản phẩm nào !</p>
                                                         </div>
                                                     </div>
                                                 }
                                                 <hr className="my-4" />
 
-                                                {/* <div className="row mb-4 d-flex justify-content-between align-items-center">
-                                                    <div className="col-md-2 col-lg-2 col-xl-2">
-                                                        <img
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
-                                                            className="img-fluid rounded-3"
-                                                            alt="Cotton T-shirt"
-                                                        />
-                                                    </div>
-                                                    <div className="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 className="text-muted">Shirt</h6>
-                                                        <h6 className="text-black mb-0">Cotton T-shirt</h6>
-                                                    </div>
-                                                    <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                        <button
-                                                            className="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                        >
-                                                            <i className="fas fa-minus" />
-                                                        </button>
-                                                        <input
-                                                            style={{ width: '50px' }}
-                                                            id="form1"
-                                                            min={0}
-                                                            name="quantity"
-                                                            defaultValue={1}
-                                                            type="number"
-                                                            className="form-control form-control-sm"
-                                                        />
-                                                        <button
-                                                            className="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                        >
-                                                            <i className="fas fa-plus" />
-                                                        </button>
-                                                    </div>
-                                                    <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                        <h6 className="mb-0">€ 44.00</h6>
-                                                    </div>
-                                                    <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                        <a href="#!" className="text-muted">
-                                                            <i className="fas fa-times" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <hr className="my-4" /> */}
-
-
-
-
-
-                                                {/* this */}
                                                 <div className="pt-5">
                                                     <h6 className="mb-0">
                                                         <NavLink to={'/auth/homePage'} className="text-body">
@@ -287,7 +241,7 @@ function Cart() {
                                                     }
 
                                                 </div>
-                                                <h5 className="text-uppercase mb-3">Shipping</h5>
+                                                {/* <h5 className="text-uppercase mb-3">Shipping</h5>
                                                 <div className="mb-4 pb-2">
                                                     <select className="select">
                                                         <option value={1}>Standard-Delivery- €5.00</option>
@@ -295,7 +249,7 @@ function Cart() {
                                                         <option value={3}>Three</option>
                                                         <option value={4}>Four</option>
                                                     </select>
-                                                </div>
+                                                </div> */}
                                                 <h5 className="text-uppercase mb-3">Give code</h5>
                                                 <div className="mb-5">
                                                     <div className="form-outline">
@@ -310,19 +264,23 @@ function Cart() {
                                                     </div>
                                                 </div>
                                                 <hr className="my-4" />
-                                                <div className="d-flex justify-content-between mb-5">
-                                                    <h5 className="text-uppercase">Total price</h5>
-                                                    <h5>{sum}</h5>
-                                                </div>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-dark btn-block btn-lg"
-                                                    data-mdb-ripple-color="dark"
-                                                    onClick={clickOrder}
-                                                >
+                                                {data.length ?
+                                                    <>
+                                                        <div className="d-flex justify-content-between mb-5">
+                                                            <h5 className="text-uppercase">Total price</h5>
+                                                            <h5>{sum}</h5>
+                                                        </div>
+                                                        <button
+                                                            disabled={btnDisabled}
+                                                            type="button"
+                                                            className="btn btn-dark btn-block btn-lg"
+                                                            data-mdb-ripple-color="dark"
+                                                            onClick={clickOrder}
+                                                        >
 
-                                                    Orders
-                                                </button>
+                                                            {btnOrders}
+                                                        </button>
+                                                    </> : ''}
                                             </div>
                                         </div>
                                     </div>

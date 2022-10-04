@@ -28,6 +28,8 @@ import { API_FIND_BY_PRODUCT_ID } from 'utils/const';
 import { API_ADDRESS_FILTER } from 'utils/const';
 import { toast } from 'react-toastify';
 import NorthIcon from '@mui/icons-material/North';
+import SouthIcon from '@mui/icons-material/South';
+
 import CheckIcon from '@mui/icons-material/Check';
 import ToggleButtonMui from '@mui/material/ToggleButton';
 import './scss.scss'
@@ -48,10 +50,11 @@ function TableAddress() {
 
     const [selected, setSelected] = React.useState(false);
     const ToggleButton = styled(ToggleButtonMui)({
-        "&.Mui-selected, &.Mui-selected:hover": {
-            color: "white",
-            backgroundColor: '#00BFFF',
-        }
+        // backgroundColor: "#00BFFF",
+        // "&.Mui-selected, &.Mui-selected:hover": {
+        //     color: "white",
+        //     backgroundColor: '#00BFFF',
+        // }
     });
 
     const handleChangeChecked = (event) => {
@@ -144,7 +147,7 @@ function TableAddress() {
                                         // onclickFilter()
                                     }}
                                 >
-                                    <NorthIcon />
+                                    {selected ? <NorthIcon /> : <SouthIcon />}
                                 </ToggleButton>
                             </div>
                         </FormControl>
@@ -187,9 +190,11 @@ function TableAddress() {
                                     <p>Đường:  {item.street}</p>
                                     <p>Thành Phố: {item.city} </p>
                                     <p>Mô tả: {item.description}</p>
+                                    <p>Số lượng trụ:</p>
+                                    <p>Khoảng giá:</p>
 
                                     <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} class="offset" >
-                                        View more
+                                        Xem thêm
                                     </button>
                                     {/* 
                                     {item.product.length > 0 ? item.product.map((itemDetail, index) => (
