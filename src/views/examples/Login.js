@@ -1,4 +1,3 @@
-
 import {
   Button,
   Card,
@@ -22,6 +21,7 @@ import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
 import PhoneInput from 'react-phone-number-input';
 import jwt_decode from "jwt-decode";
 import styled from "styled-components";
+import './login.css'
 
 const Login = () => {
   const history = useHistory();
