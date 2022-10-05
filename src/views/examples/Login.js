@@ -21,6 +21,7 @@ import { API_SIGNIN } from "utils/const";
 import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
 import PhoneInput from 'react-phone-number-input';
 import jwt_decode from "jwt-decode";
+import styled from "styled-components";
 
 const Login = () => {
   const history = useHistory();
@@ -99,8 +100,12 @@ const Login = () => {
         }
       }
     }
-  } 
-  
+  }
+
+  const styledBtn = styled.input`
+  border:none;
+  `
+
 
   return (
     <>
@@ -159,7 +164,7 @@ const Login = () => {
                   </InputGroupAddon> */}
 
                   <PhoneInput
-                    style={{ border: "1px solid #ddd", backgroundColor: 'white' ,borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%", outline: 'none' }}
+                    style={{ border: "1px solid #ddd", backgroundColor: 'white', borderRadius: "5px", padding: "0.59rem 0.75rem", width: "100%", outline: 'none' }}
                     defaultCountry="VN"
                     placeholder="Enter your phone number"
                     onChange={(value) => {

@@ -57,7 +57,8 @@
     "react-toastify": "^9.0.8",
     "react-use-navigate": "^0.1.1",
     "reactstrap": "8.9.0",
-    "sass": "1.54.5"
+    "sass": "1.54.5",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "gulp": "4.0.2",
