@@ -7,7 +7,7 @@ import { API_PRODUCT_DELETE } from 'utils/const'
 import { API_PRODUCT_ADD } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
 import { API_GET_PRODUCT } from 'utils/const'
-import CreatePillar from 'views/Pillar/CreatePillar,'
+import CreatePillar from 'views/Pillar/CreatePillar'
 import EditPillar from 'views/Pillar/EditPillar'
 import Pillar from 'views/Pillar/Pillar'
 
@@ -31,9 +31,9 @@ function AdminProduct() {
   const getAddress = async (e) => {
     const response = await axios.get(API_GET_PILLAR)
     if (response) {
-      setDataAddress(response.data)
+      setDataAddress(response.data.contents)
     }
-    console.log("data address", response.data);
+    console.log("data address", response.data.contents);
   }
 
   const handleChangeRowsPerPage = async (event) => {
