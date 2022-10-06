@@ -97,6 +97,7 @@ function TableAddress() {
             setData(response.data.contents)
         }
     }
+    console.log("dataaaaaaaaa ",data);
 
     // ONCHANGE FILTER
     const onclickFilter = async (e) => {

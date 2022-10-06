@@ -33,11 +33,11 @@ function AdminProduct() {
     if (response) {
       setDataAddress(response.data.contents)
     }
-    console.log("data address", response.data.contents);
   }
+  console.log("data address ", dataAddress);
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=name")
+    const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id")
     if (response) {
       setData(response.data.content)
       setPage(0);
@@ -48,7 +48,7 @@ function AdminProduct() {
   };
 
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=name")
+    const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
     if (response) {
       setPage(newPage)
       setData(response.data.content)
@@ -57,7 +57,7 @@ function AdminProduct() {
   }
 
   const getAllProduct = async (e) => {
-    const response = await axios.get(API_GET_PRODUCT + page + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=name")
+    const response = await axios.get(API_GET_PRODUCT + page + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
     if (response) {
       setTotalPages(response.data.totalElements)
       setData(response.data.content)
