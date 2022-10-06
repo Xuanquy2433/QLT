@@ -37,10 +37,12 @@ const columns = [
     {
         id: 'action',
         label: 'Hành động',
-        minWidth: 170,
+        minWidth: 70,
+        maxWidth: 90,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
+
 ];
 
 export default function Category({ data, setOpen, onEdit, onDelete }) {
@@ -107,8 +109,11 @@ export default function Category({ data, setOpen, onEdit, onDelete }) {
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.name} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
 
-                                            <TableCell sx={{ textAlign: 'right' }}>
-                                                <UncontrolledDropdown>
+                                            <TableCell sx={{ textAlign: 'right', display: "flex", justifyContent: "space-around" }}>
+                                                <DeleteIcon onClick={(e) => onDelete(item.id)} />
+                                                <EditIcon onClick={(e) => onClickEdit(item)} />
+
+                                                {/* <UncontrolledDropdown>
                                                     <DropdownToggle
                                                         className="btn-icon-only text-light"
                                                         href="#pablo"
@@ -117,7 +122,6 @@ export default function Category({ data, setOpen, onEdit, onDelete }) {
                                                         color=""
                                                         onClick={(e) => e.preventDefault()}
                                                     >
-                                                        <i className="fas fa-ellipsis-v" />
                                                     </DropdownToggle>
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
@@ -133,8 +137,9 @@ export default function Category({ data, setOpen, onEdit, onDelete }) {
                                                             Update
                                                         </DropdownItem>
                                                     </DropdownMenu>
-                                                </UncontrolledDropdown>
+                                                </UncontrolledDropdown> */}
                                             </TableCell>
+
                                         </TableRow>
                                     ))}
                             </TableBody>

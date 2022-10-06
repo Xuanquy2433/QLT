@@ -63,6 +63,7 @@ export default function AdminCategory() {
         if (response && response.status === 201) {
             toast.success("Thêm thành công", { autoClose: "1500" })
             setOpen(false)
+            fetchAPI()
         }
     }
 
