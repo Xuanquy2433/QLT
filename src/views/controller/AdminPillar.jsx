@@ -38,13 +38,13 @@ function AdminProduct() {
     }
   }
 
-  const getCategory= async (e) => {
+  const getCategory = async (e) => {
     const response = await axios.get(API_GET_CATEGORY)
     if (response) {
       setDataCategory(response.data.content)
     }
   }
-  console.log("cate ",dataCategory);
+  console.log("cate ", dataCategory);
 
   const handleChangeRowsPerPage = async (event) => {
     const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id")
@@ -74,7 +74,7 @@ function AdminProduct() {
       console.log('data,', response.data.content);
     }
   }
-  console.log("page", page);
+  console.log("page", data);
 
   const onEdit = async (item) => {
     setSelected(item)
@@ -137,7 +137,7 @@ function AdminProduct() {
   return (
     <div>
       <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
-      {selected && <EditPillar data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
+      {selected && <EditPillar dataCategory={dataCategory} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
       <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages}
         handleChangeRowsPerPage={handleChangeRowsPerPage} />
