@@ -279,8 +279,8 @@ function Cart() {
                                                 {data.length ?
                                                     <>
                                                         <div className="d-flex justify-content-between mb-5">
-                                                            <h5 className="text-uppercase">Total price</h5>
-                                                            <h5>{sum}</h5>
+                                                            <h5 className="text-uppercase">Tổng giá</h5>
+                                                            <h5>{formatMoney(sum)}</h5>
                                                         </div>
                                                         <button
                                                             disabled={btnDisabled}
