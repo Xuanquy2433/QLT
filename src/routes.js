@@ -127,20 +127,20 @@ var routes = [
     component: HomePage,
     layout: "/auth"
   },
-  // {
-  //   path: "/cart",
-  //   name: "Cart",
-  //   icon: "ni ni-circle-08 text-pink",
-  //   component: Cart,
-  //   layout: "/auth"
-  // },
-  // {
-  //   path: "/order/",
-  //   name: "OrderDetail",
-  //   icon: "ni ni-circle-08 text-pink",
-  //   component: OrderDetail,
-  //   layout: "/auth"
-  // },
+  {
+    path: "/cart",
+    name: "Cart",
+    icon: "ni ni-circle-08 text-pink",
+    component: Cart,
+    layout: "/auth"
+  },
+  {
+    path: "/order/",
+    name: "OrderDetail",
+    icon: "ni ni-circle-08 text-pink",
+    component: OrderDetail,
+    layout: "/auth"
+  },
   // {
   //   path: "/address/:id",
   //   name: "AddressDetail",

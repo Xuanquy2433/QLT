@@ -16,8 +16,10 @@ function OrderDetail() {
 
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
-    const [orderCode, setOrderCode] = useState([])
 
+    console.log("deta");
+    console.log("data", data.orderCode);
+    console.log(dataDetail);
     const history = useHistory()
 
     let token = localStorage.getItem('token')
@@ -33,7 +35,6 @@ function OrderDetail() {
             if (response) {
                 setDataDetail(response.data.orderDetail)
                 setData(response.data)
-                setOrderCode(response.data.mapOrderCode)
             }
         } else {
             toast.success('Please login', {
@@ -226,7 +227,7 @@ function OrderDetail() {
                                                                     <p
                                                                         className="form-control form-control-lg"
                                                                         style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-                                                                    > {orderCode.order_place}
+                                                                    > {data.orderCode}
                                                                     </p >
                                                                     <label className="form-label" htmlFor="typeText">
                                                                         Mã đặt hàng
