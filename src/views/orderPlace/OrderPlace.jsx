@@ -24,6 +24,8 @@ import { API_CONFIRM_ORDER } from 'utils/const';
 import { toast } from 'react-toastify';
 import { API_GET_DETAIL_ORDER } from 'utils/const';
 import Modal from '@mui/material/Modal';
+import CheckIcon from '@mui/icons-material/Check';
+import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import OrderDetailPopup from './OrderDetailPopup';
 
 const columns = [
@@ -58,7 +60,7 @@ const columns = [
     },
     {
         id: 'action',
-        label: 'Hành động',
+        label: '',
         minWidth: 70,
         align: 'right',
     },
@@ -95,10 +97,18 @@ function OrderPlace() {
 
     //handle
     const handleOpen = () => setOpen(true)
-    console.log(data);
+    console.log("data ", data);
 
     const confirmOrder = async (id) => {
         const response = await axios.put(API_CONFIRM_ORDER + id + '/true')
+        if (response.status === 200) {
+            toast.success('Thao tác thành công ! ', { autoClose: 2000 })
+            getOrderUserConfirmed()
+        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+    }
+
+    const refuseOrder = async (id) => {
+        const response = await axios.put(API_CONFIRM_ORDER + id + '/false')
         if (response.status === 200) {
             toast.success('Thao tác thành công ! ', { autoClose: 2000 })
             getOrderUserConfirmed()
@@ -163,16 +173,20 @@ function OrderPlace() {
                                     .map((item, index) => (
                                         <TableRow hover sx={{ cursor: 'pointer' }} onClick={() => handleOpenDetailOrder(item.id)} role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.mapOrderCode.order_place}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.total}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
 
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <Button variant="contained" onClick={() => confirmOrder(item.id)} color="success">
-                                                    Accept
+                                                    <CheckIcon />
+                                                </Button>
+                                                <Button sx={{ ml: 2 }} variant="contained" onClick={() => refuseOrder(item.id)} color="error">
+                                                    <DoDisturbIcon />
                                                 </Button>
                                             </TableCell>
+
                                         </TableRow>
                                     )) : <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4>}
                                 <Modal
