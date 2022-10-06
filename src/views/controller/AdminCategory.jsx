@@ -10,8 +10,6 @@ import { API_GET_USERS } from 'utils/const';
 import Category from 'views/category/Category';
 import CreateCategory from 'views/category/CreateCategory';
 import EditCategory from 'views/category/EditCategory';
-import Customer from 'views/customer/Customer';
-import EditCustomer from 'views/customer/EditCustomer';
 
 export default function AdminCategory() {
 
