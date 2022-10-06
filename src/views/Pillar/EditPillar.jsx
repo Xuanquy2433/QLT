@@ -8,12 +8,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function EditPillar({ item, data, dataAddress, openEdit, setOpenEdit, onSubmitEdit }) {
+export default function EditPillar({ item, data, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory }) {
 
     const { addressId, description, status, name, price } = item
 
     const [dataEdit, setDataEdit] = useState(item || {
         addressId: item.addressId || 0,
+        categoryId: item.categoryId || 0,
         description: item.description || "",
         status: item.status || "",
         name: item.name || "",
@@ -36,10 +37,6 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
     ]
 
 
-    // useEffect(() => {
-
-    // }, [item])
-
     const handleClose = () => setOpenEdit(false);
 
     const onChangeText = (e) => {
@@ -52,14 +49,24 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         onSubmitEdit({ ...item, ...dataEdit, id: item.id })
     }
 
-    const [valueState, setValueState] = useState('');
+
+    const [valueStateAddress, setValueStateAddress] = useState('');
+    const [valueStateCategory, setValueStateCategory] = useState('');
+
     const [valueStatus, setValueStatus] = useState('')
 
-    const handleChange = (event) => {
+    const handleChangeAddress = (event) => {
         const value = event.target.value;
-        setValueState(event.target.value);
-        setDataEdit({ ...dataEdit, addressId: (value) });
+        setValueStateAddress(event.target.value);
+        setDataEdit({ ...data, addressId: (value) });
         console.log("value address", value);
+    };
+
+    const handleChangeCategory = (event) => {
+        const value = event.target.value;
+        setValueStateCategory(event.target.value);
+        setDataEdit({ ...data, categoryId: (value) });
+        console.log("value category", value);
     };
 
     const handlChangeStatus = (e) => {
@@ -108,14 +115,30 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueState}
+                            value={valueStateAddress}
                             defaultValue={addressId}
                             label="Mã địa chỉ"
-                            onChange={handleChange}
+                            onChange={handleChangeAddress}
                         >
                             {dataAddress.map((item, index) => (
                                 <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
                             ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl fullWidth sx={{ margin: "5px" }}>
+                        <InputLabel id="demo-simple-select-label">Loại trụ</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={valueStateCategory}
+                            label="Mã địa chỉ"
+                            onChange={handleChangeCategory}
+                        >
+                            {dataCategory.map((item, index) => (
+                                <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+                            ))}
+
                         </Select>
                     </FormControl>
 

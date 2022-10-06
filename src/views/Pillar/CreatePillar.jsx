@@ -12,30 +12,14 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
 
     const [data, setData] = useState({
         addressId: 0,
+        categoryId: 0,
         description: "",
         status: "AVAILABLE",
         name: "",
         price: 0
     })
 
-    const statusO = [
-        {
-            value: "enable",
-            name: "Đã cho thuê"
-        },
-        {
-            value: "available",
-            name: "Có sẵn"
-        },
-        {
-            value: "stopWorking",
-            name: "Dừng hoạt động"
-        },
-    ]
-
-
     const handleClose = () => setOpen(false);
-
     const onChangeText = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
         console.log("onchange:", e.target.value);
@@ -46,24 +30,25 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
     }
 
 
-    const [valueState, setValueState] = useState('');
+    const [valueStateAddress, setValueStateAddress] = useState('');
+    const [valueStateCategory, setValueStateCategory] = useState('');
+
+
     const [valueStatus, setValueStatus] = useState('')
 
-    const handleChange = (event) => {
+    const handleChangeAddress = (event) => {
         const value = event.target.value;
-        setValueState(event.target.value);
+        setValueStateAddress(event.target.value);
         setData({ ...data, addressId: (value) });
         console.log("value address", value);
     };
 
-    const handlChangeStatus = (e) => {
-        const valueSta = e.target.value
-        setValueStatus(e.target.value);
-        setData({ ...data, status: (valueSta) });
-        console.log("value status", valueSta);
-    }
-
-    console.log(data);
+    const handleChangeCategory = (event) => {
+        const value = event.target.value;
+        setValueStateCategory(event.target.value);
+        setData({ ...data, categoryId: (value) });
+        console.log("value category", value);
+    };
 
     return (
         <Modal
@@ -103,9 +88,9 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueState}
+                            value={valueStateAddress}
                             label="Mã địa chỉ"
-                            onChange={handleChange}
+                            onChange={handleChangeAddress}
                         >
                             {dataAddress.map((item, index) => (
                                 <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
@@ -119,9 +104,9 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueState}
+                            value={valueStateCategory}
                             label="Mã địa chỉ"
-                            onChange={handleChange}
+                            onChange={handleChangeCategory}
                         >
                             {dataCategory.map((item, index) => (
                                 <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
