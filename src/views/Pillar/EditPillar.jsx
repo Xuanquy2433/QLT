@@ -22,7 +22,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
 
     const statusO = [
         {
-            value: "ENABLED",
+            value: "HIRING",
             name: "Đã cho thuê"
         },
         {
