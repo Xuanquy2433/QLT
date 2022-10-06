@@ -2,9 +2,14 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { API_GET_CATEGORY } from 'utils/const';
+import { API_ADD_CATEGORY } from 'utils/const';
+import { API_EDIT_CATEGORY } from 'utils/const';
+import { API_DELETE_CATEGORY } from 'utils/const';
 import { API_UPDATE_ROLE } from 'utils/const';
 import { API_GET_USERS } from 'utils/const';
 import Category from 'views/category/Category';
+import CreateCategory from 'views/category/CreateCategory';
+import EditCategory from 'views/category/EditCategory';
 import Customer from 'views/customer/Customer';
 import EditCustomer from 'views/customer/EditCustomer';
 
@@ -15,6 +20,8 @@ export default function AdminCategory() {
     const [page, setPage] = React.useState(1);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const [selected, setSelected] = useState(undefined)
+    const [open, setOpen] = useState(false);
+
     const [openEdit, setOpenEdit] = React.useState(false)
     const handleCloseEdit = () => setOpenEdit(false)
     useEffect(() => {
@@ -53,21 +60,22 @@ export default function AdminCategory() {
         console.log(item);
     }
 
-    const [id, setId] = useState(0)
-    const [role, setRole] = useState('')
+    const onSubmitAdd = async (data) => {
+        const response = await axios.post(API_ADD_CATEGORY, data)
+        if (response && response.status === 201) {
+            toast.success("Thêm thành công", { autoClose: "1500" })
+            setOpen(false)
+        }
+    }
 
-    const onSubmitEdit = async () => {
+    const onSubmitEdit = async (data) => {
         try {
-            const response = await axios.put(API_UPDATE_ROLE + id + "/update?roleName=" + role)
-            if (response && response.status === 200) {
+            const response = await axios.put(API_EDIT_CATEGORY, data)
+            if (response && response.status === 201) {
                 toast.success("Sửa thành công", { autoClose: "1500" })
                 fetchAPI();
                 setOpenEdit(false)
-
-            } else if (response && response.status === 400) {
-                toast.error("Người dùng đã có vai trò này!", { autoClose: "1500" })
             }
-
             //catch show error
         } catch (error) {
             console.log(error.response.data)
@@ -92,13 +100,21 @@ export default function AdminCategory() {
                 })
             }
         }
-
     }
 
+    const onDelete = async (id) => {
+        const response = await axios.delete(API_DELETE_CATEGORY + id)
+        if (response && response.status === 201) {
+            toast.success("Xoá thành công", { autoClose: "1500" })
+            fetchAPI()
+        }
+    }
 
     return (
         <div>
-            <Category data={data} />
+            {selected && <EditCategory item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
+            <CreateCategory open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
+            <Category data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete} />
         </div>
     )
 }

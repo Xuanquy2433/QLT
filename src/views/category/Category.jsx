@@ -17,7 +17,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Moment from 'react-moment';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { data } from 'jquery';
-import { OndemandVideoTwoTone } from '@mui/icons-material';
+import { OndemandVideoTwoTone, SettingsPowerRounded } from '@mui/icons-material';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
@@ -43,7 +43,7 @@ const columns = [
     },
 ];
 
-export default function Category({ data }) {
+export default function Category({ data, setOpen, onEdit, onDelete }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
@@ -55,14 +55,19 @@ export default function Category({ data }) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    const handleOpen = () => setOpen(true);
+
+    const onClickEdit = (item) => {
+        onEdit(item)
+    }
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
                     <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                        <Button sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                            Thêm loại trụ
+                        <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
+                            Thêm danh mục
                         </Button>
                         <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
@@ -117,16 +122,16 @@ export default function Category({ data }) {
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => e.preventDefault()}>
+                                                            onClick={(e) => onDelete(item.id)}>
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
                                                         </DropdownItem>
-                                                        {/* <DropdownItem
+                                                        <DropdownItem
                                                             href="#pablo"
                                                             onClick={(e) => onClickEdit(item)}>
                                                             <EditIcon></EditIcon>
                                                             Update
-                                                        </DropdownItem> */}
+                                                        </DropdownItem>
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>

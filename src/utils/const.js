@@ -56,7 +56,16 @@ export const API_GET_DETAIL_ORDER = `${API}/admin/order/`;
 
 export const API_CART_REMOVE = `${API}/cart/remove/`;
 
-export const API_GET_CATEGORY= `${API}/admin/category`;
+export const API_GET_CATEGORY = `${API}/admin/category`;
+
+export const API_ADD_CATEGORY = `${API}/admin/category/add`;
+
+export const API_EDIT_CATEGORY = `${API}/admin/category/edit`;
+
+export const API_DELETE_CATEGORY = `${API}/admin/category/delete?id=`;
+
+
+
 
 
 
