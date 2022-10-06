@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddress }) {
+export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddress, dataCategory }) {
 
     const [data, setData] = useState({
         addressId: 0,
@@ -99,7 +99,7 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                         </Select>
                     </FormControl> */}
                     <FormControl fullWidth sx={{ margin: "5px" }}>
-                        <InputLabel id="demo-simple-select-label">Mã địa chỉ</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Địa chỉ</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -109,6 +109,22 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                         >
                             {dataAddress.map((item, index) => (
                                 <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
+                            ))}
+
+                        </Select>
+                    </FormControl>
+
+                    <FormControl fullWidth sx={{ margin: "5px" }}>
+                        <InputLabel id="demo-simple-select-label">Loại trụ</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={valueState}
+                            label="Mã địa chỉ"
+                            onChange={handleChange}
+                        >
+                            {dataCategory.map((item, index) => (
+                                <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                             ))}
 
                         </Select>

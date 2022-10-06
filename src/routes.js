@@ -1,20 +1,4 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
 import Maps from "views/examples/Maps.js";
@@ -34,6 +18,8 @@ import OrderPlace from "views/orderPlace/OrderPlace";
 import AddressDetail from "views/pillarAddress/AddressDetail";
 import AdminAvailablePillar from "views/controller/AdminAvailablePillar";
 import AdminHiringPillar from "views/controller/AdminHiringPillar";
+import Category from "views/category/Category";
+import AdminCategory from "views/controller/AdminCategory";
 
 var routes = [
   {
@@ -76,6 +62,13 @@ var routes = [
     name: "Trụ đã cho thuê",
     icon: "ni ni-calendar-grid-58 text-green",
     component: AdminHiringPillar,
+    layout: "/admin"
+  },
+  {
+    path: "/category",
+    name: "Loại trụ",
+    icon: "ni  ni-paper-diploma text-green",
+    component: AdminCategory,
     layout: "/admin"
   },
   {

@@ -3,6 +3,7 @@ import axios, { AxiosError } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { API_PRODUCT_EDIT } from 'utils/const'
+import { API_GET_CATEGORY } from 'utils/const'
 import { API_PRODUCT_DELETE } from 'utils/const'
 import { API_PRODUCT_ADD } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
@@ -16,6 +17,7 @@ function AdminProduct() {
   const [data, setData] = useState([])
   const [totalPages, setTotalPages] = useState(0)
   const [dataAddress, setDataAddress] = useState([])
+  const [dataCategory, setDataCategory] = useState([])
   const [selected, setSelected] = useState(undefined)
   const [open, setOpen] = useState(false);
 
@@ -26,6 +28,7 @@ function AdminProduct() {
   useEffect(() => {
     getAllProduct()
     getAddress()
+    getCategory()
   }, [])
 
   const getAddress = async (e) => {
@@ -34,7 +37,14 @@ function AdminProduct() {
       setDataAddress(response.data.contents)
     }
   }
-  console.log("data address ", dataAddress);
+
+  const getCategory= async (e) => {
+    const response = await axios.get(API_GET_CATEGORY)
+    if (response) {
+      setDataCategory(response.data.content)
+    }
+  }
+  console.log("cate ",dataCategory);
 
   const handleChangeRowsPerPage = async (event) => {
     const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id")
@@ -126,7 +136,7 @@ function AdminProduct() {
 
   return (
     <div>
-      <CreatePillar dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
+      <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
       <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages}

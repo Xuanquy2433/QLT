@@ -156,7 +156,7 @@ const Login = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign in with credentials</small>
             </div>
-            <Form role="form">
+            <Form role="form" >
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   {/* <InputGroupAddon addonType="prepend">
@@ -215,7 +215,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button" onClick={(e) => onLogin(e)}>
+                <Button className="my-4"  color="primary" type="submit" onClick={(e) => onLogin(e)}>
                   Sign in
                 </Button>
               </div>
