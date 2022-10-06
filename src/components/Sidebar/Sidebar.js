@@ -65,7 +65,7 @@ const Sidebar = (props) => {
   console.log(decoded);
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (decoded.roles === `[ROLE_ADMIN]` && prop.path !== '/register' && prop.path !== '/login') {
+      if (decoded.roles === `[ROLE_ADMIN]` && prop.path !== '/register' && prop.path !== '/login' && prop.path !== '/order/' && prop.path !== '/cart') {
         return (
           <NavItem key={key}>
             <NavLink
