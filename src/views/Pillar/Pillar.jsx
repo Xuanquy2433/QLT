@@ -122,7 +122,7 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.address.description}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.address.fullAddress}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.category && item.category.name}</TableCell>
 
