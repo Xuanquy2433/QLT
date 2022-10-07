@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 
 export default function EditPillar({ item, data, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory }) {
 
-    const { addressId, description, status, name, price } = item
+    const { address, description, status, name,category, price } = item
 
     const [dataEdit, setDataEdit] = useState(item || {
         addressId: item.addressId || 0,
@@ -71,7 +71,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         setValueStatus(e.target.value);
         setDataEdit({ ...dataEdit, status: (valueSta) });
     }
-    console.log("statussssss ",status);
+    console.log("statussssss ",status,address,category);
     return (
         <Modal
             open={openEdit}
@@ -95,8 +95,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueStatus}
-                           
+                            value={status}
                             label="Mã địa chỉ"
                             onChange={handlChangeStatus}
                         >
@@ -111,8 +110,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueStateAddress}
-                            defaultValue={addressId}
+                            value={address.id}
                             label="Mã địa chỉ"
                             onChange={handleChangeAddress}
                         >
@@ -127,7 +125,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueStateCategory}
+                            value={category.id}
                             label="Mã địa chỉ"
                             onChange={handleChangeCategory}
                         >
