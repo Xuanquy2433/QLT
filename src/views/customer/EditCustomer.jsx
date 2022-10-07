@@ -58,15 +58,15 @@ export default function EditCustomer({ setId, setRole, item, openEdit, setOpenEd
             padding: '10px'
           }}
         >
-          <h2 style={{ textAlign: 'center' }}>Edit address</h2>
+          <h2 style={{ textAlign: 'center' }}>Cập nhập vai trò</h2>
           <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
             <FormControl fullWidth sx={{ margin: "5px" }}>
-              <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
+              <InputLabel id="demo-simple-select-label">Vai trò</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={valueState}
-                label="Mã địa chỉ"
+                label="Vai trò"
                 onChange={handleChange}
               >
                 {roles.map((item, index) => (
@@ -78,10 +78,10 @@ export default function EditCustomer({ setId, setRole, item, openEdit, setOpenEd
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button sx={{ marginRight: "5px" }} onClick={handleCloseEdit} variant="contained" color="success">
-              Close
+              Đóng
             </Button>
             <Button onClick={onClickEdit} variant="contained" color="success">
-              Submit
+              Xác nhận
             </Button>
           </div>
         </Box>

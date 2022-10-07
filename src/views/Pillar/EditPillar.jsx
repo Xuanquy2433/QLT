@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 
 export default function EditPillar({ item, data, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory }) {
 
-    const { address, description, status, name,category, price } = item
+    const { addressId, description, status, name, price } = item
 
     const [dataEdit, setDataEdit] = useState(item || {
         addressId: item.addressId || 0,
@@ -41,6 +41,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
 
     const onChangeText = (e) => {
         setDataEdit({ ...dataEdit, [e.target.name]: e.target.value })
+        console.log("onchange:", e.target.value);
     }
 
     const onClickEdit = (e) => {
@@ -58,20 +59,23 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         const value = event.target.value;
         setValueStateAddress(event.target.value);
         setDataEdit({ ...data, addressId: (value) });
+        console.log("value address", value);
     };
 
     const handleChangeCategory = (event) => {
         const value = event.target.value;
         setValueStateCategory(event.target.value);
         setDataEdit({ ...data, categoryId: (value) });
+        console.log("value category", value);
     };
 
     const handlChangeStatus = (e) => {
         const valueSta = e.target.value
         setValueStatus(e.target.value);
         setDataEdit({ ...dataEdit, status: (valueSta) });
+        console.log("value status", valueSta);
     }
-    console.log("statussssss ",status,address,category);
+    console.log(dataEdit);
     return (
         <Modal
             open={openEdit}
@@ -95,12 +99,13 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={status}
+                            value={valueStatus}
+                            defaultValue={status}
                             label="Mã địa chỉ"
                             onChange={handlChangeStatus}
                         >
                             {statusO.map((item, index) => (
-                                <MenuItem selected={status} key={index} value={item.value}>{item.name}</MenuItem>
+                                <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
                             ))}
 
                         </Select>
@@ -110,7 +115,8 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={address.id}
+                            value={valueStateAddress}
+                            defaultValue={addressId}
                             label="Mã địa chỉ"
                             onChange={handleChangeAddress}
                         >
@@ -125,7 +131,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={category.id}
+                            value={valueStateCategory}
                             label="Mã địa chỉ"
                             onChange={handleChangeCategory}
                         >
