@@ -48,12 +48,12 @@ const columns = [
         minWidth: 70,
         align: 'center',
     },
-    // {
-    //     id: 'categoryId',
-    //     label: 'Loại trụ',
-    //     minWidth: 70,
-    //     align: 'center',
-    // },
+    {
+        id: 'categoryId',
+        label: 'Loại trụ',
+        minWidth: 70,
+        align: 'center',
+    },
     {
         id: 'Status',
         label: 'Trạng thái',
@@ -124,7 +124,7 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                                             <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.address && item.address.fullAddress}</TableCell>
-                                            {/* <TableCell sx={{ textAlign: 'center' }}> {item.address}</TableCell> */}
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.category.name}</TableCell>
 
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
 

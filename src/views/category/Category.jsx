@@ -110,34 +110,8 @@ export default function Category({ data, setOpen, onEdit, onDelete }) {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
 
                                             <TableCell sx={{ textAlign: 'right', display: "flex", justifyContent: "space-around" }}>
-                                                <DeleteIcon onClick={(e) => onDelete(item.id)} />
-                                                <EditIcon onClick={(e) => onClickEdit(item)} />
-
-                                                {/* <UncontrolledDropdown>
-                                                    <DropdownToggle
-                                                        className="btn-icon-only text-light"
-                                                        href="#pablo"
-                                                        role="button"
-                                                        size="sm"
-                                                        color=""
-                                                        onClick={(e) => e.preventDefault()}
-                                                    >
-                                                    </DropdownToggle>
-                                                    <DropdownMenu className="dropdown-menu-arrow" right>
-                                                        <DropdownItem
-                                                            href="#pablo"
-                                                            onClick={(e) => onDelete(item.id)}>
-                                                            <DeleteIcon></DeleteIcon>
-                                                            Delete
-                                                        </DropdownItem>
-                                                        <DropdownItem
-                                                            href="#pablo"
-                                                            onClick={(e) => onClickEdit(item)}>
-                                                            <EditIcon></EditIcon>
-                                                            Update
-                                                        </DropdownItem>
-                                                    </DropdownMenu>
-                                                </UncontrolledDropdown> */}
+                                                <DeleteIcon sx={{ cursor: 'pointer' }} onClick={(e) => onDelete(item.id)} />
+                                                <EditIcon sx={{ cursor: 'pointer' }} onClick={(e) => onClickEdit(item)} />
                                             </TableCell>
 
                                         </TableRow>
