@@ -39,6 +39,13 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
+        id: 'Description',
+        label: 'Chú thích',
+        minWidth: 170,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
         id: 'Action',
         label: 'Hành động',
         maxWidth: 70,
@@ -116,6 +123,7 @@ export default function Address({ rowsPerPage, data, onDelete, onEdit, open, set
                                             <TableCell > {item.city} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.street} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.fullAddress} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>  {item.description} </TableCell>
 
                                             <TableCell sx={{ textAlign: "right" }}>
                                                 <UncontrolledDropdown>
