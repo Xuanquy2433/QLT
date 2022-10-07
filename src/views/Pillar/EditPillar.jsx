@@ -41,7 +41,6 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
 
     const onChangeText = (e) => {
         setDataEdit({ ...dataEdit, [e.target.name]: e.target.value })
-        console.log("onchange:", e.target.value);
     }
 
     const onClickEdit = (e) => {
@@ -59,23 +58,20 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         const value = event.target.value;
         setValueStateAddress(event.target.value);
         setDataEdit({ ...data, addressId: (value) });
-        console.log("value address", value);
     };
 
     const handleChangeCategory = (event) => {
         const value = event.target.value;
         setValueStateCategory(event.target.value);
         setDataEdit({ ...data, categoryId: (value) });
-        console.log("value category", value);
     };
 
     const handlChangeStatus = (e) => {
         const valueSta = e.target.value
         setValueStatus(e.target.value);
         setDataEdit({ ...dataEdit, status: (valueSta) });
-        console.log("value status", valueSta);
     }
-    console.log(dataEdit);
+    console.log("statussssss ",status);
     return (
         <Modal
             open={openEdit}
@@ -100,12 +96,12 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={valueStatus}
-                            defaultValue={status}
+                           
                             label="Mã địa chỉ"
                             onChange={handlChangeStatus}
                         >
                             {statusO.map((item, index) => (
-                                <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
+                                <MenuItem selected={status} key={index} value={item.value}>{item.name}</MenuItem>
                             ))}
 
                         </Select>

@@ -77,7 +77,7 @@ const Header = () => {
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-success mr-1">
                         <i className="fa fa-arrow-up mr-1" />
-                        <CurrencyFormat value={dataOverview.totalEarning} displayType={'text'} thousandSeparator={true} suffix={' VNĐ'} />
+                        <CurrencyFormat value={dataOverview.totalEarning} displayType={'text'} thousandSeparator={true} suffix={'VNĐ'} />
                       </span>{" "}
                       <span className="text-nowrap">Tổng thu nhập</span>
                     </p>
