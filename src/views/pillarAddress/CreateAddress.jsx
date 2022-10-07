@@ -5,9 +5,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 export default function CreatePillar({ data, onSubmit, open, setOpen }) {
 
-    const [dataAddress, setDataAddress] = useState(data || {
+    const [dataAddress, setDataAddress] = useState({
         city: '',
         street: '',
+        description: '',
     })
     const onChangeText = (event) => {
         setDataAddress({ ...dataAddress, [event.target.name]: event.target.value })
@@ -39,11 +40,14 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
                 >
                     <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
                     <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
-                        <TextField onChange={onChangeText} defaultValue='' name="city" style={{ margin: '5px' }} fullWidth label='City' />
-                        <TextField onChange={onChangeText} defaultValue='' name="street" style={{ margin: '5px' }} fullWidth label='Street' />
+                        <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
+
+                        <TextField onChange={onChangeText} defaultValue='' name="street" style={{ margin: '5px' }} fullWidth label='Đường' />
+                        <TextField onChange={onChangeText} defaultValue='' name="city" style={{ margin: '5px' }} fullWidth label='Thành phố' />
+
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <Button sx={{marginRight:"5px"}} onClick={handleClose} variant="contained" color="success">
+                        <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
                             Close
                         </Button>
                         <Button onClick={onClickAdd} variant="contained" color="success">
