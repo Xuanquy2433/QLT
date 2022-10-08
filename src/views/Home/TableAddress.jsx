@@ -35,6 +35,7 @@ import ToggleButtonMui from '@mui/material/ToggleButton';
 import './scss.scss'
 import AddressDetail from 'views/pillarAddress/AddressDetail';
 import { API_GET_ADDRESS } from 'utils/const';
+import { API_CLICK_SEARCH_ADDRESS } from 'utils/const';
 
 const style = {
     position: 'absolute',
@@ -77,7 +78,6 @@ function TableAddress() {
         if (response) {
             setDataDetail(response.data)
         }
-        console.log('data detail ', dataDetail);
         setOpen(true)
     };
     const handleClose = () => setOpen(false);
@@ -89,31 +89,50 @@ function TableAddress() {
     const [keyword, setKeyword] = React.useState('');
     const handleChangeField = (event) => {
         setField(event.target.value);
+        onChangeSearchNew()
         // onclickFilter()
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=asc&sortField='+field)
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=asc&sortField=' + field)
         if (response) {
             setData(response.data.contents)
         }
     }
-    console.log("dataaaaaaaaa ",data);
 
-    // ONCHANGE FILTER
-    const onclickFilter = async (e) => {
+
+    //new
+    const onChangeSearchNew = async (e) => {
         if (selected === false) {
             setSort('desc')
         } else setSort('asc')
         if (field === '') {
             setField('street')
         }
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=' + sort + '&sortField=' + field)
+        if (response) {
+            setData(response.data.contents)
+        }
+    }
+
+    //click search
+    const onclickSearch = async (e) => {
+        const response = await axios.get(API_CLICK_SEARCH_ADDRESS + keyword)
+        if (response) {
+            setData(response.data)
+        }
+        console.log('click se ',response.data);
+    }
+
+
+    // ONCHANGE FILTER
+    const onclickFilter = async (e) => {
+
         const response = await axios.get(API_ADDRESS_FILTER + "keyword=" + keyword + '&quantity=1&sort=' + sort + '&sortField=' + field)
         if (response) {
             setData(response.data)
         }
     }
-    console.log('datade ', dataDetail);
     useEffect(() => {
         getAllAddRess()
     }, [])
@@ -146,6 +165,7 @@ function TableAddress() {
                                     selected={selected}
                                     onChange={() => {
                                         setSelected(!selected);
+                                        onChangeSearchNew()
                                         // onclickFilter()
                                     }}
                                 >
@@ -168,7 +188,7 @@ function TableAddress() {
                             </Select>
                         </FormControl>
 
-                        <Button sx={{ width: '31%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickFilter} color="primary">
+                        <Button sx={{ width: '31%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickSearch} color="primary">
                             Tìm kiếm
                         </Button>
 
