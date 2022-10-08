@@ -7,6 +7,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { IconButton } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
 
 export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddress, dataCategory }) {
 
@@ -15,17 +17,19 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
         categoryId: 0,
         description: "",
         status: "AVAILABLE",
+        multipartFile: '',
         name: "",
         price: 0
     })
 
     const handleClose = () => setOpen(false);
+
     const onChangeText = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
-        console.log("onchange:", e.target.value);
     }
 
-    const onClickAdd = () => {
+    const onClickAdd = (e) => {
+        e.preventDefault()
         onSubmit(data)
     }
 
@@ -34,20 +38,16 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
     const [valueStateCategory, setValueStateCategory] = useState('');
 
 
-    const [valueStatus, setValueStatus] = useState('')
-
     const handleChangeAddress = (event) => {
         const value = event.target.value;
         setValueStateAddress(event.target.value);
         setData({ ...data, addressId: (value) });
-        console.log("value address", value);
     };
 
     const handleChangeCategory = (event) => {
         const value = event.target.value;
         setValueStateCategory(event.target.value);
         setData({ ...data, categoryId: (value) });
-        console.log("value category", value);
     };
 
     console.log(data);
@@ -69,21 +69,11 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
             >
                 <h2 style={{ textAlign: 'center' }}>Thêm trụ</h2>
                 <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
-                    {/* <FormControl fullWidth sx={{ margin: "5px" }}>
-                        <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={valueStatus}
-                            label="Mã địa chỉ"
-                            onChange={handlChangeStatus}
-                        >
-                            {statusO.map((item, index) => (
-                                <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
-                            ))}
-
-                        </Select>
-                    </FormControl> */}
+                    <FormControl fullWidth sx={{ margin: "5px" }}>
+                        <h3>Upload</h3>
+                        <input accept="image/*" name='multipartFile'
+                            onChange={(e) => setData({ ...data, multipartFile: e.target.files[0] })} multiple type="file" />
+                    </FormControl>
                     <FormControl fullWidth sx={{ margin: "5px" }}>
                         <InputLabel id="demo-simple-select-label">Địa chỉ</InputLabel>
                         <Select
@@ -126,7 +116,7 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                     <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
                         Đóng
                     </Button>
-                    <Button onClick={onClickAdd} variant="contained" color="success">
+                    <Button onClick={onClickAdd} type='submit' variant="contained" color="success">
                         Thêm
                     </Button>
                 </div>

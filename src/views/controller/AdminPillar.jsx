@@ -34,7 +34,7 @@ function AdminProduct() {
   const getAddress = async (e) => {
     const response = await axios.get(API_GET_PILLAR)
     if (response) {
-      setDataAddress(response.data.contents)
+      setDataAddress(response.data.content)
     }
   }
 
@@ -53,7 +53,6 @@ function AdminProduct() {
       setPage(0);
       // setTotalPages(response.data.totalElements)
       setRowsPerPage(+event.target.value);
-      console.log('data,', response.data.content);
     }
   };
 
@@ -62,7 +61,6 @@ function AdminProduct() {
     if (response) {
       setPage(newPage)
       setData(response.data.content)
-      console.log('data,', response.data.content);
     }
   }
 
@@ -78,16 +76,47 @@ function AdminProduct() {
 
   const onEdit = async (item) => {
     setSelected(item)
-    console.log("selected", item);
     setOpenEdit(true)
   }
 
   const onSubmit = async (data) => {
-    const response = await axios.post(API_PRODUCT_ADD, data)
-    if (response.status === 201) {
-      toast.success("them thanh cong", { autoClose: "1500" })
-      getAllProduct()
-      setOpen(false)
+    console.log("data when add ", data);
+
+    try {
+      const formData = new FormData();
+      formData.append('multipartFile', data.multipartFile);
+      const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId + '&categoryId=' + data.categoryId + '&description=' + data.description
+        + '&name=' + data.name + '&price=' + data.price, formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
+      if (response.status === 201) {
+        toast.success("them thanh cong", { autoClose: "1500" })
+        getAllProduct()
+        setOpen(false)
+      }
+    } catch (error) {
+      if (error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error) {
+        toast.error(`${error.response.data.error}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error && error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else {
+        toast.error('Error', {
+          autoClose: 2000
+        })
+      }
+
     }
   }
 
@@ -133,7 +162,6 @@ function AdminProduct() {
       getAllProduct()
     }
   }
-
   return (
     <div>
       <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />

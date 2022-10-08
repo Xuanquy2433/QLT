@@ -34,6 +34,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import ToggleButtonMui from '@mui/material/ToggleButton';
 import './scss.scss'
 import AddressDetail from 'views/pillarAddress/AddressDetail';
+import { API_GET_ADDRESS } from 'utils/const';
 
 const style = {
     position: 'absolute',
@@ -92,9 +93,9 @@ function TableAddress() {
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_PILLAR)
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=asc&sortField='+field)
         if (response) {
-            setData(response.data.content)
+            setData(response.data.contents)
         }
     }
     console.log("dataaaaaaaaa ",data);

@@ -22,16 +22,23 @@ import { formatMoney } from './../../common/formatMoney';
 const columns = [
     { id: 'id', label: 'Id', minWidth: 10, maxWidth: 10 },
     {
+        id: 'image',
+        label: 'Hình ảnh',
+        minWidth: 90,
+        align: 'center',
+      
+    },
+    {
         id: 'name',
         label: 'Tên',
-        minWidth: 170,
+        minWidth: 90,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'price',
         label: 'Giá',
-        minWidth: 130,
+        minWidth: 90,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -120,6 +127,7 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>

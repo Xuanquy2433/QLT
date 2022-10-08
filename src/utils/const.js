@@ -8,7 +8,7 @@ export const API_GET_PILLAR = `${API}/admin/address/`;
 
 export const API_GET_ADMIN_ADDRESS = `${API}/admin/address/page/`;
 
-// export const API_GET_ADDRESS =`${API}admin/address/page`
+export const API_GET_ADDRESS =`${API}/address/page/`
 
 export const API_ADD_PILLAR = `${API}/admin/address/add`;
 

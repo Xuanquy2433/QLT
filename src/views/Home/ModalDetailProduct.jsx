@@ -21,7 +21,7 @@ import { toast } from 'react-toastify';
 import { API_ADD_CART } from 'utils/const';
 
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 170 },
+    { id: 'image', label: 'Hình ảnh', minWidth: 170 },
     { id: 'name', label: 'Name', minWidth: 100 },
     {
         id: 'price',
@@ -162,7 +162,9 @@ function ModalDetailProduct({ dataDetail }) {
                                 // dataDetail.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 dataDetail.map((item, index) => (
                                     <TableRow hover role="checkbox" key={index}>
-                                        <TableCell>{item.id}</TableCell>
+                                        <TableCell>
+                                            <img style={{ width: '50px', height: '50px' }} src={item.photosImagePath} alt="" />
+                                        </TableCell>
                                         <TableCell > {item.name} </TableCell>
                                         <TableCell style={{ textAlign: 'right' }}> {item.price} </TableCell>
                                         <TableCell style={{ textAlign: 'right' }} > {item.description} </TableCell>

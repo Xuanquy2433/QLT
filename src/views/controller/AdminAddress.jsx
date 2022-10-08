@@ -170,6 +170,7 @@ export default function AdminPillar() {
 
     }
   }
+  console.log('dataaaaaaaaaaaaa ',data);
   return (
     <div>
       <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />

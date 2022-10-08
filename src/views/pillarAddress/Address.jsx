@@ -23,6 +23,7 @@ import { IconButton, InputBase } from '@mui/material';
 
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 100 },
+    { id: 'image', label: 'Hình ảnh', align: 'center', minWidth: 100 },
     { id: 'City', label: 'Thành phố', align: 'center', minWidth: 100 },
     {
         id: 'Street',
@@ -120,6 +121,9 @@ export default function Address({ rowsPerPage, data, onDelete, onEdit, open, set
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>
+                                                <img style={{ width: '50px', height: '50px' }} src={item.photosImagePath} alt="" />
+                                            </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.city} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.street} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.fullAddress} </TableCell>
