@@ -50,6 +50,8 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
                         padding: '10px'
                     }}
                 >
+                    <h2 style={{ textAlign: 'center' }}>Thêm địa chỉ</h2>
+
                     <div>
                         {selectedImage && (
                             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -59,7 +61,6 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
                         )}
 
                     </div>
-                    <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
                     <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
                         <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
 
