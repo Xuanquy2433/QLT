@@ -185,7 +185,7 @@ function TableAddress() {
                                 <p style={{
                                     width: '46%', height: '230px'
                                 }}  >
-                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src="https://cdn.brvn.vn/editor/2020/04/quangcaopanobillboardngoaitroi30_1585971255.jpg" alt="" />
+                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.image} alt="" />
 
                                 </p>
                                 <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
