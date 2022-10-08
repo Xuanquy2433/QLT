@@ -182,6 +182,9 @@ export default function AdminPillar() {
     if (response.status === 200) {
       setdata(response.data)
     }
+    if (keyword.length === 0) {
+      fetchAPI()
+    }
   }
 
   console.log('dataaaaaaaaaaaaa ', data);
