@@ -22,8 +22,8 @@ import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDrop
 import { IconButton, InputBase } from '@mui/material';
 
 const columns = [
-    { id: 'Id', label: 'Id', minWidth: 170 },
-    { id: 'City', label: 'Thành phố', minWidth: 100 },
+    { id: 'Id', label: 'Id', minWidth: 100 },
+    { id: 'City', label: 'Thành phố', align: 'center', minWidth: 100 },
     {
         id: 'Street',
         label: 'Đường',
@@ -120,7 +120,7 @@ export default function Address({ rowsPerPage, data, onDelete, onEdit, open, set
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell > {item.city} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.city} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.street} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.fullAddress} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.description} </TableCell>
