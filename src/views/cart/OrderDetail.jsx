@@ -13,12 +13,14 @@ function OrderDetail() {
     const id = params.get('id');
     console.log("id order ", id);
 
-
+    const [isConfirm, setIsConFirm] = useState(false)
+    const [valueStatus, setValueStatus] = useState('')
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
-
+    console.log(valueStatus);
     console.log("deta");
     console.log("data", data.orderCode);
+    console.log(data.status);
     console.log(dataDetail);
     const history = useHistory()
 
@@ -35,6 +37,7 @@ function OrderDetail() {
             if (response) {
                 setDataDetail(response.data.orderDetail)
                 setData(response.data)
+
             }
         } else {
             toast.success('Please login', {
@@ -50,6 +53,7 @@ function OrderDetail() {
         try {
             if (token) {
                 if (data.status === 'NEW') {
+                    setIsConFirm(true)
                     const response = await axios.put(API_CONFIRM_PAYMENT + id, {}, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
@@ -65,6 +69,7 @@ function OrderDetail() {
                             window.location.reload()
                         }, 1800);
                     };
+                    setIsConFirm(true)
                 }
             } else {
                 toast.success('Please login', {
@@ -99,6 +104,19 @@ function OrderDetail() {
 
     useEffect(() => {
         getAllOderDetail()
+        if (data.status === 'NEW') {
+            setValueStatus('Thanh toán')
+            setIsConFirm(false)
+        } else if (data.status === 'USER_CONFIRMED') {
+            setValueStatus('Vui lòng chờ admin phê duyệt đơn hàng của bạn !')
+            setIsConFirm(true)
+        } else if (data.status === 'CANCELLED') {
+            setValueStatus('Bạn đã huỷ đơn hàng này')
+            setIsConFirm(true)
+        } else if (data.status === 'PAID') {
+            setValueStatus('Đã xác nhận')
+            setIsConFirm(true)
+        }
     }, [])
 
 
@@ -250,16 +268,21 @@ function OrderDetail() {
                                                         <p className="mb-2">{data.total} VNĐ</p>
                                                     </div>
                                                     <button
+                                                        onClick={checkout}
+                                                        disabled={isConfirm}
                                                         type="button"
                                                         className="btn btn-info btn-block btn-lg"
                                                     >
-                                                        {data.status === 'NEW' && <div onClick={checkout} className="d-flex justify-content-between">
-                                                            <span>{data.total} VNĐ</span>
-                                                            <span>
-                                                                Checkout{" "}
-                                                                <i className="fas fa-long-arrow-alt-right ms-2" />
-                                                            </span>
-                                                        </div>}
+                                                        {valueStatus}
+                                                        {/* {data.status === 'NEW'
+                                                            && <div onClick={checkout} className="d-flex justify-content-between">
+                                                                <span>{data.total} VNĐ</span>
+                                                                <span>
+                                                                    Checkout{" "}
+                                                                    <i className="fas fa-long-arrow-alt-right ms-2" />
+                                                                </span>
+                                                            </div>
+                                                        }
 
                                                         {data.status === 'USER_CONFIRMED' &&
                                                             <div style={{ color: 'yellow' }} className="d-flex justify-content-between">
@@ -270,7 +293,7 @@ function OrderDetail() {
                                                         }
 
                                                         {data.status === 'CANCELLED' &&
-                                                            <div style={{ color: 'yellow' }} className="d-flex justify-content-between">
+                                                            < div style={{ color: 'yellow' }} className="d-flex justify-content-between">
                                                                 <span>
                                                                     Bạn đã hủy đơn hàng này !
                                                                 </span>
@@ -282,7 +305,7 @@ function OrderDetail() {
                                                                     Đã xác nhận !
                                                                 </span>
                                                             </div>
-                                                        }
+                                                        } */}
 
                                                     </button>
                                                 </div>
