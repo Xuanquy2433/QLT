@@ -22,7 +22,7 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
     const onChangeImage = (event) => {
         const value = event.target.files[0]
         setSelectedImage(event.target.files[0])
-        setDataAddress({ ...dataAddress, multipartFile: (value) })
+        setDataAddress({ ...dataAddress, multipartFile: event.target.files[0] })
     }
 
     const onClickAdd = (event) => {
@@ -66,7 +66,7 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
 
                         <TextField onChange={onChangeText} defaultValue='' name="street" style={{ margin: '5px' }} fullWidth label='Đường' />
                         <TextField onChange={onChangeText} defaultValue='' name="city" style={{ margin: '5px' }} fullWidth label='Thành phố' />
-                        <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" />
+                        <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image/*" />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">

@@ -60,7 +60,12 @@ export default function AdminPillar() {
     }
     else {
       try {
-        const response = await axios.post(API_ADD_PILLAR, data)
+        const formData = new FormData();
+        formData.append('multipartFile', data.multipartFile);
+        const response = await axios.post(API_ADD_PILLAR + "?city=" + data.city + "&description=" + data.description + "&street=" + data.street, formData,
+          {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          })
         if (response && response.status === 201) {
           toast.success("Thêm thành công", { autoClose: 1500 });
           setOpenEdit(false);
@@ -170,7 +175,7 @@ export default function AdminPillar() {
 
     }
   }
-  console.log('dataaaaaaaaaaaaa ',data);
+  console.log('dataaaaaaaaaaaaa ', data);
   return (
     <div>
       <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />
