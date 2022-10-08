@@ -52,10 +52,9 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
                 >
                     <div>
                         {selectedImage && (
-                            <div>
-                                <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
-                                <br />
-                                <button onClick={() => setSelectedImage(null)}>Remove</button>
+                            <div style={{ display: "flex", justifyContent: "center" }}>
+                                <img alt="not fount" width={"130px"} src={URL.createObjectURL(selectedImage)} />
+                                {/* <button onClick={() => setSelectedImage(null)}>Remove</button> */}
                             </div>
                         )}
 
