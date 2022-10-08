@@ -12,7 +12,7 @@ function Cart() {
 
     const [data, setData] = useState([])
     const [month, setMonth] = useState(1)
-    const [btnOrders, setBtnOrders] = useState('Đặt hàng')
+    // const [btnOrders, setBtnOrders] = useState('Đặt hàng')
     const [btnDisabled, setBtnDisabled] = useState(false)
     const history = useHistory()
     let token = localStorage.getItem('token')
@@ -45,8 +45,8 @@ function Cart() {
 
 
     const clickOrder = async () => {
-        setBtnOrders('Vui lòng chờ...')
-        setBtnDisabled(true)
+        // setBtnOrders('Vui lòng chờ...')
+        // setBtnDisabled(true)
         console.log('checkout token ', token);
         try {
             if (token) {
@@ -66,7 +66,7 @@ function Cart() {
                     setTimeout(() => {
                         history.push('/auth/order/?id=' + response.data.message.replace(/\D/g, ""))
                     }, 2000);
-
+                    setBtnDisabled(true);
                 };
                 // setBtnOrders('Vui lòng chờ...')
             } else {
@@ -290,7 +290,7 @@ function Cart() {
                                                             onClick={clickOrder}
                                                         >
 
-                                                            {btnOrders}
+                                                            {btnDisabled ? 'Vui lòng chờ...' : 'Đặt hàng'}
                                                         </button>
                                                     </> : ''}
                                             </div>
