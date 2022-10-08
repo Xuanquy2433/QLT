@@ -105,16 +105,16 @@ function OrderDetail() {
     useEffect(() => {
         getAllOderDetail()
         if (data.status === 'NEW') {
-            setValueStatus('Thanh toán')
+            // setValueStatus('Thanh toán')
             setIsConFirm(false)
         } else if (data.status === 'USER_CONFIRMED') {
-            setValueStatus('Vui lòng chờ admin phê duyệt đơn hàng của bạn !')
+            // setValueStatus('Vui lòng chờ admin phê duyệt đơn hàng của bạn !')
             setIsConFirm(true)
         } else if (data.status === 'CANCELLED') {
-            setValueStatus('Bạn đã huỷ đơn hàng này')
+            // setValueStatus('Bạn đã huỷ đơn hàng này')
             setIsConFirm(true)
         } else if (data.status === 'PAID') {
-            setValueStatus('Đã xác nhận')
+            // setValueStatus('Đã xác nhận')
             setIsConFirm(true)
         }
     }, [])
@@ -274,11 +274,11 @@ function OrderDetail() {
                                                         className="btn btn-info btn-block btn-lg"
                                                     >
                                                         {valueStatus}
-                                                        {/* {data.status === 'NEW'
-                                                            && <div onClick={checkout} className="d-flex justify-content-between">
+                                                        {data.status === 'NEW'
+                                                            && <div className="d-flex justify-content-between">
                                                                 <span>{data.total} VNĐ</span>
                                                                 <span>
-                                                                    Checkout{" "}
+                                                                    Thanh toán
                                                                     <i className="fas fa-long-arrow-alt-right ms-2" />
                                                                 </span>
                                                             </div>
@@ -305,7 +305,7 @@ function OrderDetail() {
                                                                     Đã xác nhận !
                                                                 </span>
                                                             </div>
-                                                        } */}
+                                                        }
 
                                                     </button>
                                                 </div>
