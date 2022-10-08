@@ -26,7 +26,7 @@ const columns = [
         label: 'Hình ảnh',
         minWidth: 90,
         align: 'center',
-      
+
     },
     {
         id: 'name',
@@ -127,7 +127,9 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>
+                                                <img style={{ width: '50px', height: '50px' }} src={item.image} alt="" />
+                                            </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
