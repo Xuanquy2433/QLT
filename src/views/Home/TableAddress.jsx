@@ -94,7 +94,7 @@ function TableAddress() {
     const getAllAddRess = async (e) => {
         const response = await axios.get(API_GET_PILLAR)
         if (response) {
-            setData(response.data.contents)
+            setData(response.data.content)
         }
     }
     console.log("dataaaaaaaaa ",data);
