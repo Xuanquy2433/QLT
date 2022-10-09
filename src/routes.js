@@ -135,7 +135,7 @@ var routes = [
     layout: "/auth"
   },
   {
-    path: "/order/",
+    path: "/order/:id",
     name: "OrderDetail",
     icon: "ni ni-circle-08 text-pink",
     component: OrderDetail,

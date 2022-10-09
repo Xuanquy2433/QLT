@@ -121,7 +121,6 @@ function TableAddress() {
         if (response) {
             setData(response.data)
         }
-        console.log('click se ',response.data);
     }
 
 
@@ -133,6 +132,7 @@ function TableAddress() {
             setData(response.data)
         }
     }
+    console.log('d ' ,data);
     useEffect(() => {
         getAllAddRess()
     }, [])

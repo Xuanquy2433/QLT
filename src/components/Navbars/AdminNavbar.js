@@ -41,6 +41,7 @@ const AdminNavbar = (props) => {
     // alert("ok")
     localStorage.removeItem("token")
     localStorage.removeItem("user")
+    localStorage.removeItem("IdOrder")
     history.push('/auth/homePage')
     // window.location.reload(false)
 

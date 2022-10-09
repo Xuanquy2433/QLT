@@ -11,23 +11,19 @@ function OrderDetail() {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const id = params.get('id');
-    console.log("id order ", id);
+    
+    console.log("id order ", localStorage.getItem('IdOrder'));
 
     const [isConfirm, setIsConFirm] = useState(false)
     const [valueStatus, setValueStatus] = useState('')
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
-    console.log(valueStatus);
-    console.log("deta");
-    console.log("data", data.orderCode);
-    console.log(data.status);
-    console.log(dataDetail);
     const history = useHistory()
 
     let token = localStorage.getItem('token')
     const getAllOderDetail = async (e) => {
         if (token) {
-            const response = await axios.get(API_GET_ORDER_DETAIL + id, {
+            const response = await axios.get(API_GET_ORDER_DETAIL + localStorage.getItem('IdOrder'), {
                 headers: {
                     'authorization': 'Bearer ' + token,
                     'Accept': 'application/json',
@@ -37,7 +33,6 @@ function OrderDetail() {
             if (response) {
                 setDataDetail(response.data.orderDetail)
                 setData(response.data)
-
             }
         } else {
             toast.success('Please login', {

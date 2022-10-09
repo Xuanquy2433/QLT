@@ -30,7 +30,6 @@ function Cart() {
         }
     }
 
-    console.log("cart ", data);
     const handleUpdateMonth = () => {
         setMonth(month + 1)
     }
@@ -47,7 +46,6 @@ function Cart() {
     const clickOrder = async () => {
         // setBtnOrders('Vui lòng chờ...')
         // setBtnDisabled(true)
-        console.log('checkout token ', token);
         try {
             if (token) {
 
@@ -62,9 +60,9 @@ function Cart() {
                     toast.success('Success', {
                         autoClose: 3000
                     })
-                    console.log("da vao ", idOrder);
                     setTimeout(() => {
                         history.push('/auth/order/?id=' + response.data.message.replace(/\D/g, ""))
+                        localStorage.setItem('IdOrder', response.data.message.replace(/\D/g, ""))
                     }, 2000);
                     setBtnDisabled(true);
                 };
@@ -99,15 +97,12 @@ function Cart() {
             }
         }
     }
-    console.log("iddddddddddddddddddddddddđ ", idOrder);
     let sum = 0
     data.map((item) => {
         sum += (Number(item.product.price) * Number(item.month))
     })
 
     useEffect(() => {
-
-
         getAllCart()
     }, [])
 
@@ -118,7 +113,6 @@ function Cart() {
         }
     }
 
-    console.log(month);
 
     return (
         <div style={{ marginTop: '20px' }} >
@@ -236,7 +230,7 @@ function Cart() {
                                         </div>
                                         <div className="col-lg-4 bg-grey">
                                             <div className="p-5">
-                                                <h3 className="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                                                <NavLink to={'/auth/order/' + localStorage.getItem('IdOrder')} className="fw-bold mb-5 mt-2 pt-1">Các trụ đã đặt</NavLink>
                                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                     <h5 className="">Name</h5>
                                                     <h5>Price</h5>
