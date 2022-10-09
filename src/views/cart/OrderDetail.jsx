@@ -22,7 +22,7 @@ function OrderDetail() {
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
     const history = useHistory()
-
+    console.log("dataDetail: " + dataDetail);
     const getAllOderDetail = async (e) => {
         if (token) {
             const response = await axios.get(API_GET_ORDER_DETAIL + idOrderInURL, {
@@ -185,7 +185,7 @@ function OrderDetail() {
                                             <hr />
                                             <div className="d-flex justify-content-between align-items-center mb-4">
                                                 <div>
-                                                    <p className="mb-0">You have {dataDetail.length} items </p>
+                                                    {/* <p className="mb-0">You have {dataDetail.length} items </p> */}
                                                 </div>
                                             </div>
 
