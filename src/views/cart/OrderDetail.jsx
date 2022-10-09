@@ -160,7 +160,7 @@ function OrderDetail() {
     }, [])
     function copy(text) {
         navigator.clipboard.writeText(text)
-        toast.success(`Copy To Clipboard`, {
+        toast.success(`Sao chép thành công`, {
             autoClose: 500
         })
     }
