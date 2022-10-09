@@ -171,7 +171,7 @@ function OrderPlace() {
                                 {data.length > 0 ? data
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
-                                        <TableRow hover sx={{ cursor: 'pointer' }} onClick={() => handleOpenDetailOrder(item.id)} role="checkbox" key={index}>
+                                        <TableRow hover sx={{ cursor: 'pointer' }} role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
@@ -184,6 +184,9 @@ function OrderPlace() {
                                                 </Button>
                                                 <Button sx={{ ml: 2 }} variant="contained" onClick={() => refuseOrder(item.id)} color="error">
                                                     <DoDisturbIcon />
+                                                </Button>
+                                                <Button sx={{ ml: 2 }} variant="contained" onClick={() => handleOpenDetailOrder(item.id)} color="success">
+                                                    ...
                                                 </Button>
                                             </TableCell>
 

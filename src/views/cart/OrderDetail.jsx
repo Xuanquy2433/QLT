@@ -34,6 +34,11 @@ function OrderDetail() {
             if (response.status === 200) {
                 setDataDetail(response.data.orderDetail)
                 setData(response.data)
+            } else if (response === null) {
+                toast.success('Không có đơn hàng này !', {
+                    autoClose: 3000
+                })
+                history.push('/auth/homePage')
             }
             else {
                 toast.success('Không có đơn hàng này !', {
@@ -103,8 +108,40 @@ function OrderDetail() {
             }
         }
     }
+    // const [timerDays, setTimerDays] = useState();
+    // const [timerHours, setTimerHours] = useState();
+    // const [timerMinutes, setTimerMinutes] = useState(10);
+    // const [timerSeconds, setTimerSeconds] = useState(10);
+    // let interval;
+
+
+    // const startTimer = () => {
+    //     const countDownDate = new Date("May 30,2022").getTime();
+    //     interval = setInterval(() => {
+    //         const now = new Date().getTime();
+    //         const distance = countDownDate - now;
+    //         const days = Math.floor(distance(24 * 60 * 60 * 1000)
+    //         );
+    //         const hours = Math.floor((distance % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60));
+    //         const minutes = Math.floor((distance % (60 * 60 * 1000)
+    //         ) / (1000 * 60));
+    //         const seconds = Math.floor((distance % (60 * 1000)) /
+    //             1000);
+    //         if (distance < 0) {
+    //             // Stop Timer
+    //             clearInterval(interval.current);
+    //         } else {
+    //             // Update Timer
+    //             setTimerDays(days);
+    //             setTimerHours(hours);
+    //             setTimerMinutes(minutes);
+    //             setTimerSeconds(seconds);
+    //         }
+    //     });
+    // };
 
     useEffect(() => {
+        // startTimer()
         getAllOderDetail()
         if (data.status === 'NEW') {
             // setValueStatus('Thanh toán')
@@ -263,6 +300,7 @@ function OrderDetail() {
                                                     </div>
                                                     <div className="d-flex justify-content-between">
                                                         <p className="mb-2">Shipping</p>
+                                                        {/* <p className="mb-2">{timerMinutes}: {timerSeconds}</p> */}
                                                         <p className="mb-2">0</p>
                                                     </div>
                                                     <div className="d-flex justify-content-between mb-4">
@@ -297,7 +335,7 @@ function OrderDetail() {
                                                         {data.status === 'CANCELLED' &&
                                                             < div style={{ color: 'yellow' }} className="d-flex justify-content-between">
                                                                 <span>
-                                                                    Bạn đã hủy đơn hàng này !
+                                                                    Đơn hàng này đã bị hủy !
                                                                 </span>
                                                             </div>
                                                         }
