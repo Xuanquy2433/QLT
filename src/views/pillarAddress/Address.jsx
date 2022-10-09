@@ -55,7 +55,7 @@ const columns = [
     },
 ];
 
-export default function Address({ rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
+export default function Address({ search, rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
 
     const style = {
         position: 'absolute',
@@ -91,8 +91,9 @@ export default function Address({ rowsPerPage, data, onDelete, onEdit, open, set
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
+                                onChange={(e) => search(e.target.value)}
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search Name Customer"
+                                placeholder="Tìm kiếm"
                             />
                         </Paper>
                     </div>

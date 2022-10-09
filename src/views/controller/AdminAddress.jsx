@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { API_EDIT_PILLAR } from 'utils/const'
 import { API_GET_ADMIN_ADDRESS } from 'utils/const'
+import { API_CLICK_SEARCH_ADDRESS } from 'utils/const'
 import { API_ADD_PILLAR } from 'utils/const'
 import { API_DELETE_PILLAR } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
@@ -60,7 +61,12 @@ export default function AdminPillar() {
     }
     else {
       try {
-        const response = await axios.post(API_ADD_PILLAR, data)
+        const formData = new FormData();
+        formData.append('multipartFile', data.multipartFile);
+        const response = await axios.post(API_ADD_PILLAR + "?city=" + data.city + "&description=" + data.description + "&street=" + data.street, formData,
+          {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          })
         if (response && response.status === 201) {
           toast.success("Thêm thành công", { autoClose: 1500 });
           setOpenEdit(false);
@@ -170,12 +176,23 @@ export default function AdminPillar() {
 
     }
   }
-  console.log('dataaaaaaaaaaaaa ',data);
+
+  const search = async (keyword) => {
+    const response = await axios.get(API_CLICK_SEARCH_ADDRESS + keyword)
+    if (response.status === 200) {
+      setdata(response.data)
+    }
+    if (keyword.length === 0) {
+      fetchAPI()
+    }
+  }
+
+  console.log('dataaaaaaaaaaaaa ', data);
   return (
     <div>
       <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />
       {selected && <EditAddress item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
-      <Address open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
+      <Address search={search} open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
         page={page} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} rowsPerPage={rowsPerPage} />
     </div>
   )

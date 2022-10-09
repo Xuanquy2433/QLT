@@ -22,7 +22,7 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
     const onChangeImage = (event) => {
         const value = event.target.files[0]
         setSelectedImage(event.target.files[0])
-        setDataAddress({ ...dataAddress, multipartFile: (value) })
+        setDataAddress({ ...dataAddress, multipartFile: event.target.files[0] })
     }
 
     const onClickAdd = (event) => {
@@ -50,23 +50,23 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
                         padding: '10px'
                     }}
                 >
+                    <h2 style={{ textAlign: 'center' }}>Thêm địa chỉ</h2>
+
                     <div>
                         {selectedImage && (
-                            <div>
-                                <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
-                                <br />
-                                <button onClick={() => setSelectedImage(null)}>Remove</button>
+                            <div style={{ display: "flex", justifyContent: "center" }}>
+                                <img alt="not fount" width={"130px"} src={URL.createObjectURL(selectedImage)} />
+                                {/* <button onClick={() => setSelectedImage(null)}>Remove</button> */}
                             </div>
                         )}
 
                     </div>
-                    <h2 style={{ textAlign: 'center' }}>ADD ADDRESS</h2>
                     <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
                         <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
 
                         <TextField onChange={onChangeText} defaultValue='' name="street" style={{ margin: '5px' }} fullWidth label='Đường' />
                         <TextField onChange={onChangeText} defaultValue='' name="city" style={{ margin: '5px' }} fullWidth label='Thành phố' />
-                        <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" />
+                        <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image/*" />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
