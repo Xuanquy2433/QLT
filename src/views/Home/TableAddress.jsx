@@ -101,6 +101,7 @@ function TableAddress() {
     }
 
 
+    console.log(data);
     //new
     const onChangeSearchNew = async (e) => {
         if (selected === false) {
@@ -132,7 +133,7 @@ function TableAddress() {
             setData(response.data)
         }
     }
-    console.log('d ' ,data);
+    console.log('d ', data);
     useEffect(() => {
         getAllAddRess()
     }, [])
