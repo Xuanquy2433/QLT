@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { API_CONFIRM_PAYMENT } from 'utils/const';
 import { API_GET_ORDER_DETAIL } from 'utils/const';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 function OrderDetail() {
 
@@ -157,7 +158,12 @@ function OrderDetail() {
             setIsConFirm(true)
         }
     }, [])
-
+    function copy(text) {
+        navigator.clipboard.writeText(text)
+        toast.success(`Copy To Clipboard`, {
+            autoClose: 500
+        })
+    }
 
     return (
         <div style={{ marginTop: '20px', backgroundColor: 'white' }}>
@@ -285,7 +291,10 @@ function OrderDetail() {
                                                                         className="form-control form-control-lg"
                                                                         style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                                                     > {data.orderCode}
+                                                                        <ContentCopyIcon onClick={() => copy(data.orderCode)} sx={{ ml: 1, cursor: 'pointer' }} />
                                                                     </p >
+                                                                    {/* <button onClick={() => copy('someText')}
+                                                                    >copy</button> */}
                                                                     <label className="form-label" htmlFor="typeText">
                                                                         Mã đặt hàng
                                                                     </label>
