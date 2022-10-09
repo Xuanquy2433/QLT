@@ -61,7 +61,7 @@ function Cart() {
                         autoClose: 3000
                     })
                     setTimeout(() => {
-                        history.push('/auth/order/?id=' + response.data.message.replace(/\D/g, ""))
+                        history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))
                         localStorage.setItem('IdOrder', response.data.message.replace(/\D/g, ""))
                     }, 2000);
                     setBtnDisabled(true);

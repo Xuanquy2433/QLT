@@ -11,8 +11,10 @@ function OrderDetail() {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const id = params.get('id');
-    
+
     console.log("id order ", localStorage.getItem('IdOrder'));
+
+    let idOrder = localStorage.getItem('IdOrder');
 
     const [isConfirm, setIsConFirm] = useState(false)
     const [valueStatus, setValueStatus] = useState('')
@@ -23,7 +25,7 @@ function OrderDetail() {
     let token = localStorage.getItem('token')
     const getAllOderDetail = async (e) => {
         if (token) {
-            const response = await axios.get(API_GET_ORDER_DETAIL + localStorage.getItem('IdOrder'), {
+            const response = await axios.get(API_GET_ORDER_DETAIL + idOrder, {
                 headers: {
                     'authorization': 'Bearer ' + token,
                     'Accept': 'application/json',
@@ -44,12 +46,12 @@ function OrderDetail() {
 
 
     const checkout = async () => {
-        console.log('checkout ');
+        console.log('checkout ', id)
         try {
             if (token) {
                 if (data.status === 'NEW') {
                     setIsConFirm(true)
-                    const response = await axios.put(API_CONFIRM_PAYMENT + id, {}, {
+                    const response = await axios.put(API_CONFIRM_PAYMENT + idOrder, {}, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
                             'Accept': 'application/json',
