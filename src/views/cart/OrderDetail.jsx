@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { API_CONFIRM_PAYMENT } from 'utils/const';
 import { API_GET_ORDER_DETAIL } from 'utils/const';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import Countdown from "react-countdown";
 
 function OrderDetail() {
 
@@ -140,6 +141,21 @@ function OrderDetail() {
     //         }
     //     });
     // };
+
+    const Completionist = () => <div>cc</div>
+    const renderer = ({ hours, minutes, seconds, completed }) => {
+        if (completed) {
+            // Render a complete state
+            return <Completionist />
+        } else {
+            // Render a countdown
+            return (
+                <span>
+                    {hours}:{minutes}:{seconds}
+                </span>
+            );
+        }
+    };
 
     useEffect(() => {
         // startTimer()
@@ -301,7 +317,10 @@ function OrderDetail() {
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                     </form>
+                                                    <Countdown date={Date.now() + 900000} renderer={renderer} />,
+
                                                     <hr className="my-4" />
                                                     <div className="d-flex justify-content-between">
                                                         <p className="mb-2">Subtotal</p>
@@ -316,6 +335,7 @@ function OrderDetail() {
                                                         <p className="mb-2">Total(Incl. taxes)</p>
                                                         <p className="mb-2">{data.total} VNĐ</p>
                                                     </div>
+
                                                     <button
                                                         onClick={checkout}
                                                         disabled={isConfirm}
