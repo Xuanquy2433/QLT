@@ -62,7 +62,6 @@ function Cart() {
                     })
                     setTimeout(() => {
                         history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))
-                        localStorage.setItem('IdOrder', response.data.message.replace(/\D/g, ""))
                     }, 2000);
                     setBtnDisabled(true);
                 };

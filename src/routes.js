@@ -20,6 +20,7 @@ import AdminAvailablePillar from "views/controller/AdminAvailablePillar";
 import AdminHiringPillar from "views/controller/AdminHiringPillar";
 import Category from "views/category/Category";
 import AdminCategory from "views/controller/AdminCategory";
+import Activity from "views/Profile/Activity";
 
 var routes = [
   {
@@ -135,10 +136,17 @@ var routes = [
     layout: "/auth"
   },
   {
-    path: "/order/:id",
+    path: "/order/",
     name: "OrderDetail",
     icon: "ni ni-circle-08 text-pink",
     component: OrderDetail,
+    layout: "/auth"
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    icon: "ni ni-circle-08 text-pink",
+    component: Activity,
     layout: "/auth"
   },
   // {

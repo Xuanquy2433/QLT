@@ -104,7 +104,7 @@ const AdminNavbar = () => {
               <NavItem>
                 {decoded && token ? <NavLink
                   className="nav-link-icon"
-                  to="/admin/index"
+                  to={'auth/profile'}
                   tag={Link}
                 >
                   <i className="ni ni-single-02" />

@@ -7,34 +7,39 @@ import { API_GET_ORDER_DETAIL } from 'utils/const';
 
 function OrderDetail() {
 
+    let token = localStorage.getItem('token')
 
-    const search = window.location.search;
-    const params = new URLSearchParams(search);
-    const id = params.get('id');
+    // const search = window.location.search;
+    // const params = new URLSearchParams(search);
+    // const id = params
 
-    console.log("id order ", localStorage.getItem('IdOrder'));
+    let idOrderInURL = window.location.pathname.replace(/\D/g, "");
 
-    let idOrder = localStorage.getItem('IdOrder');
-
+    console.log("idOrderInURL ", idOrderInURL);
     const [isConfirm, setIsConFirm] = useState(false)
     const [valueStatus, setValueStatus] = useState('')
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
     const history = useHistory()
 
-    let token = localStorage.getItem('token')
     const getAllOderDetail = async (e) => {
         if (token) {
-            const response = await axios.get(API_GET_ORDER_DETAIL + idOrder, {
+            const response = await axios.get(API_GET_ORDER_DETAIL + idOrderInURL, {
                 headers: {
                     'authorization': 'Bearer ' + token,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             })
-            if (response) {
+            if (response.status === 200) {
                 setDataDetail(response.data.orderDetail)
                 setData(response.data)
+            }
+            else {
+                toast.success('Không có đơn hàng này !', {
+                    autoClose: 3000
+                })
+                history.push('/auth/cart')
             }
         } else {
             toast.success('Please login', {
@@ -46,12 +51,12 @@ function OrderDetail() {
 
 
     const checkout = async () => {
-        console.log('checkout ', id)
+        console.log('checkout ');
         try {
             if (token) {
                 if (data.status === 'NEW') {
                     setIsConFirm(true)
-                    const response = await axios.put(API_CONFIRM_PAYMENT + idOrder, {}, {
+                    const response = await axios.put(API_CONFIRM_PAYMENT + idOrderInURL, {}, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
                             'Accept': 'application/json',
