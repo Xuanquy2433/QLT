@@ -100,17 +100,24 @@ const AdminNavbar = () => {
                 </NavLink>}
               </NavItem>
 
+
+              <NavItem>
+                {token && decoded ? <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
+                  <i className="ni ni-key-25" />
+                  <span className="nav-link-inner--text">Profile</span>
+                </NavLink> : ''}
+              </NavItem>
+
               <NavItem >
                 {decoded && token ? <NavLink
                   className="nav-link-icon"
-                  to={'auth/homePage'}
                   tag={Link}
                 >
                   <i className="ni ni-single-02" />
                   <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
                 </NavLink> : ''}
               </NavItem>
-              
+
               <NavItem>
                 {decoded && token ? <NavLink
                   className="nav-link-icon"

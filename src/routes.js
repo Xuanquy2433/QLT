@@ -144,7 +144,7 @@ var routes = [
   },
   {
     path: "/profile",
-    name: "profile",
+    name: "Profile",
     icon: "ni ni-circle-08 text-pink",
     component: Activity,
     layout: "/auth"
