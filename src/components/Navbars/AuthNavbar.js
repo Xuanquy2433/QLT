@@ -20,7 +20,6 @@ const AdminNavbar = () => {
   let decoded;
   const history = useHistory();
 
-  console.log("ccccccccccccccccc ", decoded);
   let token = localStorage.getItem("token");
   if (token !== null) {
     decoded = jwt_decode(token);

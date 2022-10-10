@@ -13,7 +13,21 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import jwt_decode from "jwt-decode";
 import './css.css'
+import axios from 'axios';
+import { API_GET_ALL_ORDER } from 'utils/const';
+import Moment from 'react-moment';
 
+
+const columns = [
+    { id: 'id', label: 'Id', minWidth: 170, align: 'left' },
+    {
+        id: 'date',
+        label: 'Ngày đặt hàng',
+        minWidth: 170,
+        align: 'center',
+    },
+    { id: 'code', label: 'Số lượng sản phẩm', minWidth: 100, align: 'center', },
+];
 function Activity() {
 
     const [value, setValue] = React.useState('1');
@@ -26,6 +40,27 @@ function Activity() {
     if (token !== null) {
         decoded = jwt_decode(token);
     }
+
+    // get all orrder
+    const [data, setData] = useState([])
+    const getALLOrder = async (e) => {
+        const response = await axios.get(API_GET_ALL_ORDER, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response) {
+            setData(response.data)
+        }
+    }
+    console.log(data);
+
+    useEffect(() => {
+        getALLOrder()
+    }, [])
+
 
     return (
         <div className='activity'>
@@ -48,25 +83,36 @@ function Activity() {
                         </TabList>
                     </Box>
                     <TabPanel value="1">
-                        <TableContainer component={Paper}>
-                            <Table className='activity-table' sx={{ minWidth: 650 }} aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell style={{ textAlign: "center" }} scope="col">ID</TableCell>
-                                        <TableCell style={{ textAlign: "center" }} scope="col">User ID</TableCell>
-                                        <TableCell style={{ textAlign: "center" }} scope="col">Message</TableCell>
-                                        <TableCell style={{ textAlign: "center" }} scope="col">Money</TableCell>
-                                        <TableCell style={{ textAlign: "center" }} scope="col" >
-                                            Type
-                                        </TableCell>
-                                        <TableCell style={{ textAlign: "center" }} scope="col" >
-                                            Create date
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                            <TableContainer sx={{ maxHeight: 700 }}>
+                                <Table stickyHeader aria-label="sticky table">
+                                    <TableHead>
+                                        <TableRow>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                    key={column.id}
+                                                    align={column.align}
+                                                    style={{ minWidth: column.minWidth }}
+                                                >
+                                                    {column.label}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {data.map((item, index) => (
+                                            <TableRow key={index} >
+                                                <TableCell align="left">{item.id}</TableCell>
+                                                <TableCell align="center"><Moment format='MMMM Do YYYY, h:mm:ss a'>{item.orderTime}</Moment></TableCell>
+                                                <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
 
-                            </Table>
-                        </TableContainer>
+                        </Paper>
                     </TabPanel>
                     <TabPanel value="2">
                         <TableContainer component={Paper}>
