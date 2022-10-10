@@ -26,28 +26,33 @@ function OrderDetail() {
     console.log("dataDetail: " + dataDetail);
     const getAllOderDetail = async (e) => {
         if (token) {
-            const response = await axios.get(API_GET_ORDER_DETAIL + idOrderInURL, {
-                headers: {
-                    'authorization': 'Bearer ' + token,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+            try {
+                const response = await axios.get(API_GET_ORDER_DETAIL + idOrderInURL, {
+                    headers: {
+                        'authorization': 'Bearer ' + token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.status === 200) {
+                    setDataDetail(response.data.orderDetail)
+                    setData(response.data)
                 }
-            })
-            if (response.status === 200) {
-                setDataDetail(response.data.orderDetail)
-                setData(response.data)
-            } else if (response === null) {
-                toast.success('Không có đơn hàng này !', {
-                    autoClose: 3000
-                })
-                history.push('/auth/homePage')
+                else {
+                    toast.success('Không có đơn hàng này !', {
+                        autoClose: 3000
+                    })
+                    history.push('/auth/cart')
+                }
+            } catch (error) {
+                if (error && error.response.status === 400) {
+                    toast.warning('Không có đơn hàng này !', {
+                        autoClose: 3000
+                    })
+                    history.push('/auth/cart')
+                }
             }
-            else {
-                toast.success('Không có đơn hàng này !', {
-                    autoClose: 3000
-                })
-                history.push('/auth/cart')
-            }
+
         } else {
             toast.success('Please login', {
                 autoClose: 3000
