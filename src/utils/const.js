@@ -66,7 +66,7 @@ export const API_DELETE_CATEGORY = `${API}/admin/category/delete?id=`;
 
 export const API_CLICK_SEARCH_ADDRESS = `${API}/search?keyword=`;
 
-export const API_GET_ALL_ORDER= `${API}/user/order`;
+export const API_GET_ALL_ORDER= `${API}/user/orders`;
 
 
 
