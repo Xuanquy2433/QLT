@@ -1,10 +1,12 @@
 .activity{
     background-color: #f2f6fc;
     color: white;
-    margin-top: 65px;
+    margin-top: 5px;
     height: 63em;
+    border-radius: 10px;
     text-align: center;
-    
+    width: 100%;
+    z-index: 10;
 }
 
 .activity .activity-title{

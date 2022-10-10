@@ -72,8 +72,6 @@ function AddressDetail() {
         }
     }
 
-    console.log("data address detail ", dataAddressProduct);
-
     return (
         // style={{width: '80%',marginTop:'76px' }}
         <div className='de'  >
