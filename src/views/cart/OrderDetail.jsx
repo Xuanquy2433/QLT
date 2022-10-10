@@ -114,6 +114,7 @@ function OrderDetail() {
             }
         }
     }
+
     // const [timerDays, setTimerDays] = useState();
     // const [timerHours, setTimerHours] = useState();
     // const [timerMinutes, setTimerMinutes] = useState(10);
@@ -374,13 +375,13 @@ function OrderDetail() {
                                                                 </span>
                                                             </div>
                                                         }
-                                                        {data.status === 'PAID' &&
+                                                        {data.status === 'PAID' || data.status === 'DONE' ?
                                                             <div className="d-flex justify-content-between">
                                                                 <span>
                                                                     Đã xác nhận !
                                                                 </span>
                                                             </div>
-                                                        }
+                                                            : null}
 
                                                     </button>
                                                 </div>

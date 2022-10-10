@@ -27,6 +27,7 @@ const columns = [
         align: 'center',
     },
     { id: 'code', label: 'Số lượng sản phẩm', minWidth: 100, align: 'center', },
+    { id: 'code', label: 'Trạng thái', minWidth: 100, align: 'right', },
 ];
 function Activity() {
 
@@ -69,7 +70,7 @@ function Activity() {
                     Xin chào  {decoded.firstName + " " + decoded.lastName}
                 </div>
                 <div className="activity-decription">
-                Đây là trang hoạt động của bạn. Bạn có thể xem lịch sử đặt hàng và đơn hàng đã đặt của bạn.
+                    Đây là trang hoạt động của bạn. Bạn có thể xem lịch sử đặt hàng và đơn hàng đã đặt của bạn.
                 </div>
             </div>
 
@@ -106,6 +107,11 @@ function Activity() {
                                                 <TableCell align="left">{item.id}</TableCell>
                                                 <TableCell align="center"><Moment format='MMMM Do YYYY, h:mm:ss a'>{item.orderTime}</Moment></TableCell>
                                                 <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
+                                                {item.status === 'USER_CONFIRMED' ? <TableCell align="right">Chờ</TableCell> : null}
+                                                {item.status === 'NEW' ? <TableCell align="right">Chưa đặt</TableCell> : null}
+                                                {item.status === 'DONE' ? <TableCell align="right">Xong</TableCell> : null}
+                                                {item.status === 'CANCELLED' ? <TableCell align="right">Đã hủy</TableCell> : null}
+
                                             </TableRow>
                                         ))}
                                     </TableBody>
