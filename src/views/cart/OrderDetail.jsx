@@ -294,7 +294,7 @@ function OrderDetail() {
                                                                 <div className="form-outline form-white">
                                                                     <p
                                                                         className="form-control form-control-lg"
-                                                                        style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
+                                                                        style={{ color: 'black', width: '100%', backgroundColor: 'white', fontWeight: 600 }}
                                                                     > MB BANK</p >
                                                                     <label className="form-label" htmlFor="typeExp">
                                                                         Bank
@@ -302,10 +302,10 @@ function OrderDetail() {
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-6-9">
-                                                                <div className="form-outline form-white">
+                                                                <div className="form-outline form-white" style={{ paddingRight: '0', paddingLeft: '0' }}>
                                                                     <p
                                                                         className="form-control form-control-lg"
-                                                                        style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
+                                                                        style={{ color: 'black', backgroundColor: 'white', fontWeight: 600, paddingRight: '0' }}
                                                                     > {data.orderCode}
                                                                         <ContentCopyIcon onClick={() => copy(data.orderCode)} sx={{ ml: 1, cursor: 'pointer' }} />
                                                                     </p >
@@ -319,7 +319,9 @@ function OrderDetail() {
                                                         </div>
 
                                                     </form>
-                                                    <Countdown date={Date.now() + 900000} renderer={renderer} />,
+                                                    {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
+                                                        Tự động hủy sau: <Countdown date={Date.now() + 900000} renderer={renderer} />
+                                                    </div> : ''}
 
                                                     <hr className="my-4" />
                                                     <div className="d-flex justify-content-between">
