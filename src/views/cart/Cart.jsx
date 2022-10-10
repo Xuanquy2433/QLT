@@ -106,9 +106,17 @@ function Cart() {
     }, [])
 
     const onClickRemoveItemCart = async (id) => {
-        const response = axios.put(API_CART_REMOVE + id)
-        if (response && response.status === 200) {
+        console.log('id cart', id);
+        const response =await axios.put(API_CART_REMOVE + id, {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response.status === 200) {
             toast.success("Xoá thành công", { autoClose: "1500" })
+            getAllCart()
         }
     }
 
@@ -203,9 +211,9 @@ function Cart() {
                                                             <h6 className="text-black mb-0">{formatMoney(item.product.price)}</h6>
                                                         </div>
                                                         <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                            <a href="#!" className="text-muted">
-                                                                <i onClick={() => onClickRemoveItemCart(item.id)} className="fas fa-times" />
-                                                            </a>
+                                                            <div style={{ cursor: 'pointer' }} className="text-muted">
+                                                                <i onClick={() => onClickRemoveItemCart(item.product.id)} className="fas fa-times" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 )) :
