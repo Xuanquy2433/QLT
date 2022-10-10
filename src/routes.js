@@ -21,6 +21,7 @@ import AdminHiringPillar from "views/controller/AdminHiringPillar";
 import Category from "views/category/Category";
 import AdminCategory from "views/controller/AdminCategory";
 import Activity from "views/Profile/Activity";
+import PageNotFound from "layouts/PageNotFound";
 
 var routes = [
   {
@@ -136,7 +137,7 @@ var routes = [
     layout: "/auth"
   },
   {
-    path: "/order/",
+    path: "/order/:id",
     name: "OrderDetail",
     icon: "ni ni-circle-08 text-pink",
     component: OrderDetail,
@@ -147,6 +148,13 @@ var routes = [
     name: "Profile",
     icon: "ni ni-circle-08 text-pink",
     component: Activity,
+    layout: "/auth"
+  },
+  {
+    path: "/pageNotFound",
+    name: "PageNotFound",
+    icon: "ni ni-circle-08 text-pink",
+    component: PageNotFound,
     layout: "/auth"
   },
   // {

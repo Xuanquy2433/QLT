@@ -81,7 +81,7 @@ const Auth = (props) => {
           <Row className="justify-content-center">
             <Switch>
               {getRoutes(routes)}
-              <Redirect from="*" to="/auth/login" />
+              <Redirect from="*" to="/auth/pageNotFound" />
             </Switch>
           </Row>
         </Container>
