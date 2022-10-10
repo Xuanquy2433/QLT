@@ -46,13 +46,12 @@ function OrderDetail() {
                 }
             } catch (error) {
                 if (error && error.response.status === 400) {
-                    toast.warning('Không có đơn hàng này !', {
+                    toast.warning('Không có mã đơn hàng này !', {
                         autoClose: 3000
                     })
                     history.push('/auth/cart')
                 }
             }
-
         } else {
             toast.success('Please login', {
                 autoClose: 3000

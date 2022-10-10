@@ -237,7 +237,7 @@ function Cart() {
                                         </div>
                                         <div className="col-lg-4 bg-grey">
                                             <div className="p-5">
-                                                <NavLink to={'/auth/order/' + localStorage.getItem('IdOrder')} className="fw-bold mb-5 mt-2 pt-1">Các trụ đã đặt</NavLink>
+                                                <p  className="fw-bold mb-5 mt-2 pt-1">Thông tin</p>
                                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                     <h5 className="">Name</h5>
                                                     <h5>Price</h5>
