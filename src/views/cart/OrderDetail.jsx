@@ -6,6 +6,7 @@ import { API_CONFIRM_PAYMENT } from 'utils/const';
 import { API_GET_ORDER_DETAIL } from 'utils/const';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Countdown from "react-countdown";
+import { BsFiles } from 'react-icons/bs';
 
 function OrderDetail() {
 
@@ -312,7 +313,7 @@ function OrderDetail() {
                                                                         className="form-control form-control-lg"
                                                                         style={{ color: 'black', backgroundColor: 'white', fontWeight: 600, paddingRight: '0' }}
                                                                     > {data.orderCode}
-                                                                        <ContentCopyIcon onClick={() => copy(data.orderCode)} sx={{ ml: 1, cursor: 'pointer' }} />
+                                                                        <BsFiles onClick={() => copy(data.orderCode)} style={{ marginLeft: "7px", cursor: 'pointer', fontSize: "18px", marginRight: "5px" }} />
                                                                     </p >
                                                                     {/* <button onClick={() => copy('someText')}
                                                                     >copy</button> */}

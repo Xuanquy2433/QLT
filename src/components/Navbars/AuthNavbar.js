@@ -1,9 +1,10 @@
-
+import { CgMenuBoxed } from 'react-icons/cg';
 import { Link, useHistory } from "react-router-dom";
 // reactstrap components
 import {
   UncontrolledCollapse,
   NavbarBrand,
+  DropdownItem,
   Navbar,
   NavItem,
   NavLink,
@@ -15,6 +16,8 @@ import {
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 import LogoutIcon from '@mui/icons-material/Logout';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'; import './style.css'
 
 const AdminNavbar = () => {
   let decoded;
@@ -24,6 +27,7 @@ const AdminNavbar = () => {
   if (token !== null) {
     decoded = jwt_decode(token);
   }
+  console.log(decoded);
   const logout = () => {
     // alert("ok")
     localStorage.removeItem("token")
@@ -33,6 +37,12 @@ const AdminNavbar = () => {
     toast.success('Logout success')
     // window.location.reload(false)
 
+  }
+
+  const checkRole = () => {
+    if (token && decoded.roles === "[ROLE_ADMIN]") {
+      history.push('/admin/index')
+    }
   }
   return (
     <>
@@ -77,58 +87,145 @@ const AdminNavbar = () => {
                   <span className="nav-link-inner--text">Trang chủ</span>
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
-                  <i className="ni ni-cart" />
-                  <span className="nav-link-inner--text">Giỏ hàng</span>
-                </NavLink>
-              </NavItem>
+              {token && decoded.roles === "[ROLE_USER]" ?
+                <NavItem>
+                  <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
+                    <i className="ni ni-cart" />
+                    <span className="nav-link-inner--text">Giỏ hàng</span>
+                  </NavLink>
+                </NavItem> :
+                null
+              }
 
 
-              {token && decoded ? '' : <NavItem> <NavLink
-                className="nav-link-icon"
-                to="/auth/register"
-                tag={Link}
-              >
-                <i className="ni ni-circle-08" />
-                <span className="nav-link-inner--text">Đăng ký</span>
-              </NavLink></NavItem>}
+
+              {token && decoded ? '' :
+                <NavItem>
+                  <NavLink
+                    className="nav-link-icon"
+                    to="/auth/register"
+                    tag={Link}
+                  >
+                    <i className="ni ni-circle-08" />
+                    <span className="nav-link-inner--text">Đăng ký</span>
+                  </NavLink>
+                </NavItem>}
 
 
+
+              {/* 
               {token && decoded ? null :
                 <NavItem>
                   <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
                     <i className="ni ni-key-25" />
                     <span className="nav-link-inner--text">Đăng nhập</span>
                   </NavLink>
-                </NavItem>}
+                </NavItem>} */}
 
-              {token && decoded ? <NavItem> <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
-                <i className="ni ni-key-25" />
-                <span className="nav-link-inner--text">Hồ sơ</span>
-              </NavLink>    </NavItem> : ''}
+              {/* {token && decoded ?
+                <NavItem>
+                  <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
+                    <i className="ni ni-key-25" />
+                    <span className="nav-link-inner--text">Hồ sơ</span>
+                  </NavLink>
+                </NavItem> : ''} */}
 
 
 
-              {decoded && token ? <NavItem ><NavLink
+              {/* {decoded && token ? <NavItem ><NavLink
                 className="nav-link-icon"
                 tag={Link}
               >
                 <i className="ni ni-single-02" />
                 <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
-              </NavLink> </NavItem> : ''}
+              </NavLink> </NavItem> : ''} */}
 
 
 
-              {decoded && token ? <NavItem> <NavLink
-                className="nav-link-icon"
-                to="/admin/index"
-                tag={Link}
-                onClick={logout}
-              >
-                <LogoutIcon />
-                <span className="nav-link-inner--text">Đăng xuất</span>
-              </NavLink>  </NavItem> : ''}
+              {/* {decoded && token ?
+                <NavItem>
+                  <NavLink
+                    className="nav-link-icon"
+                    to="/admin/index"
+                    tag={Link}
+                    onClick={logout}
+                  >
+                    <LogoutIcon />
+                    <span className="nav-link-inner--text">Đăng xuất</span>
+                  </NavLink>
+                </NavItem> : ''
+              } */}
+
+              {token && decoded ?
+
+                <div className="menu">
+                  <ul className="menu-item">
+                    <li className="menu-item-title">
+                      <NavLink onClick={checkRole} className="menu-hover nav-link-icon">
+                        <i className="ni ni-single-02" />
+                        <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
+                      </NavLink>
+                      <ul className="menu-level-2">
+
+                        {token && decoded.roles === "[ROLE_USER]" ?
+                          <li className="item-menu-level-2">
+                            <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
+                              {/* <CgMenuBoxed style={{ fontSize: "18.5px" }} /> */}
+                              <i className="ni ni-calendar-grid-58" />
+                              <span className="nav-link-inner--text">Đơn hàng</span>
+                            </NavLink>
+                            <DropdownItem divider />
+                          </li>
+                          : ''}
+                        <li className="item-menu-level-2">
+                          <NavLink className="nav-link-icon" to="/admin/index" tag={Link} onClick={logout}
+                          >
+                            <i className="ni ni-user-run" />
+                            <span className="nav-link-inner--text">Đăng xuất</span>
+                          </NavLink>
+                        </li>
+                      </ul>
+
+                    </li>
+                  </ul>
+                </div>
+                :
+                <NavItem>
+                  <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
+                    <i className="ni ni-key-25" />
+                    <span className="nav-link-inner--text">Đăng nhập</span>
+                  </NavLink>
+                </NavItem>
+              }
+
+              {/* <NavItem>
+                <div className="menu">
+                  <ul className="menu-item">
+                    <li className="menu-item-title">
+                      <NavLink className="menu-hover nav-link-icon">
+                        <i className="ni ni-single-02" />
+                        <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
+                      </NavLink>
+                      <ul className="menu-level-2">
+                        <li className="item-menu-level-2">
+                          <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
+                            <i className="ni ni-key-25" />
+                            <span className="nav-link-inner--text">Hồ sơ</span>
+                          </NavLink>
+                        </li>
+                        <li className="item-menu-level-2">
+                          <NavLink className="nav-link-icon" to="/admin/index" tag={Link} onClick={logout}
+                          >
+                            <ExitToAppIcon />
+                            <span className="nav-link-inner--text">Đăng xuất</span>
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </NavItem> */}
+
 
             </Nav>
           </UncontrolledCollapse>
