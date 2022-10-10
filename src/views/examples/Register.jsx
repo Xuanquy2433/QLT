@@ -79,7 +79,7 @@ const Register = () => {
 
   return (
     <>
-      <Col style={{paddingLeft: '55px',paddingRight: '55px'}} lg="6" md="8">
+      <Col style={{paddingLeft: '80px',paddingRight: '80px'}} lg="6" md="8">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-4">
