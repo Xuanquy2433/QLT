@@ -69,7 +69,7 @@ function Activity() {
                     Xin chào  {decoded.firstName + " " + decoded.lastName}
                 </div>
                 <div className="activity-decription">
-                    This is admin page. You can see the progress you've made with your work and manage your projects or assigned tasks
+                Đây là trang hoạt động của bạn. Bạn có thể xem lịch sử đặt hàng và đơn hàng đã đặt của bạn.
                 </div>
             </div>
 
