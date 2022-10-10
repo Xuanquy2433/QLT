@@ -10,7 +10,7 @@
      clear: both;
   }
   
-  body {
+  .bodyAbout  {
       margin: 0;
       font-style: sans-serif;
       font-size: 14px;
@@ -18,7 +18,7 @@
       position: relative;
   }
   
-  .container {
+  .bodyAbout .container {
       width: 80%;
       border: 1px solid rgba(0, 0, 0, 0);
       margin: 0 auto;
@@ -30,7 +30,7 @@
       z-index: 3;
   }
   
-  h3 {
+  .bodyAbout h3 {
       color: white;
       font-family: Anonymous Pro;
       font-weight: 400;
@@ -39,7 +39,7 @@
       text-shadow: 0 0 5px #000;
   }
   
-  p {
+  .bodyAbout p {
       color: white;
       font-family: Source Sans Pro;
       font-weight: 300;

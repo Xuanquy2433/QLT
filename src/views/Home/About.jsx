@@ -17,6 +17,7 @@ function About() {
     }));
 
     return (
+        <div className="bodyAbout">
         <div className="timeline">
             <h1 className="timeline-title">
                 About Us
@@ -59,7 +60,7 @@ function About() {
             </div>
         </div>
 
-
+        </div>
 
 
     )
