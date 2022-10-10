@@ -14,6 +14,7 @@ import './css.css'
 import TableAddress from './TableAddress';
 import TableProduct from './TableProduct';
 import BannerSlide from './BannerSlide';
+import About from './About';
 
 function HomePage() {
 
@@ -21,10 +22,14 @@ function HomePage() {
         <div  >
             <BannerSlide />
             <hr />
+            <div>
+                <About/>
+            </div>
            <div>
            <TableAddress />
            </div>
             <hr />
+            
             {/* <TableProduct /> */}
 
         </div>
