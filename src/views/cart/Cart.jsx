@@ -48,7 +48,6 @@ function Cart() {
         // setBtnDisabled(true)
         try {
             if (token) {
-
                 const response = await axios.post(API_PLACE_ORDER, {}, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -57,6 +56,7 @@ function Cart() {
                     }
                 });
                 if (response && response.status === 200) {
+                    console.log("iddddd ",response.data.message);
                     toast.success('Success', {
                         autoClose: 3000
                     })

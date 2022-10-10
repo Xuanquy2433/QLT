@@ -8,7 +8,7 @@ export const API_GET_PILLAR = `${API}/admin/address/`;
 
 export const API_GET_ADMIN_ADDRESS = `${API}/admin/address/page/`;
 
-export const API_GET_ADDRESS =`${API}/address/page/`
+export const API_GET_ADDRESS = `${API}/address/page/`
 
 export const API_ADD_PILLAR = `${API}/admin/address/add`;
 
@@ -65,6 +65,9 @@ export const API_EDIT_CATEGORY = `${API}/admin/category/edit`;
 export const API_DELETE_CATEGORY = `${API}/admin/category/delete?id=`;
 
 export const API_CLICK_SEARCH_ADDRESS = `${API}/search?keyword=`;
+
+export const API_GET_ALL_ORDER= `${API}/user/order`;
+
 
 
 

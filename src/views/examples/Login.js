@@ -109,7 +109,7 @@ const Login = () => {
 
   return (
     <>
-      <Col lg="5" md="7">
+      <Col style={{paddingLeft: '60px',paddingRight: '60px'}} lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-3">
@@ -215,7 +215,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4"  color="primary" type="submit" onClick={(e) => onLogin(e)}>
+                <Button className="my-4" color="primary" type="submit" onClick={(e) => onLogin(e)}>
                   Sign in
                 </Button>
               </div>

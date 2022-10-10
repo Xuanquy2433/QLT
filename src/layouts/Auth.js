@@ -1,17 +1,23 @@
 
 import React from "react";
-import { useLocation, Route, Switch, Redirect } from "react-router-dom";
+import { useLocation, Route, Switch, Redirect, useHistory } from "react-router-dom";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
-
+import './css.css'
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
-
+import jwt_decode from "jwt-decode";
 import routes from "routes.js";
 
 const Auth = (props) => {
- 
+
+  const history = useHistory();
+  let decoded;
+  let token = localStorage.getItem("token");
+  if (token !== null) {
+    decoded = jwt_decode(token);
+  }
   const mainContent = React.useRef(null);
   const location = useLocation();
 
@@ -29,6 +35,7 @@ const Auth = (props) => {
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
+      console.log(window.location.pathname);
       if (prop.layout === "/auth") {
         return (
           <Route
@@ -37,7 +44,11 @@ const Auth = (props) => {
             key={key}
           />
         );
-      } else {
+      } else if (decoded === undefined && !decoded && history.location.pathname === '/auth/profile') {
+        history.push('/auth/homePage')
+        history.block(true)
+      }
+      else {
         return null;
       }
     });
