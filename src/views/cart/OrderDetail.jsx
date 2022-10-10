@@ -198,8 +198,8 @@ function OrderDetail() {
                                         <div className="col-lg-7">
                                             <h5 className="mb-3">
                                                 <NavLink to={'/auth/cart'} className="text-body">
-                                                    <i className="fas fa-long-arrow-alt-left me-2" />
-                                                    Continue shopping
+                                                    <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
+                                                    Tiếp tục thuê trụ
                                                 </NavLink>
                                             </h5>
                                             <hr />
@@ -262,16 +262,16 @@ function OrderDetail() {
                                                         />
                                                     </div>
                                                     <p className="small mb-2">Vui lòng chuyển khoản vào STK bên dưới</p>
-                                                    <a href="#!" type="submit" className="text-white">
+                                                    <a href="#!" type="submit" className="text-white mr-2">
                                                         <i className="fab fa-cc-mastercard fa-2x me-2" />
                                                     </a>
-                                                    <a href="#!" type="submit" className="text-white">
+                                                    <a href="#!" type="submit" className="text-white mr-2">
                                                         <i className="fab fa-cc-visa fa-2x me-2" />
                                                     </a>
-                                                    <a href="#!" type="submit" className="text-white">
+                                                    <a href="#!" type="submit" className="text-white  mr-2">
                                                         <i className="fab fa-cc-amex fa-2x me-2" />
                                                     </a>
-                                                    <a href="#!" type="submit" className="text-white">
+                                                    <a href="#!" type="submit" className="text-white ">
                                                         <i className="fab fa-cc-paypal fa-2x" />
                                                     </a>
                                                     <form className="mt-4">
@@ -281,7 +281,7 @@ function OrderDetail() {
                                                                 style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                                             > NGUYEN VAN A</p >
                                                             <label className="form-label" htmlFor="typeName">
-                                                                Cardholder's Name
+                                                                Tên chủ tài khoản
                                                             </label>
                                                         </div>
                                                         <div className="form-outline form-white mb-4">
@@ -290,7 +290,7 @@ function OrderDetail() {
                                                                 style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                                             > 123 5678 89099 899</p >
                                                             <label className="form-label" htmlFor="typeText">
-                                                                Card Number
+                                                                Số tài khoản
                                                             </label>
                                                         </div>
                                                         <div className="row mb-4">
@@ -301,7 +301,7 @@ function OrderDetail() {
                                                                         style={{ color: 'black', width: '100%', backgroundColor: 'white', fontWeight: 600 }}
                                                                     > MB BANK</p >
                                                                     <label className="form-label" htmlFor="typeExp">
-                                                                        Bank
+                                                                        Ngân hàng
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -329,16 +329,16 @@ function OrderDetail() {
 
                                                     <hr className="my-4" />
                                                     <div className="d-flex justify-content-between">
-                                                        <p className="mb-2">Subtotal</p>
+                                                        <p className="mb-2">Tổng phụ</p>
                                                         <p className="mb-2">{data.total} VNĐ</p>
                                                     </div>
-                                                    <div className="d-flex justify-content-between">
-                                                        <p className="mb-2">Shipping</p>
-                                                        {/* <p className="mb-2">{timerMinutes}: {timerSeconds}</p> */}
+                                                    {/* <div className="d-flex justify-content-between">
+                                                        <p className="mb-2">Phí </p>
+                                                        <p className="mb-2">{timerMinutes}: {timerSeconds}</p>
                                                         <p className="mb-2">0</p>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="d-flex justify-content-between mb-4">
-                                                        <p className="mb-2">Total(Incl. taxes)</p>
+                                                        <p className="mb-2">Tổng cộng</p>
                                                         <p className="mb-2">{data.total} VNĐ</p>
                                                     </div>
 

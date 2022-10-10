@@ -74,13 +74,13 @@ const AdminNavbar = () => {
               <NavItem>
                 <NavLink className="nav-link-icon" to="/" tag={Link}>
                   <i className="ni ni-planet" />
-                  <span className="nav-link-inner--text">Home</span>
+                  <span className="nav-link-inner--text">Trang chủ</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
                   <i className="ni ni-cart" />
-                  <span className="nav-link-inner--text">Cart</span>
+                  <span className="nav-link-inner--text">Giỏ hàng</span>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -90,13 +90,13 @@ const AdminNavbar = () => {
                   tag={Link}
                 >
                   <i className="ni ni-circle-08" />
-                  <span className="nav-link-inner--text">Register</span>
+                  <span className="nav-link-inner--text">Đăng ký</span>
                 </NavLink>}
               </NavItem>
               <NavItem>
                 {token && decoded ? '' : <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
                   <i className="ni ni-key-25" />
-                  <span className="nav-link-inner--text">Login</span>
+                  <span className="nav-link-inner--text">Đăng nhập</span>
                 </NavLink>}
               </NavItem>
 
@@ -104,7 +104,7 @@ const AdminNavbar = () => {
               <NavItem>
                 {token && decoded ? <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
                   <i className="ni ni-key-25" />
-                  <span className="nav-link-inner--text">Profile</span>
+                  <span className="nav-link-inner--text">Hồ sơ</span>
                 </NavLink> : ''}
               </NavItem>
 
@@ -126,7 +126,7 @@ const AdminNavbar = () => {
                   onClick={logout}
                 >
                 <LogoutIcon/>
-                  <span className="nav-link-inner--text">Logout</span>
+                  <span className="nav-link-inner--text">Đăng xuất</span>
                 </NavLink> : ''}
               </NavItem>
             </Nav>

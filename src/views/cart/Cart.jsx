@@ -136,28 +136,26 @@ function Cart() {
                                         <div className="col-lg-8">
                                             <div className="p-5">
                                                 <div className="d-flex justify-content-between align-items-center mb-5">
-                                                    <h1 className="fw-bold mb-0 text-black">Shopping Cart</h1>
-                                                    <h6 className="mb-0 text-muted">{data.length} items</h6>
+                                                    <h1 className="fw-bold mb-0 text-black">Giỏ hàng</h1>
+                                                    <h6 className="mb-0 text-muted">{data.length} mặt hàng</h6>
                                                 </div>
                                                 {data.length ?
                                                     <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                         <div className="col-md-2 col-lg-2 col-xl-2">
-                                                            <img
-
-                                                            />
+                                                          
                                                         </div>
                                                         <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Name pillar</h6>
+                                                            <h6 className="text-muted">Tên sản phẩm</h6>
                                                         </div>
                                                         <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Month</h6>
+                                                            <h6 className="text-muted">Tháng thuê</h6>
                                                         </div>
                                                         {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
                                                         </div> */}
                                                         <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Price</h6>
+                                                            <h6 className="text-muted">Giá tiền</h6>
                                                         </div>
                                                         <div className="col-md-1 col-lg-1 col-xl-1">
                                                             <h6 className="text-muted"></h6>                                                        </div>
@@ -228,8 +226,8 @@ function Cart() {
                                                 <div className="pt-5">
                                                     <h6 className="mb-0">
                                                         <NavLink to={'/auth/homePage'} className="text-body">
-                                                            <i className="fas fa-long-arrow-alt-left me-2" />
-                                                            Back to shop
+                                                            <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
+                                                            Quay  lại trang chủ
                                                         </NavLink>
                                                     </h6>
                                                 </div>
@@ -237,8 +235,8 @@ function Cart() {
                                         </div>
                                         <div className="col-lg-4 bg-grey">
                                             <div className="p-5">
-                                                <p  className="fw-bold mb-5 mt-2 pt-1">Thông tin</p>
-                                                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                                {/* <p  className="fw-bold mb-5 mt-2 pt-1">Thông tin</p> */}
+                                                {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                     <h5 className="">Name</h5>
                                                     <h5>Price</h5>
                                                 </div>
@@ -247,13 +245,13 @@ function Cart() {
                                                     {
                                                         data.map((item) => (
                                                             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                                <h5 className="text-uppercase">{item.product.name.substring(0, 15)}</h5>
+                                                                <h5 className="text-uppercase">{item.product.name}</h5>
                                                                 <h5>{formatMoney(item.product.price)}</h5>
                                                             </div>
                                                         ))
                                                     }
 
-                                                </div>
+                                                </div> */}
                                                 {/* <h5 className="text-uppercase mb-3">Shipping</h5>
                                                 <div className="mb-4 pb-2">
                                                     <select className="select">
@@ -263,7 +261,7 @@ function Cart() {
                                                         <option value={4}>Four</option>
                                                     </select>
                                                 </div> */}
-                                                <h5 className="text-uppercase mb-3">Give code</h5>
+                                                <h5 className="text-uppercase mb-3">Mã giảm giá</h5>
                                                 <div className="mb-5">
                                                     <div className="form-outline">
                                                         <input
@@ -271,8 +269,8 @@ function Cart() {
                                                             id="form3Examplea2"
                                                             className="form-control form-control-lg"
                                                         />
-                                                        <label className="form-label" htmlFor="form3Examplea2">
-                                                            Enter your code
+                                                        <label className="form-label mt-2" htmlFor="form3Examplea2">
+                                                            Nhập mã của bạn
                                                         </label>
                                                     </div>
                                                 </div>
