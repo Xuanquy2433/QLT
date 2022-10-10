@@ -83,52 +83,53 @@ const AdminNavbar = () => {
                   <span className="nav-link-inner--text">Giỏ hàng</span>
                 </NavLink>
               </NavItem>
-              <NavItem>
-                {token && decoded ? '' : <NavLink
-                  className="nav-link-icon"
-                  to="/auth/register"
-                  tag={Link}
-                >
-                  <i className="ni ni-circle-08" />
-                  <span className="nav-link-inner--text">Đăng ký</span>
-                </NavLink>}
-              </NavItem>
-              <NavItem>
-                {token && decoded ? '' : <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
-                  <i className="ni ni-key-25" />
-                  <span className="nav-link-inner--text">Đăng nhập</span>
-                </NavLink>}
-              </NavItem>
 
 
-              <NavItem>
-                {token && decoded ? <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
-                  <i className="ni ni-key-25" />
-                  <span className="nav-link-inner--text">Hồ sơ</span>
-                </NavLink> : ''}
-              </NavItem>
+              {token && decoded ? '' : <NavItem> <NavLink
+                className="nav-link-icon"
+                to="/auth/register"
+                tag={Link}
+              >
+                <i className="ni ni-circle-08" />
+                <span className="nav-link-inner--text">Đăng ký</span>
+              </NavLink></NavItem>}
 
-              <NavItem >
-                {decoded && token ? <NavLink
-                  className="nav-link-icon"
-                  tag={Link}
-                >
-                  <i className="ni ni-single-02" />
-                  <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
-                </NavLink> : ''}
-              </NavItem>
 
-              <NavItem>
-                {decoded && token ? <NavLink
-                  className="nav-link-icon"
-                  to="/admin/index"
-                  tag={Link}
-                  onClick={logout}
-                >
-                <LogoutIcon/>
-                  <span className="nav-link-inner--text">Đăng xuất</span>
-                </NavLink> : ''}
-              </NavItem>
+              {token && decoded ? null :
+                <NavItem>
+                  <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
+                    <i className="ni ni-key-25" />
+                    <span className="nav-link-inner--text">Đăng nhập</span>
+                  </NavLink>
+                </NavItem>}
+
+              {token && decoded ? <NavItem> <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
+                <i className="ni ni-key-25" />
+                <span className="nav-link-inner--text">Hồ sơ</span>
+              </NavLink>    </NavItem> : ''}
+
+
+
+              {decoded && token ? <NavItem ><NavLink
+                className="nav-link-icon"
+                tag={Link}
+              >
+                <i className="ni ni-single-02" />
+                <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
+              </NavLink> </NavItem> : ''}
+
+
+
+              {decoded && token ? <NavItem> <NavLink
+                className="nav-link-icon"
+                to="/admin/index"
+                tag={Link}
+                onClick={logout}
+              >
+                <LogoutIcon />
+                <span className="nav-link-inner--text">Đăng xuất</span>
+              </NavLink>  </NavItem> : ''}
+
             </Nav>
           </UncontrolledCollapse>
         </Container>
