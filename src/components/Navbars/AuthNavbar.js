@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
-
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const AdminNavbar = () => {
   let decoded;
@@ -125,7 +125,7 @@ const AdminNavbar = () => {
                   tag={Link}
                   onClick={logout}
                 >
-                  <i className="ni ni-user-run" />
+                <LogoutIcon/>
                   <span className="nav-link-inner--text">Logout</span>
                 </NavLink> : ''}
               </NavItem>
