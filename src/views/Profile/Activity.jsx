@@ -12,7 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import jwt_decode from "jwt-decode";
-import './css.css'
+import './activity.css'
 import axios from 'axios';
 import { API_GET_ALL_ORDER } from 'utils/const';
 import Moment from 'react-moment';
@@ -84,7 +84,7 @@ function Activity() {
                     </Box>
                     <TabPanel value="1">
                         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                            <TableContainer sx={{ maxHeight: 700 }}>
+                            <TableContainer sx={{ maxHeight: 500 }}>
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow>
