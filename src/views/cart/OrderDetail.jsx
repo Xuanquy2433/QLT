@@ -46,7 +46,7 @@ function OrderDetail() {
                     history.push('/auth/cart')
                 }
             } catch (error) {
-                if (error && error.response.status === 400) {
+                if (error && error.response.status === 400 || error.response.status === 404) {
                     toast.warning('Không có mã đơn hàng này !', {
                         autoClose: 3000
                     })
