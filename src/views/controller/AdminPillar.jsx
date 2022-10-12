@@ -122,7 +122,12 @@ function AdminProduct() {
 
   const onSubmitEdit = async (data) => {
     try {
-      const response = await axios.put(API_PRODUCT_EDIT, data)
+      const formData = new FormData();
+      formData.append('multipartFile', data.multipartFile);
+      const response = await axios.put(API_PRODUCT_EDIT + "?addressId=" + data.addressId + "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status,
+        formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
       if (response.status === 200) {
         toast.success("Sửa thành công", { autoClose: 1500 })
         getAllProduct()

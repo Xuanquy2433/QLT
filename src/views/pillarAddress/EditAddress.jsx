@@ -8,17 +8,26 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
 
   // const handleOpenEdit = () => setOpenEdit(true);
   const handleCloseEdit = () => setOpenEdit(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const [dataAddressEdit, setDataAddressEdit] = useState(item || {
     city: item.city || '',
     street: item.street || '',
     description: item.description || '',
+    multipartFile: item.multipartFile || ''
   })
-
-  const { city, street, description } = item
+  console.log(multipartFile);
+  const { city, street, description, multipartFile } = item
 
   const onChangeText = (e) => {
     console.log(e.target.value);
     setDataAddressEdit({ ...dataAddressEdit, [e.target.name]: e.target.value })
+  }
+
+  const onChangeImage = (event) => {
+    const value = event.target.files[0]
+    setSelectedImage(event.target.files[0])
+    setDataAddressEdit({ ...dataAddressEdit, multipartFile: (value) })
   }
 
   const onClickEdit = (e) => {
@@ -44,11 +53,21 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
             padding: '10px'
           }}
         >
-          <h2 style={{ textAlign: 'center' }}>Edit address</h2>
+          <h2 style={{ textAlign: 'center' }}>Sửa địa chỉ</h2>
+          <div>
+            {selectedImage && (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img alt="not fount" width={"130px"} src={URL.createObjectURL(selectedImage)} />
+                {/* <button onClick={() => setSelectedImage(null)}>Remove</button> */}
+              </div>
+            )}
+
+          </div>
           <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
             <TextField onChange={onChangeText} defaultValue={description} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
             <TextField onChange={onChangeText} defaultValue={street} name="street" style={{ margin: '5px' }} fullWidth label='Đườmg' />
             <TextField onChange={onChangeText} defaultValue={city} name="city" style={{ margin: '5px' }} fullWidth label='Thành phố' />
+            <TextField onChange={onChangeImage} defaultValue={multipartFile} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image/*" />
 
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
