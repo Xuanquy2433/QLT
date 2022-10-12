@@ -1,7 +1,13 @@
 import  './OrderDetailComponent.css';
 import Countdown from 'react-countdown';
-function OrderDetailComponent({orderDetail}) {
+import {useEffect, useState} from "react";
 
+function OrderDetailComponent(props) {
+const [data, setData] = useState({
+  id: "",
+  isChecked: false,
+});
+const {orderDetail, hasChildren, sendDataBack, isExtended} = props;
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
       // Render a completed state
@@ -12,8 +18,23 @@ function OrderDetailComponent({orderDetail}) {
     }
   };
 
+  useEffect(() => {
+    sendDataBack(data);
+    console.log('3',isExtended);
+  }, [data,isExtended])
+
+  const onChange = (e) => {
+  // if (e.target.checked===true) {
+  //   props.sendDataBack(e.target.value);
+  // }
+  setData(a => ({...a, id: e.target.value, isChecked: e.target.checked}));
+}
   return (
-      <div className="wrapper">
+      <div className="wrapper-detail">
+        <input style={{display: hasChildren && !isExtended ? 'block' : 'none'}} type="checkbox"
+               onChange={(e) => onChange(e)} id={orderDetail.product.id}
+               value={orderDetail.product.id}/>
+        <div className="detail-name">{orderDetail.product.id}</div>
         <div className="detail-name">{orderDetail.product.name}</div>
         <div className="detail-month">{orderDetail.month}</div>
        <Countdown

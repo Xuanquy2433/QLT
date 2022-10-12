@@ -23,7 +23,12 @@ function OrderDetail() {
     const [valueStatus, setValueStatus] = useState('')
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
+    const [isExtended, setIsExtended] = useState(false);
     const history = useHistory()
+
+    const onChangeExtendedStatus = () => {
+        setIsExtended(!isExtended)
+    }
     const getAllOderDetail = async (e) => {
         if (token) {
             try {
@@ -115,38 +120,6 @@ function OrderDetail() {
         }
     }
 
-    // const [timerDays, setTimerDays] = useState();
-    // const [timerHours, setTimerHours] = useState();
-    // const [timerMinutes, setTimerMinutes] = useState(10);
-    // const [timerSeconds, setTimerSeconds] = useState(10);
-    // let interval;
-
-
-    // const startTimer = () => {
-    //     const countDownDate = new Date("May 30,2022").getTime();
-    //     interval = setInterval(() => {
-    //         const now = new Date().getTime();
-    //         const distance = countDownDate - now;
-    //         const days = Math.floor(distance(24 * 60 * 60 * 1000)
-    //         );
-    //         const hours = Math.floor((distance % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60));
-    //         const minutes = Math.floor((distance % (60 * 60 * 1000)
-    //         ) / (1000 * 60));
-    //         const seconds = Math.floor((distance % (60 * 1000)) /
-    //             1000);
-    //         if (distance < 0) {
-    //             // Stop Timer
-    //             clearInterval(interval.current);
-    //         } else {
-    //             // Update Timer
-    //             setTimerDays(days);
-    //             setTimerHours(hours);
-    //             setTimerMinutes(minutes);
-    //             setTimerSeconds(seconds);
-    //         }
-    //     });
-    // };
-
     const Completionist = () => <div>cc</div>
     const renderer = ({ hours, minutes, seconds, completed }) => {
         if (completed) {
@@ -162,9 +135,14 @@ function OrderDetail() {
         }
     };
 
+useEffect(() => {
+    onChangeExtendedStatus();
+}, [])
+
     useEffect(() => {
         // startTimer()
-        getAllOderDetail()
+        getAllOderDetail();
+
         if (data.status === 'NEW') {
             // setValueStatus('Thanh toán')
             setIsConFirm(false)
@@ -210,7 +188,7 @@ function OrderDetail() {
                                                 </div>
                                             </div>
 
-                                            <Order order={data}></Order>
+                                            <Order order={data} isExtended={isExtended}></Order>
 
                                             {dataDetail ?
                                                 dataDetail.map((item, index) => (
@@ -357,6 +335,12 @@ function OrderDetail() {
                                                             </div>
                                                             : null}
 
+                                                    </button>
+                                                    <button onClick={() => onChangeExtendedStatus()}>
+                                                            <span>
+                                                                    gia han
+
+                                                                </span>
                                                     </button>
                                                 </div>
                                             </div>
