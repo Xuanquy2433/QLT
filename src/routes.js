@@ -157,12 +157,12 @@ var routes = [
     component: PageNotFound,
     layout: "/auth"
   },
-  // {
-  //   path: "/address/:id",
-  //   name: "AddressDetail",
-  //   icon: "ni ni-circle-08 text-pink",
-  //   component: AddressDetail,
-  //   layout: "/auth"
-  // },
+  {
+    path: "/address/:id",
+    name: "AddressDetail",
+    icon: "ni ni-circle-08 text-pink",
+    component: AddressDetail,
+    layout: "/auth"
+  },
 ];
 export default routes;

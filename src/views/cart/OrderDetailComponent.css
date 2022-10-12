@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding:10px;
+}
+
+.detail-name{
+  width: 50%;
+}
+.detail-month{
+  width: 10%;
+}
+.detail-time{
+  width: 10%;
+}

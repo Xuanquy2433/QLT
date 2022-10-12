@@ -58,19 +58,6 @@ function ModalDetailProduct({ dataDetail }) {
         setPage(0);
     };
 
-    //handle
-    // const [data, setData] = useState([])
-    // useEffect(() => {
-    //     getAllAddRess()
-    // }, [])
-
-    // const getAllAddRess = async (e) => {
-    //     const response = await axios.get(API_GET_PILLAR)
-    //     if (response) {
-    //         setData(response.data)
-    //     }
-    // }
-
     const history = useHistory()
 
     let token = localStorage.getItem('token')

@@ -7,6 +7,7 @@ import { API_GET_ORDER_DETAIL } from 'utils/const';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Countdown from "react-countdown";
 import { BsFiles } from 'react-icons/bs';
+import Order from './OrderConponent';
 
 function OrderDetail() {
 
@@ -18,13 +19,11 @@ function OrderDetail() {
 
     let idOrderInURL = window.location.pathname.replace(/\D/g, "");
 
-    console.log("idOrderInURL ", idOrderInURL);
     const [isConfirm, setIsConFirm] = useState(false)
     const [valueStatus, setValueStatus] = useState('')
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
     const history = useHistory()
-    console.log("dataDetail: " + dataDetail);
     const getAllOderDetail = async (e) => {
         if (token) {
             try {
@@ -211,39 +210,12 @@ function OrderDetail() {
                                                 </div>
                                             </div>
 
+                                            <Order order={data}></Order>
 
                                             {dataDetail ?
                                                 dataDetail.map((item, index) => (
                                                     <div className="card mb-3" key={index}>
-                                                        <div className="card-body">
-                                                            <div className="d-flex justify-content-between">
-                                                                <div className="d-flex flex-row align-items-center">
-                                                                    <div>
-                                                                        <img
-                                                                            src="https://onlinecrm.vn/media/default.jpg"
-                                                                            className="img-fluid rounded-3"
-                                                                            alt="Shopping item"
-                                                                            style={{ width: 65, marginRight: '20px' }}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="ms-3" style={{ width: 150 }}>
-                                                                        <h5>{item.product.name}</h5>
-                                                                        <p className="small mb-0">{item.product.description}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="d-flex flex-row align-items-center">
-                                                                    <div style={{ width: 100 }}>
-                                                                        <h5 className="fw-normal mb-0">{item.month} Month</h5>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="d-flex flex-row align-items-center">
-                                                                    <div style={{ width: 60 }}>
-                                                                        <h5 className="mb-0">{item.product.price}</h5>
-                                                                    </div>
-                                                                </div>
 
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 ))
 
@@ -341,7 +313,8 @@ function OrderDetail() {
                                                     </div> */}
                                                     <div className="d-flex justify-content-between mb-4">
                                                         <p className="mb-2">Tổng cộng</p>
-                                                        <p className="mb-2">{data.total} VNĐ</p>
+                                                        <p className="mb-2"> {data.children? data.children.reduce((a,b) =>  data.total + a +b.total,0) : data.total } VNĐ</p>
+
                                                     </div>
 
                                                     <button
