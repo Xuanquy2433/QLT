@@ -24,9 +24,9 @@
     background-color: #ffffff;
     font-weight: 400;
     color: #212529;
-    border-radius: 7px;
+    border-radius: 8px;
     flex-direction: column;
-    padding: 5px 13px 5px 13px;
+    padding: 3px 15px 3px 15px;
 }
 
 .menu .menu-item .menu-item-title:hover .menu-level-2{

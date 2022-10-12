@@ -87,13 +87,15 @@ const AdminNavbar = () => {
                   <span className="nav-link-inner--text">Trang chủ</span>
                 </NavLink>
               </NavItem>
-             
-                <NavItem>
+
+              {token && decoded.roles != 'ROLE_ADMIN' ?
+                <NavItem >
                   <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
                     <i className="ni ni-cart" />
                     <span className="nav-link-inner--text">Giỏ hàng</span>
                   </NavLink>
-                </NavItem> 
+                </NavItem> : null}
+
 
 
 
