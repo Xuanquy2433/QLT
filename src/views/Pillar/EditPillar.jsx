@@ -10,7 +10,8 @@ import Select from '@mui/material/Select';
 
 export default function EditPillar({ item, data, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory }) {
 
-    const { addressId, description, status, name, price } = item
+    const { addressId, description, status, name, price, multipartFile } = item
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const [dataEdit, setDataEdit] = useState(item || {
         addressId: item.addressId || 0,
@@ -18,9 +19,10 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         description: item.description || "",
         status: item.status || "",
         name: item.name || "",
-        price: item.price || 0
+        price: item.price || 0,
+        multipartFile: item.multipartFile || ''
     })
-
+    console.log(dataEdit);
     const statusO = [
         {
             value: "HIRING",
@@ -43,6 +45,15 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         setDataEdit({ ...dataEdit, [e.target.name]: e.target.value })
         console.log("onchange:", e.target.value);
     }
+
+
+    const onChangeImage = (event) => {
+        const value = event.target.files[0]
+        console.log(value);
+        setSelectedImage(event.target.files[0])
+        setDataEdit({ ...dataEdit, multipartFile: (value) })
+    }
+
 
     const onClickEdit = (e) => {
         console.log(e);
@@ -93,6 +104,13 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                 }}
             >
                 <h2 style={{ textAlign: 'center' }}>Sửa thông tin trụ</h2>
+                {/* <div>
+                    {selectedImage && (
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                            <img alt="not fount" width={"130px"} src={URL.createObjectURL(selectedImage)} />
+                        </div>
+                    )}
+                </div> */}
                 <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
                     <FormControl fullWidth sx={{ margin: "5px" }}>
                         <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
@@ -141,11 +159,10 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
 
                         </Select>
                     </FormControl>
-
-
                     <TextField defaultValue={description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
                     <TextField defaultValue={price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
                     <TextField defaultValue={name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
+                    <TextField defaultValue={multipartFile} onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
 
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>

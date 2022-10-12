@@ -109,7 +109,12 @@ export default function AdminPillar() {
 
   const onSubmitEdit = async (data) => {
     try {
-      const response = await axios.put(API_EDIT_PILLAR, data)
+      const formData = new FormData();
+      formData.append('multipartFile', data.multipartFile);
+      const response = await axios.put(API_EDIT_PILLAR + "?city=" + data.city + "&description=" + data.description + "&id=" + data.id + "&street=" + data.street, formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
       if (response && response.status === 201) {
         toast.success("Cập nhập thành công", { autoClose: 1500 });
         fetchAPI();
