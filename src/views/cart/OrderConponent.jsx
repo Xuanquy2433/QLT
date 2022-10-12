@@ -21,7 +21,6 @@ function Order({order,isExtended}) {
 
     useEffect(() => {
       getCheckIds(childData);
-
     }, [childData])
 
 

@@ -20,8 +20,7 @@ const {orderDetail, hasChildren, sendDataBack, isExtended} = props;
 
   useEffect(() => {
     sendDataBack(data);
-    console.log('3',isExtended);
-  }, [data,isExtended])
+  }, [data])
 
   const onChange = (e) => {
   // if (e.target.checked===true) {

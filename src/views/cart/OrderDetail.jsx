@@ -134,11 +134,6 @@ function OrderDetail() {
             );
         }
     };
-
-useEffect(() => {
-    onChangeExtendedStatus();
-}, [])
-
     useEffect(() => {
         // startTimer()
         getAllOderDetail();
