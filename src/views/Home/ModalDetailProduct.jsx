@@ -70,7 +70,7 @@ function ModalDetailProduct({ dataDetail }) {
 
         let listCartItem = []
 
-        if (listCart !== undefined) {
+        if (listCart !== null) {
             listCartItem = JSON.parse(listCart)
         }
         let checkCartHasBeen = true
@@ -81,7 +81,7 @@ function ModalDetailProduct({ dataDetail }) {
                 checkCartHasBeen = false
             }
         }
-        if (checkCartHasBeen == true) {
+        if (checkCartHasBeen === true) {
             let items = {
                 day: 1,
                 productId: item.id,
