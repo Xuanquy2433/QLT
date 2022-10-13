@@ -100,6 +100,8 @@ function TableAddress() {
         }
     }
 
+    console.log("cc ",data);
+
     //new
     const onChangeSearchNew = async (e) => {
         if (selected === false) {
@@ -201,7 +203,7 @@ function TableAddress() {
                                 <p style={{
                                     width: '46%', height: '230px'
                                 }}  >
-                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.photosImagePath} alt="" />
+                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.image} alt="" />
 
                                 </p>
                                 <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
