@@ -56,7 +56,7 @@ function Cart() {
                     }
                 });
                 if (response && response.status === 200) {
-                    console.log("iddddd ",response.data.message);
+                    console.log("iddddd ", response.data.message);
                     toast.success('Success', {
                         autoClose: 3000
                     })
@@ -107,7 +107,7 @@ function Cart() {
 
     const onClickRemoveItemCart = async (id) => {
         console.log('id cart', id);
-        const response =await axios.put(API_CART_REMOVE + id, {}, {
+        const response = await axios.put(API_CART_REMOVE + id, {}, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',
@@ -122,7 +122,7 @@ function Cart() {
 
 
     return (
-        <div style={{ marginTop: '20px' }} >
+        <div style={{ marginTop: '20px',width:'80%',margin: 'auto' }} >
             <section className="h-100 h-custom" style={{ backgroundColor: "#d2c9ff" }}>
                 <div>
                     <div className="row d-flex justify-content-center align-items-center h-100">
@@ -142,13 +142,13 @@ function Cart() {
                                                 {data.length ?
                                                     <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                         <div className="col-md-2 col-lg-2 col-xl-2">
-                                                          
+
                                                         </div>
                                                         <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Tên sản phẩm</h6>
                                                         </div>
                                                         <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Tháng thuê</h6>
+                                                            <h6 className="text-muted">Số ngày thuê</h6>
                                                         </div>
                                                         {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
@@ -165,7 +165,7 @@ function Cart() {
                                                     <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                         <div className="col-md-2 col-lg-2 col-xl-2">
                                                             <img
-                                                                src="https://onlinecrm.vn/media/default.jpg"
+                                                                src={item.product.photosImagePath}
                                                                 className="img-fluid rounded-3"
                                                                 alt="Cotton T-shirt"
                                                             />

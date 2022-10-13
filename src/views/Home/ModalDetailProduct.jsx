@@ -67,7 +67,7 @@ function ModalDetailProduct({ dataDetail }) {
         try {
             if (token) {
                 const response = await axios.post(API_ADD_CART, {
-                    month: 1,
+                    day: 1,
                     productId: id
                 }, {
                     headers: {
