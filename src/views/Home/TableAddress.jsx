@@ -300,7 +300,7 @@ function TableAddress() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper> */}
-            <AddressDetail />
+            {/* <AddressDetail /> */}
 
 
         </React.Fragment>
