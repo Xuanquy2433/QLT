@@ -27,7 +27,7 @@ function About() {
                 <div className="secondaryContainer clearfix">
                     <div className="diamondImgHolderLeft">
                         <div className="diamond">
-                            <img src="http://www.unicornfeminism.com/images/Ada_Lovelace_portrait.jpg" alt="Ada Lovelace: superwoman" className="timelineImageLeft" />
+                            {/* <img src="http://www.unicornfeminism.com/images/Ada_Lovelace_portrait.jpg" alt="Ada Lovelace: superwoman" className="timelineImageLeft" /> */}
                         </div>
                     </div>
                     <div className="timelineTextRight">
@@ -40,7 +40,7 @@ function About() {
                     <div className="horizLeft2" />
                     <div className="diamondImgHolderRight">
                         <div className="diamond">
-                            <img src="http://unicornfeminism.com/images/rosie_riviter.jpg" alt="Rosie the Riviter" className="timelineImageRight" />
+                            {/* <img src="http://unicornfeminism.com/images/rosie_riviter.jpg" alt="Rosie the Riviter" className="timelineImageRight" /> */}
                         </div>
                     </div>
                     <div className="timelineTextLeft">
@@ -49,7 +49,7 @@ function About() {
                     </div>
                     <div className="diamondImgHolderLeft">
                         <div className="diamond">
-                            <img src="http://unicornfeminism.com/images/kathleen_hanna.jpg" alt="Kathleen Hanna: Riot Grrl" className="timelineImageLeft" />
+                            {/* <img src="http://unicornfeminism.com/images/kathleen_hanna.jpg" alt="Kathleen Hanna: Riot Grrl" className="timelineImageLeft" /> */}
                         </div>
                     </div>
                     <div className="timelineTextRight">

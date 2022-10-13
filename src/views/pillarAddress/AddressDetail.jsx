@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
 import { API_GET_PILLAR } from 'utils/const';
 import ProductComponent from "./ProductComponent";
+import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 
 const columns = [
     {
@@ -61,7 +62,7 @@ function AddressDetail() {
     }, [])
 
     const getAddress = async (e) => {
-        const response = await axios.get(API_GET_PILLAR + id[0])
+        const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
         if (response.status === 200) {
             setDataAddressProduct(response.data)
             console.log(response.data);

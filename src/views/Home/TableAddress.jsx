@@ -94,12 +94,11 @@ function TableAddress() {
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=asc&sortField=' + field)
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=asc&sortField=id')
         if (response) {
             setData(response.data.contents)
         }
     }
-
 
     //new
     const onChangeSearchNew = async (e) => {
@@ -122,8 +121,6 @@ function TableAddress() {
             setData(response.data)
         }
     }
-
-
     // ONCHANGE FILTER
     const onclickFilter = async (e) => {
 
@@ -137,7 +134,7 @@ function TableAddress() {
     }, [])
     return (
         <React.Fragment>
-            <Box sx={{ flexGrow: 1,mt:10 }}>
+            <Box sx={{ flexGrow: 1, mt: 10 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
                         <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
@@ -204,7 +201,7 @@ function TableAddress() {
                                 <p style={{
                                     width: '46%', height: '230px'
                                 }}  >
-                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.image} alt="" />
+                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.photosImagePath} alt="" />
 
                                 </p>
                                 <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
