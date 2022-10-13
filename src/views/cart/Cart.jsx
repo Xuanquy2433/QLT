@@ -122,7 +122,7 @@ function Cart() {
 
 
     return (
-        <div style={{ marginTop: '20px',width:'80%',margin: 'auto' }} >
+        <div style={{ marginTop: '20px', width: '80%', margin: 'auto' }} >
             <section className="h-100 h-custom" style={{ backgroundColor: "#d2c9ff" }}>
                 <div>
                     <div className="row d-flex justify-content-center align-items-center h-100">

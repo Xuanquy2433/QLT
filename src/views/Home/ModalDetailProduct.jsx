@@ -62,9 +62,14 @@ function ModalDetailProduct({ dataDetail }) {
 
     let token = localStorage.getItem('token')
 
-    const order = async (id) => {
-        console.log("idddddddddddd ", id);
+    const addCart = async (item) => {
+        const { id, name} = item;
+        let localCart = localStorage.getItem('cartTemp')
+        if (!localCart) {
+            localStorage.setItem('cartTemp', [])
+        }
         try {
+            console.log("ok vao r");
             if (token) {
                 const response = await axios.post(API_ADD_CART, {
                     day: 1,
@@ -83,11 +88,21 @@ function ModalDetailProduct({ dataDetail }) {
                     history.push('/auth/cart')
                 };
             } else {
-                toast.success('Please login', {
-                    autoClose: 3000
+                // when don't login
+               
+                let cart = JSON.parse(localCart);
+                cart.push({
+                    day: 1,
+                    productId: id,
+                    nameProduct: name
                 })
-                history.push('/auth/login')
+                
+                localStorage.setItem('cartTemp',JSON.stringify(cart))
+
+                // history.push('/auth/cart')
             }
+
+
 
 
         } catch (error) {
@@ -155,7 +170,7 @@ function ModalDetailProduct({ dataDetail }) {
                                         <TableCell > {item.name} </TableCell>
                                         <TableCell style={{ textAlign: 'right' }}> {item.price} </TableCell>
                                         <TableCell style={{ textAlign: 'right' }} > {item.description} </TableCell>
-                                        <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => order(item.id)} variant="contained" color="success">
+                                        <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                                             Add cart
                                         </Button> </TableCell>
                                     </TableRow>
