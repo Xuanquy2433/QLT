@@ -98,7 +98,7 @@ function Cart() {
     }
     let sum = 0
     data.map((item) => {
-        sum += (Number(item.product.price) * Number(item.month))
+        sum += (Number(item.product.price) * Number(item.day))
     })
 
     useEffect(() => {
@@ -186,7 +186,7 @@ function Cart() {
                                                                 id="form1"
                                                                 min={1}
                                                                 name="quantity"
-                                                                value={item.month}
+                                                                value={item.day}
                                                                 type="number"
                                                                 className="form-control form-control-sm"
                                                             />
