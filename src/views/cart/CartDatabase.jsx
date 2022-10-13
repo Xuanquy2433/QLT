@@ -144,7 +144,7 @@ function CartDatabase() {
                                                 <h6 className="mb-0 text-muted">{data.length} mặt hàng</h6>
                                             </div>
                                             {data.length ?
-                                                <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
+                                                <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-2 d-flex justify-content-between align-items-center">
                                                     <div className="col-md-2 col-lg-2 col-xl-2">
 
                                                     </div>
@@ -164,8 +164,8 @@ function CartDatabase() {
                                                     <div className="col-md-1 col-lg-1 col-xl-1">
                                                         <h6 className="text-muted"></h6>                                                        </div>
                                                 </div> : ''}
-                                            <hr className="my-4" />
-                                            {data.length ? data.map((item,index) => (
+                                            <hr className="mb-3 mt-1" />
+                                            {data.length ? data.map((item, index) => (
                                                 <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                     <div className="col-md-2 col-lg-2 col-xl-2">
                                                         <img

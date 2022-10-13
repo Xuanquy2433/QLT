@@ -65,27 +65,17 @@ const Login = () => {
           toast.success('Login success', {
             autoClose: 3000
           })
-          //add cart to database
-          console.log('data card when login ', JSON.parse(localStorage.getItem('cartADD')));
-
+          //add cart local to database
           var myMap = new Map()
-
-
           JSON.parse(localStorage.getItem('cartADD')).map((item) => {
             myMap.set(item.productId, item.day);
           })
 
           console.log([...myMap.entries()]);
-
-
           const obj = Object.fromEntries(myMap);
-
           const dataCart = {
             productInfo: obj
           }
-
-          console.log("obj ", dataCart);
-
           const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
             headers: {
               'authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -93,8 +83,6 @@ const Login = () => {
               'Content-Type': 'application/json'
             }
           });
-
-
           if (rs.status === 200) {
             console.log("add cart local success");
           }

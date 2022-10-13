@@ -125,7 +125,7 @@ function ModalDetailProduct({ dataDetail }) {
                         day: 1,
                         productId: item.id
                     }
-                    
+
                     listCartItem.push(items)
                     listCartADDItem.push(itemsADD)
                     localStorage.setItem('cartTemp', JSON.stringify(listCartItem));

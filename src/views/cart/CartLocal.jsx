@@ -11,8 +11,8 @@ import { formatMoney } from './../../common/formatMoney';
 
 function CartLocal() {
 
-    if(localStorage.getItem('cartTemp') == undefined) {
-        localStorage.setItem('cartTemp',JSON.stringify([])) 
+    if (localStorage.getItem('cartTemp') == undefined) {
+        localStorage.setItem('cartTemp', JSON.stringify([]))
     }
 
     const [dataLocal, setDataLocal] = useState(JSON.parse(localStorage.getItem('cartTemp')))
@@ -136,7 +136,7 @@ function CartLocal() {
                                                     <h6 className="mb-0 text-muted">{dataLocal.length} mặt hàng</h6>
                                                 </div>
                                                 {dataLocal.length ?
-                                                    <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
+                                                    <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-2 d-flex justify-content-between align-items-center">
                                                         <div className="col-md-2 col-lg-2 col-xl-2">
 
                                                         </div>
@@ -156,7 +156,7 @@ function CartLocal() {
                                                         <div className="col-md-1 col-lg-1 col-xl-1">
                                                             <h6 className="text-muted"></h6>                                                        </div>
                                                     </div> : ''}
-                                                <hr className="my-4" />
+                                                <hr className="mb-3 mt-1" />
                                                 {dataLocal.length ? dataLocal.map((item) => (
                                                     <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                         <div className="col-md-2 col-lg-2 col-xl-2">
