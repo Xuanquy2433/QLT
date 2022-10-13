@@ -88,7 +88,7 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
-              {token && decoded.roles != 'ROLE_ADMIN' ?
+              {token && decoded.roles !== '[ROLE_ADMIN]' ?
                 <NavItem >
                   <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
                     <i className="ni ni-cart" />
