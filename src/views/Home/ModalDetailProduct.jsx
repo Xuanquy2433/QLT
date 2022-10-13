@@ -63,11 +63,29 @@ function ModalDetailProduct({ dataDetail }) {
     let token = localStorage.getItem('token')
 
     const addCart = async (item) => {
-        const { id, name} = item;
-        let localCart = localStorage.getItem('cartTemp')
-        if (localCart == null) {
-            localStorage.setItem('cartTemp', [])
-        }else JSON.parse(localCart)
+        console.log(item.id);
+        const { id, name } = item;
+
+        let listCart = localStorage.getItem("cartTemp")
+        let listCartADD = localStorage.getItem("cartADD")
+
+
+        let listCartItem = []
+        let listCartADDItem = []
+
+        if (listCart && listCartADD != undefined) {
+            listCartItem = JSON.parse(listCart)
+            listCartADDItem = JSON.parse(listCartADD)
+        }
+        let checkCartHasBeen = true
+
+
+
+        console.log("listCartItem", listCartItem);
+
+        // if (!localCart) {
+        //     localStorage.setItem('cartTemp', [])
+        // }
         try {
             console.log("ok vao r");
             if (token) {
@@ -89,17 +107,34 @@ function ModalDetailProduct({ dataDetail }) {
                 };
             } else {
                 // when don't login
-               
-                let cart = JSON.parse(localCart);
-                cart.push({
-                    day: 1,
-                    productId: id,
-                    nameProduct: name
+                for (let i = 0; i < listCartItem.length; i++) {
+                    if (listCartItem[i].productId === item.id && listCartADDItem[i].productId === item.id) {
+                        // localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+                        checkCartHasBeen = false
+                    }
+                }
+                if (checkCartHasBeen == true) {
+                    let items = {
+                        day: 1,
+                        productId: item.id,
+                        nameProduct: item.name,
+                        priceProduct: item.price,
+                        imageProduct: item.photosImagePath
+                    }
+                    let itemsADD = {
+                        day: 1,
+                        productId: item.id
+                    }
+                    
+                    listCartItem.push(items)
+                    listCartADDItem.push(itemsADD)
+                    localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+                    localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
+                }
+                toast.success('Thêm vào giỏ hàng thành công', {
+                    autoClose: 3000
                 })
-
-                localStorage.setItem('cartTemp',JSON.stringify(cart))
-
-                // history.push('/auth/cart')
+                history.push('/auth/cart')
             }
 
 

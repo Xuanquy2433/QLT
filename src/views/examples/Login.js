@@ -22,6 +22,7 @@ import PhoneInput from 'react-phone-number-input';
 import jwt_decode from "jwt-decode";
 import styled from "styled-components";
 import './login.css'
+import { API_ADD_CART_LOCAL } from "utils/const";
 
 const Login = () => {
   const history = useHistory();
@@ -64,6 +65,40 @@ const Login = () => {
           toast.success('Login success', {
             autoClose: 3000
           })
+          //add cart to database
+          console.log('data card when login ', JSON.parse(localStorage.getItem('cartADD')));
+
+          var myMap = new Map()
+
+
+          JSON.parse(localStorage.getItem('cartADD')).map((item) => {
+            myMap.set(item.productId, item.day);
+          })
+
+          console.log([...myMap.entries()]);
+
+
+          const obj = Object.fromEntries(myMap);
+
+          const dataCart = {
+            productInfo: obj
+          }
+
+          console.log("obj ", dataCart);
+
+          const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
+            headers: {
+              'authorization': 'Bearer ' + localStorage.getItem('token'),
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          });
+
+
+          if (rs.status === 200) {
+            console.log("add cart local success");
+          }
+
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
             history.push('/auth/homePage')
           }
@@ -109,7 +144,7 @@ const Login = () => {
 
   return (
     <>
-      <Col style={{paddingLeft: '60px',paddingRight: '60px'}} lg="5" md="7">
+      <Col style={{ paddingLeft: '60px', paddingRight: '60px' }} lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-3">
