@@ -65,9 +65,9 @@ function ModalDetailProduct({ dataDetail }) {
     const addCart = async (item) => {
         const { id, name} = item;
         let localCart = localStorage.getItem('cartTemp')
-        if (!localCart) {
+        if (localCart == null) {
             localStorage.setItem('cartTemp', [])
-        }
+        }else JSON.parse(localCart)
         try {
             console.log("ok vao r");
             if (token) {
@@ -96,7 +96,7 @@ function ModalDetailProduct({ dataDetail }) {
                     productId: id,
                     nameProduct: name
                 })
-                
+
                 localStorage.setItem('cartTemp',JSON.stringify(cart))
 
                 // history.push('/auth/cart')
