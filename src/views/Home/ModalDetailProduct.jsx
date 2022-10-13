@@ -63,11 +63,47 @@ function ModalDetailProduct({ dataDetail }) {
     let token = localStorage.getItem('token')
 
     const addCart = async (item) => {
-        const { id, name} = item;
-        let localCart = localStorage.getItem('cartTemp')
-        if (!localCart) {
-            localStorage.setItem('cartTemp', [])
+        console.log(item.id);
+        const { id, name } = item;
+
+        let listCart = localStorage.getItem("cartTemp")
+
+        let listCartItem = []
+
+        if (listCart !== undefined) {
+            listCartItem = JSON.parse(listCart)
         }
+        let checkCartHasBeen = true
+
+        for (let i = 0; i < listCartItem.length; i++) {
+            if (listCartItem[i].productId === item.id) {
+                // localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+                checkCartHasBeen = false
+            }
+        }
+        if (checkCartHasBeen == true) {
+            let items = {
+                day: 1,
+                productId: item.id,
+                nameProduct: item.name
+            }
+            listCartItem.push(items)
+            localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+        }
+
+
+
+
+
+
+
+
+
+        console.log("listCartItem", listCartItem);
+
+        // if (!localCart) {
+        //     localStorage.setItem('cartTemp', [])
+        // }
         try {
             console.log("ok vao r");
             if (token) {
@@ -89,17 +125,10 @@ function ModalDetailProduct({ dataDetail }) {
                 };
             } else {
                 // when don't login
-               
-                let cart = JSON.parse(localCart);
-                cart.push({
-                    day: 1,
-                    productId: id,
-                    nameProduct: name
-                })
-                
-                localStorage.setItem('cartTemp',JSON.stringify(cart))
 
-                // history.push('/auth/cart')
+
+
+                history.push('/auth/cart')
             }
 
 
