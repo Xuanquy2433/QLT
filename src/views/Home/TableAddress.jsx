@@ -100,7 +100,7 @@ function TableAddress() {
         }
     }
 
-    console.log("cc ",data);
+    console.log("cc ", data);
 
     //new
     const onChangeSearchNew = async (e) => {
@@ -136,87 +136,88 @@ function TableAddress() {
     }, [])
     return (
         <React.Fragment>
-            <Box sx={{ flexGrow: 1, mt: 10 }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={8}>
-                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
-                            <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
-                                <SearchIcon onClick={onclickFilter} />
-                            </IconButton>
-                            <InputBase
-                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Tìm theo từ khóa"
-                                onChange={(e) => {
-                                    setKeyword(e.target.value)
-                                    // onclickFilter()
-                                }}
-                            />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={4} >
-                        <FormControl sx={{ width: '28%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
-                            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sort  </h3>
-                                <ToggleButton
-                                    sx={{ height: '73%' }}
-                                    value="check"
-                                    selected={selected}
-                                    onChange={() => {
-                                        setSelected(!selected);
-                                        onChangeSearchNew()
+            <Box sx={{ width: '86%', margin: 'auto' }}>
+                <Box sx={{ flexGrow: 1, mt: 10 }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={8}>
+                            <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
+                                <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
+                                    <SearchIcon onClick={onclickFilter} />
+                                </IconButton>
+                                <InputBase
+                                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                    placeholder="Tìm theo từ khóa"
+                                    onChange={(e) => {
+                                        setKeyword(e.target.value)
                                         // onclickFilter()
                                     }}
-                                >
-                                    {selected ? <NorthIcon /> : <SouthIcon />}
-                                </ToggleButton>
-                            </div>
-                        </FormControl>
-                        <FormControl sx={{ width: '31%', backgroundColor: 'white', height: '45px', ml: 2, borderRadius: '5px' }} size="small">
-                            <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
-                            <Select
-                                style={{ height: '45px', }}
-                                labelId="demo-select-small"
-                                id="demo-select-small"
-                                value={field}
-                                label="Field"
-                                onChange={handleChangeField}>
-                                <MenuItem value={'street'}>Đường</MenuItem>
-                                <MenuItem value={'city'}>Thành phố</MenuItem>
-                                <MenuItem value={'description'}>Mô tả</MenuItem>
-                            </Select>
-                        </FormControl>
+                                />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4} >
+                            <FormControl sx={{ width: '28%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
+                                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                    <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sort  </h3>
+                                    <ToggleButton
+                                        sx={{ height: '73%' }}
+                                        value="check"
+                                        selected={selected}
+                                        onChange={() => {
+                                            setSelected(!selected);
+                                            onChangeSearchNew()
+                                            // onclickFilter()
+                                        }}
+                                    >
+                                        {selected ? <NorthIcon /> : <SouthIcon />}
+                                    </ToggleButton>
+                                </div>
+                            </FormControl>
+                            <FormControl sx={{ width: '31%', backgroundColor: 'white', height: '45px', ml: 2, borderRadius: '5px' }} size="small">
+                                <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
+                                <Select
+                                    style={{ height: '45px', }}
+                                    labelId="demo-select-small"
+                                    id="demo-select-small"
+                                    value={field}
+                                    label="Field"
+                                    onChange={handleChangeField}>
+                                    <MenuItem value={'street'}>Đường</MenuItem>
+                                    <MenuItem value={'city'}>Thành phố</MenuItem>
+                                    <MenuItem value={'description'}>Mô tả</MenuItem>
+                                </Select>
+                            </FormControl>
 
-                        <Button sx={{ width: '31%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickSearch} color="primary">
-                            Tìm kiếm
-                        </Button>
+                            <Button sx={{ width: '31%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickSearch} color="primary">
+                                Tìm kiếm
+                            </Button>
 
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
+                </Box>
 
 
-            <Box sx={{ width: '100%', mt: 2 }} className='hoverBut' >
-                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                    {data && data.map((item, index) => (
-                        <Grid item xs={6} sx={{ mt: 1 }} key={index} >
-                            <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
-                                <p style={{
-                                    width: '46%', height: '230px'
-                                }}  >
-                                    <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.image} alt="" />
+                <Box sx={{ width: '100%', mt: 2 }} className='hoverBut' >
+                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        {data && data.map((item, index) => (
+                            <Grid item xs={6} sx={{ mt: 1 }} key={index} >
+                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
+                                    <p style={{
+                                        width: '46%', height: '230px'
+                                    }}  >
+                                        <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.image} alt="" />
 
-                                </p>
-                                <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
-                                    <p>Đường:  {item.street}</p>
-                                    <p>Thành Phố: {item.city} </p>
-                                    <p>Mô tả: {item.description}</p>
-                                    <p>Số lượng trụ:</p>
-                                    <p>Khoảng giá:</p>
+                                    </p>
+                                    <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
+                                        <p>Đường:  {item.street}</p>
+                                        <p>Thành Phố: {item.city} </p>
+                                        <p>Mô tả: {item.description}</p>
+                                        <p>Số lượng trụ:</p>
+                                        <p>Khoảng giá:</p>
 
-                                    <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} class="offset" >
-                                        Xem thêm
-                                    </button>
-                                    {/* 
+                                        <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} class="offset" >
+                                            Xem thêm
+                                        </button>
+                                        {/* 
                                     {item.product.length > 0 ? item.product.map((itemDetail, index) => (
                                         <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
                                             <h2>{itemDetail.name}</h2>
@@ -224,24 +225,24 @@ function TableAddress() {
                                     )) : <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '50px', backgroundColor: '#FF4433' }}>
                                         <h2 style={{ color: 'white' }}>Khu vực này đã thuê hết</h2>
                                     </div>} */}
+                                    </div>
                                 </div>
-                            </div>
-                        </Grid>
-                    ))}
-                    <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={style}>
-                            <ModalDetailProduct dataDetail={dataDetail} />
-                        </Box>
-                    </Modal>
-                </Grid>
-            </Box>
+                            </Grid>
+                        ))}
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style}>
+                                <ModalDetailProduct dataDetail={dataDetail} />
+                            </Box>
+                        </Modal>
+                    </Grid>
+                </Box>
 
-            {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ height: '400px' }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -300,9 +301,9 @@ function TableAddress() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper> */}
-            {/* <AddressDetail /> */}
+                {/* <AddressDetail /> */}
 
-
+            </Box>
         </React.Fragment>
     )
 }
