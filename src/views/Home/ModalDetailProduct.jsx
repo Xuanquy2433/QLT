@@ -217,7 +217,7 @@ function ModalDetailProduct({ dataDetail }) {
                 {/* <TablePagination
                     rowsPerPageOptions={[6, 10, 25, 100]}
                     component="div"
-                    count={dataDetail.length}
+                    count={dataDetail.length}  
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
