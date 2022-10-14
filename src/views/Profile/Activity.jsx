@@ -16,6 +16,8 @@ import './activity.css'
 import axios from 'axios';
 import { API_GET_ALL_ORDER } from 'utils/const';
 import Moment from 'react-moment';
+import { Button } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 
 const columns = [
@@ -108,10 +110,17 @@ function Activity() {
                                                 <TableCell align="center"><Moment format='MMMM Do YYYY, h:mm:ss a'>{item.orderTime}</Moment></TableCell>
                                                 <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
                                                 {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ fontWeight: '600', color: 'blue' }} align="right">Chờ</TableCell> : null}
-                                                {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600',color: '#f5c71a' }} align="right">Chưa đặt</TableCell> : null}
+                                                {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600', color: '#f5c71a' }} align="right">Chưa đặt</TableCell> : null}
                                                 {item.status === 'DONE' ? <TableCell sx={{ fontWeight: '600', color: 'green' }} align="right">Xong</TableCell> : null}
                                                 {item.status === 'CANCELLED' ? <TableCell sx={{ fontWeight: '600', color: 'red' }} align="right">Đã hủy</TableCell> : null}
 
+                                                <TableCell align="right">
+                                                    <NavLink to={'order/' + item.id}>
+                                                        <Button variant="contained" color="success">
+                                                            Chi tiết
+                                                        </Button>
+                                                    </NavLink>
+                                                </TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
