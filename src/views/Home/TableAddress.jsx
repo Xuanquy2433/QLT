@@ -204,15 +204,16 @@ function TableAddress() {
                                     <p style={{
                                         width: '46%', height: '230px'
                                     }}  >
-                                        <img style={{ width: '100%', height: '230px', border: '1px solid #ddd' }} src={item.image} alt="" />
+                                        <img style={{ width: '100%', height: '245px', border: '1px solid #ddd' }} src={item.image} alt="" />
 
                                     </p>
                                     <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
                                         <p>Đường:  {item.street}</p>
-                                        <p>Thành Phố: {item.city} </p>
-                                        <p>Mô tả: {item.description}</p>
-                                        <p>Số lượng trụ:</p>
-                                        <p>Khoảng giá:</p>
+                                        {/* <p>Thành Phố: {item.city} </p> */}
+                                        {/* <p>Mô tả: {item.description}</p> */}
+                                        <p>Khoảng giá: {item.minPrice} - {item.maxPrice}</p>
+                                        <p>Số lượng trụ: {item.totalProduct}</p>
+                                        <p>Số trụ còn trống: {item.totalProductAvailable}</p>
 
                                         <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} class="offset" >
                                             Xem thêm

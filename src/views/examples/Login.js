@@ -58,35 +58,13 @@ const Login = () => {
       try {
         const response = await axios.post(API_SIGNIN, data);
         if (response && response.status === 200) {
-          console.log("Login success, ", response?.data.token);
-          // alert("Login success");
           localStorage.setItem("token", response?.data.token);
           localStorage.setItem("user", JSON.stringify(response.data));
           toast.success('Login success', {
             autoClose: 3000
           })
-          //add cart local to database
-          var myMap = new Map()
-          JSON.parse(localStorage.getItem('cartADD')).map((item) => {
-            myMap.set(item.productId, item.day);
-          })
 
-          console.log([...myMap.entries()]);
-          const obj = Object.fromEntries(myMap);
-          const dataCart = {
-            productInfo: obj
-          }
-          const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
-            headers: {
-              'authorization': 'Bearer ' + localStorage.getItem('token'),
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          });
-          if (rs.status === 200) {
-            console.log("add cart local success");
-          }
-
+          console.log("role  ", jwt_decode(response?.data.token));
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
             history.push('/auth/homePage')
           }
@@ -95,9 +73,24 @@ const Login = () => {
           } else {
             history.push('/auth/homePage')
           }
-          // setTimeout(() => {
-          //     window.location.reload()
-          // }, 1000);
+
+          //add cart local to database
+          var myMap = new Map()
+          JSON.parse(localStorage.getItem('cartADD')).map((item) => {
+            myMap.set(item.productId, item.day);
+          })
+          console.log([...myMap.entries()]);
+          const obj = Object.fromEntries(myMap);
+          const dataCart = {
+            productInfo: obj
+          }
+          const rs = axios.post(API_ADD_CART_LOCAL, dataCart, {
+            headers: {
+              'authorization': 'Bearer ' + localStorage.getItem('token'),
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          });
         };
       } catch (error) {
         console.log(error.response.data)
