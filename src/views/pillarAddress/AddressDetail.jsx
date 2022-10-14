@@ -64,7 +64,7 @@ function AddressDetail() {
     const getAddress = async (e) => {
         const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
         if (response.status === 200) {
-            setDataAddressProduct(response.data)
+            setDataAddressProduct(response.data.product)
             console.log(response.data);
         }
     }
@@ -72,7 +72,7 @@ function AddressDetail() {
 
     return (
         <div className='de'  >
-            <Paper sx={{ width: '100%', overflow: 'hidden', mt: 3 }}>
+            <Paper sx={{ width: '80%', margin: 'auto',overflow: 'hidden', mt: 3, position: 'relative' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -98,8 +98,6 @@ function AddressDetail() {
                     </Table>
                 </TableContainer>
             </Paper>
-
-
 
         </div>
 

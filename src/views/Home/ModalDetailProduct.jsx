@@ -22,26 +22,33 @@ import { API_ADD_CART } from 'utils/const';
 
 const columns = [
     { id: 'image', label: 'Hình ảnh', minWidth: 170 },
-    { id: 'name', label: 'Name', minWidth: 100 },
+    { id: 'name', label: 'Tên trụ', minWidth: 100 },
     {
         id: 'price',
-        label: 'Price',
-        minWidth: 170,
-        align: 'right',
+        label: 'Loại trụ',
+        minWidth: 100,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'price',
+        label: 'Giá trụ',
+        minWidth: 100,
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'description',
-        label: 'Description',
-        minWidth: 170,
-        align: 'right',
+        label: 'Mô tả',
+        minWidth: 100,
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'button',
         label: 'Hành động',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 100,
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
 ];
@@ -63,12 +70,11 @@ function ModalDetailProduct({ dataDetail }) {
     let token = localStorage.getItem('token')
 
     const addCart = async (item) => {
-        console.log(item.id);
-        const { id, name } = item;
 
+        // save product to cart local
+        const { id, name } = item;
         let listCart = localStorage.getItem("cartTemp")
         let listCartADD = localStorage.getItem("cartADD")
-
 
         let listCartItem = []
         let listCartADDItem = []
@@ -79,16 +85,9 @@ function ModalDetailProduct({ dataDetail }) {
         }
         let checkCartHasBeen = true
 
-
-
-        console.log("listCartItem", listCartItem);
-
-        // if (!localCart) {
-        //     localStorage.setItem('cartTemp', [])
-        // }
         try {
-            console.log("ok vao r");
             if (token) {
+                // when already login
                 const response = await axios.post(API_ADD_CART, {
                     day: 1,
                     productId: id
@@ -136,10 +135,6 @@ function ModalDetailProduct({ dataDetail }) {
                 })
                 history.push('/auth/cart')
             }
-
-
-
-
         } catch (error) {
             console.log(error.response.data)
             if (error.response.data.message) {
@@ -203,11 +198,18 @@ function ModalDetailProduct({ dataDetail }) {
                                             <img style={{ width: '50px', height: '50px' }} src={item.photosImagePath} alt="" />
                                         </TableCell>
                                         <TableCell > {item.name} </TableCell>
-                                        <TableCell style={{ textAlign: 'right' }}> {item.price} </TableCell>
-                                        <TableCell style={{ textAlign: 'right' }} > {item.description} </TableCell>
-                                        <TableCell style={{ textAlign: 'right' }}> <Button onClick={(e) => addCart({ ...item })} variant="contained" color="success">
-                                            Add cart
-                                        </Button> </TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}> {item.category.name} </TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}> {item.price} </TableCell>
+                                        <TableCell style={{ textAlign: 'center' }} > {item.description} </TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}>
+                                            {item.status === 'AVAILABLE' ?
+                                                <Button onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                                                    Thêm vào giỏ
+                                                </Button> :
+                                                <Button  disabled variant="contained" >
+                                                    Đã cho thuê
+                                                </Button>}
+                                        </TableCell>
                                     </TableRow>
                                 )) : <h5 style={{ fontStyle: 'italic', marginTop: '8px', width: '180px' }} > Đường này chưa có trụ nào !</h5>}
                             {/* <h5 style={{fontStyle: 'italic',marginTop: '8px',width: '180px'}} > Đường này chưa có trụ nào !</h5> */}

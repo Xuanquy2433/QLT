@@ -3,7 +3,7 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import React from "react";
 
-function ProductComponent({product}) {
+function ProductComponent({ product }) {
 
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
@@ -16,15 +16,16 @@ function ProductComponent({product}) {
   };
 
   return (
-            <TableRow hover role="checkbox" >
-              <TableCell>{product.name}</TableCell>
-              <TableCell sx={{ textAlign: 'right' }}>
-                <Countdown
-                    date={product.expiredDate}
-                    renderer={renderer}
-                ></Countdown>
-              </TableCell>
-            </TableRow>
+    <TableRow hover role="checkbox" >
+      <TableCell>{product.name}</TableCell>
+      <TableCell sx={{ textAlign: 'right' }}>
+        {product.expiredDate}
+        <Countdown
+          date={product.expiredDate}
+          renderer={renderer}
+        ></Countdown>
+      </TableCell>
+    </TableRow>
 
   )
 }

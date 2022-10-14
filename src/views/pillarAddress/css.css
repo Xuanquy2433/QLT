@@ -1,6 +1,6 @@
-/* .de {
-    background-color: white;
-} */
+.de {
+   width: 100%;
+}
 .de .card {
     border: none;
 }
