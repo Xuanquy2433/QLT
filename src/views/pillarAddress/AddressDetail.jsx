@@ -72,7 +72,7 @@ function AddressDetail() {
 
     return (
         <div className='de'  >
-            <Paper sx={{ width: '80%', margin: 'auto',overflow: 'hidden', mt: 3, position: 'relative' }}>
+            <Paper sx={{ width: '80%', height: 500, margin: 'auto', overflow: 'hidden', mt: 3, position: 'relative' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -90,10 +90,10 @@ function AddressDetail() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataAddressProduct
-                                .map((item, index) => (
-                                    <ProductComponent product={item}></ProductComponent>
-                                ))}
+                            {dataAddressProduct.length > 0 ?
+                                dataAddressProduct.map((item, index) => (
+                                    <ProductComponent key={index} product={item}></ProductComponent>
+                                )) : <TableCell>Đương này chưa có trụ nào ! </TableCell>}
                         </TableBody>
                     </Table>
                 </TableContainer>

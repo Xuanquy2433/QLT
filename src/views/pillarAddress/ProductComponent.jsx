@@ -19,7 +19,6 @@ function ProductComponent({ product }) {
     <TableRow hover role="checkbox" >
       <TableCell>{product.name}</TableCell>
       <TableCell sx={{ textAlign: 'right' }}>
-        {product.expiredDate}
         <Countdown
           date={product.expiredDate}
           renderer={renderer}

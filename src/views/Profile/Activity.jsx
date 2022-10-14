@@ -30,6 +30,7 @@ const columns = [
     },
     { id: 'code', label: 'Số lượng sản phẩm', minWidth: 100, align: 'center', },
     { id: 'code', label: 'Trạng thái', minWidth: 100, align: 'right', },
+    { id: 'code', label: 'Hành động', minWidth: 100, align: 'right', },
 ];
 function Activity() {
 
