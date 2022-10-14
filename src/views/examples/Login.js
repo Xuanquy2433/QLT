@@ -66,6 +66,22 @@ const Login = () => {
 
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
             history.push('/auth/homePage')
+            //add cart local to database
+            var myMap = new Map()
+            JSON.parse(localStorage.getItem('cartADD')).map((item) => {
+              myMap.set(item.productId, item.day);
+            })
+            const obj = Object.fromEntries(myMap);
+            const dataCart = {
+              productInfo: obj
+            }
+            const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
+              headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+            });
           }
           else if (jwt_decode(response?.data.token).roles === `[ROLE_ADMIN]`) {
             history.push('/admin/index')
@@ -73,22 +89,7 @@ const Login = () => {
           else {
             history.push('/auth/homePage')
           }
-          //add cart local to database
-          var myMap = new Map()
-          JSON.parse(localStorage.getItem('cartADD')).map((item) => {
-            myMap.set(item.productId, item.day);
-          })
-          const obj = Object.fromEntries(myMap);
-          const dataCart = {
-            productInfo: obj
-          }
-          const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
-            headers: {
-              'authorization': 'Bearer ' + localStorage.getItem('token'),
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          });
+
         };
       } catch (error) {
         console.log(error.response.data)
