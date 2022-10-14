@@ -11,8 +11,12 @@ import { formatMoney } from './../../common/formatMoney';
 
 function CartLocal() {
 
-    if (localStorage.getItem('cartTemp') == undefined) {
+    if (localStorage.getItem('cartTemp') == undefined || null) {
         localStorage.setItem('cartTemp', JSON.stringify([]))
+    }
+
+    if (localStorage.getItem('cartADD') == undefined || null) {
+        localStorage.setItem('cartADD', JSON.stringify([]))
     }
 
     const [dataLocal, setDataLocal] = useState(JSON.parse(localStorage.getItem('cartTemp')))

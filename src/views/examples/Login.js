@@ -64,27 +64,25 @@ const Login = () => {
             autoClose: 3000
           })
 
-          console.log("role  ", jwt_decode(response?.data.token));
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
             history.push('/auth/homePage')
           }
           else if (jwt_decode(response?.data.token).roles === `[ROLE_ADMIN]`) {
             history.push('/admin/index')
-          } else {
+          }
+          else {
             history.push('/auth/homePage')
           }
-
           //add cart local to database
           var myMap = new Map()
           JSON.parse(localStorage.getItem('cartADD')).map((item) => {
             myMap.set(item.productId, item.day);
           })
-          console.log([...myMap.entries()]);
           const obj = Object.fromEntries(myMap);
           const dataCart = {
             productInfo: obj
           }
-          const rs = axios.post(API_ADD_CART_LOCAL, dataCart, {
+          const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
             headers: {
               'authorization': 'Bearer ' + localStorage.getItem('token'),
               'Accept': 'application/json',
