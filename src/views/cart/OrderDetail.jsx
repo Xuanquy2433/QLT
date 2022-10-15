@@ -9,6 +9,7 @@ import Countdown from "react-countdown";
 import { BsFiles } from 'react-icons/bs';
 import Order from './OrderConponent';
 import { MenuItem, Select } from '@mui/material';
+import ShowBank from './ShowBank';
 
 function OrderDetail() {
 
@@ -160,32 +161,19 @@ function OrderDetail() {
         })
     }
 
-    const [age, setAge] = React.useState('mbbank');
-    const [bank, setBank] = React.useState('0123 56 81923 123 725');
+    const [bank, setBank] = React.useState('mbbank');
 
     const handleChange = (event) => {
-
-
-        if (age === 'mbbank') {
-            setBank('0123 56 81923 123 725')
-        }
-        else if (age === 'bidv') {
-            setBank('9123 8123 9123 92')
-        }
-        else if (age === 'vpbank') {
-            setBank('82131 1312 1231 09')
-        } else if (age === 'tpbank') {
-            setBank('086 3217 3123 123')
-        } else if (age === 'vib') {
-            setBank('19883 08213 9123 32')
-        }
-        console.log('ageee ', age);
-        
-        setAge(event.target.value);
-
+        setBank(event.target.value);
     };
 
-
+    const listBank = {
+        mbank: '0123 56 81923 123 725',
+        bidv: '9123 8123 9123 92',
+        vpbank: '82131 1312 1231 09',
+        tpbank: '086 3217 3123 123',
+        vib: '19883 08213 9123 32',
+    }
 
     return (
         <div style={{ marginTop: '20px', backgroundColor: 'white' }}>
@@ -260,10 +248,7 @@ function OrderDetail() {
                                                             </label>
                                                         </div>
                                                         <div className="form-outline form-white mb-4">
-                                                            <p
-                                                                className="form-control form-control-lg"
-                                                                style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-                                                            > {bank}</p >
+                                                            <ShowBank bank={bank} listBank={listBank} />
                                                             <label className="form-label" htmlFor="typeText">
                                                                 Số tài khoản
                                                             </label>
@@ -272,7 +257,7 @@ function OrderDetail() {
                                                             <div className="col-md-5">
                                                                 <div className="form-outline form-white">
                                                                     <select className="form-control form-control-lg"
-                                                                        value={age}
+                                                                        value={bank}
                                                                         style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
                                                                         onChange={handleChange}
                                                                         aria-label="Default select example">
@@ -283,7 +268,7 @@ function OrderDetail() {
                                                                         <option value="vib">VIB</option>
                                                                     </select>
                                                                     <label className="form-label mt-3" htmlFor="typeText">
-                                                                        Bank
+                                                                        Tên ngân hàng
                                                                     </label>
                                                                 </div>
                                                             </div>
