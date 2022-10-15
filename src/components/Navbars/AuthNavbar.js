@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'; import './style.css'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const AdminNavbar = () => {
   let decoded;
@@ -163,7 +164,7 @@ const AdminNavbar = () => {
                     <li className="menu-item-title">
                       <NavLink onClick={checkRole} className="menu-hover nav-link-icon">
                         <i className="ni ni-single-02" />
-                        <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
+                        <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName} <ArrowDropDownIcon/></span>
                       </NavLink>
                       <ul className="menu-level-2">
 
