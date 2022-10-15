@@ -8,6 +8,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Countdown from "react-countdown";
 import { BsFiles } from 'react-icons/bs';
 import Order from './OrderConponent';
+import { MenuItem, Select } from '@mui/material';
 
 function OrderDetail() {
 
@@ -159,6 +160,33 @@ function OrderDetail() {
         })
     }
 
+    const [age, setAge] = React.useState('mbbank');
+    const [bank, setBank] = React.useState('0123 56 81923 123 725');
+
+    const handleChange = (event) => {
+
+
+        if (age === 'mbbank') {
+            setBank('0123 56 81923 123 725')
+        }
+        else if (age === 'bidv') {
+            setBank('9123 8123 9123 92')
+        }
+        else if (age === 'vpbank') {
+            setBank('82131 1312 1231 09')
+        } else if (age === 'tpbank') {
+            setBank('086 3217 3123 123')
+        } else if (age === 'vib') {
+            setBank('19883 08213 9123 32')
+        }
+        console.log('ageee ', age);
+        
+        setAge(event.target.value);
+
+    };
+
+
+
     return (
         <div style={{ marginTop: '20px', backgroundColor: 'white' }}>
 
@@ -235,7 +263,7 @@ function OrderDetail() {
                                                             <p
                                                                 className="form-control form-control-lg"
                                                                 style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-                                                            > 123 5678 89099 899</p >
+                                                            > {bank}</p >
                                                             <label className="form-label" htmlFor="typeText">
                                                                 Số tài khoản
                                                             </label>
@@ -243,12 +271,19 @@ function OrderDetail() {
                                                         <div className="row mb-4">
                                                             <div className="col-md-5">
                                                                 <div className="form-outline form-white">
-                                                                    <p
-                                                                        className="form-control form-control-lg"
-                                                                        style={{ color: 'black', width: '100%', backgroundColor: 'white', fontWeight: 600 }}
-                                                                    > MB BANK</p >
-                                                                    <label className="form-label" htmlFor="typeExp">
-                                                                        Ngân hàng
+                                                                    <select className="form-control form-control-lg"
+                                                                        value={age}
+                                                                        style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
+                                                                        onChange={handleChange}
+                                                                        aria-label="Default select example">
+                                                                        <option value="mbbank" selected>MB BANK</option>
+                                                                        <option value="bidv">BIDV</option>
+                                                                        <option value="vpbank">VP BANK</option>
+                                                                        <option value="tpbank">TP BANK</option>
+                                                                        <option value="vib">VIB</option>
+                                                                    </select>
+                                                                    <label className="form-label mt-3" htmlFor="typeText">
+                                                                        Bank
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -286,7 +321,7 @@ function OrderDetail() {
                                                     </div> */}
                                                     <div className="d-flex justify-content-between mb-4">
                                                         <p className="mb-2">Tổng cộng</p>
-                                                        <p className="mb-2"> {data.children? data.children.reduce((a,b) =>  data.total + a +b.total,0) : data.total } VNĐ</p>
+                                                        <p className="mb-2"> {data.children ? data.children.reduce((a, b) => data.total + a + b.total, 0) : data.total} VNĐ</p>
 
                                                     </div>
 
@@ -332,10 +367,10 @@ function OrderDetail() {
 
                                                     </button>
                                                     <button onClick={() => onChangeExtendedStatus()}>
-                                                            <span>
-                                                                    gia han
+                                                        <span>
+                                                            gia han
 
-                                                                </span>
+                                                        </span>
                                                     </button>
                                                 </div>
                                             </div>
