@@ -44,7 +44,6 @@ function AdminProduct() {
       setDataCategory(response.data.content)
     }
   }
-  console.log("cate ", dataCategory);
 
   const handleChangeRowsPerPage = async (event) => {
     const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id")
@@ -72,11 +71,11 @@ function AdminProduct() {
       console.log('data,', response.data.content);
     }
   }
-  console.log("page", data);
 
   const onEdit = async (item) => {
     setSelected(item)
     setOpenEdit(true)
+    console.log(item);
   }
 
   const onSubmit = async (data) => {
@@ -124,7 +123,8 @@ function AdminProduct() {
     try {
       const formData = new FormData();
       formData.append('multipartFile', data.multipartFile);
-      const response = await axios.put(API_PRODUCT_EDIT + "?addressId=" + data.addressId + "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status,
+      const response = await axios.put(API_PRODUCT_EDIT + "?addressId=" + data.addressId + "&categoryId=" + data.categoryId +
+        "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status,
         formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })

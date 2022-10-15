@@ -13,16 +13,30 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
     const { addressId, description, status, name, price, multipartFile } = item
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const [dataEdit, setDataEdit] = useState(item || {
-        addressId: item.addressId || 0,
-        categoryId: item.categoryId || 0,
+    useEffect(() => {
+        setDataEdit({
+            addressId: item.address.id || 0,
+            categoryId: item.category.id || 0,
+            description: item.description || "",
+            status: item.status || "",
+            name: item.name || "",
+            price: item.price || 0,
+            multipartFile: item.image || ''
+        })
+    }, [item])
+
+    const [dataEdit, setDataEdit] = useState({
+        addressId: item.address.id || 0,
+        categoryId: item.category.id || 0,
         description: item.description || "",
         status: item.status || "",
         name: item.name || "",
         price: item.price || 0,
-        multipartFile: item.multipartFile || ''
+        multipartFile: item.image || ''
     })
-    console.log(dataEdit);
+
+    console.log(dataEdit)
+
     const statusO = [
         {
             value: "HIRING",
@@ -38,14 +52,12 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         },
     ]
 
-
     const handleClose = () => setOpenEdit(false);
 
     const onChangeText = (e) => {
         setDataEdit({ ...dataEdit, [e.target.name]: e.target.value })
         console.log("onchange:", e.target.value);
     }
-
 
     const onChangeImage = (event) => {
         const value = event.target.files[0]
@@ -54,29 +66,28 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         setDataEdit({ ...dataEdit, multipartFile: (value) })
     }
 
-
     const onClickEdit = (e) => {
         console.log(e);
         onSubmitEdit({ ...item, ...dataEdit, id: item.id })
     }
 
-
-    const [valueStateAddress, setValueStateAddress] = useState('');
-    const [valueStateCategory, setValueStateCategory] = useState('');
+    const [valueStateAddress, setValueStateAddress] = useState();
+    const [valueStateCategory, setValueStateCategory] = useState();
 
     const [valueStatus, setValueStatus] = useState('')
 
     const handleChangeAddress = (event) => {
         const value = event.target.value;
         setValueStateAddress(event.target.value);
-        setDataEdit({ ...data, addressId: (value) });
+        setDataEdit({ ...dataEdit, addressId: (value) });
         console.log("value address", value);
     };
 
     const handleChangeCategory = (event) => {
+        console.log(event.target.value);
         const value = event.target.value;
         setValueStateCategory(event.target.value);
-        setDataEdit({ ...data, categoryId: (value) });
+        setDataEdit({ ...dataEdit, categoryId: value });
         console.log("value category", value);
     };
 
@@ -86,7 +97,6 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         setDataEdit({ ...dataEdit, status: (valueSta) });
         console.log("value status", valueSta);
     }
-    console.log(dataEdit);
     return (
         <Modal
             open={openEdit}
@@ -117,7 +127,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueStatus}
+                            value={dataEdit.status}
                             defaultValue={status}
                             label="Mã địa chỉ"
                             onChange={handlChangeStatus}
@@ -133,7 +143,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueStateAddress}
+                            value={dataEdit.addressId}
                             defaultValue={addressId}
                             label="Mã địa chỉ"
                             onChange={handleChangeAddress}
@@ -149,7 +159,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueStateCategory}
+                            value={dataEdit.categoryId}
                             label="Mã địa chỉ"
                             onChange={handleChangeCategory}
                         >
