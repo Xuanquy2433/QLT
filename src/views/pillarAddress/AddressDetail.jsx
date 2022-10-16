@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './css.css'
+import './detail.scss'
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -15,22 +16,36 @@ import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 
 const columns = [
     {
+        id: 'Hình ảnh',
+        label: 'Hình ảnh',
+        minWidth: 170,
+        align: 'left',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
         id: 'name',
         label: 'Tên trụ',
         minWidth: 170,
-        align: 'left',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'category',
         label: 'Loai trụ',
         minWidth: 170,
-        align: 'left',
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'price',
+        label: 'Giá',
+        minWidth: 170,
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'size',
-        label: 'Ngày hết hạn',
+        label: 'Hành động',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
@@ -52,22 +67,82 @@ function AddressDetail() {
         if (response.status === 200) {
             setDataAddressProduct(response.data.product)
             setAddress(response.data.address)
-            console.log(response.data);
         }
     }
-
+    console.log('adđ, ', address);
 
     return (
-        <div className='de'  >
-            <div className="address-detail">
-                <img src={address.image} alt="" />
-                <div>{address.id}</div>
-                <div>{address.street}</div>
-                <div>{address.city}</div>
-                <div>{address.description}</div>
-                THông tin address
-            </div>
-            <Paper sx={{ width: '80%', height: 500, margin: 'auto', overflow: 'hidden', mt: 3, position: 'relative' }}>
+        <div >
+            <div style={{ marginBottom: "15px" }} className='de'  >
+                {address ?
+                    <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: 'white', width: "96.5%" }} className="address-detail">
+                        {/* <div style={{ fontSize: "18px" }}>
+                        <div>{address.id}</div>
+                        <div >Thành phố: {address.city}</div>
+                        <div>Đường: {address.street}</div>
+                        <div>Địa chỉ: {address.city} {address.street}</div>
+                        <div>Mô tả: {address.description}</div>
+                    </div>
+                    <div >
+                        <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" />
+                    </div> */}
+
+
+                        <div className="container">
+                            <div className="header">
+                                <div className="header-logo">Thông tin trụ </div>
+                                <nav className="header-nav">
+                                    <i className="ion-ios-cart" />
+                                    <div />
+                                </nav>
+                            </div>
+                            <div className="product">
+                                <div className="product-photo">
+                                    <img style={{ width: '50%', height: '20vh' }} src="https://preview.ibb.co/kwZJhR/photo_1504051771394_dd2e66b2e08f.jpg" />
+                                    <img style={{ width: '40%', height: '35vh' }} src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
+                                </div>
+                                <div className="product-detail">
+                                    <h1 className="product__title">Thành phố {address.city}  </h1>
+                                    <div className="product__price">Đường {address.street}</div>
+                                    <div className="product__subtitle">
+                                        {address.description}
+                                    </div>
+                                    <div className="product__color">
+                                        <form action="">
+                                            <fieldset>
+                                                <input type="radio" name="color" />
+                                                <label htmlFor="straw">
+                                                    <i className="ion-android-done" />
+                                                </label>
+                                            </fieldset>
+                                            <fieldset>
+                                                <input type="radio" name="color" />
+                                                <label htmlFor="brown">
+                                                    <i className="ion-android-done" />
+                                                </label>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div> :
+                    <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
+                        <div style={{ fontSize: "18px" }}>
+                            <div>Không có địa chỉ này !</div>
+                        </div>
+                        <div >
+                            {/* <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" /> */}
+                        </div>
+                    </div>
+                }
+
+
+
+                {/* <Paper sx={{ width: '80%', height: 500, margin: 'auto', overflow: 'hidden', mt: 3, position: 'relative' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -87,15 +162,17 @@ function AddressDetail() {
                         <TableBody>
                             {dataAddressProduct.length > 0 ?
                                 dataAddressProduct.map((item, index) => (
-                                    <ProductComponent key={index} product={item}></ProductComponent>
+                                    <ProductComponent key={index} product={item} />
                                 )) : <TableCell>Đương này chưa có trụ nào ! </TableCell>}
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </Paper>
+            </Paper> */}
+
+            </div>
+            <ProductComponent product={dataAddressProduct} />
 
         </div>
-
     )
 }
 
