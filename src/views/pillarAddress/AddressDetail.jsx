@@ -101,7 +101,7 @@ function AddressDetail() {
                                 <img style={{ width: '40%', height: '35vh' }} src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
                             </div>
                             <div className="product-detail">
-                                <h1 className="product__title"> Đường {address.street}</h1>
+                                <h1 className="product__title">  {address.street}</h1>
                                 <div className="product__price">Thành phố {address.city} </div>
                                 <div className="product__subtitle">
                                     {address.description}
