@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './css.css'
+import './detail.scss'
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -74,7 +75,7 @@ function AddressDetail() {
         <div className='de'  >
             {address ?
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
-                    <div style={{ fontSize: "18px" }}>
+                    {/* <div style={{ fontSize: "18px" }}>
                         <div>{address.id}</div>
                         <div >Thành phố: {address.city}</div>
                         <div>Đường: {address.street}</div>
@@ -83,7 +84,50 @@ function AddressDetail() {
                     </div>
                     <div >
                         <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" />
+                    </div> */}
+
+
+                    <div className="container">
+                        <div className="header">
+                            <div className="header-logo">Thông tin trụ </div>
+                            <nav className="header-nav">
+                                <i className="ion-ios-cart" />
+                                <div />
+                            </nav>
+                        </div>
+                        <div className="product">
+                            <div className="product-photo">
+                                <img style={{width: '46%',height: '20vh'}} src="https://preview.ibb.co/kwZJhR/photo_1504051771394_dd2e66b2e08f.jpg" />
+                                <img style={{width: '50%',height: '35vh'}}  src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
+                            </div>
+                            <div className="product-detail">
+                                <h1 className="product__title">Thành phố {address.city}  </h1>
+                                <div className="product__price">Đường {address.street}</div>
+                                <div className="product__subtitle">
+                                {address.description}
+                                </div>
+                                <div className="product__color">
+                                    <form action="">
+                                        <fieldset>
+                                            <input type="radio" name="color" />
+                                            <label htmlFor="straw">
+                                                <i className="ion-android-done" />
+                                            </label>
+                                        </fieldset>
+                                        <fieldset>
+                                            <input type="radio" name="color" />
+                                            <label htmlFor="brown">
+                                                <i className="ion-android-done" />
+                                            </label>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
+
                 </div> :
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
                     <div style={{ fontSize: "18px" }}>
