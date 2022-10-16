@@ -43,7 +43,7 @@ export const API_PRODUCT_ADD = `${API}/product/add`;
 
 export const API_PRODUCT_EDIT = `${API}/product/update`;
 
-export const API_GET_ORDER_ADMIN_USER_CONFIRMED = `${API}/admin/order/?status=USER_CONFIRMED`;
+export const API_GET_ORDER_ADMIN_USER_CONFIRMED = `${API}/admin/orders/?status=USER_CONFIRMED`;
 
 export const API_PRODUCT_DELETE = `${API}/product/delete/`;
 

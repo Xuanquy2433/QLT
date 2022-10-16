@@ -195,14 +195,7 @@ function OrderPlace() {
                                     <TableRow >
                                         <TableCell> <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
                                     </TableRow>}
-                                <Modal
-                                    open={openDetail}
-                                    onClose={handleCloseDetailOrder}
-                                    aria-labelledby="modal-modal-title"
-                                    aria-describedby="modal-modal-description"
-                                >
-                                    <OrderDetailPopup dataDetail={dataDetail} />
-                                </Modal>
+                                <OrderDetailPopup dataDetail={dataDetail} openDetail={openDetail} handleCloseDetailOrder={handleCloseDetailOrder} />
                             </TableBody>
                         </Table>
                     </TableContainer>
