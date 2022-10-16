@@ -37,7 +37,7 @@ const {orderDetail, hasChildren, sendDataBack, isExtended} = props;
         <div className="detail-name">{orderDetail.product.name}</div>
         <div className="detail-month">{orderDetail.month}</div>
        <Countdown
-           date={orderDetail.product.expiredDate}
+           date={orderDetail.expiredDate}
            renderer={renderer}
        ></Countdown>
       </div>

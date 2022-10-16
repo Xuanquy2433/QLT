@@ -15,3 +15,11 @@
 .EXTEND{
   border: 1px solid blue;
 }
+
+.PAID{
+  border: 1px solid red;
+}
+
+.DONE{
+  border: 1px solid gray;
+}
