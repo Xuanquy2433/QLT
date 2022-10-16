@@ -90,10 +90,11 @@ function OrderPlace() {
     const [data, setData] = useState([])
     const getOrderUserConfirmed = async (e) => {
         const response = await axios.get(API_GET_ORDER_ADMIN_USER_CONFIRMED)
-        if (response) {
+        if (response && response.status === 200) {
             setData(response.data)
         }
     }
+    console.log('daaaaaaaa ', data);
 
     //handle
     const handleOpen = () => setOpen(true)
@@ -128,7 +129,6 @@ function OrderPlace() {
         }
         setOpenDetail(true)
     };
-    console.log(dataDetail);
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -191,7 +191,10 @@ function OrderPlace() {
                                             </TableCell>
 
                                         </TableRow>
-                                    )) : <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4>}
+                                    )) :
+                                    <TableRow >
+                                        <TableCell> <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
+                                    </TableRow>}
                                 <Modal
                                     open={openDetail}
                                     onClose={handleCloseDetailOrder}
