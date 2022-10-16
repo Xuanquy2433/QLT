@@ -74,7 +74,7 @@ function AddressDetail() {
     return (
         <div className='de'  >
             {address ?
-                <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
+                <div style={{ display: "flex", justifyContent: "space-between" ,backgroundColor: 'white'}} className="address-detail">
                     {/* <div style={{ fontSize: "18px" }}>
                         <div>{address.id}</div>
                         <div >Thành phố: {address.city}</div>
@@ -140,7 +140,7 @@ function AddressDetail() {
             }
 
 
-            <ProductComponent product={dataAddressProduct} />
+            {/* <ProductComponent product={dataAddressProduct} /> */}
 
             {/* <Paper sx={{ width: '80%', height: 500, margin: 'auto', overflow: 'hidden', mt: 3, position: 'relative' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
