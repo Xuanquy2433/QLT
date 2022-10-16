@@ -8,8 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function EditCustomer({ setId, setRole, item, openEdit, setOpenEdit, handleCloseEdit, onSubmitEdit }) {
-  const roles = [
+export default function EditCustomer({ item, openEdit, setOpenEdit, handleCloseEdit, onSubmitEdit }) {
+  const listRoles = [
     {
       value: "ROLE_USER",
       name: "User"
@@ -19,24 +19,31 @@ export default function EditCustomer({ setId, setRole, item, openEdit, setOpenEd
       name: "Admin"
     }
   ]
+  console.log(item);
 
-  const [valueState, setValueState] = useState('')
-  // const [data, setData] = useState(item || {
-  //   id: setId,
-  //   roleName: setRole
-  // })
+  useEffect(() => {
+    setData({
+      roleName: item.roles || '',
+    })
+  }, [item])
+
+  const { firstName, roles } = item
+  console.log(item.roles);
+
+  const [valueState, setValueState] = useState()
+  const [data, setData] = useState({
+    roleName: item.roles || '',
+  })
 
   const handleChange = (event) => {
     const value = event.target.value
     setValueState(event.target.value)
-    setRole(value)
-    setId(item.id)
-    console.log((item.id));
+    setData({ ...data, roleName: (value) })
     console.log(value);
   }
 
   const onClickEdit = () => {
-    onSubmitEdit();
+    onSubmitEdit({ ...item, ...data, id: item.id });
   }
   // console.log(data);
   return (
@@ -65,11 +72,12 @@ export default function EditCustomer({ setId, setRole, item, openEdit, setOpenEd
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={valueState}
+                value={data.roleName}
+                defaultValue={roles}
                 label="Vai trò"
                 onChange={handleChange}
               >
-                {roles.map((item, index) => (
+                {listRoles.map((item, index) => (
                   <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
                 ))}
 

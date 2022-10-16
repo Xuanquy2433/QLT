@@ -45,18 +45,18 @@ export default function AdminCustomer() {
   }
   console.log("data users", data);
 
-  const onEdit = (item) => {
+  const onEdit = async (item) => {
     setSelected(item)
     setOpenEdit(true)
     console.log(item);
   }
 
-  const [id, setId] = useState(0)
-  const [role, setRole] = useState('')
+  // const [id, setId] = useState(0)
+  // const [role, setRole] = useState('')
 
-  const onSubmitEdit = async () => {
+  const onSubmitEdit = async (data) => {
     try {
-      const response = await axios.put(API_UPDATE_ROLE + id + "/update?roleName=" + role)
+      const response = await axios.put(API_UPDATE_ROLE + data.id + "/update?roleName=" + data.roleName)
       if (response && response.status === 200) {
         toast.success("Sửa thành công", { autoClose: "1500" })
         fetchAPI();
@@ -96,7 +96,7 @@ export default function AdminCustomer() {
 
   return (
     <div>
-      <EditCustomer setId={setId} setRole={setRole} item={selected} openEdit={openEdit} handleCloseEdit={handleCloseEdit} onSubmitEdit={onSubmitEdit} />
+      {selected && <EditCustomer item={selected} openEdit={openEdit} handleCloseEdit={handleCloseEdit} onSubmitEdit={onSubmitEdit} />}
       <Customer onEdit={onEdit} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} data={data} page={page} rowsPerPage={rowsPerPage} totalPages={totalPages} />
     </div>
   )
