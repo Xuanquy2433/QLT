@@ -64,7 +64,7 @@ label.radio input:checked + span {
 
 .address-detail{
     position: relative;
-    background-color:#fff;
+    background-color:#ddd;
     width:80%;
     margin: 0 auto;
     border-radius: 4px;
