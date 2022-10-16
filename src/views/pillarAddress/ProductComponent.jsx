@@ -15,14 +15,26 @@ function ProductComponent({ product }) {
     }
   };
 
+  const buttons =(isPreOrdered,isAvailable) => {
+    if(isAvailable){
+      return <button className="btn btn-success">Thêm vào giỏ</button>
+    }
+    if(!isPreOrdered){
+      return <button className="btn btn-success">Đặt hàng</button>
+    }
+
+  }
+
   return (
     <TableRow hover role="checkbox" >
       <TableCell>{product.name}</TableCell>
+      <TableCell>{product.category.name}</TableCell>
       <TableCell sx={{ textAlign: 'right' }}>
         <Countdown
           date={product.expiredDate}
           renderer={renderer}
         ></Countdown>
+        {buttons(product.isPreOrdered,product.status==="AVAILABLE")}
       </TableCell>
     </TableRow>
 

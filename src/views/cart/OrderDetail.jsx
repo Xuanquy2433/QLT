@@ -25,12 +25,16 @@ function OrderDetail() {
     const [valueStatus, setValueStatus] = useState('')
     const [dataDetail, setDataDetail] = useState([])
     const [data, setData] = useState([])
-    const [isExtended, setIsExtended] = useState(false);
+    const [isExtended, setIsExtended] = useState(true);
+    const [order, setOrder] = useState([]);
     const history = useHistory()
 
     const onChangeExtendedStatus = () => {
         setIsExtended(!isExtended)
     }
+
+
+
     const getAllOderDetail = async (e) => {
         if (token) {
             try {
@@ -199,7 +203,11 @@ function OrderDetail() {
                                                 </div>
                                             </div>
 
-                                            <Order order={data} isExtended={isExtended}></Order>
+                                            <Order order={data}
+                                                   isExtended={isExtended}
+                                                   orderData={(data2) => setOrder(data2)}
+                                            />
+
 
                                             {dataDetail ?
                                                 dataDetail.map((item, index) => (
@@ -351,6 +359,7 @@ function OrderDetail() {
                                                             : null}
 
                                                     </button>
+
                                                     <button onClick={() => onChangeExtendedStatus()}>
                                                         <span>
                                                             gia han
