@@ -74,7 +74,7 @@ function AddressDetail() {
     return (
         <div className='de'  >
             {address ?
-                <div style={{ display: "flex", justifyContent: "space-between" ,backgroundColor: 'white'}} className="address-detail">
+                <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: 'white' }} className="address-detail">
                     {/* <div style={{ fontSize: "18px" }}>
                         <div>{address.id}</div>
                         <div >Thành phố: {address.city}</div>
@@ -97,31 +97,16 @@ function AddressDetail() {
                         </div>
                         <div className="product">
                             <div className="product-photo">
-                                <img style={{width: '50%',height: '20vh'}} src="https://preview.ibb.co/kwZJhR/photo_1504051771394_dd2e66b2e08f.jpg" />
-                                <img style={{width: '40%',height: '35vh'}}  src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
+                                <img style={{ width: '50%', height: '20vh' }} src="https://preview.ibb.co/kwZJhR/photo_1504051771394_dd2e66b2e08f.jpg" />
+                                <img style={{ width: '40%', height: '35vh' }} src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
                             </div>
                             <div className="product-detail">
                                 <h1 className="product__title">Thành phố {address.city}  </h1>
                                 <div className="product__price">Đường {address.street}</div>
                                 <div className="product__subtitle">
-                                {address.description}
+                                    {address.description}
                                 </div>
-                                <div className="product__color">
-                                    <form action="">
-                                        <fieldset>
-                                            <input type="radio" name="color" />
-                                            <label htmlFor="straw">
-                                                <i className="ion-android-done" />
-                                            </label>
-                                        </fieldset>
-                                        <fieldset>
-                                            <input type="radio" name="color" />
-                                            <label htmlFor="brown">
-                                                <i className="ion-android-done" />
-                                            </label>
-                                        </fieldset>
-                                    </form>
-                                </div>
+                                <div class="line-loading"></div>
                             </div>
                         </div>
                     </div>
