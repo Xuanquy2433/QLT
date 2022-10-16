@@ -66,25 +66,34 @@ function AddressDetail() {
         if (response.status === 200) {
             setDataAddressProduct(response.data.product)
             setAddress(response.data.address)
-            console.log(response.data);
         }
     }
-
+    console.log('adđ, ', address);
 
     return (
         <div className='de'  >
-            <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
-                <div style={{ fontSize: "18px" }}>
-                    <div>{address.id}</div>
-                    <div >Thành phố: {address.city}</div>
-                    <div>Đường: {address.street}</div>
-                    <div>Địa chỉ: {address.city} {address.street}</div>
-                    <div>Mô tả: {address.description}</div>
+            {address ?
+                <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
+                    <div style={{ fontSize: "18px" }}>
+                        <div>{address.id}</div>
+                        <div >Thành phố: {address.city}</div>
+                        <div>Đường: {address.street}</div>
+                        <div>Địa chỉ: {address.city} {address.street}</div>
+                        <div>Mô tả: {address.description}</div>
+                    </div>
+                    <div >
+                        <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" />
+                    </div>
+                </div> :
+                <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
+                    <div style={{ fontSize: "18px" }}>
+                        <div>Không có địa chỉ này !</div>
+                    </div>
+                    <div >
+                        {/* <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" /> */}
+                    </div>
                 </div>
-                <div >
-                    <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" />
-                </div>
-            </div>
+            }
 
 
             <ProductComponent product={dataAddressProduct} />
