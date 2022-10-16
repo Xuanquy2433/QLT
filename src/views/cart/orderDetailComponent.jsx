@@ -7,7 +7,7 @@ const [data, setData] = useState({
   id: "",
   isChecked: false,
 });
-const {orderDetail, hasChildren, sendDataBack, isExtended} = props;
+const {orderDetail, hasParent, sendDataBack, isExtended} = props;
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
       // Render a completed state
@@ -30,7 +30,7 @@ const {orderDetail, hasChildren, sendDataBack, isExtended} = props;
 }
   return (
       <div className="wrapper-detail">
-        <input style={{display: hasChildren && !isExtended ? 'block' : 'none'}} type="checkbox"
+        <input style={{display: !hasParent && !isExtended ? 'block' : 'none'}} type="checkbox"
                onChange={(e) => onChange(e)} id={orderDetail.product.id}
                value={orderDetail.product.id}/>
         <div className="detail-name">{orderDetail.product.id}</div>

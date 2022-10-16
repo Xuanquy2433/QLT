@@ -143,7 +143,7 @@ function OrderDetail() {
     useEffect(() => {
         // startTimer()
         getAllOderDetail();
-
+        console.log(order)
         if (data.status === 'NEW') {
             // setValueStatus('Thanh toán')
             setIsConFirm(false)
@@ -233,18 +233,7 @@ function OrderDetail() {
                                                         />
                                                     </div>
                                                     <p className="small mb-2">Vui lòng chuyển khoản vào STK bên dưới</p>
-                                                    <a href="#!" type="submit" className="text-white mr-2">
-                                                        <i className="fab fa-cc-mastercard fa-2x me-2" />
-                                                    </a>
-                                                    <a href="#!" type="submit" className="text-white mr-2">
-                                                        <i className="fab fa-cc-visa fa-2x me-2" />
-                                                    </a>
-                                                    <a href="#!" type="submit" className="text-white  mr-2">
-                                                        <i className="fab fa-cc-amex fa-2x me-2" />
-                                                    </a>
-                                                    <a href="#!" type="submit" className="text-white ">
-                                                        <i className="fab fa-cc-paypal fa-2x" />
-                                                    </a>
+
                                                     <form className="mt-4">
                                                         <div className="form-outline form-white mb-4">
                                                             <p

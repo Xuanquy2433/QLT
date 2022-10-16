@@ -6,11 +6,11 @@ function Order({order, isExtended, orderData}) {
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [childData, setChildData] = useState({});
-  const [listIds, setListIds] = useState([0]);
+  const [data, setData] = useState({});
+  const listIds = [];
   const expandOrder = () => {
     setIsExpanded(!isExpanded);
   }
-
   const getCheckIds = (data) => {
     if (data.isChecked) {
       listIds.push(data.id);
@@ -19,7 +19,6 @@ function Order({order, isExtended, orderData}) {
     }
     console.log(listIds);
   }
-
 
   useEffect(() => {
 
@@ -41,26 +40,22 @@ function Order({order, isExtended, orderData}) {
         </div>
       </div>
 
-      <div style={{ display: isExpanded && !order.hasChildren ? "none" : "block" }} >
+      <div style={{ display: isExpanded && order.hasParent ? "none" : "block" }} >
         {order.orderDetail?.map((orderDetail) => (
-
             <OrderDetailComponent
             orderDetail={orderDetail}
-            hasChildren={order.hasChildren}
+            hasParent={order.hasParent}
             sendDataBack={setChildData}
             isExtended={isExtended} />
-
-
         ))}
       </div>
+
+
       <div>
         {(order.hasChildren ? order.children.map(
-          (child) =>
-              <>
-              <Order order={child} />
-                <button onClick={() => orderData({child})}>test</button>
-              </>
-        ) : "")}
+          (child) =>{
+          return(<Order order={child} />)
+        }) : "")}
       </div>
     </div>
 
