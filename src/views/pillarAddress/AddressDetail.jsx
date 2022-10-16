@@ -140,7 +140,7 @@ function AddressDetail() {
             }
 
 
-            {/* <ProductComponent product={dataAddressProduct} /> */}
+            <ProductComponent product={dataAddressProduct} />
 
             {/* <Paper sx={{ width: '80%', height: 500, margin: 'auto', overflow: 'hidden', mt: 3, position: 'relative' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
