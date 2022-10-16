@@ -196,15 +196,15 @@ function TableAddress() {
                 </Box>
 
 
-                <Box sx={{ width: '100%', mt: 2 }} className='hoverBut' >
+                <Box sx={{ width: '100%', mt: 2, }} className='hoverBut' >
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {data && data.map((item, index) => (
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
-                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px' }}>
+                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
                                     <p style={{
                                         width: '46%', height: '230px'
                                     }}  >
-                                        <img style={{ width: '100%', height: '245px', border: '1px solid #ddd' }} src={item.image} alt="" />
+                                        <img style={{ width: '100%', height: '245px', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
 
                                     </p>
                                     <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>

@@ -15,22 +15,36 @@ import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 
 const columns = [
     {
+        id: 'Hình ảnh',
+        label: 'Hình ảnh',
+        minWidth: 170,
+        align: 'left',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
         id: 'name',
         label: 'Tên trụ',
         minWidth: 170,
-        align: 'left',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'category',
         label: 'Loai trụ',
         minWidth: 170,
-        align: 'left',
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'price',
+        label: 'Giá',
+        minWidth: 170,
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'size',
-        label: 'Ngày hết hạn',
+        label: 'Hành động',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
@@ -59,14 +73,19 @@ function AddressDetail() {
 
     return (
         <div className='de'  >
-            <div className="address-detail">
-                <img src={address.image} alt="" />
-                <div>{address.id}</div>
-                <div>{address.street}</div>
-                <div>{address.city}</div>
-                <div>{address.description}</div>
-                THông tin address
+            <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
+                <div style={{ fontSize: "18px" }}>
+                    <div>{address.id}</div>
+                    <div >Thành phố: {address.city}</div>
+                    <div>Đường: {address.street}</div>
+                    <div>Địa chỉ: {address.city} {address.street}</div>
+                    <div>Mô tả: {address.description}</div>
+                </div>
+                <div >
+                    <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" />
+                </div>
             </div>
+
             <Paper sx={{ width: '80%', height: 500, margin: 'auto', overflow: 'hidden', mt: 3, position: 'relative' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
