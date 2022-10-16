@@ -33,7 +33,7 @@ function ProductComponent({ product }) {
             <div style={{ width: "50%" }}>
               <img style={{ width: '70%', borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
-            <div style={{ width: "50%", textAlign: "center", marginTop: "25px" }}>
+            <div style={{ width: "50%", textAlign: "center", marginTop: "30px" }}>
               <h1 style={{ fontSize: "34px" }}>Tên trụ: {item.name}</h1>
               <h2>Giá: {item.price}</h2>
               <h3>Loại trụ: {item.category.name}</h3>
