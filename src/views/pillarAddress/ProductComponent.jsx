@@ -30,10 +30,10 @@ function ProductComponent({ product }) {
       {
         product.map((item, index) => (
           <div style={{ backgroundColor: "#ddd", width: "80%", margin: " 10px auto", display: "flex", padding: "20px", borderRadius: "8px" }}>
-            <div style={{ width: "50%" }}>
+            <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <img style={{ width: '70%', borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
-            <div style={{ width: "50%", textAlign: "center", marginTop: "30px" }}>
+            <div style={{ width: "50%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
               <h1 style={{ fontSize: "34px" }}>Tên trụ: {item.name}</h1>
               <h2>Giá: {item.price}</h2>
               <h3>Loại trụ: {item.category.name}</h3>
