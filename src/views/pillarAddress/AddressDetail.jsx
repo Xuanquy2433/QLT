@@ -97,8 +97,8 @@ function AddressDetail() {
                         </div>
                         <div className="product">
                             <div className="product-photo">
-                                <img style={{width: '46%',height: '20vh'}} src="https://preview.ibb.co/kwZJhR/photo_1504051771394_dd2e66b2e08f.jpg" />
-                                <img style={{width: '50%',height: '35vh'}}  src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
+                                <img style={{width: '50%',height: '20vh'}} src="https://preview.ibb.co/kwZJhR/photo_1504051771394_dd2e66b2e08f.jpg" />
+                                <img style={{width: '40%',height: '35vh'}}  src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
                             </div>
                             <div className="product-detail">
                                 <h1 className="product__title">Thành phố {address.city}  </h1>
