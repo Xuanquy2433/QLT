@@ -131,13 +131,13 @@ function ProductComponent({ product }) {
     <div style={{ display: "flex", width: " 100%", flexWrap: "wrap", justifyContent: "center" }}>
       {
         product.map((item, index) => (
-          <div style={{ float: "left", backgroundColor: "#ddd", width: "45%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>
+          <div style={{ float: "left", backgroundColor: "#ddd", width: "48%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>
             <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <img style={{ width: '75%', borderRadius: "8px" }} src={item.photosImagePath} alt="" />
+              <img style={{ width: '250px', height: "250px", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
             <div style={{ width: "50%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-              <h1 style={{ fontSize: "2em",marginBottom: '10px' }}> {item.name}</h1>
-              <h2 style={{color:'#32cd32'}}> {formatMoney(item.price)} VNĐ</h2>
+              <h1 style={{ fontSize: "2em", marginBottom: '10px' }}> {item.name}</h1>
+              <h2 style={{ color: '#32cd32' }}> {formatMoney(item.price)} VNĐ</h2>
               <h3>Loại trụ: {item.category.name}</h3>
               <h4> {item.description}</h4>
               {item.status === 'AVAILABLE' ?
