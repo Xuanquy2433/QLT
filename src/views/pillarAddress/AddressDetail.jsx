@@ -13,6 +13,8 @@ import axios from 'axios';
 import { API_GET_PILLAR } from 'utils/const';
 import ProductComponent from "./ProductComponent";
 import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const columns = [
     {
@@ -62,11 +64,21 @@ function AddressDetail() {
         getAddress()
     }, [])
 
+    const history = useHistory();
     const getAddress = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
-        if (response.status === 200) {
-            setDataAddressProduct(response.data.product)
-            setAddress(response.data.address)
+        try {
+            const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
+            if (response.status === 200) {
+                setDataAddressProduct(response.data.product)
+                setAddress(response.data.address)
+            }
+        } catch (error) {
+            if (error && error.response.status === 400 || error.response.status === 404) {
+                toast.warning('Không có địa chỉ này !', {
+                    autoClose: 3000
+                })
+                history.push('/auth/pageNotFound')
+            }
         }
     }
     console.log('adđ, ', address);
