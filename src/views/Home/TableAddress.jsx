@@ -217,9 +217,11 @@ function TableAddress() {
                                         <p>Số lượng trụ: {item.totalProduct}</p>
                                         <p>Số trụ còn trống: {item.totalProductAvailable}</p>
 
-                                        <button sx={{ mt: 6 }} onClick={() => handleOpen(item.id)} class="offset" >
-                                            Xem thêm
-                                        </button>
+                                        <NavLink to={'/auth/address/' + item.id}>
+                                            <button sx={{ mt: 6 }} class="offset" >
+                                                Xem thêm
+                                            </button>
+                                        </NavLink>
                                         {/* 
                                     {item.product.length > 0 ? item.product.map((itemDetail, index) => (
                                         <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
