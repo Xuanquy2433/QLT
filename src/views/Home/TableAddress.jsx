@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -49,6 +49,7 @@ const style = {
     p: 4,
 };
 function TableAddress() {
+    const history = useHistory();
 
     const [selected, setSelected] = React.useState(false);
     const ToggleButton = styled(ToggleButtonMui)({
@@ -74,11 +75,12 @@ function TableAddress() {
     const [dataDetail, setDataDetail] = useState([])
     const handleOpen = async (id) => {
         console.log(id);
-        const response = await axios.get(API_FIND_BY_PRODUCT_ID + id)
-        if (response) {
-            setDataDetail(response.data.product)
-        }
-        setOpen(true)
+        history.push('/auth/address/' + id)
+        // const response = await axios.get(API_FIND_BY_PRODUCT_ID + id)
+        // if (response) {
+        //     setDataDetail(response.data.product)
+        // }
+        // setOpen(true)
     };
     const handleClose = () => setOpen(false);
 
