@@ -58,7 +58,7 @@ const Auth = (props) => {
     <>
       <div className="main-content" ref={mainContent}  >
         <AuthNavbar />
-        <div className="header  py-7 py-lg-8">
+        <div className="header bg-gradient-info py-7 py-lg-8">
 
           <div className="separator separator-bottom separator-skew zindex-100">
             <svg

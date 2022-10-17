@@ -128,10 +128,10 @@ function ProductComponent({ product }) {
   }
 
   return (
-    <div style={{ display: "flex", width: " 100%", flexWrap: "wrap", justifyContent: "center" }}>
+    <div style={{ display: "flex", width: " 100%", flexWrap: "wrap", justifyContent: "center" ,marginTop: '50px'}}>
       {
         product.map((item, index) => (
-          <div style={{ float: "left", backgroundColor: "#ddd", width: "48%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>
+          <div style={{ float: "left", backgroundColor: "#ddd", marginTop: '10px',width: "45%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>
             <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <img style={{ width: '75%', borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
