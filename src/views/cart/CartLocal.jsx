@@ -58,7 +58,6 @@ function CartLocal() {
                     }
                 });
                 if (response && response.status === 200) {
-                    console.log("iddddd ", response.data.message);
                     toast.success('Success', {
                         autoClose: 3000
                     })
@@ -263,10 +262,10 @@ function CartLocal() {
                                                     onClick={clickOrder}
                                                 >
 
-                                                    {btnDisabled ? 'Vui lòng chờ...' : 'Đặt hàng'}
+                                                    {btnDisabled ? 'Vui lòng chờ...' : 'Thuê trụ'}
                                                 </button> : <NavLink to={'/auth/login'}> <button type="button"
                                                     className="btn btn-dark btn-block btn-lg"
-                                                    data-mdb-ripple-color="dark">Vui lòng đăng nhập để đặt hàng ! </button> </NavLink>}
+                                                    data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>}
 
                                             </div>
                                         </div>
