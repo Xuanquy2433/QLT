@@ -13,6 +13,8 @@ import axios from 'axios';
 import { API_GET_PILLAR } from 'utils/const';
 import ProductComponent from "./ProductComponent";
 import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const columns = [
     {
@@ -62,11 +64,21 @@ function AddressDetail() {
         getAddress()
     }, [])
 
+    const history = useHistory();
     const getAddress = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
-        if (response.status === 200) {
-            setDataAddressProduct(response.data.product)
-            setAddress(response.data.address)
+        try {
+            const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
+            if (response.status === 200) {
+                setDataAddressProduct(response.data.product)
+                setAddress(response.data.address)
+            }
+        } catch (error) {
+            if (error && error.response.status === 400 || error.response.status === 404) {
+                toast.warning('Không có địa chỉ này !', {
+                    autoClose: 3000
+                })
+                history.push('/auth/pageNotFound')
+            }
         }
     }
     console.log('adđ, ', address);
@@ -98,12 +110,12 @@ function AddressDetail() {
                             </div>
                             <div className="product">
                                 <div className="product-photo">
-                                    <img style={{ width: '50%', height: '20vh' }} src="https://preview.ibb.co/kwZJhR/photo_1504051771394_dd2e66b2e08f.jpg" />
-                                    <img style={{ width: '40%', height: '35vh' }} src="https://preview.ibb.co/fmOB2R/photo_1504051898397_67f872da760b.jpg" />
+                                    <img style={{ width: '50%', height: '20vh' }} src={address.photosImagePath} />
+                                    <img style={{ width: '40%', height: '35vh' }} src={'https://truyenthongacn.com/wp-content/uploads/2022/04/CTY-TRUYEN-THONG-ACN-1222.png'} />
                                 </div>
                                 <div className="product-detail">
-                                    <h1 className="product__title">Thành phố {address.city}  </h1>
-                                    <div className="product__price">Đường {address.street}</div>
+                                    <h1 className="product__title">{address.street} </h1>
+                                    <div className="product__price">Thành phố {address.city}  </div>
                                     <div className="product__subtitle">
                                         {address.description}
                                     </div>

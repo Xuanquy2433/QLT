@@ -10,14 +10,14 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
   const handleCloseEdit = () => setOpenEdit(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const [dataAddressEdit, setDataAddressEdit] = useState(item || {
+  const [dataAddressEdit, setDataAddressEdit] = useState({
     city: item.city || '',
     street: item.street || '',
     description: item.description || '',
-    multipartFile: item.multipartFile || ''
+    multipartFile: item.image || ''
   })
-  console.log(multipartFile);
-  const { city, street, description, multipartFile } = item
+  console.log(item.image);
+  const { city, street, description, multipartFile, image, photosImagePath } = item
 
   const onChangeText = (e) => {
     console.log(e.target.value);
@@ -67,7 +67,7 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
             <TextField onChange={onChangeText} defaultValue={description} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
             <TextField onChange={onChangeText} defaultValue={street} name="street" style={{ margin: '5px' }} fullWidth label='Đườmg' />
             <TextField onChange={onChangeText} defaultValue={city} name="city" style={{ margin: '5px' }} fullWidth label='Thành phố' />
-            <TextField onChange={onChangeImage} defaultValue={multipartFile} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image/*" />
+            <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image/*" />
 
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>

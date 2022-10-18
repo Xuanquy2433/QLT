@@ -161,21 +161,45 @@ function AdminProduct() {
   }
 
   const onDelete = async (id) => {
-    const response = await axios.delete(API_PRODUCT_DELETE + id)
-    if (response.status === 200) {
-      toast.success("Xóa thành công", { autoClose: 1500 })
-      getAllProduct()
+    try {
+      const response = await axios.delete(API_PRODUCT_DELETE + id)
+      if (response.status === 200) {
+        toast.success("Xóa thành công", { autoClose: 1500 })
+        getAllProduct()
+      }
+    } catch (error) {
+      if (error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error) {
+        toast.error(`${error.response.data.error}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error && error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else {
+        toast.error('Error', {
+          autoClose: 2000
+        })
+      }
     }
   }
-  return (
-    <div>
-      <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
-      {selected && <EditPillar dataCategory={dataCategory} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
-      <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
-        handleChangePage={handleChangePage} totalPages={totalPages}
-        handleChangeRowsPerPage={handleChangeRowsPerPage} />
-    </div>
-  )
+
+return (
+  <div>
+    <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
+    {selected && <EditPillar dataCategory={dataCategory} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
+    <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
+      handleChangePage={handleChangePage} totalPages={totalPages}
+      handleChangeRowsPerPage={handleChangeRowsPerPage} />
+  </div>
+)
 }
 
 export default AdminProduct
