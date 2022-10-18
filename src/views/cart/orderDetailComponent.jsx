@@ -1,5 +1,5 @@
 import  './OrderDetailComponent.css';
-import Countdown from 'react-countdown';
+import Countdown, {zeroPad} from 'react-countdown';
 import {useEffect, useState} from "react";
 
 function OrderDetailComponent(props) {
@@ -7,14 +7,14 @@ const [data, setData] = useState({
   id: "",
   isChecked: false,
 });
-const {orderDetail, hasParent, sendDataBack, isExtended} = props;
+const {orderDetail, hasParent, sendDataBack, isExtended, orderStatus} = props;
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
       // Render a completed state
       return <div>Đã hết hạn</div>;
     } else {
       // Render a countdown
-      return <span className="detail-time">{hours}:{minutes}</span>;
+      return <span className="detail-time">{zeroPad(hours)}:{zeroPad(minutes)}</span>;
     }
   };
 
@@ -30,11 +30,11 @@ const {orderDetail, hasParent, sendDataBack, isExtended} = props;
 }
   return (
       <div className="wrapper-detail">
-        <input style={{display: !hasParent && !isExtended ? 'block' : 'none'}} type="checkbox"
+        <input style={{display: !hasParent && !isExtended && !orderStatus? 'block' : 'none'}} type="checkbox"
                onChange={(e) => onChange(e)} id={orderDetail.product.id}
                value={orderDetail.product.id}/>
-        <div className="detail-name">{orderDetail.product.id}</div>
         <div className="detail-name">{orderDetail.product.name}</div>
+        <div className="detail-price">{orderDetail.product.price}</div>
         <div className="detail-month">{orderDetail.month}</div>
        <Countdown
            date={orderDetail.expiredDate}
