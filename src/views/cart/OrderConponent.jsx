@@ -2,12 +2,13 @@ import './OrderComponent.css';
 import { useEffect, useState } from "react";
 import OrderDetailComponent from "./orderDetailComponent";
 
-function Order({order, isExtended, orderData}) {
+function Order({order, isExtended, ya}) {
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [childData, setChildData] = useState({});
-  const [data, setData] = useState({});
   const listIds = [];
+  const [data, setData] = useState("")
+
   const expandOrder = () => {
     setIsExpanded(!isExpanded);
   }
@@ -20,14 +21,16 @@ function Order({order, isExtended, orderData}) {
     console.log(listIds);
   }
 
+  let idOrderInURL = window.location.pathname.replace(/\D/g, "");
   useEffect(() => {
-
     getCheckIds(childData);
-  }, [childData]);
+  }, [childData])
 
   return (
     <div className="wrapper">
+      <button style={{display: order.id === parseInt(idOrderInURL) ? "none" : "block"}}>chi tiet {order.id}</button>
       <div className={`${order.status}`} >
+
         <div onClick={() => expandOrder()}>
         <div className="order-info">
           <div>số lượng: {order.quantity}</div>
@@ -40,22 +43,24 @@ function Order({order, isExtended, orderData}) {
         </div>
       </div>
 
-      <div style={{ display: isExpanded && order.hasParent ? "none" : "block" }} >
+      <div style={{ display:  ya === undefined || ya === null? "block" :
+      isExpanded ? "none" : "block" }}>
+
         {order.orderDetail?.map((orderDetail) => (
             <OrderDetailComponent
             orderDetail={orderDetail}
             hasParent={order.hasParent}
             sendDataBack={setChildData}
-            isExtended={isExtended} />
+            isExtended={isExtended}
+            orderStatus={order.status==="DONE"}
+            />
         ))}
       </div>
-
-
       <div>
         {(order.hasChildren ? order.children.map(
           (child) =>{
-          return(<Order order={child} />)
-        }) : "")}
+          return(<Order order={child} ya={!isExpanded}/>)
+        }) : null)}
       </div>
     </div>
 

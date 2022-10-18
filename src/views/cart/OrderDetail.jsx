@@ -191,10 +191,18 @@ function OrderDetail() {
                                     <div className="row">
                                         <div className="col-lg-7">
                                             <h5 className="mb-3">
-                                                <NavLink to={'/auth/cart'} className="text-body">
-                                                    <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
-                                                    Tiếp tục thuê trụ
-                                                </NavLink>
+                                                {data.hasParent ?
+                                                    <NavLink to={'/auth/order/'+data.parentId} className="text-body">
+                                                        <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
+                                                        tro lai order chinh
+                                                    </NavLink>
+                                                    :
+                                                    <NavLink to={'/auth/cart'} className="text-body">
+                                                        <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
+                                                        Tiếp tục thuê trụ
+                                                    </NavLink>
+                                                }
+
                                             </h5>
                                             <hr />
                                             <div className="d-flex justify-content-between align-items-center mb-4">
