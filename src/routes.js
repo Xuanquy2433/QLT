@@ -94,13 +94,13 @@ var routes = [
     component: Maps,
     layout: "/admin"
   },
-  // {
-  //   path: "/user-profile",
-  //   name: "User Profile",
-  //   icon: "ni ni-single-02 text-yellow",
-  //   component: Profile,
-  //   layout: "/admin"
-  // },
+  {
+    path: "/profile",
+    name: "User Profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: Profile,
+    layout: "/auth"
+  },
   // {
   //   path: "/tables",
   //   name: "Tables",
@@ -144,8 +144,8 @@ var routes = [
     layout: "/auth"
   },
   {
-    path: "/profile",
-    name: "Profile",
+    path: "/activity",
+    name: "Activity",
     icon: "ni ni-circle-08 text-pink",
     component: Activity,
     layout: "/auth"

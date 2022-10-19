@@ -72,7 +72,7 @@ const Sidebar = (props) => {
       setData(response.data)
     }
   }
-  
+
   useEffect(() => {
     getOrderUserConfirmed()
   }, [])

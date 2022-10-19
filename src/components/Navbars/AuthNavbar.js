@@ -45,6 +45,17 @@ const AdminNavbar = () => {
       history.push('/admin/index')
     }
   }
+
+  const styleLab = {
+    marginRight: "7px",
+    fontWeight: "400",
+    fontSize: "1rem"
+  }
+
+  const styleFont = {
+    fontSize: "0.9rem",
+    fontWeight: "400"
+  }
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -96,6 +107,7 @@ const AdminNavbar = () => {
                   <span className="nav-link-inner--text">Giỏ hàng</span>
                 </NavLink>
               </NavItem>
+
 
 
 
@@ -164,16 +176,21 @@ const AdminNavbar = () => {
                     <li className="menu-item-title">
                       <NavLink onClick={checkRole} className="menu-hover nav-link-icon">
                         <i className="ni ni-single-02" />
-                        <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName} <ArrowDropDownIcon/></span>
+                        <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName} <ArrowDropDownIcon /></span>
                       </NavLink>
                       <ul className="menu-level-2">
 
                         {token && decoded.roles === "[ROLE_USER]" ?
                           <li className="item-menu-level-2">
+                            <NavLink className="nav-link-icon" to="/auth/activity" tag={Link}>
+                              {/* <CgMenuBoxed style={{ fontSize: "18.5px" }} /> */}
+                              <i style={styleLab} className="ni ni-calendar-grid-58" />
+                              <span style={styleFont} className="nav-link-inner--text">Đơn hàng</span>
+                            </NavLink>
                             <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
                               {/* <CgMenuBoxed style={{ fontSize: "18.5px" }} /> */}
-                              <i className="ni ni-calendar-grid-58" />
-                              <span className="nav-link-inner--text">Đơn hàng</span>
+                              <i style={styleLab} className="ni ni-single-02" />
+                              <span style={styleFont} className="nav-link-inner--text">Hồ sơ</span>
                             </NavLink>
                             <DropdownItem divider />
                           </li>
@@ -181,8 +198,8 @@ const AdminNavbar = () => {
                         <li className="item-menu-level-2">
                           <NavLink className="nav-link-icon" to="/admin/index" tag={Link} onClick={logout}
                           >
-                            <i className="ni ni-user-run" />
-                            <span className="nav-link-inner--text">Đăng xuất</span>
+                            <i style={styleLab} className="ni ni-user-run" />
+                            <span style={styleFont} className="nav-link-inner--text">Đăng xuất</span>
                           </NavLink>
                         </li>
                       </ul>
