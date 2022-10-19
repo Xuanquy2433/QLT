@@ -27,34 +27,49 @@ import Modal from '@mui/material/Modal';
 import CheckIcon from '@mui/icons-material/Check';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import OrderDetailPopup from './OrderDetailPopup';
+import Sidebar from 'components/Sidebar/Sidebar';
 
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 170 },
+    { id: 'id', label: 'Id', minWidth: 70 },
     {
         id: 'orderCode',
         label: 'Mã đặt hàng',
-        minWidth: 170,
+        minWidth: 150,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'nameCustomer',
+        label: 'Tên khách',
+        minWidth: 150,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'phoneNumber',
+        label: 'Số điện thoại',
+        minWidth: 150,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'quantity',
         label: 'Số lượng',
-        minWidth: 170,
+        minWidth: 100,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'total',
         label: 'Tổng tiền',
-        minWidth: 170,
+        minWidth: 150,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'Status',
         label: 'Trạng thái',
-        minWidth: 170,
+        minWidth: 150,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -94,7 +109,7 @@ function OrderPlace() {
             setData(response.data)
         }
     }
- 
+
 
     //handle
     const handleOpen = () => setOpen(true)
@@ -113,6 +128,7 @@ function OrderPlace() {
         if (response.status === 200) {
             toast.success('Thao tác thành công ! ', { autoClose: 2000 })
             getOrderUserConfirmed()
+            // Sidebar
         } else toast.error('Thất bại ! ', { autoClose: 2000 })
     }
 
@@ -174,9 +190,13 @@ function OrderPlace() {
                                         <TableRow hover sx={{ cursor: 'pointer' }} role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.fullName}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.total}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
+                                            {item.status === 'USER_CONFIRMED' ?
+                                                <TableCell sx={{ textAlign: 'center' }}> Chờ duyệt</TableCell>
+                                                : ''}
 
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <Button variant="contained" onClick={() => confirmOrder(item.id)} color="success">

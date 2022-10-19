@@ -72,9 +72,10 @@ const Sidebar = (props) => {
       setData(response.data)
     }
   }
+  
   useEffect(() => {
     getOrderUserConfirmed()
-  }, [data])
+  }, [])
 
   const cssOrderPlaceNoti = {
     color: 'red',
