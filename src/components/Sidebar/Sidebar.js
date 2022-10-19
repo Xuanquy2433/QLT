@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink as NavLinkRRD, Link, useHistory } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
@@ -36,6 +36,8 @@ import {
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { API_GET_ORDER_ADMIN_USER_CONFIRMED } from "utils/const";
 
 var ps;
 
@@ -62,12 +64,36 @@ const Sidebar = (props) => {
     history.push('/auth/homePage')
   } else decoded = jwt_decode(token);
 
-  console.log(decoded);
+  //get size order place
+  const [data, setData] = useState([])
+  const getOrderUserConfirmed = async (e) => {
+    const response = await axios.get(API_GET_ORDER_ADMIN_USER_CONFIRMED)
+    if (response && response.status === 200) {
+      setData(response.data)
+    }
+  }
+  useEffect(() => {
+    getOrderUserConfirmed()
+  }, [data])
+
+  const cssOrderPlaceNoti = {
+    color: 'red',
+    marginLeft: '10px',
+    fontWeight: '600',
+    width: '22px',
+    height: '22px',
+    background: '#fff',
+    border: '2px solid red',
+    textAlign: 'center',
+    fontSize: '0.8em',
+    borderRadius: '50%'
+  }
+
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
       if (decoded.roles === `[ROLE_ADMIN]` && prop.path !== '/register' && prop.path !== '/login'
         && prop.path !== '/order/' && prop.path !== '/cart' && prop.path !== '/profile'
-        && prop.path !== '/pageNotFound' && prop.path !== '/address/:id' && prop.path !== '/order/:id') {
+        && prop.path !== '/pageNotFound' && prop.path !== '/address/:id' && prop.path !== '/order/:id' && prop.path !== '/orderPlace') {
         return (
           <NavItem key={key}>
             <NavLink
@@ -81,7 +107,22 @@ const Sidebar = (props) => {
             </NavLink>
           </NavItem>
         );
-      } else if (decoded.roles === `[ROLE_USER]`) {
+      } else if (decoded.roles === `[ROLE_ADMIN]` && prop.path === '/orderPlace') {
+        return (
+          <NavItem key={key}>
+            <NavLink
+              to={prop.layout + prop.path}
+              tag={NavLinkRRD}
+              onClick={closeCollapse}
+              activeClassName="active"
+            >
+              <i className={prop.icon} />
+              {prop.name} <span style={cssOrderPlaceNoti}>{data.length}</span>
+            </NavLink>
+          </NavItem>
+        )
+      }
+      else if (decoded.roles === `[ROLE_USER]`) {
         history.push('/auth/homePage')
       }
       else if (!decoded) {

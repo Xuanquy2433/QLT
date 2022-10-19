@@ -94,7 +94,7 @@ function OrderPlace() {
             setData(response.data)
         }
     }
-    console.log('daaaaaaaa ', data);
+ 
 
     //handle
     const handleOpen = () => setOpen(true)
