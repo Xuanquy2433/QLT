@@ -13,7 +13,7 @@ function BannerSlide() {
         pauseOnHover: false,
     };
     return (
-        <div style={{ width: '800px',borderRadius: '10px', margin:'auto' }}>
+        <div style={{ width: '900px',borderRadius: '10px', margin:'auto' }}>
             <Slider  {...settings}>
                 <div >
                     {/* <h3 style={{color: 'white',textAlign: 'center'}}>1</h3> */}
