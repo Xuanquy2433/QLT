@@ -143,11 +143,10 @@ function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, chec
 
                         </button>
 
-                        <button onClick={() => onChangeExtendedStatus()}>
-                            <span>
-                                gia han
-
-                            </span>
+                        <button style={{width: '35%',margin :'auto',marginTop: '10px',textAlign: 'center'}} className="btn btn-info btn-block btn-lg" onClick={() => onChangeExtendedStatus()}>
+                                <span>
+                                    Gia hạn
+                                </span>
                         </button>
                     </div>
                 </div>

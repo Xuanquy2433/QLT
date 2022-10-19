@@ -21,7 +21,7 @@ import { NavLink } from 'react-router-dom';
 
 
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 170, align: 'left' },
+    { id: 'id', label: 'Id đơn hàng', minWidth: 170, align: 'left' },
     {
         id: 'date',
         label: 'Ngày đặt hàng',

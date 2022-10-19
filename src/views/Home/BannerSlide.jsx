@@ -10,26 +10,26 @@ function BannerSlide() {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
-        pauseOnHover: false
+        pauseOnHover: false,
     };
     return (
-        <div style={{ width: '800px',borderRadius: '10px', margin:'auto' }}>
+        <div style={{ width: '900px',borderRadius: '10px', margin:'auto' }}>
             <Slider  {...settings}>
                 <div >
                     {/* <h3 style={{color: 'white',textAlign: 'center'}}>1</h3> */}
-                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://wallpaperaccess.com/full/5923902.jpg" alt="" />
+                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://bizman.com.vn/storage/post/thumbnails/pano-quang-cao-b3c0c80a-45b6-4bd5-820a-54817f87dc72.jpg" alt="" />
                 </div>
                 <div>
-                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://wallpaperaccess.com/full/3358359.jpg" alt="" />
+                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://inbienquangcao.vn/wp-content/uploads/2020/01/Kha%CC%81i-nie%CC%A3%CC%82m-bie%CC%82%CC%89n-qua%CC%89ng-ca%CC%81o-pano-ta%CC%82%CC%81m-lo%CC%9B%CC%81n-ngoa%CC%80i-tro%CC%9B%CC%80i.jpg" alt="" />
                 </div>
                 <div>
-                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://i.pinimg.com/originals/ef/37/81/ef37815019ae52354c7c5772f4e886d6.png" alt="" />
+                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://kynguyengroup.com/wp-content/uploads/2017/09/d26976b9d8e420ba79f5.jpg" alt="" />
                 </div>
                 <div>
-                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://w0.peakpx.com/wallpaper/373/646/HD-wallpaper-lo-fi-sunset-chill-nature-relax.jpg" alt="" />
+                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="http://cdn-gd-v1.webbnc.net/useruploads/userfiles//506940/images/kich-thuoc-bien-quang-cao-ngoai-troi-3.jpg" alt="" />
                 </div>
                 <div>
-                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://i.pinimg.com/originals/26/6f/17/266f1731e0b4060fea5265efe6fa6d55.jpg" alt="" />
+                    <img style={{ width: '100%', height: '400px', borderRadius: '10px' }} src="https://showroomdecor.com.vn/wp-content/uploads/2022/05/bien-quang-cao-dung-0.jpg" alt="" />
                 </div>
             </Slider>
         </div>
