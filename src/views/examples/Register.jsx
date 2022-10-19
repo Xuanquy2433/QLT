@@ -40,13 +40,13 @@ const Register = () => {
     e.preventDefault();
     try {
       if (user.phoneNumber.length < 10) {
-        toast.error('Phone number must 10 character', {
+        toast.warning('Số điện thoại phải có 10 kí tự', {
           autoClose: 3000
         })
       } else {
         const response = await axios.post(API_SIGNUP, user)
         if (response && response.status === 201) {
-          toast.success('Signup success', {
+          toast.success('Đăng ký thành công', {
             autoClose: 3000
           })
           history.push('/auth/login')

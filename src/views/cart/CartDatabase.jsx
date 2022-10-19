@@ -140,7 +140,7 @@ function CartDatabase() {
                                     <div className="col-lg-8">
                                         <div className="p-5">
                                             <div className="d-flex justify-content-between align-items-center mb-5">
-                                                <h1 className="fw-bold mb-0 text-black">Giỏ hàng</h1>
+                                                <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
                                                 <h6 className="mb-0 text-muted">{data.length} mặt hàng</h6>
                                             </div>
                                             {data.length ?
@@ -265,7 +265,7 @@ function CartDatabase() {
                                                         <option value={4}>Four</option>
                                                     </select>
                                                 </div> */}
-                                            <h5 className="text-uppercase mb-3">Mã giảm giá</h5>
+                                            {/* <h5 className="text-uppercase mb-3">Mã giảm giá</h5>
                                             <div className="mb-5">
                                                 <div className="form-outline">
                                                     <input
@@ -277,7 +277,7 @@ function CartDatabase() {
                                                         Nhập mã của bạn
                                                     </label>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <hr className="my-4" />
 
                                             <div className="d-flex justify-content-between mb-5">

@@ -93,7 +93,7 @@ const AdminNavbar = () => {
               <NavItem >
                 <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
                   <i className="ni ni-cart" />
-                  <span className="nav-link-inner--text">Giỏ hàng</span>
+                  <span className="nav-link-inner--text">Thanh Toán</span>
                 </NavLink>
               </NavItem>
 

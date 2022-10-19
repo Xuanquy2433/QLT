@@ -60,7 +60,7 @@ const Login = () => {
         if (response && response.status === 200) {
           localStorage.setItem("token", response?.data.token);
           localStorage.setItem("user", JSON.stringify(response.data));
-          toast.success('Login success', {
+          toast.success('Đăng nhập thành công', {
             autoClose: 3000
           })
 
