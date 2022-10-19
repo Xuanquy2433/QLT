@@ -179,7 +179,6 @@ const AdminNavbar = () => {
                         <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName} <ArrowDropDownIcon /></span>
                       </NavLink>
                       <ul className="menu-level-2">
-
                         {token && decoded.roles === "[ROLE_USER]" ?
                           <li className="item-menu-level-2">
                             <NavLink className="nav-link-icon" to="/auth/activity" tag={Link}>
