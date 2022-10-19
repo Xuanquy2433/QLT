@@ -187,6 +187,7 @@ const AdminNavbar = () => {
                               <i style={styleLab} className="ni ni-calendar-grid-58" />
                               <span style={styleFont} className="nav-link-inner--text">Đơn hàng</span>
                             </NavLink>
+                            <DropdownItem divider />
                             <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
                               {/* <CgMenuBoxed style={{ fontSize: "18.5px" }} /> */}
                               <i style={styleLab} className="ni ni-single-02" />
