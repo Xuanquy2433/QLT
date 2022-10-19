@@ -82,7 +82,7 @@ const Profile = () => {
         </Box>
 
       </Modal>
-      <div style={{ width: "950px", }}>
+      <div style={{ width: "100%"}}>
         <div
           className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
           style={{
@@ -95,7 +95,7 @@ const Profile = () => {
           }}
         >
           {/* Mask */}
-          <span className="mask bg-gradient-default opacity-8" />
+          <span style={{borderRadius: '10px'}} className="mask bg-gradient-default opacity-8" />
           {/* Header container */}
           <Container className="d-flex align-items-center" fluid>
             <Row>
@@ -150,7 +150,7 @@ const Profile = () => {
                   </Button> */}
                 </div>
               </CardHeader>
-              <CardBody className="pt-0 pt-md-4">
+              <CardBody style={{height: 404}} className="pt-0 pt-md-4">
                 <Row>
                   <div className="col">
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
