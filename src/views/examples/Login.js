@@ -12,7 +12,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -128,7 +128,7 @@ const Login = () => {
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-3">
-              <small>Sign in with</small>
+              <small>Đăng nhập với</small>
             </div>
             <div className="btn-wrapper text-center">
               <Button
@@ -169,7 +169,7 @@ const Login = () => {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign in with credentials</small>
+            <small>Hoặc đăng nhập bằng thông tin của bạn</small>
             </div>
             <Form role="form" >
               <FormGroup className="mb-3">
@@ -181,7 +181,7 @@ const Login = () => {
                   <PhoneInput
                     style={{ border: "1px solid #ddd", backgroundColor: 'white', borderRadius: "5px", padding: "0.59rem 0.75rem", width: "100%", outline: 'none' }}
                     defaultCountry="VN"
-                    placeholder="Enter your phone number"
+                    placeholder="Nhập số điện thoại"
                     onChange={(value) => {
                       setData({ ...data, phoneNumber: value })
                     }}
@@ -210,13 +210,13 @@ const Login = () => {
                       setData({ ...data, password: e.target.value })
                     }
                     }
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     type="password"
                     autoComplete="new-password"
                   />
                 </InputGroup>
               </FormGroup>
-              <div className="custom-control custom-control-alternative custom-checkbox">
+              {/* <div className="custom-control custom-control-alternative custom-checkbox">
                 <input
                   className="custom-control-input"
                   id=" customCheckLogin"
@@ -228,10 +228,10 @@ const Login = () => {
                 >
                   <span className="text-muted">Remember me</span>
                 </label>
-              </div>
+              </div> */}
               <div className="text-center">
                 <Button className="my-4" color="primary" type="submit" onClick={(e) => onLogin(e)}>
-                  Sign in
+                  Đăng nhập
                 </Button>
               </div>
             </Form>
@@ -244,17 +244,16 @@ const Login = () => {
               href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
-              <small>Forgot password?</small>
+              <small>Quên mật khẩu?</small>
             </a>
           </Col>
           <Col className="text-right" xs="6">
-            <a
+            <NavLink
               className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
+              to={'/auth/register'}
             >
-              <small>Create new account</small>
-            </a>
+              <small>Đăng ký tài khoản</small>
+            </NavLink>
           </Col>
         </Row>
       </Col>

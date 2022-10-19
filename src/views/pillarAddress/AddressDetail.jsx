@@ -101,7 +101,7 @@ function AddressDetail() {
 
 
                         <div className="container">
-                            <div className="header">
+                            <div  className="header">
                                 <div className="header-logo">Thông tin trụ </div>
                                 <nav className="header-nav">
                                     <i className="ion-ios-cart" />
@@ -109,9 +109,9 @@ function AddressDetail() {
                                 </nav>
                             </div>
                             <div className="product">
-                                <div className="product-photo">
-                                    <img style={{ width: '50%', height: '20vh' }} src={address.photosImagePath} />
-                                    <img style={{ width: '40%', height: '35vh' }} src={'https://truyenthongacn.com/wp-content/uploads/2022/04/CTY-TRUYEN-THONG-ACN-1222.png'} />
+                                <div  style={{ backgroundImage: `url(${address.photosImagePath})` }} className="product-photo">
+                                    {/* <img style={{ width: '50%', height: '20vh' }} src={address.photosImagePath} />
+                                    <img style={{ width: '40%', height: '35vh' }} src={'https://truyenthongacn.com/wp-content/uploads/2022/04/CTY-TRUYEN-THONG-ACN-1222.png'} /> */}
                                 </div>
                                 <div className="product-detail">
                                     <h1 className="product__title">{address.street} </h1>

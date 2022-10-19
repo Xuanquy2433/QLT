@@ -18,7 +18,7 @@ import {
 import { API_SIGNUP } from "utils/const";
 import PhoneBluetoothSpeakerIcon from '@mui/icons-material/PhoneBluetoothSpeaker';
 import PhoneInput from 'react-phone-number-input';
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const Register = () => {
   const history = useHistory();
@@ -83,7 +83,7 @@ const Register = () => {
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-4">
-              <small>Sign up with</small>
+              <small>Đăng nhập với</small>
             </div>
             <div className="text-center">
               <Button
@@ -124,7 +124,7 @@ const Register = () => {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign up with credentials</small>
+              <small>Hoặc đăng ký bằng thông tin của bạn</small>
             </div>
             <Form role="form">
               <FormGroup>
@@ -134,7 +134,7 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input onChange={onchange} placeholder="First name" type="text" name="firstName" />
+                  <Input onChange={onchange} placeholder="Nhập tên của bạn" type="text" name="firstName" />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -144,7 +144,7 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input onChange={onchange} placeholder="Last name" type="text" name="lastName" />
+                  <Input onChange={onchange} placeholder=" Nhập họ của bạn" type="text" name="lastName" />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -172,7 +172,7 @@ const Register = () => {
                 <PhoneInput
                   style={{ border: "1px solid #ddd", backgroundColor: 'white', borderRadius: "5px", padding: "0.625rem 0.75rem", width: "100%" }}
                   defaultCountry="VN"
-                  placeholder="Enter your phone number"
+                  placeholder="Nhập số điện thoại"
                   onChange={(value) => {
                     setUser({ ...user, phoneNumber: value })
                   }} />
@@ -188,7 +188,7 @@ const Register = () => {
                   <Input
                     onChange={onchange}
                     name="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     type="password"
                     autoComplete="new-password"
                   />
@@ -200,9 +200,9 @@ const Register = () => {
                   <span className="text-success font-weight-700">strong</span>
                 </small> */}
               </div>
-              <Row className="my-4">
+              <Row className="my-1">
                 <Col xs="12">
-                  <div className="custom-control custom-control-alternative custom-checkbox">
+                  {/* <div className="custom-control custom-control-alternative custom-checkbox">
                     <input
                       className="custom-control-input"
                       id="customCheckRegister"
@@ -219,17 +219,35 @@ const Register = () => {
                         </a>
                       </span>
                     </label>
-                  </div>
+                  </div> */}
                 </Col>
               </Row>
               <div className="text-center">
                 <Button onClick={onSignup} className="mt-4" color="primary" type="button">
-                  Create account
+                  Đăng ký
                 </Button>
               </div>
             </Form>
           </CardBody>
         </Card>
+        <Row className="mt-3">
+          <Col xs="6">
+            <a
+              className="text-light"
+              href="#pablo"
+              onClick={(e) => e.preventDefault()}
+            >
+              <small>Quên mật khẩu?</small>
+            </a>
+          </Col>
+          <Col className="text-right" xs="6">
+            <div
+              className="text-light"
+            >
+              <small>Đã có tài khoản ?  <NavLink to={'/auth/login'}> Đăng nhập</NavLink></small>
+            </div>
+          </Col>
+        </Row>
       </Col>
     </>
   );
