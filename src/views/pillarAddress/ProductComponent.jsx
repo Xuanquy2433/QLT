@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { API_ADD_CART } from "utils/const";
 import { Button } from "@mui/material";
 import { formatMoney } from "common/formatMoney";
+import { API_ADD_CART_PREORDER } from "utils/const";
 
 function ProductComponent({ product }) {
 
@@ -126,7 +127,96 @@ function ProductComponent({ product }) {
       }
     }
   }
-  console.log('cac ', product);
+  const addCartPreorder = async (item) => {
+
+    // save product to cart local
+    const { id, name } = item;
+    let listCart = localStorage.getItem("cartTemp")
+    let listCartADD = localStorage.getItem("cartADD")
+
+    let listCartItem = []
+    let listCartADDItem = []
+
+    if (listCart && listCartADD != undefined) {
+      listCartItem = JSON.parse(listCart)
+      listCartADDItem = JSON.parse(listCartADD)
+    }
+    let checkCartHasBeen = true
+
+    try {
+      if (token) {
+        // when already login
+        const response = await axios.post(API_ADD_CART_PREORDER, {
+          day: 1,
+          productId: id
+        }, {
+          headers: {
+            'authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        if (response && response.status === 201) {
+          toast.success('Thêm vào giỏ hàng thành công', {
+            autoClose: 3000
+          })
+          history.push('/auth/cart')
+        };
+      } else {
+        // when don't login
+        for (let i = 0; i < listCartItem.length; i++) {
+          if (listCartItem[i].productId === item.id && listCartADDItem[i].productId === item.id) {
+            // localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+            checkCartHasBeen = false
+          }
+        }
+        if (checkCartHasBeen == true) {
+          let items = {
+            day: 1,
+            productId: item.id,
+            nameProduct: item.name,
+            priceProduct: item.price,
+            imageProduct: item.photosImagePath
+          }
+          let itemsADD = {
+            day: 1,
+            productId: item.id
+          }
+
+          listCartItem.push(items)
+          listCartADDItem.push(itemsADD)
+          localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+          localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
+        }
+        toast.success('Thêm vào giỏ hàng thành công', {
+          autoClose: 3000
+        })
+        history.push('/auth/cart')
+      }
+    } catch (error) {
+      console.log(error.response.data)
+      if (error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error) {
+        toast.error(`${error.response.data.error}`, {
+          autoClose: 2000
+        })
+      }
+      else if (error.response.data.error && error.response.data.message) {
+        toast.error(`${error.response.data.message}`, {
+          autoClose: 2000
+        })
+      }
+      else {
+        toast.error('Error', {
+          autoClose: 2000
+        })
+      }
+    }
+  }
   return (
     <div style={{ display: "flex", width: "175vh", flexWrap: "wrap", justifyContent: "center", marginTop: '50px', marginBottom: '150px' }}>
       {
@@ -148,10 +238,10 @@ function ProductComponent({ product }) {
                   Đã cho thuê
                 </Button>}
             </div>
-            {product.preOrdered === true ? 
-            <Button  variant="contained" >
-              Đặt trước
-            </Button> : ''}
+            {product.preOrdered === true ?
+              <Button onClick={(e) => addCartPreorder({ ...item })} variant="contained" >
+                Đặt trước
+              </Button> : ''}
           </div>
         ))
       }</div>

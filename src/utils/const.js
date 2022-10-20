@@ -77,6 +77,9 @@ export const API_ADD_CART_LOCAL = `${API}/cart/addalltocart`;
 
 export const API_PROFILE_GET_USER = `${API}/user/profile`
 
+export const API_ADD_CART_PREORDER = `${API}/cart/addtocart_preorder`
+
+
 
 
 

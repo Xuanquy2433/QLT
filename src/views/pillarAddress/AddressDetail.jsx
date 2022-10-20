@@ -81,7 +81,6 @@ function AddressDetail() {
             }
         }
     }
-    console.log('adđ, ', address);
 
     return (
         <div >
