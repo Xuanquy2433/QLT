@@ -73,9 +73,12 @@ const Sidebar = (props) => {
     }
   }
 
+  
+
   useEffect(() => {
     getOrderUserConfirmed()
   }, [])
+
 
   const cssOrderPlaceNoti = {
     color: 'red',
@@ -118,7 +121,7 @@ const Sidebar = (props) => {
               activeClassName="active"
             >
               <i className={prop.icon} />
-              {prop.name} <span style={cssOrderPlaceNoti}>{data.length}</span>
+              {prop.name} {data.length > 0 ? <span style={cssOrderPlaceNoti}>{data.length}</span> : ''}
             </NavLink>
           </NavItem>
         )
