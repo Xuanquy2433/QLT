@@ -128,7 +128,7 @@ function ProductComponent({ product }) {
   }
 
   return (
-    <div style={{ display: "flex", width: " 100%", flexWrap: "wrap", justifyContent: "center" ,marginTop: '50px'}}>
+    <div style={{ display: "flex", width: " 100%", flexWrap: "wrap", justifyContent: "center" ,marginTop: '50px',marginBottom:'150px'}}>
       {
         product.map((item, index) => (
           <div style={{ float: "left", backgroundColor: "#ddd", marginTop: '10px',width: "45%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>

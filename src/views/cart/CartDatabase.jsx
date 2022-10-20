@@ -238,7 +238,7 @@ function CartDatabase() {
                                         </div>
                                     </div>
                                     <div className="col-lg-4 bg-grey">
-                                        <div className="p-5">
+                                        <div style={{marginTop: '50px'}}  className="p-5">
                                             {/* <p  className="fw-bold mb-5 mt-2 pt-1">Thông tin</p> */}
                                             {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                     <h5 className="">Name</h5>
@@ -294,7 +294,7 @@ function CartDatabase() {
                                             >
 
                                                 {btnDisabled ? 'Vui lòng chờ...' : 'Thuê trụ'}
-                                            </button> : <NavLink to={'/auth/login'}> <button type="button"
+                                            </button> : <NavLink to={'/auth/login'}> <button style={{marginTop: '120px'}} type="button"
                                                 className="btn btn-dark btn-block btn-lg"
                                                 data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>}
 
