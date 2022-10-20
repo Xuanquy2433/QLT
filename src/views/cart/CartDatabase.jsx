@@ -127,8 +127,8 @@ function CartDatabase() {
 
 
     return (
-        <section className="h-100 h-custom" style={{ backgroundColor: "#d2c9ff" }}>
-            <div>
+        <section className="h-custom"style={{ backgroundColor: "white", height: '70vh',marginBottom: '80px' }}>
+            <div style={{ backgroundColor: 'white' }}>
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12">
                         <div
@@ -239,45 +239,6 @@ function CartDatabase() {
                                     </div>
                                     <div className="col-lg-4 bg-grey">
                                         <div style={{marginTop: '50px'}}  className="p-5">
-                                            {/* <p  className="fw-bold mb-5 mt-2 pt-1">Thông tin</p> */}
-                                            {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                    <h5 className="">Name</h5>
-                                                    <h5>Price</h5>
-                                                </div>
-                                                <hr className="my-4" />
-                                                <div style={{ display: "flex", flexDirection: "column" }} className="ase">
-                                                    {
-                                                        data.map((item) => (
-                                                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                                <h5 className="text-uppercase">{item.product.name}</h5>
-                                                                <h5>{formatMoney(item.product.price)}</h5>
-                                                            </div>
-                                                        ))
-                                                    }
-
-                                                </div> */}
-                                            {/* <h5 className="text-uppercase mb-3">Shipping</h5>
-                                                <div className="mb-4 pb-2">
-                                                    <select className="select">
-                                                        <option value={1}>Standard-Delivery- €5.00</option>
-                                                        <option value={2}>Two</option>
-                                                        <option value={3}>Three</option>
-                                                        <option value={4}>Four</option>
-                                                    </select>
-                                                </div> */}
-                                            {/* <h5 className="text-uppercase mb-3">Mã giảm giá</h5>
-                                            <div className="mb-5">
-                                                <div className="form-outline">
-                                                    <input
-                                                        type="text"
-                                                        id="form3Examplea2"
-                                                        className="form-control form-control-lg"
-                                                    />
-                                                    <label className="form-label mt-2" htmlFor="form3Examplea2">
-                                                        Nhập mã của bạn
-                                                    </label>
-                                                </div>
-                                            </div> */}
                                             <hr className="my-4" />
 
                                             <div className="d-flex justify-content-between mb-5">
@@ -286,6 +247,7 @@ function CartDatabase() {
                                             </div>
 
                                             {token && decoded ? <button
+                                            style={{marginTop: '120px'}}
                                                 disabled={btnDisabled}
                                                 type="button"
                                                 className="btn btn-dark btn-block btn-lg"
@@ -294,7 +256,7 @@ function CartDatabase() {
                                             >
 
                                                 {btnDisabled ? 'Vui lòng chờ...' : 'Thuê trụ'}
-                                            </button> : <NavLink to={'/auth/login'}> <button style={{marginTop: '120px'}} type="button"
+                                            </button> : <NavLink to={'/auth/login'}> <button  type="button"
                                                 className="btn btn-dark btn-block btn-lg"
                                                 data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>}
 
