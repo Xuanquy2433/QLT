@@ -131,7 +131,7 @@ function ProductComponent({ product }) {
     <div style={{ display: "flex", width: "175vh", flexWrap: "wrap", justifyContent: "center" ,marginTop: '50px',marginBottom:'150px'}}>
       {
         product.map((item, index) => (
-          <div style={{ float: "left", backgroundColor: "#ddd", marginTop: '10px',width: "45%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>
+          <div style={{ float: "left", backgroundColor: "#ddd", marginTop: '20px',width: "45%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>
             <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <img style={{ width: '100%', height: 250,borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
