@@ -105,7 +105,7 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}
-                    <TableContainer sx={{ minHeight: '29em' }}>
+                    <TableContainer sx={{ height: '62vh' }}>
                         <Table aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
@@ -173,7 +173,7 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[6, 10, 25, 100]}
+                        rowsPerPageOptions={[5, 10, 25, 100]}
                         component="div"
                         count={totalPages}
                         rowsPerPage={rowsPerPage}

@@ -24,7 +24,7 @@ function AdminProduct() {
 
   const [openEdit, setOpenEdit] = useState(false);
   const [page, setPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   useEffect(() => {
     getAllProduct()

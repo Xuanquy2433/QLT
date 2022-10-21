@@ -67,7 +67,7 @@ export default function AvailablePillar({ data, page, rowsPerPage, totalPages, h
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}
-                    <TableContainer sx={{ minHeight: '29em' }}>
+                    <TableContainer sx={{ height: '62vh' }}>
                         <Table aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
