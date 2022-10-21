@@ -81,9 +81,9 @@ function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, chec
                             </div>
 
                         </form>
-                        {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
+                        {/* {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
                             Tự động hủy sau: <Countdown date={Date.now() + 900000} renderer={renderer} />
-                        </div> : ''}
+                        </div> : ''} */}
 
                         <hr className="my-4" />
                         <div className="d-flex justify-content-between">

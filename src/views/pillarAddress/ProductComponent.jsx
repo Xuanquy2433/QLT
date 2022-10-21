@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { API_ADD_CART } from "utils/const";
 import { Button } from "@mui/material";
 import { formatMoney } from "common/formatMoney";
-import { API_ADD_CART_PREORDER } from "utils/const";
+import { API_ADD_CART_PRE_ORDER } from "utils/const";
 
 function ProductComponent({ product }) {
 
@@ -127,13 +127,13 @@ function ProductComponent({ product }) {
       }
     }
   }
-  const addCartPreorder = async (item) => {
+  const addCartPreOrder = async (item) => {
     // save product to cart local
     const { id, name } = item;
     try {
       if (token) {
         // when already login
-        const response = await axios.post(API_ADD_CART_PREORDER, {
+        const response = await axios.post(API_ADD_CART_PRE_ORDER, {
           day: 1,
           productId: id
         }, {
@@ -203,7 +203,7 @@ function ProductComponent({ product }) {
             </div>
             {item.preOrdered === false ?
               <Button sx={{ height: '9vh', fontSize: '0.6em', width: '10%', position: 'absolute', top: '0', right: '0', backgroundColor: ' #F4364C' }}
-                onClick={(e) => addCartPreorder({ ...item })} variant="contained" >
+                onClick={(e) => addCartPreOrder({ ...item })} variant="contained" >
                 Đặt trước
               </Button> : ''}
           </div>

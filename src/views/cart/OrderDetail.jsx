@@ -34,8 +34,6 @@ function OrderDetail() {
         setIsExtended(!isExtended)
     }
 
-
-
     const getAllOderDetail = async (e) => {
         if (token) {
             try {
@@ -210,8 +208,6 @@ function OrderDetail() {
                                                 isExtended={isExtended}
                                                 orderData={(data2) => setOrder(data2)}
                                             />
-
-
                                             {dataDetail ?
                                                 dataDetail.map((item, index) => (
                                                     <div className="card mb-3" key={index}>
@@ -220,8 +216,6 @@ function OrderDetail() {
                                                 ))
 
                                                 : <h2> Chưa có sản phẩm nào </h2>}
-
-
                                         </div>
                                         <ComponentRightInfo bank={bank} listBank={listBank} handleChange={handleChange} data={data} renderer={renderer}
                                             checkout={checkout} isConfirm={isConfirm} valueStatus={valueStatus} onChangeExtendedStatus={onChangeExtendedStatus} />

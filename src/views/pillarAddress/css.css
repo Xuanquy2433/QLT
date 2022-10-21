@@ -1,5 +1,5 @@
 .de {
-   width: 100%;
+    width: 100%;
 }
 .de .card {
     border: none;
@@ -61,16 +61,15 @@ label.radio input:checked + span {
     margin-right: 10px;
 }
 
-
-.address-detail{
+.address-detail {
     position: relative;
-    background-color:#ddd;
-    width:80%;
+    background-color: #ddd;
+    width: 80%;
     margin: 0 auto;
     border-radius: 4px;
     padding: 10px;
 }
-
+/* loadding */
 
 .line-loading {
     width: 100%;
@@ -78,9 +77,9 @@ label.radio input:checked + span {
     height: 5px;
     position: relative;
     margin: 0 auto;
-  }
-  
-  .line-loading:before {
+}
+
+.line-loading:before {
     content: "";
     position: absolute;
     right: auto;
@@ -88,20 +87,20 @@ label.radio input:checked + span {
     height: 100%;
     background-color: var(--info);
     animation: lineLoading 2s forwards infinite linear;
-  }
-  
-  @keyframes lineLoading {
+}
+
+@keyframes lineLoading {
     0% {
-      right: 100%;
+        right: 100%;
     }
-  
+
     50% {
-      right: 0;
-      left: 0;
+        right: 0;
+        left: 0;
     }
-  
+
     100% {
-      right: 0;
-      left: 100%;
+        right: 0;
+        left: 100%;
     }
-  }
+}

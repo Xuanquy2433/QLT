@@ -120,7 +120,7 @@ function CartDatabase() {
             }
         })
         if (response.status === 200) {
-            toast.success("Xoá thành công", { autoClose: "1500" })
+            toast.success("Xoá thành công", { autoClose: 1500 })
             getAllCart()
         }
     }
