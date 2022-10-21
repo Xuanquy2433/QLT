@@ -96,13 +96,12 @@ function TableAddress() {
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=asc&sortField=id')
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=asc&sortField=id')
         if (response) {
             setData(response.data.contents)
         }
     }
 
-    console.log("cc ", data);
 
     //new
     const onChangeSearchNew = async (e) => {

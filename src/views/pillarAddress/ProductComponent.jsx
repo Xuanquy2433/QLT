@@ -128,21 +128,8 @@ function ProductComponent({ product }) {
     }
   }
   const addCartPreorder = async (item) => {
-
     // save product to cart local
     const { id, name } = item;
-    let listCart = localStorage.getItem("cartTemp")
-    let listCartADD = localStorage.getItem("cartADD")
-
-    let listCartItem = []
-    let listCartADDItem = []
-
-    if (listCart && listCartADD != undefined) {
-      listCartItem = JSON.parse(listCart)
-      listCartADDItem = JSON.parse(listCartADD)
-    }
-    let checkCartHasBeen = true
-
     try {
       if (token) {
         // when already login
@@ -164,34 +151,9 @@ function ProductComponent({ product }) {
         };
       } else {
         // when don't login
-        for (let i = 0; i < listCartItem.length; i++) {
-          if (listCartItem[i].productId === item.id && listCartADDItem[i].productId === item.id) {
-            // localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
-            checkCartHasBeen = false
-          }
-        }
-        if (checkCartHasBeen == true) {
-          let items = {
-            day: 1,
-            productId: item.id,
-            nameProduct: item.name,
-            priceProduct: item.price,
-            imageProduct: item.photosImagePath
-          }
-          let itemsADD = {
-            day: 1,
-            productId: item.id
-          }
-
-          listCartItem.push(items)
-          listCartADDItem.push(itemsADD)
-          localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
-          localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
-        }
-        toast.success('Thêm vào giỏ hàng thành công', {
-          autoClose: 3000
+        toast.warning('Vui lòng đăng nhập để sử dụng tính năng này !', {
+          autoClose: 1500
         })
-        history.push('/auth/cart')
       }
     } catch (error) {
       console.log(error.response.data)
@@ -217,11 +179,12 @@ function ProductComponent({ product }) {
       }
     }
   }
+  console.log("product true ", product);
   return (
     <div style={{ display: "flex", width: "175vh", flexWrap: "wrap", justifyContent: "center", marginTop: '50px', marginBottom: '150px' }}>
       {
         product.map((item, index) => (
-          <div style={{ float: "left", backgroundColor: "#ddd", marginTop: '20px', width: "45%", margin: "5px", display: "flex", padding: "20px", borderRadius: "8px", }}>
+          <div style={{ float: "left", position: 'relative', backgroundColor: "#ddd", marginTop: '20px', width: "45%", margin: "5px", display: "flex", padding: "10px", borderRadius: "8px", }}>
             <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <img style={{ width: '100%', height: 250, borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
@@ -238,8 +201,9 @@ function ProductComponent({ product }) {
                   Đã cho thuê
                 </Button>}
             </div>
-            {product.preOrdered === true ?
-              <Button onClick={(e) => addCartPreorder({ ...item })} variant="contained" >
+            {item.preOrdered === false ?
+              <Button sx={{ height: '9vh', fontSize: '0.6em', width: '10%', position: 'absolute', top: '0', right: '0', backgroundColor: ' #F4364C' }}
+                onClick={(e) => addCartPreorder({ ...item })} variant="contained" >
                 Đặt trước
               </Button> : ''}
           </div>
