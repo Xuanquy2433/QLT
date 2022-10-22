@@ -69,7 +69,7 @@ const Login = () => {
             //add cart local to database
             var myMap = new Map()
             JSON.parse(localStorage.getItem('cartADD')).map((item) => {
-              myMap.set(item.productId, item.day);
+              myMap.set(item.productId, item.month);
             })
             const obj = Object.fromEntries(myMap);
             const dataCart = {
