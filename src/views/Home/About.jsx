@@ -27,7 +27,7 @@ function About() {
                 <div className="secondaryContainer clearfix">
                     <div className="diamondImgHolderLeft">
                         <div className="diamond">
-                            {/* <img src="http://www.unicornfeminism.com/images/Ada_Lovelace_portrait.jpg" alt="Ada Lovelace: superwoman" className="timelineImageLeft" /> */}
+                            <img src="https://st2.depositphotos.com/3591429/10464/i/950/depositphotos_104648666-stock-photo-group-of-people-brainstorming-on.jpg" alt="Ada Lovelace: superwoman" className="timelineImageLeft" />
                         </div>
                     </div>
                     <div className="timelineTextRight">
@@ -40,7 +40,7 @@ function About() {
                     <div className="horizLeft2" />
                     <div className="diamondImgHolderRight">
                         <div className="diamond">
-                            {/* <img src="http://unicornfeminism.com/images/rosie_riviter.jpg" alt="Rosie the Riviter" className="timelineImageRight" /> */}
+                            <img src="https://img.freepik.com/premium-photo/about-us-multicolor-inscription-white-brick-wall-with-doodle-icons-around-about-us-concept-modern-style-illustration-with-doodle-design-icons-about-us-white-brickwall-background_226262-1853.jpg?w=2000" alt="Rosie the Riviter" className="timelineImageRight" />
                         </div>
                     </div>
                     <div className="timelineTextLeft">
@@ -49,7 +49,7 @@ function About() {
                     </div>
                     <div className="diamondImgHolderLeft">
                         <div className="diamond">
-                            {/* <img src="http://unicornfeminism.com/images/kathleen_hanna.jpg" alt="Kathleen Hanna: Riot Grrl" className="timelineImageLeft" /> */}
+                            <img src="https://www.impactplus.com/hubfs/blog-image-uploads/best-about-us-pages.jpg" alt="Kathleen Hanna: Riot Grrl" className="timelineImageLeft" />
                         </div>
                     </div>
                     <div className="timelineTextRight">
