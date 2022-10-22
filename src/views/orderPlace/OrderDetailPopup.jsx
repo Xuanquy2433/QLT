@@ -100,7 +100,7 @@ function OrderDetailPopup({ dataDetail, openDetail, handleCloseDetailOrder }) {
                                         .map((item, index) => (
                                             <TableRow key={index} hover role="checkbox" >
                                                 <TableCell>{item.id}</TableCell>
-                                                <TableCell style={{ textAlign: 'center' }}>{item.day} tháng</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{item.month} tháng</TableCell>
                                                 <TableCell style={{ textAlign: 'center' }}>{item.product.name}</TableCell>
                                                 <TableCell style={{ textAlign: 'center' }}>{item.product.price}</TableCell>
                                                 <TableCell style={{ textAlign: 'center' }}>{item.product.description}</TableCell>

@@ -57,7 +57,7 @@ function ProductComponent({ product }) {
       if (token) {
         // when already login
         const response = await axios.post(API_ADD_CART, {
-          day: 1,
+          month: 1,
           productId: id
         }, {
           headers: {
@@ -82,14 +82,14 @@ function ProductComponent({ product }) {
         }
         if (checkCartHasBeen == true) {
           let items = {
-            day: 1,
+            month: 1,
             productId: item.id,
             nameProduct: item.name,
             priceProduct: item.price,
             imageProduct: item.photosImagePath
           }
           let itemsADD = {
-            day: 1,
+            month: 1,
             productId: item.id
           }
 
@@ -134,7 +134,7 @@ function ProductComponent({ product }) {
       if (token) {
         // when already login
         const response = await axios.post(API_ADD_CART_PRE_ORDER, {
-          day: 1,
+          month: 1,
           productId: id
         }, {
           headers: {

@@ -103,7 +103,7 @@ function CartDatabase() {
     }
     let sum = 0
     data.map((item) => {
-        sum += (Number(item.product.price) * Number(item.day))
+        sum += (Number(item.product.price) * Number(item.month))
     })
 
     useEffect(() => {
@@ -152,7 +152,7 @@ function CartDatabase() {
                                                         <h6 className="text-muted">Tên sản phẩm</h6>
                                                     </div>
                                                     <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 className="text-muted">Số ngày thuê</h6>
+                                                        <h6 className="text-muted">Số tháng thuê</h6>
                                                     </div>
                                                     {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
@@ -190,7 +190,7 @@ function CartDatabase() {
                                                             id="form1"
                                                             min={1}
                                                             name="quantity"
-                                                            value={item.day}
+                                                            value={item.month}
                                                             type="number"
                                                             className="form-control form-control-sm"
                                                         />
