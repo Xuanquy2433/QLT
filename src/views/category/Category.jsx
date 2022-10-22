@@ -14,6 +14,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Button, IconButton, InputBase } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import Moment from 'react-moment';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { data } from 'jquery';
@@ -45,7 +47,7 @@ const columns = [
 
 ];
 
-export default function Category({ data, setOpen, onEdit, onDelete }) {
+export default function Category({ handleOpenDelete, openDelete, handleCloseDelete, data, setOpen, onEdit, onDelete }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
@@ -110,11 +112,40 @@ export default function Category({ data, setOpen, onEdit, onDelete }) {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
 
                                             <TableCell sx={{ textAlign: 'right', display: "flex", justifyContent: "space-around" }}>
-                                                <DeleteIcon sx={{ cursor: 'pointer' }} onClick={(e) => onDelete(item.id)} />
+                                                <DeleteIcon sx={{ cursor: 'pointer' }} onClick={handleOpenDelete} />
                                                 <EditIcon sx={{ cursor: 'pointer' }} onClick={(e) => onClickEdit(item)} />
                                             </TableCell>
+                                            <Modal
+                                                open={openDelete}
+                                                onClose={handleCloseDelete}
+                                                aria-labelledby="modal-modal-title"
+                                                aria-describedby="modal-modal-description"
+                                            >
+                                                <Box className='form-add-product'
+                                                    sx={{
+                                                        width: '40%',
+                                                        margin: 'auto',
+                                                        marginTop: '270px',
+                                                        backgroundColor: 'white',
+                                                        padding: '10px',
+                                                        // borderRadius: "10px"
+                                                    }}
+                                                >
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
+                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá loại trụ này ?</h2>
 
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
+
+                                                    <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
+                                                        <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
+                                                        <button onClick={(e) => onDelete(item.id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+                                                    </div>
+
+                                                </Box>
+
+                                            </Modal>
                                         </TableRow>
+
                                     ))}
                             </TableBody>
                         </Table>

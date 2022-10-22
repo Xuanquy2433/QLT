@@ -186,7 +186,7 @@ export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete
                                                     }}
                                                 >
                                                     <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
-                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá địa chỉ ?</h2>
+                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá trụ quảng cáo ?</h2>
 
                                                     <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
 
