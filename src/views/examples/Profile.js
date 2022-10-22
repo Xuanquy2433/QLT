@@ -7,6 +7,8 @@ import {
   Form,
   Input,
   Container,
+  DropdownItem,
+
   Row,
   Col
 } from "reactstrap";
@@ -61,28 +63,26 @@ const Profile = () => {
           sx={{
             width: '40%',
             margin: 'auto',
-            marginTop: '300px',
+            marginTop: '270px',
             backgroundColor: 'white',
             padding: '10px',
-            borderRadius: "10px"
+            // borderRadius: "10px"
           }}
         >
-          <h2 style={{ textAlign: 'center', margin: "15px" }}>Xác nhận thay đổi ?</h2>
+          <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
+          <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận thay đổi ?</h2>
 
+          <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
-              Huỷ
-            </Button>
-            <Button variant="contained" color="success">
-              Xác nhận
-            </Button>
+          <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
+            <button onClick={handleClose} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
+            <button style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
           </div>
 
         </Box>
 
       </Modal>
-      <div style={{ width: "100%"}}>
+      <div style={{ width: "100%" }}>
         <div
           className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
           style={{
@@ -95,7 +95,7 @@ const Profile = () => {
           }}
         >
           {/* Mask */}
-          <span style={{borderRadius: '10px'}} className="mask bg-gradient-default opacity-8" />
+          <span style={{ borderRadius: '10px' }} className="mask bg-gradient-default opacity-8" />
           {/* Header container */}
           <Container className="d-flex align-items-center" fluid>
             <Row>
@@ -150,7 +150,7 @@ const Profile = () => {
                   </Button> */}
                 </div>
               </CardHeader>
-              <CardBody style={{height: 404}} className="pt-0 pt-md-4">
+              <CardBody style={{ height: 404 }} className="pt-0 pt-md-4">
                 <Row>
                   <div className="col">
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
