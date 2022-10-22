@@ -55,7 +55,7 @@ const columns = [
     },
 ];
 
-export default function Address({ search, rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
+export default function Address({ handleOpenDelete, handleCloseDelete, openDelete, search, rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
 
     const style = {
         position: 'absolute',
@@ -74,6 +74,7 @@ export default function Address({ search, rowsPerPage, data, onDelete, onEdit, o
     const onClickEdit = (data) => {
         onEdit(data)
     }
+
 
     return (
         <>
@@ -146,9 +147,10 @@ export default function Address({ search, rowsPerPage, data, onDelete, onEdit, o
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => onDelete(item.id)}>
+                                                            onClick={handleOpenDelete}>
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
+
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
@@ -159,8 +161,39 @@ export default function Address({ search, rowsPerPage, data, onDelete, onEdit, o
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>
+                                            <Modal
+                                                open={openDelete}
+                                                onClose={handleCloseDelete}
+                                                aria-labelledby="modal-modal-title"
+                                                aria-describedby="modal-modal-description"
+                                            >
+                                                <Box className='form-add-product'
+                                                    sx={{
+                                                        width: '40%',
+                                                        margin: 'auto',
+                                                        marginTop: '270px',
+                                                        backgroundColor: 'white',
+                                                        padding: '10px',
+                                                        // borderRadius: "10px"
+                                                    }}
+                                                >
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
+                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá địa chỉ ?</h2>
+
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
+
+                                                    <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
+                                                        <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
+                                                        <button onClick={(e) => onDelete(item.id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+                                                    </div>
+
+                                                </Box>
+
+                                            </Modal>
                                         </TableRow>
+
                                     ))}
+
                             </TableBody>
                         </Table>
                     </TableContainer>
