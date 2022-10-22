@@ -4,28 +4,46 @@ import OrderDetailComponent from "./orderDetailComponent";
 import Moment from 'react-moment';
 import { formatMoney } from 'common/formatMoney';
 
-function Order({ order, isExtended, ya }) {
+function Order({ order, isExtended, ya, dataBack }) {
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [childData, setChildData] = useState({});
-  const listIds = [];
+  const [listIds, setListIds] = useState([]);
+
   const [data, setData] = useState("")
+
+  let checkIdHasBeen = true
 
   const expandOrder = () => {
     setIsExpanded(!isExpanded);
   }
   const getCheckIds = (data) => {
     if (data.isChecked) {
-      listIds.push(data.id);
-    } else {
-      listIds.splice(listIds.indexOf(data.id), 1);
+
+      for (let i = 0; i < listIds.length; i++) {
+        if (listIds.id === data.id) {
+          checkIdHasBeen = false
+        }
+      }
+
+      if (checkIdHasBeen == true) {
+        setListIds([...listIds, {
+          productId: data.id,
+          month: 1,
+        }]);
+
+      }
     }
-    console.log(listIds);
+    // else {
+    //   listIds.splice(listIds.indexOf(data.id), 1);
+    // }
   }
+  console.log(listIds);
 
   let idOrderInURL = window.location.pathname.replace(/\D/g, "");
   useEffect(() => {
     getCheckIds(childData);
+    dataBack(listIds)
   }, [childData])
 
   return (

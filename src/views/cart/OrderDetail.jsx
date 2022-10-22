@@ -127,25 +127,35 @@ function OrderDetail() {
         }
     }
 
+    const [childData, setChildData] = useState({});
     const reOrder = async () => {
         try {
-                
-                // const response = await axios.put(API_ORDER_RE_ORDER , {}, {
-                //     headers: {
-                //         'Authorization': `Bearer ${token}`,
-                //         'Accept': 'application/json',
-                //         'Content-Type': 'application/json'
-                //     }
-                // });
-                // if (response && response.status === 200) {
-                //     toast.success('Success', {
-                //         autoClose: 3000
-                //     })
-                //     setTimeout(() => {
-                //         window.location.reload()
-                //     }, 1800);
-                // };
-            
+            var myMap = new Map()
+            childData.map((item) => {
+                myMap.set(item.productId, item.month);
+            })
+            const obj = Object.fromEntries(myMap);
+
+            const dataAPI = {
+                id: data.id,
+                productInfo: obj
+            }
+            console.log('child data, ', dataAPI);
+
+
+            const response = await axios.put(API_ORDER_RE_ORDER, dataAPI, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response && response.status === 200) {
+                toast.success('Success', {
+                    autoClose: 3000
+                })
+            };
+
         } catch (error) {
             console.log(error.response.data)
             if (error.response.data.message) {
@@ -218,6 +228,8 @@ function OrderDetail() {
         vib: '19883 08213 9123 32',
     }
 
+
+
     return (
         <div style={{ marginTop: '20px', backgroundColor: 'white' }}>
 
@@ -251,9 +263,15 @@ function OrderDetail() {
                                             </div>
 
                                             <Order order={data}
+                                                dataBack={setChildData}
                                                 isExtended={isExtended}
                                                 orderData={(data2) => setOrder(data2)}
                                             />
+                                            {data.status === 'PAID' ? <button style={{ width: '35%', margin: 'auto', marginTop: '10px', textAlign: 'center' }} className="btn btn-info btn-block btn-lg mt-3" onClick={() => reOrder()}>
+                                                <span>
+                                                    Chấp nhận gia hạn
+                                                </span>
+                                            </button> : ''}
                                             {dataDetail ?
                                                 dataDetail.map((item, index) => (
                                                     <div className="card mb-3" key={index}>

@@ -4,7 +4,7 @@ import { BsFiles } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 import ShowBank from './ShowBank'
 
-function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
+function ComponentRightInfo({ bank, reOrder,listBank, handleChange, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
     function copy(text) {
         navigator.clipboard.writeText(text)
         toast.success(`Sao chép thành công`, {
@@ -145,7 +145,7 @@ function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, chec
 
                         {data.status === 'PAID' ? <button style={{ width: '35%', margin: 'auto', marginTop: '10px', textAlign: 'center' }} className="btn btn-info btn-block btn-lg" onClick={() => onChangeExtendedStatus()}>
                             <span>
-                                Gia hạn
+                               Gia hạn
                             </span>
                         </button> : ''}
                     </div>
