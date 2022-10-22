@@ -22,6 +22,10 @@ export default function AdminCategory() {
 
     const [openEdit, setOpenEdit] = React.useState(false)
     const handleCloseEdit = () => setOpenEdit(false)
+
+    const [openDelete, setOpenDelete] = useState(false)
+    const handleOpenDelete = () => setOpenDelete(true);
+    const handleCloseDelete = () => setOpenDelete(false);
     useEffect(() => {
         fetchAPI()
     }, [])
@@ -105,6 +109,7 @@ export default function AdminCategory() {
         const response = await axios.delete(API_DELETE_CATEGORY + id)
         if (response && response.status === 201) {
             toast.success("Xoá thành công", { autoClose: "1500" })
+            setOpenDelete(false)
             fetchAPI()
         }
     }
@@ -113,7 +118,8 @@ export default function AdminCategory() {
         <div>
             {selected && <EditCategory item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
             <CreateCategory open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
-            <Category data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete} />
+            <Category data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
+                openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
         </div>
     )
 }
