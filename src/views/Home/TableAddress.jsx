@@ -140,7 +140,7 @@ function TableAddress() {
             <Box sx={{ width: '86%', margin: 'auto' }}>
                 <Box sx={{ flexGrow: 1, mt: 10 }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={8}>
+                        <Grid item xs={9}>
                             <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
                                 <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
                                     <SearchIcon onClick={onclickFilter} />
@@ -155,10 +155,10 @@ function TableAddress() {
                                 />
                             </Paper>
                         </Grid>
-                        <Grid item xs={4} >
-                            <FormControl sx={{ width: '28%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
+                        <Grid item xs={3} >
+                            <FormControl sx={{ width: '47%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sort  </h3>
+                                    <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginRight: '10%',marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
                                     <ToggleButton
                                         sx={{ height: '73%' }}
                                         value="check"
@@ -173,25 +173,9 @@ function TableAddress() {
                                     </ToggleButton>
                                 </div>
                             </FormControl>
-                            <FormControl sx={{ width: '31%', backgroundColor: 'white', height: '45px', ml: 2, borderRadius: '5px' }} size="small">
-                                <InputLabel sx={{ color: 'black' }} id="demo-select-small">Tên trường</InputLabel>
-                                <Select
-                                    style={{ height: '45px', }}
-                                    labelId="demo-select-small"
-                                    id="demo-select-small"
-                                    value={field}
-                                    label="Field"
-                                    onChange={handleChangeField}>
-                                    <MenuItem value={'street'}>Đường</MenuItem>
-                                    <MenuItem value={'city'}>Thành phố</MenuItem>
-                                    <MenuItem value={'description'}>Mô tả</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            <Button sx={{ width: '31%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickSearch} color="primary">
+                            <Button sx={{ width: '45%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickSearch} color="primary">
                                 Tìm kiếm
                             </Button>
-
                         </Grid>
                     </Grid>
                 </Box>

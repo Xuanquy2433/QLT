@@ -30,23 +30,26 @@ function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, chec
 
                         <form className="mt-4">
                             <div className="form-outline form-white mb-4">
+                                <label className="form-label" htmlFor="typeName">
+                                    Tên chủ tài khoản
+                                </label>
                                 <p
                                     className="form-control form-control-lg"
                                     style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
                                 > NGUYEN VAN A</p >
-                                <label className="form-label" htmlFor="typeName">
-                                    Tên chủ tài khoản
-                                </label>
                             </div>
                             <div className="form-outline form-white mb-4">
-                                <ShowBank bank={bank} listBank={listBank} />
                                 <label className="form-label" htmlFor="typeText">
                                     Số tài khoản
                                 </label>
+                                <ShowBank bank={bank} listBank={listBank} />
                             </div>
                             <div className="row mb-4">
                                 <div className="col-md-5">
                                     <div className="form-outline form-white">
+                                        <label className="form-label mt-1" htmlFor="typeText">
+                                            Tên ngân hàng
+                                        </label>
                                         <select className="form-control form-control-lg"
                                             value={bank}
                                             style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
@@ -58,13 +61,13 @@ function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, chec
                                             <option value="tpbank">TP BANK</option>
                                             <option value="vib">VIB</option>
                                         </select>
-                                        <label className="form-label mt-3" htmlFor="typeText">
-                                            Tên ngân hàng
-                                        </label>
                                     </div>
                                 </div>
                                 <div className="col-md-6-9">
                                     <div className="form-outline form-white" style={{ paddingRight: '0', paddingLeft: '0' }}>
+                                        <label className="form-label mt-1" htmlFor="typeText">
+                                            Mã đặt hàng
+                                        </label>
                                         <p
                                             className="form-control form-control-lg"
                                             style={{ color: 'black', backgroundColor: 'white', fontWeight: 600, paddingRight: '0' }}
@@ -73,9 +76,6 @@ function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, chec
                                         </p >
                                         {/* <button onClick={() => copy('someText')}
                                                                     >copy</button> */}
-                                        <label className="form-label" htmlFor="typeText">
-                                            Mã đặt hàng
-                                        </label>
                                     </div>
                                 </div>
                             </div>
