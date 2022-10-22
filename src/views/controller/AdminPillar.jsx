@@ -26,6 +26,9 @@ function AdminProduct() {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const [openDelete, setOpenDelete] = useState(false)
+  const handleOpenDelete = () => setOpenDelete(true);
+  const handleCloseDelete = () => setOpenDelete(false);
   useEffect(() => {
     getAllProduct()
     getAddress()
@@ -92,8 +95,9 @@ function AdminProduct() {
         })
       if (response.status === 201) {
         toast.success("them thanh cong", { autoClose: "1500" })
-        getAllProduct()
         setOpen(false)
+
+        getAllProduct()
       }
     } catch (error) {
       if (error.response.data.message) {
@@ -165,6 +169,7 @@ function AdminProduct() {
     try {
       const response = await axios.delete(API_PRODUCT_DELETE + id)
       if (response.status === 200) {
+        setOpenDelete(false)
         toast.success("Xóa thành công", { autoClose: 1500 })
         getAllProduct()
       }
@@ -192,15 +197,15 @@ function AdminProduct() {
     }
   }
 
-return (
-  <div>
-    <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
-    {selected && <EditPillar dataCategory={dataCategory} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
-    <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
-      handleChangePage={handleChangePage} totalPages={totalPages}
-      handleChangeRowsPerPage={handleChangeRowsPerPage} />
-  </div>
-)
+  return (
+    <div>
+      <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
+      {selected && <EditPillar dataCategory={dataCategory} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
+      <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
+        handleChangePage={handleChangePage} totalPages={totalPages} handleChangeRowsPerPage={handleChangeRowsPerPage}
+        openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
+    </div>
+  )
 }
 
 export default AdminProduct
