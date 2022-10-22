@@ -19,6 +19,8 @@ import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { formatMoney } from './../../common/formatMoney';
+import Modal from '@mui/material/Modal';
+
 const columns = [
     { id: 'id', label: 'Id', minWidth: 10, maxWidth: 10 },
     {
@@ -76,7 +78,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
+export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete, handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
 
 
     const handleOpen = () => setOpen(true)
@@ -154,7 +156,7 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
                                                             href="#pablo"
-                                                            onClick={(e) => onDelete(item.id)}>
+                                                            onClick={handleOpenDelete}>
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
                                                         </DropdownItem>
@@ -167,6 +169,35 @@ export default function Pillar({ handleChangeRowsPerPage, totalPages, data, setO
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>
+                                            <Modal
+                                                open={openDelete}
+                                                onClose={handleCloseDelete}
+                                                aria-labelledby="modal-modal-title"
+                                                aria-describedby="modal-modal-description"
+                                            >
+                                                <Box className='form-add-product'
+                                                    sx={{
+                                                        width: '40%',
+                                                        margin: 'auto',
+                                                        marginTop: '270px',
+                                                        backgroundColor: 'white',
+                                                        padding: '10px',
+                                                        // borderRadius: "10px"
+                                                    }}
+                                                >
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
+                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá địa chỉ ?</h2>
+
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
+
+                                                    <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
+                                                        <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
+                                                        <button onClick={(e) => onDelete(item.id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+                                                    </div>
+
+                                                </Box>
+
+                                            </Modal>
                                         </TableRow>
                                     ))}
                             </TableBody>
