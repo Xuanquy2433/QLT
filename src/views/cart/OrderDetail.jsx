@@ -33,7 +33,6 @@ function OrderDetail() {
 
     const onChangeExtendedStatus = () => {
         setIsExtended(!isExtended)
-        reOrder();
     }
 
     const getAllOderDetail = async (e) => {
