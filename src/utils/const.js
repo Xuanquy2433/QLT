@@ -79,6 +79,9 @@ export const API_PROFILE_GET_USER = `${API}/user/profile`
 
 export const API_ADD_CART_PRE_ORDER = `${API}/cart/addtocart_preorder`
 
+export const API_ORDER_RE_ORDER= `${API}/admin/order/extend_order`
+
+
 
 
 

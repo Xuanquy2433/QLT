@@ -11,6 +11,7 @@ import Order from './OrderConponent';
 import { MenuItem, Select } from '@mui/material';
 import ShowBank from './ShowBank';
 import ComponentRightInfo from './ComponentRightInfo';
+import { API_ORDER_RE_ORDER } from 'utils/const';
 
 function OrderDetail() {
 
@@ -32,6 +33,7 @@ function OrderDetail() {
 
     const onChangeExtendedStatus = () => {
         setIsExtended(!isExtended)
+        reOrder();
     }
 
     const getAllOderDetail = async (e) => {
@@ -100,6 +102,50 @@ function OrderDetail() {
                 })
                 history.push('/auth/login')
             }
+        } catch (error) {
+            console.log(error.response.data)
+            if (error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error) {
+                toast.error(`${error.response.data.error}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error && error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else {
+                toast.error('Error', {
+                    autoClose: 2000
+                })
+            }
+        }
+    }
+
+    const reOrder = async () => {
+        try {
+                
+                // const response = await axios.put(API_ORDER_RE_ORDER , {}, {
+                //     headers: {
+                //         'Authorization': `Bearer ${token}`,
+                //         'Accept': 'application/json',
+                //         'Content-Type': 'application/json'
+                //     }
+                // });
+                // if (response && response.status === 200) {
+                //     toast.success('Success', {
+                //         autoClose: 3000
+                //     })
+                //     setTimeout(() => {
+                //         window.location.reload()
+                //     }, 1800);
+                // };
+            
         } catch (error) {
             console.log(error.response.data)
             if (error.response.data.message) {

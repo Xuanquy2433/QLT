@@ -143,7 +143,7 @@ function ComponentRightInfo({ bank, listBank, handleChange, data, renderer, chec
 
                         </button>
 
-                        {data.checked === true ? <button style={{ width: '35%', margin: 'auto', marginTop: '10px', textAlign: 'center' }} className="btn btn-info btn-block btn-lg" onClick={() => onChangeExtendedStatus()}>
+                        {data.status === 'PAID' ? <button style={{ width: '35%', margin: 'auto', marginTop: '10px', textAlign: 'center' }} className="btn btn-info btn-block btn-lg" onClick={() => onChangeExtendedStatus()}>
                             <span>
                                 Gia hạn
                             </span>
