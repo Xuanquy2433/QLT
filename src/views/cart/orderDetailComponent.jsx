@@ -7,7 +7,9 @@ function OrderDetailComponent(props) {
     id: "",
     isChecked: false,
   });
-  const { orderDetail, hasParent, sendDataBack, isExtended, orderStatus } = props;
+
+  const [monthBack, setMonthBack] = useState(Number(1));
+  const { orderDetail, hasParent, sendDataBack, isExtended, orderStatus, dataMonthBack } = props;
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
       // Render a completed state
@@ -20,6 +22,7 @@ function OrderDetailComponent(props) {
 
   useEffect(() => {
     sendDataBack(data);
+    dataMonthBack(monthBack)
   }, [data])
 
   const onChange = (e) => {
@@ -28,12 +31,17 @@ function OrderDetailComponent(props) {
     // }
     setData(a => ({ ...a, id: e.target.value, isChecked: e.target.checked }));
   }
+  console.log('month ', monthBack);
   return (
     <div className="wrapper-detail">
       <input style={{ display: !hasParent && !isExtended && !orderStatus ? 'block' : 'none' }} type="checkbox"
         onChange={(e) => onChange(e)} id={orderDetail.product.id}
         value={orderDetail.product.id} />
       <div className="detail-name">Tên: {orderDetail.product.name}</div>
+      <input defaultValue={monthBack} onChange={e => {
+        setMonthBack(e.target.value)
+       ;
+      }} className="detail-month" type="Number" />
       <div className="detail-price">Tổng :{orderDetail.product.price}</div>
       <div className="detail-month"> {orderDetail.month}</div>
       <Countdown

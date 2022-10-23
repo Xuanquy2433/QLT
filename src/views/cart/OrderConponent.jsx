@@ -12,6 +12,10 @@ function Order({ order, isExtended, ya, dataBack }) {
 
   const [data, setData] = useState("")
 
+  const [monthChild, setMonthChild] = useState(1)
+
+
+
   let checkIdHasBeen = true
 
   const expandOrder = () => {
@@ -19,6 +23,7 @@ function Order({ order, isExtended, ya, dataBack }) {
   }
 
   const getCheckIds = (data) => {
+
     if (data.isChecked) {
       listIds.map((item => {
         if (item.productId == data.id) {
@@ -29,21 +34,27 @@ function Order({ order, isExtended, ya, dataBack }) {
       if (checkIdHasBeen == true) {
         setListIds([...listIds, {
           productId: data.id,
-          month: 1,
+          month: Number(monthChild),
         }]);
       }
     }
     else {
       listIds.splice(listIds.indexOf(data.id), 1)
     }
+
+    dataBack(listIds)
+
   }
   console.log(listIds);
+
+
 
   let idOrderInURL = window.location.pathname.replace(/\D/g, "");
   useEffect(() => {
     getCheckIds(childData);
-    dataBack(listIds)
   }, [childData])
+
+  console.log('month child ', monthChild);
 
   return (
     <div className="wrapper">
@@ -102,6 +113,7 @@ function Order({ order, isExtended, ya, dataBack }) {
             sendDataBack={setChildData}
             isExtended={isExtended}
             orderStatus={order.status === "DONE"}
+            dataMonthBack={setMonthChild}
           />
         ))}
       </div>
