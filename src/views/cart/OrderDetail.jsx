@@ -241,17 +241,11 @@ function OrderDetail() {
                                     <div className="row">
                                         <div className="col-lg-7">
                                             <h5 className="mb-3">
-                                                {data.hasParent ?
-                                                    <NavLink to={'/auth/order/' + data.parentId} className="text-body">
-                                                        <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
-                                                        tro lai order chinh
-                                                    </NavLink>
-                                                    :
-                                                    <NavLink to={'/auth/cart'} className="text-body">
+                                                    <NavLink to={'/auth/homePage'} className="text-body">
                                                         <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
                                                         Tiếp tục thuê trụ
                                                     </NavLink>
-                                                }
+
 
                                             </h5>
                                             <hr />
@@ -262,15 +256,11 @@ function OrderDetail() {
                                             </div>
 
                                             <Order order={data}
-                                                dataBack={setChildData}
+                                                dataBack={cData => setChildData(cData)}
                                                 isExtended={isExtended}
                                                 orderData={(data2) => setOrder(data2)}
                                             />
-                                            {data.status === 'PAID' ? <button style={{ width: '35%', margin: 'auto', marginTop: '10px', textAlign: 'center' }} className="btn btn-info btn-block btn-lg mt-3" onClick={() => reOrder()}>
-                                                <span>
-                                                    Chấp nhận gia hạn
-                                                </span>
-                                            </button> : ''}
+
                                             {dataDetail ?
                                                 dataDetail.map((item, index) => (
                                                     <div className="card mb-3" key={index}>

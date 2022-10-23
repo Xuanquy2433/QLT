@@ -6,7 +6,10 @@
 }
 
 .detail-name{
-  width: 50%;
+  width: 20%;
+}
+.detail-month{
+  width: 10%;
 }
 .detail-month{
   width: 10%;
