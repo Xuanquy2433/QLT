@@ -17,6 +17,7 @@ function Order({ order, isExtended, ya, dataBack }) {
   const expandOrder = () => {
     setIsExpanded(!isExpanded);
   }
+
   const getCheckIds = (data) => {
     if (data.isChecked) {
       listIds.map((item => {
@@ -30,12 +31,11 @@ function Order({ order, isExtended, ya, dataBack }) {
           productId: data.id,
           month: 1,
         }]);
-
       }
     }
-    // else {
-    //   listIds.splice(listIds.indexOf(data.id), 1);
-    // }
+    else {
+      listIds.splice(listIds.indexOf(data.id), 1)
+    }
   }
   console.log(listIds);
 
