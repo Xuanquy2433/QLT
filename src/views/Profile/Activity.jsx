@@ -82,7 +82,7 @@ function Activity() {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', color: 'white', paddingTop: '30px !important' }}>
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
-                            <Tab label="Đơn hàng đã thuê" value="2" />
+                            <Tab label="Các trụ đang thuê" value="2" />
                             {/* <Tab label="Add product" value="3" /> */}
                         </TabList>
                     </Box>
