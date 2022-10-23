@@ -41,9 +41,7 @@ function Order({ order, isExtended, ya, dataBack }) {
     else {
       listIds.splice(listIds.indexOf(data.id), 1)
     }
-
     dataBack(listIds)
-
   }
   console.log(listIds);
 

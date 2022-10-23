@@ -23,7 +23,7 @@ function OrderDetailComponent(props) {
   useEffect(() => {
     sendDataBack(data);
     dataMonthBack(monthBack)
-  }, [data])
+  }, [data,monthBack])
 
   const onChange = (e) => {
     // if (e.target.checked===true) {
@@ -40,7 +40,6 @@ function OrderDetailComponent(props) {
       <div className="detail-name">Tên: {orderDetail.product.name}</div>
       <input defaultValue={monthBack} onChange={e => {
         setMonthBack(e.target.value)
-       ;
       }} className="detail-month" type="Number" />
       <div className="detail-price">Tổng :{orderDetail.product.price}</div>
       <div className="detail-month"> {orderDetail.month}</div>
