@@ -64,8 +64,7 @@ const Profile = () => {
     setEditUser({
       email: data.email || "",
       firstName: data.firstName || "",
-      lastName: data.lastName | "",
-
+      lastName: data.lastName || "",
     })
   }, [data])
 
