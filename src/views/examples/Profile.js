@@ -19,6 +19,8 @@ import { Box, Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_PROFILE_GET_USER } from "utils/const";
+import { toast } from "react-toastify";
+import { API_UPDATE_USER } from "utils/const";
 
 const Profile = () => {
   const user = localStorage.getItem("user");
@@ -50,7 +52,47 @@ const Profile = () => {
       setData(response.data)
     }
   }
-  console.log(data);
+
+  const [editUser, setEditUser] = useState({
+    email: data.email || "",
+    firstName: data.firstName || "",
+    lastName: data.lastName || "",
+  })
+
+  console.log(editUser.lastName);
+  useEffect(() => {
+    setEditUser({
+      email: data.email || "",
+      firstName: data.firstName || "",
+      lastName: data.lastName | "",
+
+    })
+  }, [data])
+
+  const onUpdate = async (data) => {
+    const response = await axios.put(API_UPDATE_USER, data, {
+      headers: {
+        'authorization': 'Bearer ' + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if (response.status === 200) {
+      toast.success("Sửa thành công", { autoClose: 1500 })
+    }
+  }
+
+  const onChangeText = (event) => {
+    setEditUser({ ...editUser, [event.target.name]: event.target.value })
+  }
+
+  const handleUpdate = () => {
+    onUpdate({ ...editUser })
+    setOpen(false)
+  }
+  console.log(editUser);
+
+  // console.log(data);
   return (
     <>
       <Modal
@@ -76,7 +118,7 @@ const Profile = () => {
 
           <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
             <button onClick={handleClose} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
-            <button style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+            <button onClick={handleUpdate} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
           </div>
 
         </Box>
@@ -171,7 +213,7 @@ const Profile = () => {
                 </Row>
                 <div className="text-center">
                   <h3>
-                    {data.firstName} {data.lastName}
+                    {editUser.firstName} {editUser.lastName}
                     <span className="font-weight-light">, 27</span>
                   </h3>
                   <div className="h5 font-weight-300">
@@ -234,6 +276,7 @@ const Profile = () => {
                             Số điện thoại
                           </label>
                           <Input
+                            readOnly={true}
                             className="form-control-alternative"
                             defaultValue={data.phoneNumber}
                             id="input-username"
@@ -251,9 +294,11 @@ const Profile = () => {
                             Địa chỉ email
                           </label>
                           <Input
+                            name="email"
+                            onChange={onChangeText}
                             className="form-control-alternative"
                             id="input-email"
-                            defaultValue={data.email}
+                            defaultValue={editUser.email}
                             type="email"
                           />
                         </FormGroup>
@@ -269,8 +314,10 @@ const Profile = () => {
                             Họ
                           </label>
                           <Input
+                            name="firstName"
+                            onChange={onChangeText}
                             className="form-control-alternative"
-                            defaultValue={data.firstName}
+                            defaultValue={editUser.firstName}
                             id="input-first-name"
                             type="text"
                           />
@@ -285,8 +332,10 @@ const Profile = () => {
                             Tên
                           </label>
                           <Input
+                            name="lastName"
+                            onChange={onChangeText}
                             className="form-control-alternative"
-                            defaultValue={data.lastName}
+                            defaultValue={editUser.lastName}
                             id="input-last-name"
                             type="text"
                           />
