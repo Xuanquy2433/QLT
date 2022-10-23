@@ -82,7 +82,7 @@ function Activity() {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', color: 'white', paddingTop: '30px !important' }}>
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
-                            <Tab label="Lịch sử đặt hàng" value="2" />
+                            <Tab label="Đơn hàng đã thuê" value="2" />
                             {/* <Tab label="Add product" value="3" /> */}
                         </TabList>
                     </Box>
@@ -131,27 +131,52 @@ function Activity() {
                         </Paper>
                     </TabPanel>
                     <TabPanel value="2">
-                        <TableContainer component={Paper}>
-                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Name Services</TableCell>
-                                        <TableCell align="right">STA PROFIT</TableCell>
-                                        <TableCell align="right">CREATEDDATE</TableCell>
-                                        <TableCell align="right">CLAIM DATE</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                        </TableCell>
-                                        <TableCell align="right"></TableCell>
-                                        <TableCell align="right"></TableCell>
-                                        <TableCell align="right"></TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                            <TableContainer sx={{ maxHeight: 500 }}>
+                                <Table stickyHeader aria-label="sticky table">
+                                    <TableHead>
+                                        <TableRow>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                    key={column.id}
+                                                    align={column.align}
+                                                    style={{ minWidth: column.minWidth }}
+                                                >
+                                                    {column.label}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {data.map((item, index) => {
+                                            if (item.status === 'PAID') {
+                                                return (
+                                                    <TableRow key={index} >
+                                                        <TableCell align="left">{item.id}</TableCell>
+                                                        <TableCell align="center"><Moment format='MMMM Do YYYY, h:mm:ss a'>{item.orderTime}</Moment></TableCell>
+                                                        <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
+                                                        {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ fontWeight: '600', color: 'blue' }} align="right">Chờ</TableCell> : null}
+                                                        {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600', color: '#f5c71a' }} align="right">Chờ thanh toán</TableCell> : null}
+                                                        {item.status === 'DONE' ? <TableCell sx={{ fontWeight: '600', color: 'green' }} align="right">Xong</TableCell> : null}
+                                                        {item.status === 'CANCELLED' ? <TableCell sx={{ fontWeight: '600', color: 'red' }} align="right">Đã hủy</TableCell> : null}
+                                                        {item.status === 'PAID' ? <TableCell sx={{ fontWeight: '600', color: 'orange' }} align="right">Đang thuê</TableCell> : null}
+                                                        <TableCell align="right">
+                                                            <NavLink to={'order/' + item.id}>
+                                                                <Button variant="contained" color="success">
+                                                                    Chi tiết
+                                                                </Button>
+                                                            </NavLink>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                )
+                                            }
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+
+                        </Paper>
                     </TabPanel>
                     {/* <TabPanel value="3">
                         <Box className='form-add-product'
