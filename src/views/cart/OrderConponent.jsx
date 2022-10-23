@@ -10,9 +10,6 @@ function Order({ order, isExtended, ya, dataBack }) {
   const [childData, setChildData] = useState({});
   const [listIds, setListIds] = useState([]);
 
-  const [data, setData] = useState("")
-
-  const [monthChild, setMonthChild] = useState(1)
 
 
 
@@ -23,36 +20,31 @@ function Order({ order, isExtended, ya, dataBack }) {
   }
 
   const getCheckIds = (data) => {
-
     if (data.isChecked) {
+      // eslint-disable-next-line array-callback-return
       listIds.map((item => {
-        if (item.productId == data.id) {
+        if (item.productId === data.id) {
           checkIdHasBeen = false
         }
       }))
 
-      if (checkIdHasBeen == true) {
+      if (checkIdHasBeen === true) {
         setListIds([...listIds, {
           productId: data.id,
-          month: Number(monthChild),
+          month: Number(data.month)
         }]);
       }
     }
     else {
       listIds.splice(listIds.indexOf(data.id), 1)
     }
-    dataBack(listIds)
   }
-  console.log(listIds);
+  console.log(childData);
 
 
 
   let idOrderInURL = window.location.pathname.replace(/\D/g, "");
-  useEffect(() => {
-    getCheckIds(childData);
-  }, [childData])
 
-  console.log('month child ', monthChild);
 
   return (
     <div className="wrapper">
@@ -107,23 +99,10 @@ function Order({ order, isExtended, ya, dataBack }) {
         {order.orderDetail?.map((orderDetail) => (
           <OrderDetailComponent
             orderDetail={orderDetail}
-            hasParent={order.hasParent}
-            sendDataBack={setChildData}
-            isExtended={isExtended}
-            orderStatus={order.status === "DONE"}
-            dataMonthBack={setMonthChild}
           />
         ))}
       </div>
-      <div>
-        {(order.hasChildren ? order.children.map(
-          (child) => {
-            return (<Order order={child} ya={!isExpanded} />)
-          }) : null)}
-      </div>
     </div>
-
   )
-
 }
 export default Order;
