@@ -120,9 +120,16 @@ function CartLocal() {
 
         }
     }
+
+    const handleRemoveCartItem = (id) => {
+        let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
+        listCartItems.splice(id, 1)
+        localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
+        toast.success("Xoá thành cônng", { autoClose: "1500" })
+    }
     return (
         <React.Fragment>
-            <section className="h-custom" style={{ backgroundColor: "white", height: '70vh',marginBottom: '80px' }}>
+            <section className="h-custom" style={{ backgroundColor: "white", height: '70vh', marginBottom: '80px' }}>
                 <div style={{ backgroundColor: 'white' }}>
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-12">
@@ -209,7 +216,7 @@ function CartLocal() {
                                                         </div>
                                                         <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                                                             <div style={{ cursor: 'pointer' }} className="text-muted">
-                                                                <i onClick={() => onClickRemoveItemCart(item.productId)} className="fas fa-times" />
+                                                                <i onClick={(e) => handleRemoveCartItem(item.id)} className="fas fa-times" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -233,7 +240,7 @@ function CartLocal() {
                                             </div>
                                         </div>
                                         <div className="col-lg-4 bg-grey">
-                                            <div style={{marginTop: '50px'}} className="p-5">
+                                            <div style={{ marginTop: '50px' }} className="p-5">
                                                 {/* <h5 className="text-uppercase mb-3">Mã giảm giá</h5>
                                                 <div className="mb-5">
                                                     <div className="form-outline">
@@ -249,7 +256,7 @@ function CartLocal() {
                                                 </div> */}
                                                 <hr className="my-4" />
 
-                                                <div  className="d-flex justify-content-between mb-5">
+                                                <div className="d-flex justify-content-between mb-5">
                                                     <h5 className="text-uppercase">Tổng giá</h5>
                                                     <h5>{formatMoney(sum)}</h5>
                                                 </div>
@@ -263,7 +270,7 @@ function CartLocal() {
                                                 >
 
                                                     {btnDisabled ? 'Vui lòng chờ...' : 'Thuê trụ'}
-                                                </button> : <NavLink  to={'/auth/login'}> <button style={{marginTop: '120px'}} type="button"
+                                                </button> : <NavLink to={'/auth/login'}> <button style={{ marginTop: '120px' }} type="button"
                                                     className="btn btn-dark btn-block btn-lg"
                                                     data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>}
 
