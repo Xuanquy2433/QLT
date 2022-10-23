@@ -19,12 +19,11 @@ function Order({ order, isExtended, ya, dataBack }) {
   }
   const getCheckIds = (data) => {
     if (data.isChecked) {
-
-      for (let i = 0; i < listIds.length; i++) {
-        if (listIds.id === data.id) {
+      listIds.map((item => {
+        if (item.productId == data.id) {
           checkIdHasBeen = false
         }
-      }
+      }))
 
       if (checkIdHasBeen == true) {
         setListIds([...listIds, {
