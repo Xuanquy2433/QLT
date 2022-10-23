@@ -18,6 +18,7 @@ import { API_GET_ALL_ORDER } from 'utils/const';
 import Moment from 'react-moment';
 import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { API_GET_EXTEND_ORDER_USER } from 'utils/const';
 
 
 const columns = [
@@ -29,8 +30,30 @@ const columns = [
         align: 'center',
     },
     { id: 'code', label: 'Số lượng sản phẩm', minWidth: 100, align: 'center', },
-    { id: 'code', label: 'Trạng thái', minWidth: 100, align: 'right', },
-    { id: 'code', label: 'Hành động', minWidth: 100, align: 'right', },
+    { id: 'a', label: 'Trạng thái', minWidth: 100, align: 'right', },
+    { id: 's', label: 'Hành động', minWidth: 100, align: 'right', },
+];
+
+const columns2 = [
+    // { id: 'id', label: 'Id', minWidth: 60, align: 'left' },
+    { id: 'j', label: 'Tên trụ', minWidth: 100, align: 'center', },
+    { id: 'code', label: 'Giá', minWidth: 100, align: 'center', },
+    { id: 'a', label: 'Địa chỉ', minWidth: 100, align: 'center', },
+    { id: 'a2', label: 'Loại trụ', minWidth: 100, align: 'center', },
+    { id: 'a22', label: 'Số tháng thuê', minWidth: 100, align: 'center', },
+    {
+        id: 'date',
+        label: 'Ngày bắt đầu',
+        minWidth: 170,
+        align: 'center',
+    },
+    {
+        id: 'date2',
+        label: 'Ngày kết thúc',
+        minWidth: 170,
+        align: 'center',
+    },
+    // { id: 's', label: 'Hành động', minWidth: 100, align: 'center', },
 ];
 function Activity() {
 
@@ -59,13 +82,28 @@ function Activity() {
             setData(response.data)
         }
     }
-    console.log(data);
+
+
+    const [dataOrderDetail, setDataOrderDetail] = useState([])
+    const getALLOrderDetail = async (e) => {
+        const response = await axios.get(API_GET_EXTEND_ORDER_USER, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response && response.status === 200) {
+            setDataOrderDetail(response.data)
+        }
+    }
 
     useEffect(() => {
         getALLOrder()
+        getALLOrderDetail()
     }, [])
 
-
+    console.log("dddđ ", dataOrderDetail);
     return (
         <div className='activity'>
             <div className='activity-content'>
@@ -82,7 +120,7 @@ function Activity() {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', color: 'white', paddingTop: '30px !important' }}>
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
-                            <Tab label="Các trụ đang thuê" value="2" />
+                            <Tab label="Gia hạn trụ" value="2" />
                             {/* <Tab label="Add product" value="3" /> */}
                         </TabList>
                     </Box>
@@ -136,7 +174,7 @@ function Activity() {
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow>
-                                            {columns.map((column) => (
+                                            {columns2.map((column) => (
                                                 <TableCell
                                                     sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                                     key={column.id}
@@ -149,28 +187,26 @@ function Activity() {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {data.map((item, index) => {
-                                            if (item.status === 'PAID') {
-                                                return (
-                                                    <TableRow key={index} >
-                                                        <TableCell align="left">{item.id}</TableCell>
-                                                        <TableCell align="center"><Moment format='MMMM Do YYYY, h:mm:ss a'>{item.orderTime}</Moment></TableCell>
-                                                        <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
-                                                        {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ fontWeight: '600', color: 'blue' }} align="right">Chờ</TableCell> : null}
-                                                        {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600', color: '#f5c71a' }} align="right">Chờ thanh toán</TableCell> : null}
-                                                        {item.status === 'DONE' ? <TableCell sx={{ fontWeight: '600', color: 'green' }} align="right">Xong</TableCell> : null}
-                                                        {item.status === 'CANCELLED' ? <TableCell sx={{ fontWeight: '600', color: 'red' }} align="right">Đã hủy</TableCell> : null}
-                                                        {item.status === 'PAID' ? <TableCell sx={{ fontWeight: '600', color: 'orange' }} align="right">Đang thuê</TableCell> : null}
-                                                        <TableCell align="right">
-                                                            <NavLink to={'order/' + item.id}>
-                                                                <Button variant="contained" color="success">
-                                                                    Chi tiết
-                                                                </Button>
-                                                            </NavLink>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                )
-                                            }
+                                        {dataOrderDetail.map((item, index) => {
+                                            return (
+                                                <TableRow key={index} >
+                                                    {/* <TableCell align="left">{item.id}</TableCell> */}
+                                                    <TableCell align="center">{item.product.name} </TableCell>
+                                                    <TableCell align="center">{item.product.price} </TableCell>
+                                                    <TableCell align="center">{item.product.address.fullAddress} </TableCell>
+                                                    <TableCell align="center">{item.product.category.name} </TableCell>
+                                                    <TableCell align="center">{item.month} tháng </TableCell>
+                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.startDate}</Moment></TableCell>
+                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></TableCell>
+                                                    {/* <TableCell align="right">
+                                                        <NavLink to={'order/' + item.id}>
+                                                            <Button variant="contained" color="success">
+                                                                Chi tiết
+                                                            </Button>
+                                                        </NavLink>
+                                                    </TableCell> */}
+                                                </TableRow>
+                                            )
                                         })}
                                     </TableBody>
                                 </Table>

@@ -38,3 +38,13 @@
                     </Modal>
                 </Grid>
             </Box>
+
+
+                                            SETTING MYSQL
+
+INSERT INTO `settings`(`key`, `category`, `value`) VALUES ('CUSTOMER_VERIFY_CONTENT', 'MAIL_TEMPLATES', 
+'[[name]]<a href=\"[[URL]]\" target=\"_self\">verify</a>'), ('CUSTOMER_VERIFY_SUBJECT', 'MAIL_TEMPLATES', 
+'Email to verify...'), ('MAIL_FROM', 'MAIL_SERVER', 'thangptpk01991@fpt.edu.vn'), ('MAIL_HOST', 'MAIL_SERVER',
+'smtp.gmail.com'), ('MAIL_PASSWORD', 'MAIL_SERVER', 'thanhthang307'), ('MAIL_PORT', 'MAIL_SERVER', '587'), 
+('MAIL_SENDER_NAME', 'MAIL_SERVER', 'ShopMe'), ('MAIL_USERNAME', 'MAIL_SERVER', 'thangptpk01991@fpt.edu.vn'), 
+('SMTP_AUTH', 'MAIL_SERVER', 'true'), ('SMTP_SECURED', 'MAIL_SERVER', 'true')

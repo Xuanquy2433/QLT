@@ -81,6 +81,9 @@ export const API_ADD_CART_PRE_ORDER = `${API}/cart/addtocart_preorder`
 
 export const API_ORDER_RE_ORDER= `${API}/admin/order/extend_order`
 
+export const API_GET_EXTEND_ORDER_USER= `${API}/user/orderdetail?status=extend`
+
+
 
 
 

@@ -69,14 +69,14 @@ const columns = [
     {
         id: 'Status',
         label: 'Trạng thái',
-        minWidth: 150,
+        minWidth: 100,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'action',
         label: '',
-        minWidth: 70,
+        minWidth: 100,
         align: 'right',
     },
 ];
