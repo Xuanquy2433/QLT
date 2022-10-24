@@ -108,10 +108,6 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
-
-
-
-
               {token && decoded ? '' :
                 <NavItem>
                   <NavLink
@@ -123,8 +119,6 @@ const AdminNavbar = () => {
                     <span className="nav-link-inner--text">Đăng ký</span>
                   </NavLink>
                 </NavItem>}
-
-
 
               {/* 
               {token && decoded ? null :
@@ -184,7 +178,7 @@ const AdminNavbar = () => {
                             <NavLink className="nav-link-icon" to="/auth/activity" tag={Link}>
                               {/* <CgMenuBoxed style={{ fontSize: "18.5px" }} /> */}
                               <i style={styleLab} className="ni ni-calendar-grid-58" />
-                              <span style={styleFont} className="nav-link-inner--text">Đơn hàng</span>
+                              <span style={styleFont} className="nav-link-inner--text">Hoạt động </span>
                             </NavLink>
                             <DropdownItem divider />
                             <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
