@@ -52,7 +52,7 @@ function HomePage() {
                         <img src="https://nocodebuilding.com/wp-content/uploads/2020/07/fb.png" alt="Chat Messenger" />
                     </a>
 
-                    <a href="http://zalo.me/0989333069" target="_blank" className="zalo">
+                    <a href="http://zalo.me/0869773152" target="_blank" className="zalo">
                         <img src="https://nocodebuilding.com/wp-content/uploads/2020/07/zl.png" alt="Chat Zalo" />
                     </a>
                 </div>
