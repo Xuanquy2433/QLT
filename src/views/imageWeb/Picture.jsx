@@ -14,12 +14,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Button, IconButton, InputBase } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Moment from 'react-moment';
+
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import { data } from 'jquery';
-import { OndemandVideoTwoTone, SettingsPowerRounded } from '@mui/icons-material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
@@ -53,7 +54,7 @@ const columns = [
 
 ];
 
-export default function Picture({ handleOpenDelete, openDelete, handleCloseDelete, data, setOpen, onEdit, onDelete }) {
+export default function Picture({ data, setOpen, onEdit, onDelete }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
@@ -70,6 +71,22 @@ export default function Picture({ handleOpenDelete, openDelete, handleCloseDelet
     const onClickEdit = (item) => {
         onEdit(item)
     }
+
+
+    //handle popup confirm
+    const [openConfirm, setOpenConFirm] = React.useState(false);
+
+    const [idSave, setIdSave] = React.useState(Number);
+
+
+    const handleClickOpenConfirm = () => {
+        setOpenConFirm(true);
+    };
+
+    const handleCloseConfirm = () => {
+        setOpenConFirm(false);
+    };
+
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -114,14 +131,42 @@ export default function Picture({ handleOpenDelete, openDelete, handleCloseDelet
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.image} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.category}</TableCell>
                                             <TableCell sx={{ textAlign: 'center', width: '20%' }}>
-                                                <img style={{ width: '50%' }} src={item.photosImagePath} alt="hihi" />
+                                                <img style={{ width: '50%', height: '8vh' }} src={item.photosImagePath} alt="hihi" />
                                             </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>
-                                                <DeleteIcon sx={{ cursor: 'pointer', marginRight: '39%' }} onClick={(e) => onDelete(item.id)} />
+                                                <DeleteIcon sx={{ cursor: 'pointer', marginRight: '39%' }} onClick={e => {
+                                                    handleClickOpenConfirm()
+                                                    setIdSave(item.id)
+                                                }} />
                                                 <EditIcon sx={{ cursor: 'pointer' }} onClick={(e) => onClickEdit(item)} />
                                             </TableCell>
                                         </TableRow>
                                     ))}
+                                <Dialog
+                                    open={openConfirm}
+                                    onClose={handleCloseConfirm}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">
+                                        {"Xác nhận xóa hình ảnh"}
+                                    </DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                            Bạn chắc chắn muốn xóa hình ảnh này ? Lưu ý: sau khi
+                                            xóa không thể khôi phục lại hình ảnh này.
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleCloseConfirm}>Hủy</Button>
+                                        <Button onClick={e => {
+                                            onDelete(idSave)
+                                            handleCloseConfirm()
+                                        }} autoFocus>
+                                            Đồng ý
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
                             </TableBody>
                         </Table>
                     </TableContainer>
