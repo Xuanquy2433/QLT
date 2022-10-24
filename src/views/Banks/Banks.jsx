@@ -138,7 +138,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                                     </DropdownToggle>
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
-                                                            onClick={() => onDelete(item.id)}
+                                                            onClick={handleOpenDelete}
                                                         >
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
