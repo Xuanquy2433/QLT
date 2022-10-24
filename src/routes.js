@@ -23,6 +23,7 @@ import AdminCategory from "views/controller/AdminCategory";
 import Activity from "views/Profile/Activity";
 import PageNotFound from "layouts/PageNotFound";
 import ForgotPassword from "views/examples/ForgotPassword";
+import AdminBank from "views/controller/AdminBank";
 
 var routes = [
   {
@@ -86,6 +87,13 @@ var routes = [
     name: "Đơn đặt trụ",
     icon: "ni ni-single-copy-04 text-cyan",
     component: OrderPlace,
+    layout: "/admin"
+  },
+  {
+    path: "/banks",
+    name: "Thông Tin Ngân hàng",
+    icon: "ni ni-single-copy-04 text-cyan",
+    component: AdminBank,
     layout: "/admin"
   },
   {
@@ -172,5 +180,6 @@ var routes = [
     component: ForgotPassword,
     layout: "/auth"
   },
+
 ];
 export default routes;

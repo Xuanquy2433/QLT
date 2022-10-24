@@ -11,62 +11,42 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button, IconButton, InputBase } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, InputBase } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import Box from '@mui/material/Box';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { formatMoney } from './../../common/formatMoney';
 import Modal from '@mui/material/Modal';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 10, maxWidth: 10 },
+    { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
-        id: 'image',
-        label: 'Hình ảnh',
-        minWidth: 90,
-        align: 'center',
-
-    },
-    {
-        id: 'name',
-        label: 'Tên',
-        minWidth: 90,
+        id: 'Name',
+        label: 'Tên ngân hàng',
+        minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'price',
-        label: 'Giá',
-        minWidth: 90,
+        id: 'desc',
+        label: 'Mã ngân hàng',
+        minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'Description',
-        label: 'Chú thích',
-        minWidth: 130,
+        id: 'desc',
+        label: 'Số tài khoản',
+        minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'AddressId',
-        label: 'Địa chỉ',
-        minWidth: 70,
-        align: 'center',
-    },
-    {
-        id: 'categoryId',
-        label: 'Loại trụ',
-        minWidth: 70,
-        align: 'center',
-    },
-    {
-        id: 'Status',
-        label: 'Trạng thái',
-        minWidth: 100,
+        id: 'desc',
+        label: 'Tên chủ tài khoản',
+        minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -74,39 +54,51 @@ const columns = [
         id: 'action',
         label: 'Hành động',
         minWidth: 70,
-        align: 'right',
+        maxWidth: 90,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
     },
+
 ];
+export default function Banks({ setOpen, data, handleOpenDelete, openDelete, handleCloseDelete, onDelete }) {
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
-export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete, handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
-    const handleOpen = () => setOpen(true)
-    const onClickEdit = (data) => {
-        onEdit(data)
-    }
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+    const handleOpen = () => setOpen(true);
+
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     return (
-        <>
+        <div>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
                     <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
                         <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                            Thêm Trụ
+                            Thêm tài khoản
                         </Button>
-                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+                        <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Tìm kiếm thông tin trụ"
+                                placeholder="Tìm kiếm tên tài khoản ngân hàng"
                             />
                         </Paper>
                     </div>
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}
-                    <TableContainer sx={{ height: '62vh' }}>
+                    <TableContainer sx={{ minHeight: '29em' }}>
                         <Table aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
@@ -128,17 +120,10 @@ export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>
-                                                <img style={{ width: '50px', height: '50px' }} src={item.image} alt="" />
-                                            </TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.name}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.address.fullAddress}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.category && item.category.name}</TableCell>
-
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
-
+                                            <TableCell sx={{ textAlign: 'center' }}>  {item.bankName} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.bankCode}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.bankAccountNumber}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.bankAccountName}</TableCell>
 
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <UncontrolledDropdown>
@@ -148,71 +133,65 @@ export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete
                                                         role="button"
                                                         size="sm"
                                                         color=""
-                                                        onClick={(e) => e.preventDefault()}
                                                     >
                                                         <i className="fas fa-ellipsis-v" />
                                                     </DropdownToggle>
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
-                                                            onClick={handleOpenDelete}>
+                                                            onClick={() => onDelete(item.id)}
+                                                        >
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
+
                                                         </DropdownItem>
                                                         <DropdownItem
-                                                            href="#pablo"
-                                                            onClick={(e) => onClickEdit(item)}>
+                                                        >
                                                             <EditIcon></EditIcon>
                                                             Update
                                                         </DropdownItem>
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>
-                                            <Modal
+                                            <Dialog
+                                                fullScreen={fullScreen}
                                                 open={openDelete}
                                                 onClose={handleCloseDelete}
-                                                aria-labelledby="modal-modal-title"
-                                                aria-describedby="modal-modal-description"
+                                                aria-labelledby="responsive-dialog-title"
                                             >
-                                                <Box className='form-add-product'
-                                                    sx={{
-                                                        width: '40%',
-                                                        margin: 'auto',
-                                                        marginTop: '270px',
-                                                        backgroundColor: 'white',
-                                                        padding: '10px',
-                                                        // borderRadius: "10px"
-                                                    }}
-                                                >
-                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
-                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá trụ quảng cáo ?</h2>
-
-                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
-
-                                                    <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
-                                                        <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
-                                                        <button onClick={(e) => onDelete(item.id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
-                                                    </div>
-
-                                                </Box>
-
-                                            </Modal>
+                                                <DialogTitle id="responsive-dialog-title">
+                                                    {"Xác nhận xoá ?"}
+                                                </DialogTitle>
+                                                <DialogContent>
+                                                    <DialogContentText>
+                                                        Do you really want to buy product with  This process cannot be undone.
+                                                    </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                    <Button autoFocus onClick={handleCloseDelete}>
+                                                        Cancel
+                                                    </Button>
+                                                    <Button onClick={() => onDelete(item.id)} autoFocus>
+                                                        Confirm
+                                                    </Button>
+                                                </DialogActions>
+                                            </Dialog>
                                         </TableRow>
+
                                     ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[5, 10, 25, 100]}
+                        rowsPerPageOptions={[6, 25, 100]}
                         component="div"
-                        count={totalPages}
+                        count={data.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
-                        // pageSize={1}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
             </Container>
-        </>
+        </div >
     )
 }

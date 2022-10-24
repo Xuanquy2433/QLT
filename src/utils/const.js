@@ -91,6 +91,14 @@ export const API_EXTEND_ORDER_USER = `${API}/extend_order`
 
 export const API_FORGOTPASSWORD = `${API}/forget_password?email=`
 
+export const API_BANK_GET = `${API}/bank/`
+
+export const API_BANK_ADD = `${API}/bank/add`
+
+export const API_BANK_REMOVE = `${API}/bank/remove/`
+
+
+
 
 
 
