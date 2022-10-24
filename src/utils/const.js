@@ -97,6 +97,15 @@ export const API_BANK_ADD = `${API}/bank/add`
 
 export const API_BANK_REMOVE = `${API}/bank/remove/`
 
+export const API_GET_PICTURES = `${API}/admin/webImage/getAll`
+
+export const API_POST_PICTURES = `${API}/admin/webImage/add`
+
+export const API_DELETE_PICTURES = `${API}/admin/webImage/delete/`
+
+
+
+
 
 
 

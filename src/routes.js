@@ -24,6 +24,7 @@ import Activity from "views/Profile/Activity";
 import PageNotFound from "layouts/PageNotFound";
 import ForgotPassword from "views/examples/ForgotPassword";
 import AdminBank from "views/controller/AdminBank";
+import AdminPictures from "views/controller/AdminPictures";
 
 var routes = [
   {
@@ -92,8 +93,15 @@ var routes = [
   {
     path: "/banks",
     name: "Thông Tin Ngân hàng",
-    icon: "ni ni-single-copy-04 text-cyan",
+    icon: "ni ni-diamond text-blue",
     component: AdminBank,
+    layout: "/admin"
+  },
+  {
+    path: "/pictures",
+    name: "Ảnh",
+    icon: "ni ni-image text-blue",
+    component: AdminPictures,
     layout: "/admin"
   },
   {
