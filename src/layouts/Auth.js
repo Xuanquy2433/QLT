@@ -48,6 +48,10 @@ const Auth = (props) => {
         history.push('/auth/homePage')
         history.block(true)
       }
+      else if (decoded === undefined && !decoded && history.location.pathname === '/auth/activity') {
+        history.push('/auth/homePage')
+        history.block(true)
+      }
       else {
         return null;
       }
