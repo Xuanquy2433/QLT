@@ -12,6 +12,7 @@ import CreatePillar from 'views/Pillar/CreatePillar'
 import EditPillar from 'views/Pillar/EditPillar'
 import Pillar from 'views/Pillar/Pillar'
 import { API_GET_ADMIN_ADDRESS } from 'utils/const'
+import { showError } from 'utils/error'
 
 function AdminProduct() {
   const [keyword, setKeyword] = useState('')
@@ -167,33 +168,15 @@ function AdminProduct() {
 
   const onDelete = async (id) => {
     try {
-      const response = await axios.delete(API_PRODUCT_DELETE + id)
-      if (response.status === 200) {
-        setOpenDelete(false)
-        toast.success("Xóa thành công", { autoClose: 1500 })
-        getAllProduct()
-      }
+      console.log('id product delete ,',id);
+      // const response = await axios.delete(API_PRODUCT_DELETE + id)
+      // if (response.status === 200) {
+      //   setOpenDelete(false)
+      //   toast.success("Xóa thành công", { autoClose: 1500 })
+      //   getAllProduct()
+      // }
     } catch (error) {
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
-      }
+      showError(error)
     }
   }
 

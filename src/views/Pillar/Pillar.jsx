@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -79,6 +79,7 @@ const columns = [
 ];
 
 export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete, handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
+    const [id, setId] = useState(Number)
 
     const handleOpen = () => setOpen(true)
     const onClickEdit = (data) => {
@@ -154,7 +155,10 @@ export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete
                                                     </DropdownToggle>
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
-                                                            onClick={handleOpenDelete}>
+                                                            onClick={e => {
+                                                                handleOpenDelete()
+                                                                setId(item.id)
+                                                            }}>
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
                                                         </DropdownItem>
@@ -167,37 +171,38 @@ export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>
-                                            <Modal
-                                                open={openDelete}
-                                                onClose={handleCloseDelete}
-                                                aria-labelledby="modal-modal-title"
-                                                aria-describedby="modal-modal-description"
-                                            >
-                                                <Box className='form-add-product'
-                                                    sx={{
-                                                        width: '40%',
-                                                        margin: 'auto',
-                                                        marginTop: '270px',
-                                                        backgroundColor: 'white',
-                                                        padding: '10px',
-                                                        // borderRadius: "10px"
-                                                    }}
-                                                >
-                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
-                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá trụ quảng cáo ?</h2>
 
-                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
-
-                                                    <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
-                                                        <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
-                                                        <button onClick={(e) => onDelete(item.id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
-                                                    </div>
-
-                                                </Box>
-
-                                            </Modal>
                                         </TableRow>
                                     ))}
+                                <Modal
+                                    open={openDelete}
+                                    onClose={handleCloseDelete}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box className='form-add-product'
+                                        sx={{
+                                            width: '40%',
+                                            margin: 'auto',
+                                            marginTop: '270px',
+                                            backgroundColor: 'white',
+                                            padding: '10px',
+                                            // borderRadius: "10px"
+                                        }}
+                                    >
+                                        <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
+                                        <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá trụ quảng cáo ?</h2>
+
+                                        <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
+
+                                        <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
+                                            <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
+                                            <button onClick={(e) => onDelete(id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+                                        </div>
+
+                                    </Box>
+
+                                </Modal>
                             </TableBody>
                         </Table>
                     </TableContainer>
