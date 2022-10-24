@@ -85,6 +85,8 @@ export const API_UPDATE_USER = `${API}/user/edit`
 
 export const API_GET_EXTEND_ORDER_USER = `${API}/user/orderdetail?status=extend`
 
+export const API_GET_EXPIRED_ORDER_USER = `${API}/user/orderdetail?status=expired`
+
 export const API_EXTEND_ORDER_USER = `${API}/extend_order`
 
 

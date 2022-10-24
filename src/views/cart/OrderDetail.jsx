@@ -12,6 +12,7 @@ import { MenuItem, Select } from '@mui/material';
 import ShowBank from './ShowBank';
 import ComponentRightInfo from './ComponentRightInfo';
 import { API_ORDER_RE_ORDER } from 'utils/const';
+import { showError } from 'utils/error';
 
 function OrderDetail() {
 
@@ -156,27 +157,7 @@ function OrderDetail() {
             };
 
         } catch (error) {
-            console.log(error.response.data)
-            if (error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error) {
-                toast.error(`${error.response.data.error}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error && error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else {
-                toast.error('Error', {
-                    autoClose: 2000
-                })
-            }
+            showError(error)
         }
     }
 
@@ -241,12 +222,10 @@ function OrderDetail() {
                                     <div className="row">
                                         <div className="col-lg-7">
                                             <h5 className="mb-3">
-                                                    <NavLink to={'/auth/homePage'} className="text-body">
-                                                        <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
-                                                        Tiếp tục thuê trụ
-                                                    </NavLink>
-
-
+                                                <NavLink to={'/auth/homePage'} className="text-body">
+                                                    <i className="fas fa-long-arrow-alt-left me-2 mr-2" />
+                                                    Tiếp tục thuê trụ
+                                                </NavLink>
                                             </h5>
                                             <hr />
                                             <div className="d-flex justify-content-between align-items-center mb-4">

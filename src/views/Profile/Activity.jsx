@@ -21,6 +21,9 @@ import { NavLink } from 'react-router-dom';
 import { API_GET_EXTEND_ORDER_USER } from 'utils/const';
 import { toast } from 'react-toastify';
 import { API_EXTEND_ORDER_USER } from 'utils/const';
+import { showError } from 'utils/error';
+import Expired from './Expired';
+import { API_GET_EXPIRED_ORDER_USER } from 'utils/const';
 
 
 const columns = [
@@ -36,6 +39,27 @@ const columns = [
     { id: 's', label: 'Hành động', minWidth: 100, align: 'right', },
 ];
 
+const columns3 = [
+    // { id: 'id', label: 'Id', minWidth: 60, align: 'left' },
+    { id: 'j', label: 'Tên trụ', minWidth: 100, align: 'center', },
+    { id: 'code', label: 'Giá', minWidth: 100, align: 'center', },
+    { id: 'a', label: 'Địa chỉ', minWidth: 100, align: 'center', },
+    { id: 'a2', label: 'Loại trụ', minWidth: 100, align: 'center', },
+    { id: 'a22', label: 'Số tháng thuê', minWidth: 100, align: 'center', },
+    {
+        id: 'date',
+        label: 'Ngày bắt đầu',
+        minWidth: 170,
+        align: 'center',
+    },
+    {
+        id: 'date2',
+        label: 'Ngày kết thúc',
+        minWidth: 170,
+        align: 'center',
+    },
+    // { id: 's', label: 'Hành động', minWidth: 100, align: 'center', },
+];
 
 function Activity() {
     const [showCheckbox, setShowCheckbox] = useState(false)
@@ -90,7 +114,22 @@ function Activity() {
         }
     }
 
+    // get order detail expired
+    const [dataOrderDetailExpred, setDataOrderDetailExpired] = useState([])
+    const getALLOrderDetailExpired = async (e) => {
+        const response = await axios.get(API_GET_EXPIRED_ORDER_USER, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response && response.status === 200) {
+            setDataOrderDetailExpired(response.data)
+        }
+    }
 
+    // get order detail extend
     const [dataOrderDetail, setDataOrderDetail] = useState([])
     const getALLOrderDetail = async (e) => {
         const response = await axios.get(API_GET_EXTEND_ORDER_USER, {
@@ -132,9 +171,7 @@ function Activity() {
             console.log('list ids when remove ', listIds);
         }
     }
-
     console.log('list ids ', listIds);
-
     const extend = async () => {
         try {
             var map = new Map()
@@ -154,39 +191,19 @@ function Activity() {
                 }
             });
             if (response && response.status === 200) {
-                toast.success('Success', {
-                    autoClose: 3000
+                toast.success('Gia hạn thành công ! ', {
+                    autoClose: 1500
                 })
             };
-
         } catch (error) {
-            console.log(error.response.data)
-            if (error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error) {
-                toast.error(`${error.response.data.error}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error && error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else {
-                toast.error('Error', {
-                    autoClose: 2000
-                })
-            }
+            showError(error)
         }
     }
 
     useEffect(() => {
         getALLOrder()
         getALLOrderDetail()
+        getALLOrderDetailExpired()
     }, [])
 
     return (
@@ -206,7 +223,7 @@ function Activity() {
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
                             <Tab label="Trụ đang thuê" value="2" />
-                            {/* <Tab label="Add product" value="3" /> */}
+                            <Tab label="Trụ đã hết hạn" value="3" />
                         </TabList>
                     </Box>
                     <TabPanel value="1">
@@ -276,7 +293,7 @@ function Activity() {
                                             return (
                                                 <TableRow key={index} >
                                                     {/* <TableCell align="left">{item.id}</TableCell> */}
-                                                    {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.id, month)} />
+                                                    {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.product.id, month)} />
                                                         <input onChange={e => setMonth(e.target.value)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
                                                     </TableCell> : <TableCell align="center"> </TableCell>}
                                                     <TableCell align="center">{item.product.name} </TableCell>
@@ -300,12 +317,14 @@ function Activity() {
                                 </Table>
                             </TableContainer>
                         </Paper>
-
                         <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
                             <Button onClick={extend} variant="contained" color="success">
                                 Gia hạn
                             </Button>
                         </Grid>
+                    </TabPanel>
+                    <TabPanel value='3'>
+                        <Expired columns3={columns3} dataOrderDetailExpired={dataOrderDetailExpred} />
                     </TabPanel>
                 </TabContext>
             </Box>
