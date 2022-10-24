@@ -15,10 +15,12 @@ import {
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'; import './style.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import React from 'react';
 
 const AdminNavbar = () => {
   let decoded;
@@ -192,10 +194,22 @@ const AdminNavbar = () => {
                         <li className="item-menu-level-2">
                           <NavLink className="nav-link-icon" to="/admin/index" tag={Link} onClick={logout}
                           >
-                            <i style={styleLab} className="ni ni-user-run" />
+                            <LogoutIcon sx={styleLab} />
                             <span style={styleFont} className="nav-link-inner--text">Đăng xuất</span>
                           </NavLink>
                         </li>
+
+                        {token && decoded.roles === '[ROLE_ADMIN]' ?
+                          <React.Fragment>
+                            <DropdownItem divider />
+                            <li className="item-menu-level-2">
+                              <NavLink className="nav-link-icon" to="/admin/index" tag={Link}
+                              >
+                                <AdminPanelSettingsIcon sx={styleLab} />
+                                <span style={styleFont} className="nav-link-inner--text">Quản trị</span>
+                              </NavLink>
+                            </li>
+                          </React.Fragment> : ''}
                       </ul>
 
                     </li>
