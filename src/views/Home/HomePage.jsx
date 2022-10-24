@@ -48,7 +48,7 @@ function HomePage() {
             <div className="social-button">
                 <div className="social-button-content">
 
-                    <a href="https://m.me/nocodebuilding/" target="_blank" className="mes">
+                    <a href="https://m.me/gp.1604/" target="_blank" className="mes">
                         <img src="https://nocodebuilding.com/wp-content/uploads/2020/07/fb.png" alt="Chat Messenger" />
                     </a>
 
