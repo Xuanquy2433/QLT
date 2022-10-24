@@ -65,7 +65,7 @@ const Login = () => {
           })
 
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
-            history.push('/auth/homePage')
+            history.goBack()
             //add cart local to database
             var myMap = new Map()
             JSON.parse(localStorage.getItem('cartADD')).map((item) => {
