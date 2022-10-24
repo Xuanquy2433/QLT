@@ -16,9 +16,11 @@ import './activity.css'
 import axios from 'axios';
 import { API_GET_ALL_ORDER } from 'utils/const';
 import Moment from 'react-moment';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { API_GET_EXTEND_ORDER_USER } from 'utils/const';
+import { toast } from 'react-toastify';
+import { API_EXTEND_ORDER_USER } from 'utils/const';
 
 
 const columns = [
@@ -34,28 +36,33 @@ const columns = [
     { id: 's', label: 'Hành động', minWidth: 100, align: 'right', },
 ];
 
-const columns2 = [
-    // { id: 'id', label: 'Id', minWidth: 60, align: 'left' },
-    { id: 'j', label: 'Tên trụ', minWidth: 100, align: 'center', },
-    { id: 'code', label: 'Giá', minWidth: 100, align: 'center', },
-    { id: 'a', label: 'Địa chỉ', minWidth: 100, align: 'center', },
-    { id: 'a2', label: 'Loại trụ', minWidth: 100, align: 'center', },
-    { id: 'a22', label: 'Số tháng thuê', minWidth: 100, align: 'center', },
-    {
-        id: 'date',
-        label: 'Ngày bắt đầu',
-        minWidth: 170,
-        align: 'center',
-    },
-    {
-        id: 'date2',
-        label: 'Ngày kết thúc',
-        minWidth: 170,
-        align: 'center',
-    },
-    // { id: 's', label: 'Hành động', minWidth: 100, align: 'center', },
-];
+
 function Activity() {
+    const [showCheckbox, setShowCheckbox] = useState(false)
+    const columns2 = [
+        // { id: 'id', label: 'Id', minWidth: 60, align: 'left' },
+        { id: 'id22', label: <Button onClick={e => setShowCheckbox(!showCheckbox)} variant="contained" color="success">+</Button>, minWidth: 20, align: 'center' },
+        { id: 'j', label: 'Tên trụ', minWidth: 100, align: 'center', },
+        { id: 'code', label: 'Giá', minWidth: 100, align: 'center', },
+        { id: 'a', label: 'Địa chỉ', minWidth: 100, align: 'center', },
+        { id: 'a2', label: 'Loại trụ', minWidth: 100, align: 'center', },
+        { id: 'a22', label: 'Số tháng thuê', minWidth: 100, align: 'center', },
+        {
+            id: 'date',
+            label: 'Ngày bắt đầu',
+            minWidth: 170,
+            align: 'center',
+        },
+        {
+            id: 'date2',
+            label: 'Ngày kết thúc',
+            minWidth: 170,
+            align: 'center',
+        },
+        // { id: 's', label: 'Hành động', minWidth: 100, align: 'center', },
+    ];
+
+
 
     const [value, setValue] = React.useState('1');
     const handleChange = (event, newValue) => {
@@ -98,12 +105,90 @@ function Activity() {
         }
     }
 
+    //handle checkbox
+    const [listIds, setListIds] = useState([]);
+    const [month, setMonth] = useState(Number(1));
+
+    let checkIdHasBeen = true
+    const handleChangeCheckbox = (event, id, month) => {
+        setMonth(1)
+        if (event.target.checked) {
+            console.log('✅ id = ', id);
+            listIds.map((item => {
+                if (item.productId === id) {
+                    checkIdHasBeen = false
+                }
+            }))
+            if (checkIdHasBeen === true) {
+                setListIds([...listIds, {
+                    productId: id,
+                    month: Number(month) || 1
+                }]);
+            }
+        }
+        else {
+            console.log('⛔️ Checkbox is NOT checked');
+            listIds.splice(listIds.indexOf(data.id), 1)
+            console.log('list ids when remove ', listIds);
+        }
+    }
+
+    console.log('list ids ', listIds);
+
+    const extend = async () => {
+        try {
+            var map = new Map()
+            listIds.map((item) => {
+                map.set(item.productId, item.month);
+            })
+            const objData = Object.fromEntries(map);
+            const dataAPI = {
+                productInfo: objData
+            }
+            console.log('daata api ,', dataAPI);
+            const response = await axios.put(API_EXTEND_ORDER_USER, dataAPI, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response && response.status === 200) {
+                toast.success('Success', {
+                    autoClose: 3000
+                })
+            };
+
+        } catch (error) {
+            console.log(error.response.data)
+            if (error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error) {
+                toast.error(`${error.response.data.error}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error && error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else {
+                toast.error('Error', {
+                    autoClose: 2000
+                })
+            }
+        }
+    }
+
     useEffect(() => {
         getALLOrder()
         getALLOrderDetail()
     }, [])
 
-    console.log("dddđ ", dataOrderDetail);
     return (
         <div className='activity'>
             <div className='activity-content'>
@@ -120,7 +205,7 @@ function Activity() {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', color: 'white', paddingTop: '30px !important' }}>
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
-                            <Tab label="Gia hạn trụ" value="2" />
+                            <Tab label="Trụ đang thuê" value="2" />
                             {/* <Tab label="Add product" value="3" /> */}
                         </TabList>
                     </Box>
@@ -170,7 +255,7 @@ function Activity() {
                     </TabPanel>
                     <TabPanel value="2">
                         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                            <TableContainer sx={{ maxHeight: 500 }}>
+                            <TableContainer sx={{ maxHeight: 467 }}>
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow>
@@ -191,6 +276,9 @@ function Activity() {
                                             return (
                                                 <TableRow key={index} >
                                                     {/* <TableCell align="left">{item.id}</TableCell> */}
+                                                    {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.id, month)} />
+                                                        <input onChange={e => setMonth(e.target.value)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
+                                                    </TableCell> : <TableCell align="center"> </TableCell>}
                                                     <TableCell align="center">{item.product.name} </TableCell>
                                                     <TableCell align="center">{item.product.price} </TableCell>
                                                     <TableCell align="center">{item.product.address.fullAddress} </TableCell>
@@ -211,39 +299,14 @@ function Activity() {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-
                         </Paper>
+
+                        <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                            <Button onClick={extend} variant="contained" color="success">
+                                Gia hạn
+                            </Button>
+                        </Grid>
                     </TabPanel>
-                    {/* <TabPanel value="3">
-                        <Box className='form-add-product'
-                            sx={{
-                                maxWidth: '50%',
-                                margin: '0 auto',
-                                marginTop: ' 70px',
-                                backgroundColor: 'white'
-
-                            }}
-                        >
-                            <TextField name="name" className='form-input-add-product' fullWidth label="Name" id="name" />
-                            <TextField name="percentage" className='form-input-add-product' fullWidth label="Percentage" id="Percentage" />
-                            <div style={{ display: 'flex', justifyContent: ' space-between' }} className="form-flex">
-                                <TextField name="price" style={{ marginRight: '5px' }} className='form-input-add-product' fullWidth label="Price" id="Price" />
-                                <TextField name="investMonth" className='form-input-add-product' fullWidth label="InvestMonth" id="InvestMonth" />
-                            </div>
-
-                            <TextField name="imageURL" className='form-input-add-product' fullWidth label="Image" id="Image" />
-                            <TextField name="description" className='form-input-add-product' fullWidth label="Descriptions" id="Descriptions" />
-
-                            <div className='form-input-add-product'>
-                                <FormControl sx={{ width: '100%' }}>
-                                    <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
-
-                                </FormControl>
-                            </div>
-                        </Box>
-
-
-                    </TabPanel> */}
                 </TabContext>
             </Box>
 
