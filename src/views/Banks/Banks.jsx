@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -76,6 +76,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const [id, setId] = useState()
     return (
         <div>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -138,7 +139,10 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                                     </DropdownToggle>
                                                     <DropdownMenu className="dropdown-menu-arrow" right>
                                                         <DropdownItem
-                                                            onClick={handleOpenDelete}
+                                                            onClick={(e) => {
+                                                                handleOpenDelete()
+                                                                setId(item.id)
+                                                            }}
                                                         >
                                                             <DeleteIcon></DeleteIcon>
                                                             Delete
@@ -152,29 +156,35 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>
-                                            <Dialog
-                                                fullScreen={fullScreen}
+                                            <Modal
                                                 open={openDelete}
                                                 onClose={handleCloseDelete}
-                                                aria-labelledby="responsive-dialog-title"
+                                                aria-labelledby="modal-modal-title"
+                                                aria-describedby="modal-modal-description"
                                             >
-                                                <DialogTitle id="responsive-dialog-title">
-                                                    {"Xác nhận xoá ?"}
-                                                </DialogTitle>
-                                                <DialogContent>
-                                                    <DialogContentText>
-                                                        Do you really want to buy product with  This process cannot be undone.
-                                                    </DialogContentText>
-                                                </DialogContent>
-                                                <DialogActions>
-                                                    <Button autoFocus onClick={handleCloseDelete}>
-                                                        Cancel
-                                                    </Button>
-                                                    <Button onClick={() => onDelete(item.id)} autoFocus>
-                                                        Confirm
-                                                    </Button>
-                                                </DialogActions>
-                                            </Dialog>
+                                                <Box className='form-add-product'
+                                                    sx={{
+                                                        width: '40%',
+                                                        margin: 'auto',
+                                                        marginTop: '270px',
+                                                        backgroundColor: 'white',
+                                                        padding: '10px',
+                                                        // borderRadius: "10px"
+                                                    }}
+                                                >
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
+                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá trụ quảng cáo ?</h2>
+
+                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
+
+                                                    <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
+                                                        <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
+                                                        <button onClick={(e) => onDelete(id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+                                                    </div>
+
+                                                </Box>
+
+                                            </Modal>
                                         </TableRow>
 
                                     ))}
