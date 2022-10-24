@@ -9,7 +9,7 @@ import "assets/scss/argon-dashboard-react.scss";
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import AddressDetail from "views/pillarAddress/AddressDetail";
 
 
@@ -24,6 +24,10 @@ if (setupTime == null) {
 } else {
   if (now - setupTime > hours * 60 * 60 * 1000) {
     localStorage.clear()
+    toast.warning('Phiên đăng nhập đã hết hạn ', { autoClose: 1000 })
+    setTimeout(() => {
+      window.location.reload();
+    }, 1700);
     localStorage.setItem('setupTime', now);
   }
 }
