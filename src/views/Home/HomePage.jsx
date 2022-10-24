@@ -47,11 +47,9 @@ function HomePage() {
             </div>
             <div className="social-button">
                 <div className="social-button-content">
-
                     <a href="https://m.me/gp.1604/" target="_blank" className="mes">
                         <img src="https://nocodebuilding.com/wp-content/uploads/2020/07/fb.png" alt="Chat Messenger" />
                     </a>
-
                     <a href="http://zalo.me/0869773152" target="_blank" className="zalo">
                         <img src="https://nocodebuilding.com/wp-content/uploads/2020/07/zl.png" alt="Chat Zalo" />
                     </a>

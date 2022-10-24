@@ -103,6 +103,11 @@ export const API_POST_PICTURES = `${API}/admin/webImage/add`
 
 export const API_DELETE_PICTURES = `${API}/admin/webImage/delete/`
 
+export const API_SETTING_GET = `${API}/admin/settings/settings/`
+
+export const API_SETTING_UPDATE = `${API}/admin/settings/settings/update`
+
+
 
 
 

@@ -25,6 +25,8 @@ import PageNotFound from "layouts/PageNotFound";
 import ForgotPassword from "views/examples/ForgotPassword";
 import AdminBank from "views/controller/AdminBank";
 import AdminPictures from "views/controller/AdminPictures";
+import Setting from "views/Setting/Setting";
+import AdminSetting from "views/controller/AdminSetting";
 
 var routes = [
   {
@@ -44,14 +46,14 @@ var routes = [
   {
     path: "/pillars",
     name: " Địa chỉ",
-    icon: "ni ni-archive-2 text-pink",
+    icon: "ni ni-square-pin text-pink",
     component: AdminAddress,
     layout: "/admin"
   },
   {
     path: "/product",
     name: "Trụ",
-    icon: "ni ni-delivery-fast text-blue",
+    icon: "ni ni-bullet-list-67 text-blue",
     component: AdminPillar,
     layout: "/admin"
   },
@@ -93,8 +95,15 @@ var routes = [
   {
     path: "/banks",
     name: "Thông Tin Ngân hàng",
-    icon: "ni ni-diamond text-blue",
+    icon: "ni ni-diamond text-gold",
     component: AdminBank,
+    layout: "/admin"
+  },
+  {
+    path: "/setting",
+    name: "Cài đặt",
+    icon: "ni ni-settings text-blue",
+    component: AdminSetting,
     layout: "/admin"
   },
   {
@@ -142,7 +151,7 @@ var routes = [
   {
     path: "/homePage",
     name: "Home Page",
-    icon: "ni ni-circle-08 text-pink",
+    icon: "ni ni-world text-pink",
     component: HomePage,
     layout: "/auth"
   },
