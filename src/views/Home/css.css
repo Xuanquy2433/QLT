@@ -240,3 +240,50 @@
     display: none;
   }
 }
+
+
+/* mess zalo */
+.social-button{
+  display: inline-grid;
+    position: fixed;
+    background-color:rgba(255,255,255,0) !important;
+    bottom: 15px;
+    right: 20px;
+    min-width: 45px;
+    text-align: center;
+    z-index: 99999;
+}
+.social-button-content{
+  display: inline-grid;   
+}
+.social-button a {padding:8px 0;cursor: pointer;position: relative;}
+.social-button i{
+  width: 40px;
+    height: 40px;
+    background: #F05A5E;
+    color: #fff;
+    border-radius: 100%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.9;
+    position: relative;
+    z-index: 999;
+}
+.social-button span{
+  display: none;
+}
+
+.mes:hover > span, .zalo:hover > span{display: block}
+.social-button a span {
+    border-radius: 2px;
+    text-align: center;
+    background: #ffffff;
+    padding: 9px;
+    display: none;
+    width: 180px;
+    margin-right: 10px;
+    position: absolute;
+    color: #ffffff;
+    z-index: 999;
+    top: 9px;
+    right: 20px;}
