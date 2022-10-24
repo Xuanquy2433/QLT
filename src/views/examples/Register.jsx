@@ -79,13 +79,13 @@ const Register = () => {
 
   return (
     <>
-      <Col style={{ paddingLeft: '80px', paddingRight: '80px' }} lg="6" md="8">
+      <Col style={{ paddingLeft: '100px', paddingRight: '100px' }} lg="6" md="8">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-4">
-              <small>Đăng nhập với</small>
+            <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D", marginBottom: "-20px" }}>
+              <small style={{ fontWeight: "500" }}>Đăng ký</small>
             </div>
-            <div className="text-center">
+            {/* <div className="text-center">
               <Button
                 className="btn-neutral btn-icon mr-4"
                 color="default"
@@ -120,11 +120,11 @@ const Register = () => {
                 </span>
                 <span className="btn-inner--text">Google</span>
               </Button>
-            </div>
+            </div> */}
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Hoặc đăng ký bằng thông tin của bạn</small>
+              <small>Vui lòng nhập thông tin của bạn</small>
             </div>
             <Form role="form">
               <FormGroup>
@@ -223,7 +223,7 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button onClick={onSignup} className="mt-4" color="primary" type="button">
+                <Button style={{ width: "100%" }} onClick={onSignup} className="mt-4" color="primary" type="button">
                   Đăng ký
                 </Button>
               </div>
@@ -232,13 +232,12 @@ const Register = () => {
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-            <a
+            <NavLink
+              to={'/auth/forgotPassword'}
               className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
             >
               <small>Quên mật khẩu?</small>
-            </a>
+            </NavLink>
           </Col>
           <Col className="text-right" xs="6">
             <div

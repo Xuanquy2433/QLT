@@ -89,6 +89,8 @@ export const API_GET_EXPIRED_ORDER_USER = `${API}/user/orderdetail?status=expire
 
 export const API_EXTEND_ORDER_USER = `${API}/extend_order`
 
+export const API_FORGOTPASSWORD = `${API}/forget_password?email=`
+
 
 
 

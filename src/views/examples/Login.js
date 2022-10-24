@@ -124,13 +124,13 @@ const Login = () => {
 
   return (
     <>
-      <Col style={{ paddingLeft: '60px', paddingRight: '60px' }} lg="5" md="7">
+      <Col style={{ paddingLeft: '70px', paddingRight: '70px' }} lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-3">
-              <small>Đăng nhập với</small>
+            <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D", marginBottom: "-20px" }}>
+              <small style={{ fontWeight: "500" }}>Đăng nhập</small>
             </div>
-            <div className="btn-wrapper text-center">
+            {/* <div className="btn-wrapper text-center">
               <Button
                 className="btn-neutral btn-icon"
                 color="default"
@@ -165,11 +165,11 @@ const Login = () => {
                 </span>
                 <span className="btn-inner--text">Google</span>
               </Button>
-            </div>
+            </div> */}
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-            <small>Hoặc đăng nhập bằng thông tin của bạn</small>
+              <small>Đăng nhập bằng thông tin của bạn</small>
             </div>
             <Form role="form" >
               <FormGroup className="mb-3">
@@ -230,7 +230,7 @@ const Login = () => {
                 </label>
               </div> */}
               <div className="text-center">
-                <Button className="my-4" color="primary" type="submit" onClick={(e) => onLogin(e)}>
+                <Button style={{ width: "100%" }} className="my-4" color="primary" type="submit" onClick={(e) => onLogin(e)}>
                   Đăng nhập
                 </Button>
               </div>
@@ -239,13 +239,12 @@ const Login = () => {
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-            <a
+            <NavLink
+              to={'/auth/forgotPassword'}
               className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
             >
               <small>Quên mật khẩu?</small>
-            </a>
+            </NavLink>
           </Col>
           <Col className="text-right" xs="6">
             <NavLink

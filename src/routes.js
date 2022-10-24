@@ -22,6 +22,7 @@ import Category from "views/category/Category";
 import AdminCategory from "views/controller/AdminCategory";
 import Activity from "views/Profile/Activity";
 import PageNotFound from "layouts/PageNotFound";
+import ForgotPassword from "views/examples/ForgotPassword";
 
 var routes = [
   {
@@ -162,6 +163,13 @@ var routes = [
     name: "AddressDetail",
     icon: "ni ni-circle-08 text-pink",
     component: AddressDetail,
+    layout: "/auth"
+  },
+  {
+    path: "/forgotPassword",
+    name: "ForgotPassword",
+    icon: "ni ni-circle-08 text-pink",
+    component: ForgotPassword,
     layout: "/auth"
   },
 ];
