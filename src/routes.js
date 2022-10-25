@@ -100,17 +100,17 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/setting",
-    name: "Cài đặt",
-    icon: "ni ni-settings text-blue",
-    component: AdminSetting,
+    path: "/pictures",
+    name: "Ảnh website",
+    icon: "ni ni-image text-blue",
+    component: AdminPictures,
     layout: "/admin"
   },
   {
-    path: "/pictures",
-    name: "Ảnh",
-    icon: "ni ni-image text-blue",
-    component: AdminPictures,
+    path: "/setting",
+    name: "Cài đặt email",
+    icon: "ni ni-settings text-blue",
+    component: AdminSetting,
     layout: "/admin"
   },
   {

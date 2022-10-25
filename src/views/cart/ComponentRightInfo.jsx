@@ -1,16 +1,39 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Countdown from 'react-countdown'
 import { BsFiles } from 'react-icons/bs'
 import { toast } from 'react-toastify'
+import { API_BANK_GET } from 'utils/const'
 import ShowBank from './ShowBank'
 
-function ComponentRightInfo({ bank, reOrder,listBank, handleChange, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
+function ComponentRightInfo({  reOrder, listBank, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
     function copy(text) {
         navigator.clipboard.writeText(text)
         toast.success(`Sao chép thành công`, {
             autoClose: 500
         })
     }
+    const [bank, setBank] = React.useState({
+        bankName: '',
+        bankAccountNumber: ''
+    });
+
+    const handleChange = (event) => {
+        setBank({bankName: (event.target.value)});
+    };
+
+    const [dataBanks, setDataBanks] = useState([])
+    const fetchAPI = async () => {
+        const response = await axios.post(API_BANK_GET)
+        if (response.status === 200) {
+            setDataBanks(response.data)
+        }
+    }
+
+    useEffect(() => {
+        fetchAPI()
+    }, [])
+
 
     return (
         <React.Fragment>
@@ -42,7 +65,11 @@ function ComponentRightInfo({ bank, reOrder,listBank, handleChange, data, render
                                 <label className="form-label" htmlFor="typeText">
                                     Số tài khoản
                                 </label>
-                                <ShowBank bank={bank} listBank={listBank} />
+                                {/* <ShowBank bank={dataBanks} listBank={listBank} /> */}
+                                <p
+                                    className="form-control form-control-lg"
+                                    style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
+                                > 23823 2323 2 </p >
                             </div>
                             <div className="row mb-4">
                                 <div className="col-md-5">
@@ -55,11 +82,16 @@ function ComponentRightInfo({ bank, reOrder,listBank, handleChange, data, render
                                             style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
                                             onChange={handleChange}
                                             aria-label="Default select example">
-                                            <option value="mbbank" selected>MB BANK</option>
-                                            <option value="bidv">BIDV</option>
+                                            {
+                                                dataBanks.map((item, index) => (
+                                                    <option key={index} value={item.id} selected>{item.bankName}</option>
+                                                ))
+                                            }
+
+                                            {/* <option value="bidv">BIDV</option>
                                             <option value="vpbank">VP BANK</option>
                                             <option value="tpbank">TP BANK</option>
-                                            <option value="vib">VIB</option>
+                                            <option value="vib">VIB</option> */}
                                         </select>
                                     </div>
                                 </div>

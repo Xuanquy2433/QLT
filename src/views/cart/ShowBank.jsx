@@ -3,11 +3,11 @@ import React from 'react'
 function ShowBank({ bank, listBank }) {
     return (
         <React.Fragment>
-            {bank === 'mbbank' && <p
+            {bank.id === bank.id && <p
                 className="form-control form-control-lg"
                 style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-            > {listBank.mbank}</p >}
-            {bank === 'tpbank' && <p
+            > {bank.bankName}</p >}
+            {/* {bank === 'tpbank' && <p
                 className="form-control form-control-lg"
                 style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
             > {listBank.tpbank}</p >}
@@ -22,7 +22,7 @@ function ShowBank({ bank, listBank }) {
             {bank === 'bidv' && <p
                 className="form-control form-control-lg"
                 style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-            > {listBank.bidv}</p >}
+            > {listBank.bidv}</p >} */}
         </React.Fragment>
     )
 }
