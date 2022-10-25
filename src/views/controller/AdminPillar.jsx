@@ -87,18 +87,22 @@ function AdminProduct() {
     console.log("data when add ", data);
 
     try {
-      const formData = new FormData();
-      formData.append('multipartFile', data.multipartFile);
-      const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId + '&categoryId=' + data.categoryId + '&description=' + data.description
-        + '&name=' + data.name + '&price=' + data.price, formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' }
-        })
-      if (response.status === 201) {
-        toast.success("them thanh cong", { autoClose: "1500" })
-        setOpen(false)
+      if (data.name === " ") {
+        toast.error("Không được để trống địa chỉ", { autoClose: "1500" })
+      } else {
+        const formData = new FormData();
+        formData.append('multipartFile', data.multipartFile);
+        const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId + '&categoryId=' + data.categoryId + '&description=' + data.description
+          + '&name=' + data.name + '&price=' + data.price, formData,
+          {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          })
+        if (response.status === 201) {
+          toast.success("them thanh cong", { autoClose: "1500" })
+          setOpen(false)
 
-        getAllProduct()
+          getAllProduct()
+        }
       }
     } catch (error) {
       if (error.response.data.message) {
@@ -168,13 +172,13 @@ function AdminProduct() {
 
   const onDelete = async (id) => {
     try {
-      console.log('id product delete ,',id);
-      // const response = await axios.delete(API_PRODUCT_DELETE + id)
-      // if (response.status === 200) {
-      //   setOpenDelete(false)
-      //   toast.success("Xóa thành công", { autoClose: 1500 })
-      //   getAllProduct()
-      // }
+      console.log('id product delete ,', id);
+      const response = await axios.delete(API_PRODUCT_DELETE + id)
+      if (response.status === 200) {
+        setOpenDelete(false)
+        toast.success("Xóa thành công", { autoClose: 1500 })
+        getAllProduct()
+      }
     } catch (error) {
       showError(error)
     }

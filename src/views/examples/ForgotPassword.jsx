@@ -26,8 +26,7 @@ const ForgotPassword = () => {
         email: "",
     });
 
-    const [isLoading, setIsLoading] = useState('Gửi')
-    const [disabled, setDisabled] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     console.log('data ,', data);
     const onForgetPassword = async (e) => {
@@ -38,19 +37,15 @@ const ForgotPassword = () => {
             })
         }
         else {
-            // setIsLoading('Vui lòng chờ...')
-            setDisabled(true)
+            setIsLoading(true)
             try {
-                const response = await axios.post(API_FORGOTPASSWORD + data.email);
-                if (response && response.status === 200) {
-                    setIsLoading('Vui lòng kiểm tra email')
+                const response = await axios.post(API_FORGOTPASSWORD + data.email).then((res) => {
                     toast.success('Vui lòng kiểm tra email của bạn', {
                         autoClose: 3000
-                    })
-                };
+                    }).finally(() => setIsLoading(false))
+                })
             } catch (error) {
-                setDisabled(false)
-                setIsLoading('Gửi')
+                setIsLoading(false)
                 console.log(error.response.data)
                 if (error.response.data.message) {
                     toast.error(`${error.response.data.message}`, {
@@ -110,8 +105,8 @@ const ForgotPassword = () => {
                                 </InputGroup>
                             </FormGroup>
                             <div className="text-center">
-                                <Button style={{ width: "100%", margin: "0" }} disabled={disabled} className="" color="primary" type="submit" onClick={(e) => onForgetPassword(e)}>
-                                    {isLoading}
+                                <Button style={{ width: "100%", margin: "0" }} disabled={isLoading} className="" color="primary" type="submit" onClick={(e) => onForgetPassword(e)}>
+                                    {isLoading ? "Vui lòng chờ..." : "Gửi"}
                                 </Button>
                             </div>
                         </Form>

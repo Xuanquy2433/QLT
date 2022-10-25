@@ -28,7 +28,7 @@ export default function ChangePassword() {
     console.log(data);
     let token = localStorage.getItem("token");
 
-    const [isLoading, setIsLoading] = useState('Gửi')
+    const [isLoading, setIsLoading] = useState('Đổi mật khẩu')
     const [disabled, setDisabled] = useState(false)
 
     const ChangePassword = async (e) => {

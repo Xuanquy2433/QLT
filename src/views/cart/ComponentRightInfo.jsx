@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { API_BANK_GET } from 'utils/const'
 import ShowBank from './ShowBank'
 
-function ComponentRightInfo({  reOrder, listBank, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
+function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
     function copy(text) {
         navigator.clipboard.writeText(text)
         toast.success(`Sao chép thành công`, {
@@ -19,7 +19,7 @@ function ComponentRightInfo({  reOrder, listBank, data, renderer, checkout, isCo
     });
 
     const handleChange = (event) => {
-        setBank({bankName: (event.target.value)});
+        setBank({ bankName: (event.target.value) });
     };
 
     const [dataBanks, setDataBanks] = useState([])
