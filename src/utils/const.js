@@ -101,11 +101,15 @@ export const API_GET_PICTURES = `${API}/admin/webImage/getAll`
 
 export const API_POST_PICTURES = `${API}/admin/webImage/add`
 
+export const API_UPDATE_PICTURES = `${API}/admin/webImage/update/`
+
 export const API_DELETE_PICTURES = `${API}/admin/webImage/delete/`
 
 export const API_SETTING_GET = `${API}/admin/settings/settings/`
 
 export const API_SETTING_UPDATE = `${API}/admin/settings/settings/update`
+
+
 
 
 
