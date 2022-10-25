@@ -122,7 +122,7 @@ const Register = () => {
               </Button>
             </div> */}
           </CardHeader>
-          <CardBody className="px-lg-5 py-lg-5">
+          <CardBody className="px-lg-5 ">
             <div className="text-center text-muted mb-4">
               <small>Vui lòng nhập thông tin của bạn</small>
             </div>
@@ -223,7 +223,7 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button style={{ width: "100%" }} onClick={onSignup} className="mt-4" color="primary" type="button">
+                <Button style={{ width: "100%" }} onClick={onSignup} className="" color="primary" type="button">
                   Đăng ký
                 </Button>
               </div>

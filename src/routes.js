@@ -27,6 +27,7 @@ import AdminBank from "views/controller/AdminBank";
 import AdminPictures from "views/controller/AdminPictures";
 import Setting from "views/Setting/Setting";
 import AdminSetting from "views/controller/AdminSetting";
+import ChangePassword from "views/examples/ChangePassword";
 
 var routes = [
   {
@@ -195,6 +196,13 @@ var routes = [
     name: "ForgotPassword",
     icon: "ni ni-circle-08 text-pink",
     component: ForgotPassword,
+    layout: "/auth"
+  },
+  {
+    path: "/changePassword",
+    name: "ChangePassword",
+    icon: "ni ni-circle-08 text-pink",
+    component: ChangePassword,
     layout: "/auth"
   },
 

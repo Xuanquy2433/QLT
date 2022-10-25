@@ -109,8 +109,7 @@ export const API_SETTING_GET = `${API}/admin/settings/settings/`
 
 export const API_SETTING_UPDATE = `${API}/admin/settings/settings/update`
 
-
-
+export const API_CHANGE_PASSWORD = `${API}/user/profile/change_password/`
 
 
 

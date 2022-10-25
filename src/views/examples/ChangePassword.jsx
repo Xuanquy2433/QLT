@@ -17,62 +17,35 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import styled from "styled-components";
-import './login.css'
-import { API_FORGOTPASSWORD } from "utils/const";
-
-const ForgotPassword = () => {
+import { API_CHANGE_PASSWORD } from './../../utils/const';
+import { showError } from "utils/error";
+export default function ChangePassword() {
     const history = useHistory();
     const [data, setData] = useState({
-        email: "",
+        oldPassword: "",
+        newPassword: "",
     });
+    console.log(data);
+    let token = localStorage.getItem("token");
 
     const [isLoading, setIsLoading] = useState('Gửi')
     const [disabled, setDisabled] = useState(false)
 
-    console.log('data ,', data);
-    const onForgetPassword = async (e) => {
-        e.preventDefault();
-        if (data.email === '') {
-            toast.error('Email không được để trống', {
-                autoClose: 2000
+    const ChangePassword = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await axios.get(API_CHANGE_PASSWORD + "?oldPassword=" + data.oldPassword + "&newPassword=" + data.newPassword, {
+                headers: {
+                    'authorization': 'Bearer ' + token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
             })
-        }
-        else {
-            // setIsLoading('Vui lòng chờ...')
-            setDisabled(true)
-            try {
-                const response = await axios.post(API_FORGOTPASSWORD + data.email);
-                if (response && response.status === 200) {
-                    setIsLoading('Vui lòng kiểm tra email')
-                    toast.success('Vui lòng kiểm tra email của bạn', {
-                        autoClose: 3000
-                    })
-                };
-            } catch (error) {
-                setDisabled(false)
-                setIsLoading('Gửi')
-                console.log(error.response.data)
-                if (error.response.data.message) {
-                    toast.error(`${error.response.data.message}`, {
-                        autoClose: 2000
-                    })
-                }
-                else if (error.response.data.error) {
-                    toast.error(`${error.response.data.error}`, {
-                        autoClose: 2000
-                    })
-                }
-                else if (error.response.data.error && error.response.data.message) {
-                    toast.error(`${error.response.data.message}`, {
-                        autoClose: 2000
-                    })
-                }
-                else {
-                    toast.error('Error', {
-                        autoClose: 2000
-                    })
-                }
+            if (response.status === 200) {
+                toast.success("Đổi mật khẩu thành công", { autoClose: "1500" })
             }
+        } catch (error) {
+            showError()
         }
     }
 
@@ -80,37 +53,53 @@ const ForgotPassword = () => {
     border:none;
     `
     return (
-        <>
-            <Col style={{ paddingLeft: '80px', paddingRight: '80px' }} lg="5" md="7">
+        <div>
+            <Col style={{ paddingLeft: '80px', paddingRight: '80px' }} >
                 <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-transparent pb-5">
                         <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D" }}>
-                            <small style={{ fontWeight: "500" }}>Quên mật khẩu</small>
+                            <small style={{ fontWeight: "500" }}>Đổi mật khẩu</small>
                         </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                         <div className="text-center text-muted mb-4">
-                            <small>Vui lòng nhập email của bạn để lấy lại mật khẩu.</small>
+                            <small>Vui lòng nhập mật khẩu cũ và mật khẩu mới để thay đổi.</small>
                         </div>
                         <Form role="form" >
                             <FormGroup>
                                 <InputGroup className="input-group-alternative">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>
-                                            <i className="ni ni-email-83" />
+                                            <i className="ni ni-lock-circle-open" />
                                         </InputGroupText>
                                     </InputGroupAddon>
                                     <Input
-                                        onChange={(e) => setData({ ...data, email: e.target.value })}
-                                        placeholder="Nhập email"
-                                        type="email"
+                                        onChange={(e) => setData({ ...data, oldPassword: e.target.value })}
+                                        placeholder="Nhập mật khẩu cũ"
+                                        type="text"
                                         autoComplete="new-email"
                                         require
                                     />
                                 </InputGroup>
                             </FormGroup>
+                            <FormGroup>
+                                <InputGroup className="input-group-alternative">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="ni ni-lock-circle-open" />
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input
+                                        onChange={(e) => setData({ ...data, newPassword: e.target.value })}
+                                        placeholder="Nhập mật khẩu mới"
+                                        type="password"
+                                        autoComplete="new-password"
+                                        require
+                                    />
+                                </InputGroup>
+                            </FormGroup>
                             <div className="text-center">
-                                <Button style={{ width: "100%", margin: "0" }} disabled={disabled} className="" color="primary" type="submit" onClick={(e) => onForgetPassword(e)}>
+                                <Button onClick={(e) => ChangePassword(e)} style={{ width: "100%", margin: "0" }} disabled={disabled} className="" color="primary" type="submit">
                                     {isLoading}
                                 </Button>
                             </div>
@@ -124,7 +113,7 @@ const ForgotPassword = () => {
                             className="text-light"
                         >
                             <small>Đã có tài khoản?
-                                <NavLink to={'/auth/login'}>Đăng nhập</NavLink>
+                                <NavLink to={'/auth/login'}> Đăng nhập</NavLink>
                             </small>
                         </div>
                     </Col>
@@ -138,8 +127,6 @@ const ForgotPassword = () => {
                     </Col>
                 </Row>
             </Col>
-        </>
-    );
-};
-
-export default ForgotPassword;
+        </div>
+    )
+}

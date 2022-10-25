@@ -6,12 +6,16 @@ import {
   FormGroup,
   Form,
   Input,
+  NavItem,
+  NavLink,
   Container,
   DropdownItem,
 
   Row,
   Col
 } from "reactstrap";
+import { Link, useHistory } from "react-router-dom";
+
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import jwt_decode from "jwt-decode";
@@ -213,19 +217,13 @@ const Profile = () => {
                 <div className="text-center">
                   <h3>
                     {editUser.firstName} {editUser.lastName}
-                    <span className="font-weight-light">, 27</span>
                   </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
-                  </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
-                  </div>
                   <div>
-                    <i className="ni education_hat mr-2" />
-                    University of Computer Science
+                    <Button color="info">
+                      <NavLink className="nav-link-icon" to="/auth/changePassword" tag={Link}>
+                        <span style={{ color: "#ffffff" }} className="">Đổi mật khẩu</span>
+                      </NavLink>
+                    </Button>
                   </div>
                   {/* <hr className="my-4" />
                   <p>
@@ -343,7 +341,6 @@ const Profile = () => {
                     </Row>
                     <Button
                       color="info"
-                      href="#pablo"
                       onClick={handleOpen}
                     >
                       Sửa thông tin
