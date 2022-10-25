@@ -15,13 +15,13 @@ export default function EditPictures({ item, data, openEdit, setOpenEdit, onSubm
 
     useEffect(() => {
         setDataEdit({
-            category: valueStateCategory || '',
+            category: category || '',
             image: item.image || ''
         })
     }, [item])
 
     const [dataEdit, setDataEdit] = useState({
-        category: valueStateCategory || '',
+        category: category || '',
         image: item.image || ''
     })
 
@@ -75,7 +75,7 @@ export default function EditPictures({ item, data, openEdit, setOpenEdit, onSubm
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={valueStateCategory}
+                            value={dataEdit.category}
                             onChange={handleChangeCategory}>
                             <MenuItem value={'banner'}>Ảnh banner</MenuItem>
                             <MenuItem value={'logo'}>Ảnh logo</MenuItem>
