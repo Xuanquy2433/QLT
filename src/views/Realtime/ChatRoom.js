@@ -5,25 +5,22 @@ import SockJS from 'sockjs-client';
 var stompClient = null;
 const ChatRoom = () => {
     const [publicChats, setPublicChats] = useState([]);
-    const [userData, setUserData] = useState({
-        username: '',
-        receivername: '',
-        connected: false,
-        message: ''
-    });
+
     useEffect(() => {
         connect();
     }, []);
 
     const connect = () => {
-        let Sock = new SockJS('http://localhost:8080/ws');
+        let Sock = new SockJS('http://localhost:8082/ws');
         stompClient = over(Sock);
         stompClient.connect({}, onConnected, onError);
     }
 
     const onConnected = () => {
-        setUserData({ ...userData, "connected": true });
+        // dòng này cho trang admin
         stompClient.subscribe('/notification/public', onMessageReceived);
+        //cho trang user
+        stompClient.subscribe('/user/15/private', onMessageReceived);
     }
 
     const onMessageReceived = (payload) => {
@@ -35,14 +32,18 @@ const ChatRoom = () => {
     const onError = (err) => {
         console.log(err);
     }
-    return (<>
-        {publicChats.map((chat, index) => (
-            <div className="message-data">{chat.message}</div>
 
+    //message, date,type,status
+    return (<>
+        {publicChats.map((chat) => (
+            <>
+                <div className="message-data">{chat.message}</div>
+                <div className="message-data">{chat.status}</div></>
         ))}
     </>
 
     )
 }
+
 
 export default ChatRoom

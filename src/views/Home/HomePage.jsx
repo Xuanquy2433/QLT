@@ -22,11 +22,12 @@ function HomePage() {
         <div  >
             <BannerSlide />
             <hr />
-            <div>
-                <About />
-            </div>
+            
             <div>
                 <TableAddress />
+            </div>
+            <div>
+                <About />
             </div>
             <hr />
             <div className="hotline-phone-ring-wrap">

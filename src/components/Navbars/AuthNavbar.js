@@ -21,6 +21,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'; import './style.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React from 'react';
+import ChatRoom from 'views/Realtime/ChatRoom';
 
 const AdminNavbar = () => {
   let decoded;
@@ -110,6 +111,8 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
+
+
               {token && decoded ? '' :
                 <NavItem>
                   <NavLink
@@ -165,6 +168,12 @@ const AdminNavbar = () => {
                 </NavItem> : ''
               } */}
 
+              <NavItem className="menu-hover nav-link-icon">
+                <NavLink className="nav-link-icon" tag={Link}>
+                  <i className="ni ni-notification-70" />
+                  <span className="nav-link-inner--text"><ChatRoom />Thông báo </span>
+                </NavLink>
+              </NavItem>
               {token && decoded ?
 
                 <div className="menu">
@@ -216,12 +225,16 @@ const AdminNavbar = () => {
                   </ul>
                 </div>
                 :
-                <NavItem>
-                  <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
-                    <i className="ni ni-key-25" />
-                    <span className="nav-link-inner--text">Đăng nhập</span>
-                  </NavLink>
-                </NavItem>
+                <React.Fragment>
+                  <NavItem>
+                    <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
+                      <i className="ni ni-key-25" />
+                      <span className="nav-link-inner--text">Đăng nhập</span>
+                    </NavLink>
+                  </NavItem>
+
+
+                </React.Fragment>
               }
 
               {/* <NavItem>
