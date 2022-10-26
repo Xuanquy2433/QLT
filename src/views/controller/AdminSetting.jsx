@@ -29,13 +29,13 @@ export default function AdminSetting() {
     const onSubmitEdit = async (data) => {
         try {
             const response = await axios.post(API_SETTING_UPDATE, [data]
-                , {
-                    headers: {
-                        'authorization': 'Bearer ' + token,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                }
+                // , {
+                //     headers: {
+                //         'authorization': 'Bearer ' + token,
+                //         'Accept': 'application/json',
+                //         'Content-Type': 'application/json'
+                //     }
+                // }
             )
             if (response.status === 200) {
                 toast.success("Sửa thành công", { autoClose: "1500" })

@@ -7,11 +7,11 @@ import { QuizTwoTone } from '@mui/icons-material';
 export default function EditSetting({ openEdit, setOpenEdit, item, onSubmitEdit }) {
     const { key, value, category } = item;
 
-    const [data, setData] = useState([{
+    const [data, setData] = useState({
         category: "GENERAL",
         key: item.key || "",
         value: item.value || "",
-    }])
+    })
 
     const onChangeText = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
