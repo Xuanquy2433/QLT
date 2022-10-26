@@ -20,8 +20,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'; import './style.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatRoom from 'views/Realtime/ChatRoom';
+import { API_GET_TEST } from 'utils/const';
+import axios from 'axios';
+import { API_GET_MARK_AS_READ } from 'utils/const';
+import { API_GET_SK } from 'utils/const';
 
 const AdminNavbar = () => {
   let decoded;
@@ -59,6 +63,17 @@ const AdminNavbar = () => {
     fontSize: "0.9rem",
     fontWeight: "400"
   }
+  // const [data, setData] = useState([])
+
+
+  useEffect(() => {
+    const fetchAPI = async () => {
+      const response = await axios.post(API_GET_TEST)
+      const response1 = await axios.post(API_GET_MARK_AS_READ)
+      const response2 = await axios.get(API_GET_SK)
+    }
+    fetchAPI()
+  }, [])
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
