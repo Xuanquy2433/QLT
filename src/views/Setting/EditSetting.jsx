@@ -14,7 +14,7 @@ export default function EditSetting({ openEdit, setOpenEdit, item, onSubmitEdit 
     })
 
     const onChangeText = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value })
+        setData({ ...data, [e.target.name]: e.target.value, key: (item.key) })
     }
 
     console.log(data);
