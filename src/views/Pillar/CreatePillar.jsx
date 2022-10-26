@@ -68,12 +68,17 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                 }}
             >
                 <h2 style={{ textAlign: 'center' }}>Thêm trụ</h2>
-                <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
+                <div style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
                     {/* <FormControl fullWidth sx={{ margin: "5px" }}>
                         <h3>Upload</h3>
                         <input accept="image/*" name='multipartFile'
                             onChange={(e) => setData({ ...data, multipartFile: e.target.files[0] })} multiple type="file" />
                     </FormControl> */}
+                    <TextField style={{ margin: '5px -5px 5px 5px' }} accept="image/*" name='multipartFile' onChange={(e) => setData({ ...data, multipartFile: e.target.files[0] })} multiple type="file" />
+                    <TextField onChange={onChangeText} defaultValue='' name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
+                    <TextField type="number" onChange={onChangeText} defaultValue='' name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
+                    <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
+
                     <FormControl fullWidth sx={{ margin: "5px" }}>
                         <InputLabel id="demo-simple-select-label">Địa chỉ</InputLabel>
                         <Select
@@ -89,7 +94,6 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
 
                         </Select>
                     </FormControl>
-
                     <FormControl fullWidth sx={{ margin: "5px" }}>
                         <InputLabel id="demo-simple-select-label">Loại trụ</InputLabel>
                         <Select
@@ -105,13 +109,6 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
 
                         </Select>
                     </FormControl>
-
-
-                    <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
-                    <TextField type="number" onChange={onChangeText} defaultValue='' name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
-                    <TextField onChange={onChangeText} defaultValue='' name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
-                    <TextField style={{ margin: '5px -5px 5px 5px' }} accept="image/*" name='multipartFile' onChange={(e) => setData({ ...data, multipartFile: e.target.files[0] })} multiple type="file" />
-
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">

@@ -9,6 +9,7 @@ import { API_ADD_CART } from "utils/const";
 import { Button } from "@mui/material";
 import { formatMoney } from "common/formatMoney";
 import { API_ADD_CART_PRE_ORDER } from "utils/const";
+import Moment from "react-moment";
 
 function ProductComponent({ product }) {
 
@@ -200,6 +201,7 @@ function ProductComponent({ product }) {
                 <Button disabled variant="contained" >
                   Đã cho thuê
                 </Button>}
+              {item.expiredDate !== null ? <h4 style={{marginTop: '15px'}}> Ngày hết hạn: <span style={{color:'red'}}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}
             </div>
             {item.preOrdered === false ?
               <Button sx={{ height: '9vh', fontSize: '0.6em', width: '10%', position: 'absolute', top: '0', right: '0', backgroundColor: ' #F4364C' }}

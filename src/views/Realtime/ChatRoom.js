@@ -38,7 +38,8 @@ const ChatRoom = () => {
         {publicChats.map((chat) => (
             <>
                 <div className="message-data">{chat.message}</div>
-                <div className="message-data">{chat.status}</div></>
+                {/* <div className="message-data">{chat.status}</div> */}
+            </>
         ))}
     </>
 
