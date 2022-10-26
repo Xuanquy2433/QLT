@@ -38,9 +38,9 @@ export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
                     }}
                 >
                     <h2 style={{ textAlign: 'center' }}>Thêm danh mục</h2>
-                    <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
-                        <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
+                    <div style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
                         <TextField onChange={onChangeText} defaultValue='' name="name" style={{ margin: '5px' }} fullWidth label='Tên danh mục' />
+                        <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Button onClick={handleClose} sx={{ marginRight: "5px" }} variant="contained" color="success">
