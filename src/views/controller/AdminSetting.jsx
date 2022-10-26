@@ -27,22 +27,21 @@ export default function AdminSetting() {
     }
 
     const onSubmitEdit = async (data) => {
-        console.log('data setting ',[data]);
         try {
-            // const response = await axios.post(API_SETTING_UPDATE, data
-                // , {
-                //     headers: {
-                //         'authorization': 'Bearer ' + token,
-                //         'Accept': 'application/json',
-                //         'Content-Type': 'application/json'
-                //     }
-                // }
-            // )
-            // if (response.status === 200) {
-            //     toast.success("Sửa thành công", { autoClose: "1500" })
-            //     fetchAPI()
-            //     setOpenEdit(false)
-            // }
+            const response = await axios.post(API_SETTING_UPDATE, [data]
+                , {
+                    headers: {
+                        'authorization': 'Bearer ' + token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            if (response.status === 200) {
+                toast.success("Sửa thành công", { autoClose: "1500" })
+                fetchAPI()
+                setOpenEdit(false)
+            }
         } catch (error) {
             showError(error)
         }
