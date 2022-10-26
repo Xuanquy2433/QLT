@@ -27,8 +27,9 @@ export default function AdminSetting() {
     }
 
     const onSubmitEdit = async (data) => {
+        console.log('data setting ',[data]);
         try {
-            const response = await axios.post(API_SETTING_UPDATE, data
+            // const response = await axios.post(API_SETTING_UPDATE, data
                 // , {
                 //     headers: {
                 //         'authorization': 'Bearer ' + token,
@@ -36,12 +37,12 @@ export default function AdminSetting() {
                 //         'Content-Type': 'application/json'
                 //     }
                 // }
-            )
-            if (response.status === 200) {
-                toast.success("Sửa thành công", { autoClose: "1500" })
-                fetchAPI()
-                setOpenEdit(false)
-            }
+            // )
+            // if (response.status === 200) {
+            //     toast.success("Sửa thành công", { autoClose: "1500" })
+            //     fetchAPI()
+            //     setOpenEdit(false)
+            // }
         } catch (error) {
             showError(error)
         }
