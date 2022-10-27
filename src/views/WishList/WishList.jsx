@@ -35,10 +35,10 @@ const columns = [
     { id: 'Mô tả', label: 'Mô tả', minWidth: 100, align: 'center', },
     { id: 'a', label: 'Giá', minWidth: 100, align: 'center', },
     { id: 'Loại trụ', label: 'Loại trụ', minWidth: 100, align: 'center', },
-    { id: 'Địa chỉ', label: 'Địa chỉ', minWidth: 100, align: 'center', },
+    { id: 'Địa chỉ', label: 'Địa chỉ', minWidth: 170, align: 'center', },
     { id: 'Địa chỉ', label: 'Tình trạng', minWidth: 100, align: 'center', },
 
-    { id: 's', label: 'Hành động', minWidth: 70, align: 'right', },
+    { id: 's', label: 'Hành động', minWidth: 40, align: 'right', },
 ];
 export default function WishList() {
     let decoded;
