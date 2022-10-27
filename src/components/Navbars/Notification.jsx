@@ -60,7 +60,7 @@ function Notification() {
     return (
         <React.Fragment>
             <Stack direction="row" spacing={2}>
-                <div className='menu-lv2'>
+                <div className='menu-lv2-noti'>
                     <p
                         ref={anchorRef}
                         id="composition-button"
