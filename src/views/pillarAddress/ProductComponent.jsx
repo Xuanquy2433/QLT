@@ -184,7 +184,7 @@ function ProductComponent({ product }) {
   }
 
   const onClickAddWishList = async (id) => {
-    const response = await axios.post(API_WISHLIST_ADD + id, {
+    const response = await axios.post(API_WISHLIST_ADD + id, {}, {
       headers: {
         'authorization': 'Bearer ' + token,
         'Accept': 'application/json',
