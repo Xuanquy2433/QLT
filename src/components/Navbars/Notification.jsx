@@ -90,7 +90,7 @@ function Notification() {
                                             aria-labelledby="composition-button"
                                             onKeyDown={handleListKeyDown}>
                                             {/* data from socket */}
-                                            <ChatRoom />
+                                            <ChatRoom handleClose={handleClose} />
                                             {/* hard data test */}
                                             <MenuItem onClick={handleClose}>
                                                 <div className='notification' >You have <b>4 new themes</b> trending</div>
