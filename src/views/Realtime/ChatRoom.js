@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { over } from 'stompjs';
 import SockJS from 'sockjs-client';
+import { MenuItem } from '@mui/material';
 
 var stompClient = null;
-const ChatRoom = () => {
+const ChatRoom = ({ handleClose }) => {
     const [publicChats, setPublicChats] = useState([]);
 
     useEffect(() => {
@@ -37,8 +38,12 @@ const ChatRoom = () => {
     return (<>
         {publicChats.map((chat) => (
             <>
-                <div className="message-data">{chat.message}</div>
+                {/* {chat.message} */}
                 {/* <div className="message-data">{chat.status}</div> */}
+                <MenuItem onClick={handleClose}>
+                    <div className='notification' > {chat.message} </div>
+                    <div className='notification-time' >{chat.date}</div>
+                </MenuItem>
             </>
         ))}
     </>
