@@ -99,7 +99,7 @@ const Sidebar = (props) => {
         && prop.path !== '/order/' && prop.path !== '/cart' && prop.path !== '/profile'
         && prop.path !== '/pageNotFound' && prop.path !== '/address/:id' && prop.path !== '/order/:id'
         && prop.path !== '/orderPlace' && prop.path !== '/activity' && prop.path !== '/forgotPassword'
-        && prop.path !== '/changePassword') {
+        && prop.path !== '/changePassword' && prop.path !== '/wishList') {
         return (
           <NavItem key={key}>
             <NavLink

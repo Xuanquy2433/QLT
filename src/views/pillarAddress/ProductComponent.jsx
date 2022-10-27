@@ -211,7 +211,7 @@ function ProductComponent({ product }) {
               <h3>Loại trụ: {item.category.name}</h3>
               <h4> {item.description}</h4>
               {item.status === 'AVAILABLE' ?
-                <Button className="btn-cart-cus" style={{ '&:hover': { backgroundColor: "#5372E4" }, fontWeight: "500", width: "100%", border: "1px solid #5372E4", background: "none", color: "#5372E4", boxShadow: "none" }} onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                <Button className="btn-cart-cus" style={{ fontWeight: "500", width: "100%", border: "1px solid #5372E4", background: "none", color: "#5372E4", boxShadow: "none" }} onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                   Thêm vào giỏ
                 </Button> :
                 <Button style={{ '&:hover': { backgroundColor: "#5372E4" }, fontWeight: "500", width: "100%", border: "1px solid #5372E4", background: "none", color: "#5372E4", boxShadow: "none" }} disabled variant="contained" >
