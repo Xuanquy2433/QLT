@@ -25,8 +25,9 @@ function Notification() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-
+        fetchAPI()
+        // setOpen((prevOpen) => !prevOpen);
+        setOpen(true)
     };
 
     const handleClose = (event) => {
@@ -55,7 +56,7 @@ function Notification() {
         }
 
         prevOpen.current = open;
-        fetchAPI()
+
 
     }, [open]);
 
