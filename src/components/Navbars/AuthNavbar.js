@@ -204,7 +204,7 @@ const AdminNavbar = () => {
                             <NavLink className="nav-link-icon" to="/auth/wishList" tag={Link}>
                               {/* <CgMenuBoxed style={{ fontSize: "18.5px" }} /> */}
                               <BsSuitHeartFill style={styleLab} className="ni ni-BsSuitHeartFill" />
-                              <span style={styleFont} className="nav-link-inner--text">Ưa thích</span>
+                              <span style={styleFont} className="nav-link-inner--text">Yêu thích</span>
                             </NavLink>
 
                             <DropdownItem divider />
