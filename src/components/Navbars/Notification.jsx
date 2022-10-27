@@ -25,9 +25,7 @@ function Notification() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        // fetchAPI()
         setOpen((prevOpen) => !prevOpen);
-        fetchAPI()
 
     };
 
@@ -43,7 +41,6 @@ function Notification() {
         if (event.key === 'Tab') {
             event.preventDefault();
             setOpen(false);
-
         } else if (event.key === 'Escape') {
             setOpen(false);
 
@@ -58,6 +55,7 @@ function Notification() {
         }
 
         prevOpen.current = open;
+        fetchAPI()
 
     }, [open]);
 
@@ -97,10 +95,10 @@ function Notification() {
                                             aria-labelledby="composition-button"
                                             onKeyDown={handleListKeyDown}>
                                             {/* data from socket */}
-
+                                            <ChatRoom />
                                             {/* hard data test */}
                                             <MenuItem onClick={handleClose}>
-                                                <div className='notification' >You have <b>4 new themes</b> <ChatRoom /> </div>
+                                                <div className='notification' >You have <b>4 new themes</b>  </div>
                                                 <div className='notification-time' >10 minutes ago</div>
                                             </MenuItem>
                                         </MenuList>

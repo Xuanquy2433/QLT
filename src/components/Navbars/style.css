@@ -1,40 +1,34 @@
-.menu-lv2-noti NotificationsNoneIcon{
+.menu-lv2-noti NotificationsNoneIcon {
     font-size: 30px;
-
 }
 
-.menu-lv2-noti li{
+.menu-lv2-noti li {
     display: block;
-    }
+}
 
+.menu-lv2-noti .notification-time {
+    color: silver;
+    font-size: 15px;
+}
 
-    .menu-lv2-noti .notification-time{
-        color: silver;
-        font-size: 15px;
-    }
-
-
-
-
-.menu ul{
+.menu ul {
     list-style: none;
 }
 
-.menu .menu-item{
+.menu .menu-item {
     padding-left: 0;
 }
 
-.menu .menu-item .menu-item-title .nav-link-icon{
+.menu .menu-item .menu-item-title .nav-link-icon {
     cursor: pointer;
 }
 
-
-.menu .menu-item .menu-item-title .menu-level-2{
+.menu .menu-item .menu-item-title .menu-level-2 {
     z-index: 10;
     text-align: left;
     position: absolute;
     will-change: transform;
-    display: none;  
+    display: none;
     background-color: #ffffff;
     font-weight: 400;
     color: #212529;
@@ -43,12 +37,12 @@
     padding: 3px 15px 3px 15px;
 }
 
-.menu .menu-item .menu-item-title:hover .menu-level-2{
+.menu .menu-item .menu-item-title:hover .menu-level-2 {
     cursor: pointer;
     display: flex;
 }
 
-.menu .menu-item .menu-item-title .menu-level-2 .item-menu-level-2 .nav-link-icon{
+.menu .menu-item .menu-item-title .menu-level-2 .item-menu-level-2 .nav-link-icon {
     color: #212529;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -107,16 +101,16 @@
 @-webkit-keyframes spin-topbar {
     0% {
         -webkit-transform: rotate(0deg);
-   }
+    }
     100% {
         -webkit-transform: rotate(360deg);
-   }
+    }
 }
 @keyframes spin-topbar {
     0% {
         transform: rotate(0deg);
-   }
+    }
     100% {
         transform: rotate(360deg);
-   }
+    }
 }
