@@ -69,8 +69,8 @@ const AdminNavbar = () => {
   useEffect(() => {
     const fetchAPI = async () => {
       const response = await axios.post(API_GET_TEST)
-      const response1 = await axios.post(API_GET_MARK_AS_READ)
-      const response2 = await axios.get(API_GET_SK)
+      // const response1 = await axios.post(API_GET_MARK_AS_READ)
+      // const response2 = await axios.get(API_GET_SK)
     }
     fetchAPI()
   }, [])

@@ -114,6 +114,12 @@ export const API_GET_MARK_AS_READ = `${API}/notification/markAsRead`
 
 export const API_GET_SK = `${API}/notification/`
 
+export const API_START_COOL_DOWN = `${API}/start_cool_down?orderId=`
+
+export const API_EXTEND_TIME = `${API}/extend_order_payment_time/`
+
+
+
 
 
 

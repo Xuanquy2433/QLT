@@ -13,11 +13,11 @@ import Modal from '@mui/material/Modal';
 
 
 const columnsDetail = [
-    { id: 'id', label: 'Id', minWidth: 170 },
+    { id: 'id', label: 'Id', minWidth: 70 },
     {
         id: 'month',
         label: 'Số tháng thuê',
-        minWidth: 170,
+        minWidth: 150,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     }, {
@@ -29,7 +29,7 @@ const columnsDetail = [
     }, {
         id: 'price',
         label: 'Giá tiền',
-        minWidth: 170,
+        minWidth: 150,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     }, {

@@ -27,9 +27,17 @@ import Modal from '@mui/material/Modal';
 import CheckIcon from '@mui/icons-material/Check';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import OrderDetailPopup from './OrderDetailPopup';
-import Sidebar from 'components/Sidebar/Sidebar';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import InfoIcon from '@mui/icons-material/Info';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { API_EXTEND_TIME } from 'utils/const';
 
 const columns = [
+    { id: 'detail', label: '', minWidth: 10 },
     { id: 'id', label: 'Id', minWidth: 70 },
     {
         id: 'orderCode',
@@ -145,6 +153,31 @@ function OrderPlace() {
         }
         setOpenDetail(true)
     };
+
+    //handle popup confirm
+    const [openConfirm, setOpenConFirm] = React.useState(false);
+
+    const handleClickOpenConfirm = () => {
+        setOpenConFirm(true);
+    };
+
+    const handleCloseConfirm = () => {
+        setOpenConFirm(false);
+    };
+
+    const [idSave, setIdSave] = React.useState(Number);
+
+
+    const extendTime = async (id) => {
+        const response = await axios.post(API_EXTEND_TIME + id + '?day=tomorrow')
+        if (response.status === 200) {
+            toast.success('Thao tác thành công ! ', { autoClose: 1500 })
+            getOrderUserConfirmed()
+            // Sidebar
+        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+    }
+
+
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -188,6 +221,10 @@ function OrderPlace() {
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover sx={{ cursor: 'pointer' }} role="checkbox" key={index}>
+                                            <TableCell sx={{ textAlign: 'right' }}>
+                                                <InfoIcon onClick={() => handleOpenDetailOrder(item.id)}>
+                                                </InfoIcon>
+                                            </TableCell>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.fullName}</TableCell>
@@ -197,7 +234,6 @@ function OrderPlace() {
                                             {item.status === 'USER_CONFIRMED' ?
                                                 <TableCell sx={{ textAlign: 'center' }}> Chờ duyệt</TableCell>
                                                 : ''}
-
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <Button variant="contained" onClick={() => confirmOrder(item.id)} color="success">
                                                     <CheckIcon />
@@ -205,16 +241,43 @@ function OrderPlace() {
                                                 <Button sx={{ ml: 2 }} variant="contained" onClick={() => refuseOrder(item.id)} color="error">
                                                     <DoDisturbIcon />
                                                 </Button>
-                                                <Button sx={{ ml: 2 }} variant="contained" onClick={() => handleOpenDetailOrder(item.id)} color="success">
-                                                    ...
-                                                </Button>
+                                                <MoreTimeIcon sx={{ ml: 2 }} onClick={e => {
+                                                    handleClickOpenConfirm()
+                                                    setIdSave(item.id)
+                                                }} ></MoreTimeIcon>
                                             </TableCell>
-
                                         </TableRow>
                                     )) :
                                     <TableRow >
                                         <TableCell> <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
                                     </TableRow>}
+                                <Dialog
+                                    open={openConfirm}
+                                    onClose={handleCloseConfirm}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">
+                                        {"Xác nhận xóa hình ảnh"}
+                                    </DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                            Bạn chắc chắn muốn gia hạn thêm thời gian chờ cho đơn hàng có id
+                                            <span style={{ color: 'red' }}> {idSave} </span>
+                                            sang ngày mai ?
+                                            Lưu ý: sau khi chấp nhận không thể hoàn tác.
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleCloseConfirm}>Hủy</Button>
+                                        <Button onClick={e => {
+                                            handleCloseConfirm()
+                                            extendTime(idSave)
+                                        }} autoFocus>
+                                            Chấp nhận
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
                                 <OrderDetailPopup dataDetail={dataDetail} openDetail={openDetail} handleCloseDetailOrder={handleCloseDetailOrder} />
                             </TableBody>
                         </Table>
