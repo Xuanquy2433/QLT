@@ -1,4 +1,4 @@
-export const API = 'http://chothuecot-dev.ap-southeast-1.elasticbeanstalk.com';
+export const API = 'http://localhost:8082';
 
 export const API_SIGNUP = `${API}/signup`;
 
