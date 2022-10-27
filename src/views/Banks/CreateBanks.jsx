@@ -38,7 +38,7 @@ export default function CreateBanks({ open, setOpen, onSubmitAdd }) {
                         padding: '10px'
                     }}
                 >
-                    <h2 style={{ textAlign: 'center' }}>Thêm danh mục</h2>
+                    <h2 style={{ textAlign: 'center' }}>Thêm thông tin tài khoản ngân hàng</h2>
                     <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
                         <TextField onChange={onChangeText} name="bankAccountName" style={{ margin: '5px' }} fullWidth label='Tên chủ tài khoản' />
                         <TextField onChange={onChangeText} name="bankAccountNumber" style={{ margin: '5px' }} fullWidth label='Số tài khoản' />
