@@ -60,7 +60,7 @@ const columns = [
     },
 
 ];
-export default function Banks({ setOpen, data, handleOpenDelete, openDelete, handleCloseDelete, onDelete }) {
+export default function Banks({ setOpen, data, handleOpenDelete, openDelete, handleCloseDelete, onDelete, onEdit }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
@@ -149,6 +149,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
 
                                                         </DropdownItem>
                                                         <DropdownItem
+                                                            onClick={(e) => onEdit(item)}
                                                         >
                                                             <EditIcon></EditIcon>
                                                             Update

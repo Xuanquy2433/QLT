@@ -56,6 +56,7 @@ export default function CreateBanks({ open, setOpen, onSubmitAdd }) {
 
                 </Box>
 
-            </Modal></div>
+            </Modal>
+        </div>
     )
 }
