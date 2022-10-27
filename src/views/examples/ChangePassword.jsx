@@ -106,26 +106,6 @@ export default function ChangePassword() {
                         </Form>
                     </CardBody>
                 </Card>
-                <Row className="mt-3">
-                    <Col xs="6">
-                        <div
-                            to={'/auth/login'}
-                            className="text-light"
-                        >
-                            <small>Đã có tài khoản?
-                                <NavLink to={'/auth/login'}> Đăng nhập</NavLink>
-                            </small>
-                        </div>
-                    </Col>
-                    <Col className="text-right" xs="6">
-                        <NavLink
-                            className="text-light"
-                            to={'/auth/register'}
-                        >
-                            <small>Đăng ký tài khoản</small>
-                        </NavLink>
-                    </Col>
-                </Row>
             </Col>
         </div>
     )

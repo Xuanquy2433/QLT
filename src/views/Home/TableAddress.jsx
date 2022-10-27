@@ -111,17 +111,20 @@ function TableAddress() {
         if (field === '') {
             setField('street')
         }
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=5&sort=' + sort + '&sortField=' + field)
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=' + sort + '&sortField=' + field)
         if (response) {
             setData(response.data.contents)
         }
     }
 
     //click search
+    const [show, setShow] = useState(false);
     const onclickSearch = async (e) => {
-        const response = await axios.get(API_CLICK_SEARCH_ADDRESS + keyword)
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&keyword=' + keyword + '&sort=asc&sortField=id')
         if (response) {
-            setData(response.data)
+            setData(response.data.contents)
+            setShow(true)
+            // getAllAddRess()
         }
     }
     // ONCHANGE FILTER
@@ -148,17 +151,14 @@ function TableAddress() {
                                 <InputBase
                                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                     placeholder="Tìm theo từ khóa"
-                                    onChange={(e) => {
-                                        setKeyword(e.target.value)
-                                        // onclickFilter()
-                                    }}
+                                    onChange={e => setKeyword(e.target.value)}
                                 />
                             </Paper>
                         </Grid>
                         <Grid item xs={3} >
-                            <FormControl sx={{ width: '47%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
+                            <FormControl sx={{ width: '49%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginRight: '10%',marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
+                                    <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginRight: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
                                     <ToggleButton
                                         sx={{ height: '73%' }}
                                         value="check"
@@ -182,8 +182,9 @@ function TableAddress() {
 
 
                 <Box sx={{ width: '100%', mt: 2, }} className='hoverBut' >
+                    {show && <p>Tìm thấy {data.length} kết quả cho: {keyword}</p>}
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        {data && data.map((item, index) => (
+                        {data.length > 0 ? data.map((item, index) => (
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                                 <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
                                     <p style={{
@@ -216,7 +217,9 @@ function TableAddress() {
                                     </div>
                                 </div>
                             </Grid>
-                        ))}
+                        )) : <div style={{ width: '50%', margin: 'auto', marginTop: '7%' }}>
+                            <p style={{ fontSize: '1.5em' }}>Hiện không có địa chỉ nào !</p>
+                        </div>}
                         <Modal
                             open={open}
                             onClose={handleClose}
