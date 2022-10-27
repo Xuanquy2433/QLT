@@ -40,10 +40,8 @@ const ChatRoom = ({ handleClose }) => {
             <>
                 {/* {chat.message} */}
                 {/* <div className="message-data">{chat.status}</div> */}
-                <MenuItem onClick={handleClose}>
                     <div className='notification' > {chat.message} </div>
                     <div className='notification-time' >{chat.date}</div>
-                </MenuItem>
             </>
         ))}
     </>

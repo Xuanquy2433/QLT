@@ -24,6 +24,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React, { useEffect } from 'react';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Notification from './Notification';
+import ChatRoom from 'views/Realtime/ChatRoom';
 
 
 const AdminNavbar = () => {
@@ -107,6 +108,17 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
+              <NavItem className="menu-hover nav-link-icon">
+                <NavLink className="nav-link-icon" tag={Link}>
+                  <Notification />
+                </NavLink>
+              </NavItem> 
+
+              <NavItem className="menu-hover nav-link-icon">
+                <NavLink className="nav-link-icon" tag={Link}>
+                  <ChatRoom />
+                </NavLink>
+              </NavItem> 
 
               <NavItem >
                 <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
@@ -171,12 +183,6 @@ const AdminNavbar = () => {
                   </NavLink>
                 </NavItem> : ''
               } */}
-
-              <NavItem className="menu-hover nav-link-icon">
-                <NavLink className="nav-link-icon" tag={Link}>
-                  <Notification />
-                </NavLink>
-              </NavItem>
 
               {token && decoded ?
                 <div className="menu">
