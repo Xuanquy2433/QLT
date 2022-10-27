@@ -10,7 +10,9 @@ import { Button } from "@mui/material";
 import { formatMoney } from "common/formatMoney";
 import { API_ADD_CART_PRE_ORDER } from "utils/const";
 import Moment from "react-moment";
-
+import { AiOutlineHeart } from "react-icons/ai";
+import './ProductComponent.css'
+import { API_WISHLIST_ADD } from "utils/const";
 function ProductComponent({ product }) {
 
   const renderer = ({ hours, minutes, completed }) => {
@@ -180,37 +182,56 @@ function ProductComponent({ product }) {
       }
     }
   }
+
+  const onClickAddWishList = async (id) => {
+    const response = await axios.post(API_WISHLIST_ADD + id, {
+      headers: {
+        'authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if (response.status === 200) {
+      toast.success("Đã thêm vào danh sách yêu thích.")
+    }
+  }
   console.log("product true ", product);
   return (
-    <div style={{ display: "flex", width: "175vh", flexWrap: "wrap", justifyContent: "center", marginTop: '50px', marginBottom: '150px' }}>
+    <div style={{ display: "flex", maxWidth: "100%", flexWrap: "wrap", justifyContent: "center", marginTop: '50px', marginBottom: '150px' }}>
       {
         product.map((item, index) => (
-          <div style={{ float: "left", position: 'relative', backgroundColor: "#ddd", marginTop: '20px', width: "45%", margin: "5px", display: "flex", padding: "10px", borderRadius: "8px", }}>
-            <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <img style={{ width: '100%', height: 250, borderRadius: "8px" }} src={item.photosImagePath} alt="" />
+          <div style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
+            <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <img style={{ width: '100%', height: "auto", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
-            <div style={{ width: "50%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-              <h1 style={{ fontSize: "2em", marginBottom: '10px' }}> {item.name}</h1>
-              <h2 style={{ color: '#32cd32' }}> {formatMoney(item.price)} VNĐ</h2>
+            <div style={{ width: "100%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+
+              <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: '1px', color: "#444444" }}> {item.name}</h1>
+              <h2 style={{ color: '#D70018' }}> {formatMoney(item.price)} VNĐ</h2>
               <h3>Loại trụ: {item.category.name}</h3>
               <h4> {item.description}</h4>
               {item.status === 'AVAILABLE' ?
-                <Button onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                <Button className="btn-cart-cus" style={{ '&:hover': { backgroundColor: "#5372E4" }, fontWeight: "500", width: "100%", border: "1px solid #5372E4", background: "none", color: "#5372E4", boxShadow: "none" }} onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                   Thêm vào giỏ
                 </Button> :
                 <Button disabled variant="contained" >
                   Đã cho thuê
                 </Button>}
-              {item.expiredDate !== null ? <h4 style={{marginTop: '15px'}}> Ngày hết hạn: <span style={{color:'red'}}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}
+              {item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}
             </div>
-            {item.preOrdered === false ?
-              <Button sx={{ height: '9vh', fontSize: '0.6em', width: '10%', position: 'absolute', top: '0', right: '0', backgroundColor: ' #F4364C' }}
-                onClick={(e) => addCartPreOrder({ ...item })} variant="contained" >
-                Đặt trước
-              </Button> : ''}
-          </div>
+            {
+              item.preOrdered === false ?
+                <Button sx={{ height: '9vh', fontSize: '0.6em', width: '10%', position: 'absolute', top: '0', right: '0', backgroundColor: ' #F4364C' }}
+                  onClick={(e) => addCartPreOrder({ ...item })} variant="contained" >
+                  Đặt trước
+                </Button> : ''
+            }
+            < div style={{ display: "flex", alignItems: "center", marginTop: "5px", justifyContent: "end" }}>
+              Yêu thích  <AiOutlineHeart onClick={(e) => onClickAddWishList(item.id)} className="colorHeart-cus" style={{ fontSize: "30px", color: "rgb(215,0,24)", cursor: "pointer" }} />
+            </div>
+          </div >
         ))
-      }</div>
+      }</div >
     // <TableRow hover role="checkbox" >
     //   <TableCell sx={{}}>
     //     <img style={{ width: '80px', borderRadius: "8px" }} src={product.photosImagePath} alt="" />

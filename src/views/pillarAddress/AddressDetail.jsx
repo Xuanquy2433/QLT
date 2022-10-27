@@ -99,7 +99,7 @@ function AddressDetail() {
                     </div> */}
 
 
-                        <div style={{position: 'sticky'}} className="container">
+                        <div style={{ position: 'sticky' }} className="container">
                             <div className="header">
                                 <div className="header-logo">Thông tin trụ </div>
                                 <nav className="header-nav">

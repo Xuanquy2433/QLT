@@ -197,6 +197,7 @@ function ModalDetailProduct({ dataDetail }) {
                                         <TableCell>
                                             <img style={{ width: '50px', height: '50px' }} src={item.photosImagePath} alt="" />
                                         </TableCell>
+
                                         <TableCell > {item.name} </TableCell>
                                         <TableCell style={{ textAlign: 'center' }}> {item.category.name} </TableCell>
                                         <TableCell style={{ textAlign: 'center' }}> {item.price} </TableCell>
@@ -206,7 +207,7 @@ function ModalDetailProduct({ dataDetail }) {
                                                 <Button onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                                                     Thêm vào giỏ
                                                 </Button> :
-                                                <Button  disabled variant="contained" >
+                                                <Button disabled variant="contained" >
                                                     Đã cho thuê
                                                 </Button>}
                                         </TableCell>

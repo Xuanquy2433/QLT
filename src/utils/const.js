@@ -118,6 +118,8 @@ export const API_START_COOL_DOWN = `${API}/start_cool_down?orderId=`
 
 export const API_EXTEND_TIME = `${API}/extend_order_payment_time/`
 
+export const API_WISHLIST_ADD = `${API}/wishlist/add?productId=`
+
 
 
 
