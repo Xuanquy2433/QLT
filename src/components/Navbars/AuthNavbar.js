@@ -1,5 +1,6 @@
 import { CgMenuBoxed } from 'react-icons/cg';
 import { Link, useHistory } from "react-router-dom";
+import '../Navbars/style.css'
 // reactstrap components
 import {
   UncontrolledCollapse,
@@ -23,10 +24,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React, { useEffect } from 'react';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Notification from './Notification';
-import axios from 'axios';
-import { API_GET_TEST } from 'utils/const';
-import { API_GET_MARK_AS_READ } from 'utils/const';
-import { API_GET_SK } from 'utils/const';
+
 
 const AdminNavbar = () => {
   let decoded;
@@ -64,7 +62,7 @@ const AdminNavbar = () => {
     fontSize: "0.9rem",
     fontWeight: "400"
   }
- 
+
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -176,19 +174,6 @@ const AdminNavbar = () => {
 
               <NavItem className="menu-hover nav-link-icon">
                 <NavLink className="nav-link-icon" tag={Link}>
-                  {/* <i className="ni ni-notification-70" />
-
-                  <button>
-                    <span className="nav-link-inner--text"><ChatRoom />Thông báo </span>
-                  </button>
-                  <ul className='menu'>
-                    <li className='menu-item'>
-                      <a href="#" >
-                        <div >You have <b>3 new themes</b> trending</div>
-                        <div >15 minutes ago</div>
-                      </a>
-                    </li>
-                  </ul> */}
                   <Notification />
                 </NavLink>
               </NavItem>
