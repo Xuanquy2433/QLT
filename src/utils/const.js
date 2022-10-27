@@ -8,12 +8,9 @@ export const API_GET_PILLAR = `${API}/admin/address/`;
 
 export const API_GET_ADDRESS_DETAIL_USER = `${API}/address/`;
 
-
 export const API_GET_ADMIN_ADDRESS = `${API}/admin/address/page/`;
 
 export const API_GET_ADDRESS = `${API}/address/page/`
-
-
 
 export const API_ADD_PILLAR = `${API}/admin/address/add`;
 
@@ -110,6 +107,21 @@ export const API_SETTING_GET = `${API}/admin/settings/settings/`
 export const API_SETTING_UPDATE = `${API}/admin/settings/settings/update`
 
 export const API_CHANGE_PASSWORD = `${API}/user/profile/change_password/`
+
+export const API_GET_TEST = `${API}/notification/test_notification`
+
+export const API_GET_MARK_AS_READ = `${API}/notification/markAsRead`
+
+export const API_GET_SK = `${API}/notification/`
+
+export const API_START_COOL_DOWN = `${API}/start_cool_down?orderId=`
+
+export const API_EXTEND_TIME = `${API}/extend_order_payment_time/`
+
+
+
+
+
 
 
 

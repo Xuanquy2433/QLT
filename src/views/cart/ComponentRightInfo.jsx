@@ -113,9 +113,10 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                             </div>
 
                         </form>
-                        {/* {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
-                            Tự động hủy sau: <Countdown date={Date.now() + 900000} renderer={renderer} />
-                        </div> : ''} */}
+                        {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
+                            Tự động hủy đơn hàng sau: <Countdown date={Date.now() + 3602000} renderer={renderer} />
+                            <h5 style={{ color: 'yellow', marginTop: '5px' }}> Vui lòng liên hệ <span style={{ color: 'white' }}>0982.123.12 </span> để gia hạn thêm thời gian chờ.</h5>
+                        </div> : ''}
 
                         <hr className="my-4" />
                         <div className="d-flex justify-content-between">

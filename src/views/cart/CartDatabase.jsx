@@ -9,6 +9,7 @@ import './cart.css'
 import jwt_decode from "jwt-decode";
 import { formatMoney } from './../../common/formatMoney';
 import CartLocal from './CartLocal'
+import { API_START_COOL_DOWN } from 'utils/const'
 
 function CartDatabase() {
 
@@ -62,12 +63,14 @@ function CartDatabase() {
                     }
                 });
                 if (response && response.status === 200) {
-                    toast.success('Success', {
-                        autoClose: 3000
+                    toast.success('Đặt hàng thành công', {
+                        autoClose: 1500
                     })
+                    const responseCoolDown = await axios.get(API_START_COOL_DOWN + response.data.message.replace(/\D/g, ""))
                     setTimeout(() => {
                         history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))
                     }, 2000);
+
                     setBtnDisabled(true);
                 };
                 // setBtnOrders('Vui lòng chờ...')
@@ -127,7 +130,7 @@ function CartDatabase() {
 
 
     return (
-        <section className="h-custom"style={{ backgroundColor: "white", height: '70vh',marginBottom: '80px' }}>
+        <section className="h-custom" style={{ backgroundColor: "white", height: '70vh', marginBottom: '80px' }}>
             <div style={{ backgroundColor: 'white' }}>
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12">
@@ -238,7 +241,7 @@ function CartDatabase() {
                                         </div>
                                     </div>
                                     <div className="col-lg-4 bg-grey">
-                                        <div style={{marginTop: '50px'}}  className="p-5">
+                                        <div style={{ marginTop: '50px' }} className="p-5">
                                             <hr className="my-4" />
 
                                             <div className="d-flex justify-content-between mb-5">
@@ -247,7 +250,7 @@ function CartDatabase() {
                                             </div>
 
                                             {token && decoded ? <button
-                                            style={{marginTop: '120px'}}
+                                                style={{ marginTop: '120px' }}
                                                 disabled={btnDisabled}
                                                 type="button"
                                                 className="btn btn-dark btn-block btn-lg"
@@ -256,7 +259,7 @@ function CartDatabase() {
                                             >
 
                                                 {btnDisabled ? 'Vui lòng chờ...' : 'Thuê trụ'}
-                                            </button> : <NavLink to={'/auth/login'}> <button  type="button"
+                                            </button> : <NavLink to={'/auth/login'}> <button type="button"
                                                 className="btn btn-dark btn-block btn-lg"
                                                 data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>}
 

@@ -2,29 +2,28 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Button from '@mui/material/Button'
+import { QuizTwoTone } from '@mui/icons-material';
+export default function EditSetting({ openEdit, setOpenEdit, item, onSubmitEdit }) {
+    const { key, value, category } = item;
 
-export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
     const [data, setData] = useState({
-        name: "",
-        description: ""
+        category: "GENERAL",
+        key: item.key || "",
+        value: item.value || "",
     })
 
     const onChangeText = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value })
+        setData({ ...data, [e.target.name]: e.target.value, key: (item.key) })
     }
 
-    const onClickAdd = () => {
-        onSubmitAdd(data)
-    }
-
-    const handleClose = () => setOpen(false)
     console.log(data);
+    const handleClose = () => setOpenEdit(false)
     return (
         <div>
             <Modal
-                open={open}
-                onClose={setOpen}
+                open={openEdit}
+                onClose={setOpenEdit}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -37,17 +36,16 @@ export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
                         padding: '10px'
                     }}
                 >
-                    <h2 style={{ textAlign: 'center' }}>Thêm danh mục</h2>
-                    <div style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
-                        <TextField onChange={onChangeText} defaultValue='' name="name" style={{ margin: '5px' }} fullWidth label='Tên danh mục' />
-                        <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
+                    <h2 style={{ textAlign: 'center' }}>Sửa: {key}</h2>
+                    <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
+                        <TextField onChange={onChangeText} defaultValue={value} name="value" style={{ margin: '5px' }} fullWidth label='Tên danh mục' />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Button onClick={handleClose} sx={{ marginRight: "5px" }} variant="contained" color="success">
                             Đóng
                         </Button>
-                        <Button onClick={onClickAdd} variant="contained" color="success">
-                            Thêm
+                        <Button onClick={() => onSubmitEdit(data)} variant="contained" color="success">
+                            Sửa
                         </Button>
                     </div>
 

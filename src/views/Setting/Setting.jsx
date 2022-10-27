@@ -41,7 +41,7 @@ const columns = [
     },
 
 ];
-export default function Setting({ data, setOpen }) {
+export default function Setting({ data, setOpen, onEdit }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
@@ -87,10 +87,13 @@ export default function Setting({ data, setOpen }) {
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell sx={{ textAlign: 'left' }}>{item.key}</TableCell>
                                             <TableCell sx={{ textAlign: 'left' }}>{item.value}</TableCell>
-
-                                            <TableCell sx={{ textAlign: 'right', display: "flex", justifyContent: "space-around" }}>
-                                                <EditIcon sx={{ cursor: 'pointer' }} />
-                                            </TableCell>
+                                            {item.key === "MAIL_FROM" || item.key === "MAIL_PASSWORD" || item.key === "MAIL_SENDER_NAME" ||
+                                                item.key === "MAIL_USERNAME" ?
+                                                <TableCell sx={{ textAlign: 'right', display: "flex", justifyContent: "space-around" }}>
+                                                    <EditIcon onClick={(e) => onEdit(item)} sx={{ cursor: 'pointer' }} />
+                                                </TableCell> :
+                                                <TableCell sx={{ textAlign: 'left' }}></TableCell>
+                                            }
                                             {/* <Modal
                                                 open={openDelete}
                                                 onClose={handleCloseDelete}

@@ -66,8 +66,7 @@ export default function EditPictures({ item, data, openEdit, setOpenEdit, onSubm
                     marginTop: ' 150px',
                     backgroundColor: 'white',
                     padding: '10px'
-                }}
-            >
+                }}>
                 <h2 style={{ textAlign: 'center' }}>Sửa thông tin ảnh</h2>
                 <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
                     <FormControl fullWidth sx={{ margin: "5px" }}>
@@ -79,6 +78,7 @@ export default function EditPictures({ item, data, openEdit, setOpenEdit, onSubm
                             onChange={handleChangeCategory}>
                             <MenuItem value={'banner'}>Ảnh banner</MenuItem>
                             <MenuItem value={'logo'}>Ảnh logo</MenuItem>
+                            <MenuItem value={'about'}>Ảnh about us</MenuItem>
                         </Select>
                     </FormControl>
                     <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }}
