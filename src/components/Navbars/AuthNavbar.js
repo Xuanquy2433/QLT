@@ -24,7 +24,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React, { useEffect } from 'react';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Notification from './Notification';
-
+import { BsSuitHeartFill } from "react-icons/bs";
 
 const AdminNavbar = () => {
   let decoded;
@@ -200,6 +200,14 @@ const AdminNavbar = () => {
                               <i style={styleLab} className="ni ni-single-02" />
                               <span style={styleFont} className="nav-link-inner--text">Hồ sơ</span>
                             </NavLink>
+                            <DropdownItem divider />
+
+                            <NavLink className="nav-link-icon" to="/auth/wishList" tag={Link}>
+                              {/* <CgMenuBoxed style={{ fontSize: "18.5px" }} /> */}
+                              <BsSuitHeartFill style={styleLab} className="ni ni-BsSuitHeartFill" />
+                              <span style={styleFont} className="nav-link-inner--text">Ưa thích</span>
+                            </NavLink>
+
                             <DropdownItem divider />
                           </li>
                           : ''}

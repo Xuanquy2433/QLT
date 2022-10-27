@@ -28,6 +28,7 @@ import AdminPictures from "views/controller/AdminPictures";
 import Setting from "views/Setting/Setting";
 import AdminSetting from "views/controller/AdminSetting";
 import ChangePassword from "views/examples/ChangePassword";
+import WishList from "views/WishList/WishList";
 
 var routes = [
   {
@@ -203,6 +204,13 @@ var routes = [
     name: "ChangePassword",
     icon: "ni ni-circle-08 text-pink",
     component: ChangePassword,
+    layout: "/auth"
+  },
+  {
+    path: "/wishList",
+    name: "wishList",
+    icon: "ni ni-circle-08 text-pink",
+    component: WishList,
     layout: "/auth"
   },
 
