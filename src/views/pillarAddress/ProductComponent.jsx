@@ -192,7 +192,7 @@ function ProductComponent({ product }) {
       }
     })
     if (response.status === 200) {
-      toast.success("Đã thêm vào danh sách yêu thích.")
+      toast.success("Đã thêm vào danh sách yêu thích.", { autoClose: 1500 })
     }
   }
   console.log("product true ", product);
