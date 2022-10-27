@@ -25,8 +25,8 @@ function Notification() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-
+        // setOpen((prevOpen) => !prevOpen);
+        fetchAPI()
     };
 
     const handleClose = (event) => {
@@ -55,7 +55,7 @@ function Notification() {
         }
 
         prevOpen.current = open;
-        fetchAPI()
+
 
     }, [open]);
 
@@ -77,7 +77,7 @@ function Notification() {
                         <NotificationsNoneIcon />
                     </p>
                     <Popper
-                        open={open}
+                        open={true}
                         anchorEl={anchorRef.current}
                         role={undefined}
                         placement="bottom-start"
