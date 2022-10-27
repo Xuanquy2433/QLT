@@ -25,16 +25,16 @@ function Notification() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        fetchAPI()
         setOpen((prevOpen) => !prevOpen);
+
     };
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
-
         setOpen(false);
+
     };
 
     function handleListKeyDown(event) {
@@ -43,6 +43,7 @@ function Notification() {
             setOpen(false);
         } else if (event.key === 'Escape') {
             setOpen(false);
+
         }
     }
 
@@ -54,11 +55,15 @@ function Notification() {
         }
 
         prevOpen.current = open;
+        fetchAPI()
+
     }, [open]);
 
 
     return (
         <React.Fragment>
+
+
             <Stack direction="row" spacing={2}>
                 <div className='menu-lv2-noti'>
                     <p
@@ -90,10 +95,10 @@ function Notification() {
                                             aria-labelledby="composition-button"
                                             onKeyDown={handleListKeyDown}>
                                             {/* data from socket */}
-                                            <ChatRoom handleClose={handleClose} />
+                                            <ChatRoom />
                                             {/* hard data test */}
                                             <MenuItem onClick={handleClose}>
-                                                <div className='notification' >You have <b>4 new themes</b> trending</div>
+                                                <div className='notification' >You have <b>4 new themes</b>  </div>
                                                 <div className='notification-time' >10 minutes ago</div>
                                             </MenuItem>
                                         </MenuList>
