@@ -14,12 +14,15 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
         })
     }
     const [bank, setBank] = React.useState({
+        id: 0,
         bankName: '',
         bankAccountNumber: ''
     });
 
+    console.log(bank);
+
     const handleChange = (event) => {
-        setBank({ bankName: (event.target.value) });
+        setBank({ ...bank, bankName: (event.target.value), bankAccountNumber: (event.target.value), id: (event.target.value) });
     };
 
     const [dataBanks, setDataBanks] = useState([])
@@ -59,7 +62,7 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                 <p
                                     className="form-control form-control-lg"
                                     style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-                                > NGUYEN VAN A</p >
+                                >{bank.bankName}</p >
                             </div>
                             <div className="form-outline form-white mb-4">
                                 <label className="form-label" htmlFor="typeText">
@@ -69,7 +72,7 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                 <p
                                     className="form-control form-control-lg"
                                     style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-                                > 23823 2323 2 </p >
+                                >{bank.bankAccountNumber}</p >
                             </div>
                             <div className="row mb-4">
                                 <div className="col-md-5">
@@ -78,7 +81,7 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                             Tên ngân hàng
                                         </label>
                                         <select className="form-control form-control-lg"
-                                            value={bank}
+                                            // value={bank.id}
                                             style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
                                             onChange={handleChange}
                                             aria-label="Default select example">
