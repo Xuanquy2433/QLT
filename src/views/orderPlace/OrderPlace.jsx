@@ -29,12 +29,10 @@ import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import OrderDetailPopup from './OrderDetailPopup';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import InfoIcon from '@mui/icons-material/Info';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import { API_EXTEND_TIME } from 'utils/const';
+import DialogExtendTime from './DialogExtendTime';
+import DialogConfirmOrder from './DialogConfirmOrder';
+import DialogRefuseOrder from './DialogRefuseOrder';
 
 const columns = [
     { id: 'detail', label: '', minWidth: 10 },
@@ -121,7 +119,16 @@ function OrderPlace() {
 
     //handle
     const handleOpen = () => setOpen(true)
-    console.log("data ", data);
+
+    const [openConfirmOrder, setOpenConFirmOrder] = React.useState(false);
+
+    const handleClickOpenConfirmOrder = () => {
+        setOpenConFirmOrder(true);
+    };
+
+    const handleCloseConfirmOrder = () => {
+        setOpenConFirmOrder(false);
+    };
 
     const confirmOrder = async (id) => {
         const response = await axios.put(API_CONFIRM_ORDER + id + '/true')
@@ -130,7 +137,15 @@ function OrderPlace() {
             getOrderUserConfirmed()
         } else toast.error('Thất bại ! ', { autoClose: 2000 })
     }
+    const [openRefuseOrder, setOpenRefuseOrder] = React.useState(false);
 
+    const handleClickOpenRefuseOrder = () => {
+        setOpenRefuseOrder(true);
+    };
+
+    const handleCloseRefuseOrder = () => {
+        setOpenRefuseOrder(false);
+    };
     const refuseOrder = async (id) => {
         const response = await axios.put(API_CONFIRM_ORDER + id + '/false')
         if (response.status === 200) {
@@ -167,7 +182,6 @@ function OrderPlace() {
 
     const [idSave, setIdSave] = React.useState(Number);
 
-
     const extendTime = async (id) => {
         const response = await axios.post(API_EXTEND_TIME + id + '?day=tomorrow')
         if (response.status === 200) {
@@ -176,6 +190,7 @@ function OrderPlace() {
             // Sidebar
         } else toast.error('Thất bại ! ', { autoClose: 2000 })
     }
+
 
 
     return (
@@ -235,10 +250,16 @@ function OrderPlace() {
                                                 <TableCell sx={{ textAlign: 'center' }}> Chờ duyệt</TableCell>
                                                 : ''}
                                             <TableCell sx={{ textAlign: 'right' }}>
-                                                <Button variant="contained" onClick={() => confirmOrder(item.id)} color="success">
+                                                <Button variant="contained" onClick={e => {
+                                                    handleClickOpenConfirmOrder()
+                                                    setIdSave(item.id)
+                                                }} color="success">
                                                     <CheckIcon />
                                                 </Button>
-                                                <Button sx={{ ml: 2 }} variant="contained" onClick={() => refuseOrder(item.id)} color="error">
+                                                <Button sx={{ ml: 2 }} variant="contained" onClick={e => {
+                                                    handleClickOpenRefuseOrder()
+                                                    setIdSave(item.id)
+                                                }} color="error">
                                                     <DoDisturbIcon />
                                                 </Button>
                                                 <MoreTimeIcon sx={{ ml: 2 }} onClick={e => {
@@ -251,33 +272,10 @@ function OrderPlace() {
                                     <TableRow >
                                         <TableCell> <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
                                     </TableRow>}
-                                <Dialog
-                                    open={openConfirm}
-                                    onClose={handleCloseConfirm}
-                                    aria-labelledby="alert-dialog-title"
-                                    aria-describedby="alert-dialog-description"
-                                >
-                                    <DialogTitle id="alert-dialog-title">
-                                        {"Xác nhận xóa hình ảnh"}
-                                    </DialogTitle>
-                                    <DialogContent>
-                                        <DialogContentText id="alert-dialog-description">
-                                            Bạn chắc chắn muốn gia hạn thêm thời gian chờ cho đơn hàng có id
-                                            <span style={{ color: 'red' }}> {idSave} </span>
-                                            sang ngày mai ?
-                                            Lưu ý: sau khi chấp nhận không thể hoàn tác.
-                                        </DialogContentText>
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button onClick={handleCloseConfirm}>Hủy</Button>
-                                        <Button onClick={e => {
-                                            handleCloseConfirm()
-                                            extendTime(idSave)
-                                        }} autoFocus>
-                                            Chấp nhận
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
+                                <DialogExtendTime openConfirm={openConfirm} handleCloseConfirm={handleCloseConfirm} idSave={idSave} extendTime={extendTime} />
+                                <DialogConfirmOrder openConfirmOrder={openConfirmOrder} handleCloseConfirmOrder={handleCloseConfirmOrder} idSave={idSave} confirmOrder={confirmOrder} />
+                                <DialogRefuseOrder openRefuseOrder={openRefuseOrder} handleCloseRefuseOrder={handleCloseRefuseOrder} idSave={idSave} refuseOrder={refuseOrder} />
+
                                 <OrderDetailPopup dataDetail={dataDetail} openDetail={openDetail} handleCloseDetailOrder={handleCloseDetailOrder} />
                             </TableBody>
                         </Table>

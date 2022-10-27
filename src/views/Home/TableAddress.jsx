@@ -114,6 +114,7 @@ function TableAddress() {
         const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=' + sort + '&sortField=' + field)
         if (response) {
             setData(response.data.contents)
+            setShow(false)
         }
     }
 
@@ -129,11 +130,11 @@ function TableAddress() {
     }
     // ONCHANGE FILTER
     const onclickFilter = async (e) => {
-
         const response = await axios.get(API_ADDRESS_FILTER + "keyword=" + keyword + '&quantity=1&sort=' + sort + '&sortField=' + field)
         if (response) {
             setData(response.data)
         }
+        setShow(false)
     }
     useEffect(() => {
         getAllAddRess()
@@ -151,7 +152,10 @@ function TableAddress() {
                                 <InputBase
                                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                     placeholder="Tìm theo từ khóa"
-                                    onChange={e => setKeyword(e.target.value)}
+                                    onChange={e => {
+                                        setKeyword(e.target.value)
+                                        setShow(false)
+                                    }}
                                 />
                             </Paper>
                         </Grid>
@@ -182,7 +186,7 @@ function TableAddress() {
 
 
                 <Box sx={{ width: '100%', mt: 2, }} className='hoverBut' >
-                    {show && <p>Tìm thấy {data.length} kết quả cho: {keyword}</p>}
+                    {show && <p>Tìm thấy {data.length} kết quả cho: "{keyword}"</p>}
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {data.length > 0 ? data.map((item, index) => (
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
