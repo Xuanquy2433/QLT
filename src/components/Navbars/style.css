@@ -1,42 +1,18 @@
-.menu .menu-item a{
-    text-decoration: none;
+.menu-lv2 button{
+    color: #dddd;
+    
 }
-
-.menu ul{
-    list-style: none;
-}
-
-.menu .menu-item{
-    padding-left: 0;
-}
-
-.menu .menu-item .menu-item-title .nav-link-icon{
-    cursor: pointer;
+.menu-lv2 NotificationsNoneIcon{
+    font-size: 30px;
+    
 }
 
 
-.menu .menu-item .menu-item-title .menu-level-2{
-    z-index: 10;
-    text-align: left;
-    position: absolute;
-    will-change: transform;
-    display: none;  
-    background-color: #ffffff;
-    font-weight: 400;
-    color: #212529;
-    border-radius: 8px;
-    flex-direction: column;
-    padding: 3px 15px 3px 15px;
-}
+.menu-lv2 li{
+    display: block;
+    }
 
-.menu .menu-item .menu-item-title:hover .menu-level-2{
-    cursor: pointer;
-    display: flex;
-}
-
-.menu .menu-item .menu-item-title .menu-level-2 .item-menu-level-2 .nav-link-icon{
-    color: #212529;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 0.85rem;
-}
+    .menu-lv2 .notification-time{
+        color: silver;
+        font-size: 15px;
+    }
