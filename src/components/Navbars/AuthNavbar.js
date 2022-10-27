@@ -1,5 +1,6 @@
 import { CgMenuBoxed } from 'react-icons/cg';
 import { Link, useHistory } from "react-router-dom";
+import '../Navbars/style.css'
 // reactstrap components
 import {
   UncontrolledCollapse,
@@ -20,12 +21,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'; import './style.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import React, { useEffect, useState } from 'react';
-import ChatRoom from 'views/Realtime/ChatRoom';
-import { API_GET_TEST } from 'utils/const';
-import axios from 'axios';
-import { API_GET_MARK_AS_READ } from 'utils/const';
-import { API_GET_SK } from 'utils/const';
+import React, { useEffect } from 'react';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Notification from './Notification';
+
 
 const AdminNavbar = () => {
   let decoded;
@@ -63,17 +62,7 @@ const AdminNavbar = () => {
     fontSize: "0.9rem",
     fontWeight: "400"
   }
-  // const [data, setData] = useState([])
 
-
-  useEffect(() => {
-    const fetchAPI = async () => {
-      const response = await axios.post(API_GET_TEST)
-      // const response1 = await axios.post(API_GET_MARK_AS_READ)
-      // const response2 = await axios.get(API_GET_SK)
-    }
-    fetchAPI()
-  }, [])
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -185,12 +174,11 @@ const AdminNavbar = () => {
 
               <NavItem className="menu-hover nav-link-icon">
                 <NavLink className="nav-link-icon" tag={Link}>
-                  <i className="ni ni-notification-70" />
-                  <span className="nav-link-inner--text"><ChatRoom /> </span>
+                  <Notification />
                 </NavLink>
               </NavItem>
-              {token && decoded ?
 
+              {token && decoded ?
                 <div className="menu">
                   <ul className="menu-item">
                     <li className="menu-item-title">
