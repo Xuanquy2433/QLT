@@ -13,6 +13,8 @@ import axios from 'axios';
 import { API_GET_TEST } from 'utils/const';
 import AdminNotification from 'views/Realtime/AdminNotification';
 import UserNotification from 'views/Realtime/UserNotification';
+import UserNotificationSize from 'views/Realtime/NotificationUserSize';
+import { API_GET_MARK_AS_READ } from 'utils/const';
 
 
 function Notification() {
@@ -26,12 +28,16 @@ function Notification() {
         // const response2 = await axios.get(API_GET_SK)
     }
 
+    const markAsRead = async () => {
+        const response = await axios.post(API_GET_MARK_AS_READ)
+    }
+
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
         fetchAPI()
-        // setOpen((prevOpen) => !prevOpen);
-        setOpen(true)
+        setOpen((prevOpen) => !prevOpen);
+        // setOpen(true)
     };
 
     const handleClose = (event) => {
@@ -39,7 +45,8 @@ function Notification() {
             return;
         }
         setOpen(false);
-
+        console.log("evt close ");
+        markAsRead()
     };
 
     function handleListKeyDown(event) {
@@ -83,7 +90,7 @@ function Notification() {
                         {/* <NotificationsNoneIcon /> {countUser}
                         <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
                         <NotificationsNoneIcon /> {countUser}
-
+                        <UserNotificationSize changeUserCount={(data) => setUserCount(data)} />
                     </p>
                     <Popper
                         open={open}
