@@ -25,7 +25,7 @@ function DialogExtendTime({ openConfirm, handleCloseConfirm, idSave, extendTime 
                     <DialogContentText id="alert-dialog-description">
                         Bạn chắc chắn muốn gia hạn thêm thời gian chờ cho đơn hàng có id
                         <span style={{ color: 'red' }}> {idSave} </span>
-                        sang ngày mai ?
+                        đến hết  <span style={{ color: 'blue', fontWeight: '600' }}>ngày mai</span> ?
                         Lưu ý: sau khi chấp nhận không thể hoàn tác.
                     </DialogContentText>
                 </DialogContent>

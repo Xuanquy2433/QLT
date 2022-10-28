@@ -30,9 +30,10 @@ import OrderDetailPopup from './OrderDetailPopup';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import InfoIcon from '@mui/icons-material/Info';
 import { API_EXTEND_TIME } from 'utils/const';
-import DialogExtendTime from './DialogExtendTime';
+import DialogExtendTime from './DialogExtendTimeTomorrow';
 import DialogConfirmOrder from './DialogConfirmOrder';
 import DialogRefuseOrder from './DialogRefuseOrder';
+import DialogExtendTimeToday from './DialogExtendTimeToday';
 
 const columns = [
     { id: 'detail', label: '', minWidth: 10 },
@@ -90,7 +91,7 @@ const columns = [
 
 function OrderPlace() {
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+    const [rowsPerPage, setRowsPerPage] = React.useState(3);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -170,20 +171,40 @@ function OrderPlace() {
     };
 
     //handle popup confirm
-    const [openConfirm, setOpenConFirm] = React.useState(false);
+    const [openConfirmTomorrow, setOpenConFirmTomorrow] = React.useState(false);
 
-    const handleClickOpenConfirm = () => {
-        setOpenConFirm(true);
+    const handleClickOpenConfirmTomorrow = () => {
+        setOpenConFirmTomorrow(true);
     };
 
-    const handleCloseConfirm = () => {
-        setOpenConFirm(false);
+    const handleCloseConfirmTomorrow = () => {
+        setOpenConFirmTomorrow(false);
+    };
+
+
+    const [openConfirmToday, setOpenConFirmToday] = React.useState(false);
+
+    const handleClickOpenConfirmToday = () => {
+        setOpenConFirmToday(true);
+    };
+
+    const handleCloseConfirmToday = () => {
+        setOpenConFirmToday(false);
     };
 
     const [idSave, setIdSave] = React.useState(Number);
 
     const extendTime = async (id) => {
         const response = await axios.post(API_EXTEND_TIME + id + '?day=tomorrow')
+        if (response.status === 200) {
+            toast.success('Thao tác thành công ! ', { autoClose: 1500 })
+            getOrderUserConfirmed()
+            // Sidebar
+        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+    }
+
+    const extendTimeToday = async (id) => {
+        const response = await axios.post(API_EXTEND_TIME + id)
         if (response.status === 200) {
             toast.success('Thao tác thành công ! ', { autoClose: 1500 })
             getOrderUserConfirmed()
@@ -256,23 +277,57 @@ function OrderPlace() {
                                                 }} color="success">
                                                     <CheckIcon />
                                                 </Button>
-                                                <Button sx={{ ml: 2 }} variant="contained" onClick={e => {
+                                                <Button sx={{ ml: 2, mt: 1 }} variant="contained" onClick={e => {
                                                     handleClickOpenRefuseOrder()
                                                     setIdSave(item.id)
                                                 }} color="error">
                                                     <DoDisturbIcon />
                                                 </Button>
-                                                <MoreTimeIcon sx={{ ml: 2 }} onClick={e => {
+                                                {/* <MoreTimeIcon sx={{ ml: 2 }} onClick={e => {
                                                     handleClickOpenConfirm()
                                                     setIdSave(item.id)
-                                                }} ></MoreTimeIcon>
+                                                }} ></MoreTimeIcon> */}
+                                            </TableCell>
+                                            <TableCell sx={{ textAlign: "right" }}>
+                                                <UncontrolledDropdown>
+                                                    <DropdownToggle
+                                                        className="btn-icon-only text-light"
+                                                        href="#pablo"
+                                                        role="button"
+                                                        size="sm"
+                                                        color=""
+                                                        onClick={(e) => e.preventDefault()}
+                                                    >
+                                                        <i className="fas fa-ellipsis-v" />
+                                                    </DropdownToggle>
+                                                    <DropdownMenu className="dropdown-menu-arrow" right>
+                                                        <DropdownItem
+                                                            onClick={e => {
+                                                                handleClickOpenConfirmTomorrow()
+                                                                setIdSave(item.id)
+                                                            }}>
+                                                            <MoreTimeIcon />
+                                                            Gia hạn sang ngày mai
+
+                                                        </DropdownItem>
+                                                        <DropdownItem
+                                                           onClick={e => {
+                                                            handleClickOpenConfirmToday()
+                                                            setIdSave(item.id)
+                                                        }}>
+                                                            <MoreTimeIcon />
+                                                            Gia hạn đến hết hôm nay
+                                                        </DropdownItem>
+                                                    </DropdownMenu>
+                                                </UncontrolledDropdown>
                                             </TableCell>
                                         </TableRow>
                                     )) :
                                     <TableRow >
                                         <TableCell> <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
                                     </TableRow>}
-                                <DialogExtendTime openConfirm={openConfirm} handleCloseConfirm={handleCloseConfirm} idSave={idSave} extendTime={extendTime} />
+                                <DialogExtendTime openConfirm={openConfirmTomorrow} handleCloseConfirm={handleCloseConfirmTomorrow} idSave={idSave} extendTime={extendTime} />
+                                <DialogExtendTimeToday openConfirmToday={openConfirmToday} handleCloseConfirmToday={handleCloseConfirmToday} idSave={idSave} extendTimeToday={extendTimeToday} />
                                 <DialogConfirmOrder openConfirmOrder={openConfirmOrder} handleCloseConfirmOrder={handleCloseConfirmOrder} idSave={idSave} confirmOrder={confirmOrder} />
                                 <DialogRefuseOrder openRefuseOrder={openRefuseOrder} handleCloseRefuseOrder={handleCloseRefuseOrder} idSave={idSave} refuseOrder={refuseOrder} />
 
@@ -280,6 +335,15 @@ function OrderPlace() {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[3, 10, 25, 100]}
+                        component="div"
+                        count={data.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
                 </Paper>
             </Container>
         </>
