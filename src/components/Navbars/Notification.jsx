@@ -70,6 +70,7 @@ function Notification() {
 
 
             <Stack direction="row" spacing={2}>
+            
                 <div className='menu-lv2-noti'>
                     <p
                         ref={anchorRef}
@@ -95,7 +96,9 @@ function Notification() {
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}>
+                                    
                                 <Paper>
+                                <div className="scrollbar" id="style-1">
                                     <ClickAwayListener onClickAway={handleClose}>
                                         <MenuList
                                             autoFocusItem={open}
@@ -111,11 +114,13 @@ function Notification() {
                                             </MenuItem> */}
                                         </MenuList>
                                     </ClickAwayListener>
+                                    </div>
                                 </Paper>
+                               
                             </Grow>
                         )}
                     </Popper>
-                </div>
+                    </div>
             </Stack>
 
         </React.Fragment>
