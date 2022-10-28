@@ -15,6 +15,7 @@ import AdminNotification from 'views/Realtime/AdminNotification';
 import UserNotification from 'views/Realtime/UserNotification';
 import UserNotificationSize from 'views/Realtime/NotificationUserSize';
 import AdminNotificationSize from 'views/Realtime/NotificationAdminSize';
+import { API_GET_MARK_AS_READ_ADMIN } from 'utils/const';
 
 
 function NotificationAdmin() {
@@ -22,26 +23,21 @@ function NotificationAdmin() {
     const [countAdmin, setCountAdmin] = React.useState(0);
     const [countUser, setUserCount] = React.useState(0);
 
-    const fetchAPI = async () => {
-        const response = await axios.post(API_GET_TEST)
-        // const response1 = await axios.post(API_GET_MARK_AS_READ)
-        // const response2 = await axios.get(API_GET_SK)
-    }
-
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        fetchAPI()
         setOpen((prevOpen) => !prevOpen);
         // setOpen(true)
     };
-
+    const markAsRead = async () => {
+        const response = await axios.post(API_GET_MARK_AS_READ_ADMIN)
+    }
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
         setOpen(false);
-
+        markAsRead()
     };
 
     function handleListKeyDown(event) {

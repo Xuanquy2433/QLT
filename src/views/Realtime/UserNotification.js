@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
+import { BorderBottom } from '@mui/icons-material';
 
 
 var stompClient = null;
@@ -63,7 +64,7 @@ const UserNotification = (params) => {
         <>
             {data.length > 0 ? data.map((data) => (
                 <>
-                    <MenuItem >
+                    <MenuItem sx={{borderBottom: '1px solid #ddd'}} >
                         <div  >{data.message}  </div>
                         <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                     </MenuItem>

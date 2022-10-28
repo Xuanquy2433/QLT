@@ -116,6 +116,8 @@ export const API_GET_TEST = `${API}/notification/test_notification`
 
 export const API_GET_MARK_AS_READ = `${API}/notification/markAsRead/?userId=`
 
+export const API_GET_MARK_AS_READ_ADMIN = `${API}/notification/markAsRead/`
+
 export const API_GET_SK = `${API}/notification/`
 
 export const API_START_COOL_DOWN = `${API}/start_cool_down?orderId=`

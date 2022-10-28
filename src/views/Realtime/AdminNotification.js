@@ -53,7 +53,7 @@ const AdminNotification = (params) => {
     return (<>
         {data.length > 0 ? data.map((data) => (
             <>
-                <MenuItem >
+                <MenuItem sx={{ borderBottom: '1px solid #ddd' }} >
                     <div  >{data.message}  </div>
                     <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                 </MenuItem>
