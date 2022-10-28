@@ -49,10 +49,7 @@ const AdminNavbar = (props) => {
             {props.brandText}
 
           </p>
-          <div style={{ marginLeft: '10%',cursor: 'pointer' }}>
-            <NotificationAdmin />
-
-          </div>
+          
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
               <InputGroup className="input-group-alternative">
@@ -65,6 +62,10 @@ const AdminNavbar = (props) => {
               </InputGroup>
             </FormGroup>
           </Form>
+          <div style={{ marginTop: '15px',cursor: 'pointer' }}>
+            <NotificationAdmin />
+
+          </div>
 
 
 

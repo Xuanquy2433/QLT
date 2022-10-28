@@ -90,7 +90,7 @@ function Notification() {
                     >
                         {/* <NotificationsNoneIcon /> {countUser}
                         <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
-                        <NotificationsNoneIcon /> {countUser}
+                        <NotificationsNoneIcon /> <span className='count-noti'>{countUser}</span>
                         <UserNotificationSize changeUserCount={(data) => setUserCount(data)} />
                     </p>
                     <Popper

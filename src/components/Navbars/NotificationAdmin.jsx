@@ -74,7 +74,7 @@ function NotificationAdmin() {
             <Stack direction="row" spacing={2}>
                 <div className='menu-lv2-noti'>
                     <p
-                    style={{color: 'white'}}
+                        style={{ color: 'white' }}
                         ref={anchorRef}
                         id="composition-button"
                         aria-controls={open ? 'composition-menu' : undefined}
@@ -99,22 +99,25 @@ function NotificationAdmin() {
                             <Grow
                                 {...TransitionProps}>
                                 <Paper>
-                                    <ClickAwayListener onClickAway={handleClose}>
-                                        <MenuList
-                                            autoFocusItem={open}
-                                            id="composition-menu"
-                                            aria-labelledby="composition-button"
-                                            onKeyDown={handleListKeyDown}>
-                                            {/* data from socket */}
-                                            <AdminNotification changeCount={(data) => setCountAdmin(data)} />
-                                            {/* hard data test */}
-                                            {/* <MenuItem onClick={handleClose}>
+                                    <div className="scrollbar" id="style-1">
+                                        <ClickAwayListener onClickAway={handleClose}>
+                                            <MenuList
+                                                autoFocusItem={open}
+                                                id="composition-menu"
+                                                aria-labelledby="composition-button"
+                                                onKeyDown={handleListKeyDown}>
+                                                {/* data from socket */}
+                                                <AdminNotification changeCount={(data) => setCountAdmin(data)} />
+                                                {/* hard data test */}
+                                                {/* <MenuItem onClick={handleClose}>
                                                 <div className='notification' >You have <b>4 new themes</b>  </div>
                                                 <div className='notification-time' >10 minutes ago</div>
                                             </MenuItem> */}
-                                        </MenuList>
-                                    </ClickAwayListener>
+                                            </MenuList>
+                                        </ClickAwayListener>
+                                        </div>
                                 </Paper>
+                            
                             </Grow>
                         )}
                     </Popper>
