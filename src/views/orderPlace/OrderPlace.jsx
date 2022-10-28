@@ -238,8 +238,8 @@ function OrderPlace() {
 
     const [keyword, setKeyword] = React.useState('');
 
-    const search = async () => {
-        const response = await axios.get(API_GET_ORDER_ADMIN + '?keyword=' + keyword)
+    const search = async (e) => {
+        const response = await axios.get(API_GET_ORDER_ADMIN + '?keyword=' + e.target.value)
         if (response && response.status === 200) {
             setData(response.data)
         }
@@ -253,19 +253,19 @@ function OrderPlace() {
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button> */}
-                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '67%', marginBottom: '20px', borderRadius: '7px' }}>
+                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '83%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                 placeholder="Tìm kiếm mã đơn hàng"
-                                onChange={e => setKeyword(e.target.value)}
+                                onChange={e => search(e)}
                             />
                         </Paper>
-                        <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6.3vh' }} variant="contained" color="success">
+                        {/* <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6.3vh' }} variant="contained" color="success">
                             Tìm kiếm
-                        </Button>
+                        </Button> */}
                         <FormControl sx={{ m: 1, width: '17%' }} size="small">
                             <InputLabel id="demo-select-small">Trạng thái</InputLabel>
                             <Select
