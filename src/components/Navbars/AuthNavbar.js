@@ -34,7 +34,6 @@ const AdminNavbar = () => {
   if (token !== null) {
     decoded = jwt_decode(token);
   }
-  console.log(decoded);
   const logout = () => {
     // alert("ok")
     localStorage.removeItem("token")

@@ -14,28 +14,34 @@ import { API_GET_TEST } from 'utils/const';
 import AdminNotification from 'views/Realtime/AdminNotification';
 import UserNotification from 'views/Realtime/UserNotification';
 import UserNotificationSize from 'views/Realtime/NotificationUserSize';
+import jwt_decode from "jwt-decode";
 import { API_GET_MARK_AS_READ } from 'utils/const';
 
 
 function Notification() {
+    let decoded;
 
+    let token = localStorage.getItem("token");
+    if (token !== null) {
+        decoded = jwt_decode(token);
+    }
     const [countAdmin, setCountAdmin] = React.useState(0);
     const [countUser, setUserCount] = React.useState(0);
 
-    const fetchAPI = async () => {
-        const response = await axios.post(API_GET_TEST)
-        // const response1 = await axios.post(API_GET_MARK_AS_READ)
-        // const response2 = await axios.get(API_GET_SK)
-    }
+    // const fetchAPI = async () => {
+    //     const response = await axios.post(API_GET_TEST)
+    //     // const response1 = await axios.post(API_GET_MARK_AS_READ)
+    //     // const response2 = await axios.get(API_GET_SK)
+    // }
 
     const markAsRead = async () => {
-        const response = await axios.post(API_GET_MARK_AS_READ)
+        const response = await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
     }
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        fetchAPI()
+        // fetchAPI()
         setOpen((prevOpen) => !prevOpen);
         // setOpen(true)
     };
@@ -109,13 +115,13 @@ function Notification() {
                                     <div className="scrollbar" id="style-1">
                                         <ClickAwayListener onClickAway={handleClose}>
                                             <MenuList
-                                                style={{ width: '300px',position: 'relative' }}
+                                                style={{ width: '300px', position: 'relative' }}
                                                 autoFocusItem={open}
                                                 id="composition-menu"
                                                 aria-labelledby="composition-button"
                                                 onKeyDown={handleListKeyDown}>
                                                 {/* data from socket */}
-                                                <div style={{position: 'absolute'}}>
+                                                <div style={{ position: 'absolute' }}>
                                                     <UserNotification changeUserCount={(data) => setUserCount(data)} />
                                                 </div>
                                                 {/* hard data test */}

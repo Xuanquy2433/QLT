@@ -112,7 +112,7 @@ export const API_CHANGE_PASSWORD = `${API}/user/profile/change_password/`
 
 export const API_GET_TEST = `${API}/notification/test_notification`
 
-export const API_GET_MARK_AS_READ = `${API}/notification/markAsRead`
+export const API_GET_MARK_AS_READ = `${API}/notification/markAsRead/?userId=`
 
 export const API_GET_SK = `${API}/notification/`
 
