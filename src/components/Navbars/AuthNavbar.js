@@ -39,6 +39,8 @@ const AdminNavbar = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     localStorage.removeItem("IdOrder")
+    localStorage.removeItem("cartADD")
+    localStorage.removeItem("cartTemp")
     history.push('/auth/homePage')
     toast.success('Logout success')
     // window.location.reload(false)

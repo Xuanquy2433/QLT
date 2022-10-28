@@ -86,6 +86,7 @@ const columns = [
         minWidth: 100,
         align: 'right',
     },
+
 ];
 
 
@@ -311,10 +312,10 @@ function OrderPlace() {
 
                                                         </DropdownItem>
                                                         <DropdownItem
-                                                           onClick={e => {
-                                                            handleClickOpenConfirmToday()
-                                                            setIdSave(item.id)
-                                                        }}>
+                                                            onClick={e => {
+                                                                handleClickOpenConfirmToday()
+                                                                setIdSave(item.id)
+                                                            }}>
                                                             <MoreTimeIcon />
                                                             Gia hạn đến hết hôm nay
                                                         </DropdownItem>
@@ -324,7 +325,7 @@ function OrderPlace() {
                                         </TableRow>
                                     )) :
                                     <TableRow >
-                                        <TableCell> <h4 style={{ fontStyle: 'italic', marginTop: '8px' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
+                                        <TableCell style={{ borderBottom: '0px solid black' }}> <h4 style={{ fontStyle: 'italic', marginTop: '8px', position: 'absolute' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
                                     </TableRow>}
                                 <DialogExtendTime openConfirm={openConfirmTomorrow} handleCloseConfirm={handleCloseConfirmTomorrow} idSave={idSave} extendTime={extendTime} />
                                 <DialogExtendTimeToday openConfirmToday={openConfirmToday} handleCloseConfirmToday={handleCloseConfirmToday} idSave={idSave} extendTimeToday={extendTimeToday} />

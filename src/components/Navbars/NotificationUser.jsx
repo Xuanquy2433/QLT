@@ -51,7 +51,6 @@ function Notification() {
             return;
         }
         setOpen(false);
-        console.log("evt close ");
         markAsRead()
     };
 

@@ -5,6 +5,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
+import { toast } from 'react-toastify';
 
 
 var stompClient = null;
@@ -48,9 +49,9 @@ const UserNotification = (params) => {
     }
 
 
-    const onMessageReceived = () => {
+    const onMessageReceived = (data) => {
         getNotification();
-
+        toast.success(data, { autoClose: 2000 })
     }
 
     const onError = (err) => {

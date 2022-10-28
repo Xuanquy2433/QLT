@@ -250,7 +250,7 @@ function Activity() {
                                                 <TableCell align="left">{item.id}</TableCell>
                                                 <TableCell align="center"><Moment format='MMMM Do YYYY, h:mm:ss a'>{item.orderTime}</Moment></TableCell>
                                                 <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
-                                                {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ fontWeight: '600', color: 'blue' }} align="right">Chờ</TableCell> : null}
+                                                {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ fontWeight: '600', color: 'blue' }} align="right">Chờ admin phê duyệt</TableCell> : null}
                                                 {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600', color: '#f5c71a' }} align="right">Chờ thanh toán</TableCell> : null}
                                                 {item.status === 'DONE' ? <TableCell sx={{ fontWeight: '600', color: 'green' }} align="right">Xong</TableCell> : null}
                                                 {item.status === 'CANCELLED' ? <TableCell sx={{ fontWeight: '600', color: 'red' }} align="right">Đã hủy</TableCell> : null}

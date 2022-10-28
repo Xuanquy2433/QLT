@@ -84,7 +84,7 @@ function NotificationAdmin() {
                     >
                         {/* <NotificationsNoneIcon /> {countUser}
                         <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
-                        <NotificationsNoneIcon /> {countAdmin}
+                        <NotificationsNoneIcon /> <span >{countAdmin}</span>
                         <AdminNotificationSize changeCount={(data) => setCountAdmin(data)} />
                     </p>
                     <Popper

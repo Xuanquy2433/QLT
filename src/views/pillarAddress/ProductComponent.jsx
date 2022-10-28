@@ -202,9 +202,9 @@ function ProductComponent({ product }) {
     }}>
       {
         product.map((item, index) => (
-          <div style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
+          <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
             <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <img style={{ width: '100%', height: "auto", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
+              <img style={{ width: '100%', height: "27vh", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
             </div>
             <div style={{ width: "100%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
 
@@ -218,7 +218,7 @@ function ProductComponent({ product }) {
                 </Button> :
                 <Button style={{
                   '&:hover': { backgroundColor: "#5372E4" }, fontWeight: "500", width: "100%"
-                  , border: "1px solid #5372E4", background: "none", color: "red", boxShadow: "none",backgroundColor:'rgb(255, 210, 210)'
+                  , border: "1px solid #5372E4", background: "none", color: "red", boxShadow: "none", backgroundColor: 'rgb(255, 210, 210)'
                 }} disabled variant="contained" >
                   Đã cho thuê
                 </Button>}

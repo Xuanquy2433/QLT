@@ -4,6 +4,7 @@ import SockJS from 'sockjs-client';
 import axios from "axios";
 import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
+import { toast } from 'react-toastify';
 
 
 var stompClient = null;
@@ -39,9 +40,9 @@ const AdminNotification = (params) => {
     }
 
 
-    const onMessageReceived = () => {
+    const onMessageReceived = (data) => {
         getNotification();
-
+        toast.success(data, { autoClose: 2000 })
     }
 
     const onError = (err) => {

@@ -29,6 +29,8 @@ const AdminNavbar = (props) => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     localStorage.removeItem("IdOrder")
+    localStorage.removeItem("cartADD")
+    localStorage.removeItem("cartTemp")
     history.push('/auth/homePage')
     // window.location.reload(false)
 
@@ -49,7 +51,7 @@ const AdminNavbar = (props) => {
             {props.brandText}
 
           </p>
-          
+
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
               <InputGroup className="input-group-alternative">
@@ -62,7 +64,7 @@ const AdminNavbar = (props) => {
               </InputGroup>
             </FormGroup>
           </Form>
-          <div style={{ marginTop: '15px',cursor: 'pointer' }}>
+          <div style={{ marginTop: '15px', cursor: 'pointer' }}>
             <NotificationAdmin />
 
           </div>
