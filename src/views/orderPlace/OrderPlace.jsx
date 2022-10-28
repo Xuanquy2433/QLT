@@ -19,7 +19,6 @@ import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import axios from 'axios';
-import { API_GET_ORDER_ADMIN_USER_CONFIRMED } from 'utils/const';
 import { API_CONFIRM_ORDER } from 'utils/const';
 import { toast } from 'react-toastify';
 import { API_GET_DETAIL_ORDER } from 'utils/const';
@@ -34,6 +33,11 @@ import DialogExtendTime from './DialogExtendTimeTomorrow';
 import DialogConfirmOrder from './DialogConfirmOrder';
 import DialogRefuseOrder from './DialogRefuseOrder';
 import DialogExtendTimeToday from './DialogExtendTimeToday';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { API_GET_ORDER_ADMIN } from 'utils/const';
 
 const columns = [
     { id: 'detail', label: '', minWidth: 10 },
@@ -112,7 +116,7 @@ function OrderPlace() {
 
     const [data, setData] = useState([])
     const getOrderUserConfirmed = async (e) => {
-        const response = await axios.get(API_GET_ORDER_ADMIN_USER_CONFIRMED)
+        const response = await axios.get(API_GET_ORDER_ADMIN)
         if (response && response.status === 200) {
             setData(response.data)
         }
@@ -213,8 +217,33 @@ function OrderPlace() {
         } else toast.error('Thất bại ! ', { autoClose: 2000 })
     }
 
+    //handle status
+    const [status, setStatus] = React.useState('');
 
+    const handleChange = async (event) => {
+        setStatus(event.target.value);
+        console.log('status ', event.target.value);
+        if (event.target.value !== 'ALL') {
+            const response = await axios.get(API_GET_ORDER_ADMIN + '?status=' + event.target.value)
+            if (response && response.status === 200) {
+                setData(response.data)
+            }
+        } else {
+            const response = await axios.get(API_GET_ORDER_ADMIN)
+            if (response && response.status === 200) {
+                setData(response.data)
+            }
+        }
+    };
 
+    const [keyword, setKeyword] = React.useState('');
+
+    const search = async () => {
+        const response = await axios.get(API_GET_ORDER_ADMIN + '?keyword=' + keyword)
+        if (response && response.status === 200) {
+            setData(response.data)
+        }
+    };
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -224,15 +253,38 @@ function OrderPlace() {
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button> */}
-                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '67%', marginBottom: '20px', borderRadius: '7px' }}>
                             <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                 placeholder="Tìm kiếm mã đơn hàng"
+                                onChange={e => setKeyword(e.target.value)}
                             />
                         </Paper>
+                        <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6vh' }} variant="contained" color="success">
+                            Tìm kiếm
+                        </Button>
+                        <FormControl sx={{ m: 1, width: '17%' }} size="small">
+                            <InputLabel id="demo-select-small">Trạng thái</InputLabel>
+                            <Select
+                                labelId="demo-select-small"
+                                id="demo-select-small"
+                                value={status}
+                                label="status"
+                                onChange={handleChange}>
+                                <MenuItem value={'ALL'}>ALL</MenuItem>
+                                <MenuItem value={'NEW'}>NEW </MenuItem>
+                                <MenuItem value={'CANCELLED'}>CANCELLED </MenuItem>
+                                <MenuItem value={'DONE'}>DONE </MenuItem>
+                                <MenuItem value={'USER_CONFIRMED'}>USER_CONFIRMED </MenuItem>
+                                <MenuItem value={'PAID'}>PAID </MenuItem>
+                                <MenuItem value={'EXTEND'}>EXTEND</MenuItem>
+                            </Select>
+                        </FormControl>
+
+
                     </div>
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
@@ -268,9 +320,7 @@ function OrderPlace() {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.total}</TableCell>
-                                            {item.status === 'USER_CONFIRMED' ?
-                                                <TableCell sx={{ textAlign: 'center' }}> Chờ duyệt</TableCell>
-                                                : ''}
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}>
                                                 <Button variant="contained" onClick={e => {
                                                     handleClickOpenConfirmOrder()

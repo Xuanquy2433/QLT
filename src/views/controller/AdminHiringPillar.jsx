@@ -9,8 +9,8 @@ export default function AdminHiringPillar() {
 
     const [data, setData] = useState([])
     const [totalPages, setTotalPages] = useState(0)
-    const [page, setPage] = React.useState(1);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(13);
 
     useEffect(() => {
         fetchAPI()
@@ -34,7 +34,7 @@ export default function AdminHiringPillar() {
     };
 
     const fetchAPI = async () => {
-        const response = await axios.get(API_GET_PRODUCT_HIRING + page + "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=HIRING')
+        const response = await axios.get(API_GET_PRODUCT_HIRING + page + 1 + "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=HIRING')
         if (response) {
             setData(response.data.content)
             setTotalPages(response.data.totalElements)

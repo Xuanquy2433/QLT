@@ -6,6 +6,8 @@ export const API_SIGNIN = `${API}/login`;
 
 export const API_GET_PILLAR = `${API}/admin/address/`;
 
+export const API_GET_ALL_ADDRESS = `${API}/admin/list_address`;
+
 export const API_GET_ADDRESS_DETAIL_USER = `${API}/address/`;
 
 export const API_GET_ADMIN_ADDRESS = `${API}/admin/address/page/`;
@@ -40,7 +42,7 @@ export const API_PRODUCT_ADD = `${API}/product/add`;
 
 export const API_PRODUCT_EDIT = `${API}/product/update`;
 
-export const API_GET_ORDER_ADMIN_USER_CONFIRMED = `${API}/admin/orders/?status=USER_CONFIRMED`;
+export const API_GET_ORDER_ADMIN = `${API}/admin/orders/`;
 
 export const API_PRODUCT_DELETE = `${API}/product/delete/`;
 
@@ -125,6 +127,8 @@ export const API_WISHLIST_ADD = `${API}/wishlist/add?productId=`
 export const API_WISHLIST_GET = `${API}/wishlist/get?productId=`
 
 export const API_WISHLIST_REMOVE = `${API}/wishlist/remove?productId=`
+
+
 
 
 

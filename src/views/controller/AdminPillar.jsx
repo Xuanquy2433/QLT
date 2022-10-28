@@ -13,6 +13,7 @@ import EditPillar from 'views/Pillar/EditPillar'
 import Pillar from 'views/Pillar/Pillar'
 import { API_GET_ADMIN_ADDRESS } from 'utils/const'
 import { showError } from 'utils/error'
+import { API_GET_ALL_ADDRESS } from 'utils/const'
 
 function AdminProduct() {
   const [keyword, setKeyword] = useState('')
@@ -37,9 +38,9 @@ function AdminProduct() {
   }, [])
 
   const getAddress = async (e) => {
-    const response = await axios.get(API_GET_ADMIN_ADDRESS + page + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=street")
+    const response = await axios.get(API_GET_ALL_ADDRESS)
     if (response) {
-      setDataAddress(response.data.content)
+      setDataAddress(response.data)
     }
   }
 

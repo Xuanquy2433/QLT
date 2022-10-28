@@ -37,7 +37,7 @@ import {
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { API_GET_ORDER_ADMIN_USER_CONFIRMED } from "utils/const";
+import { API_GET_ORDER_ADMIN } from "utils/const";
 
 var ps;
 
@@ -67,7 +67,7 @@ const Sidebar = (props) => {
   //get size order place
   const [data, setData] = useState([])
   const getOrderUserConfirmed = async (e) => {
-    const response = await axios.get(API_GET_ORDER_ADMIN_USER_CONFIRMED)
+    const response = await axios.get(API_GET_ORDER_ADMIN)
     if (response && response.status === 200) {
       setData(response.data)
     }

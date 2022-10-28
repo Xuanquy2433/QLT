@@ -18,7 +18,7 @@ export default function AdminPillar() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [openEdit, setOpenEdit] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
@@ -30,7 +30,7 @@ export default function AdminPillar() {
   }, [])
 
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_GET_ADMIN_ADDRESS + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=street")
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
     if (response) {
       setPage(newPage);
       setdata(response.data.content)
@@ -38,7 +38,7 @@ export default function AdminPillar() {
   };
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_GET_ADMIN_ADDRESS + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=street")
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=id")
     if (response) {
       setdata(response.data.content)
       setPage(0);
@@ -47,7 +47,7 @@ export default function AdminPillar() {
   };
 
   const fetchAPI = async (e) => {
-    const response = await axios.get(API_GET_ADMIN_ADDRESS + page + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=street")
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
     if (response) {
       setdata(response.data.content)
       setTotalPages(response.data.totalElements)

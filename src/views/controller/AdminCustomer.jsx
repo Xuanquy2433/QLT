@@ -10,7 +10,7 @@ export default function AdminCustomer() {
 
   const [data, setData] = useState([])
   const [totalPages, setTotalPages] = useState(0)
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(6);
   const [selected, setSelected] = useState(undefined)
   const [openEdit, setOpenEdit] = React.useState(false)
@@ -37,7 +37,7 @@ export default function AdminCustomer() {
   };
 
   const fetchAPI = async () => {
-    const response = await axios.get(API_GET_USERS + page + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage)
+    const response = await axios.get(API_GET_USERS + page + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage)
     if (response) {
       setData(response.data.content)
       setTotalPages(response.data.totalElements)

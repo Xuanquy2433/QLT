@@ -8,8 +8,8 @@ export default function AdminAvailablePillar() {
 
     const [data, setData] = useState([])
     const [totalPages, setTotalPages] = useState(0)
-    const [page, setPage] = React.useState(1);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     useEffect(() => {
         fetchAPI()
@@ -33,7 +33,7 @@ export default function AdminAvailablePillar() {
     };
 
     const fetchAPI = async () => {
-        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + page + "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=AVAILABLE')
+        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + page +1+ "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=AVAILABLE')
         if (response) {
             setData(response.data.content)
             setTotalPages(response.data.totalElements)
