@@ -71,7 +71,7 @@ const UserNotification = (params) => {
             )) :
                 <MenuItem >
                     <div className='notification' >Hiện không có thông báo ! </div>
-                    <div className='notification-time' > <Moment fromNow>Bây giờ</Moment></div>
+                    <div className='notification-time' >Bây giờ</div>
                 </MenuItem>}
         </>
     )
