@@ -197,7 +197,7 @@ function ProductComponent({ product }) {
   }
   return (
     <div style={{
-      display: "flex", maxWidth: "100%", flexWrap: "wrap", justifyContent: "center"
+      display: "flex", width: '1300px', flexWrap: "wrap", justifyContent: "center"
       , marginTop: '50px', marginBottom: '150px'
     }}>
       {
