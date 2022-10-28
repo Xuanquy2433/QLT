@@ -2,29 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { over } from 'stompjs';
 import SockJS from 'sockjs-client';
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 import { MenuItem } from '@mui/material';
-import Moment from 'react-moment';
 
 
 var stompClient = null;
-const UserNotification = (params) => {
-    const [count, setCount] = useState(0);
+const AdminNotificationSize = (params) => {
+    const [publicChats, setPublicChats] = useState([]);
     const [data, setData] = useState([]);
-
+    const [count, setCount] = useState(0);
     useEffect(() => {
         connect();
         getNotification();
 
     }, []);
-
-    let decoded;
-    let token = localStorage.getItem("token");
-    if (token !== null) {
-        decoded = jwt_decode(token);
-    }
-
-    console.log('decoede :', Number(decoded.sub.slice(0, 1)));
 
     const connect = () => {
         let Sock = new SockJS('http://localhost:8082/ws');
@@ -33,17 +23,17 @@ const UserNotification = (params) => {
     }
 
     const onConnected = () => {
-        stompClient.subscribe('/user/' + Number(decoded.sub.slice(0, 1)) + '/private', onMessageReceived);
+        stompClient.subscribe('/notification/public', onMessageReceived);
     }
 
 
     const getNotification = async (e) => {
-        const response = await axios.get('http://localhost:8082/notification/?id=' + Number(decoded.sub.slice(0, 1)))
+        const response = await axios.get('http://localhost:8082/notification/')
         console.log(response.data)
         if (response.status === 200) {
             setData(response.data)
             setCount(response.data.length)
-            params.changeUserCount(response.data.length)
+            params.changeCount(response.data.length)
         }
     }
 
@@ -61,10 +51,11 @@ const UserNotification = (params) => {
     return (<>
         {data.map((data) => (
             <>
-                <MenuItem sx={{width: '200px'}} >
+                {/* <MenuItem >
                     <div className='notification' >{data.message}  </div>
-                    <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
-                </MenuItem>
+                    <div className='notification-time' >10 minutes ago</div>
+                </MenuItem> */}
+                {/* <div className="message-data">{chat.status}</div> */}
             </>
         ))}
     </>
@@ -73,4 +64,4 @@ const UserNotification = (params) => {
 }
 
 
-export default UserNotification
+export default AdminNotificationSize

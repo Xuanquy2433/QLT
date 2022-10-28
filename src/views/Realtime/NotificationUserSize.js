@@ -8,7 +8,7 @@ import Moment from 'react-moment';
 
 
 var stompClient = null;
-const UserNotification = (params) => {
+const UserNotificationSize = (params) => {
     const [count, setCount] = useState(0);
     const [data, setData] = useState([]);
 
@@ -61,10 +61,10 @@ const UserNotification = (params) => {
     return (<>
         {data.map((data) => (
             <>
-                <MenuItem sx={{width: '200px'}} >
+                {/* <MenuItem >
                     <div className='notification' >{data.message}  </div>
                     <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
-                </MenuItem>
+                </MenuItem> */}
             </>
         ))}
     </>
@@ -73,4 +73,4 @@ const UserNotification = (params) => {
 }
 
 
-export default UserNotification
+export default UserNotificationSize

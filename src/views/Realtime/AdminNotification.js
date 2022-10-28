@@ -3,6 +3,7 @@ import { over } from 'stompjs';
 import SockJS from 'sockjs-client';
 import axios from "axios";
 import { MenuItem } from '@mui/material';
+import Moment from 'react-moment';
 
 
 var stompClient = null;
@@ -53,7 +54,7 @@ const AdminNotification = (params) => {
             <>
                 <MenuItem >
                     <div className='notification' >{data.message}  </div>
-                    <div className='notification-time' >10 minutes ago</div>
+                    <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                 </MenuItem>
                 {/* <div className="message-data">{chat.status}</div> */}
             </>

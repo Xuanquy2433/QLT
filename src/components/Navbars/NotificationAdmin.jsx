@@ -14,9 +14,10 @@ import { API_GET_TEST } from 'utils/const';
 import AdminNotification from 'views/Realtime/AdminNotification';
 import UserNotification from 'views/Realtime/UserNotification';
 import UserNotificationSize from 'views/Realtime/NotificationUserSize';
+import AdminNotificationSize from 'views/Realtime/NotificationAdminSize';
 
 
-function Notification() {
+function NotificationAdmin() {
 
     const [countAdmin, setCountAdmin] = React.useState(0);
     const [countUser, setUserCount] = React.useState(0);
@@ -73,6 +74,7 @@ function Notification() {
             <Stack direction="row" spacing={2}>
                 <div className='menu-lv2-noti'>
                     <p
+                    style={{color: 'white'}}
                         ref={anchorRef}
                         id="composition-button"
                         aria-controls={open ? 'composition-menu' : undefined}
@@ -82,8 +84,8 @@ function Notification() {
                     >
                         {/* <NotificationsNoneIcon /> {countUser}
                         <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
-                        <NotificationsNoneIcon /> {countUser}
-                        <UserNotificationSize changeUserCount={(data) => setUserCount(data)} />
+                        <NotificationsNoneIcon /> {countAdmin}
+                        <AdminNotificationSize changeCount={(data) => setCountAdmin(data)} />
                     </p>
                     <Popper
                         open={open}
@@ -104,7 +106,7 @@ function Notification() {
                                             aria-labelledby="composition-button"
                                             onKeyDown={handleListKeyDown}>
                                             {/* data from socket */}
-                                            <UserNotification changeUserCount={(data) => setUserCount(data)} />
+                                            <AdminNotification changeCount={(data) => setCountAdmin(data)} />
                                             {/* hard data test */}
                                             {/* <MenuItem onClick={handleClose}>
                                                 <div className='notification' >You have <b>4 new themes</b>  </div>
@@ -123,4 +125,4 @@ function Notification() {
     )
 }
 
-export default Notification
+export default NotificationAdmin

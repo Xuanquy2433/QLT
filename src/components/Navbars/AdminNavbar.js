@@ -1,5 +1,5 @@
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 // reactstrap components
 import {
   DropdownMenu,
@@ -15,9 +15,12 @@ import {
   Navbar,
   Nav,
   Container,
-  Media
+  Media,
+  NavItem
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
+import Notification from "./Notification";
+import NotificationAdmin from "./NotificationAdmin";
 
 const AdminNavbar = (props) => {
   const history = useHistory();
@@ -46,7 +49,10 @@ const AdminNavbar = (props) => {
             {props.brandText}
 
           </p>
+          <div style={{ marginLeft: '10%',cursor: 'pointer' }}>
+            <NotificationAdmin />
 
+          </div>
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
               <InputGroup className="input-group-alternative">
@@ -59,6 +65,10 @@ const AdminNavbar = (props) => {
               </InputGroup>
             </FormGroup>
           </Form>
+
+
+
+
           <Nav className="align-items-center d-none d-md-flex" navbar>
             <UncontrolledDropdown nav>
               <DropdownToggle className="pr-0" nav>

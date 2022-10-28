@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { NavLink } from "react-router-dom";
-import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import { Card, CardBody, CardTitle, Container, Row, Col, Nav } from "reactstrap";
 import { API_GET_OVERVIEW } from "utils/const";
 
 const Header = () => {
@@ -41,9 +41,9 @@ const Header = () => {
                         </span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <NavLink to={'/admin/product'} style={{ color: 'white' }}> <i className="fas fa-chart-bar" /></NavLink>
-                        </div>
+                        <NavLink to={'/admin/product'} className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                          <i className="fas fa-chart-bar" />
+                        </NavLink>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
@@ -69,9 +69,9 @@ const Header = () => {
                         <span className="h2 font-weight-bold mb-0">{dataOverview.totalHiring}</span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
+                        <NavLink to={'/admin/hiringPillar'} className="icon icon-shape bg-warning text-white rounded-circle shadow">
                           <i className="fas fa-chart-pie" />
-                        </div>
+                        </NavLink>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
@@ -98,9 +98,9 @@ const Header = () => {
                         <span className="h2 font-weight-bold mb-0">{dataOverview.totalAvailable}</span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-info text-white rounded-circle shadow">
+                        <NavLink to={'/admin/availablePillar'} className="icon icon-shape bg-info text-white rounded-circle shadow">
                           <i className="fas fa-percent" />
-                        </div>
+                        </NavLink>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
@@ -126,9 +126,9 @@ const Header = () => {
                         <span className="h2 font-weight-bold mb-0">{dataOverview.totalUser}</span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                        <NavLink to={'/admin/customers'} className="icon icon-shape bg-yellow text-white rounded-circle shadow">
                           <i className="fas fa-users" />
-                        </div>
+                        </NavLink>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
