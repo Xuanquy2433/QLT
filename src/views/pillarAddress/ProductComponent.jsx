@@ -104,7 +104,7 @@ function ProductComponent({ product }) {
         toast.success('Thêm vào giỏ hàng thành công', {
           autoClose: 3000
         })
-        history.push('/auth/cart')
+        // history.push('/auth/cart')
       }
     } catch (error) {
       console.log(error.response.data)
@@ -183,17 +183,25 @@ function ProductComponent({ product }) {
     }
   }
 
+  let user = localStorage.getItem('user')
+
   const onClickAddWishList = async (id) => {
-    const response = await axios.post(API_WISHLIST_ADD + id, {}, {
-      headers: {
-        'authorization': 'Bearer ' + token,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    if (!token && !user) {
+      history.push('/auth/login')
+      toast.warning("Vui lòng đăng nhập!")
+    } else {
+      const response = await axios.post(API_WISHLIST_ADD + id, {}, {
+        headers: {
+          'authorization': 'Bearer ' + token,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      if (response.status === 200) {
+        toast.success("Đã thêm vào danh sách yêu thích.", { autoClose: 1500 })
       }
-    })
-    if (response.status === 200) {
-      toast.success("Đã thêm vào danh sách yêu thích.", { autoClose: 1500 })
     }
+
   }
   return (
     <div style={{
@@ -213,7 +221,10 @@ function ProductComponent({ product }) {
               <h3>Loại trụ: {item.category.name}</h3>
               <h4> {item.description}</h4>
               {item.status === 'AVAILABLE' ?
-                <Button className="btn-cart-cus" style={{ fontWeight: "500", width: "100%", border: "1px solid #5372E4", background: "none", color: "#5372E4", boxShadow: "none" }} onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                <Button className="btn-cart-cus" style={{
+                  '&:hover': { backgroundColor: "#5372E4" }, fontWeight: "500", width: "100%",
+                  border: "1px solid #5372E4", background: "#5372E4", color: "#FFFFFF",
+                }} onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                   Thêm vào giỏ
                 </Button> :
                 <Button style={{
