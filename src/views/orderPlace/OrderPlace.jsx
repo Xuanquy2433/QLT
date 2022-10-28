@@ -263,7 +263,7 @@ function OrderPlace() {
                                 onChange={e => setKeyword(e.target.value)}
                             />
                         </Paper>
-                        <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6vh' }} variant="contained" color="success">
+                        <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6.3vh' }} variant="contained" color="success">
                             Tìm kiếm
                         </Button>
                         <FormControl sx={{ m: 1, width: '17%' }} size="small">

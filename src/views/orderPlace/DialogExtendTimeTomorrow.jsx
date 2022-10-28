@@ -19,7 +19,7 @@ function DialogExtendTime({ openConfirm, handleCloseConfirm, idSave, extendTime 
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Xác nhận gia hạn thêm thời gian"}
+                    {"Xác nhận gia hạn thêm thời gian chờ"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">

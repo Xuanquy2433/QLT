@@ -66,11 +66,7 @@ const AdminNavbar = (props) => {
           </Form>
           <div style={{ marginTop: '15px', cursor: 'pointer' }}>
             <NotificationAdmin />
-
           </div>
-
-
-
 
           <Nav className="align-items-center d-none d-md-flex" navbar>
             <UncontrolledDropdown nav>

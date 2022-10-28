@@ -69,17 +69,6 @@ function OrderDetailPopup({ dataDetail, openDetail, handleCloseDetailOrder }) {
             >
                 <Box sx={style}>
                     <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-                        <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                            <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
-                                <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                                    <SearchIcon />
-                                </IconButton>
-                                <InputBase
-                                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                    placeholder="Search here"
-                                />
-                            </Paper>
-                        </div>
                         <TableContainer sx={{ height: '350px' }}>
                             <Table aria-label="sticky table">
                                 <TableHead>
