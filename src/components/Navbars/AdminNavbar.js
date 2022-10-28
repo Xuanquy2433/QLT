@@ -19,7 +19,7 @@ import {
   NavItem
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
-import Notification from "./Notification";
+import Notification from "./NotificationUser";
 import NotificationAdmin from "./NotificationAdmin";
 
 const AdminNavbar = (props) => {

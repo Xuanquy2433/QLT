@@ -61,7 +61,7 @@ const UserNotification = (params) => {
     return (<>
         {data.map((data) => (
             <>
-                <MenuItem sx={{width: '200px'}} >
+                <MenuItem  >
                     <div className='notification' >{data.message}  </div>
                     <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                 </MenuItem>

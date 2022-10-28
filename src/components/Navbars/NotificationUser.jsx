@@ -14,6 +14,7 @@ import { API_GET_TEST } from 'utils/const';
 import AdminNotification from 'views/Realtime/AdminNotification';
 import UserNotification from 'views/Realtime/UserNotification';
 import UserNotificationSize from 'views/Realtime/NotificationUserSize';
+import { API_GET_MARK_AS_READ } from 'utils/const';
 
 
 function Notification() {
@@ -25,6 +26,10 @@ function Notification() {
         const response = await axios.post(API_GET_TEST)
         // const response1 = await axios.post(API_GET_MARK_AS_READ)
         // const response2 = await axios.get(API_GET_SK)
+    }
+
+    const markAsRead = async () => {
+        const response = await axios.post(API_GET_MARK_AS_READ)
     }
 
     const [open, setOpen] = React.useState(false);
@@ -40,7 +45,8 @@ function Notification() {
             return;
         }
         setOpen(false);
-
+        console.log("evt close ");
+        markAsRead()
     };
 
     function handleListKeyDown(event) {

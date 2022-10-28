@@ -23,7 +23,7 @@ import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React, { useEffect } from 'react';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import Notification from './Notification';
+import Notification from './NotificationUser';
 import { BsSuitHeartFill } from "react-icons/bs";
 
 const AdminNavbar = () => {
