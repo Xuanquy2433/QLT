@@ -77,9 +77,10 @@ function Notification() {
 
 
             <Stack direction="row" spacing={2}>
-            
+
                 <div className='menu-lv2-noti'>
                     <p
+                        style={{ width: '50px' }}
                         ref={anchorRef}
                         id="composition-button"
                         aria-controls={open ? 'composition-menu' : undefined}
@@ -103,31 +104,34 @@ function Notification() {
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}>
-                                    
+
                                 <Paper>
-                                <div className="scrollbar" id="style-1">
-                                    <ClickAwayListener onClickAway={handleClose}>
-                                        <MenuList
-                                            autoFocusItem={open}
-                                            id="composition-menu"
-                                            aria-labelledby="composition-button"
-                                            onKeyDown={handleListKeyDown}>
-                                            {/* data from socket */}
-                                            <UserNotification changeUserCount={(data) => setUserCount(data)} />
-                                            {/* hard data test */}
-                                            {/* <MenuItem onClick={handleClose}>
+                                    <div className="scrollbar" id="style-1">
+                                        <ClickAwayListener onClickAway={handleClose}>
+                                            <MenuList
+                                                style={{ width: '300px',position: 'relative' }}
+                                                autoFocusItem={open}
+                                                id="composition-menu"
+                                                aria-labelledby="composition-button"
+                                                onKeyDown={handleListKeyDown}>
+                                                {/* data from socket */}
+                                                <div style={{position: 'absolute'}}>
+                                                    <UserNotification changeUserCount={(data) => setUserCount(data)} />
+                                                </div>
+                                                {/* hard data test */}
+                                                {/* <MenuItem onClick={handleClose}>
                                                 <div className='notification' >You have <b>4 new themes</b>  </div>
                                                 <div className='notification-time' >10 minutes ago</div>
                                             </MenuItem> */}
-                                        </MenuList>
-                                    </ClickAwayListener>
+                                            </MenuList>
+                                        </ClickAwayListener>
                                     </div>
                                 </Paper>
-                               
+
                             </Grow>
                         )}
                     </Popper>
-                    </div>
+                </div>
             </Stack>
 
         </React.Fragment>
