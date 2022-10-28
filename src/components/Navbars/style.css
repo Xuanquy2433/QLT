@@ -54,6 +54,11 @@
     font-size: 0.85rem;
 }
 
+
+.menu-level-2{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 /* noti */
 .top-text-block {
     display: block;
