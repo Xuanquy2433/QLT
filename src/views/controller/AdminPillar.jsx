@@ -24,7 +24,7 @@ function AdminProduct() {
   const [open, setOpen] = useState(false);
 
   const [openEdit, setOpenEdit] = useState(false);
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [openDelete, setOpenDelete] = useState(false)
@@ -69,7 +69,7 @@ function AdminProduct() {
   }
 
   const getAllProduct = async (e) => {
-    const response = await axios.get(API_GET_PRODUCT + page + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
+    const response = await axios.get(API_GET_PRODUCT + page + 1 + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
     if (response) {
       setTotalPages(response.data.totalElements)
       setData(response.data.content)
