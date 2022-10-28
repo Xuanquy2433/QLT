@@ -101,7 +101,7 @@ function ProductComponent({ product }) {
           localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
           localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
         }
-        toast.success('Thêm vào giỏ hàng thành công', {
+        toast.success('Đã thêm vào giỏ hàng', {
           autoClose: 3000
         })
         // history.push('/auth/cart')
@@ -147,7 +147,7 @@ function ProductComponent({ product }) {
           }
         });
         if (response && response.status === 201) {
-          toast.success('Thêm vào giỏ hàng thành công', {
+          toast.success('Đã thêm vào giỏ hàng', {
             autoClose: 3000
           })
           history.push('/auth/cart')
