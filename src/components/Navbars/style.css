@@ -54,8 +54,7 @@
     font-size: 0.85rem;
 }
 
-
-.menu-level-2{
+.menu-level-2 {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -152,4 +151,47 @@
 
 #style-2 {
     width: 100%;
+}
+
+.notification {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.notification .badge {
+    position: absolute;
+    top: -12px;
+    right: -15px;
+    font-size: 12px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: red;
+    text-align: center;
+    line-height: 14px;
+    color: white;
+}
+
+.notificationAdmin {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.notificationAdmin .badge {
+    position: absolute;
+    top: -12px;
+    right: -15px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: red;
+    text-align: center;
+    line-height: 15px;
+    color: white;
 }

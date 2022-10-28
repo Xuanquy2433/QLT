@@ -69,8 +69,6 @@ function NotificationAdmin() {
 
     return (
         <React.Fragment>
-
-
             <Stack direction="row" spacing={2}>
                 <div className='menu-lv2-noti'>
                     <p
@@ -80,11 +78,11 @@ function NotificationAdmin() {
                         aria-controls={open ? 'composition-menu' : undefined}
                         aria-expanded={open ? 'true' : undefined}
                         aria-haspopup="true"
-                        onClick={handleToggle}
-                    >
-                        {/* <NotificationsNoneIcon /> {countUser}
-                        <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
-                        <NotificationsNoneIcon /> <span style={{fontWeight: '800',color: 'red'}} >{countAdmin}</span>
+                        onClick={handleToggle}>
+                        <p class="notification">
+                            <span> <NotificationsNoneIcon /></span>
+                            <span class="badge">{countAdmin}</span>
+                        </p>
                         <AdminNotificationSize changeCount={(data) => setCountAdmin(data)} />
                     </p>
                     <Popper
@@ -93,8 +91,7 @@ function NotificationAdmin() {
                         role={undefined}
                         placement="bottom-start"
                         transition
-                        disablePortal
-                    >
+                        disablePortal >
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}>
@@ -115,9 +112,8 @@ function NotificationAdmin() {
                                             </MenuItem> */}
                                             </MenuList>
                                         </ClickAwayListener>
-                                        </div>
+                                    </div>
                                 </Paper>
-                            
                             </Grow>
                         )}
                     </Popper>

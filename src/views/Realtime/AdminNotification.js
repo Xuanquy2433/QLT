@@ -54,14 +54,14 @@ const AdminNotification = (params) => {
         {data.length > 0 ? data.map((data) => (
             <>
                 <MenuItem >
-                    <div className='notification' >{data.message}  </div>
+                    <div  >{data.message}  </div>
                     <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                 </MenuItem>
                 {/* <div className="message-data">{chat.status}</div> */}
             </>
         )) :
             <MenuItem >
-                <div className='notification' >Hiện không có thông báo ! </div>
+                <div >Hiện không có thông báo ! </div>
                 <div className='notification-time' > Bây giờ</div>
             </MenuItem>}
     </>

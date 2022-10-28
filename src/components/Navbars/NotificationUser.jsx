@@ -79,10 +79,7 @@ function Notification() {
 
     return (
         <React.Fragment>
-
-
             <Stack direction="row" spacing={2}>
-
                 <div className='menu-lv2-noti'>
                     <p
                         style={{ width: '50px' }}
@@ -95,7 +92,12 @@ function Notification() {
                     >
                         {/* <NotificationsNoneIcon /> {countUser}
                         <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
-                        <NotificationsNoneIcon /> <span className='count-noti'>{countUser}</span>
+                        {/* <NotificationsNoneIcon /> <span className='count-noti'>{countUser}</span> */}
+
+                        <p class="notification">
+                            <span> <NotificationsNoneIcon /></span>
+                            <span class="badge">{countUser}</span>
+                        </p>
                         <UserNotificationSize changeUserCount={(data) => setUserCount(data)} />
                     </p>
                     <Popper
@@ -109,7 +111,6 @@ function Notification() {
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}>
-
                                 <Paper>
                                     <div className="scrollbar" id="style-1">
                                         <ClickAwayListener onClickAway={handleClose}>
@@ -132,7 +133,6 @@ function Notification() {
                                         </ClickAwayListener>
                                     </div>
                                 </Paper>
-
                             </Grow>
                         )}
                     </Popper>
