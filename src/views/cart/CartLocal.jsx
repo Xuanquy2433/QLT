@@ -8,7 +8,6 @@ import { API_GET_CART } from 'utils/const'
 import './cart.css'
 import jwt_decode from "jwt-decode";
 import { formatMoney } from './../../common/formatMoney';
-import ChatRoom from 'views/Realtime/ChatRoom'
 
 function CartLocal() {
 
@@ -144,7 +143,7 @@ function CartLocal() {
                                             <div className="p-5">
                                                 <div className="d-flex justify-content-between align-items-center mb-5">
                                                     <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
-                                                    <ChatRoom/>
+                                                    {/* <ChatRoom/> */}
                                                     <h6 className="mb-0 text-muted">{dataLocal.length} mặt hàng</h6>
                                                 </div>
                                                 {dataLocal.length ?

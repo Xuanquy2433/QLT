@@ -107,11 +107,12 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
-              <NavItem className="menu-hover nav-link-icon">
-                <NavLink className="nav-link-icon" tag={Link}>
-                  <Notification />
-                </NavLink>
-              </NavItem>
+              {token && decoded ?
+                <NavItem className="menu-hover nav-link-icon">
+                  <NavLink className="nav-link-icon" tag={Link}>
+                    <Notification />
+                  </NavLink>
+                </NavItem> : ''}
 
               <NavItem >
                 <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>

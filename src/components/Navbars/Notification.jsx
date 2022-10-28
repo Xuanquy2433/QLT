@@ -9,12 +9,16 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import ChatRoom from 'views/Realtime/ChatRoom';
 import axios from 'axios';
 import { API_GET_TEST } from 'utils/const';
+import AdminNotification from 'views/Realtime/AdminNotification';
+import UserNotification from 'views/Realtime/UserNotification';
 
 
 function Notification() {
+
+    const [countAdmin, setCountAdmin] = React.useState(0);
+    const [countUser, setUserCount] = React.useState(0);
 
     const fetchAPI = async () => {
         const response = await axios.post(API_GET_TEST)
@@ -75,7 +79,10 @@ function Notification() {
                         aria-haspopup="true"
                         onClick={handleToggle}
                     >
-                        <NotificationsNoneIcon />
+                        {/* <NotificationsNoneIcon /> {countUser}
+                        <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
+                        <NotificationsNoneIcon /> {countUser}
+
                     </p>
                     <Popper
                         open={open}
@@ -96,12 +103,12 @@ function Notification() {
                                             aria-labelledby="composition-button"
                                             onKeyDown={handleListKeyDown}>
                                             {/* data from socket */}
-                                            <ChatRoom />
+                                            <UserNotification changeUserCount={(data) => setUserCount(data)} />
                                             {/* hard data test */}
-                                            <MenuItem onClick={handleClose}>
+                                            {/* <MenuItem onClick={handleClose}>
                                                 <div className='notification' >You have <b>4 new themes</b>  </div>
                                                 <div className='notification-time' >10 minutes ago</div>
-                                            </MenuItem>
+                                            </MenuItem> */}
                                         </MenuList>
                                     </ClickAwayListener>
                                 </Paper>
