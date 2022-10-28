@@ -2,8 +2,9 @@
     font-size: 30px;
 }
 
-.menu-lv2-noti{
-    position: relative;
+.menu-lv2-noti .count-noti{
+    color: red;
+   
 }
 
 .menu-lv2-noti li {
@@ -136,3 +137,14 @@
     background-color:#353a3f;
     border-radius: 10px;
 } 
+
+#style-1::-webkit-scrollbar-thumb {
+    height: 70px;
+    width: 3px;
+    background-color:#353a3f;
+    border-radius: 10px;
+} 
+
+#style-2{
+    width: 100%;
+}
