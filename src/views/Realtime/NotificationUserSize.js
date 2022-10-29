@@ -25,7 +25,6 @@ const UserNotificationSize = (params) => {
         decoded = jwt_decode(token);
     }
 
-    console.log('decoede :', Number(decoded.sub.slice(0, 1)));
 
     const connect = () => {
         let Sock = new SockJS('http://localhost:8082/ws');
@@ -44,12 +43,7 @@ const UserNotificationSize = (params) => {
         if (response.status === 200) {
             setData(response.data)
             setCount(response.data.length)
-            response.data.map((item, index) => {
-                if (item.checked === false) {
-                    setCountNew(countNew + 1)
-                }
-            })
-            params.changeUserCount(countNew)
+            params.changeUserCount(response.data.length)
         }
     }
 

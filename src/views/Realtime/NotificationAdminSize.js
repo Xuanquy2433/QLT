@@ -34,9 +34,8 @@ const AdminNotificationSize = (params) => {
         console.log(response.data)
         if (response.status === 200) {
             setData(response.data)
-            setCount(response.data.length)
             response.data.map((item, index) => {
-                if (item.checked === false) {
+                if (item.checked == false) {
                     setCountNew(countNew + 1)
                 }
             })

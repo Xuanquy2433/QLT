@@ -90,18 +90,12 @@ function Notification() {
                         aria-haspopup="true"
                         onClick={handleToggle}
                     >
-                        {/* <NotificationsNoneIcon /> {countUser}
-                        <UserNotification changeUserCount={(data) => setUserCount(data)} /> */}
-                        {/* <NotificationsNoneIcon /> <span className='count-noti'>{countUser}</span> */}
 
                         <p class="notification">
                             <span> <NotificationsNoneIcon /></span>
                             <span class="badge">{countUser}</span>
                         </p>
-                        <UserNotificationSize changeUserCount={(data) => {
-                            setUserCount(data)
-                            console.log('not ',data);
-                        }} />
+                        <UserNotificationSize changeUserCount={(data) => setUserCount(data)} />
                     </p>
                     <Popper
                         open={open}
