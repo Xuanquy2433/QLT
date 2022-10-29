@@ -74,7 +74,6 @@ function AdminProduct() {
     if (response) {
       setTotalPages(response.data.totalElements)
       setData(response.data.content)
-      console.log('data,', response.data.content);
     }
   }
 
@@ -184,12 +183,19 @@ function AdminProduct() {
       showError(error)
     }
   }
-
+  const search = async (keyword) => {
+    console.log('key word search admin address ', keyword);
+    const response = await axios.get(API_GET_PRODUCT + page + 1 + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
+    if (response) {
+      setTotalPages(response.data.totalElements)
+      setData(response.data.content)
+    }
+  }
   return (
     <div>
       <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar dataCategory={dataCategory} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
-      <Pillar page={page} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
+      <Pillar page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages} handleChangeRowsPerPage={handleChangeRowsPerPage}
         openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
     </div>

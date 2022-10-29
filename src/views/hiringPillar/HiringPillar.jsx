@@ -46,7 +46,7 @@ const columns = [
     // { id: 'street', label: 'street', minWidth: 150, align: 'center', },
     // { id: 'action', label: 'Hành động', minWidth: 150, align: 'right', },
 ];
-export default function HiringPillar({ data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
+export default function HiringPillar({ data, page, search,rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
 
     return (
         <>
@@ -59,8 +59,9 @@ export default function HiringPillar({ data, page, rowsPerPage, totalPages, hand
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
+                                onChange={e => search(e.target.value)}
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Search"
+                                placeholder="Tìm kiếm"
                             />
                         </Paper>
                     </div>

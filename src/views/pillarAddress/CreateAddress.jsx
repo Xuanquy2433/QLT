@@ -29,10 +29,7 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
         onSubmit(dataAddress)
         setOpen(false)
     }
-
     const handleClose = () => setOpen(false);
-
-    console.log(dataAddress);
     return (
         <div>
             <Modal

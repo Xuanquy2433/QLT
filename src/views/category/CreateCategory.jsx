@@ -19,7 +19,6 @@ export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
     }
 
     const handleClose = () => setOpen(false)
-    console.log(data);
     return (
         <div>
             <Modal

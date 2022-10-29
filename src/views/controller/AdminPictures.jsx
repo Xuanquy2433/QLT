@@ -67,7 +67,7 @@ export default function AdminPictures() {
     }
 
     const onSubmitEdit = async (data) => {
-        console.log('on submit id ',data);
+        console.log('on submit id ', data);
         try {
             const formData = new FormData();
             formData.append('image', data.image);
@@ -98,10 +98,17 @@ export default function AdminPictures() {
             showError(error)
         }
     }
+    const search = async (keyword) => {
+        // const response = await axios.get(API_GET_ADMIN_ADDRESS + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
+        // if (response) {
+        //   setdata(response.data.content)
+        //   setTotalPages(response.data.totalElements)
 
+        // }
+    }
     return (
         <div>
-            <Picture data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
+            <Picture search={search} data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
             <AddPictures open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
             {selected && <EditPictures data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}

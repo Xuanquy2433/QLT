@@ -47,18 +47,18 @@ const columns = [
 
 ];
 
-export default function Category({ handleOpenDelete, openDelete, handleCloseDelete, data, setOpen, onEdit, onDelete }) {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+export default function Category({ handleOpenDelete, search, openDelete, handleCloseDelete, data, setOpen, onEdit, onDelete, totalPages, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage }) {
+    // const [page, setPage] = React.useState(0);
+    // const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    // const handleChangePage = (event, newPage) => {
+    //     setPage(newPage);
+    // };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+    // const handleChangeRowsPerPage = (event) => {
+    //     setRowsPerPage(+event.target.value);
+    //     setPage(0);
+    // };
     const handleOpen = () => setOpen(true);
     const [idDelete, setIdDelete] = React.useState(Number);
 
@@ -80,6 +80,7 @@ export default function Category({ handleOpenDelete, openDelete, handleCloseDele
                             </IconButton>
                             <InputBase
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                onChange={e => search(e.target.value)}
                                 placeholder="Tìm kiếm tên loại trụ"
                             />
                         </Paper>
@@ -105,7 +106,7 @@ export default function Category({ handleOpenDelete, openDelete, handleCloseDele
                             </TableHead>
                             <TableBody>
                                 {data
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
@@ -154,9 +155,9 @@ export default function Category({ handleOpenDelete, openDelete, handleCloseDele
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[6, 25, 100]}
+                        rowsPerPageOptions={[7, 25, 100]}
                         component="div"
-                        count={data.length}
+                        count={totalPages}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

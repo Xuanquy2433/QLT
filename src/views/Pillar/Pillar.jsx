@@ -78,7 +78,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete, handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
+export default function Pillar({ handleOpenDelete, openDelete, search,handleCloseDelete, handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
     const [id, setId] = useState(Number)
 
     const handleOpen = () => setOpen(true)
@@ -99,6 +99,7 @@ export default function Pillar({ handleOpenDelete, openDelete, handleCloseDelete
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
+                                onChange={e => search(e.target.value)}
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                 placeholder="Tìm kiếm thông tin trụ"
                             />

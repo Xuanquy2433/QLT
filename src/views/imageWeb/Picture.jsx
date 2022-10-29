@@ -54,7 +54,7 @@ const columns = [
 
 ];
 
-export default function Picture({ data, setOpen, onEdit, onDelete }) {
+export default function Picture({ data, setOpen, search,onEdit, onDelete }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
@@ -101,6 +101,7 @@ export default function Picture({ data, setOpen, onEdit, onDelete }) {
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
+                            onChange={e => search(e.target.value)}
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                 placeholder="Tìm kiếm loại ảnh"
                             />

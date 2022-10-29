@@ -40,12 +40,18 @@ export default function AdminHiringPillar() {
             setTotalPages(response.data.totalElements)
         }
     }
-    console.log("data HIRING", data);
+    const search = async (keyword) => {
+        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + page + 1 + "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=HIRING&keyword=' + keyword)
+        if (response) {
+            setData(response.data.content)
+            setTotalPages(response.data.totalElements)
+        }
+    }
 
 
     return (
         <div>
-            <HiringPillar handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} data={data} page={page} rowsPerPage={rowsPerPage} totalPages={totalPages} />
+            <HiringPillar search={search} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} data={data} page={page} rowsPerPage={rowsPerPage} totalPages={totalPages} />
         </div>
     )
 }

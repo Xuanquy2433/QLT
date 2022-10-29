@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { API_EDIT_PILLAR } from 'utils/const'
 import { API_GET_ADMIN_ADDRESS } from 'utils/const'
+import { API_GET_ADDRESS } from 'utils/const'
 import { API_CLICK_SEARCH_ADDRESS } from 'utils/const'
 import { API_ADD_PILLAR } from 'utils/const'
 import { API_DELETE_PILLAR } from 'utils/const'
@@ -52,7 +53,6 @@ export default function AdminPillar() {
       setdata(response.data.content)
       setTotalPages(response.data.totalElements)
     }
-    console.log("response", response.data);
   }
 
   const onSubmit = async (data) => {
@@ -187,16 +187,14 @@ export default function AdminPillar() {
   }
 
   const search = async (keyword) => {
-    const response = await axios.get(API_CLICK_SEARCH_ADDRESS + keyword)
-    if (response.status === 200) {
-      setdata(response.data)
-    }
-    if (keyword.length === 0) {
-      fetchAPI()
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
+    if (response) {
+      setdata(response.data.content)
+      setTotalPages(response.data.totalElements)
+
     }
   }
 
-  console.log('dataaaaaaaaaaaaa ', data);
   return (
     <div>
       <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />

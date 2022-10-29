@@ -43,12 +43,10 @@ export default function AdminCustomer() {
       setTotalPages(response.data.totalElements)
     }
   }
-  console.log("data users", data);
 
   const onEdit = async (item) => {
     setSelected(item)
     setOpenEdit(true)
-    console.log(item);
   }
 
   // const [id, setId] = useState(0)
@@ -93,11 +91,18 @@ export default function AdminCustomer() {
 
   }
 
+  const search = async (keyword) => {
+    const response = await axios.get(API_GET_USERS + page + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage + "&keyword=" + keyword)
+    if (response) {
+      setData(response.data.content)
+      setTotalPages(response.data.totalElements)
 
+    }
+  }
   return (
     <div>
       {selected && <EditCustomer item={selected} openEdit={openEdit} handleCloseEdit={handleCloseEdit} onSubmitEdit={onSubmitEdit} />}
-      <Customer onEdit={onEdit} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} data={data} page={page} rowsPerPage={rowsPerPage} totalPages={totalPages} />
+      <Customer search={search} onEdit={onEdit} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} data={data} page={page} rowsPerPage={rowsPerPage} totalPages={totalPages} />
     </div>
   )
 }

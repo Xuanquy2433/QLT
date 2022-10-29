@@ -50,7 +50,6 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
         setData({ ...data, categoryId: (value) });
     };
 
-    console.log(data);
     return (
         <Modal
             open={open}

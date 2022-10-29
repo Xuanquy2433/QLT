@@ -56,7 +56,7 @@ const columns = [
     },
 ];
 
-export default function Customer({ onEdit, data, page, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
+export default function Customer({ onEdit, data, page, search,rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
     const onClickEdit = (data) => {
         onEdit(data);
     }
@@ -74,6 +74,7 @@ export default function Customer({ onEdit, data, page, rowsPerPage, totalPages, 
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
+                                onChange={e => search(e.target.value)}
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                 placeholder="Tìm kiếm tên khách hàng"
                             />

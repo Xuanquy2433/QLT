@@ -22,7 +22,7 @@ import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDrop
 import { IconButton, InputBase } from '@mui/material';
 
 const columns = [
-    { id: 'Id', label: 'Id', minWidth: 100 },
+    { id: 'Id', label: 'Id', minWidth: 70 },
     { id: 'image', label: 'Hình ảnh', align: 'center', minWidth: 100 },
     { id: 'City', label: 'Thành phố', align: 'center', minWidth: 100 },
     {
@@ -212,11 +212,6 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
                     />
                 </Paper>
             </Container >
-
-
-
-
-
         </>
     )
 }
