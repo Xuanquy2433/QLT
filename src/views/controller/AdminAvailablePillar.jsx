@@ -9,7 +9,7 @@ export default function AdminAvailablePillar() {
     const [data, setData] = useState([])
     const [totalPages, setTotalPages] = useState(0)
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
     useEffect(() => {
         fetchAPI()

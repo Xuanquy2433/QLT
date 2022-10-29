@@ -102,7 +102,7 @@ export default function HiringPillar({ data, page, search,rowsPerPage, totalPage
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[13, 25, 100]}
+                        rowsPerPageOptions={[6,10, 25, 100]}
                         component="div"
                         count={totalPages}
                         rowsPerPage={rowsPerPage}

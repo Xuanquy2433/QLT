@@ -101,7 +101,7 @@ export default function AvailablePillar({ data, page, search, rowsPerPage, total
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[10, 25, 100]}
+                        rowsPerPageOptions={[6,10, 25, 100]}
                         component="div"
                         count={totalPages}
                         rowsPerPage={rowsPerPage}

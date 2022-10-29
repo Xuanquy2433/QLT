@@ -66,6 +66,8 @@ export const API_GET_CATEGORY_PAGE = `${API}/admin/category/page/`;
 
 export const API_ADD_CATEGORY = `${API}/admin/category/add`;
 
+export const API_GET_ALL_CATEGORY = `${API}/admin/list_category`;
+
 export const API_EDIT_CATEGORY = `${API}/admin/category/edit`;
 
 export const API_DELETE_CATEGORY = `${API}/admin/category/delete?id=`;

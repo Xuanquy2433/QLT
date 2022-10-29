@@ -214,9 +214,6 @@ function ProductComponent({ product }) {
   const count = Math.ceil(product.length / PER_PAGE);
   const _DATA = usePagination(product, PER_PAGE);
 
-  // const count = 10
-  // const _DATA = usePagination(product, PER_PAGE);
-
   const handleChange = (e, p) => {
     setPage(p);
     _DATA.jump(p);

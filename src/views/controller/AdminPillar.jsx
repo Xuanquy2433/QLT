@@ -14,6 +14,7 @@ import Pillar from 'views/Pillar/Pillar'
 import { API_GET_ADMIN_ADDRESS } from 'utils/const'
 import { showError } from 'utils/error'
 import { API_GET_ALL_ADDRESS } from 'utils/const'
+import { API_GET_ALL_CATEGORY } from 'utils/const'
 
 function AdminProduct() {
   const [keyword, setKeyword] = useState('')
@@ -45,9 +46,9 @@ function AdminProduct() {
   }
 
   const getCategory = async (e) => {
-    const response = await axios.get(API_GET_CATEGORY)
+    const response = await axios.get(API_GET_ALL_CATEGORY)
     if (response) {
-      setDataCategory(response.data.content)
+      setDataCategory(response.data)
     }
   }
 
@@ -84,8 +85,6 @@ function AdminProduct() {
   }
 
   const onSubmit = async (data) => {
-    console.log("data when add ", data);
-
     try {
       if (data.name === " ") {
         toast.error("Không được để trống địa chỉ", { autoClose: "1500" })
@@ -98,9 +97,8 @@ function AdminProduct() {
             headers: { 'Content-Type': 'multipart/form-data' }
           })
         if (response.status === 201) {
-          toast.success("them thanh cong", { autoClose: "1500" })
+          toast.success("Thêm thành công", { autoClose: 1500 })
           setOpen(false)
-
           getAllProduct()
         }
       }

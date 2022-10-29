@@ -21,6 +21,7 @@ import {
 import jwt_decode from "jwt-decode";
 import Notification from "./NotificationUser";
 import NotificationAdmin from "./NotificationAdmin";
+import { toast } from "react-toastify";
 
 const AdminNavbar = (props) => {
   const history = useHistory();
@@ -32,6 +33,7 @@ const AdminNavbar = (props) => {
     localStorage.removeItem("cartADD")
     localStorage.removeItem("cartTemp")
     history.push('/auth/homePage')
+    toast.success('Đăng xuất thành công !')
     // window.location.reload(false)
 
   }
