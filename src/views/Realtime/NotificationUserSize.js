@@ -10,6 +10,7 @@ import Moment from 'react-moment';
 var stompClient = null;
 const UserNotificationSize = (params) => {
     const [count, setCount] = useState(0);
+    const [countNew, setCountNew] = useState(0);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -43,7 +44,12 @@ const UserNotificationSize = (params) => {
         if (response.status === 200) {
             setData(response.data)
             setCount(response.data.length)
-            params.changeUserCount(response.data.length)
+            response.data.map((item, index) => {
+                if (item.checked === false) {
+                    setCountNew(countNew + 1)
+                }
+            })
+            params.changeUserCount(countNew)
         }
     }
 

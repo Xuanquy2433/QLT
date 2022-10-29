@@ -90,8 +90,21 @@ const Index = (props) => {
                     </h6>
                     <h2 className="text-white mb-0">Sales value</h2>
                   </div>
+                  <p className="mt-3">
+                    <NavLink>
+                      <span className="d-none d-md-block"> <input type="date" /></span>
+                    </NavLink>
+                  </p>
+                  <span style={{color:'white', fontSize: '1.5em',fontWeight: '600'}}> -</span>
+                  <p className="mt-3">
+                    <NavLink>
+                      <span className="d-none d-md-block"> <input type="date" /></span>
+                    </NavLink>
+                  </p>
                   <div className="col">
                     <Nav className="justify-content-end" pills>
+
+
                       <NavItem>
                         <NavLink
                           className={classnames("py-2 px-3", {

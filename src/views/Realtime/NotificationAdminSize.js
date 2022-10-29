@@ -9,6 +9,8 @@ var stompClient = null;
 const AdminNotificationSize = (params) => {
     const [publicChats, setPublicChats] = useState([]);
     const [data, setData] = useState([]);
+    const [countNew, setCountNew] = useState(0);
+
     const [count, setCount] = useState(0);
     useEffect(() => {
         connect();
@@ -33,7 +35,12 @@ const AdminNotificationSize = (params) => {
         if (response.status === 200) {
             setData(response.data)
             setCount(response.data.length)
-            params.changeCount(response.data.length)
+            response.data.map((item, index) => {
+                if (item.checked === false) {
+                    setCountNew(countNew + 1)
+                }
+            })
+            params.changeCount(countNew)
         }
     }
 

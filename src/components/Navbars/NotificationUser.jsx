@@ -98,7 +98,10 @@ function Notification() {
                             <span> <NotificationsNoneIcon /></span>
                             <span class="badge">{countUser}</span>
                         </p>
-                        <UserNotificationSize changeUserCount={(data) => setUserCount(data)} />
+                        <UserNotificationSize changeUserCount={(data) => {
+                            setUserCount(data)
+                            console.log('not ',data);
+                        }} />
                     </p>
                     <Popper
                         open={open}
