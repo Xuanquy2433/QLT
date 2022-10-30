@@ -107,7 +107,7 @@ const AdminNavbar = () => {
 
               {token && decoded ?
                 <NavItem className="menu-hover nav-link-icon">
-                  <NavLink className="nav-link-icon" tag={Link}>
+                  <NavLink className="nav-link-icon" >
                     <Notification />
                   </NavLink>
                 </NavItem> : ''}

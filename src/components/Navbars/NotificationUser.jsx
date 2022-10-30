@@ -66,7 +66,7 @@ function Notification() {
 
     return (
         <React.Fragment>
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" style={{ cursor: 'pointer' }} spacing={2}>
                 <div className='menu-lv2-noti'>
                     <p
                         style={{ width: '50px' }}
@@ -102,7 +102,7 @@ function Notification() {
                                                 id="composition-menu"
                                                 aria-labelledby="composition-button"
                                                 onKeyDown={handleListKeyDown}>
-                                                <UserNotification changeCount={(data) => setUserCount(data)} />
+                                                <UserNotification changeUserCount={(data) => setUserCount(data)} />
                                             </MenuList>
                                         </ClickAwayListener>
                                     </div>
