@@ -54,7 +54,7 @@ const AdminNotification = (params) => {
         {data.length > 0 ? data.map((data) => (
             <>
                 <MenuItem sx={{ borderBottom: '1px solid #ddd'}} >
-                    <i className="ni ni check-bold"></i>
+                    {/* <i className="ni ni check-bold"></i> */}
                     <div  >{data.message}  </div>
                     <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                 </MenuItem>

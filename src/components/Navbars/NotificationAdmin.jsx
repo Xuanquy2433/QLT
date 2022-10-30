@@ -22,7 +22,6 @@ function NotificationAdmin() {
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
-        // setOpen(true)
     };
     const markAsRead = async () => {
         const response = await axios.post(API_GET_MARK_AS_READ_ADMIN)
@@ -41,7 +40,6 @@ function NotificationAdmin() {
             setOpen(false);
         } else if (event.key === 'Escape') {
             setOpen(false);
-
         }
     }
 
@@ -51,10 +49,7 @@ function NotificationAdmin() {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
         }
-
         prevOpen.current = open;
-
-
     }, [open]);
 
 
