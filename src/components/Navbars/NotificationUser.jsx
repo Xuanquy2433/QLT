@@ -15,6 +15,7 @@ import AdminNotification from 'views/Realtime/AdminNotification';
 import UserNotification from 'views/Realtime/UserNotification';
 import jwt_decode from "jwt-decode";
 import { API_GET_MARK_AS_READ } from 'utils/const';
+import UserSize from 'views/Realtime/UserSize';
 
 
 function Notification() {
@@ -81,6 +82,7 @@ function Notification() {
                             <span class="badge">{countUser}</span>
                         </p>
                         {/* <UserNotification changeCount={(data) => setUserCount(data)} /> */}
+                        <UserSize changeUserCount={(data) => setUserCount(data)}></UserSize>
                     </p>
                     <Popper
                         open={open}
