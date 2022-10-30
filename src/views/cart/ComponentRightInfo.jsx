@@ -13,18 +13,6 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
             autoClose: 500
         })
     }
-    const [bank, setBank] = React.useState({
-        id: 0,
-        bankName: '',
-        bankAccountNumber: ''
-    });
-
-    console.log(bank);
-
-    const handleChange = (event) => {
-        setBank({ ...bank, bankName: (event.target.value), bankAccountNumber: (event.target.value), id: (event.target.value) });
-    };
-
     const [dataBanks, setDataBanks] = useState([])
     const fetchAPI = async () => {
         const response = await axios.post(API_BANK_GET)
@@ -32,6 +20,19 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
             setDataBanks(response.data)
         }
     }
+    const [bank, setBank] = React.useState({
+        id: dataBanks.id || 0,
+        bankName: dataBanks.bankName || '',
+        bankAccountNumber: dataBanks.bankAccountNumber || ''
+    })
+
+    console.log(bank);
+
+    const handleChange = (event, e) => {
+        setBank({ ...bank, id: (event.target.value) });
+    };
+
+
 
     useEffect(() => {
         fetchAPI()
@@ -81,13 +82,12 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                             Tên ngân hàng
                                         </label>
                                         <select className="form-control form-control-lg"
-                                            // value={bank.id}
                                             style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
                                             onChange={handleChange}
                                             aria-label="Default select example">
                                             {
                                                 dataBanks.map((item, index) => (
-                                                    <option key={index} value={item.id} selected>{item.bankName}</option>
+                                                    <option key={index} value={item.id}>{item.bankName}</option>
                                                 ))
                                             }
 
