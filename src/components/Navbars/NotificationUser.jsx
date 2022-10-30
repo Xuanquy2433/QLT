@@ -34,9 +34,7 @@ function Notification() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        // fetchAPI()
         setOpen((prevOpen) => !prevOpen);
-        // setOpen(true)
     };
 
     const handleClose = (event) => {
@@ -53,7 +51,6 @@ function Notification() {
             setOpen(false);
         } else if (event.key === 'Escape') {
             setOpen(false);
-
         }
     }
 
@@ -63,10 +60,7 @@ function Notification() {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
         }
-
         prevOpen.current = open;
-
-
     }, [open]);
 
 
@@ -81,14 +75,12 @@ function Notification() {
                         aria-controls={open ? 'composition-menu' : undefined}
                         aria-expanded={open ? 'true' : undefined}
                         aria-haspopup="true"
-                        onClick={handleToggle}
-                    >
-
+                        onClick={handleToggle}>
                         <p class="notification">
                             <span> <NotificationsNoneIcon /></span>
                             <span class="badge">{countUser}</span>
                         </p>
-                        <UserNotification changeCount={(data) => setUserCount(data)} />
+                        {/* <UserNotification changeCount={(data) => setUserCount(data)} /> */}
                     </p>
                     <Popper
                         open={open}
@@ -110,10 +102,7 @@ function Notification() {
                                                 id="composition-menu"
                                                 aria-labelledby="composition-button"
                                                 onKeyDown={handleListKeyDown}>
-                                                {/* data from socket */}
-                                                <div style={{ position: 'absolute' }}>
-                                                    <UserNotification changeCount={(data) => setUserCount(data)} />
-                                                </div>
+                                                <UserNotification changeCount={(data) => setUserCount(data)} />
                                             </MenuList>
                                         </ClickAwayListener>
                                     </div>
