@@ -7,11 +7,8 @@ import { MenuItem } from '@mui/material';
 
 var stompClient = null;
 const AdminNotificationSize = (params) => {
-    const [publicChats, setPublicChats] = useState([]);
     const [data, setData] = useState([]);
-    const [countNew, setCountNew] = useState(0);
 
-    const [count, setCount] = useState(0);
     useEffect(() => {
         connect();
         getNotification();
@@ -28,21 +25,14 @@ const AdminNotificationSize = (params) => {
         stompClient.subscribe('/notification/public', onMessageReceived);
     }
 
-
     const getNotification = async (e) => {
         const response = await axios.get('http://localhost:8082/notification/')
         console.log(response.data)
         if (response.status === 200) {
             setData(response.data)
-            response.data.map((item, index) => {
-                if (item.checked == false) {
-                    setCountNew(countNew + 1)
-                }
-            })
-            params.changeCount(countNew)
+            params.changeCount(response.data.filter((data)=>data.checked===false).length)
         }
     }
-
 
     const onMessageReceived = () => {
         getNotification();

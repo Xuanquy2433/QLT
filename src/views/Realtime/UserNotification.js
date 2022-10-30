@@ -11,7 +11,6 @@ import { BorderBottom } from '@mui/icons-material';
 
 var stompClient = null;
 const UserNotification = (params) => {
-    const [count, setCount] = useState(0);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -44,8 +43,7 @@ const UserNotification = (params) => {
         console.log(response.data)
         if (response.status === 200) {
             setData(response.data)
-            setCount(response.data.length)
-            params.changeUserCount(response.data.length)
+            params.changeUserCount(response.data.filter((data)=>data.checked===false).length)
         }
     }
 
