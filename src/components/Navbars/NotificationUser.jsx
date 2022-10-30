@@ -13,7 +13,6 @@ import axios from 'axios';
 import { API_GET_TEST } from 'utils/const';
 import AdminNotification from 'views/Realtime/AdminNotification';
 import UserNotification from 'views/Realtime/UserNotification';
-import UserNotificationSize from 'views/Realtime/NotificationUserSize';
 import jwt_decode from "jwt-decode";
 import { API_GET_MARK_AS_READ } from 'utils/const';
 
@@ -25,14 +24,8 @@ function Notification() {
     if (token !== null) {
         decoded = jwt_decode(token);
     }
-    const [countAdmin, setCountAdmin] = React.useState(0);
     const [countUser, setUserCount] = React.useState(0);
 
-    // const fetchAPI = async () => {
-    //     const response = await axios.post(API_GET_TEST)
-    //     // const response1 = await axios.post(API_GET_MARK_AS_READ)
-    //     // const response2 = await axios.get(API_GET_SK)
-    // }
 
     const markAsRead = async () => {
         const response = await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
@@ -95,7 +88,7 @@ function Notification() {
                             <span> <NotificationsNoneIcon /></span>
                             <span class="badge">{countUser}</span>
                         </p>
-                        <UserNotificationSize changeUserCount={(data) => setUserCount(data)} />
+                        <UserNotification changeCount={(data) => setUserCount(data)} />
                     </p>
                     <Popper
                         open={open}
@@ -119,13 +112,8 @@ function Notification() {
                                                 onKeyDown={handleListKeyDown}>
                                                 {/* data from socket */}
                                                 <div style={{ position: 'absolute' }}>
-                                                    <UserNotification changeUserCount={(data) => setUserCount(data)} />
+                                                    <UserNotification changeCount={(data) => setUserCount(data)} />
                                                 </div>
-                                                {/* hard data test */}
-                                                {/* <MenuItem onClick={handleClose}>
-                                                <div className='notification' >You have <b>4 new themes</b>  </div>
-                                                <div className='notification-time' >10 minutes ago</div>
-                                            </MenuItem> */}
                                             </MenuList>
                                         </ClickAwayListener>
                                     </div>

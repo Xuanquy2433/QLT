@@ -18,11 +18,8 @@ import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'; import './style.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React, { useEffect } from 'react';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Notification from './NotificationUser';
 import { BsSuitHeartFill } from "react-icons/bs";
 

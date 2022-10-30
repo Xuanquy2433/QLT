@@ -7,11 +7,11 @@ import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
 import { BorderBottom } from '@mui/icons-material';
+import {API} from "../../utils/const";
 
 
 var stompClient = null;
 const UserNotification = (params) => {
-    const [count, setCount] = useState(0);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const UserNotification = (params) => {
     console.log('decoede :', Number(decoded.sub.slice(0, 1)));
 
     const connect = () => {
-        let Sock = new SockJS('http://localhost:8082/ws');
+        let Sock = new SockJS(API+'/ws');
         stompClient = over(Sock);
         stompClient.connect({}, onConnected, onError);
     }
@@ -40,12 +40,11 @@ const UserNotification = (params) => {
 
 
     const getNotification = async (e) => {
-        const response = await axios.get('http://localhost:8082/notification/?id=' + Number(decoded.sub.slice(0, 1)))
+        const response = await axios.get(API+'/notification/?id=' + Number(decoded.sub.slice(0, 1)))
         console.log(response.data)
         if (response.status === 200) {
             setData(response.data)
-            setCount(response.data.length)
-            params.changeUserCount(response.data.length)
+            params.changeCount(response.data.filter((data)=>data.checked===false).length)
         }
     }
 

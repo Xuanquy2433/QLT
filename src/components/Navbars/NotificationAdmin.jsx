@@ -5,23 +5,18 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import axios from 'axios';
-import { API_GET_TEST } from 'utils/const';
 import AdminNotification from 'views/Realtime/AdminNotification';
-import UserNotification from 'views/Realtime/UserNotification';
-import UserNotificationSize from 'views/Realtime/NotificationUserSize';
-import AdminNotificationSize from 'views/Realtime/NotificationAdminSize';
+
 import { API_GET_MARK_AS_READ_ADMIN } from 'utils/const';
 
 
 function NotificationAdmin() {
 
     const [countAdmin, setCountAdmin] = React.useState(0);
-    const [countUser, setUserCount] = React.useState(0);
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -79,7 +74,7 @@ function NotificationAdmin() {
                             <span> <NotificationsNoneIcon /></span>
                             <span class="badge">{countAdmin}</span>
                         </p>
-                        <AdminNotificationSize changeCount={(data) => setCountAdmin(data)} />
+                        {/*<AdminNotification changeCount={(data) => setCountAdmin(data)} />*/}
                     </p>
                     <Popper
                         open={open}
@@ -99,13 +94,7 @@ function NotificationAdmin() {
                                                 id="composition-menu"
                                                 aria-labelledby="composition-button"
                                                 onKeyDown={handleListKeyDown}>
-                                                {/* data from socket */}
                                                 <AdminNotification changeCount={(data) => setCountAdmin(data)} />
-                                                {/* hard data test */}
-                                                {/* <MenuItem onClick={handleClose}>
-                                                <div className='notification' >You have <b>4 new themes</b>  </div>
-                                                <div className='notification-time' >10 minutes ago</div>
-                                            </MenuItem> */}
                                             </MenuList>
                                         </ClickAwayListener>
                                     </div>

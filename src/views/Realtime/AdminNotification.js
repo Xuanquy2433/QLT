@@ -5,15 +5,13 @@ import axios from "axios";
 import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
+import {green} from "@mui/material/colors";
+import {API} from "../../utils/const";
 
 
 var stompClient = null;
 const AdminNotification = (params) => {
-    const [publicChats, setPublicChats] = useState([]);
     const [data, setData] = useState([]);
-    const [countNew, setCountNew] = useState(0);
-
-    const [count, setCount] = useState(0);
     useEffect(() => {
         connect();
         getNotification();
@@ -21,7 +19,7 @@ const AdminNotification = (params) => {
     }, []);
 
     const connect = () => {
-        let Sock = new SockJS('http://localhost:8082/ws');
+        let Sock = new SockJS(API +'/ws');
         stompClient = over(Sock);
         stompClient.connect({}, onConnected, onError);
     }
@@ -32,16 +30,11 @@ const AdminNotification = (params) => {
 
 
     const getNotification = async (e) => {
-        const response = await axios.get('http://localhost:8082/notification/')
+        const response = await axios.get(API +'/notification/')
         console.log(response.data)
         if (response.status === 200) {
             setData(response.data)
-            response.data.map((item, index) => {
-                if (item.checked == false) {
-                    setCountNew(countNew + 1)
-                }
-            })
-            params.changeCount(countNew)
+            params.changeCount(response.data.filter((data)=>data.checked===false).length)
         }
     }
 
@@ -56,10 +49,12 @@ const AdminNotification = (params) => {
     }
 
     //message, date,type,status
+  ;
     return (<>
         {data.length > 0 ? data.map((data) => (
             <>
-                <MenuItem sx={{ borderBottom: '1px solid #ddd' }} >
+                <MenuItem sx={{ borderBottom: '1px solid #ddd'}} >
+                    <i className="ni ni check-bold"></i>
                     <div  >{data.message}  </div>
                     <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                 </MenuItem>
