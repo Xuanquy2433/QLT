@@ -74,8 +74,8 @@ function ProductComponent({ product }) {
           }
         });
         if (response && response.status === 201) {
-          toast.success('Thêm vào giỏ hàng thành công', {
-            autoClose: 3000
+          toast.success('Đã thêm vào danh sách thanh toán', {
+            autoClose: 1500
           })
           history.push('/auth/cart')
         };
@@ -105,8 +105,8 @@ function ProductComponent({ product }) {
           localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
           localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
         }
-        toast.success('Đã thêm vào giỏ hàng', {
-          autoClose: 3000
+        toast.success('Đã thêm vào danh sách thanh toán', {
+          autoClose: 1500
         })
         // history.push('/auth/cart')
       }
@@ -151,8 +151,8 @@ function ProductComponent({ product }) {
           }
         });
         if (response && response.status === 201) {
-          toast.success('Đã thêm vào giỏ hàng', {
-            autoClose: 3000
+          toast.success('Đã thêm vào danh sách thanh toán', {
+            autoClose: 1500
           })
           history.push('/auth/cart')
         };

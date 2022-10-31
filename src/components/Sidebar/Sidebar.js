@@ -73,7 +73,18 @@ const Sidebar = (props) => {
     }
   }
 
+  const logout = () => {
+    // alert("ok")
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    localStorage.removeItem("IdOrder")
+    localStorage.removeItem("cartADD")
+    localStorage.removeItem("cartTemp")
+    history.push('/auth/homePage')
+    toast.success('Đăng xuất thành công !', { autoClose: 1500 })
+    // window.location.reload(false)
 
+  }
 
   useEffect(() => {
     getOrderUserConfirmed()
@@ -183,7 +194,7 @@ const Sidebar = (props) => {
         ) : null}
         {/* User */}
         <Nav className="align-items-center d-md-none">
-          <UncontrolledDropdown nav>
+          {/* <UncontrolledDropdown nav>
             <DropdownToggle nav className="nav-link-icon">
               <i className="ni ni-bell-55" />
             </DropdownToggle>
@@ -197,21 +208,30 @@ const Sidebar = (props) => {
               <DropdownItem divider />
               <DropdownItem>Something else here</DropdownItem>
             </DropdownMenu>
-          </UncontrolledDropdown>
+          </UncontrolledDropdown> */}
           <UncontrolledDropdown nav>
             <DropdownToggle nav>
               <Media className="align-items-center">
                 <span className="avatar avatar-sm rounded-circle">
                   <img
                     alt="..."
-                    src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                    src={decoded.avatar}
                   />
                 </span>
+                <Media style={{ marginLeft: '6px' }}>
+                  {token && decoded ? <span className="mb-0  text-sm font-weight-bold">
+                    {decoded.firstName + ' ' + decoded.lastName}
+                  </span> : <span className="mb-0  text-sm font-weight-bold">
+                    Giang Fam
+                  </span>}
+                  <i className="ni ni-bold-down ml-1"></i>
+                </Media>
+
               </Media>
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
               <DropdownItem className="noti-title" header tag="div">
-                <h6 className="text-overflow m-0">Welcomeeeeeeee!</h6>
+                <h6 className="text-overflow m-0">Welcome!</h6>
               </DropdownItem>
               <DropdownItem to="/admin/user-profile" tag={Link}>
                 <i className="ni ni-single-02" />
@@ -232,9 +252,7 @@ const Sidebar = (props) => {
               <DropdownItem divider />
               <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                 <i className="ni ni-user-run" />
-                <span onClick={() => {
-                  history.push('/admin/index');
-                }} >Logout</span>
+                <span onClick={logout} >Đăng xuất</span>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

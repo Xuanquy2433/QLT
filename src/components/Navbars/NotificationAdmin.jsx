@@ -22,6 +22,9 @@ function NotificationAdmin() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
+        if (open == false) {
+            markAsRead()
+        }
         setOpen((prevOpen) => !prevOpen);
     };
     const markAsRead = async () => {
@@ -32,7 +35,6 @@ function NotificationAdmin() {
             return;
         }
         setOpen(false);
-        markAsRead()
     };
 
     function handleListKeyDown(event) {
@@ -68,7 +70,7 @@ function NotificationAdmin() {
                         onClick={handleToggle}>
                         <p class="notification">
                             <span> <NotificationsNoneIcon /></span>
-                            <span class="badge">{countAdmin}</span>
+                            {countAdmin !== 0 ? <span class="badge">{countAdmin}</span> : ''}
                         </p>
                         {/* <AdminNotification changeCount={(data) => setCountAdmin(data)} /> */}
                         <AdminSize changeCount={(data) => setCountAdmin(data)} ></AdminSize>

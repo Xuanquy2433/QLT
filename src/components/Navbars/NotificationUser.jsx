@@ -35,6 +35,9 @@ function Notification() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
+        if (open == false) {
+            markAsRead()
+        }
         setOpen((prevOpen) => !prevOpen);
     };
 
@@ -43,7 +46,6 @@ function Notification() {
             return;
         }
         setOpen(false);
-        markAsRead()
     };
 
     function handleListKeyDown(event) {
@@ -79,7 +81,7 @@ function Notification() {
                         onClick={handleToggle}>
                         <p class="notification">
                             <span> <NotificationsNoneIcon /></span>
-                            <span class="badge">{countUser}</span>
+                            {countUser !== 0 ? <span class="badge">{countUser}</span> : ''}
                         </p>
                         {/* <UserNotification changeCount={(data) => setUserCount(data)} /> */}
                         <UserSize changeUserCount={(data) => setUserCount(data)}></UserSize>

@@ -39,7 +39,7 @@ const AdminNavbar = () => {
     localStorage.removeItem("cartADD")
     localStorage.removeItem("cartTemp")
     history.push('/auth/homePage')
-    toast.success('Đăng xuất thành công !')
+    toast.success('Đăng xuất thành công !', { autoClose: 1500 })
     // window.location.reload(false)
 
   }

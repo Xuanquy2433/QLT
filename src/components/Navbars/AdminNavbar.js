@@ -33,7 +33,7 @@ const AdminNavbar = (props) => {
     localStorage.removeItem("cartADD")
     localStorage.removeItem("cartTemp")
     history.push('/auth/homePage')
-    toast.success('Đăng xuất thành công !')
+    toast.success('Đăng xuất thành công !', { autoClose: 1500 })
     // window.location.reload(false)
 
   }
@@ -76,8 +76,8 @@ const AdminNavbar = (props) => {
                 <Media className="align-items-center">
                   <span className="avatar avatar-sm rounded-circle">
                     <img
-                      alt="..."
-                      src={require("../../assets/img/theme/gp.jpg")}
+                      alt="hihi avatar"
+                      src={decoded.avatar}
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">

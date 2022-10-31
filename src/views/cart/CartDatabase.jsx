@@ -63,7 +63,7 @@ function CartDatabase() {
                     }
                 });
                 if (response && response.status === 200) {
-                    toast.success('Đặt hàng thành công', {
+                    toast.success('Đặt trụ thành công', {
                         autoClose: 1500
                     })
                     const responseCoolDown = await axios.get(API_START_COOL_DOWN + response.data.message.replace(/\D/g, ""))
@@ -123,7 +123,7 @@ function CartDatabase() {
             }
         })
         if (response.status === 200) {
-            toast.success("Xoá thành công", { autoClose: 1500 })
+            toast.success("Xoá thành công", { autoClose: 1000 })
             getAllCart()
         }
     }
