@@ -72,7 +72,7 @@ function Notification() {
             <Stack direction="row" style={{ cursor: 'pointer' }} spacing={2}>
                 <div className='menu-lv2-noti'>
                     <p
-                        style={{ width: '50px' }}
+                        // style={{ width: '50px' }}
                         ref={anchorRef}
                         id="composition-button"
                         aria-controls={open ? 'composition-menu' : undefined}
