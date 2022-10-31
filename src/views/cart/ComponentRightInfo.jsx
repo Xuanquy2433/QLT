@@ -26,13 +26,12 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
         bankAccountNumber: dataBanks.bankAccountNumber || ''
     })
 
-    console.log(bank);
 
     const handleChange = (event, e) => {
         setBank({ ...bank, id: (event.target.value) });
     };
 
-
+console.log('data cacel ',data);
 
     useEffect(() => {
         fetchAPI()
@@ -117,7 +116,8 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
 
                         </form>
                         {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
-                            Tự động hủy đơn hàng sau: <Countdown date={Date.now() + 3602000} renderer={renderer} />
+                            Tự động hủy đơn hàng sau: {data.cancelTime}
+                            {/* <Countdown date={Date.now() + 3602000} renderer={renderer} /> */}
                             <h5 style={{ color: 'yellow', marginTop: '5px' }}> Vui lòng liên hệ <span style={{ color: 'white' }}>0982.123.12 </span> để gia hạn thêm thời gian chờ.</h5>
                         </div> : ''}
 

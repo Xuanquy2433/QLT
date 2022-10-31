@@ -38,6 +38,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { API_GET_ORDER_ADMIN } from 'utils/const';
+import { showError } from 'utils/error';
 
 const columns = [
     { id: 'detail', label: '', minWidth: 10 },
@@ -137,11 +138,15 @@ function OrderPlace() {
     };
 
     const confirmOrder = async (id) => {
-        const response = await axios.put(API_CONFIRM_ORDER + id + '/true')
-        if (response.status === 200) {
-            toast.success('Thao tác thành công ! ', { autoClose: 2000 })
-            getOrderUserConfirmed()
-        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+        try {
+            const response = await axios.put(API_CONFIRM_ORDER + id + '/true')
+            if (response.status === 200) {
+                toast.success('Thao tác thành công ! ', { autoClose: 2000 })
+                getOrderUserConfirmed()
+            } else toast.error('Thất bại ! ', { autoClose: 2000 })
+        } catch (error) {
+            showError(error)
+        }
     }
     const [openRefuseOrder, setOpenRefuseOrder] = React.useState(false);
 
@@ -153,12 +158,16 @@ function OrderPlace() {
         setOpenRefuseOrder(false);
     };
     const refuseOrder = async (id) => {
-        const response = await axios.put(API_CONFIRM_ORDER + id + '/false')
-        if (response.status === 200) {
-            toast.success('Thao tác thành công ! ', { autoClose: 2000 })
-            getOrderUserConfirmed()
-            // Sidebar
-        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+        try {
+            const response = await axios.put(API_CONFIRM_ORDER + id + '/false')
+            if (response.status === 200) {
+                toast.success('Thao tác thành công ! ', { autoClose: 2000 })
+                getOrderUserConfirmed()
+                // Sidebar
+            } else toast.error('Thất bại ! ', { autoClose: 2000 })
+        } catch (error) {
+            showError(error)
+        }
     }
 
     //handle click detail
@@ -321,57 +330,98 @@ function OrderPlace() {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.total}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
-                                            <TableCell sx={{ textAlign: 'right' }}>
-                                                <Button variant="contained" onClick={e => {
-                                                    handleClickOpenConfirmOrder()
-                                                    setIdSave(item.id)
-                                                }} color="success">
-                                                    <CheckIcon />
-                                                </Button>
-                                                <Button sx={{ ml: 2, mt: 1 }} variant="contained" onClick={e => {
-                                                    handleClickOpenRefuseOrder()
-                                                    setIdSave(item.id)
-                                                }} color="error">
-                                                    <DoDisturbIcon />
-                                                </Button>
-                                                {/* <MoreTimeIcon sx={{ ml: 2 }} onClick={e => {
+                                            {item.status === 'NEW' || item.status === 'USER_CONFIRMED' ?
+                                                <React.Fragment>
+                                                    <TableCell sx={{ textAlign: 'right' }}>
+                                                        <Button variant="contained" onClick={e => {
+                                                            handleClickOpenConfirmOrder()
+                                                            setIdSave(item.id)
+                                                        }} color="success">
+                                                            <CheckIcon />
+                                                        </Button>
+                                                        <Button sx={{ ml: 2, mt: 1 }} variant="contained" onClick={e => {
+                                                            handleClickOpenRefuseOrder()
+                                                            setIdSave(item.id)
+                                                        }} color="error">
+                                                            <DoDisturbIcon />
+                                                        </Button>
+                                                        {/* <MoreTimeIcon sx={{ ml: 2 }} onClick={e => {
                                                     handleClickOpenConfirm()
                                                     setIdSave(item.id)
                                                 }} ></MoreTimeIcon> */}
-                                            </TableCell>
-                                            <TableCell sx={{ textAlign: "right" }}>
-                                                <UncontrolledDropdown>
-                                                    <DropdownToggle
-                                                        className="btn-icon-only text-light"
-                                                        href="#pablo"
-                                                        role="button"
-                                                        size="sm"
-                                                        color=""
-                                                        onClick={(e) => e.preventDefault()}
-                                                    >
-                                                        <i className="fas fa-ellipsis-v" />
-                                                    </DropdownToggle>
-                                                    <DropdownMenu className="dropdown-menu-arrow" right>
-                                                        <DropdownItem
-                                                            onClick={e => {
-                                                                handleClickOpenConfirmTomorrow()
-                                                                setIdSave(item.id)
-                                                            }}>
-                                                            <MoreTimeIcon />
-                                                            Gia hạn sang ngày mai
+                                                    </TableCell>
+                                                    <TableCell sx={{ textAlign: "right" }}>
+                                                        <UncontrolledDropdown>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={(e) => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" right>
+                                                                <DropdownItem
+                                                                    onClick={e => {
+                                                                        handleClickOpenConfirmTomorrow()
+                                                                        setIdSave(item.id)
+                                                                    }}>
+                                                                    <MoreTimeIcon />
+                                                                    Gia hạn sang ngày mai
 
-                                                        </DropdownItem>
-                                                        <DropdownItem
-                                                            onClick={e => {
-                                                                handleClickOpenConfirmToday()
-                                                                setIdSave(item.id)
-                                                            }}>
-                                                            <MoreTimeIcon />
-                                                            Gia hạn đến hết hôm nay
-                                                        </DropdownItem>
-                                                    </DropdownMenu>
-                                                </UncontrolledDropdown>
-                                            </TableCell>
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    onClick={e => {
+                                                                        handleClickOpenConfirmToday()
+                                                                        setIdSave(item.id)
+                                                                    }}>
+                                                                    <MoreTimeIcon />
+                                                                    Gia hạn đến hết hôm nay
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </TableCell>
+                                                </React.Fragment> :
+                                                //disable
+                                                <React.Fragment>
+                                                    <TableCell sx={{ textAlign: 'right' }}>
+                                                        <Button variant="contained" disabled color="success">
+                                                            <CheckIcon />
+                                                        </Button>
+                                                        <Button sx={{ ml: 2, mt: 1 }} variant="contained" disabled color="error">
+                                                            <DoDisturbIcon />
+                                                        </Button>
+                                                    </TableCell>
+                                                    <TableCell sx={{ textAlign: "right" }}>
+                                                        <UncontrolledDropdown>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={(e) => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" right>
+                                                                <DropdownItem
+                                                                    disabled>
+                                                                    <MoreTimeIcon />
+                                                                    Gia hạn sang ngày mai
+
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    disabled>
+                                                                    <MoreTimeIcon />
+                                                                    Gia hạn đến hết hôm nay
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </TableCell>
+                                                </React.Fragment>}
                                         </TableRow>
                                     )) :
                                     <TableRow >

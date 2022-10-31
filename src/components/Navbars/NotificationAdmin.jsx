@@ -12,6 +12,7 @@ import axios from 'axios';
 import AdminNotification from 'views/Realtime/AdminNotification';
 
 import { API_GET_MARK_AS_READ_ADMIN } from 'utils/const';
+import AdminSize from 'views/Realtime/AdminSize';
 
 
 function NotificationAdmin() {
@@ -70,6 +71,7 @@ function NotificationAdmin() {
                             <span class="badge">{countAdmin}</span>
                         </p>
                         {/* <AdminNotification changeCount={(data) => setCountAdmin(data)} /> */}
+                        <AdminSize changeCount={(data) => setCountAdmin(data)} ></AdminSize>
                     </p>
                     <Popper
                         open={open}
