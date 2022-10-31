@@ -16,7 +16,7 @@ import { API_WISHLIST_ADD } from "utils/const";
 import usePagination from "./Pagination";
 import './css.css'
 import { ThemeProvider } from "styled-components";
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 function ProductComponent({ product }) {
 
   const renderer = ({ hours, minutes, completed }) => {
@@ -241,6 +241,11 @@ function ProductComponent({ product }) {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
+        <Stack sx={{ mt: 8 }} alignItems="center">
+          <Pagination
+            sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
+            count={count} page={page} color="secondary" onChange={handleChange} />
+        </Stack>
         <div style={{
           display: "flex", width: '1300px', flexWrap: "wrap", justifyContent: "center"
           , marginTop: '50px', marginBottom: '150px'
@@ -258,10 +263,14 @@ function ProductComponent({ product }) {
                   <h3>Loại trụ: {item.category.name}</h3>
                   <h4> {item.description}</h4>
                   {item.status === 'AVAILABLE' ?
-                    <Button className="btn-cart-cus" style={{
-                      '&:hover': { backgroundColor: "#5372E4" }, fontWeight: "500", width: "100%",
+                    <Button className="btn-cart-cus" sx={{
+                      ':hover': {
+                        bgcolor: '#1337bf',
+                      },
+                      fontWeight: "500", width: "100%",
                       border: "1px solid #5372E4", background: "#5372E4", color: "#FFFFFF",
-                    }} onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                    }}
+                      onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                       Thêm vào giỏ
                     </Button> :
                     <Button style={{
@@ -272,14 +281,14 @@ function ProductComponent({ product }) {
                     </Button>}
                   {item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}
                 </div>
-                {
+                {/* {
                   item.preOrdered === false ?
                     <Button sx={{ height: '9vh', fontSize: '0.6em', width: '10%', position: 'absolute', top: '0', right: '0', backgroundColor: ' #F4364C' }}
                       onClick={(e) => addCartPreOrder({ ...item })} variant="contained" >
                       Đặt trước
                     </Button> : ''
-                }
-                < div style={{ display: "flex", alignItems: "center", marginTop: "5px", justifyContent: "end" }}>
+                } */}
+                < div style={{ display: "flex", alignItems: "center", marginTop: "10px", justifyContent: "end" }}>
                   Yêu thích  <AiOutlineHeart onClick={(e) => onClickAddWishList(item.id)} className="colorHeart-cus" style={{ fontSize: "30px", color: "rgb(215,0,24)", cursor: "pointer" }} />
                 </div>
               </div >
