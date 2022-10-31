@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Countdown from 'react-countdown'
 import { BsFiles } from 'react-icons/bs'
+import Moment from 'react-moment'
 import { toast } from 'react-toastify'
 import { API_BANK_GET } from 'utils/const'
 import ShowBank from './ShowBank'
@@ -20,18 +21,13 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
             setDataBanks(response.data)
         }
     }
-    const [bank, setBank] = React.useState({
-        id: dataBanks.id || 0,
-        bankName: dataBanks.bankName || '',
-        bankAccountNumber: dataBanks.bankAccountNumber || ''
-    })
+    const [bank, setBank] = React.useState(Number(1))
 
 
-    const handleChange = (event, e) => {
-        setBank({ ...bank, id: (event.target.value) });
+    const handleChange = (event) => {
+        setBank(event.target.value);
     };
 
-console.log('data cacel ',data);
 
     useEffect(() => {
         fetchAPI()
@@ -62,7 +58,15 @@ console.log('data cacel ',data);
                                 <p
                                     className="form-control form-control-lg"
                                     style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-                                >{bank.bankName}</p >
+                                >
+                                    {dataBanks.map(item => {
+                                        if (item.id == bank) {
+                                            return (
+                                                item.bankAccountName
+                                            )
+                                        }
+                                    })}
+                                </p >
                             </div>
                             <div className="form-outline form-white mb-4">
                                 <label className="form-label" htmlFor="typeText">
@@ -71,8 +75,15 @@ console.log('data cacel ',data);
                                 {/* <ShowBank bank={dataBanks} listBank={listBank} /> */}
                                 <p
                                     className="form-control form-control-lg"
-                                    style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}
-                                >{bank.bankAccountNumber}</p >
+                                    style={{ color: 'black', backgroundColor: 'white', fontWeight: 600 }}>
+                                    {dataBanks.map(item => {
+                                        if (item.id == bank) {
+                                            return (
+                                                item.bankAccountNumber
+                                            )
+                                        }
+                                    })}
+                                </p >
                             </div>
                             <div className="row mb-4">
                                 <div className="col-md-5">
@@ -89,11 +100,6 @@ console.log('data cacel ',data);
                                                     <option key={index} value={item.id}>{item.bankName}</option>
                                                 ))
                                             }
-
-                                            {/* <option value="bidv">BIDV</option>
-                                            <option value="vpbank">VP BANK</option>
-                                            <option value="tpbank">TP BANK</option>
-                                            <option value="vib">VIB</option> */}
                                         </select>
                                     </div>
                                 </div>
@@ -116,21 +122,12 @@ console.log('data cacel ',data);
 
                         </form>
                         {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
-                            Tự động hủy đơn hàng sau: {data.cancelTime}
+                            Vui lòng thanh toán trước: <Moment style={{ marginRight: '5px' }} format="hh:mm  DD/MM/YYYY">{data.cancelTime}</Moment>.
                             {/* <Countdown date={Date.now() + 3602000} renderer={renderer} /> */}
-                            <h5 style={{ color: 'yellow', marginTop: '5px' }}> Vui lòng liên hệ <span style={{ color: 'white' }}>0982.123.12 </span> để gia hạn thêm thời gian chờ.</h5>
+                            <h5 className='mt-3' style={{ color: 'yellow', marginTop: '5px' }}> Vui lòng liên hệ <span style={{ color: 'white' }}>0982.123.12 </span> để gia hạn thêm thời gian chờ.</h5>
                         </div> : ''}
 
                         <hr className="my-4" />
-                        <div className="d-flex justify-content-between">
-                            <p className="mb-2">Tổng phụ</p>
-                            <p className="mb-2">{data.total} VNĐ</p>
-                        </div>
-                        {/* <div className="d-flex justify-content-between">
-                                                        <p className="mb-2">Phí </p>
-                                                        <p className="mb-2">{timerMinutes}: {timerSeconds}</p>
-                                                        <p className="mb-2">0</p>
-                                                    </div> */}
                         <div className="d-flex justify-content-between mb-4">
                             <p className="mb-2">Tổng cộng</p>
                             <p className="mb-2"> {data.children ? data.children.reduce((a, b) => data.total + a + b.total, 0) : data.total} VNĐ</p>
