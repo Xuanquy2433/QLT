@@ -11,7 +11,6 @@ import { API } from "../../utils/const";
 
 var stompClient = null;
 const UserSize = (params) => {
-    const [data, setData] = useState([]);
     useEffect(() => {
         connect();
         getNotification();
@@ -38,9 +37,7 @@ const UserSize = (params) => {
 
     const getNotification = async (e) => {
         const response = await axios.get(API + '/notification/?id=' + Number(decoded.sub.slice(0, 1)))
-        console.log(response.data)
         if (response.status === 200) {
-            setData(response.data)
             params.changeUserCount(response.data.filter((data) => data.checked === false).length)
         }
     }

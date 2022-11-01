@@ -29,6 +29,7 @@ function Notification() {
 
 
     const markAsRead = async () => {
+        console.log('da goi mark as read');
         const response = await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
     }
 
@@ -45,6 +46,9 @@ function Notification() {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
+        if (open == true) {
+            markAsRead()
+        }
         setOpen(false);
     };
 
@@ -56,7 +60,6 @@ function Notification() {
             setOpen(false);
         }
     }
-
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = React.useRef(open);
     React.useEffect(() => {

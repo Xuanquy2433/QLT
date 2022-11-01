@@ -330,7 +330,7 @@ function OrderPlace() {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.total}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
-                                            {item.status === 'NEW' || item.status === 'USER_CONFIRMED' ?
+                                            {item.status === 'NEW' || item.status === 'USER_CONFIRMED' || item.status === 'EXTEND' ?
                                                 <React.Fragment>
                                                     <TableCell sx={{ textAlign: 'right' }}>
                                                         <Button variant="contained" onClick={e => {

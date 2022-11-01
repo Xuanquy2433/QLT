@@ -255,6 +255,7 @@ function Activity() {
                                                 {item.status === 'DONE' ? <TableCell sx={{ fontWeight: '600', color: 'green' }} align="right">Xong</TableCell> : null}
                                                 {item.status === 'CANCELLED' ? <TableCell sx={{ fontWeight: '600', color: 'red' }} align="right">Đã hủy</TableCell> : null}
                                                 {item.status === 'PAID' ? <TableCell sx={{ fontWeight: '600', color: 'orange' }} align="right">Đang thuê</TableCell> : null}
+                                                {item.status === 'EXTEND' ? <TableCell sx={{ fontWeight: '600', color: 'pink' }} align="right">Gia hạn</TableCell> : null}
                                                 <TableCell align="right">
                                                     <NavLink to={'order/' + item.id}>
                                                         <Button variant="contained" color="success">

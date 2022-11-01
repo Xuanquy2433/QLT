@@ -41,7 +41,7 @@ const UserNotification = (params) => {
         console.log(response.data)
         if (response.status === 200) {
             setData(response.data)
-            params.changeUserCount(response.data.filter((data)=>data.checked===false).length)
+            params.changeUserCount(response.data.filter((data) => data.checked === false).length)
         }
     }
 
@@ -58,14 +58,11 @@ const UserNotification = (params) => {
     //message, date,type,status
     return (
         <>
-            {data.length > 0 ? data.map((data) => (
-                <>
-                    <MenuItem sx={{ borderBottom: '1px solid #ddd' }} >
-                        <div  >{data.message}  </div>
-                        <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
-                    </MenuItem>
-                    {/* <div className="message-data">{chat.status}</div> */}
-                </>
+            {data.length > 0 ? data.map((data, index) => (
+                <MenuItem key={index} sx={{ borderBottom: '1px solid #ddd' }} >
+                    <div  >{data.message}  </div>
+                    <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
+                </MenuItem>
             )) :
                 <MenuItem >
                     <div  >Hiện không có thông báo ! </div>
