@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 
 export default function EditPillar({ item, data, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory }) {
 
-    const { addressId, description, status, name, price, multipartFile } = item
+    const { addressId, description, status, name, price, multipartFile, image } = item
     const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {

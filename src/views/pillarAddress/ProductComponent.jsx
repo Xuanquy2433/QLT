@@ -303,22 +303,22 @@ function ProductComponent({ product }) {
                   <h4> {item.description}</h4>
                   {item.status === 'AVAILABLE' ?
                     <Button className="btn-cart-cus" sx={{
-                      ':hover': {
+                      '&:hover': {
                         bgcolor: '#1337bf',
                       },
                       fontWeight: "500", width: "100%",
-                      border: "1px solid #5372E4", background: "#5372E4", color: "#FFFFFF",
+                      background: "#1973BC", color: "#FFFFFF",
                     }}
                       onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                       Thêm vào giỏ
                     </Button> :
                     <Button style={{
-                      '&:hover': { backgroundColor: "#5372E4" }, fontWeight: "500", width: "100%"
-                      , border: "1px solid #5372E4", background: "none", color: "red", boxShadow: "none", backgroundColor: 'rgb(255, 210, 210)'
+                      fontWeight: "500", width: "100%"
+                      , border: "1px solid #5372E4", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
                     }} disabled variant="contained" >
                       Đã cho thuê
                     </Button>}
-                  {item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}
+                  <div style={{ height: "28.5px" }}>{item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}</div>
                 </div>
                 {/* {
                   item.preOrdered === false ?
@@ -327,7 +327,7 @@ function ProductComponent({ product }) {
                       Đặt trước
                     </Button> : ''
                 } */}
-                < div style={{ display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
+                < div style={{ fontWeight: "600", display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
                   Yêu thích
                   {
                     data.filter(i => i.id === item.id).length === 0 ?

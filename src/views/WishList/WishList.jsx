@@ -79,6 +79,7 @@ export default function WishList() {
         }
 
     }
+    console.log(data);
     return (
         <div className='activity'>
             <div className='activity-content'>
