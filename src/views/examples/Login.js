@@ -61,7 +61,7 @@ const Login = () => {
           localStorage.setItem("token", response?.data.token);
           localStorage.setItem("user", JSON.stringify(response.data));
           toast.success('Đăng nhập thành công', {
-            autoClose: 3000
+            autoClose: 1500
           })
 
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {

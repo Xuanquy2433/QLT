@@ -15,24 +15,24 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
         })
     }
     const [dataBanks, setDataBanks] = useState([])
+    const [idDataBanks, setIdDataBanks] = useState()
+
     const fetchAPI = async () => {
         const response = await axios.post(API_BANK_GET)
         if (response.status === 200) {
             setDataBanks(response.data)
+            setBank(response.data[0].id)
         }
     }
-    const [bank, setBank] = React.useState(Number(1))
 
-
+    const [bank, setBank] = useState()
     const handleChange = (event) => {
         setBank(event.target.value);
     };
 
-
     useEffect(() => {
         fetchAPI()
     }, [])
-
 
     return (
         <React.Fragment>
@@ -162,7 +162,7 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                             {data.status === 'EXTEND' &&
                                 <div style={{ color: 'yellow' }} className="d-flex justify-content-between">
                                     <span>
-                                       Gia hạn !
+                                        Gia hạn !
                                     </span>
                                 </div>
                             }
