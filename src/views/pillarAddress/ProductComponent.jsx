@@ -292,7 +292,6 @@ function ProductComponent({ product }) {
           {
             _DATA.currentData().map((item, index) => (
               <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
-                <h1>{item.id}</h1>
                 <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <img style={{ width: '100%', height: "27vh", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
                 </div>
@@ -328,7 +327,7 @@ function ProductComponent({ product }) {
                       Đặt trước
                     </Button> : ''
                 } */}
-                < div style={{ display: "flex", alignItems: "center", marginTop: "10px", justifyContent: "end" }}>
+                < div style={{ display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
                   Yêu thích
                   {
                     data.filter(i => i.id === item.id) ? <AiFillHeart

@@ -144,7 +144,7 @@ function CartLocal() {
                                                 <div className="d-flex justify-content-between align-items-center mb-5">
                                                     <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
                                                     {/* <ChatRoom/> */}
-                                                    <h6 className="mb-0 text-muted">{dataLocal.length} mặt hàng</h6>
+                                                    <h6 className="mb-0 text-muted">{dataLocal.length} trụ</h6>
                                                 </div>
                                                 {dataLocal.length ?
                                                     <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-2 d-flex justify-content-between align-items-center">
@@ -224,7 +224,7 @@ function CartLocal() {
                                                 )) :
                                                     <div style={{ width: "100%" }} >
                                                         <div style={{ width: '500px', clear: 'both', textAlign: 'center' }}>
-                                                            <p>Chưa có sản phẩm nào !</p>
+                                                            <p>Chưa có trụ nào !</p>
                                                         </div>
                                                     </div>
                                                 }
