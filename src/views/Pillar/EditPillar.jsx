@@ -172,8 +172,11 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                     <TextField defaultValue={description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
                     <TextField defaultValue={price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
                     <TextField defaultValue={name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
-                    <TextField defaultValue={multipartFile} onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
 
+
+                    <img style={{ width: "20px" }} src={dataEdit.multipartFile} alt="" />
+
+                    <TextField defaultValue={multipartFile} onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">

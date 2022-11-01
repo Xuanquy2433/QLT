@@ -330,12 +330,13 @@ function ProductComponent({ product }) {
                 < div style={{ display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
                   Yêu thích
                   {
-                    data.filter(i => i.id === item.id) ? <AiFillHeart
-                      onClick={(e) => onHandleRemoveWishList(item.id)}
-                      style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> :
+                    data.filter(i => i.id === item.id).length === 0 ?
                       <AiOutlineHeart
                         onClick={(e) => onClickAddWishList(item.id)}
                         className="colorHeart-cus"
+                        style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> :
+                      <AiFillHeart
+                        onClick={(e) => onHandleRemoveWishList(item.id)}
                         style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} />
                   }
                   {/* <AiFillHeart
