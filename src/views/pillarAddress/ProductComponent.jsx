@@ -1,7 +1,7 @@
 import Countdown from "react-countdown";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -11,12 +11,15 @@ import { formatMoney } from "common/formatMoney";
 import { API_ADD_CART_PRE_ORDER } from "utils/const";
 import Moment from "react-moment";
 import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import './ProductComponent.css'
 import { API_WISHLIST_ADD } from "utils/const";
 import usePagination from "./Pagination";
 import './css.css'
 import { ThemeProvider } from "styled-components";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { API_WISHLIST_REMOVE } from "utils/const";
+import { API_WISHLIST_GET } from "utils/const";
 function ProductComponent({ product }) {
 
   const renderer = ({ hours, minutes, completed }) => {
@@ -202,10 +205,44 @@ function ProductComponent({ product }) {
         }
       })
       if (response.status === 200) {
+        getWishList()
         toast.success("Đã thêm vào danh sách yêu thích.", { autoClose: 1500 })
       }
     }
 
+  }
+
+
+  const onHandleRemoveWishList = async (id) => {
+    const response = await axios.post(API_WISHLIST_REMOVE + id, {}, {
+      headers: {
+        'authorization': 'Bearer ' + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if (response.status === 200) {
+      getWishList()
+      toast.success("Đã xoá khỏi danh sách yêu thích.", { autoClose: "1500" })
+    }
+
+  }
+
+  useEffect(() => {
+    getWishList()
+  }, [])
+  const [data, setData] = useState([])
+  const getWishList = async (id) => {
+    const response = await axios.get(API_WISHLIST_GET + 0, {
+      headers: {
+        'authorization': 'Bearer ' + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if (response.status === 200) {
+      setData(response.data)
+    }
   }
 
   let [page, setPage] = useState(1);
@@ -219,6 +256,7 @@ function ProductComponent({ product }) {
     _DATA.jump(p);
   };
 
+  console.log("_data", _DATA.currentData());
   const theme = createTheme({
     palette: {
       primary: {
@@ -238,6 +276,7 @@ function ProductComponent({ product }) {
     }
   })
 
+  console.log(data);
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -253,6 +292,7 @@ function ProductComponent({ product }) {
           {
             _DATA.currentData().map((item, index) => (
               <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
+                <h1>{item.id}</h1>
                 <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <img style={{ width: '100%', height: "27vh", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
                 </div>
@@ -289,7 +329,23 @@ function ProductComponent({ product }) {
                     </Button> : ''
                 } */}
                 < div style={{ display: "flex", alignItems: "center", marginTop: "10px", justifyContent: "end" }}>
-                  Yêu thích  <AiOutlineHeart onClick={(e) => onClickAddWishList(item.id)} className="colorHeart-cus" style={{ fontSize: "30px", color: "rgb(215,0,24)", cursor: "pointer" }} />
+                  Yêu thích
+                  {
+                    data.filter(i => i.id === item.id) ? <AiFillHeart
+                      onClick={(e) => onHandleRemoveWishList(item.id)}
+                      style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> :
+                      <AiOutlineHeart
+                        onClick={(e) => onClickAddWishList(item.id)}
+                        className="colorHeart-cus"
+                        style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} />
+                  }
+                  {/* <AiFillHeart
+                      onClick={(e) => onHandleRemoveWishList(item.id)}
+                      style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> 
+                    <AiOutlineHeart
+                      onClick={(e) => onClickAddWishList(item.id)}
+                      className="colorHeart-cus"
+                      style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> */}
                 </div>
               </div >
             ))
