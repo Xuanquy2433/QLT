@@ -15,8 +15,6 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
         })
     }
     const [dataBanks, setDataBanks] = useState([])
-    const [idDataBanks, setIdDataBanks] = useState()
-
     const fetchAPI = async () => {
         const response = await axios.post(API_BANK_GET)
         if (response.status === 200) {
