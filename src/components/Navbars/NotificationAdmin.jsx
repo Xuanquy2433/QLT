@@ -22,9 +22,9 @@ function NotificationAdmin() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        if (open == false) {
-            markAsRead()
-        }
+        // if (open == false) {
+        //     markAsRead()
+        // }
         setOpen((prevOpen) => !prevOpen);
     };
     const markAsRead = async () => {
@@ -33,6 +33,10 @@ function NotificationAdmin() {
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
+        }
+        if (open == true) {
+            markAsRead()
+            setCountAdmin(0)
         }
         setOpen(false);
     };

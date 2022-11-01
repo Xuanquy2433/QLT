@@ -36,9 +36,10 @@ function Notification() {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        if (open == false) {
-            markAsRead()
-        }
+        // if (open == false) {
+        //     markAsRead()
+        //     setUserCount(0)
+        // }
         setOpen((prevOpen) => !prevOpen);
     };
 
@@ -48,6 +49,7 @@ function Notification() {
         }
         if (open == true) {
             markAsRead()
+            setUserCount(0)
         }
         setOpen(false);
     };
