@@ -18,12 +18,14 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import styled from "styled-components";
 import './login.css'
-import { API_FORGOTPASSWORD } from "utils/const";
-
-const ForgotPassword = () => {
+import { API_RESET_PASSWORD } from "utils/const";
+export default function ChangePasswordForgot() {
     const history = useHistory();
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const token = params.get('token');
     const [data, setData] = useState({
-        email: "",
+        newPassword: "",
     });
 
     const [isLoading, setIsLoading] = useState(false)
@@ -32,19 +34,20 @@ const ForgotPassword = () => {
     console.log('data ,', data);
     const onForgetPassword = async (e) => {
         e.preventDefault();
-        if (data.email === '') {
-            toast.error('Email không được để trống', {
+        if (data.newPassword === '') {
+            toast.error('Password không được để trống', {
                 autoClose: 2000
             })
         }
         else {
             setIsLoading(true)
             try {
-                const response = await axios.post(API_FORGOTPASSWORD + data.email)
+                const response = await axios.put(API_RESET_PASSWORD + "?newPassword=" + data.newPassword + "&token=" + token)
                 if (response.status === 200) {
-                    toast.success('Vui lòng kiểm tra email của bạn', {
-                        autoClose: 3000
+                    toast.success('Đổi mật khẩu thành công', {
+                        autoClose: 2000
                     })
+                    history.push('/auth/login')
                     setShowMessage(true)
                 }
             } catch (error) {
@@ -73,24 +76,20 @@ const ForgotPassword = () => {
             }
         }
     }
-
-    const styledBtn = styled.input`
-    border:none;
-    `
     return (
         <>
             <Col style={{ paddingLeft: '70px', paddingRight: '70px' }} lg="5" md="7">
                 <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-transparent pb-5">
                         <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D" }}>
-                            <small style={{ fontWeight: "500" }}>Quên mật khẩu</small>
+                            <small style={{ fontWeight: "500" }}>Đổi mật khẩu</small>
                         </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                         <div className="text-center text-muted mb-4">
-                            <small>Vui lòng nhập email của bạn để lấy lại mật khẩu.</small>
+                            <small>Vui lòng nhập mật khẩu mới.</small>
                         </div>
-                        {showMessage && (
+                        {/* {showMessage && (
                             <div style={{ backgroundColor: "#F0F9EB", borderRadius: "5px", padding: "7px" }} className="text-center text-muted mb-4">
                                 <small style={{ color: "#67c23a" }}>
                                     Chúng tôi đã gửi <div style={{ fontWeight: "600", display: "inline-block" }}>một email</div>
@@ -98,7 +97,7 @@ const ForgotPassword = () => {
                                     Có thể mất từ 1 đến 2 phút để hoàn thành. Hãy kiểm tra hộp thư đến của bạn
                                     <div style={{ fontWeight: "600", display: "inline-block" }}>{data.email}</div></small>
                             </div>
-                        )}
+                        )} */}
                         <Form role="form" >
                             <FormGroup>
                                 <InputGroup className="input-group-alternative">
@@ -108,17 +107,18 @@ const ForgotPassword = () => {
                                         </InputGroupText>
                                     </InputGroupAddon>
                                     <Input
-                                        onChange={(e) => setData({ ...data, email: e.target.value })}
-                                        placeholder="Nhập email"
-                                        type="email"
-                                        autoComplete="new-email"
+                                        onChange={(e) => setData({ ...data, newPassword: e.target.value })}
+                                        placeholder="Nhập mật khẩu mới"
+                                        type="password"
+                                        autoComplete="new-password"
                                         require
                                     />
                                 </InputGroup>
                             </FormGroup>
                             <div className="text-center">
-                                <Button style={{ width: "100%", margin: "0" }} disabled={isLoading} className="" color="primary" type="submit" onClick={(e) => onForgetPassword(e)}>
-                                    {isLoading ? "Vui lòng chờ..." : "Gửi email cho tôi"}
+                                <Button style={{ width: "100%", margin: "0" }} disabled={isLoading} color="primary" type="submit" onClick={(e) => onForgetPassword(e)}>
+                                    {/* {isLoading ? "Vui lòng chờ..." : "Gửi email cho tôi"} */}
+                                    Đổi mật khẩu
                                 </Button>
                             </div>
                         </Form>
@@ -146,7 +146,5 @@ const ForgotPassword = () => {
                 </Row>
             </Col>
         </>
-    );
-};
-
-export default ForgotPassword;
+    )
+}

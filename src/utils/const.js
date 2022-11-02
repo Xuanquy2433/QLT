@@ -136,6 +136,8 @@ export const API_WISHLIST_REMOVE = `${API}/wishlist/remove?productId=`
 
 export const API_OVERVIEW_MONTHLY_EARNING = `${API}/admin/overview/monthly_earning`
 
+export const API_RESET_PASSWORD = `${API}/reset_password`
+
 
 
 

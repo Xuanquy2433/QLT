@@ -29,6 +29,7 @@ import Setting from "views/Setting/Setting";
 import AdminSetting from "views/controller/AdminSetting";
 import ChangePassword from "views/examples/ChangePassword";
 import WishList from "views/WishList/WishList";
+import ChangePasswordForgot from "views/examples/ChangePasswordForgot";
 
 var routes = [
   {
@@ -211,6 +212,13 @@ var routes = [
     name: "wishList",
     icon: "ni ni-circle-08 text-pink",
     component: WishList,
+    layout: "/auth"
+  },
+  {
+    path: "/reset_password",
+    name: "reset_password",
+    icon: "ni ni-circle-08 text-pink",
+    component: ChangePasswordForgot,
     layout: "/auth"
   },
 
