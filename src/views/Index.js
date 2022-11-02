@@ -34,6 +34,7 @@ import Header from "components/Headers/Header.js";
 import { API_GET_OVERVIEW } from "utils/const";
 import axios from "axios";
 import { API_OVERVIEW_MONTHLY_EARNING } from "utils/const";
+import { API_OVERVIEW_MONTHLY_HIRED } from "utils/const";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
@@ -43,28 +44,63 @@ const Index = (props) => {
     parseOptions(Chart, chartOptions());
   }
 
-  const toggleNavs = (e, index) => {
+  const toggleNavs = async (e, index) => {
     e.preventDefault();
     setActiveNav(index);
     setChartExample1Data("data" + index);
+    if (chartExample1Data === 'data1') {
+      console.log('month');
+      const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + '5&type=week')
+      if (response) {
+        setDataMonth(response.data)
+      }
+    } else {
+      console.log('week');
+      const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + '5&type=month')
+      if (response) {
+        setDataMonth(response.data)
+      }
+    }
   };
 
   const [dataOverview, setDataOverview] = useState([])
   const [dataOverviewOrderEachMonth, setDataOverviewOrderEachMonth] = useState([])
   useEffect(() => {
     overview()
+    const onchangeHired = async (e) => {
+      const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED + 10)
+      if (response) {
+        setDataOverviewOrderEachMonth(response.data)
+      }
+    }
+    const overviewMonth = async (e) => {
+      const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + 5 + '&type=month')
+      if (response) {
+        setDataMonth(response.data)
+      }
+    }
     overviewMonth()
+    onchangeHired()
   }, [])
 
   const overview = async (e) => {
     const response = await axios.get(API_GET_OVERVIEW)
     if (response) {
       setDataOverview(response.data)
-      setDataOverviewOrderEachMonth(response.data.totalProductOrderEachMonth)
-
     }
   }
+
+  const [numberHired, setNumberHired] = useState(5)
+  const onchangeHired = async (e) => {
+    const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED + e.target.value)
+    if (response) {
+      setDataOverviewOrderEachMonth(response.data)
+    }
+  }
+
   const dataMapEachMonth = new Map(Object.entries(dataOverviewOrderEachMonth));
+
+
   let monthEach = []
   let totalEach = []
   dataMapEachMonth.forEach(function (value, key) {
@@ -74,14 +110,23 @@ const Index = (props) => {
     totalEach.push(value)
   })
 
-  console.log('hello ', dataOverviewOrderEachMonth);
 
   // data month earning
   const [dataMonth, setDataMonth] = useState([])
-  const overviewMonth = async (e) => {
-    const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING)
-    if (response) {
-      setDataMonth(response.data)
+
+  const onchangeEarning = async (e) => {
+    if (chartExample1Data === 'data1') {
+      console.log('month');
+      const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + e.target.value + '&type=month')
+      if (response) {
+        setDataMonth(response.data)
+      }
+    } else {
+      console.log('week');
+      const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + e.target.value + '&type=week')
+      if (response) {
+        setDataMonth(response.data)
+      }
     }
   }
   const dataMap = new Map(Object.entries(dataMonth));
@@ -107,15 +152,15 @@ const Index = (props) => {
     ]
   };
 
-  // const data2 = {
-  //   labels: month,
-  //   datasets: [
-  //     {
-  //       label: "Performance",
-  //       data: total
-  //     }
-  //   ]
-  // }
+  const data2 = {
+    labels: month,
+    datasets: [
+      {
+        label: "Performance",
+        data: total
+      }
+    ]
+  }
 
 
   return (
@@ -138,14 +183,14 @@ const Index = (props) => {
                     <NavLink>
                       <span className="d-none d-md-block"> <input type="date" /></span>
                     </NavLink>
-                  </p>
-                  <span style={{color:'white', fontSize: '1.5em',fontWeight: '600'}}> -</span>
+                  </p> */}
+                  {/* <span style={{color:'white', fontSize: '1.5em',fontWeight: '600'}}> -</span> */}
                   <p className="mt-3">
                     <NavLink>
-                      <span className="d-none d-md-block"> <input type="date" /></span>
+                      <span className="d-none d-md-block"> <span style={{color: 'white'}}>Số trụ</span> <input type="number" min={1} max={100} defaultValue={5} onChange={onchangeEarning} /></span>
                     </NavLink>
-                  </p> */}
-                  {/* <div className="col">
+                  </p>
+                  <div className="col">
                     <Nav className="justify-content-end" pills>
                       <NavItem>
                         <NavLink
@@ -168,19 +213,19 @@ const Index = (props) => {
                           href="#pablo"
                           onClick={(e) => toggleNavs(e, 2)}
                         >
-                          <span className="d-none d-md-block">Week</span>
+                          <span className="d-none d-md-block">Tuần</span>
                           <span className="d-md-none">W</span>
                         </NavLink>
                       </NavItem>
                     </Nav>
-                  </div> */}
+                  </div>
                 </Row>
               </CardHeader>
               <CardBody>
                 {/* Chart */}
                 <div className="chart">
                   <Line
-                    data={data1}
+                    data={chartExample1Data === 'data1' ? data1 : data2}
                     options={chartExample1.options}
                     getDatasetAtEvent={(e) => console.log(e)}
                   />
@@ -196,7 +241,8 @@ const Index = (props) => {
                     <h6 className="text-uppercase text-muted ls-1 mb-1">
                       Số trụ được thuê hàng tháng
                     </h6>
-                    <h2 className="mb-0">{new Date().getMonth()}{"/"}{new Date().getFullYear()}{" "}</h2>
+                    {/* <h2 className="mb-0">{new Date().getMonth()}{"/"}{new Date().getFullYear()}{" "}</h2> */}
+                    Số lượng trụ cần lấy <input type="number" min={1} max={100} defaultValue={10} onChange={onchangeHired} />
                   </div>
                 </Row>
               </CardHeader>
