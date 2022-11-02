@@ -1,20 +1,4 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import { useEffect, useState } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
@@ -49,6 +33,7 @@ import {
 import Header from "components/Headers/Header.js";
 import { API_GET_OVERVIEW } from "utils/const";
 import axios from "axios";
+import { API_OVERVIEW_MONTHLY_EARNING } from "utils/const";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
@@ -66,6 +51,7 @@ const Index = (props) => {
   const [dataOverview, setDataOverview] = useState([])
   useEffect(() => {
     overview()
+    overviewMonth()
   }, [])
 
   const overview = async (e) => {
@@ -74,6 +60,28 @@ const Index = (props) => {
       setDataOverview(response.data)
     }
   }
+
+  // data month earning
+  const [dataMonth, setDataMonth] = useState([])
+  const overviewMonth = async (e) => {
+    const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING)
+    if (response) {
+      setDataMonth(response.data)
+    }
+  }
+  const dataMap = new Map(Object.entries(dataMonth));
+  console.log('this data ', dataMonth);
+
+  let month = []
+  let total = []
+  dataMap.forEach(function (value, key) {
+    month.push(key)
+  })
+  dataMap.forEach(function (value, key) {
+    total.push(value)
+  })
+  console.log('month ', month);
+  console.log('total ', total);
   return (
     <>
       <Header />
@@ -90,7 +98,7 @@ const Index = (props) => {
                     </h6>
                     <h2 className="text-white mb-0">Sales value</h2>
                   </div>
-                  <p className="mt-3">
+                  {/* <p className="mt-3">
                     <NavLink>
                       <span className="d-none d-md-block"> <input type="date" /></span>
                     </NavLink>
@@ -100,7 +108,7 @@ const Index = (props) => {
                     <NavLink>
                       <span className="d-none d-md-block"> <input type="date" /></span>
                     </NavLink>
-                  </p>
+                  </p> */}
                   <div className="col">
                     <Nav className="justify-content-end" pills>
 
@@ -152,9 +160,9 @@ const Index = (props) => {
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-muted ls-1 mb-1">
-                      Performance
+                      Thu nhập hàng tháng
                     </h6>
-                    <h2 className="mb-0">Total orders</h2>
+                    <h2 className="mb-0">Thu nhập {new Date().getFullYear()}{" "}</h2>
                   </div>
                 </Row>
               </CardHeader>
@@ -162,7 +170,16 @@ const Index = (props) => {
                 {/* Chart */}
                 <div className="chart">
                   <Bar
-                    data={chartExample2.data}
+                    data={{
+                      labels: month,
+                      datasets: [
+                        {
+                          label: "Thu nhâp",
+                          data: total,
+                          maxBarThickness: 10
+                        }
+                      ]
+                    }}
                     options={chartExample2.options}
                   />
                 </div>

@@ -134,6 +134,9 @@ export const API_WISHLIST_GET = `${API}/wishlist/get?productId=`
 
 export const API_WISHLIST_REMOVE = `${API}/wishlist/remove?productId=`
 
+export const API_OVERVIEW_MONTHLY_EARNING = `${API}/admin/overview/monthly_earning`
+
+
 
 
 
