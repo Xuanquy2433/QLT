@@ -47,7 +47,30 @@ const Index = (props) => {
     e.preventDefault();
     setActiveNav(index);
     setChartExample1Data("data" + index);
+    console.log('this ', index);
   };
+
+  const data1 = {
+    labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [
+      {
+        label: "Performance",
+        data: [0, 20, 10, 30, 15, 40, 20, 60, 100]
+      }
+    ]
+  };
+
+  const data2 = {
+    labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [
+      {
+        label: "Performance",
+        data: [10, 20, 5, 25, 10, 30, 15, 40, 40]
+      }
+    ]
+  }
+
+
   const [dataOverview, setDataOverview] = useState([])
   useEffect(() => {
     overview()
@@ -70,7 +93,6 @@ const Index = (props) => {
     }
   }
   const dataMap = new Map(Object.entries(dataMonth));
-  console.log('this data ', dataMonth);
 
   let month = []
   let total = []
@@ -80,8 +102,6 @@ const Index = (props) => {
   dataMap.forEach(function (value, key) {
     total.push(value)
   })
-  console.log('month ', month);
-  console.log('total ', total);
   return (
     <>
       <Header />
@@ -144,7 +164,7 @@ const Index = (props) => {
                 {/* Chart */}
                 <div className="chart">
                   <Line
-                    data={chartExample1[chartExample1Data]}
+                    data={chartExample1Data === 'data1' ? data1 : data2}
                     options={chartExample1.options}
                     getDatasetAtEvent={(e) => console.log(e)}
                   />

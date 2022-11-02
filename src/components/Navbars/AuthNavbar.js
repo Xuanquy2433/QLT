@@ -109,7 +109,6 @@ const AdminNavbar = () => {
                 <NavItem >
                   <NavLink style={{ display: "flex" }} className="nav-link-icon" >
                     <Notification />
-                    <span className="nav-link-inner--text">Thông báo</span>
                   </NavLink>
                 </NavItem> : ''}
 
