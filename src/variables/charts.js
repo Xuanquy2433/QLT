@@ -1,4 +1,5 @@
 const Chart = require("chart.js");
+const { formatMoney } = require("common/formatMoney");
 //
 // Chart extension for making the bars rounded
 // Code from: https://codepen.io/jedtrow/full/ygRYgo
@@ -302,7 +303,7 @@ let chartExample1 = {
           ticks: {
             callback: function (value) {
               if (!(value % 10)) {
-                return "$" + value + "k";
+                return formatMoney(value) + ' VNĐ';
               }
             }
           }
@@ -320,7 +321,7 @@ let chartExample1 = {
             content += label;
           }
 
-          content += "$" + yLabel + "k";
+          content += formatMoney(yLabel) + ' VNĐ';
           return content;
         }
       }

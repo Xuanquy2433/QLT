@@ -50,6 +50,7 @@ const Index = (props) => {
   };
 
   const [dataOverview, setDataOverview] = useState([])
+  const [dataOverviewOrderEachMonth, setDataOverviewOrderEachMonth] = useState([])
   useEffect(() => {
     overview()
     overviewMonth()
@@ -59,8 +60,21 @@ const Index = (props) => {
     const response = await axios.get(API_GET_OVERVIEW)
     if (response) {
       setDataOverview(response.data)
+      setDataOverviewOrderEachMonth(response.data.totalProductOrderEachMonth)
+
     }
   }
+  const dataMapEachMonth = new Map(Object.entries(dataOverviewOrderEachMonth));
+  let monthEach = []
+  let totalEach = []
+  dataMapEachMonth.forEach(function (value, key) {
+    monthEach.push(key)
+  })
+  dataMapEachMonth.forEach(function (value, key) {
+    totalEach.push(value)
+  })
+
+  console.log('hello ', dataOverviewOrderEachMonth);
 
   // data month earning
   const [dataMonth, setDataMonth] = useState([])
@@ -93,15 +107,15 @@ const Index = (props) => {
     ]
   };
 
-  const data2 = {
-    labels: month,
-    datasets: [
-      {
-        label: "Performance",
-        data: total
-      }
-    ]
-  }
+  // const data2 = {
+  //   labels: month,
+  //   datasets: [
+  //     {
+  //       label: "Performance",
+  //       data: total
+  //     }
+  //   ]
+  // }
 
 
   return (
@@ -116,9 +130,9 @@ const Index = (props) => {
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-light ls-1 mb-1">
-                      Overview
+                      Thu nhập hàng tháng
                     </h6>
-                    <h2 className="text-white mb-0">Sales value</h2>
+                    <h2 className="text-white mb-0">Thu nhập {new Date().getFullYear()}{" "}</h2>
                   </div>
                   {/* <p className="mt-3">
                     <NavLink>
@@ -131,7 +145,7 @@ const Index = (props) => {
                       <span className="d-none d-md-block"> <input type="date" /></span>
                     </NavLink>
                   </p> */}
-                  <div className="col">
+                  {/* <div className="col">
                     <Nav className="justify-content-end" pills>
                       <NavItem>
                         <NavLink
@@ -141,7 +155,7 @@ const Index = (props) => {
                           href="#pablo"
                           onClick={(e) => toggleNavs(e, 1)}
                         >
-                          <span className="d-none d-md-block">Month</span>
+                          <span className="d-none d-md-block">Tháng</span>
                           <span className="d-md-none">M</span>
                         </NavLink>
                       </NavItem>
@@ -159,14 +173,14 @@ const Index = (props) => {
                         </NavLink>
                       </NavItem>
                     </Nav>
-                  </div>
+                  </div> */}
                 </Row>
               </CardHeader>
               <CardBody>
                 {/* Chart */}
                 <div className="chart">
                   <Line
-                    data={chartExample1Data === 'data1' ? data1 : data2}
+                    data={data1}
                     options={chartExample1.options}
                     getDatasetAtEvent={(e) => console.log(e)}
                   />
@@ -180,9 +194,9 @@ const Index = (props) => {
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-muted ls-1 mb-1">
-                      Thu nhập hàng tháng
+                      Số trụ được thuê hàng tháng
                     </h6>
-                    <h2 className="mb-0">Thu nhập {new Date().getFullYear()}{" "}</h2>
+                    <h2 className="mb-0">{new Date().getMonth()}{"/"}{new Date().getFullYear()}{" "}</h2>
                   </div>
                 </Row>
               </CardHeader>
@@ -191,11 +205,11 @@ const Index = (props) => {
                 <div className="chart">
                   <Bar
                     data={{
-                      labels: month,
+                      labels: monthEach,
                       datasets: [
                         {
                           label: "Thu nhâp",
-                          data: total,
+                          data: totalEach,
                           maxBarThickness: 10
                         }
                       ]
