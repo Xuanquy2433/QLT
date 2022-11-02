@@ -85,7 +85,7 @@ function Notification() {
                         aria-haspopup="true"
                         onClick={handleToggle}>
                         <p class="notification">
-                            <span> <NotificationsNoneIcon /></span>
+                            <span> <NotificationsNoneIcon /></span> Thông báo
                             {countUser !== 0 ? <span class="badge">{countUser}</span> : ''}
                         </p>
                         {/* <UserNotification changeCount={(data) => setUserCount(data)} /> */}
