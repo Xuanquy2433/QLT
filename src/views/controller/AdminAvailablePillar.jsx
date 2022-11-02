@@ -16,7 +16,7 @@ export default function AdminAvailablePillar() {
     }, [])
 
     const handleChangePage = async (event, newPage) => {
-        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + (newPage + 1) + "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=AVAILABLE')
+        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + (newPage + 1) + "?sort=desc&sortField=street&dataPerPage=" + rowsPerPage + '&status=AVAILABLE')
         if (response) {
             setData(response.data.content)
             setPage(newPage);
@@ -24,7 +24,7 @@ export default function AdminAvailablePillar() {
     };
 
     const handleChangeRowsPerPage = async (event) => {
-        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + 1 + "?sort=desc&sortField=id&dataPerPage=" + event.target.value + '&status=AVAILABLE')
+        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + 1 + "?sort=desc&sortField=street&dataPerPage=" + event.target.value + '&status=AVAILABLE')
         if (response) {
             setData(response.data.content)
             setPage(0);
@@ -33,14 +33,14 @@ export default function AdminAvailablePillar() {
     };
 
     const fetchAPI = async () => {
-        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + page + 1 + "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=AVAILABLE')
+        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + page + 1 + "?sort=desc&sortField=street&dataPerPage=" + rowsPerPage + '&status=AVAILABLE')
         if (response) {
             setData(response.data.content)
             setTotalPages(response.data.totalElements)
         }
     }
     const search = async (keyword) => {
-        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + page + 1 + "?sort=desc&sortField=id&dataPerPage=" + rowsPerPage + '&status=AVAILABLE&keyword=' + keyword)
+        const response = await axios.get(API_GET_PRODUCT_AVAILABLE + page + 1 + "?sort=desc&sortField=street&dataPerPage=" + rowsPerPage + '&status=AVAILABLE&keyword=' + keyword)
         if (response) {
             setData(response.data.content)
             setTotalPages(response.data.totalElements)
