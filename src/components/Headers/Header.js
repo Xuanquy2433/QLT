@@ -26,7 +26,7 @@ const Header = () => {
             {/* Card stats */}
             <Row>
               <Col lg="6" xl="3">
-                <Card className="card-stats mb-4 mb-xl-0">
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -47,16 +47,16 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 3.48%
+                      <span className="text-success mr-1">
+                        <i className="fa fa-arrow-up" /> to
                       </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
                     </p>
                   </CardBody>
                 </Card>
               </Col>
               <Col lg="6" xl="3">
-                <Card className="card-stats mb-4 mb-xl-0">
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -85,7 +85,7 @@ const Header = () => {
                 </Card>
               </Col>
               <Col lg="6" xl="3">
-                <Card className="card-stats mb-4 mb-xl-0">
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -105,15 +105,15 @@ const Header = () => {
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" /> 1.10%
+                        <i className="fas fa-arrow-down" />
                       </span>{" "}
-                      <span className="text-nowrap">Since yesterday</span>
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
                     </p>
                   </CardBody>
                 </Card>
               </Col>
               <Col lg="6" xl="3">
-                <Card className="card-stats mb-4 mb-xl-0">
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -132,10 +132,133 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fas fa-arrow-up" /> 12%
+                      <span className="text-success">
+                        <i className="fas fa-arrow-up" /> {dataOverview.totalUserHiring}
                       </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
+                      <span className="text-nowrap"> người dùng đang thuê trụ</span>
+                    </p>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+
+          <div className="header-body mt-4">
+            {/* Card stats */}
+            <Row>
+              <Col lg="6" xl="3">
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
+                  <CardBody>
+                    <Row>
+                      <div className="col">
+                        <CardTitle
+                          tag="h5"
+                          className="text-uppercase text-muted mb-0"
+                        >
+                          Tổng thu nhập
+                        </CardTitle>
+                        <span className="h2 font-weight-bold mb-0">
+                          <CurrencyFormat value={dataOverview.totalEarning} displayType={'text'} thousandSeparator={true} />
+                        </span>
+                      </div>
+                      <Col className="col-auto">
+                        <p className="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                          <i className="ni ni-money-coins" />
+                        </p>
+                      </Col>
+                    </Row>
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-1">
+                        <i className="fa fa-arrow-up mr-1" /> to
+                      </span>{" "}
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
+                    </p>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col lg="6" xl="3" >
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
+                  <CardBody>
+                    <Row>
+                      <div className="col">
+                        <CardTitle
+                          tag="h5"
+                          className="text-uppercase text-muted mb-0"
+                        >
+                          Tổng thu nhập hôm nay
+                        </CardTitle>
+                        <span className="h2 font-weight-bold mb-0">
+                          <CurrencyFormat value={dataOverview.totalEarningToday} displayType={'text'} suffix={' VNĐ'} thousandSeparator={true} />
+                        </span>
+                      </div>
+                      <Col className="col-auto">
+                        <p className="icon icon-shape bg-green text-white rounded-circle shadow">
+                          <i className="fas fa-chart-pie" />
+                        </p>
+                      </Col>
+                    </Row>
+                    {/* <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-1">
+                        <i className="fa fa-arrow-up mr-1" />
+                        <CurrencyFormat value={dataOverview.totalEarning} displayType={'text'} thousandSeparator={true} suffix={'VNĐ'} />
+                      </span>{" "}
+                      <span className="text-nowrap"></span>
+                    </p> */}
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col lg="6" xl="3">
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
+                  <CardBody>
+                    <Row>
+                      <div className="col">
+                        <CardTitle
+                          tag="h5"
+                          className="text-uppercase text-muted mb-0"
+                        >
+                          Số người dùng đang thuê trụ
+                        </CardTitle>
+                        <span className="h2 font-weight-bold mb-0">{dataOverview.totalUserHiring}</span>
+                      </div>
+                      <Col className="col-auto">
+                        <p className="icon icon-shape bg-pink text-white rounded-circle shadow">
+                          <i className="fas fa-percent" />
+                        </p>
+                      </Col>
+                    </Row>
+                    {/* <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-warning mr-2">
+                        <i className="fas fa-arrow-down" /> to
+                      </span>{" "}
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
+                    </p> */}
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col lg="6" xl="3">
+                <Card style={{ height: '17vh' }} className="card-stats mb-4 mb-xl-0">
+                  <CardBody>
+                    <Row>
+                      <div className="col">
+                        <CardTitle
+                          tag="h5"
+                          className="text-uppercase text-muted mb-0"
+                        >
+                          Số lượng khách
+                        </CardTitle>
+                        <span className="h2 font-weight-bold mb-0">{dataOverview.totalUser}</span>
+                      </div>
+                      <Col className="col-auto">
+                        <p className="icon icon-shape bg-cyan text-white rounded-circle shadow">
+                          <i className="fas fa-users" />
+                        </p>
+                      </Col>
+                    </Row>
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success">
+                        <i className="fas fa-arrow-up" /> {dataOverview.totalUserHiring}
+                      </span>{" "}
+                      <span className="text-nowrap"> người dùng đang thuê trụ</span>
                     </p>
                   </CardBody>
                 </Card>

@@ -87,7 +87,7 @@ const Index = (props) => {
       <Header />
       {/* Page content */}
       <Container className="mt--7" fluid>
-        <Row>
+        <Row className="mb-4">
           <Col className="mb-5 mb-xl-0" xl="8">
             <Card className="bg-gradient-default shadow">
               <CardHeader className="bg-transparent">
@@ -111,8 +111,6 @@ const Index = (props) => {
                   </p> */}
                   <div className="col">
                     <Nav className="justify-content-end" pills>
-
-
                       <NavItem>
                         <NavLink
                           className={classnames("py-2 px-3", {
