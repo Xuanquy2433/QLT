@@ -48,7 +48,6 @@ export default function ChangePasswordForgot() {
                         autoClose: 2000
                     })
                     history.push('/auth/login')
-                    setShowMessage(true)
                 }
             } catch (error) {
                 setIsLoading(false)
