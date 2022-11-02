@@ -47,29 +47,7 @@ const Index = (props) => {
     e.preventDefault();
     setActiveNav(index);
     setChartExample1Data("data" + index);
-    console.log('this ', index);
   };
-
-  const data1 = {
-    labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Performance",
-        data: [0, 20, 10, 30, 15, 40, 20, 60, 100]
-      }
-    ]
-  };
-
-  const data2 = {
-    labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Performance",
-        data: [10, 20, 5, 25, 10, 30, 15, 40, 40]
-      }
-    ]
-  }
-
 
   const [dataOverview, setDataOverview] = useState([])
   useEffect(() => {
@@ -102,6 +80,30 @@ const Index = (props) => {
   dataMap.forEach(function (value, key) {
     total.push(value)
   })
+
+
+
+  const data1 = {
+    labels: month,
+    datasets: [
+      {
+        label: "Performance",
+        data: total
+      }
+    ]
+  };
+
+  const data2 = {
+    labels: month,
+    datasets: [
+      {
+        label: "Performance",
+        data: total
+      }
+    ]
+  }
+
+
   return (
     <>
       <Header />
