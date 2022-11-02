@@ -37,16 +37,20 @@ const columns = [
     {
         id: 'status',
         label: 'Trạng thái',
-        minWidth: 170,
+        minWidth: 80,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     { id: 'description', label: 'Mô tả', minWidth: 150, align: 'center', },
     { id: 'address', label: 'Địa chỉ', minWidth: 150, align: 'center', },
+    { id: 'timeStart', label: 'Ngày bắt đầu', minWidth: 150, align: 'center', },
+
+    { id: 'expriedDate', label: 'Ngày hết hạn', minWidth: 150, align: 'center', },
+
     // { id: 'street', label: 'street', minWidth: 150, align: 'center', },
     // { id: 'action', label: 'Hành động', minWidth: 150, align: 'right', },
 ];
-export default function HiringPillar({ data, page, search,rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
+export default function HiringPillar({ data, page, search, rowsPerPage, totalPages, handleChangePage, handleChangeRowsPerPage }) {
 
     return (
         <>
@@ -95,6 +99,17 @@ export default function HiringPillar({ data, page, search,rowsPerPage, totalPage
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
                                             <TableCell sx={{ textAlign: 'center', height: '65px' }}> {item.address.fullAddress}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>
+                                                <Moment format="MMMM Do YYYY">
+                                                    temp {item.expiredDate}
+                                                </Moment>
+                                            </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>
+                                                <Moment format="MMMM Do YYYY">
+                                                    {item.expiredDate}
+                                                </Moment>
+                                            </TableCell>
+
                                             {/* <TableCell sx={{ textAlign: 'right' }}><Button variant="contained" color='success' >Accept</Button></TableCell> */}
                                         </TableRow>
                                     ))}
@@ -102,7 +117,7 @@ export default function HiringPillar({ data, page, search,rowsPerPage, totalPage
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[6,10, 25, 100]}
+                        rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
                         count={totalPages}
                         rowsPerPage={rowsPerPage}
