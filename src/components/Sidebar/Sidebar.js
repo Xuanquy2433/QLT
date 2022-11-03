@@ -106,11 +106,7 @@ const Sidebar = (props) => {
 
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (decoded.roles === `[ROLE_ADMIN]` && prop.path !== '/register' && prop.path !== '/login'
-        && prop.path !== '/order/' && prop.path !== '/cart' && prop.path !== '/profile'
-        && prop.path !== '/pageNotFound' && prop.path !== '/address/:id' && prop.path !== '/order/:id'
-        && prop.path !== '/orderPlace' && prop.path !== '/activity' && prop.path !== '/forgotPassword'
-        && prop.path !== '/changePassword' && prop.path !== '/wishList' && prop.path !== '/maps') {
+      if (decoded.roles === `[ROLE_ADMIN]` && prop.layout === "/admin") {
         return (
           <NavItem key={key}>
             <NavLink
