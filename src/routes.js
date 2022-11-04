@@ -30,6 +30,7 @@ import AdminSetting from "views/controller/AdminSetting";
 import ChangePassword from "views/examples/ChangePassword";
 import WishList from "views/WishList/WishList";
 import ChangePasswordForgot from "views/examples/ChangePasswordForgot";
+import CategoryDetail from "views/Home/CategoryDetail";
 
 var routes = [
   {
@@ -193,6 +194,15 @@ var routes = [
     component: AddressDetail,
     layout: "/auth"
   },
+
+  {
+    path: "/categories/:id",
+    name: "CategoryDetail",
+    icon: "ni ni-circle-08 text-pink",
+    component: CategoryDetail,
+    layout: "/auth"
+  },
+
   {
     path: "/forgotPassword",
     name: "ForgotPassword",

@@ -15,6 +15,7 @@ import TableAddress from './TableAddress';
 import TableProduct from './TableProduct';
 import BannerSlide from './BannerSlide';
 import About from './About';
+import Categories from './Categories';
 
 function HomePage() {
 
@@ -22,7 +23,8 @@ function HomePage() {
         <div  >
             <BannerSlide />
             <hr />
-            
+
+            <Categories />
             <div>
                 <TableAddress />
             </div>
