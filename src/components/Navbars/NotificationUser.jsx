@@ -29,7 +29,7 @@ function Notification() {
 
 
     const markAsRead = async () => {
-        console.log('da goi mark as read');
+        console.log('go here mark as read');
         const response = await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
     }
 
@@ -63,6 +63,8 @@ function Notification() {
     React.useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
+            markAsRead()
+            setUserCount(0)
         }
         prevOpen.current = open;
     }, [open]);
@@ -81,10 +83,13 @@ function Notification() {
                         aria-haspopup="true"
                         onClick={handleToggle}>
                         <p class="notification">
-                            <span> <NotificationsNoneIcon /></span> Thông báo
+                            <span> <NotificationsNoneIcon /></span>
                             {countUser !== 0 ? <span class="badge">{countUser}</span> : ''}
-                        </p>
-                        {/* <UserNotification changeCount={(data) => setUserCount(data)} /> */}
+                        </p>Thông báo
+
+                        {/* <div style={{ display: 'none' }}>
+                            <UserNotification changeCount={(data) => setUserCount(data)} />
+                        </div> */}
                         <UserSize changeUserCount={(data) => setUserCount(data)}></UserSize>
                     </p>
                     <Popper

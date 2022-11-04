@@ -16,6 +16,7 @@ import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { API_GET_ADDRESS_DETAIL_NOT_TOKEN } from 'utils/const';
+import { showError } from 'utils/error';
 
 const columns = [
     {
@@ -98,6 +99,7 @@ function AddressDetail() {
                 })
                 history.push('/auth/pageNotFound')
             }
+            else showError(error)
         }
     }
 
