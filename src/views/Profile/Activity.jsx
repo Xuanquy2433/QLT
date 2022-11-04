@@ -24,6 +24,7 @@ import { API_EXTEND_ORDER_USER } from 'utils/const';
 import { showError } from 'utils/error';
 import Expired from './Expired';
 import { API_GET_EXPIRED_ORDER_USER } from 'utils/const';
+import { showError2 } from 'utils/error';
 
 
 const columns = [
@@ -65,7 +66,7 @@ function Activity() {
     const [showCheckbox, setShowCheckbox] = useState(false)
     const columns2 = [
         // { id: 'id', label: 'Id', minWidth: 60, align: 'left' },
-        { id: 'id22', label: <Button onClick={e => setShowCheckbox(!showCheckbox)} variant="contained" color="success">+</Button>, minWidth: 20, align: 'center' },
+        showCheckbox == true ? { id: 'id22', label: 'Số tháng', minWidth: 20, align: 'center' } : { id: 'id82', label: '', minWidth: 10, align: 'center' },
         { id: 'j', label: 'Tên trụ', minWidth: 100, align: 'center', },
         { id: 'code', label: 'Giá', minWidth: 100, align: 'center', },
         { id: 'a', label: 'Địa chỉ', minWidth: 100, align: 'center', },
@@ -172,6 +173,10 @@ function Activity() {
         }
     }
     console.log('list ids ', listIds);
+
+    const [showExtend, setShowExtend] = useState(true)
+
+
     const extend = async () => {
         try {
             var map = new Map()
@@ -182,7 +187,6 @@ function Activity() {
             const dataAPI = {
                 productInfo: objData
             }
-            console.log('daata api ,', dataAPI);
             const response = await axios.put(API_EXTEND_ORDER_USER, dataAPI, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -196,7 +200,7 @@ function Activity() {
                 })
             };
         } catch (error) {
-            showError(error)
+            showError2(error)
         }
     }
 
@@ -205,7 +209,7 @@ function Activity() {
         getALLOrderDetail()
         getALLOrderDetailExpired()
     }, [])
-
+    {/* <Button onClick={e => setShowCheckbox(!showCheckbox)} variant="contained" color="success">+</Button>, */ }
     return (
         <div className='activity'>
             <div className='activity-content'>
@@ -318,11 +322,25 @@ function Activity() {
                                 </Table>
                             </TableContainer>
                         </Paper>
-                        <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                            <Button onClick={extend} variant="contained" color="success">
+                        {showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                            <Button onClick={e => {
+                                setShowCheckbox(true)
+                                setShowExtend(false)
+                            }} variant="contained" color="success">
                                 Gia hạn
                             </Button>
-                        </Grid>
+                        </Grid> :
+                            <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                                <Button onClick={extend} variant="contained" color="success">
+                                    Xác nhận
+                                </Button>
+                                <Button sx={{ ml: 1 }} onClick={e => {
+                                    setShowExtend(true)
+                                    setShowCheckbox(false)
+                                }} variant="contained" color="error">
+                                    Đóng
+                                </Button>
+                            </Grid>}
                     </TabPanel>
                     <TabPanel value='3'>
                         <Expired columns3={columns3} dataOrderDetailExpired={dataOrderDetailExpred} />
