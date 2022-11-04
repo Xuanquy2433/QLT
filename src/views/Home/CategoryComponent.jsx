@@ -274,17 +274,15 @@ function CategoryComponent({ products, address }) {
         }
     })
 
-    console.log('data from parent ', products);
-    console.log('data address from parent ', address);
 
     return (
         <React.Fragment>
             <ThemeProvider theme={theme}>
-                <Stack sx={{ mt: 8 }} alignItems="center">
+                {/* <Stack sx={{ mt: 8 }} alignItems="center">
                     <Pagination
                         sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
                         count={count} page={page} color="secondary" onChange={handleChange} />
-                </Stack>
+                </Stack> */}
                 <div style={{ width: '100%', display: 'flex' }}>
                     <hr style={{ border: '2px solid white', width: '40%' }} />
                     <h1 style={{ fontSize: "28px", fontWeight: "600", width: '20%', marginTop: '1px', color: "white", textAlign: 'center' }}> Đường {address.street}</h1>
@@ -344,11 +342,11 @@ function CategoryComponent({ products, address }) {
                         ))
                     }
                 </div >
-                {/* <Stack alignItems="center">
+                <Stack alignItems="center">
                     <Pagination
                         sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
                         count={count} page={page} color="secondary" onChange={handleChange} />
-                </Stack> */}
+                </Stack>
             </ThemeProvider>
         </React.Fragment >
 

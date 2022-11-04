@@ -16,6 +16,8 @@ import { API_GET_ADDRESS_DETAIL_NOT_TOKEN } from 'utils/const';
 import CategoryComponent from './CategoryComponent';
 import { API_GET_CATEGORY_BY_ID } from 'utils/const';
 import { showError } from 'utils/error';
+import usePagination from 'views/pillarAddress/Pagination';
+import { Pagination, Stack } from '@mui/material';
 
 const columns = [
     {
@@ -92,7 +94,16 @@ function CategoryDetail() {
     useEffect(() => {
         getCategory()
     }, [])
+    let [page, setPage] = useState(1);
+    const PER_PAGE = 1;
 
+    const count = Math.ceil(Object.entries(dataCategoryMap).length / PER_PAGE);
+    const _DATA = usePagination(Object.entries(dataCategoryMap), PER_PAGE);
+
+    const handleChange = (e, p) => {
+        setPage(p);
+        _DATA.jump(p);
+    };
     return (
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >
@@ -133,10 +144,14 @@ function CategoryDetail() {
                     </div>
                 }
             </div>
-
+            <Stack sx={{ mt: 8 }} alignItems="center">
+                <Pagination
+                    sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
+                    count={count} page={page} color="secondary" onChange={handleChange} />
+            </Stack>
             {
-                Object.entries(dataCategoryMap).map(([key, value]) => (
-                    <CategoryComponent  address={JSON.parse(key)} products={value} />
+                _DATA.currentData().map(([key, value]) => (
+                    <CategoryComponent address={JSON.parse(key)} products={value} />
                 ))
             }
 
