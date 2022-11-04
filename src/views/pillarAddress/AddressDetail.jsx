@@ -15,6 +15,7 @@ import ProductComponent from "./ProductComponent";
 import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { API_GET_ADDRESS_DETAIL_NOT_TOKEN } from 'utils/const';
 
 const columns = [
     {
@@ -60,18 +61,36 @@ function AddressDetail() {
     const [address, setAddress] = useState({})
     const id = useState(window.location.pathname.replace(/\D/g, ""));
     console.log(id[0]);
+    let token = localStorage.getItem("token");
+
     useEffect(() => {
         getAddress()
     }, [])
 
     const history = useHistory();
     const getAddress = async (e) => {
+
         try {
-            const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
-            if (response.status === 200) {
-                setDataAddressProduct(response.data.product)
-                setAddress(response.data.address)
+            if (!token) {
+                const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
+                if (response.status === 200) {
+                    setDataAddressProduct(response.data.product)
+                    setAddress(response.data.address)
+                }
+            } else {
+                const response = await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0], {
+                    headers: {
+                        'authorization': 'Bearer ' + token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.status === 200) {
+                    setDataAddressProduct(response.data.product)
+                    setAddress(response.data.address)
+                }
             }
+
         } catch (error) {
             if (error && error.response.status === 400 || error.response.status === 404) {
                 toast.warning('Không có địa chỉ này !', {
