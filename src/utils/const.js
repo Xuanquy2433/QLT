@@ -142,6 +142,8 @@ export const API_RESET_PASSWORD = `${API}/reset_password`
 
 export const API_GET_ADDRESS_DETAIL_NOT_TOKEN = `${API}/address2/{addressId}?id=`
 
+export const API_UPDATE_MONTH_CART = `${API}/cart/update/`
+
 
 
 
