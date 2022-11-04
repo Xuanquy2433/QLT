@@ -104,7 +104,7 @@ function CategoryDetail() {
         setPage(p);
         _DATA.jump(p);
     };
-    console.log('adsad ',_DATA);
+    
     return (
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >

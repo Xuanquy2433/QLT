@@ -344,7 +344,7 @@ function CategoryComponent({ products, address }) {
                 </div >
                 <Stack alignItems="center">
                     <Pagination
-                        sx={{ button: { color: 'white',width: '100%', margin: 'auto' } }}
+                        sx={{ button: { color: 'white', width: '100%', margin: 'auto' } }}
                         count={count} page={page} color="primary" showFirstButton showLastButton onChange={handleChange} />
                 </Stack>
             </ThemeProvider>
