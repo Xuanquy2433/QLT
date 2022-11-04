@@ -144,6 +144,9 @@ export const API_GET_ADDRESS_DETAIL_NOT_TOKEN = `${API}/address2/{addressId}?id=
 
 export const API_UPDATE_MONTH_CART = `${API}/cart/update/`
 
+export const API_GET_CATEGORY_BY_ID = `${API}/category/`
+
+
 
 
 
