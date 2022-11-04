@@ -18,7 +18,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { API_WISHLIST_REMOVE } from "utils/const";
 import { API_WISHLIST_GET } from "utils/const";
 import usePagination from "views/pillarAddress/Pagination";
-function CategoryComponent({ category }) {
+function CategoryComponent({ products, address }) {
 
     const renderer = ({ hours, minutes, completed }) => {
         if (completed) {
@@ -243,18 +243,18 @@ function CategoryComponent({ category }) {
         }
     }
 
-    // let [page, setPage] = useState(1);
-    // const PER_PAGE = 8;
+    let [page, setPage] = useState(1);
+    const PER_PAGE = 8;
 
-    // const count = Math.ceil(category.length / PER_PAGE);
-    // const _DATA = usePagination(category, PER_PAGE);
+    const count = Math.ceil(products.length / PER_PAGE);
+    const _DATA = usePagination(products, PER_PAGE);
 
-    // const handleChange = (e, p) => {
-    //     setPage(p);
-    //     _DATA.jump(p);
-    // };
+    const handleChange = (e, p) => {
+        setPage(p);
+        _DATA.jump(p);
+    };
 
-    // console.log("_data", _DATA.currentData());
+    console.log("_data", _DATA.currentData());
     const theme = createTheme({
         palette: {
             primary: {
@@ -274,79 +274,75 @@ function CategoryComponent({ category }) {
         }
     })
 
-    const dataCategoryMapEntries = new Map(Object.entries(category));
-
-    console.log('data from parent ', category);
+    console.log('data from parent ', products);
+    console.log('data address from parent ', address);
 
     return (
         <React.Fragment>
             <ThemeProvider theme={theme}>
-                {/* <Stack sx={{ mt: 8 }} alignItems="center">
+                <Stack sx={{ mt: 8 }} alignItems="center">
                     <Pagination
                         sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
                         count={count} page={page} color="secondary" onChange={handleChange} />
-                </Stack> */}
+                </Stack>
+                <div style={{ width: '100%', display: 'flex' }}>
+                    <hr style={{ border: '2px solid white', width: '40%' }} />
+                    <h1 style={{ fontSize: "28px", fontWeight: "600", width: '20%', marginTop: '1px', color: "white", textAlign: 'center' }}> Đường {address.street}</h1>
+                    <hr style={{ border: '2px solid white', width: '40%' }} />
+                </div>
                 <div style={{
                     display: "flex", width: '1300px', flexWrap: "wrap", justifyContent: "center"
                     , marginTop: '50px', marginBottom: '150px'
                 }}>
-                    cc
                     {
-                        category.forEach(function (value, key) {
-                            console.log('key ', JSON.parse(key));
-                            return (
-                                <h3>Tên đường: {key.street}</h3>
-                            )
-                        })
-                    }
-                    {/* {
-                        // _DATA.currentData().map((item, index) => (
-                        category.map((item, index) => (
-                            <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
-                                <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                                    <img style={{ width: '100%', height: "27vh", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
-                                </div>
-                                <div style={{ width: "100%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                        _DATA.currentData().map((item, index) => (
+                            <React.Fragment>
+                                < div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
+                                    <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                                        <img style={{ width: '100%', height: "27vh", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
+                                    </div>
+                                    <div style={{ width: "100%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
 
-                                    <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: '1px', color: "#444444" }}> {item.name}</h1>
-                                    <h2 style={{ color: '#D70018' }}> {formatMoney(item.price)} VNĐ</h2>
-                                    <h3>Loại trụ: {item.category.name}</h3>
-                                    <h4> {item.description}</h4>
-                                    {item.status === 'AVAILABLE' ?
-                                        <Button className="btn-cart-cus" sx={{
-                                            '&:hover': {
-                                                bgcolor: '#1337bf',
-                                            },
-                                            fontWeight: "500", width: "100%",
-                                            background: "#1973BC", color: "#FFFFFF",
-                                        }}
-                                            onClick={(e) => addCart({ ...item })} variant="contained" color="success">
-                                            Thêm vào giỏ
-                                        </Button> :
-                                        <Button style={{
-                                            fontWeight: "500", width: "100%"
-                                            , border: "1px solid #5372E4", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
-                                        }} disabled variant="contained" >
-                                            Đã cho thuê
-                                        </Button>}
-                                    <div style={{ height: "28.5px" }}>{item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}</div>
-                                </div>
-                                < div style={{ fontWeight: "600", display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
-                                    Yêu thích
-                                    {
-                                        data.filter(i => i.id === item.id).length === 0 ?
-                                            <AiOutlineHeart
-                                                onClick={(e) => onClickAddWishList(item.id)}
-                                                className="colorHeart-cus"
-                                                style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> :
-                                            <AiFillHeart
-                                                onClick={(e) => onHandleRemoveWishList(item.id)}
-                                                style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} />
-                                    }
-                                </div>
-                            </div >
+                                        <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: '1px', color: "#444444" }}> {item.name}</h1>
+                                        <h2 style={{ color: '#D70018' }}> {formatMoney(item.price)} VNĐ</h2>
+                                        {/* <h3>Loại trụ: {item.category.name}</h3> */}
+                                        <h4> {item.description}</h4>
+                                        {item.status === 'AVAILABLE' ?
+                                            <Button className="btn-cart-cus" sx={{
+                                                '&:hover': {
+                                                    bgcolor: '#1337bf',
+                                                },
+                                                fontWeight: "500", width: "100%",
+                                                background: "#1973BC", color: "#FFFFFF",
+                                            }}
+                                                onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                                                Thêm vào giỏ
+                                            </Button> :
+                                            <Button style={{
+                                                fontWeight: "500", width: "100%"
+                                                , border: "1px solid #5372E4", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
+                                            }} disabled variant="contained" >
+                                                Đã cho thuê
+                                            </Button>}
+                                        <div style={{ height: "28.5px" }}>{item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}</div>
+                                    </div>
+                                    < div style={{ fontWeight: "600", display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
+                                        Yêu thích
+                                        {
+                                            data.filter(i => i.id === item.id).length === 0 ?
+                                                <AiOutlineHeart
+                                                    onClick={(e) => onClickAddWishList(item.id)}
+                                                    className="colorHeart-cus"
+                                                    style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> :
+                                                <AiFillHeart
+                                                    onClick={(e) => onHandleRemoveWishList(item.id)}
+                                                    style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} />
+                                        }
+                                    </div>
+                                </div >
+                            </React.Fragment>
                         ))
-                    } */}
+                    }
                 </div >
                 {/* <Stack alignItems="center">
                     <Pagination

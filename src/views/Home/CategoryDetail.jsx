@@ -78,15 +78,15 @@ function CategoryDetail() {
         }
     }
 
-    const arrayDataAddress = []
-    const arrayDataPillar = []
-    const dataCategoryMapEntries = new Map(Object.entries(dataCategoryMap));
-    dataCategoryMapEntries.forEach(function (value, key) {
-        arrayDataAddress.push(key)
-        arrayDataPillar.push(value)
-    })
-    console.log('arrayDataAddress ', arrayDataAddress);
-    console.log('arrayDataPillar ', dataCategoryMap);
+    // const arrayDataAddress = []
+    // const arrayDataPillar = []
+    // const dataCategoryMapEntries = new Map(Object.entries(dataCategoryMap));
+    // dataCategoryMapEntries.forEach(function (value, key) {
+    //     arrayDataAddress.push(key)
+    //     arrayDataPillar.push(value)
+    // })
+    // console.log('arrayDataAddress ', arrayDataAddress);
+    // console.log('arrayDataPillar ', dataCategoryMap);
 
 
     useEffect(() => {
@@ -133,7 +133,14 @@ function CategoryDetail() {
                     </div>
                 }
             </div>
-            <CategoryComponent category={arrayDataAddress} />
+
+            {
+                Object.entries(dataCategoryMap).map(([key, value]) => (
+                    <CategoryComponent  address={JSON.parse(key)} products={value} />
+                ))
+            }
+
+            {/* <CategoryComponent category={arrayDataAddress} /> */}
 
         </div>
     )
