@@ -344,8 +344,8 @@ function CategoryComponent({ products, address }) {
                 </div >
                 <Stack alignItems="center">
                     <Pagination
-                        sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
-                        count={count} page={page} color="secondary" onChange={handleChange} />
+                        sx={{ button: { color: 'white',width: '100%', margin: 'auto' } }}
+                        count={count} page={page} color="primary" showFirstButton showLastButton onChange={handleChange} />
                 </Stack>
             </ThemeProvider>
         </React.Fragment >

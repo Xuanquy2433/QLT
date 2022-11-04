@@ -104,6 +104,7 @@ function CategoryDetail() {
         setPage(p);
         _DATA.jump(p);
     };
+    console.log('adsad ',_DATA);
     return (
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >
@@ -126,7 +127,7 @@ function CategoryDetail() {
                                     <h1 className="product__title">{dataCategory.name} </h1>
                                     {/* <div className="product__price">Thành phố {address.city}  </div> */}
                                     <div className="product__subtitle">
-                                        {dataCategory.description}
+                                     Mô tả:    {dataCategory.description}
                                     </div>
 
                                     <div class="line-loading"></div>
@@ -150,13 +151,10 @@ function CategoryDetail() {
                     count={count} page={page} color="secondary" onChange={handleChange} />
             </Stack>
             {
-                _DATA.currentData().map(([key, value]) => (
+                _DATA.currentData().length > 0 ? _DATA.currentData().map(([key, value]) => (
                     <CategoryComponent address={JSON.parse(key)} products={value} />
-                ))
+                )) : <h1 style={{ fontSize: "28px", fontWeight: "600", width: '100%', marginTop: '1px', color: "white", textAlign: 'center' }}> Chưa có trụ nào ! </h1>
             }
-
-            {/* <CategoryComponent category={arrayDataAddress} /> */}
-
         </div>
     )
 }
