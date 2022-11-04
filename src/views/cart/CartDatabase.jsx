@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode";
 import { formatMoney } from './../../common/formatMoney';
 import CartLocal from './CartLocal'
 import { API_START_COOL_DOWN } from 'utils/const'
+import { API_UPDATE_MONTH_CART } from './../../utils/const';
 
 function CartDatabase() {
 
@@ -38,14 +39,27 @@ function CartDatabase() {
         }
     }
 
-
-    const handleUpdateMonth = () => {
-        setMonth(month + 1)
+    console.log(data);
+    const handleUpdateMonth = async (item) => {
+        const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month + 1) + {
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        getAllCart()
     }
 
-    const handleMonth = () => {
-        if (month > 1) {
-            setMonth(month - 1)
+    const handleMonth = async (item) => {
+        if (item.month > 1) {
+            const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month - 1), {
+                headers: {
+                    'authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
         }
     }
 
@@ -184,7 +198,7 @@ function CartDatabase() {
                                                     <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
                                                         <button
                                                             className="btn btn-link px-2"
-                                                            onClick={handleMonth}
+                                                            onClick={(e) => handleMonth(item)}
                                                         >
                                                             <i className="fas fa-minus" />
                                                         </button>
@@ -199,7 +213,7 @@ function CartDatabase() {
                                                         />
                                                         <button
                                                             className="btn btn-link px-2"
-                                                            onClick={handleUpdateMonth}
+                                                            onClick={() => handleUpdateMonth(item)}
                                                         >
                                                             <i className="fas fa-plus" />
                                                         </button>
