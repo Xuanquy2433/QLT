@@ -12,11 +12,7 @@ import { API } from "../../utils/const";
 var stompClient = null;
 const UserNotification = (params) => {
     const [data, setData] = useState([]);
-    useEffect(() => {
-        connect();
-        getNotification();
 
-    }, []);
 
     let decoded;
     let token = localStorage.getItem("token");
@@ -36,29 +32,33 @@ const UserNotification = (params) => {
     }
 
 
-    const getNotification = async (e) => {
+    const getNotification = async () => {
         const response = await axios.get(API + '/notification/?id=' + Number(decoded.sub.slice(0, 1)))
-        console.log(response.data)
         if (response.status === 200) {
-            setData(response.data)
+            handleRequest(response.data)
             params.changeUserCount(response.data.filter((data) => data.checked === false).length)
         }
     }
+   const handleRequest = (data) =>{
+        setData(data)
+    }
 
-
-    const onMessageReceived = (data) => {
-        getNotification();
-        toast.success(data, { autoClose: 2000 })
+    console.log(data)
+    const onMessageReceived = (payload) => {
+        setData(data =>[ JSON.parse(payload.body),...data])
     }
 
     const onError = (err) => {
         console.log(err);
     }
-
+    useEffect(() => {
+        connect();
+        getNotification();
+    }, []);
     //message, date,type,status
     return (
         <>
-            {data.length > 0 ? data.map((data, index) => (
+            {data.length > 0 ? data?.map((data, index) => (
                 <MenuItem key={index} sx={{ borderBottom: '1px solid #ddd' }} >
                     <div  >{data.message}  </div>
                     <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>

@@ -31,13 +31,12 @@ const AdminSize = (params) => {
 
     const getNotification = async (e) => {
         const response = await axios.get(API + '/notification/')
-        console.log(response.data)
+
         if (response.status === 200) {
             setData(response.data)
             params.changeCount(response.data.filter((data) => data.checked === false).length)
         }
     }
-
 
     const onMessageReceived = (data) => {
         getNotification();

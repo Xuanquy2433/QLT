@@ -29,24 +29,25 @@ function Notification() {
 
 
     const markAsRead = async () => {
-        console.log('go here mark as read');
         const response = await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
+        console.log('go here mark as read');
     }
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
+        markAsRead()
+        setUserCount(0)
         setOpen((prevOpen) => !prevOpen);
-    };
+
+        }
+
+
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
-        }
-        if (open == true) {
-            markAsRead()
-            setUserCount(0)
-        }
+            return;      }
+
         setOpen(false);
     };
 
@@ -66,9 +67,9 @@ function Notification() {
             markAsRead()
             setUserCount(0)
         }
+
         prevOpen.current = open;
     }, [open]);
-
 
     return (
         <React.Fragment>

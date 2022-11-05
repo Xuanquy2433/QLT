@@ -33,11 +33,13 @@ const AdminNotification = (params) => {
         const response = await axios.get(API +'/notification/')
         console.log(response.data)
         if (response.status === 200) {
-            setData(response.data)
             params.changeCount(response.data.filter((data)=>data.checked===false).length)
+            handleRequest(response.data)
         }
     }
-
+    const handleRequest = (data) =>{
+        setData(data)
+    }
 
     const onMessageReceived = (data) => {
         getNotification();

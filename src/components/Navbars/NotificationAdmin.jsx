@@ -19,24 +19,22 @@ function NotificationAdmin() {
 
     const [countAdmin, setCountAdmin] = React.useState(0);
 
+
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
-        // if (open == false) {
-        //     markAsRead()
-        // }
+        markAsRead()
+        setCountAdmin(0)
         setOpen((prevOpen) => !prevOpen);
+
+
     };
     const markAsRead = async () => {
-        const response = await axios.post(API_GET_MARK_AS_READ_ADMIN)
+        await axios.post(API_GET_MARK_AS_READ_ADMIN)
     }
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
-        }
-        if (open == true) {
-            markAsRead()
-            setCountAdmin(0)
         }
         setOpen(false);
     };
@@ -55,6 +53,8 @@ function NotificationAdmin() {
     React.useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
+            markAsRead()
+            setCountAdmin(0)
         }
         prevOpen.current = open;
     }, [open]);

@@ -14,7 +14,6 @@ const UserSize = (params) => {
     useEffect(() => {
         connect();
         getNotification();
-
     }, []);
 
     let decoded;
@@ -53,11 +52,6 @@ const UserSize = (params) => {
     }
 
     //message, date,type,status
-    return (
-        <>
-
-        </>
-    )
 }
 
 
