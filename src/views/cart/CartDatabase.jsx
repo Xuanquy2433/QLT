@@ -228,7 +228,7 @@ function CartDatabase() {
                                                         </div> */}
                                                     <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                         {/* <h6 className="text-muted">Price</h6> */}
-                                                        <h6 className="text-black mb-0">{formatMoney(item.product.price)}</h6>
+                                                        <h6 className="text-black mb-0">{formatMoney(item.product.price * item.month)}</h6>
                                                     </div>
                                                     <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                                                         <div style={{ cursor: 'pointer' }} className="text-muted">
