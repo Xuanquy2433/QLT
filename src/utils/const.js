@@ -146,6 +146,9 @@ export const API_UPDATE_MONTH_CART = `${API}/cart/update/`
 
 export const API_GET_CATEGORY_BY_ID = `${API}/category/`
 
+export const API_GET_CATEGORY_BY_ID_2 = `${API}/category2/`
+
+
 
 
 

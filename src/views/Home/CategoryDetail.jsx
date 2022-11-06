@@ -20,6 +20,7 @@ import usePagination from 'views/pillarAddress/Pagination';
 import { Pagination, Stack } from '@mui/material';
 import { API_ADD_CART } from 'utils/const';
 import { API_CART_REMOVE } from 'utils/const';
+import { API_GET_CATEGORY_BY_ID_2 } from 'utils/const';
 
 const columns = [
     {
@@ -70,18 +71,51 @@ function CategoryDetail() {
 
 
     const history = useHistory();
+    // const getCategory = async (e) => {
+    //     try {
+    //         const response = await axios.get(API_GET_CATEGORY_BY_ID + id[0])
+    //         if (response.status === 200) {
+    //             setDataCategory(response.data.category)
+    //             setDataCategoryMap(response.data.categoryMap)
+    //         }
+    //     } catch (error) {
+    //         showError(error)
+    //     }
+    // }
+
     const getCategory = async (e) => {
         try {
-            const response = await axios.get(API_GET_CATEGORY_BY_ID + id[0])
-            if (response.status === 200) {
-                setDataCategory(response.data.category)
-                setDataCategoryMap(response.data.categoryMap)
+            if (!token) {
+                const response = await axios.get(API_GET_CATEGORY_BY_ID + id[0])
+                if (response.status === 200) {
+                    setDataCategory(response.data.category)
+                    setDataCategoryMap(response.data.categoryMap)
+                }
+            } else {
+                const response = await axios.get(API_GET_CATEGORY_BY_ID_2 + id[0], {
+                    headers: {
+                        'authorization': 'Bearer ' + token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.status === 200) {
+                    setDataCategory(response.data)
+                    setDataCategoryMap(response.data)
+                }
             }
         } catch (error) {
+            // if (error && error.response.status === 400 || error.response.status === 404) {
+            //     toast.warning('Không có địa chỉ này !', {
+            //         autoClose: 3000
+            //     })
+            //     history.push('/auth/pageNotFound')
+            // }
+            // else 
             showError(error)
         }
     }
-    
+
     // const arrayDataAddress = []
     // const arrayDataPillar = []
     // const dataCategoryMapEntries = new Map(Object.entries(dataCategoryMap));
@@ -203,6 +237,7 @@ function CategoryDetail() {
     let [page, setPage] = useState(1);
     const PER_PAGE = 1;
 
+
     const count = Math.ceil(Object.entries(dataCategoryMap).length / PER_PAGE);
     const _DATA = usePagination(Object.entries(dataCategoryMap), PER_PAGE);
 
@@ -210,7 +245,7 @@ function CategoryDetail() {
         setPage(p);
         _DATA.jump(p);
     };
-
+console.log('_DATA.currentData() ',_DATA.currentData());
     return (
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >
@@ -230,10 +265,10 @@ function CategoryDetail() {
                                     <img style={{ width: '40%', height: '35vh' }} src={'https://truyenthongacn.com/wp-content/uploads/2022/04/CTY-TRUYEN-THONG-ACN-1222.png'} /> */}
                                 </div>
                                 <div className="product-detail">
-                                    <h1 className="product__title">{dataCategory.name} </h1>
+                                    {/* <h1 className="product__title">{dataCategory.name} </h1> */}
                                     {/* <div className="product__price">Thành phố {address.city}  </div> */}
                                     <div className="product__subtitle">
-                                        Mô tả:    {dataCategory.description}
+                                        {/* Mô tả:    {dataCategory.description} */}
                                     </div>
 
                                     <div class="line-loading"></div>

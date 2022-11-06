@@ -7,17 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import Autocomplete from '@mui/material/Autocomplete';
-import EditIcon from '@mui/icons-material/Edit';
+
 import { Button, IconButton, InputBase } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import Box from '@mui/material/Box';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import axios from 'axios';
 import { API_CONFIRM_ORDER } from 'utils/const';
 import { toast } from 'react-toastify';
@@ -39,6 +32,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { API_GET_ORDER_ADMIN } from 'utils/const';
 import { showError } from 'utils/error';
+import AdminSize from "../Realtime/AdminSize";
 
 const columns = [
     { id: 'detail', label: '', minWidth: 10 },
@@ -98,7 +92,7 @@ const columns = [
 function OrderPlace() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(3);
-
+    const [size, setSize] = React.useState(0);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -113,6 +107,11 @@ function OrderPlace() {
     useEffect(() => {
         getOrderUserConfirmed()
     }, [])
+
+    useEffect(() => {
+        setSize(size)
+        getOrderUserConfirmed()
+    }, [size])
 
 
     const [data, setData] = useState([])
@@ -255,6 +254,8 @@ function OrderPlace() {
     };
     return (
         <>
+            <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
+
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
@@ -446,6 +447,7 @@ function OrderPlace() {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
+
             </Container>
         </>
     )
