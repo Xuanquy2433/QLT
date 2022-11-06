@@ -193,7 +193,7 @@ function CategoryComponent({ products, address, onClickRemoveItemCart, addCart }
                         sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
                         count={count} page={page} color="secondary" onChange={handleChange} />
                 </Stack> */}
-                <div style={{ width: '100%', display: 'flex' }}>
+                <div style={{ width: '100%', display: 'flex', alignItems: "center", }}>
                     <hr style={{ border: '2px solid white', width: '40%' }} />
                     <h1 style={{ fontSize: "28px", fontWeight: "600", width: '20%', marginTop: '1px', color: "white", textAlign: 'center' }}> Đường {address.street}</h1>
                     <hr style={{ border: '2px solid white', width: '40%' }} />
