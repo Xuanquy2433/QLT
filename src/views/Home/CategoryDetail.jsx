@@ -81,7 +81,7 @@ function CategoryDetail() {
             showError(error)
         }
     }
-
+    
     // const arrayDataAddress = []
     // const arrayDataPillar = []
     // const dataCategoryMapEntries = new Map(Object.entries(dataCategoryMap));
@@ -251,18 +251,15 @@ function CategoryDetail() {
                     </div>
                 }
             </div>
-            {/* <Stack sx={{ mt: 8 }} alignItems="center">
+            <Stack sx={{ mt: 8 }} alignItems="center">
                 <Pagination
                     sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
                     count={count} page={page} color="secondary" onChange={handleChange} />
-            </Stack> */}
+            </Stack>
             {
-                // dataCategoryMap.length > 0 ? dataCategoryMap.map(([key, value]) => (
-                //     <CategoryComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} address={JSON.parse(key)} products={value} />
-                // )) : <h1 style={{ fontSize: "28px", fontWeight: "600", width: '100%', marginTop: '1px', color: "white", textAlign: 'center' }}> Chưa có trụ nào ! </h1>
-                Object.entries(dataCategoryMap).map(([key, value]) => (
+                _DATA.currentData().length > 0 ? _DATA.currentData().map(([key, value]) => (
                     <CategoryComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} address={JSON.parse(key)} products={value} />
-                ))
+                )) : <h1 style={{ fontSize: "28px", fontWeight: "600", width: '100%', marginTop: '1px', color: "white", textAlign: 'center' }}> Chưa có trụ nào ! </h1>
             }
         </div>
     )
