@@ -17,6 +17,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { API_GET_ADDRESS_DETAIL_NOT_TOKEN } from 'utils/const';
 import { showError } from 'utils/error';
+import { API_CART_REMOVE } from 'utils/const';
 
 const columns = [
     {
@@ -64,13 +65,8 @@ function AddressDetail() {
     console.log(id[0]);
     let token = localStorage.getItem("token");
 
-    useEffect(() => {
-        getAddress()
-    }, [])
-
     const history = useHistory();
     const getAddress = async (e) => {
-
         try {
             if (!token) {
                 const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
@@ -102,6 +98,24 @@ function AddressDetail() {
             else showError(error)
         }
     }
+    const onClickRemoveItemCart = async (id) => {
+        console.log('id cart', id);
+        const response = await axios.put(API_CART_REMOVE + id, {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response.status === 200) {
+            toast.success("Xoá khỏi giỏ thành công", { autoClose: 1300 })
+            getAddress()
+        }
+    }
+
+    useEffect(() => {
+        getAddress()
+    }, [])
 
     return (
         <div >
@@ -188,7 +202,7 @@ function AddressDetail() {
             </Paper> */}
 
             </div>
-            <ProductComponent product={dataAddressProduct} />
+            <ProductComponent onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} />
 
         </div>
     )

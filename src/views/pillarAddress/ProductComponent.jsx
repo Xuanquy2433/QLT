@@ -20,7 +20,8 @@ import { ThemeProvider } from "styled-components";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { API_WISHLIST_REMOVE } from "utils/const";
 import { API_WISHLIST_GET } from "utils/const";
-function ProductComponent({ product }) {
+import { API_CART_REMOVE } from "utils/const";
+function ProductComponent({ product, onClickRemoveItemCart }) {
 
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
@@ -276,7 +277,8 @@ function ProductComponent({ product }) {
     }
   })
 
-  console.log(data);
+
+  console.log('ll ', _DATA.currentData());
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -302,7 +304,7 @@ function ProductComponent({ product }) {
                   <h3>Loại trụ: {item.category.name}</h3>
                   <h4> {item.description}</h4>
                   {item.status === 'AVAILABLE' ?
-                    <Button className="btn-cart-cus" sx={{
+                    item.inCart === false ? <Button className="btn-cart-cus" sx={{
                       '&:hover': {
                         bgcolor: '#1337bf',
                       },
@@ -311,7 +313,19 @@ function ProductComponent({ product }) {
                     }}
                       onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                       Thêm vào giỏ
-                    </Button> :
+                    </Button>
+                      :
+                      <Button className="btn-cart-cus" sx={{
+                        '&:hover': {
+                          bgcolor: '#green',
+                        },
+                        fontWeight: "500", width: "100%",
+                        background: "green", color: "#FFFFFF",
+                      }}
+                        onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
+                        Xóa khỏi giỏ
+                      </Button>
+                    :
                     <Button style={{
                       fontWeight: "500", width: "100%"
                       , border: "1px solid #5372E4", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
