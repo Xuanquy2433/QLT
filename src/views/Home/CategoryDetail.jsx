@@ -100,8 +100,8 @@ function CategoryDetail() {
                     }
                 })
                 if (response.status === 200) {
-                    setDataCategory(response.data)
-                    setDataCategoryMap(response.data)
+                    setDataCategory(response.data.category)
+                    setDataCategoryMap(response.data.categoryMap)
                 }
             }
         } catch (error) {
@@ -245,7 +245,14 @@ function CategoryDetail() {
         setPage(p);
         _DATA.jump(p);
     };
-console.log('_DATA.currentData() ',_DATA.currentData());
+console.log('error this',Object.entries(dataCategoryMap) );
+    // const object2 = Object.fromEntries(
+    //     Object.entries(dataCategoryMap)
+    //     .map(([ key, val ]) => [ key, val * 2 ])
+    //   );
+      
+    //   console.log(object2);
+ 
     return (
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >
@@ -265,10 +272,10 @@ console.log('_DATA.currentData() ',_DATA.currentData());
                                     <img style={{ width: '40%', height: '35vh' }} src={'https://truyenthongacn.com/wp-content/uploads/2022/04/CTY-TRUYEN-THONG-ACN-1222.png'} /> */}
                                 </div>
                                 <div className="product-detail">
-                                    {/* <h1 className="product__title">{dataCategory.name} </h1> */}
+                                    <h1 className="product__title">{dataCategory.name} </h1>
                                     {/* <div className="product__price">Thành phố {address.city}  </div> */}
                                     <div className="product__subtitle">
-                                        {/* Mô tả:    {dataCategory.description} */}
+                                        Mô tả:    {dataCategory.description}
                                     </div>
 
                                     <div class="line-loading"></div>

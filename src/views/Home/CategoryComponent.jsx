@@ -165,7 +165,6 @@ function CategoryComponent({ products, address, onClickRemoveItemCart, addCart }
         _DATA.jump(p);
     };
 
-    console.log("_data", _DATA.currentData());
     const theme = createTheme({
         palette: {
             primary: {
