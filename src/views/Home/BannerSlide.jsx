@@ -26,7 +26,7 @@ function BannerSlide() {
     }
     useEffect(() => {
         getData();
-    })
+    },[])
     return (
         <div style={{ width: '1400px', borderRadius: '10px', height: '600px',margin: 'auto' }}>
             <Slider  {...settings}>

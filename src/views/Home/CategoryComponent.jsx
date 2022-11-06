@@ -18,7 +18,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { API_WISHLIST_REMOVE } from "utils/const";
 import { API_WISHLIST_GET } from "utils/const";
 import usePagination from "views/pillarAddress/Pagination";
-function CategoryComponent({ products, address }) {
+function CategoryComponent({ products, address, onClickRemoveItemCart, addCart }) {
 
     const renderer = ({ hours, minutes, completed }) => {
         if (completed) {
@@ -45,96 +45,7 @@ function CategoryComponent({ products, address }) {
 
     let token = localStorage.getItem('token')
 
-    const addCart = async (item) => {
 
-        // save product to cart local
-        const { id, name } = item;
-        let listCart = localStorage.getItem("cartTemp")
-        let listCartADD = localStorage.getItem("cartADD")
-
-        let listCartItem = []
-        let listCartADDItem = []
-
-        if (listCart && listCartADD != undefined) {
-            listCartItem = JSON.parse(listCart)
-            listCartADDItem = JSON.parse(listCartADD)
-        }
-        let checkCartHasBeen = true
-
-        try {
-            if (token) {
-                // when already login
-                const response = await axios.post(API_ADD_CART, {
-                    month: 1,
-                    productId: id
-                }, {
-                    headers: {
-                        'authorization': 'Bearer ' + localStorage.getItem('token'),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (response && response.status === 201) {
-                    toast.success('Đã thêm vào danh sách thanh toán', {
-                        autoClose: 1500
-                    })
-                    history.push('/auth/cart')
-                };
-            } else {
-                // when don't login
-                for (let i = 0; i < listCartItem.length; i++) {
-                    if (listCartItem[i].productId === item.id && listCartADDItem[i].productId === item.id) {
-                        // localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
-                        checkCartHasBeen = false
-                    }
-                }
-                if (checkCartHasBeen == true) {
-                    let items = {
-                        month: 1,
-                        productId: item.id,
-                        nameProduct: item.name,
-                        priceProduct: item.price,
-                        imageProduct: item.photosImagePath
-                    }
-                    let itemsADD = {
-                        month: 1,
-                        productId: item.id
-                    }
-
-                    listCartItem.push(items)
-                    listCartADDItem.push(itemsADD)
-                    localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
-                    localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
-                }
-                toast.success('Đã thêm vào danh sách thanh toán', {
-                    autoClose: 1500
-                })
-                // history.push('/auth/cart')
-            }
-        } catch (error) {
-            console.log(error.response.data)
-            if (error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error) {
-                toast.error(`${error.response.data.error}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error && error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else {
-                toast.error('Error', {
-                    autoClose: 2000
-                })
-            }
-        }
-    }
     const addCartPreOrder = async (item) => {
         // save product to cart local
         const { id, name } = item;
@@ -274,7 +185,6 @@ function CategoryComponent({ products, address }) {
         }
     })
 
-
     return (
         <React.Fragment>
             <ThemeProvider theme={theme}>
@@ -295,7 +205,7 @@ function CategoryComponent({ products, address }) {
                     {
                         _DATA.currentData().map((item, index) => (
                             <React.Fragment>
-                                < div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
+                                <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
                                     <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                                         <img style={{ width: '100%', height: "27vh", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
                                     </div>
@@ -303,10 +213,10 @@ function CategoryComponent({ products, address }) {
 
                                         <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: '1px', color: "#444444" }}> {item.name}</h1>
                                         <h2 style={{ color: '#D70018' }}> {formatMoney(item.price)} VNĐ</h2>
-                                        {/* <h3>Loại trụ: {item.category.name}</h3> */}
+                                        <h3>Loại trụ: {item.name}</h3>
                                         <h4> {item.description}</h4>
                                         {item.status === 'AVAILABLE' ?
-                                            <Button className="btn-cart-cus" sx={{
+                                            item.inCart === false ? <Button className="btn-cart-cus" sx={{
                                                 '&:hover': {
                                                     bgcolor: '#1337bf',
                                                 },
@@ -314,15 +224,28 @@ function CategoryComponent({ products, address }) {
                                                 background: "#1973BC", color: "#FFFFFF",
                                             }}
                                                 onClick={(e) => addCart({ ...item })} variant="contained" color="success">
-                                                Thêm vào giỏ
-                                            </Button> :
+                                                Thêm vào thanh toán
+                                            </Button>
+                                                :
+                                                <Button className="btn-cart-cus" sx={{
+                                                    '&:hover': {
+                                                        bgcolor: '#1337bf',
+                                                        color: 'yellow'
+                                                    },
+                                                    fontWeight: "500", width: "100%",
+                                                    background: "#1973BC", color: "yellow",
+                                                }}
+                                                    onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
+                                                    Xóa khỏi thanh toán
+                                                </Button>
+                                            :
                                             <Button style={{
                                                 fontWeight: "500", width: "100%"
                                                 , border: "1px solid #5372E4", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
                                             }} disabled variant="contained" >
                                                 Đã cho thuê
                                             </Button>}
-                                        <div style={{ height: "28.5px" }}>{item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}</div>
+                                        {item.status === 'HIRING' && item.expiredDate !== null ? <div style={{ height: "28.5px" }}> <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> </div> : ''}
                                     </div>
                                     < div style={{ fontWeight: "600", display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
                                         Yêu thích
