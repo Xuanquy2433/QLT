@@ -41,7 +41,7 @@ function CartDatabase() {
 
     console.log(data);
     const handleUpdateMonth = async (item) => {
-        const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month + 1) + {
+        const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month + 1), {},{
             headers: {
                 'authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Accept': 'application/json',
@@ -53,13 +53,14 @@ function CartDatabase() {
 
     const handleMonth = async (item) => {
         if (item.month > 1) {
-            const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month - 1), {
+            const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month - 1), {},{
                 headers: {
                     'authorization': 'Bearer ' + localStorage.getItem('token'),
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             })
+            getAllCart()
         }
     }
 
