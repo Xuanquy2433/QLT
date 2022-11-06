@@ -312,18 +312,18 @@ function ProductComponent({ product, onClickRemoveItemCart }) {
                       background: "#1973BC", color: "#FFFFFF",
                     }}
                       onClick={(e) => addCart({ ...item })} variant="contained" color="success">
-                      Thêm vào giỏ
+                      Thêm vào thanh toán
                     </Button>
                       :
                       <Button className="btn-cart-cus" sx={{
                         '&:hover': {
-                          bgcolor: '#green',
+                          bgcolor: '#041e80',
                         },
                         fontWeight: "500", width: "100%",
-                        background: "green", color: "#FFFFFF",
+                        background: "#1337bf", color: "#FFFFFF",
                       }}
                         onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
-                        Xóa khỏi giỏ
+                        Xóa khỏi thanh toán
                       </Button>
                     :
                     <Button style={{
