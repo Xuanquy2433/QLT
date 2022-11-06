@@ -245,14 +245,16 @@ function CategoryDetail() {
         setPage(p);
         _DATA.jump(p);
     };
-console.log('error this',Object.entries(dataCategoryMap) );
+    console.log('error this', dataCategoryMap);
+    console.log('error this', Object.entries(dataCategoryMap));
+
     // const object2 = Object.fromEntries(
     //     Object.entries(dataCategoryMap)
     //     .map(([ key, val ]) => [ key, val * 2 ])
     //   );
-      
+
     //   console.log(object2);
- 
+
     return (
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >
