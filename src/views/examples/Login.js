@@ -124,7 +124,7 @@ const Login = () => {
 
   return (
     <>
-      <Col style={{ paddingLeft: '70px', paddingRight: '70px' }} lg="5" md="7">
+      <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D", marginBottom: "-20px" }}>

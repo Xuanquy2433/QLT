@@ -17,7 +17,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import styled from "styled-components";
-import './login.css'
+import './forgotPassword.css'
 import { API_FORGOTPASSWORD } from "utils/const";
 
 const ForgotPassword = () => {
@@ -79,7 +79,7 @@ const ForgotPassword = () => {
     `
     return (
         <>
-            <Col style={{ paddingLeft: '70px', paddingRight: '70px' }} lg="5" md="7">
+            <Col lg="5" md="7">
                 <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-transparent pb-5">
                         <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D" }}>

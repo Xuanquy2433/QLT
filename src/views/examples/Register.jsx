@@ -19,6 +19,7 @@ import { API_SIGNUP } from "utils/const";
 import PhoneBluetoothSpeakerIcon from '@mui/icons-material/PhoneBluetoothSpeaker';
 import PhoneInput from 'react-phone-number-input';
 import { NavLink, useHistory } from "react-router-dom";
+import './register.css'
 
 const Register = () => {
   const history = useHistory();
@@ -79,7 +80,7 @@ const Register = () => {
 
   return (
     <>
-      <Col style={{ paddingLeft: '100px', paddingRight: '100px' }} lg="6" md="8">
+      <Col lg="6" md="8">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D", marginBottom: "-20px" }}>

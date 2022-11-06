@@ -40,13 +40,14 @@ function Notification() {
         setUserCount(0)
         setOpen((prevOpen) => !prevOpen);
 
-        }
+    }
 
 
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;      }
+            return;
+        }
 
         setOpen(false);
     };
@@ -83,10 +84,15 @@ function Notification() {
                         aria-expanded={open ? 'true' : undefined}
                         aria-haspopup="true"
                         onClick={handleToggle}>
-                        <p class="notification">
-                            <span> <NotificationsNoneIcon /></span>
+
+
+                        <div class="notification">
+                            <NotificationsNoneIcon />
+                            <span style={{ color: "#172b4d !important" }} className="nav-link-inner--text">Thông báo</span>
                             {countUser !== 0 ? <span class="badge">{countUser}</span> : ''}
-                        </p>Thông báo
+
+                            {/* <span> <NotificationsNoneIcon /></span> */}
+                        </div>
 
                         {/* <div style={{ display: 'none' }}>
                             <UserNotification changeCount={(data) => setUserCount(data)} />

@@ -181,7 +181,7 @@ const AdminNavbar = () => {
                   <ul className="menu-item">
                     <li className="menu-item-title">
                       <NavLink onClick={checkRole} className="menu-hover nav-link-icon">
-                        <i className="ni ni-single-02" />
+                        <i style={{ marginRight: "4px" }} className="ni ni-single-02" />
                         <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName} <ArrowDropDownIcon /></span>
                       </NavLink>
                       <ul className="menu-level-2">
@@ -209,6 +209,17 @@ const AdminNavbar = () => {
                             <DropdownItem divider />
                           </li>
                           : ''}
+                        {token && decoded.roles === '[ROLE_ADMIN]' ?
+                          <React.Fragment>
+                            <li className="item-menu-level-2">
+                              <NavLink className="nav-link-icon" to="/admin/index" tag={Link}
+                              >
+                                <AdminPanelSettingsIcon sx={styleLab} />
+                                <span style={styleFont} className="nav-link-inner--text">Quản trị</span>
+                              </NavLink>
+                            </li>
+                            <DropdownItem divider />
+                          </React.Fragment> : ''}
                         <li className="item-menu-level-2">
                           <NavLink className="nav-link-icon" to="/admin/index" tag={Link} onClick={logout}
                           >
@@ -217,17 +228,7 @@ const AdminNavbar = () => {
                           </NavLink>
                         </li>
 
-                        {token && decoded.roles === '[ROLE_ADMIN]' ?
-                          <React.Fragment>
-                            <DropdownItem divider />
-                            <li className="item-menu-level-2">
-                              <NavLink className="nav-link-icon" to="/admin/index" tag={Link}
-                              >
-                                <AdminPanelSettingsIcon sx={styleLab} />
-                                <span style={styleFont} className="nav-link-inner--text">Quản trị</span>
-                              </NavLink>
-                            </li>
-                          </React.Fragment> : ''}
+
                       </ul>
 
                     </li>
