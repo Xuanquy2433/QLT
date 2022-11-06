@@ -19,6 +19,8 @@ import axios from "axios";
 import styled from "styled-components";
 import { API_CHANGE_PASSWORD } from './../../utils/const';
 import { showError } from "utils/error";
+
+import './forgotPassword.css'
 export default function ChangePassword() {
     const history = useHistory();
     const [data, setData] = useState({
@@ -54,7 +56,7 @@ export default function ChangePassword() {
     `
     return (
         <div>
-            <Col style={{ paddingLeft: '80px', paddingRight: '80px' }} >
+            <Col style={{ marginTop: "30px" }}>
                 <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-transparent pb-5">
                         <div style={{ textAlign: "center", fontSize: "33px", color: "#172B4D" }}>

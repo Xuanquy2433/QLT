@@ -16,12 +16,10 @@ const Login = () => {
             className="d-flex justify-content-between p-3"
             style={{ backgroundColor: "#6351ce" }}
           >
-            {/* Left */}
             <div className="me-5">
               <span>Kết nối với chúng tôi trên các mạng xã hội:</span>
             </div>
-            {/* Left */}
-            {/* Right */}
+
             <div>
               <NavLink to={''} className="text-white me-4 mr-5">
                 <i className="fab fa-facebook-f" />
@@ -42,7 +40,6 @@ const Login = () => {
                 <i className="fab fa-github" />
               </NavLink>
             </div>
-            {/* Right */}
           </section>
           {/* Section: Social media */}
           {/* Section: Links  */}
