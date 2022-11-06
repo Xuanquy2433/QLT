@@ -81,7 +81,7 @@ function CategoryDetail() {
             showError(error)
         }
     }
-    
+
     // const arrayDataAddress = []
     // const arrayDataPillar = []
     // const dataCategoryMapEntries = new Map(Object.entries(dataCategoryMap));
@@ -257,7 +257,7 @@ function CategoryDetail() {
                     count={count} page={page} color="secondary" onChange={handleChange} />
             </Stack>
             {
-                _DATA.currentData().length > 0 ? _DATA.currentData().map(([key, value]) => (
+                dataCategoryMap.length > 0 ? dataCategoryMap.map(([key, value]) => (
                     <CategoryComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} address={JSON.parse(key)} products={value} />
                 )) : <h1 style={{ fontSize: "28px", fontWeight: "600", width: '100%', marginTop: '1px', color: "white", textAlign: 'center' }}> Chưa có trụ nào ! </h1>
             }
