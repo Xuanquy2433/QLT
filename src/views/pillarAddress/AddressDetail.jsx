@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { API_GET_ADDRESS_DETAIL_NOT_TOKEN } from 'utils/const';
 import { showError } from 'utils/error';
 import { API_CART_REMOVE } from 'utils/const';
+import { API_ADD_CART } from 'utils/const';
 
 const columns = [
     {
@@ -108,11 +109,102 @@ function AddressDetail() {
             }
         })
         if (response.status === 200) {
-            toast.success("Xoá khỏi giỏ thành công", { autoClose: 1300 })
+            toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1300 })
             getAddress()
         }
     }
 
+    //add cart
+    const addCart = async (item) => {
+        // save product to cart local
+        const { id, name } = item;
+        let listCart = localStorage.getItem("cartTemp")
+        let listCartADD = localStorage.getItem("cartADD")
+
+        let listCartItem = []
+        let listCartADDItem = []
+
+        if (listCart && listCartADD != undefined) {
+            listCartItem = JSON.parse(listCart)
+            listCartADDItem = JSON.parse(listCartADD)
+        }
+        let checkCartHasBeen = true
+        try {
+            if (token) {
+                // when already login
+                const response = await axios.post(API_ADD_CART, {
+                    month: 1,
+                    productId: id
+                }, {
+                    headers: {
+                        'authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response && response.status === 201) {
+                    toast.success('Đã thêm vào danh sách thanh toán', {
+                        autoClose: 1500
+                    })
+                    getAddress()
+                    // history.push('/auth/cart')
+                };
+            } else {
+                // when don't login
+                for (let i = 0; i < listCartItem.length; i++) {
+                    if (listCartItem[i].productId === item.id && listCartADDItem[i].productId === item.id) {
+                        // localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+                        checkCartHasBeen = false
+                    }
+                }
+                if (checkCartHasBeen == true) {
+                    let items = {
+                        month: 1,
+                        productId: item.id,
+                        nameProduct: item.name,
+                        priceProduct: item.price,
+                        imageProduct: item.photosImagePath
+                    }
+                    let itemsADD = {
+                        month: 1,
+                        productId: item.id
+                    }
+
+                    listCartItem.push(items)
+                    listCartADDItem.push(itemsADD)
+                    localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
+                    localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
+                }
+                toast.success('Đã thêm vào danh sách thanh toán', {
+                    autoClose: 1500
+                })
+                getAddress()
+                // history.push('/auth/cart')
+            }
+        } catch (error) {
+            console.log(error.response.data)
+            if (error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error) {
+                toast.error(`${error.response.data.error}`, {
+                    autoClose: 2000
+                })
+            }
+            else if (error.response.data.error && error.response.data.message) {
+                toast.error(`${error.response.data.message}`, {
+                    autoClose: 2000
+                })
+            }
+            else {
+                toast.error('Error', {
+                    autoClose: 2000
+                })
+            }
+        }
+    }
     useEffect(() => {
         getAddress()
     }, [])
@@ -132,8 +224,6 @@ function AddressDetail() {
                     <div >
                         <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" />
                     </div> */}
-
-
                         <div style={{ position: 'sticky' }} className="container">
                             <div className="header">
                                 <div className="header-logo">Thông tin trụ </div>
@@ -158,8 +248,6 @@ function AddressDetail() {
                                 </div>
                             </div>
                         </div>
-
-
 
                     </div> :
                     <div style={{ display: "flex", justifyContent: "space-between" }} className="address-detail">
@@ -202,7 +290,7 @@ function AddressDetail() {
             </Paper> */}
 
             </div>
-            <ProductComponent onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} />
+            <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} />
 
         </div>
     )

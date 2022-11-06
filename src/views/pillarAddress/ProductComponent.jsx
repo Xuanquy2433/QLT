@@ -21,7 +21,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { API_WISHLIST_REMOVE } from "utils/const";
 import { API_WISHLIST_GET } from "utils/const";
 import { API_CART_REMOVE } from "utils/const";
-function ProductComponent({ product, onClickRemoveItemCart }) {
+function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
 
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
@@ -43,101 +43,9 @@ function ProductComponent({ product, onClickRemoveItemCart }) {
 
   }
 
-
   const history = useHistory()
-
   let token = localStorage.getItem('token')
 
-  const addCart = async (item) => {
-
-    // save product to cart local
-    const { id, name } = item;
-    let listCart = localStorage.getItem("cartTemp")
-    let listCartADD = localStorage.getItem("cartADD")
-
-    let listCartItem = []
-    let listCartADDItem = []
-
-    if (listCart && listCartADD != undefined) {
-      listCartItem = JSON.parse(listCart)
-      listCartADDItem = JSON.parse(listCartADD)
-    }
-    let checkCartHasBeen = true
-
-    try {
-      if (token) {
-        // when already login
-        const response = await axios.post(API_ADD_CART, {
-          month: 1,
-          productId: id
-        }, {
-          headers: {
-            'authorization': 'Bearer ' + localStorage.getItem('token'),
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        });
-        if (response && response.status === 201) {
-          toast.success('Đã thêm vào danh sách thanh toán', {
-            autoClose: 1500
-          })
-          history.push('/auth/cart')
-        };
-      } else {
-        // when don't login
-        for (let i = 0; i < listCartItem.length; i++) {
-          if (listCartItem[i].productId === item.id && listCartADDItem[i].productId === item.id) {
-            // localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
-            checkCartHasBeen = false
-          }
-        }
-        if (checkCartHasBeen == true) {
-          let items = {
-            month: 1,
-            productId: item.id,
-            nameProduct: item.name,
-            priceProduct: item.price,
-            imageProduct: item.photosImagePath
-          }
-          let itemsADD = {
-            month: 1,
-            productId: item.id
-          }
-
-          listCartItem.push(items)
-          listCartADDItem.push(itemsADD)
-          localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
-          localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
-        }
-        toast.success('Đã thêm vào danh sách thanh toán', {
-          autoClose: 1500
-        })
-        // history.push('/auth/cart')
-      }
-    } catch (error) {
-      console.log(error.response.data)
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
-      }
-    }
-  }
   const addCartPreOrder = async (item) => {
     // save product to cart local
     const { id, name } = item;
@@ -213,7 +121,6 @@ function ProductComponent({ product, onClickRemoveItemCart }) {
 
   }
 
-
   const onHandleRemoveWishList = async (id) => {
     const response = await axios.post(API_WISHLIST_REMOVE + id, {}, {
       headers: {
@@ -257,7 +164,6 @@ function ProductComponent({ product, onClickRemoveItemCart }) {
     _DATA.jump(p);
   };
 
-  console.log("_data", _DATA.currentData());
   const theme = createTheme({
     palette: {
       primary: {
@@ -278,15 +184,14 @@ function ProductComponent({ product, onClickRemoveItemCart }) {
   })
 
 
-  console.log('ll ', _DATA.currentData());
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <Stack sx={{ mt: 8 }} alignItems="center">
+        {/* <Stack sx={{ mt: 8 }} alignItems="center">
           <Pagination
             sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
             count={count} page={page} color="secondary" onChange={handleChange} />
-        </Stack>
+        </Stack> */}
         <div style={{
           display: "flex", width: '1300px', flexWrap: "wrap", justifyContent: "center"
           , marginTop: '50px', marginBottom: '150px'
@@ -317,10 +222,11 @@ function ProductComponent({ product, onClickRemoveItemCart }) {
                       :
                       <Button className="btn-cart-cus" sx={{
                         '&:hover': {
-                          bgcolor: '#041e80',
+                          bgcolor: '#1337bf',
+                          color: 'yellow'
                         },
                         fontWeight: "500", width: "100%",
-                        background: "#1337bf", color: "#FFFFFF",
+                        background: "#1973BC", color: "yellow",
                       }}
                         onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
                         Xóa khỏi thanh toán
