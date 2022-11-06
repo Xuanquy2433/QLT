@@ -238,7 +238,7 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                     }} disabled variant="contained" >
                       Đã cho thuê
                     </Button>}
-                  <div style={{ height: "28.5px" }}>{item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}</div>
+                  <div style={{ height: "28.5px" }}>{item.status === 'HIRING' && item.expiredDate !== null ? <h4 style={{ marginTop: '15px' }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> : ''}</div>
                 </div>
                 {/* {
                   item.preOrdered === false ?
