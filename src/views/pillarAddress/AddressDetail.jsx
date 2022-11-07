@@ -101,15 +101,25 @@ function AddressDetail() {
     }
     const onClickRemoveItemCart = async (id) => {
         console.log('id cart', id);
-        const response = await axios.put(API_CART_REMOVE + id, {}, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+        if (token) {
+            const response = await axios.put(API_CART_REMOVE + id, {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (response.status === 200) {
+                toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1300 })
+                getAddress()
             }
-        })
-        if (response.status === 200) {
-            toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1300 })
+        } else {
+            console.log('delete id cart local', id);
+
+            let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
+            listCartItems.splice(id, 1)
+            localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
+            toast.success("Xoá thành cônng", { autoClose: "1500" })
             getAddress()
         }
     }

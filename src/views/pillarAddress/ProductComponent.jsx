@@ -183,7 +183,8 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
     }
   })
 
-
+  let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
+  console.log(listCartItems);
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -209,16 +210,17 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                   <h3>Loại trụ: {item.category.name}</h3>
                   <h4> {item.description}</h4>
                   {item.status === 'AVAILABLE' ?
-                    item.inCart === false ? <Button className="btn-cart-cus" sx={{
-                      '&:hover': {
-                        bgcolor: '#1337bf',
-                      },
-                      fontWeight: "500", width: "100%",
-                      background: "#1973BC", color: "#FFFFFF",
-                    }}
-                      onClick={(e) => addCart({ ...item })} variant="contained" color="success">
-                      Thêm vào thanh toán
-                    </Button>
+                    item.inCart === false && listCartItems.filter(i => i.productId === item.id).length === 0 ?
+                      <Button className="btn-cart-cus" sx={{
+                        '&:hover': {
+                          bgcolor: '#1337bf',
+                        },
+                        fontWeight: "500", width: "100%",
+                        background: "#1973BC", color: "#FFFFFF",
+                      }}
+                        onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                        Thêm vào thanh toán
+                      </Button>
                       :
                       <Button className="btn-cart-cus" sx={{
                         '&:hover': {
