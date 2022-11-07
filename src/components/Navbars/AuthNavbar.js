@@ -72,7 +72,7 @@ const AdminNavbar = () => {
             /> */}
             {/* <h3 style={{ fontSize: "2.5em", fontWeight: 800, color: 'white' }}>LOGO</h3> */}
             <div class="typed-animation">
-              <h1 style={{ color: 'white' }} class="typed-out">LOGO</h1>
+              <h1 style={{ color: 'white', margin: "0" }} class="typed-out">LOGO</h1>
             </div>
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
@@ -105,12 +105,7 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
-              {token && decoded ?
-                <NavItem >
-                  <NavLink style={{ display: "flex" }} className="nav-link-icon" >
-                    <Notification />
-                  </NavLink>
-                </NavItem> : ''}
+
 
               <NavItem >
                 <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
@@ -119,7 +114,12 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
-
+              {token && decoded ?
+                <NavItem >
+                  <NavLink style={{ display: "flex" }} className="nav-link-icon" >
+                    <Notification />
+                  </NavLink>
+                </NavItem> : ''}
 
               {token && decoded ? '' :
                 <NavItem>

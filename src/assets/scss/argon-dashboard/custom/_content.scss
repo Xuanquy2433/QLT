@@ -3,14 +3,24 @@
 
     // Navbar
     .navbar-top {
-        position: absolute;
+        // position: absolute;
+        height: 80px;
         left: 0;
         top: 0;
         width: 100%;
         z-index: 20;
-        background-color: transparent;
+        // background-color: transparent;
+        // #242526
+        background-color: rgb(99, 81, 206);
         padding-left: 0 !important;
         padding-right: 0 !important;
+        position: fixed;
+        // border-bottom:1px solid #333;
+    }
+
+    .navcustom-ss{
+        position: absolute;
+        background-color: transparent;
     }
 
     // Container

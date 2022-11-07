@@ -8,7 +8,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Notifications from '@mui/icons-material/Notifications';
 import axios from 'axios';
 import { API_GET_TEST } from 'utils/const';
 import AdminNotification from 'views/Realtime/AdminNotification';
@@ -77,7 +77,7 @@ function Notification() {
             <Stack direction="row" style={{ cursor: 'pointer' }} spacing={2}>
                 <div className='menu-lv2-noti'>
                     <p
-                        // style={{ width: '50px' }}
+                        style={{ margin: "0" }}
                         ref={anchorRef}
                         id="composition-button"
                         aria-controls={open ? 'composition-menu' : undefined}
@@ -86,9 +86,9 @@ function Notification() {
                         onClick={handleToggle}>
 
 
-                        <div class="notification">
-                            <NotificationsNoneIcon />
-                            <span style={{ color: "#172b4d !important" }} className="nav-link-inner--text">Thông báo</span>
+                        <div style={{ display: "flex", alignItems: "center" }} class="notification">
+                            <Notifications style={{ width: "21px", height: "21px", marginLeft: "-2px" }} />
+                            <span style={{ color: "#172b4d !important", fontWeight: "400" }} className="nav-link-inner--text">Thông báo</span>
                             {countUser !== 0 ? <span class="badge">{countUser}</span> : ''}
 
                             {/* <span> <NotificationsNoneIcon /></span> */}
