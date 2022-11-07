@@ -157,12 +157,13 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                 </div>
                             }
 
-                            {data.status === 'EXTEND' &&
-                                <div style={{ color: 'yellow' }} className="d-flex justify-content-between">
-                                    <span>
-                                        Gia hạn !
-                                    </span>
-                                </div>
+                            {data.status === 'EXTEND' && <div className="d-flex justify-content-between">
+                                <span>{data.total} VNĐ</span>
+                                <span>
+                                    Thanh toán
+                                    <i className="fas fa-long-arrow-alt-right ms-2" />
+                                </span>
+                            </div>
                             }
 
                             {data.status === 'CANCELLED' &&

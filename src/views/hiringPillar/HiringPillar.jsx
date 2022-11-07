@@ -36,12 +36,12 @@ const columns = [
     },
     {
         id: 'status',
-        label: 'Trạng thái',
+        label: 'Số điện thoại',
         minWidth: 80,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
-    { id: 'description', label: 'Mô tả', minWidth: 150, align: 'center', },
+    { id: 'description', label: 'Tên khách', minWidth: 150, align: 'center', },
     { id: 'address', label: 'Địa chỉ', minWidth: 150, align: 'center', },
     { id: 'timeStart', label: 'Ngày bắt đầu', minWidth: 150, align: 'center', },
 
@@ -96,8 +96,9 @@ export default function HiringPillar({ data, page, search, rowsPerPage, totalPag
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.name} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> { }</TableCell>
+                                            {item.status === 'HIRING' ? <TableCell sx={{ textAlign: 'center' }}> {JSON.parse(item.user).phoneNumber}</TableCell> : <TableCell sx={{ textAlign: 'center' }}>Chưa thuê</TableCell>}
+                                            {item.status === 'HIRING' ? <TableCell sx={{ textAlign: 'center' }}> {JSON.parse(item.user).firstName + ' ' + JSON.parse(item.user).lastName}</TableCell> : <TableCell sx={{ textAlign: 'center' }}>Chưa thuê</TableCell>}
+                                            {/* {item.status === 'HIRING' ? <TableCell sx={{ textAlign: 'center' }}> {JSON.parse(item.user).firstName + ' ' + JSON.parse(item.user).lastName}</TableCell> : <TableCell sx={{ textAlign: 'center' }}>''</TableCell>} */}
                                             <TableCell sx={{ textAlign: 'center', height: '65px' }}> {item.address.fullAddress}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>
                                                 <Moment format="MMMM Do YYYY">
