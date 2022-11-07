@@ -210,7 +210,8 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                   <h3>Loại trụ: {item.category.name}</h3>
                   <h4> {item.description}</h4>
                   {item.status === 'AVAILABLE' ?
-                    item.inCart === false && listCartItems.filter(i => i.productId === item.id).length === 0 ?
+                    // && listCartItems.filter(i => i.productId === item.id).length === 0
+                    item.inCart === false ?
                       <Button className="btn-cart-cus" sx={{
                         '&:hover': {
                           bgcolor: '#1337bf',
