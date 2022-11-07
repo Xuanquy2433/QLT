@@ -199,7 +199,7 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
         }}>
           {
             _DATA.currentData().map((item, index) => (
-              <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
+              <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#E7EBF0", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}>
                 <div style={{ width: "100%", height: "30vh", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <img style={{ width: '100%', height: "100%", borderRadius: "8px", objectFit: "cover" }} src={item.photosImagePath} alt="" />
                 </div>
@@ -214,10 +214,17 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                     item.inCart === false ?
                       <Button className="btn-cart-cus" sx={{
                         '&:hover': {
-                          bgcolor: '#1337bf',
+                          bgcolor: '#007784',
+                          outline: "none",
+                          boxShadow: "none"
                         },
+                        border: "3px solid #007784",
                         fontWeight: "500", width: "100%",
-                        background: "#1973BC", color: "#FFFFFF",
+                        background: "none",
+                        outline: "none",
+                        color: "#007784",
+                        borderRadius: "8px",
+                        boxShadow: "none",
                       }}
                         onClick={(e) => addCart({ ...item })} variant="contained" color="success">
                         Thêm vào thanh toán
@@ -225,11 +232,17 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                       :
                       <Button className="btn-cart-cus" sx={{
                         '&:hover': {
-                          bgcolor: '#1337bf',
-                          color: 'yellow'
+                          bgcolor: '#007784',
+                          outline: "none",
+                          boxShadow: "none"
                         },
+                        border: "3px solid #007784",
+                        bgcolor: '#007784',
                         fontWeight: "500", width: "100%",
-                        background: "#1973BC", color: "yellow",
+                        outline: "none",
+                        color: "#FFFFFF",
+                        borderRadius: "8px",
+                        boxShadow: "none",
                       }}
                         onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
                         Xóa khỏi thanh toán

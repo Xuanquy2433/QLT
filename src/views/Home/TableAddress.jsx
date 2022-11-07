@@ -190,7 +190,7 @@ function TableAddress() {
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {data.length > 0 ? data.map((item, index) => (
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
-                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
+                                <div style={{ backgroundColor: '#E7EBF0', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
                                     <p style={{
                                         width: '46%', height: '230px'
                                     }}  >
@@ -206,9 +206,23 @@ function TableAddress() {
                                         <p>Số trụ còn trống: {item.totalProductAvailable}</p>
 
                                         <NavLink to={'/auth/address/' + item.id}>
-                                            <button sx={{ mt: 6 }} class="offset" >
+                                            <Button sx={{
+                                                '&:hover': {
+                                                    bgcolor: '#007784',
+                                                    outline: "none",
+                                                    boxShadow: "none",
+                                                    color: "#FFFFFF !important"
+                                                },
+                                                border: "3px solid #007784 !important",
+                                                fontWeight: "500", width: "100%",
+                                                background: "none",
+                                                outline: "none",
+                                                color: "#007784 !important",
+                                                borderRadius: "8px",
+                                                boxShadow: "none",
+                                            }}  >
                                                 Xem thêm
-                                            </button>
+                                            </Button>
                                         </NavLink>
                                         {/* 
                                     {item.product.length > 0 ? item.product.map((itemDetail, index) => (

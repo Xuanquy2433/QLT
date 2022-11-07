@@ -223,7 +223,7 @@ function AddressDetail() {
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >
                 {address ?
-                    <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: 'white', width: "96.5%" }} className="address-detail">
+                    <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: '#E7EBF0', width: "96.5%" }} className="address-detail">
                         {/* <div style={{ fontSize: "18px" }}>
                         <div>{address.id}</div>
                         <div >Thành phố: {address.city}</div>

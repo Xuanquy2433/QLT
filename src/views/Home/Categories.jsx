@@ -4,7 +4,15 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import { Nav } from 'reactstrap';
 import { API_GET_ALL_CATEGORY } from 'utils/const';
-
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import InboxIcon from '@mui/icons-material/Inbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import CategoryIcon from '@mui/icons-material/Category';
 function Categories() {
 
     const [data, setData] = useState([]);
@@ -20,16 +28,31 @@ function Categories() {
 
 
     return (
-        <Box sx={{ width: '86%', margin: 'auto' }}>
-            Categories
-            {
-                data.map((item, index) => (
-                    <NavLink style={{ marginRight: '20px' }} key={index} to={'/auth/categories/' + item.id}>
-                        {item.name}
-                    </NavLink>
-                ))
-            }
-        </Box>
+        <Box sx={{ width: '86%', margin: 'auto', borderRadius: "8px" }}>
+            <div>
+                <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderRadius: "8px", color: "#333", fontWeight: "600", }}>
+                    <h2 style={{ margin: "8px 0px 0px 10px" }}>Danh mục: </h2>
+
+                    {
+                        data.map((item, index) => (
+                            <NavLink key={index} to={'/auth/categories/' + item.id} aria-label="main mailbox folders">
+                                <List>
+                                    <ListItem disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <CategoryIcon />
+                                            </ListItemIcon>
+                                            <ListItemText sx={{ color: "#333" }} primary={item.name} />
+                                        </ListItemButton>
+                                    </ListItem>
+                                </List>
+                                <Divider />
+                            </NavLink>
+                        ))
+                    }
+                </Box>
+            </div >
+        </Box >
     )
 }
 
