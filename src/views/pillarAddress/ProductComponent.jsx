@@ -200,8 +200,8 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
           {
             _DATA.currentData().map((item, index) => (
               <div key={index} style={{ flexDirection: "column", float: "left", position: 'relative', backgroundColor: "#FFFFFF", marginTop: '20px', width: "23%", margin: "5px", display: "flex", padding: "10px", borderRadius: "15px", }}>
-                <div style={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                  <img style={{ width: '100%', height: "27vh", borderRadius: "8px" }} src={item.photosImagePath} alt="" />
+                <div style={{ width: "100%", height: "30vh", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <img style={{ width: '100%', height: "100%", borderRadius: "8px", objectFit: "cover" }} src={item.photosImagePath} alt="" />
                 </div>
                 <div style={{ width: "100%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
 

@@ -26,13 +26,13 @@ function BannerSlide() {
     }
     useEffect(() => {
         getData();
-    },[])
+    }, [])
     return (
-        <div style={{ width: '1400px', borderRadius: '10px', height: '600px',margin: 'auto' }}>
+        <div style={{ width: '1400px', borderRadius: '10px', height: '600px', margin: 'auto' }}>
             <Slider  {...settings}>
                 {data.map((i) => (
                     <div >
-                        <img style={{ width: '100%', height: '600px', borderRadius: '10px' }} src={i.photosImagePath} alt="" />
+                        <img style={{ width: '100%', height: '80vh', borderRadius: '10px', }} src={i.photosImagePath} alt="" />
                     </div>
                 ))}
             </Slider>
