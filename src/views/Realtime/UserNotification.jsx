@@ -43,7 +43,6 @@ const UserNotification = (params) => {
         setData(data)
     }
 
-    console.log(data)
     const onMessageReceived = (payload) => {
         setData(data =>[ JSON.parse(payload.body),...data])
     }

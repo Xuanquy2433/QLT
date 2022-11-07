@@ -31,7 +31,6 @@ const AdminNotification = (params) => {
 
     const getNotification = async (e) => {
         const response = await axios.get(API +'/notification/')
-        console.log(response.data)
         if (response.status === 200) {
             params.changeCount(response.data.filter((data)=>data.checked===false).length)
             handleRequest(response.data)
@@ -41,9 +40,8 @@ const AdminNotification = (params) => {
         setData(data)
     }
 
-    const onMessageReceived = (data) => {
-        getNotification();
-        toast.success(data, { autoClose: 2000 })
+    const onMessageReceived = (payload) => {
+        setData(data =>[ JSON.parse(payload.body),...data])
     }
 
     const onError = (err) => {

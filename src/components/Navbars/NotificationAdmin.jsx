@@ -26,8 +26,6 @@ function NotificationAdmin() {
         markAsRead()
         setCountAdmin(0)
         setOpen((prevOpen) => !prevOpen);
-
-
     };
     const markAsRead = async () => {
         await axios.post(API_GET_MARK_AS_READ_ADMIN)
@@ -61,54 +59,59 @@ function NotificationAdmin() {
 
 
     return (
-        <React.Fragment>
-            <Stack direction="row" spacing={2}>
-                <div className='menu-lv2-noti'>
-                    <p
-                        style={{ color: 'white' }}
-                        ref={anchorRef}
-                        id="composition-button"
-                        aria-controls={open ? 'composition-menu' : undefined}
-                        aria-expanded={open ? 'true' : undefined}
-                        aria-haspopup="true"
-                        onClick={handleToggle}>
-                        <p class="notification">
-                            <span> <NotificationsNoneIcon /></span>
-                            {countAdmin !== 0 ? <span class="badge">{countAdmin}</span> : ''}
-                        </p>
-                        {/* <AdminNotification changeCount={(data) => setCountAdmin(data)} /> */}
-                        <AdminSize changeCount={(data) => setCountAdmin(data)} ></AdminSize>
-                    </p>
-                    <Popper
-                        open={open}
-                        anchorEl={anchorRef.current}
-                        role={undefined}
-                        placement="bottom-start"
-                        transition
-                        disablePortal >
-                        {({ TransitionProps, placement }) => (
-                            <Grow
-                                {...TransitionProps}>
-                                <Paper>
-                                    <div className="scrollbar" id="style-1">
-                                        <ClickAwayListener onClickAway={handleClose}>
-                                            <MenuList
-                                                autoFocusItem={open}
-                                                id="composition-menu"
-                                                aria-labelledby="composition-button"
-                                                onKeyDown={handleListKeyDown}>
-                                                <AdminNotification changeCount={(data) => setCountAdmin(data)} />
-                                            </MenuList>
-                                        </ClickAwayListener>
-                                    </div>
-                                </Paper>
-                            </Grow>
-                        )}
-                    </Popper>
-                </div>
-            </Stack>
+        <>
 
-        </React.Fragment>
+            <React.Fragment>
+                <AdminSize changeCount={(data) => setCountAdmin(data)} ></AdminSize>
+                <Stack direction="row" spacing={2}>
+
+                    <div className='menu-lv2-noti'>
+                        <p
+                            style={{ color: 'white' }}
+                            ref={anchorRef}
+                            id="composition-button"
+                            aria-controls={open ? 'composition-menu' : undefined}
+                            aria-expanded={open ? 'true' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleToggle}>
+                            <p class="notification">
+                                <span> <NotificationsNoneIcon /></span>
+                                {countAdmin !== 0 ? <span class="badge">{countAdmin}</span> : ''}
+                            </p>
+                            {/* <AdminNotification changeCount={(data) => setCountAdmin(data)} /> */}
+
+                        </p>
+                        <Popper
+                            open={open}
+                            anchorEl={anchorRef.current}
+                            role={undefined}
+                            placement="bottom-start"
+                            transition
+                            disablePortal >
+                            {({ TransitionProps, placement }) => (
+                                <Grow
+                                    {...TransitionProps}>
+                                    <Paper>
+                                        <div className="scrollbar" id="style-1">
+                                            <ClickAwayListener onClickAway={handleClose}>
+                                                <MenuList
+                                                    autoFocusItem={open}
+                                                    id="composition-menu"
+                                                    aria-labelledby="composition-button"
+                                                    onKeyDown={handleListKeyDown}>
+                                                    <AdminNotification changeCount={(data) => setCountAdmin(data)} />
+                                                </MenuList>
+                                            </ClickAwayListener>
+                                        </div>
+                                    </Paper>
+                                </Grow>
+                            )}
+                        </Popper>
+                    </div>
+                </Stack>
+
+            </React.Fragment></>
+
     )
 }
 

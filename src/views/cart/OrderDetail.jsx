@@ -13,14 +13,13 @@ import ShowBank from './ShowBank';
 import ComponentRightInfo from './ComponentRightInfo';
 import { API_ORDER_RE_ORDER } from 'utils/const';
 import { showError } from 'utils/error';
+import UserSize from "../Realtime/UserSize";
 
 function OrderDetail() {
 
     let token = localStorage.getItem('token')
 
-    // const search = window.location.search;
-    // const params = new URLSearchParams(search);
-    // const id = params
+    const [size, setSize] = useState(0)
 
     let idOrderInURL = window.location.pathname.replace(/\D/g, "");
 
@@ -90,9 +89,8 @@ function OrderDetail() {
                         toast.success('Success', {
                             autoClose: 3000
                         })
-                        setTimeout(() => {
-                            window.location.reload()
-                        }, 1800);
+                        setSize(99)
+
                     };
                     setIsConFirm(true)
                 }
@@ -177,8 +175,6 @@ function OrderDetail() {
     };
     useEffect(() => {
         // startTimer()
-        getAllOderDetail();
-        console.log(order)
         if (data.status === 'NEW') {
             // setValueStatus('Thanh toán')
             setIsConFirm(false)
@@ -193,6 +189,12 @@ function OrderDetail() {
             setIsConFirm(true)
         }
     }, [])
+
+    useEffect(() => {
+        setSize(size)
+        console.log('size', size);
+        getAllOderDetail();
+    }, [size])
 
     const [bank, setBank] = React.useState('mbbank');
 
@@ -212,7 +214,7 @@ function OrderDetail() {
 
     return (
         <div style={{ marginTop: '20px', backgroundColor: 'white' }}>
-
+            <UserSize changeUserCount={(data) => setSize(data)}/>
             <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
                 <div style={{ width: '1000px' }} >
                     <div className="row d-flex justify-content-center align-items-center h-100">
