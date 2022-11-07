@@ -97,11 +97,11 @@ export default function HiringPillar({ data, page, search, rowsPerPage, totalPag
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.name} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {formatMoney(item.price)}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> { }</TableCell>
                                             <TableCell sx={{ textAlign: 'center', height: '65px' }}> {item.address.fullAddress}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>
                                                 <Moment format="MMMM Do YYYY">
-                                                    temp {item.expiredDate}
+                                                    {item.startDate}
                                                 </Moment>
                                             </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>
