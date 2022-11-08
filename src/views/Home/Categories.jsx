@@ -31,7 +31,7 @@ function Categories() {
         <Box sx={{ width: '86%', margin: 'auto', borderRadius: "8px" }}>
             <div>
                 <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderRadius: "8px", color: "#333", fontWeight: "600", }}>
-                    <h2 style={{ margin: "8px 0px 0px 10px" }}>Danh mục: </h2>
+                    <h2 style={{ margin: "8px 0px 0px 10px" }}>Danh mục </h2>
 
                     {
                         data.map((item, index) => (
