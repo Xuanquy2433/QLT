@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { over } from 'stompjs';
 import SockJS from 'sockjs-client';
 import axios from "axios";
@@ -7,6 +7,7 @@ import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
 import { API } from "../../utils/const";
+import { NavLink } from 'react-router-dom';
 
 
 var stompClient = null;
@@ -39,17 +40,18 @@ const UserNotification = (params) => {
             params.changeUserCount(response.data.filter((data) => data.checked === false).length)
         }
     }
-   const handleRequest = (data) =>{
+    const handleRequest = (data) => {
         setData(data)
     }
 
     const onMessageReceived = (payload) => {
-        setData(data =>[ JSON.parse(payload.body),...data])
+        setData(data => [JSON.parse(payload.body), ...data])
     }
 
     const onError = (err) => {
         console.log(err);
     }
+
     useEffect(() => {
         connect();
         getNotification();
@@ -58,10 +60,14 @@ const UserNotification = (params) => {
     return (
         <>
             {data.length > 0 ? data?.map((data, index) => (
-                <MenuItem key={index} sx={{ borderBottom: '1px solid #ddd' }} >
-                    <div  >{data.message}  </div>
-                    <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
-                </MenuItem>
+                <Fragment>
+                    <NavLink to={'/auth/order/' + data.targetId}>
+                        <MenuItem key={index} sx={{ borderBottom: '1px solid #ddd' }} >
+                            <div style={{ color: 'black' }} >{data.message}  </div>
+                            <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
+                        </MenuItem>
+                    </NavLink>
+                </Fragment>
             )) :
                 <MenuItem >
                     <div  >Hiện không có thông báo ! </div>

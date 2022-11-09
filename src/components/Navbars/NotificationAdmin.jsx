@@ -96,6 +96,7 @@ function NotificationAdmin() {
                                             <ClickAwayListener onClickAway={handleClose}>
                                                 <MenuList
                                                     autoFocusItem={open}
+                                                    onClick={handleClose}
                                                     id="composition-menu"
                                                     aria-labelledby="composition-button"
                                                     onKeyDown={handleListKeyDown}>

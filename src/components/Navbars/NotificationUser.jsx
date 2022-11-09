@@ -41,14 +41,10 @@ function Notification() {
         setOpen((prevOpen) => !prevOpen);
 
     }
-
-
-
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
-
         setOpen(false);
     };
 
@@ -116,6 +112,7 @@ function Notification() {
                                             <MenuList
                                                 style={{ width: '300px', position: 'relative' }}
                                                 autoFocusItem={open}
+                                                onClick={handleClose}
                                                 id="composition-menu"
                                                 aria-labelledby="composition-button"
                                                 onKeyDown={handleListKeyDown}>
