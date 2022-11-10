@@ -16,7 +16,6 @@ import {
   NavLink,
   Nav,
   Progress,
-  Table,
   Container,
   Row,
   Col
@@ -35,7 +34,41 @@ import { API_GET_OVERVIEW } from "utils/const";
 import axios from "axios";
 import { API_OVERVIEW_MONTHLY_EARNING } from "utils/const";
 import { API_OVERVIEW_MONTHLY_HIRED } from "utils/const";
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import { API_OVERVIEW_TIME_PRODUCT_HIRED } from "utils/const";
+import moment from "moment";
 
+
+const columns = [
+  { id: 'id', label: 'Id', minWidth: 170 },
+  { id: 'name', label: 'Tên trụ', minWidth: 100 },
+  {
+    id: 'description',
+    label: 'Mô tả',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'price',
+    label: 'Giá',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+];
+
+function createData(name, code, population, size) {
+  const density = population / size;
+  return { name, code, population, size, density };
+}
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
@@ -65,23 +98,7 @@ const Index = (props) => {
 
   const [dataOverview, setDataOverview] = useState([])
   const [dataOverviewOrderEachMonth, setDataOverviewOrderEachMonth] = useState([])
-  useEffect(() => {
-    overview()
-    const onchangeHired = async (e) => {
-      const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED)
-      if (response) {
-        setDataOverviewOrderEachMonth(response.data)
-      }
-    }
-    const overviewMonth = async (e) => {
-      const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + '&type=month')
-      if (response) {
-        setDataMonth(response.data)
-      }
-    }
-    overviewMonth()
-    onchangeHired()
-  }, [])
+
 
   const overview = async (e) => {
     const response = await axios.get(API_GET_OVERVIEW)
@@ -136,7 +153,36 @@ const Index = (props) => {
   //   ]
   // }
 
+  //GET API
+  let d = new Date();
+  let date2 = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDate()
 
+  const [dataTimeOverview, setDataTimeOverview] = useState([])
+  const timeOverview = async (e) => {
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?date1=' + date2 + '&date2=' + moment().format('YYYY/MM/DD') + '&sort=desc')
+    if (response) {
+      // setDataTimeOverview(response)
+    }
+  }
+  console.log('rie ', dataTimeOverview);
+  useEffect(() => {
+    overview()
+    const onchangeHired = async (e) => {
+      const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED)
+      if (response) {
+        setDataOverviewOrderEachMonth(response.data)
+      }
+    }
+    const overviewMonth = async (e) => {
+      const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + '&type=month')
+      if (response) {
+        setDataMonth(response.data)
+      }
+    }
+    overviewMonth()
+    onchangeHired()
+    timeOverview()
+  }, [])
   return (
     <>
       <Header />
@@ -237,6 +283,67 @@ const Index = (props) => {
                   />
                 </div>
               </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row className="mt-5 mb-4">
+          <Col className="mb-5 mb-xl-0" style={{ width: '100%' }}>
+            <Card className="shadow">
+              <CardHeader className="border-0">
+                <Row className="align-items-center">
+                  <div className="col">
+                    <span className="mb-0 mr-3">Thời gian sản phẩm được thuê</span>
+                    <input className="mr-3" type="date" />
+                    <input className="mr-3" type="date" />
+                    <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      size="sm"
+                    >
+                      Tìm kiếm
+                    </Button>
+                  </div>
+
+                </Row>
+              </CardHeader>
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                          key={column.id}
+                          align={column.align}
+                          style={{ minWidth: column.minWidth }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dataTimeOverview
+                      .map((row) => {
+                        return (
+                          <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                            {columns.map((column) => {
+                              const value = row[column.id];
+                              return (
+                                <TableCell key={column.id} align={column.align}>
+                                  {column.format && typeof value === 'number'
+                                    ? column.format(value)
+                                    : value}
+                                </TableCell>
+                              );
+                            })}
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Card>
           </Col>
         </Row>

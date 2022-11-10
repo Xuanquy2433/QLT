@@ -139,6 +139,8 @@ export const API_OVERVIEW_MONTHLY_EARNING = `${API}/admin/overview/month_week_ea
 
 export const API_OVERVIEW_MONTHLY_HIRED = `${API}/admin/overview/monthly_product_hired?number=50`
 
+export const API_OVERVIEW_TIME_PRODUCT_HIRED= `${API}/admin/overview/time_product_hired`
+
 export const API_RESET_PASSWORD = `${API}/reset_password`
 
 export const API_GET_ADDRESS_DETAIL_NOT_TOKEN = `${API}/address2/`
