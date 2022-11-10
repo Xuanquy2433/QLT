@@ -186,9 +186,11 @@ function TableAddress() {
 
 
                 <Box sx={{ width: '100%', mt: 2, }} className='hoverBut' >
+
                     {show && <p>Tìm thấy {data.length} kết quả cho: "{keyword}"</p>}
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {data.length > 0 ? data.map((item, index) => (
+                            item.totalProduct > 0 &&
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                                 <div style={{ backgroundColor: '#E7EBF0', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
                                     <p style={{
@@ -225,13 +227,13 @@ function TableAddress() {
                                             </Button>
                                         </NavLink>
                                         {/* 
-                                    {item.product.length > 0 ? item.product.map((itemDetail, index) => (
-                                        <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
-                                            <h2>{itemDetail.name}</h2>
-                                        </div>
-                                    )) : <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '50px', backgroundColor: '#FF4433' }}>
-                                        <h2 style={{ color: 'white' }}>Khu vực này đã thuê hết</h2>
-                                    </div>} */}
+                               {item.product.length > 0 ? item.product.map((itemDetail, index) => (
+                                   <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
+                                       <h2>{itemDetail.name}</h2>
+                                   </div>
+                               )) : <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '50px', backgroundColor: '#FF4433' }}>
+                                   <h2 style={{ color: 'white' }}>Khu vực này đã thuê hết</h2>
+                               </div>} */}
                                     </div>
                                 </div>
                             </Grid>
