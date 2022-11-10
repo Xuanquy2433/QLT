@@ -40,11 +40,13 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
             >
                 <Box className='form-add-product'
                     sx={{
-                        maxWidth: '40%',
-                        margin: '0 auto',
-                        marginTop: ' 150px',
+                        width: '40%',
+                        position: 'relative',
+                        transform: "translate(-50%, -50%)",
                         backgroundColor: 'white',
-                        padding: '10px'
+                        padding: '10px',
+                        top: "50%",
+                        left: "50%"
                     }}
                 >
                     <h2 style={{ textAlign: 'center' }}>Thêm địa chỉ</h2>

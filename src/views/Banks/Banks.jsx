@@ -157,38 +157,40 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>
-                                            <Modal
-                                                open={openDelete}
-                                                onClose={handleCloseDelete}
-                                                aria-labelledby="modal-modal-title"
-                                                aria-describedby="modal-modal-description"
-                                            >
-                                                <Box className='form-add-product'
-                                                    sx={{
-                                                        width: '40%',
-                                                        margin: 'auto',
-                                                        marginTop: '270px',
-                                                        backgroundColor: 'white',
-                                                        padding: '10px',
-                                                        // borderRadius: "10px"
-                                                    }}
-                                                >
-                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
-                                                    <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá trụ quảng cáo ?</h2>
 
-                                                    <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
-
-                                                    <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
-                                                        <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
-                                                        <button onClick={(e) => onDelete(id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
-                                                    </div>
-
-                                                </Box>
-
-                                            </Modal>
                                         </TableRow>
 
                                     ))}
+                                <Modal
+                                    open={openDelete}
+                                    onClose={handleCloseDelete}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box className='form-add-product'
+                                        sx={{
+                                            width: '40%',
+                                            position: 'relative',
+                                            transform: "translate(-50%, -50%)",
+                                            backgroundColor: 'white',
+                                            padding: '10px',
+                                            top: "50%",
+                                            left: "50%"
+                                        }}
+                                    >
+                                        <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
+                                        <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận xoá ?</h2>
+
+                                        <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
+
+                                        <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
+                                            <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
+                                            <button onClick={(e) => onDelete(id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+                                        </div>
+
+                                    </Box>
+
+                                </Modal>
                             </TableBody>
                         </Table>
                     </TableContainer>

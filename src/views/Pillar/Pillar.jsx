@@ -78,7 +78,7 @@ const columns = [
     },
 ];
 
-export default function Pillar({ handleOpenDelete, openDelete, search,handleCloseDelete, handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
+export default function Pillar({ handleOpenDelete, openDelete, search, handleCloseDelete, handleChangeRowsPerPage, totalPages, data, setOpen, onDelete, onEdit, page, rowsPerPage, handleChangePage }) {
     const [id, setId] = useState(Number)
 
     const handleOpen = () => setOpen(true)
@@ -184,10 +184,12 @@ export default function Pillar({ handleOpenDelete, openDelete, search,handleClos
                                     <Box className='form-add-product'
                                         sx={{
                                             width: '40%',
-                                            margin: 'auto',
-                                            marginTop: '270px',
+                                            position: 'relative',
+                                            transform: "translate(-50%, -50%)",
                                             backgroundColor: 'white',
                                             padding: '10px',
+                                            top: "50%",
+                                            left: "50%"
                                             // borderRadius: "10px"
                                         }}
                                     >

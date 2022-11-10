@@ -131,11 +131,12 @@ export default function Category({ handleOpenDelete, search, openDelete, handleC
                                     <Box className='form-add-product'
                                         sx={{
                                             width: '40%',
-                                            margin: 'auto',
-                                            marginTop: '270px',
+                                            position: 'relative',
+                                            transform: "translate(-50%, -50%)",
                                             backgroundColor: 'white',
                                             padding: '10px',
-                                            // borderRadius: "10px"
+                                            top: "50%",
+                                            left: "50%"
                                         }}
                                     >
                                         <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
