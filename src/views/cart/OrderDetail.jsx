@@ -213,8 +213,8 @@ function OrderDetail() {
 
 
     return (
-        <div style={{ marginTop: '20px', backgroundColor: 'white' }}>
-            <UserSize changeUserCount={(data) => setSize(data)}/>
+        <div style={{ backgroundColor: 'white' }}>
+            <UserSize changeUserCount={(data) => setSize(data)} />
             <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
                 <div style={{ width: '1000px' }} >
                     <div className="row d-flex justify-content-center align-items-center h-100">

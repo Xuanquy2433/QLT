@@ -129,7 +129,7 @@ const Profile = () => {
         </Box>
 
       </Modal>
-      <div style={{ width: "100%" }}>
+      {/* <div style={{ width: "100%" }}>
         <div
           className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
           style={{
@@ -141,9 +141,7 @@ const Profile = () => {
             borderRadius: "9px"
           }}
         >
-          {/* Mask */}
           <span style={{ borderRadius: '10px' }} className="mask bg-gradient-default opacity-8" />
-          {/* Header container */}
           <Container className="d-flex align-items-center" fluid>
             <Row>
               <Col style={{ maxWidth: "100%" }} lg="7" md="10">
@@ -156,9 +154,9 @@ const Profile = () => {
             </Row>
           </Container>
         </div>
-      </div>
+      </div> */}
       {/* Page content */}
-      <Container className="mt--7" fluid>
+      <Container className="mt-5" fluid>
         <Row>
           <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
             <Card className="card-profile shadow">

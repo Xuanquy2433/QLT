@@ -46,8 +46,41 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                 alt="Avatar"
                             />
                         </div>
-                        <p className="small mb-2">Vui lòng chuyển khoản vào STK bên dưới</p>
-
+                        <p className="small">Vui lòng chuyển khoản vào STK bên dưới kèm theo <span style={{color: 'yellow'}}>nội dung là mã đặt hàng</span>. </p>
+                        <div className="row mb-4">
+                            <div className="col-md-5">
+                                <div className="form-outline form-white">
+                                    <label className="form-label mt-1" htmlFor="typeText">
+                                        Tên ngân hàng
+                                    </label>
+                                    <select className="form-control form-control-lg"
+                                        style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
+                                        onChange={handleChange}
+                                        aria-label="Default select example">
+                                        {
+                                            dataBanks.map((item, index) => (
+                                                <option key={index} value={item.id}>{item.bankName}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6-9">
+                                <div className="form-outline form-white" style={{ paddingRight: '0', paddingLeft: '0' }}>
+                                    <label className="form-label mt-1" htmlFor="typeText">
+                                        Mã đặt hàng
+                                    </label>
+                                    <span
+                                        className="form-control form-control-lg"
+                                        style={{ color: 'black', backgroundColor: 'white', fontWeight: 600, paddingRight: '0' }}
+                                    > {data.orderCode}
+                                        <BsFiles onClick={() => copy(data.orderCode)} style={{ marginLeft: "7px", cursor: 'pointer', fontSize: "18px", marginRight: "5px" }} />
+                                    </span >
+                                    {/* <button onClick={() => copy('someText')}
+                                                                    >copy</button> */}
+                                </div>
+                            </div>
+                        </div>
                         <form className="mt-4">
                             <div className="form-outline form-white mb-4">
                                 <label className="form-label" htmlFor="typeName">
@@ -83,40 +116,7 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                     })}
                                 </p >
                             </div>
-                            <div className="row mb-4">
-                                <div className="col-md-5">
-                                    <div className="form-outline form-white">
-                                        <label className="form-label mt-1" htmlFor="typeText">
-                                            Tên ngân hàng
-                                        </label>
-                                        <select className="form-control form-control-lg"
-                                            style={{ paddingRight: '0', paddingLeft: '1', color: 'black', fontWeight: 600, cursor: 'pointer' }}
-                                            onChange={handleChange}
-                                            aria-label="Default select example">
-                                            {
-                                                dataBanks.map((item, index) => (
-                                                    <option key={index} value={item.id}>{item.bankName}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-md-6-9">
-                                    <div className="form-outline form-white" style={{ paddingRight: '0', paddingLeft: '0' }}>
-                                        <label className="form-label mt-1" htmlFor="typeText">
-                                            Mã đặt hàng
-                                        </label>
-                                        <p
-                                            className="form-control form-control-lg"
-                                            style={{ color: 'black', backgroundColor: 'white', fontWeight: 600, paddingRight: '0' }}
-                                        > {data.orderCode}
-                                            <BsFiles onClick={() => copy(data.orderCode)} style={{ marginLeft: "7px", cursor: 'pointer', fontSize: "18px", marginRight: "5px" }} />
-                                        </p >
-                                        {/* <button onClick={() => copy('someText')}
-                                                                    >copy</button> */}
-                                    </div>
-                                </div>
-                            </div>
+
 
                         </form>
                         {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
@@ -125,11 +125,10 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                             <h5 className='mt-3' style={{ color: 'yellow', marginTop: '5px' }}> Vui lòng liên hệ <span style={{ color: 'white' }}>0982.123.12 </span> để gia hạn thêm thời gian chờ.</h5>
                         </div> : ''}
 
-                        <hr className="my-4" />
-                        <div className="d-flex justify-content-between mb-4">
+                        <hr className="my-1" />
+                        <div className="d-flex justify-content-between mb-2">
                             <p className="mb-2">Tổng cộng</p>
                             <p className="mb-2"> {data.children ? data.children.reduce((a, b) => data.total + a + b.total, 0) : data.total} VNĐ</p>
-
                         </div>
 
                         <button
