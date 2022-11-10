@@ -160,9 +160,9 @@ function TableAddress() {
                             </Paper>
                         </Grid>
                         <Grid item xs={3} >
-                            <FormControl sx={{ width: '49%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
+                            <FormControl sx={{ width: '53%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <h3 style={{ color: 'black', width: '46%', marginLeft: '10%', marginRight: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
+                                    <h3 style={{ color: 'black', width: '190px', marginLeft: '10%', marginRight: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
                                     <ToggleButton
                                         sx={{ height: '73%' }}
                                         value="check"
@@ -177,7 +177,7 @@ function TableAddress() {
                                     </ToggleButton>
                                 </div>
                             </FormControl>
-                            <Button sx={{ width: '45%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickSearch} color="primary">
+                            <Button sx={{ width: '40%', ml: 2, borderRadius: '5px', height: '45px', }} variant="contained" onClick={onclickSearch} color="primary">
                                 Tìm kiếm
                             </Button>
                         </Grid>
@@ -191,21 +191,21 @@ function TableAddress() {
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {data.length > 0 ? data.map((item, index) => (
                             item.totalProduct > 0 &&
-                            <Grid item xs={6} sx={{ mt: 1 }} key={index} >
-                                <div style={{ backgroundColor: '#E7EBF0', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
+                            <Grid item xs={4} sx={{ mt: 1 }} key={index} >
+                                <div style={{ backgroundColor: '#E7EBF0',justifyItems:'center', display: 'flex', flexDirection: 'column', padding: '20px', borderRadius: "8px" }}>
                                     <p style={{
-                                        width: '46%', height: '230px'
+                                        width: '100%', height: '230px'
                                     }}  >
                                         <img style={{ width: '100%', height: '245px', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
 
                                     </p>
-                                    <div style={{ width: '46%', marginLeft: '4%', color: 'black' }}>
-                                        <p>Đường:  {item.street}</p>
+                                    <div style={{ width: '100%',justifyContent:'center', color: 'black' }}>
+                                        <p style={{ fontSize:'20px', paddingTop:'7px' }}>Đường:  {item.street}</p>
                                         {/* <p>Thành Phố: {item.city} </p> */}
                                         {/* <p>Mô tả: {item.description}</p> */}
-                                        <p>Khoảng giá: {item.minPrice} - {item.maxPrice}</p>
+                                        <p>Khoảng giá: <span style={{ fontSize:'20px' , fontWeight:'600' }}>{item.minPrice} - {item.maxPrice}</span> </p>
                                         <p>Số lượng trụ: {item.totalProduct}</p>
-                                        <p>Số trụ còn trống: {item.totalProductAvailable}</p>
+                                        <p>Số trụ còn trống: <span style={{ color:'red' , fontSize:'20px' ,fontWeight:'500px' }} >{item.totalProductAvailable}</span> </p>
 
                                         <NavLink to={'/auth/address/' + item.id}>
                                             <Button sx={{
@@ -216,7 +216,7 @@ function TableAddress() {
                                                     color: "#FFFFFF !important"
                                                 },
                                                 border: "3px solid #007784 !important",
-                                                fontWeight: "500", width: "100%",
+                                                fontWeight: "500", width: "90%",
                                                 background: "none",
                                                 outline: "none",
                                                 color: "#007784 !important",
