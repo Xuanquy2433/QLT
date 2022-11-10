@@ -14,14 +14,13 @@ function CartLocal() {
     if (localStorage.getItem('cartTemp') == undefined || null) {
         localStorage.setItem('cartTemp', JSON.stringify([]))
     }
-
     if (localStorage.getItem('cartADD') == undefined || null) {
         localStorage.setItem('cartADD', JSON.stringify([]))
     }
 
     const [dataLocal, setDataLocal] = useState(JSON.parse(localStorage.getItem('cartTemp')))
 
-
+    const [up, setUp] = useState(1)
     const [month, setMonth] = useState(1)
     // const [btnOrders, setBtnOrders] = useState('Đặt hàng')
     const [btnDisabled, setBtnDisabled] = useState(false)
@@ -32,15 +31,32 @@ function CartLocal() {
         decoded = jwt_decode(token);
     }
 
-
-    console.log('data loacl ', dataLocal);
-    const handleUpdateMonth = () => {
-        setMonth(month + 1)
+    console.log('data local ', dataLocal[0]);
+    const handleUpdateMonth = (id) => {
+        let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
+        for (let i = 0; i < dataLocal.length; i++) {
+            if (dataLocal[i].productId === id && cartAddP[i].productId === id) {
+                dataLocal[i].month += 1
+                cartAddP[i].month += 1
+                setUp(up + 1)
+                localStorage.setItem("cartTemp", JSON.stringify(dataLocal))
+                localStorage.setItem("cartADD", JSON.stringify(cartAddP))
+            }
+        }
     }
 
-    const handleMonth = () => {
-        if (month > 1) {
-            setMonth(month - 1)
+    const handleMonth = (id) => {
+        let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
+        for (let i = 0; i < dataLocal.length; i++) {
+            if (dataLocal[i].productId === id && cartAddP[i].productId === id) {
+                if (dataLocal[i].month > 1 && cartAddP[i].month > 1) {
+                    dataLocal[i].month -= 1
+                    cartAddP[i].month -= 1
+                    setUp(up + 1)
+                    localStorage.setItem("cartTemp", JSON.stringify(dataLocal))
+                    localStorage.setItem("cartADD", JSON.stringify(cartAddP))
+                }
+            }
         }
     }
 
@@ -104,7 +120,7 @@ function CartLocal() {
 
     useEffect(() => {
 
-    }, [])
+    }, [up])
 
     const onClickRemoveItemCart = async (id) => {
         console.log('id cart', id);
@@ -123,8 +139,11 @@ function CartLocal() {
 
     const handleRemoveCartItem = (id) => {
         let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
+        let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
+        cartAddP.splice(id, 1)
         listCartItems.splice(id, 1)
         localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
+        localStorage.setItem("cartADD", JSON.stringify(cartAddP))
         toast.success("Xoá thành cônng", { autoClose: "1500" })
     }
     return (
@@ -168,8 +187,8 @@ function CartLocal() {
                                                             <h6 className="text-muted"></h6>                                                        </div>
                                                     </div> : ''}
                                                 <hr className="mb-3 mt-1" />
-                                                {dataLocal.length ? dataLocal.map((item) => (
-                                                    <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
+                                                {dataLocal.length ? dataLocal.map((item, index) => (
+                                                    <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                         <div className="col-md-2 col-lg-2 col-xl-2">
                                                             <img
                                                                 src={item.imageProduct}
@@ -184,7 +203,7 @@ function CartLocal() {
                                                         <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
                                                             <button
                                                                 className="btn btn-link px-2"
-                                                                onClick={handleMonth}
+                                                                onClick={(e) => handleMonth(item.productId)}
                                                             >
                                                                 <i className="fas fa-minus" />
                                                             </button>
@@ -199,7 +218,7 @@ function CartLocal() {
                                                             />
                                                             <button
                                                                 className="btn btn-link px-2"
-                                                                onClick={handleUpdateMonth}
+                                                                onClick={(e) => handleUpdateMonth(item.productId)}
                                                             >
                                                                 <i className="fas fa-plus" />
                                                             </button>
@@ -213,7 +232,7 @@ function CartLocal() {
                                                         </div> */}
                                                         <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                             {/* <h6 className="text-muted">Price</h6> */}
-                                                            <h6 className="text-black mb-0">{formatMoney(item.priceProduct)}</h6>
+                                                            <h6 className="text-black mb-0">{formatMoney(item.priceProduct * item.month)}</h6>
                                                         </div>
                                                         <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                                                             <div style={{ cursor: 'pointer' }} className="text-muted">
