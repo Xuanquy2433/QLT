@@ -10,7 +10,6 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -20,7 +19,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import './css.css'
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { IconButton, InputBase } from '@mui/material';
-
+import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
+import "./PillarAddress.css"
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70 },
     { id: 'image', label: 'Hình ảnh', align: 'center', minWidth: 100 },
@@ -82,17 +83,21 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
 
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-                    <div style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", }}>
+                    <div className='header-custom-search' style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", }}>
                         <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm địa chỉ
                         </Button>
 
+                        <Box onClick={handleOpen} sx={{ display: "block", padding: "12px", backgroundColor: "#2e7d32", borderRadius: "8px", mr: "5px" }}>
+                            <AddIcon sx={{ color: "#FFFFFF" }} />
+                        </Box>
+
                         {/* <TextField sx={{display: 'flex',padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }} id="outlined-basic" label="Search" variant="outlined" /> */}
 
                         <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px', '&:focus': { border: "1px solid blue" } }}>
-                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                            {/* <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
-                            </IconButton>
+                            </IconButton> */}
                             <InputBase
                                 onChange={(e) => search(e.target.value)}
                                 sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
