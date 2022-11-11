@@ -1,0 +1,61 @@
+@media(min-width: 320px) and (max-width: 767px  ) {
+    .header-custom-search .MuiButtonBase-root{
+        display: none;
+   }
+
+   .MuiModal-root .form-add-product{
+        width: 90%;
+    }
+
+}
+
+@media(min-width: 320px) and (max-width: 420px  ) {
+     .MuiModal-root .form-add-product{
+        width: 90%;
+    }
+ }
+ 
+
+@media(min-width: 768px) and (max-width: 1023px  ) {
+     .header-custom-search .MuiBox-root{
+        display: none;
+    }
+
+     .header-custom-search .MuiButtonBase-root{
+        width: 40%;
+   }
+
+   .MuiModal-root .form-add-product{
+        width: 50%;
+        top: 33%;
+    }
+}
+
+@media(min-width: 1024px ) and (max-width: 1200px  ){
+     .header-custom-search .MuiBox-root{
+        display: none;
+    }
+
+     .header-custom-search .MuiButtonBase-root{
+        width: 25%;
+   }
+
+   .MuiModal-root .form-add-product{
+        width: 40%;
+        top: 25%;
+    }
+}
+
+@media(min-width: 1201px ) {
+     .header-custom-search .MuiBox-root{
+        display: none;
+    }
+
+    .header-custom-search .MuiButtonBase-root{
+        width: 20%;
+   }
+
+   .MuiModal-root .form-add-product{
+    width: 30%;
+}
+}
