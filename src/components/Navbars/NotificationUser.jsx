@@ -110,7 +110,7 @@ function Notification() {
                                     <div className="scrollbar" id="style-1">
                                         <ClickAwayListener onClickAway={handleClose}>
                                             <MenuList
-                                                style={{ width: '300px', position: 'relative' }}
+                                                style={{ width: '335px', position: 'relative' }}
                                                 autoFocusItem={open}
                                                 onClick={handleClose}
                                                 id="composition-menu"

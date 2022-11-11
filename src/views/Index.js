@@ -81,7 +81,7 @@ const Index = (props) => {
     e.preventDefault();
     setActiveNav(index);
     setChartExample1Data("data" + index);
-    if (chartExample1Data === 'data1') {
+    if (index === 2) {
       console.log('week');
       const response = await axios.get(API_OVERVIEW_MONTHLY_EARNING + '5&type=week')
       if (response) {
@@ -200,7 +200,6 @@ const Index = (props) => {
   const arr2 = []
   const dataArr = []
 
-  console.log('dataTimeOverview ', dataTimeOverview);
   const obj = Object.entries(dataTimeOverview)
   obj.forEach(function (value, key) {
     arr.push(value)
@@ -280,7 +279,7 @@ const Index = (props) => {
                           className={classnames("py-2 px-3", {
                             active: activeNav === 1
                           })}
-                          href="#pablo"
+                          style={{cursor: 'pointer'}}
                           onClick={(e) => toggleNavs(e, 1)}
                         >
                           <span className="d-none d-md-block">Tháng</span>
@@ -293,7 +292,7 @@ const Index = (props) => {
                             active: activeNav === 2
                           })}
                           data-toggle="tab"
-                          href="#pablo"
+                          style={{cursor: 'pointer'}}
                           onClick={(e) => toggleNavs(e, 2)}
                         >
                           <span className="d-none d-md-block">Tuần</span>
@@ -355,8 +354,9 @@ const Index = (props) => {
               <CardHeader className="border-0">
                 <Row className="align-items-center">
                   <div className="col">
-                    <span className="mb-0 mr-3">Thời gian sản phẩm được thuê</span>
+                    <span className="mb-0 mr-3" style={{ color: 'black', fontWeight: '600' }}>Các trụ được thuê từ thời gian </span>
                     <input className="mr-3" id='date1' onChange={e => setDateAPI1(e.target.value)} type="date" />
+                    <span className="mb-0 mr-3" style={{ color: 'black', fontWeight: '600' }}>đến</span>
                     <input className="mr-3" id='date2' onChange={e => setDateAPI2(e.target.value)} type="date" />
                     <Button
                       color="primary"
@@ -369,7 +369,7 @@ const Index = (props) => {
 
                 </Row>
               </CardHeader>
-              <TableContainer sx={{ height: 590 }}>
+              <TableContainer sx={{ height: 588 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
@@ -407,7 +407,7 @@ const Index = (props) => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
+                rowsPerPageOptions={[]}
                 component="div"
                 count={totalPages}
                 rowsPerPage={rowsPerPage}
