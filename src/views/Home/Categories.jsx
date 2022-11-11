@@ -32,24 +32,29 @@ function Categories() {
             <div>
                 <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderRadius: "8px", color: "#333", fontWeight: "600", }}>
                     <h2 style={{ margin: "8px 0px 0px 10px" }}>Danh mục </h2>
+                   
+                   
+                   
+                    <div style={{ display: 'flex', justifyContent: 'center'}}>
+                        {
+                            data.map((item, index) => (
+                                <NavLink style={{borderRight:'1px solid #4444' , padding:'0 35px'}} key={index} to={'/auth/categories/' + item.id} aria-label="main mailbox folders">
+                                    <List>
+                                        <ListItem disablePadding>
+                                            <ListItemButton>
+                                                <ListItemIcon>
+                                                    <CategoryIcon />
+                                                </ListItemIcon>
+                                                <ListItemText sx={{ color: "#333" }} primary={item.name} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    </List>
+                                    <Divider />
+                                </NavLink>
+                            ))
+                        }
 
-                    {
-                        data.map((item, index) => (
-                            <NavLink key={index} to={'/auth/categories/' + item.id} aria-label="main mailbox folders">
-                                <List>
-                                    <ListItem disablePadding>
-                                        <ListItemButton>
-                                            <ListItemIcon>
-                                                <CategoryIcon />
-                                            </ListItemIcon>
-                                            <ListItemText sx={{ color: "#333" }} primary={item.name} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                </List>
-                                <Divider />
-                            </NavLink>
-                        ))
-                    }
+                        </div>
                 </Box>
             </div >
         </Box >
