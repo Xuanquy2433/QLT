@@ -37,6 +37,11 @@ import AddressDetail from 'views/pillarAddress/AddressDetail';
 import { API_GET_ADDRESS } from 'utils/const';
 import { API_CLICK_SEARCH_ADDRESS } from 'utils/const';
 
+import { alpha } from '@mui/material/styles';
+
+import Menu from '@mui/material/Menu';
+
+
 const style = {
     position: 'absolute',
     top: '40%',
@@ -136,13 +141,19 @@ function TableAddress() {
         }
         setShow(false)
     }
+
+
+
+
+
+
     useEffect(() => {
         getAllAddRess()
     }, [])
     return (
         <React.Fragment>
-            <Box sx={{ width: '86%', margin: 'auto' }}>
-                <Box sx={{ flexGrow: 1, mt: 10 }}>
+            <Box sx={{ width: '86%', margin: 'auto'  }}>
+                <Box  sx={{ flexGrow: 1, mt: 10 , marginTop:'30px !important' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
                             <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
@@ -185,6 +196,9 @@ function TableAddress() {
                 </Box>
 
 
+
+
+
                 <Box sx={{ width: '100%', mt: 2, }} className='hoverBut' >
 
                     {show && <p>Tìm thấy {data.length} kết quả cho: "{keyword}"</p>}
@@ -192,20 +206,20 @@ function TableAddress() {
                         {data.length > 0 ? data.map((item, index) => (
                             item.totalProduct > 0 &&
                             <Grid item xs={4} sx={{ mt: 1 }} key={index} >
-                                <div style={{ backgroundColor: '#E7EBF0',justifyItems:'center', display: 'flex', flexDirection: 'column', padding: '20px', borderRadius: "8px" }}>
+                                <div style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'column', padding: '20px', borderRadius: "8px" }}>
                                     <p style={{
                                         width: '100%', height: '230px'
                                     }}  >
                                         <img style={{ width: '100%', height: '245px', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
 
                                     </p>
-                                    <div style={{ width: '100%',justifyContent:'center', color: 'black' }}>
-                                        <p style={{ fontSize:'20px', paddingTop:'7px' }}>Đường:  {item.street}</p>
+                                    <div style={{ width: '100%', justifyContent: 'center', color: 'black' }}>
+                                        <p style={{ fontSize: '20px', paddingTop: '7px' }}>Đường:  {item.street}</p>
                                         {/* <p>Thành Phố: {item.city} </p> */}
                                         {/* <p>Mô tả: {item.description}</p> */}
-                                        <p>Khoảng giá: <span style={{ fontSize:'20px' , fontWeight:'600' }}>{item.minPrice} - {item.maxPrice}</span> </p>
+                                        <p>Khoảng giá: <span style={{ fontSize: '20px', fontWeight: '600' }}>{item.minPrice} - {item.maxPrice}</span> </p>
                                         <p>Số lượng trụ: {item.totalProduct}</p>
-                                        <p>Số trụ còn trống: <span style={{ color:'red' , fontSize:'20px' ,fontWeight:'500px' }} >{item.totalProductAvailable}</span> </p>
+                                        <p>Số trụ còn trống: <span style={{ color: 'red', fontSize: '20px', fontWeight: '500px' }} >{item.totalProductAvailable}</span> </p>
 
                                         <NavLink to={'/auth/address/' + item.id}>
                                             <Button sx={{
