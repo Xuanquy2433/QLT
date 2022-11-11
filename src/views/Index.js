@@ -153,18 +153,41 @@ const Index = (props) => {
   //   ]
   // }
 
-  //GET API
+  //GET API TIME_PRODUCT_HIRED
   let d = new Date();
   let date2 = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDate()
-
   const [dataTimeOverview, setDataTimeOverview] = useState([])
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
+  const handleChangePage = async (event, newPage) => {
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
+    if (response) {
+      setPage(newPage);
+      setDataTimeOverview(response.data.content)
+    }
+  };
+
+  const handleChangeRowsPerPage = async (event) => {
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=id")
+    if (response) {
+      setDataTimeOverview(response.data.content)
+      setPage(0);
+      setRowsPerPage(+event.target.value);
+    }
+  };
+
   const timeOverview = async (e) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?date1=' + date2 + '&date2=' + moment().format('YYYY/MM/DD') + '&sort=desc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2 + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + page + 1 + '&sort=desc')
     if (response) {
       // setDataTimeOverview(response)
+      setTotalPages(response.data.totalElements)
     }
   }
   console.log('rie ', dataTimeOverview);
+
+
+
   useEffect(() => {
     overview()
     const onchangeHired = async (e) => {
@@ -344,6 +367,15 @@ const Index = (props) => {
                   </TableBody>
                 </Table>
               </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={totalPages}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
             </Card>
           </Col>
         </Row>
