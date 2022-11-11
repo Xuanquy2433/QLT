@@ -155,40 +155,80 @@ const Index = (props) => {
 
   //GET API TIME_PRODUCT_HIRED
   let d = new Date();
-  let date2 = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDate()
+  let date2Input = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDate()
+
+
   const [dataTimeOverview, setDataTimeOverview] = useState([])
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [dateAPI1, setDateAPI1] = useState(date2Input);
+  const [dateAPI2, setDateAPI2] = useState(moment().format('YYYY/MM/DD'));
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2Input + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + (newPage + 1) + '&sort=desc')
     if (response) {
       setPage(newPage);
-      setDataTimeOverview(response.data.content)
+      setDataTimeOverview(response.data.map)
     }
   };
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=id")
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + date2Input + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + 1 + '&sort=desc')
     if (response) {
-      setDataTimeOverview(response.data.content)
+      setDataTimeOverview(response.data.map)
       setPage(0);
       setRowsPerPage(+event.target.value);
     }
   };
 
   const timeOverview = async (e) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2 + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + page + 1 + '&sort=desc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2Input + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + page + 1 + '&sort=desc')
     if (response) {
-      // setDataTimeOverview(response)
-      setTotalPages(response.data.totalElements)
+      setDataTimeOverview(response.data.map)
+      setTotalPages(response.data.totalProduct)
     }
   }
-  console.log('rie ', dataTimeOverview);
 
+  const submitDate = async (e) => {
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + dateAPI1.replace(/-/g, '/') + '&date2=' + dateAPI2.replace(/-/g, '/') + '&page=' + page + 1 + '&sort=desc')
+    if (response) {
+      setDataTimeOverview(response.data.map)
+      setTotalPages(response.data.totalProduct)
+    }
+  }
+  const arr = []
+  const arr2 = []
+  const dataArr = []
 
+  console.log('dataTimeOverview ', dataTimeOverview);
+  const obj = Object.entries(dataTimeOverview)
+  obj.forEach(function (value, key) {
+    arr.push(value)
+  })
+
+  const obj2 = Object.entries(arr)
+  obj2.forEach(function (value, key) {
+    arr2.push(value[1])
+  })
+  arr2.forEach(function (value, key) {
+    dataArr.push(JSON.parse(value[0]))
+  })
 
   useEffect(() => {
+
+    //set default value input date
+    var date = new Date();
+    var day = date.getDate();
+    var month2 = date.getMonth() + 1;
+    var month3 = date.getMonth();
+    var year = date.getFullYear();
+    if (month2 < 10) month2 = "0" + month2;
+    if (day < 10) day = "0" + day;
+    var today1 = year + "-" + month2 + "-" + day;
+    var today2 = year + "-" + month3 + "-" + day;
+
+    document.getElementById("date1").value = today2;
+    document.getElementById("date2").value = today1;
     overview()
     const onchangeHired = async (e) => {
       const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED)
@@ -316,12 +356,11 @@ const Index = (props) => {
                 <Row className="align-items-center">
                   <div className="col">
                     <span className="mb-0 mr-3">Thời gian sản phẩm được thuê</span>
-                    <input className="mr-3" type="date" />
-                    <input className="mr-3" type="date" />
+                    <input className="mr-3" id='date1' onChange={e => setDateAPI1(e.target.value)} type="date" />
+                    <input className="mr-3" id='date2' onChange={e => setDateAPI2(e.target.value)} type="date" />
                     <Button
                       color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={submitDate}
                       size="sm"
                     >
                       Tìm kiếm
@@ -330,7 +369,7 @@ const Index = (props) => {
 
                 </Row>
               </CardHeader>
-              <TableContainer sx={{ maxHeight: 440 }}>
+              <TableContainer sx={{ height: 590 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
@@ -347,7 +386,7 @@ const Index = (props) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {dataTimeOverview
+                    {dataArr
                       .map((row) => {
                         return (
                           <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
