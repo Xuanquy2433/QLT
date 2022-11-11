@@ -49,7 +49,7 @@ const Header = () => {
                       <span className="text-success mr-1">
                         <i className="fa fa-arrow-up" /> to
                       </span>{" "}
-                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}{""}</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -170,7 +170,7 @@ const Header = () => {
                       <span className="text-success mr-1">
                         <i className="fa fa-arrow-up mr-1" /> to
                       </span>{" "}
-                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}{""}</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -243,9 +243,9 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Số lượng khách
+                          Số lượng khách truy cập website
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">{dataOverview.totalUser}</span>
+                        <span className="h2 font-weight-bold mb-0">Coming soon</span>
                       </div>
                       <Col className="col-auto">
                         <p className="icon icon-shape bg-cyan text-white rounded-circle shadow">
@@ -254,10 +254,10 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success">
-                        <i className="fas fa-arrow-up" /> {dataOverview.totalUserHiring}
+                      <span className="text-success mr-1">
+                        <i className="fa fa-arrow-up mr-1" /> to
                       </span>{" "}
-                      <span className="text-nowrap"> người dùng đang thuê trụ</span>
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}{""}</span>
                     </p>
                   </CardBody>
                 </Card>
