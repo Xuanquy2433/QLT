@@ -74,11 +74,13 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-nowrap">Tổng số trụ: </span>
+
                       <span className="text-success mr-1">
-                        <i className="fa fa-arrow-up mr-1" />
-                        <CurrencyFormat value={dataOverview.totalEarning} displayType={'text'} thousandSeparator={true} suffix={'VNĐ'} />
+                        {/* <i className="fa fa-arrow-up mr-1" /> */}
+                        {dataOverview.totalProduct}
+
                       </span>{" "}
-                      <span className="text-nowrap">Tổng thu nhập</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -98,15 +100,20 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <NavLink to={'/admin/availablePillar'} className="icon icon-shape bg-info text-white rounded-circle shadow">
-                          <i className="fas fa-percent" />
+                          {/* <i className="fas fa-percent" /> */}
+                          <i className="fas fa-chart-pie" />
+
                         </NavLink>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" />
+                      <span className="text-nowrap">Tổng số trụ: </span>
+
+                      <span className="text-success mr-1">
+                        {/* <i className="fa fa-arrow-up mr-1" /> */}
+                        {dataOverview.totalProduct}
+
                       </span>{" "}
-                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -184,9 +191,10 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Tổng thu nhập hôm nay
+                          Thu nhập hôm nay
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
+                          {/* <i className="fa fa-arrow-up" />    */}
                           <CurrencyFormat value={dataOverview.totalEarningToday} displayType={'text'} suffix={' VNĐ'} thousandSeparator={true} />
                         </span>
                       </div>
@@ -196,6 +204,12 @@ const Header = () => {
                         </p>
                       </Col>
                     </Row>
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-1">
+                        {/* <i className="fa fa-arrow-up" />  */}
+                      </span>{" "}
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}{""}</span>
+                    </p>
                     {/* <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-success mr-1">
                         <i className="fa fa-arrow-up mr-1" />
@@ -265,7 +279,7 @@ const Header = () => {
             </Row>
           </div>
         </Container>
-      </div>
+      </div >
     </>
   );
 };
