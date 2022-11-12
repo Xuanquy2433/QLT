@@ -44,6 +44,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { API_OVERVIEW_TIME_PRODUCT_HIRED } from "utils/const";
 import moment from "moment";
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 
 const columns = [
@@ -279,7 +280,7 @@ const Index = (props) => {
                           className={classnames("py-2 px-3", {
                             active: activeNav === 1
                           })}
-                          style={{cursor: 'pointer'}}
+                          style={{ cursor: 'pointer' }}
                           onClick={(e) => toggleNavs(e, 1)}
                         >
                           <span className="d-none d-md-block">Tháng</span>
@@ -292,7 +293,7 @@ const Index = (props) => {
                             active: activeNav === 2
                           })}
                           data-toggle="tab"
-                          style={{cursor: 'pointer'}}
+                          style={{ cursor: 'pointer' }}
                           onClick={(e) => toggleNavs(e, 2)}
                         >
                           <span className="d-none d-md-block">Tuần</span>
@@ -354,10 +355,10 @@ const Index = (props) => {
               <CardHeader className="border-0">
                 <Row className="align-items-center">
                   <div className="col">
-                    <span className="mb-0 mr-3" style={{ color: 'black', fontWeight: '600' }}>Các trụ được thuê từ thời gian </span>
-                    <input className="mr-3" id='date1' onChange={e => setDateAPI1(e.target.value)} type="date" />
+                    <span className="mb-0 mr-3" style={{ color: 'black', fontWeight: '600' }}>Các trụ được thuê từ thời gian từ:</span>
+                    <input name="date1" style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date1' onChange={e => setDateAPI1(e.target.value)} type="date" />
                     <span className="mb-0 mr-3" style={{ color: 'black', fontWeight: '600' }}>đến</span>
-                    <input className="mr-3" id='date2' onChange={e => setDateAPI2(e.target.value)} type="date" />
+                    <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2' onChange={e => setDateAPI2(e.target.value)} type="date" />
                     <Button
                       color="primary"
                       onClick={submitDate}
