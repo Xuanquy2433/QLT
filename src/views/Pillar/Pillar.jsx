@@ -20,7 +20,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { formatMoney } from './../../common/formatMoney';
 import Modal from '@mui/material/Modal';
-
+import Grid from '@mui/material/Grid';
+import AddIcon from '@mui/icons-material/Add';
+import './Pillar.css'
 const columns = [
     { id: 'id', label: 'Id', minWidth: 10, maxWidth: 10 },
     {
@@ -90,21 +92,31 @@ export default function Pillar({ handleOpenDelete, openDelete, search, handleClo
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
-                    <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                        <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                            Thêm Trụ
-                        </Button>
-                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
-                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                            <InputBase
-                                onChange={e => search(e.target.value)}
-                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Tìm kiếm thông tin trụ"
-                            />
-                        </Paper>
-                    </div>
+                    <Grid container spacing={1}>
+                        <Grid item xs={2} >
+                            <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "100%" }} variant="contained" color="success">
+                                Thêm Trụ
+                            </Button>
+                            <Box onClick={handleOpen} sx={{ padding: "4px 5px", textAlign: "center", display: "block", backgroundColor: "#2e7d32", borderRadius: "8px", mr: "5px" }}>
+                                <AddIcon sx={{ color: "#FFFFFF", fontSize: "40px", width: "100%" }} />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={10}>
+                            <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+                                <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                                    <SearchIcon />
+                                </IconButton>
+                                <InputBase
+                                    onChange={e => search(e.target.value)}
+                                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                    placeholder="Tìm kiếm"
+                                />
+                            </Paper>
+                        </Grid>
+
+                    </Grid>
+
+
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}

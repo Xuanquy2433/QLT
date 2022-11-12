@@ -83,7 +83,7 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
 
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-                    <div className='header-custom-search' style={{ width: '100%', display: "flex", flexDirection: "row", alignItems: "center", }}>
+                    <div className='header-custom-search' style={{ marginBottom: "10px", width: '100%', display: "flex", flexDirection: "row", alignItems: "center", }}>
                         <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm địa chỉ
                         </Button>
@@ -94,7 +94,7 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
 
                         {/* <TextField sx={{display: 'flex',padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px' }} id="outlined-basic" label="Search" variant="outlined" /> */}
 
-                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px', '&:focus': { border: "1px solid blue" } }}>
+                        <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', borderRadius: '7px', '&:focus': { border: "1px solid blue" } }}>
                             {/* <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                 <SearchIcon />
                             </IconButton> */}
