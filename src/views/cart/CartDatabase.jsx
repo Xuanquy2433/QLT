@@ -48,6 +48,8 @@ function CartDatabase() {
                 'Content-Type': 'application/json'
             }
         })
+        // setMonthUpdate(monthUpdate + 1)
+        setShowDate(d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear())
         getAllCart()
     }
 
@@ -60,6 +62,7 @@ function CartDatabase() {
                     'Content-Type': 'application/json'
                 }
             })
+            setShowDate(d.getDate() + '/' + (d.getMonth() + - 1) + '/' + d.getFullYear())
             getAllCart()
         }
     }
@@ -124,6 +127,12 @@ function CartDatabase() {
         sum += (Number(item.product.price) * Number(item.month))
     })
 
+    const [monthUpdate, setMonthUpdate] = useState(1)
+    const d = new Date()
+    const date = d.getDate() + '/' + (d.getMonth() + monthUpdate) + '/' + d.getFullYear()
+    const [showDate, setShowDate] = useState(null)
+
+    console.log('month ', monthUpdate, ' showDate ', showDate);
     useEffect(() => {
         getAllCart()
     }, [])
@@ -184,7 +193,7 @@ function CartDatabase() {
                                                 </div> : ''}
                                             <hr className="mb-3 mt-1" />
                                             {data.length ? data.map((item, index) => (
-                                                <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
+                                                <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center">
                                                     <div className="col-md-2 col-lg-2 col-xl-2">
                                                         <img
                                                             src={item.product.photosImagePath}
@@ -219,13 +228,6 @@ function CartDatabase() {
                                                             <i className="fas fa-plus" />
                                                         </button>
                                                     </div>
-                                                    {/* <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-black mb-0">{item.month}</h6>
-                                                        </div> */}
-                                                    {/* <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Description</h6>
-                                                            <h6 className="text-black mb-0">{item.product.description}</h6>
-                                                        </div> */}
                                                     <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                         {/* <h6 className="text-muted">Price</h6> */}
                                                         <h6 className="text-black mb-0">{formatMoney(item.product.price * item.month)}</h6>
@@ -235,6 +237,15 @@ function CartDatabase() {
                                                             <i onClick={() => onClickRemoveItemCart(item.product.id)} className="fas fa-times" />
                                                         </div>
                                                     </div>
+                                                    <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                        <div style={{ cursor: 'pointer' }} className="text-muted">
+                                                            {/* hide this div */}
+                                                        </div>
+                                                    </div>
+                                                    <h6 style={{ fontSize: '0.8em' }} className="text-muted mt-2">Ngày bắt đầu:
+                                                        <span className="text-nowrap mr-3"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}</span>
+                                                        - <span className='ml-2'>{d.getDate() + '/' + (d.getMonth() + item.month) + '/' + d.getFullYear()}</span></h6>
+
                                                 </div>
                                             )) :
                                                 <div style={{ width: "100%" }} >
@@ -243,9 +254,9 @@ function CartDatabase() {
                                                     </div>
                                                 </div>
                                             }
-                                            <hr className="my-4" />
+                                            {/* <hr className="my-4" /> */}
 
-                                            <div className="pt-5">
+                                            <div className="pt-3">
                                                 <h6 className="mb-0">
                                                     <NavLink to={'/auth/homePage'} className="text-body">
                                                         <i className="fas fa-long-arrow-alt-left me-2 mr-2" />

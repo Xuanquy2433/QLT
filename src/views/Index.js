@@ -44,7 +44,6 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { API_OVERVIEW_TIME_PRODUCT_HIRED } from "utils/const";
 import moment from "moment";
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 
 const columns = [
