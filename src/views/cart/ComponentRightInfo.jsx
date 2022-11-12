@@ -140,9 +140,9 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                             {valueStatus}
                             {data.status === 'NEW'
                                 && <div className="d-flex justify-content-between">
-                                    <span>{data.total} VNĐ</span>
+                                    <span>{data.total} VNĐ123</span>
                                     <span>
-                                        Thanh toán
+                                        Thanh toán 123
                                         <i className="fas fa-long-arrow-alt-right ms-2" />
                                     </span>
                                 </div>
@@ -159,7 +159,7 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                             {data.status === 'EXTEND' && <div className="d-flex justify-content-between">
                                 <span>{data.total} VNĐ</span>
                                 <span>
-                                    Thanh toán
+                                    Gia hạn
                                     <i className="fas fa-long-arrow-alt-right ms-2" />
                                 </span>
                             </div>
