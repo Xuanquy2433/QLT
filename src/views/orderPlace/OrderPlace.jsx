@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-import { Button, IconButton, InputBase } from '@mui/material';
+import { Button, Grid, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import axios from 'axios';
@@ -33,10 +33,13 @@ import Select from '@mui/material/Select';
 import { API_GET_ORDER_ADMIN } from 'utils/const';
 import { showError } from 'utils/error';
 import AdminSize from "../Realtime/AdminSize";
+import { formatMoney } from './../../common/formatMoney';
 
 const columns = [
-    { id: 'detail', label: '', minWidth: 10 },
-    { id: 'id', label: 'Id', minWidth: 50 },
+    {
+        id: 'detail', label: 'Chi tiết', minWidth: 90, maxWidth: 90, align: 'left',
+    },
+    // { id: 'id', label: 'Id', minWidth: 50 },
     {
         id: 'orderCode',
         label: 'Mã đặt hàng',
@@ -274,43 +277,47 @@ function OrderPlace() {
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
-                    <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
+                    <Grid container spacing={1} xs={12} style={{ width: '100%', display: "flex", flexDirection: "row" }}>
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button> */}
-                        <Paper sx={{ border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '83%', marginBottom: '20px', borderRadius: '7px' }}>
-                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                            <InputBase
-                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Tìm kiếm mã đơn hàng"
-                                onChange={e => search(e)}
-                            />
-                        </Paper>
+                        <Grid item xs={8}>
+                            <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '5px 7px 5px 7px', marginBottom: '20px', borderRadius: '7px' }}>
+                                <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                                    <SearchIcon />
+                                </IconButton>
+                                <InputBase
+                                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                    placeholder="Tìm kiếm mã đơn hàng"
+                                    onChange={e => search(e)}
+                                />
+                            </Paper>
+                        </Grid>
                         {/* <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6.3vh' }} variant="contained" color="success">
                             Tìm kiếm
                         </Button> */}
-                        <FormControl sx={{ m: 1, width: '17%' }} size="small">
-                            <InputLabel id="demo-select-small">Trạng thái</InputLabel>
-                            <Select
-                                labelId="demo-select-small"
-                                id="demo-select-small"
-                                value={status}
-                                label="status"
-                                onChange={handleChange}>
-                                <MenuItem value={'ALL'}>ALL</MenuItem>
-                                <MenuItem value={'NEW'}>NEW </MenuItem>
-                                <MenuItem value={'CANCELLED'}>CANCELLED </MenuItem>
-                                <MenuItem value={'DONE'}>DONE </MenuItem>
-                                <MenuItem value={'USER_CONFIRMED'}>USER_CONFIRMED </MenuItem>
-                                <MenuItem value={'PAID'}>PAID </MenuItem>
-                                <MenuItem value={'EXTEND'}>EXTEND</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <Grid item xs={4}>
+                            <FormControl sx={{ m: 1, width: "100%" }} size="small">
+                                <InputLabel id="demo-select-small">Trạng thái</InputLabel>
+                                <Select
+                                    labelId="demo-select-small"
+                                    id="demo-select-small"
+                                    value={status}
+                                    label="status"
+                                    onChange={handleChange}>
+                                    <MenuItem value={'ALL'}>ALL</MenuItem>
+                                    <MenuItem value={'NEW'}>NEW </MenuItem>
+                                    <MenuItem value={'CANCELLED'}>CANCELLED </MenuItem>
+                                    <MenuItem value={'DONE'}>DONE </MenuItem>
+                                    <MenuItem value={'USER_CONFIRMED'}>USER_CONFIRMED </MenuItem>
+                                    <MenuItem value={'PAID'}>PAID </MenuItem>
+                                    <MenuItem value={'EXTEND'}>EXTEND</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
 
 
-                    </div>
+                    </Grid>
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}
@@ -335,16 +342,16 @@ function OrderPlace() {
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover sx={{ cursor: 'pointer' }} role="checkbox" key={index}>
-                                            <TableCell sx={{ textAlign: 'right' }}>
+                                            <TableCell sx={{ textAlign: 'left' }}>
                                                 <InfoIcon onClick={() => handleOpenDetailOrder(item.id)}>
                                                 </InfoIcon>
                                             </TableCell>
-                                            <TableCell>{item.id}</TableCell>
+                                            {/* <TableCell>{item.id}</TableCell> */}
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.fullName}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.total}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>{formatMoney(item.total)}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
                                             {item.status === 'NEW' || item.status === 'USER_CONFIRMED' || item.status === 'EXTEND' ?
                                                 <React.Fragment>
