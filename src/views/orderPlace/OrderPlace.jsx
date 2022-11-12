@@ -36,7 +36,7 @@ import AdminSize from "../Realtime/AdminSize";
 
 const columns = [
     { id: 'detail', label: '', minWidth: 10 },
-    { id: 'id', label: 'Id', minWidth: 70 },
+    { id: 'id', label: 'Id', minWidth: 50 },
     {
         id: 'orderCode',
         label: 'Mã đặt hàng',
@@ -61,7 +61,7 @@ const columns = [
     {
         id: 'quantity',
         label: 'Số lượng',
-        minWidth: 100,
+        minWidth: 50,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -79,10 +79,25 @@ const columns = [
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
+
     {
-        id: 'action',
-        label: '',
-        minWidth: 100,
+        id: 'Xác nhận',
+        label: 'Xác nhận',
+        minWidth: 50,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'Huỷ',
+        label: 'Huỷ',
+        minWidth: 50,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'Khác',
+        label: 'Khác',
+        minWidth: 50,
         align: 'right',
     },
 
@@ -333,24 +348,28 @@ function OrderPlace() {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
                                             {item.status === 'NEW' || item.status === 'USER_CONFIRMED' || item.status === 'EXTEND' ?
                                                 <React.Fragment>
-                                                    <TableCell sx={{ textAlign: 'right' }}>
+                                                    <TableCell sx={{ textAlign: 'center' }}>
                                                         <Button variant="contained" onClick={e => {
                                                             handleClickOpenConfirmOrder()
                                                             setIdSave(item.id)
                                                         }} color="success">
                                                             <CheckIcon />
                                                         </Button>
-                                                        <Button sx={{ ml: 2, mt: 1 }} variant="contained" onClick={e => {
-                                                            handleClickOpenRefuseOrder()
-                                                            setIdSave(item.id)
-                                                        }} color="error">
-                                                            <DoDisturbIcon />
-                                                        </Button>
+
                                                         {/* <MoreTimeIcon sx={{ ml: 2 }} onClick={e => {
                                                     handleClickOpenConfirm()
                                                     setIdSave(item.id)
                                                 }} ></MoreTimeIcon> */}
                                                     </TableCell>
+                                                    <TableCell sx={{ textAlign: 'center' }}>
+                                                        <Button variant="contained" onClick={e => {
+                                                            handleClickOpenRefuseOrder()
+                                                            setIdSave(item.id)
+                                                        }} color="error">
+                                                            <DoDisturbIcon />
+                                                        </Button>
+                                                    </TableCell>
+
                                                     <TableCell sx={{ textAlign: "right" }}>
                                                         <UncontrolledDropdown>
                                                             <DropdownToggle
@@ -387,11 +406,13 @@ function OrderPlace() {
                                                 </React.Fragment> :
                                                 //disable
                                                 <React.Fragment>
-                                                    <TableCell sx={{ textAlign: 'right' }}>
-                                                        <Button variant="contained" disabled color="success">
+                                                    <TableCell sx={{ textAlign: 'center' }}>
+                                                        <Button variant="contained" disabled={true}>
                                                             <CheckIcon />
                                                         </Button>
-                                                        <Button sx={{ ml: 2, mt: 1 }} variant="contained" disabled color="error">
+                                                    </TableCell>
+                                                    <TableCell sx={{ textAlign: 'center' }}>
+                                                        <Button variant="contained" disabled={true} >
                                                             <DoDisturbIcon />
                                                         </Button>
                                                     </TableCell>
