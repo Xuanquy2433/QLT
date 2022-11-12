@@ -76,7 +76,7 @@ function OrderDetail() {
         console.log('checkout ');
         try {
             if (token) {
-                if (data.status === 'NEW') {
+                if (data.status === 'NEW' || data.status === 'EXTEND') {
                     setIsConFirm(true)
                     const response = await axios.put(API_CONFIRM_PAYMENT + idOrderInURL, {}, {
                         headers: {
