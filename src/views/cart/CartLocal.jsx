@@ -186,68 +186,71 @@ function CartLocal() {
                                                         <div className="col-md-1 col-lg-1 col-xl-1">
                                                             <h6 className="text-muted"></h6>                                                        </div>
                                                     </div> : ''}
-                                                <hr className="mb-3 mt-1" />
-                                                {dataLocal.length ? dataLocal.map((item, index) => (
-                                                    <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
-                                                        <div className="col-md-2 col-lg-2 col-xl-2">
-                                                            <img
-                                                                src={item.imageProduct}
-                                                                className="img-fluid rounded-3"
-                                                                alt="Cotton T-shirt"
-                                                            />
-                                                        </div>
-                                                        <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            {/* <h6 className="text-muted">Shirt</h6> */}
-                                                            <h6 className="text-black mb-0">{item.nameProduct.substring(0, 17)}</h6>
-                                                        </div>
-                                                        <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
-                                                            <button
-                                                                className="btn btn-link px-2"
-                                                                onClick={(e) => handleMonth(item.productId)}
-                                                            >
-                                                                <i className="fas fa-minus" />
-                                                            </button>
-                                                            <input
-                                                                style={{ width: '50px' }}
-                                                                id="form1"
-                                                                min={1}
-                                                                name="quantity"
-                                                                value={item.month}
-                                                                type="number"
-                                                                className="form-control form-control-sm"
-                                                            />
-                                                            <button
-                                                                className="btn btn-link px-2"
-                                                                onClick={(e) => handleUpdateMonth(item.productId)}
-                                                            >
-                                                                <i className="fas fa-plus" />
-                                                            </button>
-                                                        </div>
-                                                        {/* <div className="col-md-3 col-lg-3 col-xl-3">
+                                                <div className='scrollbar' style={{ boxShadow: 'none' }} id='style-1' >
+
+                                                    <hr className="mb-3 mt-1" />
+                                                    {dataLocal.length ? dataLocal.map((item, index) => (
+                                                        <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
+                                                            <div className="col-md-2 col-lg-2 col-xl-2">
+                                                                <img
+                                                                    src={item.imageProduct}
+                                                                    className="img-fluid rounded-3"
+                                                                    alt="Cotton T-shirt"
+                                                                />
+                                                            </div>
+                                                            <div className="col-md-3 col-lg-3 col-xl-3">
+                                                                {/* <h6 className="text-muted">Shirt</h6> */}
+                                                                <h6 className="text-black mb-0">{item.nameProduct.substring(0, 17)}</h6>
+                                                            </div>
+                                                            <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
+                                                                <button
+                                                                    className="btn btn-link px-2"
+                                                                    onClick={(e) => handleMonth(item.productId)}
+                                                                >
+                                                                    <i className="fas fa-minus" />
+                                                                </button>
+                                                                <input
+                                                                    style={{ width: '50px' }}
+                                                                    id="form1"
+                                                                    min={1}
+                                                                    name="quantity"
+                                                                    value={item.month}
+                                                                    type="number"
+                                                                    className="form-control form-control-sm"
+                                                                />
+                                                                <button
+                                                                    className="btn btn-link px-2"
+                                                                    onClick={(e) => handleUpdateMonth(item.productId)}
+                                                                >
+                                                                    <i className="fas fa-plus" />
+                                                                </button>
+                                                            </div>
+                                                            {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-black mb-0">{item.month}</h6>
                                                         </div> */}
-                                                        {/* <div className="col-md-3 col-lg-3 col-xl-3">
+                                                            {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
                                                         </div> */}
-                                                        <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
-                                                            {/* <h6 className="text-muted">Price</h6> */}
-                                                            <h6 className="text-black mb-0">{formatMoney(item.priceProduct * item.month)}</h6>
-                                                        </div>
-                                                        <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                            <div style={{ cursor: 'pointer' }} className="text-muted">
-                                                                <i onClick={(e) => handleRemoveCartItem(item.id)} className="fas fa-times" />
+                                                            <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
+                                                                {/* <h6 className="text-muted">Price</h6> */}
+                                                                <h6 className="text-black mb-0">{formatMoney(item.priceProduct * item.month)}</h6>
+                                                            </div>
+                                                            <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                                <div style={{ cursor: 'pointer' }} className="text-muted">
+                                                                    <i onClick={(e) => handleRemoveCartItem(item.id)} className="fas fa-times" />
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                )) :
-                                                    <div style={{ width: "100%" }} >
-                                                        <div style={{ width: '500px', clear: 'both', textAlign: 'center' }}>
-                                                            <p>Chưa có trụ nào !</p>
+                                                    )) :
+                                                        <div style={{ width: "100%" }} >
+                                                            <div style={{ width: '500px', clear: 'both', textAlign: 'center' }}>
+                                                                <p>Chưa có trụ nào !</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                }
-                                                <hr className="my-4" />
+                                                    }
+                                                </div>
+                                                {/* <hr className="my-4" /> */}
 
                                                 <div className="pt-5">
                                                     <h6 className="mb-0">
