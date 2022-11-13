@@ -23,6 +23,7 @@ import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import AddIcon from '@mui/icons-material/Add';
 import './Pillar.css'
+import ProductStatus from "../../components/ProductStatus";
 const columns = [
     { id: 'id', label: 'Id', minWidth: 10, maxWidth: 10 },
     {
@@ -151,7 +152,9 @@ export default function Pillar({ handleOpenDelete, openDelete, search, handleClo
                                             <TableCell sx={{ textAlign: 'center' }}> {item.address.fullAddress}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.category && item.category.name}</TableCell>
 
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>
+                                                <ProductStatus status={item.status}></ProductStatus>
+                                                </TableCell>
 
 
                                             <TableCell sx={{ textAlign: 'right' }}>

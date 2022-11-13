@@ -58,11 +58,6 @@ function TableAddress() {
 
     const [selected, setSelected] = React.useState(false);
     const ToggleButton = styled(ToggleButtonMui)({
-        // backgroundColor: "#00BFFF",
-        // "&.Mui-selected, &.Mui-selected:hover": {
-        //     color: "white",
-        //     backgroundColor: '#00BFFF',
-        // }
     });
 
     const handleChangeChecked = (event) => {
@@ -70,22 +65,12 @@ function TableAddress() {
     };
 
 
-    // const [checked, setChecked] = React.useState(true);
-    // const handleChangeChecked = (event) => {
-    //     setChecked(event.target.checked);
-    // };
-
     // show hide popup
     const [open, setOpen] = React.useState(false);
     const [dataDetail, setDataDetail] = useState([])
     const handleOpen = async (id) => {
         console.log(id);
         history.push('/auth/address/' + id)
-        // const response = await axios.get(API_FIND_BY_PRODUCT_ID + id)
-        // if (response) {
-        //     setDataDetail(response.data.product)
-        // }
-        // setOpen(true)
     };
     const handleClose = () => setOpen(false);
 
@@ -205,14 +190,14 @@ function TableAddress() {
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {data.length > 0 ? data.map((item, index) => (
                             item.totalProduct > 0 &&
-                            <Grid item xs={4} sx={{ mt: 1 }} key={index} >
-                                <div style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'column', padding: '20px', borderRadius: "8px" }}>
-                                    <p style={{
-                                        width: '100%', height: '230px'
+                            <Grid item xs={6} sx={{ mt: 1 }} key={index} >
+                                <div style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
+                                    <div style={{
+                                        width: '100%', height: '260px'
                                     }}  >
-                                        <img style={{ width: '100%', height: '245px', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
+                                        <img style={{ width: '100%', height: '100%', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
 
-                                    </p>
+                                    </div>
                                     <div style={{ width: '100%', justifyContent: 'center', color: 'black' }}>
                                         <p style={{ fontSize: '20px', paddingTop: '7px' }}>Đường:  {item.street}</p>
                                         {/* <p>Thành Phố: {item.city} </p> */}
@@ -240,14 +225,7 @@ function TableAddress() {
                                                 Xem thêm
                                             </Button>
                                         </NavLink>
-                                        {/* 
-                               {item.product.length > 0 ? item.product.map((itemDetail, index) => (
-                                   <div key={index} style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '5px' }}>
-                                       <h2>{itemDetail.name}</h2>
-                                   </div>
-                               )) : <div style={{ border: '1px solid #ddd', textAlign: 'center', marginTop: '50px', backgroundColor: '#FF4433' }}>
-                                   <h2 style={{ color: 'white' }}>Khu vực này đã thuê hết</h2>
-                               </div>} */}
+
                                     </div>
                                 </div>
                             </Grid>
@@ -267,66 +245,6 @@ function TableAddress() {
                     </Grid>
                 </Box>
 
-                {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                <TableContainer sx={{ height: '400px' }}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {data
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    return (
-                                        <TableRow onClick={() => handleOpen(row.id)} hover role="checkbox" tabIndex={-1} key={index}>
-                                            {columns.map((column) => {
-                                                const value = row[column.id];
-                                                return (
-                                                    <TableCell key={column.id} sx={{ cursor: 'pointer' }} align={column.align}>
-                                                        {column.format && typeof value === 'number'
-                                                            ? column.format(value)
-                                                            : value}
-                                                    </TableCell>
-                                                );
-                                            })}
-                                        </TableRow>
-                                    );
-                                })}
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                            >
-                                <Box sx={style}>
-                                    <ModalDetailProduct dataDetail={dataDetail} />
-                                </Box>
-                            </Modal>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={data.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper> */}
-                {/* <AddressDetail /> */}
 
             </Box>
         </React.Fragment>
