@@ -180,12 +180,7 @@ function TableAddress() {
                     </Grid>
                 </Box>
 
-
-
-
-
                 <Box sx={{ width: '100%', mt: 2, }} className='hoverBut' >
-
                     {show && <p>Tìm thấy {data.length} kết quả cho: "{keyword}"</p>}
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {data.length > 0 ? data.map((item, index) => (
