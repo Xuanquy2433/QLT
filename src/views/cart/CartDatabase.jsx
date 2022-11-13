@@ -154,15 +154,15 @@ function CartDatabase() {
 
 
     return (
-        <section className="h-custom" style={{ backgroundColor: "white", height: '50vh', marginBottom: '80px' }}>
-            <div style={{ backgroundColor: 'white' }}>
-                <div className="row d-flex justify-content-center align-items-center h-100">
+        <section className="h-custom" style={{backgroundColor: "white", height: '50vh', marginBottom: '80px' , borderRadius:'15px 0 0 15px' }}>
+            <div style={{backgroundColor: 'white' , borderRadius:'15px 0 0 15px' }}>
+                <div  className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12">
                         <div
                             className="card card-registration card-registration-2"
                             style={{ borderRadius: 15 }}
                         >
-                            <div className="card-body p-0">
+                            <div className="card-body p-0 scrollbar" id='style-1'>  
                                 <div className="row g-0">
                                     <div className="col-lg-8">
                                         <div className="p-5">
@@ -171,7 +171,7 @@ function CartDatabase() {
                                                 <h6 className="mb-0 text-muted">{data.length} trụ</h6>
                                             </div>
                                             {data.length ?
-                                                <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-2 d-flex justify-content-between align-items-center">
+                                                <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
                                                     <div className="col-md-2 col-lg-2 col-xl-2">
 
                                                     </div>
@@ -193,7 +193,7 @@ function CartDatabase() {
                                                 </div> : ''}
                                             <hr className="mb-3 mt-1" />
                                             {data.length ? data.map((item, index) => (
-                                                <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center">
+                                                <div key={index} style={{  display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center  ">
                                                     <div className="col-md-2 col-lg-2 col-xl-2">
                                                         <img
                                                             src={item.product.photosImagePath}

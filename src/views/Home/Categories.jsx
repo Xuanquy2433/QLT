@@ -35,10 +35,10 @@ function Categories() {
                    
                    
                    
-                    <div style={{ display: 'flex', justifyContent: 'center'}}>
+                    <div>
                         {
                             data.map((item, index) => (
-                                <NavLink style={{borderRight:'1px solid #4444' , padding:'0 35px'}} key={index} to={'/auth/categories/' + item.id} aria-label="main mailbox folders">
+                                <NavLink  key={index} to={'/auth/categories/' + item.id} aria-label="main mailbox folders">
                                     <List>
                                         <ListItem disablePadding>
                                             <ListItemButton>
