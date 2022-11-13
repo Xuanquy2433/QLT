@@ -154,7 +154,7 @@ function CartDatabase() {
 
 
     return (
-        <section className="h-custom" style={{ backgroundColor: "white", height: '70vh', marginBottom: '80px' }}>
+        <section className="h-custom" style={{ backgroundColor: "white", height: '50vh', marginBottom: '80px' }}>
             <div style={{ backgroundColor: 'white' }}>
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12">
@@ -244,7 +244,7 @@ function CartDatabase() {
                                                     </div>
                                                     <h6 style={{ fontSize: '0.8em' }} className="text-muted mt-2">Ngày bắt đầu:
                                                         <span className="text-nowrap mr-3"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}</span>
-                                                        - <span className='ml-2'>{d.getDate() + '/' + (d.getMonth() + item.month) + '/' + d.getFullYear()}</span></h6>
+                                                        - <span className='ml-2'>{d.getDate() + '/' + (d.getMonth() + 1 + item.month) + '/' + d.getFullYear()}</span></h6>
 
                                                 </div>
                                             )) :
