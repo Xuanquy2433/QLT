@@ -178,7 +178,7 @@ const Index = (props) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2Input + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + (newPage + 1) + '&sort=desc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + dateAPI2 + '&page=' + (newPage + 1) + '&sort=desc')
     if (response) {
       setPage(newPage);
       setDataTimeOverview(response.data.map)
@@ -186,7 +186,7 @@ const Index = (props) => {
   };
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + date2Input + '&date2=' + moment().format('DD/MM/YYYY') + '&page=' + 1 + '&sort=desc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + dateAPI2 + '&page=' + 1 + '&sort=desc')
     if (response) {
       setDataTimeOverview(response.data.map)
       setPage(0);
