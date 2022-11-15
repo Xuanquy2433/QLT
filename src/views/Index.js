@@ -1,4 +1,7 @@
-
+import NorthIcon from '@mui/icons-material/North';
+import SouthIcon from '@mui/icons-material/South';
+import FormControl from '@mui/material/FormControl';
+import ToggleButtonMui from '@mui/material/ToggleButton';
 import { useEffect, useState } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
@@ -44,6 +47,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { API_OVERVIEW_TIME_PRODUCT_HIRED } from "utils/const";
 import moment from "moment";
+import styled from 'styled-components';
+import { formatMoney } from 'common/formatMoney';
 
 
 const columns = [
@@ -51,16 +56,23 @@ const columns = [
   { id: 'name', label: 'Tên trụ', minWidth: 100 },
   {
     id: 'description',
-    label: 'Mô tả',
+    label: 'Địa chỉ',
     minWidth: 170,
-    align: 'right',
+    align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'price',
     label: 'Giá',
     minWidth: 170,
-    align: 'right',
+    align: 'center',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'quantityPillar',
+    label: 'Số lượng trụ được thuê',
+    minWidth: 170,
+    align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
 ];
@@ -155,17 +167,18 @@ const Index = (props) => {
 
   //GET API TIME_PRODUCT_HIRED
   let d = new Date();
-  let date2Input = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDate()
+  let date2Input = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear()
 
 
   const [dataTimeOverview, setDataTimeOverview] = useState([])
+  const [totalHiring, setTotalHiring] = useState(0)
   const [page, setPage] = useState(0);
   const [dateAPI1, setDateAPI1] = useState(date2Input);
-  const [dateAPI2, setDateAPI2] = useState(moment().format('YYYY/MM/DD'));
+  const [dateAPI2, setDateAPI2] = useState(moment().format('DD/MM/YYYY'));
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2Input + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + (newPage + 1) + '&sort=desc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + dateAPI2 + '&page=' + (newPage + 1) + '&sort=desc')
     if (response) {
       setPage(newPage);
       setDataTimeOverview(response.data.map)
@@ -173,7 +186,7 @@ const Index = (props) => {
   };
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + date2Input + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + 1 + '&sort=desc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + dateAPI2 + '&page=' + 1 + '&sort=desc')
     if (response) {
       setDataTimeOverview(response.data.map)
       setPage(0);
@@ -182,20 +195,66 @@ const Index = (props) => {
   };
 
   const timeOverview = async (e) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2Input + '&date2=' + moment().format('YYYY/MM/DD') + '&page=' + page + 1 + '&sort=desc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2Input + '&date2=' + moment().format('DD/MM/YYYY') + '&page=' + page + 1 + '&sort=' + sort)
     if (response) {
       setDataTimeOverview(response.data.map)
+      setTotalHiring(response.data.totalHired)
       setTotalPages(response.data.totalProduct)
     }
   }
 
+  const [keyword, setKeyword] = useState(null);
   const submitDate = async (e) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + dateAPI1.replace(/-/g, '/') + '&date2=' + dateAPI2.replace(/-/g, '/') + '&page=' + page + 1 + '&sort=desc')
+    if (keyword == null) {
+      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+        + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort)
+      if (response) {
+        setDataTimeOverview(response.data.map)
+        setTotalHiring(response.data.totalHired)
+        setTotalPages(response.data.totalProduct)
+      }
+    } else {
+      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+        + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort + '&keyword=' + keyword)
+      if (response) {
+        setDataTimeOverview(response.data.map)
+        setTotalHiring(response.data.totalHired)
+        setTotalPages(response.data.totalProduct)
+      }
+    }
+  }
+
+  const [sort, setSort] = useState('asc');
+  const onChangeButtonSort = async (e) => {
+    if (selected === false) {
+      setSort('desc')
+    } else setSort('asc')
+    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+      + dateAPI1.replace(/-/g, '/') + '&date2=' + dateAPI2.replace(/-/g, '/') + '&page=' + page + 1 + '&sort=' + sort)
     if (response) {
       setDataTimeOverview(response.data.map)
+      setTotalHiring(response.data.totalHired)
       setTotalPages(response.data.totalProduct)
     }
   }
+
+  // const onchangeSearch = async (e) => {
+  //   if (selected === false) {
+  //     setSort('desc')
+  //   } else setSort('asc')
+  //   const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' +
+  //     dateAPI1.replace(/-/g, '/') + '&date2=' + dateAPI2.replace(/-/g, '/') + '&page=' + page + 1 + '&sort=' + sort + '&keyword=' + keyword)
+  //   if (response) {
+  //     setDataTimeOverview(response.data.map)
+  //     setTotalHiring(response.data.totalHired)
+  //     setTotalPages(response.data.totalProduct)
+  //   }
+  // }
+
+
+  const [selected, setSelected] = useState(false);
+  const ToggleButton = styled(ToggleButtonMui)({
+  });
   const arr = []
   const arr2 = []
   const dataArr = []
@@ -212,6 +271,9 @@ const Index = (props) => {
   arr2.forEach(function (value, key) {
     dataArr.push(JSON.parse(value[0]))
   })
+
+  console.log('data ', arr2);
+  console.log('dataArr ', dataArr);
 
   useEffect(() => {
 
@@ -358,6 +420,7 @@ const Index = (props) => {
                     <input name="date1" style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date1' onChange={e => setDateAPI1(e.target.value)} type="date" />
                     <span className="mb-0 mr-3" style={{ color: 'black', fontWeight: '600' }}>đến</span>
                     <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2' onChange={e => setDateAPI2(e.target.value)} type="date" />
+                    <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" placeholder='Tìm theo địa chỉ' onChange={e => setKeyword(e.target.value)} type="text" />
                     <Button
                       color="primary"
                       onClick={submitDate}
@@ -365,6 +428,22 @@ const Index = (props) => {
                     >
                       Tìm kiếm
                     </Button>
+                    <FormControl sx={{ backgroundColor: 'white', height: '45px', borderRadius: '5px',marginLeft: '10px' }} size="small">
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <ToggleButton
+                          sx={{ height: '83%' }}
+                          value="check"
+                          selected={selected}
+                          onChange={() => {
+                            setSelected(!selected);
+                            onChangeButtonSort()
+                            // onclickFilter()
+                          }}
+                        >
+                          {selected ? <NorthIcon /> : <SouthIcon />}
+                        </ToggleButton>
+                      </div>
+                    </FormControl>
                   </div>
 
                 </Row>
@@ -386,20 +465,15 @@ const Index = (props) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {dataArr
-                      .map((row) => {
+                    {Object.entries(arr2)
+                      .map(([key, value]) => {
                         return (
-                          <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number'
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
+                          <TableRow hover role="checkbox" key={key}>
+                            <TableCell style={{ textAlign: 'left' }}>{JSON.parse(value[0]).id}</TableCell>
+                            <TableCell style={{ textAlign: 'left' }}>{JSON.parse(value[0]).name}</TableCell>
+                            <TableCell style={{ textAlign: 'center' }}>{JSON.parse(value[0]).street}</TableCell>
+                            <TableCell style={{ textAlign: 'center' }}>{formatMoney(JSON.parse(value[0]).price)} VNĐ</TableCell>
+                            <TableCell style={{ textAlign: 'center' }}>{JSON.parse(value[1])}</TableCell>
                           </TableRow>
                         );
                       })}
