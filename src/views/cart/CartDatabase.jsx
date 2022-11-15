@@ -19,6 +19,7 @@ function CartDatabase() {
     const [month, setMonth] = useState(1)
     // const [btnOrders, setBtnOrders] = useState('Đặt hàng')
     const [btnDisabled, setBtnDisabled] = useState(false)
+    const [showDate, setShowDate] = useState(new Date())
     const history = useHistory()
     let decoded;
     let token = localStorage.getItem("token");
@@ -49,7 +50,8 @@ function CartDatabase() {
             }
         })
         // setMonthUpdate(monthUpdate + 1)
-        setShowDate(d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear())
+        setShowDate(new Date(showDate.setMonth(showDate.getMonth()+1)))
+
         getAllCart()
     }
 
@@ -62,11 +64,19 @@ function CartDatabase() {
                     'Content-Type': 'application/json'
                 }
             })
-            setShowDate(d.getDate() + '/' + (d.getMonth() + - 1) + '/' + d.getFullYear())
+            setShowDate(new Date(showDate.setMonth(showDate.getMonth()-1)))
             getAllCart()
         }
     }
 
+    const showDate2 = (d1,d2) => {
+        let date = new Date();
+        let day = date.getDate();
+        date.setMonth(date.getMonth()+d2);
+        let month = date.getMonth() +1;
+        let year = date.getFullYear();
+        return day+'/'+month + '/' + year;
+    }
     // const [idOrder, setIdOrder] = useState()
     const clickOrder = async () => {
         // setBtnOrders('Vui lòng chờ...')
@@ -128,9 +138,8 @@ function CartDatabase() {
     })
 
     const [monthUpdate, setMonthUpdate] = useState(1)
-    const d = new Date()
-    const date = d.getDate() + '/' + (d.getMonth() + monthUpdate) + '/' + d.getFullYear()
-    const [showDate, setShowDate] = useState(null)
+
+
 
     console.log('month ', monthUpdate, ' showDate ', showDate);
     useEffect(() => {
@@ -245,7 +254,7 @@ function CartDatabase() {
                                                         </div>
                                                         <h6 style={{ fontSize: '0.8em' }} className="text-muted mt-2">Ngày bắt đầu:
                                                             <span className="text-nowrap mr-3"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}</span>
-                                                            - <span className='ml-2'>{d.getDate() + '/' + (d.getMonth() + 1 + item.month) + '/' + d.getFullYear()}</span></h6>
+                                                            - <span className='ml-2'>{showDate2(0,item.month)}</span></h6>
 
                                                     </div>
                                                 )) :

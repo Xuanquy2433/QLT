@@ -1,6 +1,7 @@
 import { CgMenuBoxed } from 'react-icons/cg';
 import { Link, useHistory } from "react-router-dom";
 import '../Navbars/style.css'
+import Badge from '@mui/material/Badge';
 // reactstrap components
 import {
   UncontrolledCollapse,
@@ -22,6 +23,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React, { useEffect } from 'react';
 import Notification from './NotificationUser';
 import { BsSuitHeartFill } from "react-icons/bs";
+import CartCount from "../../views/cart/CartCount";
 
 const AdminNavbar = () => {
   let decoded;
@@ -109,10 +111,18 @@ const AdminNavbar = () => {
 
               <NavItem >
                 <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
-                  <i className="ni ni-cart" />
+
+                  <Badge badgeContent={ <CartCount />} color="secondary"
+                         anchorOrigin={{
+                           vertical: 'top',
+                           horizontal: 'left',
+                         }}>
+                    <i className="ni ni-cart" />
+                  </Badge >
                   <span className="nav-link-inner--text">Thanh Toán</span>
                 </NavLink>
               </NavItem>
+
 
               {token && decoded ?
                 <NavItem >
