@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -184,6 +189,7 @@ function Activity() {
 
     const [showExtend, setShowExtend] = useState(true)
     const extend = async () => {
+        handleClose()
         try {
             var map = new Map()
             listIds.map((item) => {
@@ -209,7 +215,15 @@ function Activity() {
             showError2(error)
         }
     }
+    const [open, setOpen] = React.useState(false);
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     useEffect(() => {
         getALLOrder()
         getALLOrderDetail()
@@ -257,10 +271,10 @@ function Activity() {
                                         {data.map((item, index) => (
                                             <TableRow key={index} >
                                                 <TableCell align="left">{item.id}</TableCell>
-                                                <TableCell align="center"><Moment format='MMMM Do YYYY, h:mm:ss a'>{item.orderTime}</Moment></TableCell>
+                                                <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.orderTime}</Moment></TableCell>
                                                 <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
                                                 {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ fontWeight: '600', color: 'blue' }} align="right">Chờ admin phê duyệt</TableCell> : null}
-                                                {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600', color: '#f5c71a' }} align="right">Chờ thanh toán</TableCell> : null}
+                                                {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600', color: 'purple' }} align="right">Chờ thanh toán</TableCell> : null}
                                                 {item.status === 'DONE' ? <TableCell sx={{ fontWeight: '600', color: 'green' }} align="right">Xong</TableCell> : null}
                                                 {item.status === 'CANCELLED' ? <TableCell sx={{ fontWeight: '600', color: 'red' }} align="right">Đã hủy</TableCell> : null}
                                                 {item.status === 'PAID' ? <TableCell sx={{ fontWeight: '600', color: 'orange' }} align="right">Đang thuê</TableCell> : null}
@@ -336,7 +350,7 @@ function Activity() {
                             </Button>
                         </Grid> :
                             <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                                <Button onClick={extend} variant="contained" color="success">
+                                <Button onClick={handleClickOpen} variant="contained" color="success">
                                     Xác nhận
                                 </Button>
                                 <Button sx={{ ml: 1 }} onClick={e => {
@@ -352,7 +366,28 @@ function Activity() {
                     </TabPanel>
                 </TabContext>
             </Box>
-
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Xác nhận gia hạn"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                       Bạn có chắc chắc muốn gia hạn thêm không ?
+                       Lưu ý sau khi đồng ý không thể hoàn tác.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Từ chối</Button>
+                    <Button onClick={extend} autoFocus>
+                        Đồng ý
+                    </Button>
+                </DialogActions>
+            </Dialog>
 
         </div>
 

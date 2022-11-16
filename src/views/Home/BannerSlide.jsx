@@ -16,6 +16,7 @@ function BannerSlide() {
         slickPrev: false,
         slickNext: false,
         swipeToSlide: false,
+        arrows: false,
     };
     const [data, setData] = React.useState([]);
     const getData = async () => {
@@ -28,11 +29,11 @@ function BannerSlide() {
         getData();
     }, [])
     return (
-        <div style={{ maxWidth: '1300px', margin: 'auto' }}>
+        <div style={{ maxWidth: '1480px', margin: 'auto' }}>
             <Slider  {...settings}>
                 {data.map((i) => (
                     <div >
-                        <img style={{ width: '100%', height: '80vh'}} src={i.photosImagePath} alt="" />
+                        <img style={{ width: '100%', height: '80vh' }} src={i.photosImagePath} alt="" />
                     </div>
                 ))}
             </Slider>

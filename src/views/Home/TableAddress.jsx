@@ -25,6 +25,7 @@ import SouthIcon from '@mui/icons-material/South';
 
 import CheckIcon from '@mui/icons-material/Check';
 import ToggleButtonMui from '@mui/material/ToggleButton';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import './scss.scss'
 import AddressDetail from 'views/pillarAddress/AddressDetail';
 import { API_GET_ADDRESS } from 'utils/const';
@@ -33,6 +34,7 @@ import { API_CLICK_SEARCH_ADDRESS } from 'utils/const';
 
 import Menu from '@mui/material/Menu';
 import usePagination from 'views/pillarAddress/Pagination';
+import { formatMoney } from 'common/formatMoney';
 
 
 const style = {
@@ -193,9 +195,9 @@ function TableAddress() {
                                         <p style={{ fontSize: '20px', paddingTop: '7px' }}>Đường:  {item.street}</p>
                                         {/* <p>Thành Phố: {item.city} </p> */}
                                         {/* <p>Mô tả: {item.description}</p> */}
-                                        <p>Khoảng giá: <span style={{ fontSize: '20px', fontWeight: '600' }}>{item.minPrice} - {item.maxPrice}</span> </p>
-                                        <p>Số lượng trụ: {item.totalProduct}</p>
-                                        <p>Số trụ còn trống: <span style={{ color: 'red', fontSize: '20px', fontWeight: '500px' }} >{item.totalProductAvailable}</span> </p>
+                                        <p>Khoảng giá: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)} - {formatMoney(item.maxPrice)}</span> </p>
+                                        <p>Số lượng trụ: <span style={{ color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
+                                        <p> <FmdGoodIcon style={{ color: 'red', cursor: 'pointer' }} /> </p>
 
                                         <NavLink to={'/auth/address/' + item.id}>
                                             <Button sx={{

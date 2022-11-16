@@ -195,7 +195,7 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
         </Stack> */}
         <div style={{
           display: "flex", width: '1300px', flexWrap: "wrap", justifyContent: "center"
-          , marginTop: '50px', marginBottom: '150px'
+          , marginTop: '50px', marginBottom: '70px'
         }}>
           {
             _DATA.currentData().map((item, index) => (

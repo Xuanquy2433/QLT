@@ -9,7 +9,7 @@ const Login = () => {
         {/* Footer */}
         <footer
           className="text-center text-lg-start text-white"
-          style={{ backgroundColor: "#1c2331", marginTop: '50px' }}
+          style={{ backgroundColor: "#1c2331", marginTop: '35px' }}
         >
           {/* Section: Social media */}
           <section
