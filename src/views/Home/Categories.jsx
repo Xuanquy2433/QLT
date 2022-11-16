@@ -26,30 +26,35 @@ function Categories() {
 
 
     return (
-        <Box sx={{ width: '86%', margin: 'auto', borderRadius: "8px"}}>
+        <Box sx={{ width: '86%', margin: 'auto', borderRadius: "8px" }}>
             <div>
-                    <h2 style={{ margin: "8px 0px 10px 10px",color: 'white' }}>Danh mục </h2>
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
-                        {
-                            data.map((item, index) => (
-                                <NavLink  key={index} to={'/auth/categories/' + item.id} aria-label="main mailbox folders"
-                                style={{margin: "8px 10px 10px 0px"}}>
-                                            <Button variant="contained"
-                                                    sx={{ width: '100%', maxWidth: 360,
-                                                        bgcolor: 'background.paper' }}
-                                            >
-                                                <ListItemIcon>
-                                                    <CategoryIcon />
-                                                </ListItemIcon>
-                                                <ListItemText sx={{ color: "#333" }} primary={item.name} />
-                                            </Button>
+                <h2 style={{ margin: "8px 0px 10px 10px", color: 'white' }}>Danh mục </h2>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    {
+                        data.map((item, index) => (
+                            <NavLink key={index} to={'/auth/categories/' + item.id} aria-label="main mailbox folders"
+                                style={{ margin: "8px 10px 10px 0px" }}>
+                                <Button variant="contained"
+                                    sx={{
+                                        width: '100%', maxWidth: 360,
+                                        bgcolor: 'background.paper',
+                                        '&:hover': {
+                                            backgroundColor: '#87CEFA',
+                                        },
+                                    }}
+                                >
+                                    <ListItemIcon>
+                                        <CategoryIcon />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ color: "#333" }} primary={item.name} />
+                                </Button>
 
-                                    <Divider />
-                                </NavLink>
-                            ))
-                        }
+                                <Divider />
+                            </NavLink>
+                        ))
+                    }
 
-                        </div>
+                </div>
             </div >
         </Box >
     )

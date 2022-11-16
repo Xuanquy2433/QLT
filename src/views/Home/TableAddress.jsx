@@ -1,12 +1,5 @@
-import { Grid, IconButton, InputBase, styled, Switch } from '@mui/material';
+import { Grid, IconButton, InputBase, Pagination, Stack, styled, Switch } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { Link, NavLink, useHistory } from 'react-router-dom'
@@ -37,9 +30,9 @@ import AddressDetail from 'views/pillarAddress/AddressDetail';
 import { API_GET_ADDRESS } from 'utils/const';
 import { API_CLICK_SEARCH_ADDRESS } from 'utils/const';
 
-import { alpha } from '@mui/material/styles';
 
 import Menu from '@mui/material/Menu';
+import usePagination from 'views/pillarAddress/Pagination';
 
 
 const style = {
@@ -63,7 +56,6 @@ function TableAddress() {
     const handleChangeChecked = (event) => {
         setSelected(event.target.checked);
     };
-
 
     // show hide popup
     const [open, setOpen] = React.useState(false);
@@ -101,7 +93,7 @@ function TableAddress() {
         if (field === '') {
             setField('street')
         }
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=' + sort + '&sortField=' + field)
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=1000&sort=' + sort + '&sortField=' + field)
         if (response) {
             setData(response.data.contents)
             setShow(false)
@@ -111,7 +103,7 @@ function TableAddress() {
     //click search
     const [show, setShow] = useState(false);
     const onclickSearch = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&keyword=' + keyword + '&sort=asc&sortField=id')
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=1000&keyword=' + keyword + '&sort=asc&sortField=id')
         if (response) {
             setData(response.data.contents)
             setShow(true)
@@ -126,19 +118,23 @@ function TableAddress() {
         }
         setShow(false)
     }
+    //Pagination
+    let [page, setPage] = useState(1);
+    const PER_PAGE = 6;
+    const count = Math.ceil(data.length / PER_PAGE);
+    const _DATA = usePagination(data, PER_PAGE);
 
-
-
-
-
-
+    const handleChange = (e, p) => {
+        setPage(p);
+        _DATA.jump(p);
+    };
     useEffect(() => {
         getAllAddRess()
     }, [])
     return (
         <React.Fragment>
-            <Box sx={{ width: '86%', margin: 'auto'  }}>
-                <Box  sx={{ flexGrow: 1, mt: 10 , marginTop:'30px !important' }}>
+            <Box sx={{ width: '86%', margin: 'auto' }}>
+                <Box sx={{ flexGrow: 1, mt: 10, marginTop: '30px !important' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
                             <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
@@ -183,7 +179,7 @@ function TableAddress() {
                 <Box sx={{ width: '100%', mt: 2, }} className='hoverBut' >
                     {show && <p>Tìm thấy {data.length} kết quả cho: "{keyword}"</p>}
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        {data.length > 0 ? data.map((item, index) => (
+                        {_DATA.currentData().length > 0 ? _DATA.currentData().map((item, index) => (
                             item.totalProduct > 0 &&
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                                 <div style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
@@ -239,8 +235,11 @@ function TableAddress() {
                         </Modal>
                     </Grid>
                 </Box>
-
-
+                <Stack sx={{ mt: 8 }} alignItems="center">
+                    <Pagination
+                        sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }} showFirstButton showLastButton
+                        count={count} page={page} color="secondary" onChange={handleChange} />
+                </Stack>
             </Box>
         </React.Fragment>
     )
