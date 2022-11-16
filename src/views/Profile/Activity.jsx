@@ -151,9 +151,9 @@ function Activity() {
 
     let checkIdHasBeen = true
     const handleChangeCheckbox = (event, id, month) => {
-        setMonth(1)
+        // setMonth(1)
         if (event.target.checked) {
-            console.log('✅ id = ', id);
+            setMonth(1)
             listIds.map((item => {
                 if (item.productId === id) {
                     checkIdHasBeen = false
@@ -172,11 +172,22 @@ function Activity() {
             console.log('list ids when remove ', listIds);
         }
     }
+    const onchangeMonth = (event, id) => {
+        setMonth(event.target.value)
+        listIds.map((item => {
+            if (item.productId === id) {
+                checkIdHasBeen = false
+                console.log('da them');
+                setListIds([...listIds, {
+                    productId: id,
+                    month: Number(event.target.value)
+                }]);
+            }
+        }))
+    }
     console.log('list ids ', listIds);
 
     const [showExtend, setShowExtend] = useState(true)
-
-
     const extend = async () => {
         try {
             var map = new Map()
@@ -209,7 +220,6 @@ function Activity() {
         getALLOrderDetail()
         getALLOrderDetailExpired()
     }, [])
-    {/* <Button onClick={e => setShowCheckbox(!showCheckbox)} variant="contained" color="success">+</Button>, */ }
     return (
         <div className='activity'>
             <div className='activity-content'>
@@ -299,7 +309,7 @@ function Activity() {
                                                 <TableRow key={index} >
                                                     {/* <TableCell align="left">{item.id}</TableCell> */}
                                                     {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.product.id, month)} />
-                                                        <input onChange={e => setMonth(e.target.value)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
+                                                        <input onChange={e => onchangeMonth(e, item.product.id)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
                                                     </TableCell> : <TableCell align="center"> </TableCell>}
                                                     <TableCell align="center">{item.product.name} </TableCell>
                                                     <TableCell align="center">{item.product.price} </TableCell>
