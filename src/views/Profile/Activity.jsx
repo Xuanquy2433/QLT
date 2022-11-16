@@ -176,12 +176,7 @@ function Activity() {
         setMonth(event.target.value)
         listIds.map((item => {
             if (item.productId === id) {
-                checkIdHasBeen = false
-                console.log('da them');
-                setListIds([...listIds, {
-                    productId: id,
-                    month: Number(event.target.value)
-                }]);
+                item.month = Number(event.target.value)
             }
         }))
     }
