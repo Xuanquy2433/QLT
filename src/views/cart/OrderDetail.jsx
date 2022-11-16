@@ -202,16 +202,6 @@ function OrderDetail() {
         setBank(event.target.value);
     };
 
-    const listBank = {
-        mbank: '0123 56 81923 123 725',
-        bidv: '9123 8123 9123 92',
-        vpbank: '82131 1312 1231 09',
-        tpbank: '086 3217 3123 123',
-        vib: '19883 08213 9123 32',
-    }
-
-
-
     return (
         <div style={{ backgroundColor: 'white' }}>
             <UserSize changeUserCount={(data) => setSize(data)} />
@@ -251,7 +241,7 @@ function OrderDetail() {
 
                                                 : <h2> Chưa có sản phẩm nào </h2>}
                                         </div>
-                                        <ComponentRightInfo bank={bank} listBank={listBank} handleChange={handleChange} data={data} renderer={renderer}
+                                        <ComponentRightInfo bank={bank} handleChange={handleChange} data={data} renderer={renderer}
                                             checkout={checkout} isConfirm={isConfirm} valueStatus={valueStatus} onChangeExtendedStatus={onChangeExtendedStatus} />
                                     </div>
                                 </div>

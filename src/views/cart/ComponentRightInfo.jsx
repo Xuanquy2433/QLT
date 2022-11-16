@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import { API_BANK_GET } from 'utils/const'
 import ShowBank from './ShowBank'
 
-function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
+function ComponentRightInfo({ reOrder, data, renderer, checkout, isConfirm, valueStatus, onChangeExtendedStatus }) {
     function copy(text) {
         navigator.clipboard.writeText(text)
         toast.success(`Sao chép thành công`, {
@@ -46,11 +46,11 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                 alt="Avatar"
                             />
                         </div>
-                        <p className="small">Vui lòng chuyển khoản vào STK bên dưới kèm theo <span style={{color: 'yellow'}}>nội dung là mã đặt hàng</span>. </p>
+                        <p className="small">Vui lòng chuyển khoản vào STK bên dưới kèm theo <span style={{ color: 'yellow' }}>nội dung là mã đặt hàng</span>. </p>
                         <div className="row mb-4">
                             <div className="col-md-5">
                                 <div className="form-outline form-white">
-                                    <label className="form-label mt-1" htmlFor="typeText">
+                                    <label className="form-label mt-1" style={{fontSize: '0.9em'}} htmlFor="typeText">
                                         Tên ngân hàng
                                     </label>
                                     <select className="form-control form-control-lg"
@@ -66,7 +66,7 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                 </div>
                             </div>
                             <div className="col-md-6-9">
-                                <div className="form-outline form-white" style={{ paddingRight: '0', paddingLeft: '0' }}>
+                                <div className="form-outline form-white" style={{ paddingRight: '0', paddingLeft: '0',fontSize: '0.9em' }}>
                                     <label className="form-label mt-1" htmlFor="typeText">
                                         Mã đặt hàng
                                     </label>
@@ -117,7 +117,6 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                                 </p >
                             </div>
 
-
                         </form>
                         {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
                             Vui lòng thanh toán trước: <Moment style={{ marginRight: '5px' }} format="hh:mm  DD/MM/YYYY">{data.cancelTime}</Moment>.
@@ -140,9 +139,9 @@ function ComponentRightInfo({ reOrder, listBank, data, renderer, checkout, isCon
                             {valueStatus}
                             {data.status === 'NEW'
                                 && <div className="d-flex justify-content-between">
-                                    <span>{data.total} VNĐ123</span>
+                                    <span>{data.total} VNĐ</span>
                                     <span>
-                                        Thanh toán 123
+                                        Thanh toán 
                                         <i className="fas fa-long-arrow-alt-right ms-2" />
                                     </span>
                                 </div>
