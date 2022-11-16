@@ -16,20 +16,32 @@ import AddressDetail from "views/pillarAddress/AddressDetail";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // localStorage.setItem("data", JSON.stringify({ role: 'admin', name: 'abc' }))
 
-var hours = 2;
-var now = new Date().getTime();
-var setupTime = localStorage.getItem('setupTime');
-if (setupTime == null) {
-  localStorage.setItem('setupTime', now)
-} else {
-  if (now - setupTime > hours * 60 * 60 * 1000) {
-    localStorage.clear()
-    toast.warning('Phiên đăng nhập đã hết hạn ', { autoClose: 1000 })
-    setTimeout(() => {
-      window.location.reload();
-    }, 1700);
-    localStorage.setItem('setupTime', now);
-  }
+// var hours = 2;
+// var now = new Date().getTime();
+// var setupTime = localStorage.getItem('setupTime');
+// if (setupTime == null) {
+//   localStorage.setItem('setupTime', now)
+// } else {
+//   if (now - setupTime > hours * 60 * 60 * 1000) {
+//     localStorage.clear()
+//     toast.warning('Phiên đăng nhập đã hết hạn ', { autoClose: 1000 })
+//     setTimeout(() => {
+//       window.location.reload();
+//     }, 1700);
+//     localStorage.setItem('setupTime', now);
+//   }
+// }
+let token = localStorage.getItem('token')
+function isTokenExpired(token) {
+  const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+  return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+}
+if (token && isTokenExpired(token)) { 
+  localStorage.clear()
+  toast.warning('Phiên đăng nhập đã hết hạn !', { autoClose: 1000 })
+  setTimeout(() => {
+    window.location.reload();
+  }, 1600);
 }
 
 root.render(
