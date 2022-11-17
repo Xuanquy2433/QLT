@@ -74,11 +74,11 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-nowrap">Tổng số trụ: </span>
+                      <span className="text-nowrap">Tổng số trụ đã thuê: </span>
 
                       <span className="text-success mr-1">
                         {/* <i className="fa fa-arrow-up mr-1" /> */}
-                        {dataOverview.totalProduct}
+                        {dataOverview.totalHiring}/{dataOverview.totalProduct}
 
                       </span>{" "}
                     </p>
@@ -107,11 +107,11 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-nowrap">Tổng số trụ: </span>
+                      <span className="text-nowrap">Tổng số trụ chưa thuê: </span>
 
                       <span className="text-success mr-1">
                         {/* <i className="fa fa-arrow-up mr-1" /> */}
-                        {dataOverview.totalProduct}
+                        {dataOverview.totalAvailable}/{dataOverview.totalProduct}
 
                       </span>{" "}
                     </p>
@@ -239,12 +239,12 @@ const Header = () => {
                         </p>
                       </Col>
                     </Row>
-                    {/* <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" /> to
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-1">
+                        <i className="fa fa-arrow-up mr-1" /> to
                       </span>{" "}
-                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
-                    </p> */}
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}{""}</span>
+                    </p>
                   </CardBody>
                 </Card>
               </Col>
