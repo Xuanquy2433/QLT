@@ -114,10 +114,7 @@ export default function Pillar({ handleOpenDelete, openDelete, search, handleClo
                                 />
                             </Paper>
                         </Grid>
-
                     </Grid>
-
-
 
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}

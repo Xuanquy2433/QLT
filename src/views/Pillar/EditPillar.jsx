@@ -97,6 +97,18 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
         setDataEdit({ ...dataEdit, status: (valueSta) });
         console.log("value status", valueSta);
     }
+
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
+
     return (
         <Modal
             open={openEdit}
@@ -149,6 +161,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                             defaultValue={addressId}
                             label="Mã địa chỉ"
                             onChange={handleChangeAddress}
+                            MenuProps={MenuProps}
                         >
                             {dataAddress.map((item, index) => (
                                 <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
@@ -163,6 +176,7 @@ export default function EditPillar({ item, data, dataAddress, openEdit, setOpenE
                             id="demo-simple-select"
                             value={dataEdit.categoryId}
                             label="Mã địa chỉ"
+                            MenuProps={MenuProps}
                             onChange={handleChangeCategory}
                         >
                             {dataCategory.map((item, index) => (

@@ -109,7 +109,7 @@ const columns = [
 
 function OrderPlace() {
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(3);
+    const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const [size, setSize] = React.useState(0);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -310,7 +310,7 @@ function OrderPlace() {
                                     <MenuItem value={'CANCELLED'}>Đã hủy </MenuItem>
                                     <MenuItem value={'DONE'}>Xong </MenuItem>
                                     <MenuItem value={'USER_CONFIRMED'}>Đã xác nhận </MenuItem>
-                                    <MenuItem value={'PAID'}>PAID </MenuItem>
+                                    <MenuItem value={'PAID'}>Đang thuê</MenuItem>
                                     <MenuItem value={'EXTEND'}>Gia hạn</MenuItem>
                                 </Select>
                             </FormControl>
@@ -343,8 +343,7 @@ function OrderPlace() {
                                     .map((item, index) => (
                                         <TableRow hover sx={{ cursor: 'pointer' }} role="checkbox" key={index}>
                                             <TableCell sx={{ textAlign: 'left' }}>
-                                                <InfoIcon onClick={() => handleOpenDetailOrder(item.id)}>
-                                                </InfoIcon>
+                                                <InfoIcon style={{color: '#1E90FF'}}  onClick={() => handleOpenDetailOrder(item.id)}/>
                                             </TableCell>
                                             {/* <TableCell>{item.id}</TableCell> */}
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
@@ -352,12 +351,12 @@ function OrderPlace() {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>{formatMoney(item.total)}</TableCell>
-                                            {item.status === 'NEW' ? <TableCell sx={{ textAlign: 'center',color: 'green' }}> Mới</TableCell> : ''}
-                                            {item.status === 'DONE' ? <TableCell sx={{ textAlign: 'center' }}> Đã xong</TableCell> : ''}
-                                            {item.status === 'CANCELLED' ? <TableCell sx={{ textAlign: 'center',color: 'red' }}> Đã hủy</TableCell> : ''}
-                                            {item.status === 'PAID' ? <TableCell sx={{ textAlign: 'center' }}> Paid</TableCell> : ''}
-                                            {item.status === 'EXTEND' ? <TableCell sx={{ textAlign: 'center' }}> Gia hạn</TableCell> : ''}
-                                            {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ textAlign: 'center' }}> USER_CONFIRMED</TableCell> : ''}
+                                            {item.status === 'NEW' ? <TableCell sx={{ textAlign: 'center', color: 'green' }}> Mới</TableCell> : ''}
+                                            {item.status === 'DONE' ? <TableCell sx={{ textAlign: 'center',color: 'blue' }}> Đã xong</TableCell> : ''}
+                                            {item.status === 'CANCELLED' ? <TableCell sx={{ textAlign: 'center', color: 'red' }}> Đã hủy</TableCell> : ''}
+                                            {item.status === 'PAID' ? <TableCell sx={{ textAlign: 'center', color: '#ffa700' }}> Đang thuê</TableCell> : ''}
+                                            {item.status === 'EXTEND' ? <TableCell sx={{ textAlign: 'center', color: 'purple' }}> Gia hạn</TableCell> : ''}
+                                            {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ textAlign: 'center' , color: 'green'}}> Đã xác nhận </TableCell> : ''}
 
                                             {item.status === 'NEW' || item.status === 'USER_CONFIRMED' || item.status === 'EXTEND' ?
                                                 <React.Fragment>
@@ -472,7 +471,7 @@ function OrderPlace() {
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[3, 10, 25, 100]}
+                        rowsPerPageOptions={[6, 10, 25, 100]}
                         component="div"
                         count={data.length}
                         rowsPerPage={rowsPerPage}

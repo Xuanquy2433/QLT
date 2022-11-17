@@ -68,10 +68,10 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
-                            Close
+                            Đóng
                         </Button>
                         <Button onClick={onClickAdd} variant="contained" color="success">
-                            Submit
+                            Xác nhận
                         </Button>
                     </div>
 

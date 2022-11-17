@@ -74,10 +74,10 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button sx={{ marginRight: "5px" }} onClick={handleCloseEdit} variant="contained" color="success">
-              Close
+              Đóng
             </Button>
             <Button onClick={onClickEdit} variant="contained" color="success">
-              Submit
+              Xác nhận
             </Button>
           </div>
         </Box>

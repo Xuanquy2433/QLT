@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import './Pillar.css'
 import { IconButton } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 
@@ -50,6 +51,17 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
         setData({ ...data, categoryId: (value) });
     };
 
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
+
     return (
         <Modal
             open={open}
@@ -83,16 +95,16 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                     <FormControl fullWidth sx={{ margin: "5px" }}>
                         <InputLabel id="demo-simple-select-label">Địa chỉ</InputLabel>
                         <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
+                            labelId="demo-multiple-name-label"
+                            id="demo-multiple-name"
                             value={valueStateAddress}
                             label="Mã địa chỉ"
                             onChange={handleChangeAddress}
+                            MenuProps={MenuProps}
                         >
                             {dataAddress.map((item, index) => (
                                 <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
                             ))}
-
                         </Select>
                     </FormControl>
                     <FormControl fullWidth sx={{ margin: "5px" }}>
@@ -102,6 +114,7 @@ export default function CreatePillar({ dataa, onSubmit, open, setOpen, dataAddre
                             id="demo-simple-select"
                             value={valueStateCategory}
                             label="Mã địa chỉ"
+                            MenuProps={MenuProps}
                             onChange={handleChangeCategory}
                         >
                             {dataCategory.map((item, index) => (
