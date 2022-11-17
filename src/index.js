@@ -11,6 +11,7 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import { toast, ToastContainer } from "react-toastify";
 import AddressDetail from "views/pillarAddress/AddressDetail";
+import jwt_decode from "jwt-decode";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -32,16 +33,29 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 //   }
 // }
 let token = localStorage.getItem('token')
+let decoded;
+
+if (token !== null) {
+  decoded = jwt_decode(token);
+}
 function isTokenExpired(token) {
   const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
   return (Math.floor((new Date).getTime() / 1000)) >= expiry;
 }
-if (token && isTokenExpired(token)) { 
+if (token && isTokenExpired(token)) {
   localStorage.clear()
   toast.warning('Phiên đăng nhập đã hết hạn !', { autoClose: 1000 })
   setTimeout(() => {
     window.location.reload();
   }, 1600);
+}
+
+if (token && decoded.roles == '[ROLE_ADMIN]') {
+  document.title = "Quản lý trụ quảng cáo | Admin";
+} else if (token && decoded.roles == '[ROLE_USER]') {
+  document.title = "ACN | Trụ quảng cáo";
+} else if (!token && !decoded) {
+  document.title = "ACN | Trụ quảng cáo";
 }
 
 root.render(

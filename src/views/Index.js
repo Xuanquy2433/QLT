@@ -49,6 +49,7 @@ import { API_OVERVIEW_TIME_PRODUCT_HIRED } from "utils/const";
 import moment from "moment";
 import styled from 'styled-components';
 import { formatMoney } from 'common/formatMoney';
+import { toast } from 'react-toastify';
 
 
 const columns = [
@@ -173,24 +174,41 @@ const Index = (props) => {
   const [dataTimeOverview, setDataTimeOverview] = useState([])
   const [totalHiring, setTotalHiring] = useState(0)
   const [page, setPage] = useState(0);
-  const [dateAPI1, setDateAPI1] = useState(date2Input);
-  const [dateAPI2, setDateAPI2] = useState(moment().format('DD/MM/YYYY'));
+  const [dateAPI1, setDateAPI1] = useState(null);
+  const [dateAPI2, setDateAPI2] = useState(null);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + dateAPI2 + '&page=' + (newPage + 1) + '&sort=desc')
-    if (response) {
-      setPage(newPage);
-      setDataTimeOverview(response.data.map)
+    if (dateAPI1 == null || dateAPI2 == null) {
+      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + date2Input + '&date2=' + moment().format("DD/MM/YYYY") + '&page=' + (newPage + 1) + '&sort=desc')
+      if (response) {
+        setPage(newPage);
+        setDataTimeOverview(response.data.map)
+      }
+    } else {
+      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + (newPage + 1) + '&sort=desc')
+      if (response) {
+        setPage(newPage);
+        setDataTimeOverview(response.data.map)
+      }
     }
   };
-
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + dateAPI2 + '&page=' + 1 + '&sort=desc')
-    if (response) {
-      setDataTimeOverview(response.data.map)
-      setPage(0);
-      setRowsPerPage(+event.target.value);
+    if (dateAPI1 == null || dateAPI2 == null) {
+      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + date2Input + '&date2=' + moment().format("DD/MM/YYYY") + '&page=' + 1 + '&sort=desc')
+      if (response) {
+        setDataTimeOverview(response.data.map)
+        setPage(0);
+        setRowsPerPage(+event.target.value);
+      }
+
+    } else {
+      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + event.target.value + ' &date1=' + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + 1 + '&sort=desc')
+      if (response) {
+        setDataTimeOverview(response.data.map)
+        setPage(0);
+        setRowsPerPage(+event.target.value);
+      }
     }
   };
 
@@ -205,21 +223,28 @@ const Index = (props) => {
 
   const [keyword, setKeyword] = useState(null);
   const submitDate = async (e) => {
-    if (keyword == null) {
-      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
-        + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort)
-      if (response) {
-        setDataTimeOverview(response.data.map)
-        setTotalHiring(response.data.totalHired)
-        setTotalPages(response.data.totalProduct)
-      }
+    if (dateAPI1 == null) {
+      toast.warning('Vui lòng chọn thời gian bắt đầu ', { autoClose: 1200 })
+    } else if (dateAPI2 == null) {
+      toast.warning('Vui lòng chọn thời gian kết thúc ', { autoClose: 1200 })
+
     } else {
-      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
-        + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort + '&keyword=' + keyword)
-      if (response) {
-        setDataTimeOverview(response.data.map)
-        setTotalHiring(response.data.totalHired)
-        setTotalPages(response.data.totalProduct)
+      if (keyword == null) {
+        const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+          + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort)
+        if (response) {
+          setDataTimeOverview(response.data.map)
+          setTotalHiring(response.data.totalHired)
+          setTotalPages(response.data.totalProduct)
+        }
+      } else {
+        const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+          + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort + '&keyword=' + keyword)
+        if (response) {
+          setDataTimeOverview(response.data.map)
+          setTotalHiring(response.data.totalHired)
+          setTotalPages(response.data.totalProduct)
+        }
       }
     }
   }
@@ -229,12 +254,33 @@ const Index = (props) => {
     if (selected === false) {
       setSort('desc')
     } else setSort('asc')
-    const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
-      + dateAPI1.replace(/-/g, '/') + '&date2=' + dateAPI2.replace(/-/g, '/') + '&page=' + page + 1 + '&sort=' + sort)
-    if (response) {
-      setDataTimeOverview(response.data.map)
-      setTotalHiring(response.data.totalHired)
-      setTotalPages(response.data.totalProduct)
+
+    if (dateAPI1 == null || dateAPI2 == null) {
+      const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+        + date2Input + '&date2=' + moment().format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort)
+      if (response) {
+        setDataTimeOverview(response.data.map)
+        setTotalHiring(response.data.totalHired)
+        setTotalPages(response.data.totalProduct)
+      }
+    } else {
+      if (keyword == null) {
+        const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+          + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort)
+        if (response) {
+          setDataTimeOverview(response.data.map)
+          setTotalHiring(response.data.totalHired)
+          setTotalPages(response.data.totalProduct)
+        }
+      } else {
+        const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
+          + moment(dateAPI1).format("DD/MM/YYYY") + '&date2=' + moment(dateAPI2).format("DD/MM/YYYY") + '&page=' + page + 1 + '&sort=' + sort + '&keyword=' + keyword)
+        if (response) {
+          setDataTimeOverview(response.data.map)
+          setTotalHiring(response.data.totalHired)
+          setTotalPages(response.data.totalProduct)
+        }
+      }
     }
   }
 
@@ -276,20 +322,6 @@ const Index = (props) => {
   console.log('dataArr ', dataArr);
 
   useEffect(() => {
-
-    //set default value input date
-    var date = new Date();
-    var day = date.getDate();
-    var month2 = date.getMonth() + 1;
-    var month3 = date.getMonth();
-    var year = date.getFullYear();
-    if (month2 < 10) month2 = "0" + month2;
-    if (day < 10) day = "0" + day;
-    var today1 = year + "-" + month2 + "-" + day;
-    var today2 = year + "-" + month3 + "-" + day;
-
-    document.getElementById("date1").value = today2;
-    document.getElementById("date2").value = today1;
     overview()
     const onchangeHired = async (e) => {
       const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED)
@@ -378,7 +410,7 @@ const Index = (props) => {
             </Card>
           </Col>
           <Col xl="4">
-            <Card className="shadow">
+            <Card style={{height: '100%'}} className="shadow">
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">
                   <div className="col">
@@ -428,7 +460,7 @@ const Index = (props) => {
                     >
                       Tìm kiếm
                     </Button>
-                    <FormControl sx={{ backgroundColor: 'white', height: '45px', borderRadius: '5px',marginLeft: '10px' }} size="small">
+                    <FormControl sx={{ backgroundColor: 'white', height: '45px', borderRadius: '5px', marginLeft: '10px' }} size="small">
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <ToggleButton
                           sx={{ height: '83%' }}
@@ -448,7 +480,7 @@ const Index = (props) => {
 
                 </Row>
               </CardHeader>
-              <TableContainer sx={{ height: 588 }}>
+              <TableContainer >
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
