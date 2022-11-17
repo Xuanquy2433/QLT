@@ -18,7 +18,8 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import Grid from '@mui/material/Grid';
+import AddIcon from '@mui/icons-material/Add';
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
@@ -82,21 +83,28 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
-                    <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                        <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                            Thêm tài khoản
-                        </Button>
-                        <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
-                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                            <InputBase
-                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Tìm kiếm tên tài khoản ngân hàng"
-                            />
-                        </Paper>
-                    </div>
+                    <Grid container spacing={1}>
+                        <Grid item xs={2} >
+                            <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "100%" }} variant="contained" color="success">
+                                Thêm loại trụ
+                            </Button>
+                            <Box onClick={handleOpen} sx={{ padding: "4px 5px", textAlign: "center", display: "block", backgroundColor: "#2e7d32", borderRadius: "8px", mr: "5px" }}>
+                                <AddIcon sx={{ color: "#FFFFFF", fontSize: "40px", width: "100%" }} />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={10}>
+                            <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+                                <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                                    <SearchIcon />
+                                </IconButton>
+                                <InputBase
+                                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                    placeholder="Tìm kiếm loại trụ"
+                                />
+                            </Paper>
+                        </Grid>
 
+                    </Grid>
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
                     {/* stickyHeader */}
                     <TableContainer sx={{ minHeight: '29em' }}>

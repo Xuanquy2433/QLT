@@ -21,12 +21,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+
+import AddIcon from '@mui/icons-material/Add';
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
+        id: 'link',
+        label: 'Ảnh',
+        minWidth: 120,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
         id: 'Name',
         label: 'Đường dẫn hình ảnh',
-        minWidth: 70,
+        minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -37,24 +48,18 @@ const columns = [
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
-    {
-        id: 'link',
-        label: 'Ảnh',
-        minWidth: 150,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
+
     {
         id: 'action',
         label: 'Hành động',
-        minWidth: 100,
-        align: 'center',
+        minWidth: 80,
+        align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
 
 ];
 
-export default function Picture({ data, setOpen, search,onEdit, onDelete }) {
+export default function Picture({ data, setOpen, search, onEdit, onDelete }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
@@ -92,21 +97,29 @@ export default function Picture({ data, setOpen, search,onEdit, onDelete }) {
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
-                    <div style={{ width: '100%', display: "flex", flexDirection: "row" }}>
-                        <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
-                            Thêm ảnh
-                        </Button>
-                        <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
-                            <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                            <InputBase
-                            onChange={e => search(e.target.value)}
-                                sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
-                                placeholder="Tìm kiếm loại ảnh"
-                            />
-                        </Paper>
-                    </div>
+                    <Grid container spacing={1}>
+                        <Grid item xs={2} >
+                            <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "100%" }} variant="contained" color="success">
+                                Thêm ảnh
+                            </Button>
+                            <Box onClick={handleOpen} sx={{ padding: "4px 5px", textAlign: "center", display: "block", backgroundColor: "#2e7d32", borderRadius: "8px", mr: "5px" }}>
+                                <AddIcon sx={{ color: "#FFFFFF", fontSize: "40px", width: "100%" }} />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={10}>
+                            <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
+                                <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
+                                    <SearchIcon />
+                                </IconButton>
+                                <InputBase
+                                    onChange={e => search(e.target.value)}
+                                    sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
+                                    placeholder="Tìm kiếm"
+                                />
+                            </Paper>
+                        </Grid>
+
+                    </Grid>
                     <TableContainer sx={{ height: '61vh' }}>
                         <Table aria-label="sticky table">
                             <TableHead>
@@ -129,17 +142,49 @@ export default function Picture({ data, setOpen, search,onEdit, onDelete }) {
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>  {item.image} </TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.category}</TableCell>
                                             <TableCell sx={{ textAlign: 'center', width: '20%' }}>
                                                 <img style={{ width: '50%', height: '8vh' }} src={item.photosImagePath} alt="hihi" />
                                             </TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>
+                                            <TableCell sx={{ textAlign: 'center' }}>  {item.image} </TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.category}</TableCell>
+
+                                            {/* <TableCell sx={{ textAlign: 'center', display: "flex", justifyContent: "space-around" }}>
                                                 <DeleteIcon sx={{ cursor: 'pointer', marginRight: '39%' }} onClick={e => {
                                                     handleClickOpenConfirm()
                                                     setIdSave(item.id)
                                                 }} />
                                                 <EditIcon sx={{ cursor: 'pointer' }} onClick={(e) => onClickEdit(item)} />
+                                            </TableCell> */}
+                                            <TableCell sx={{ textAlign: 'right' }}>
+                                                <UncontrolledDropdown>
+                                                    <DropdownToggle
+                                                        className="btn-icon-only text-light"
+                                                        href="#pablo"
+                                                        role="button"
+                                                        size="sm"
+                                                        color=""
+                                                    >
+                                                        <i className="fas fa-ellipsis-v" />
+                                                    </DropdownToggle>
+                                                    <DropdownMenu className="dropdown-menu-arrow" right>
+                                                        <DropdownItem
+                                                            onClick={(e) => {
+                                                                handleClickOpenConfirm()
+                                                                setIdSave(item.id)
+                                                            }}
+                                                        >
+                                                            <DeleteIcon></DeleteIcon>
+                                                            Xoá
+
+                                                        </DropdownItem>
+                                                        <DropdownItem
+                                                            onClick={(e) => onClickEdit(item)}
+                                                        >
+                                                            <EditIcon></EditIcon>
+                                                            Sửa
+                                                        </DropdownItem>
+                                                    </DropdownMenu>
+                                                </UncontrolledDropdown>
                                             </TableCell>
                                         </TableRow>
                                     ))}

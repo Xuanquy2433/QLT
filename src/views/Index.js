@@ -52,8 +52,8 @@ import { formatMoney } from 'common/formatMoney';
 
 
 const columns = [
-  { id: 'id', label: 'Id', minWidth: 170 },
-  { id: 'name', label: 'Tên trụ', minWidth: 100 },
+  { id: 'id', label: 'Id', minWidth: 50 },
+  { id: 'name', label: 'Tên trụ', align: 'center', minWidth: 160 },
   {
     id: 'description',
     label: 'Địa chỉ',
@@ -70,8 +70,8 @@ const columns = [
   },
   {
     id: 'quantityPillar',
-    label: 'Số lượng trụ được thuê',
-    minWidth: 170,
+    label: 'Số trụ được thuê',
+    minWidth: 100,
     align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
@@ -428,7 +428,7 @@ const Index = (props) => {
                     >
                       Tìm kiếm
                     </Button>
-                    <FormControl sx={{ backgroundColor: 'white', height: '45px', borderRadius: '5px',marginLeft: '10px' }} size="small">
+                    <FormControl sx={{ backgroundColor: 'white', height: '45px', borderRadius: '5px', marginLeft: '10px' }} size="small">
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <ToggleButton
                           sx={{ height: '83%' }}
@@ -470,7 +470,7 @@ const Index = (props) => {
                         return (
                           <TableRow hover role="checkbox" key={key}>
                             <TableCell style={{ textAlign: 'left' }}>{JSON.parse(value[0]).id}</TableCell>
-                            <TableCell style={{ textAlign: 'left' }}>{JSON.parse(value[0]).name}</TableCell>
+                            <TableCell style={{ textAlign: 'center' }}>{JSON.parse(value[0]).name}</TableCell>
                             <TableCell style={{ textAlign: 'center' }}>{JSON.parse(value[0]).street}</TableCell>
                             <TableCell style={{ textAlign: 'center' }}>{formatMoney(JSON.parse(value[0]).price)} VNĐ</TableCell>
                             <TableCell style={{ textAlign: 'center' }}>{JSON.parse(value[1])}</TableCell>
