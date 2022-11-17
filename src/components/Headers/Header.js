@@ -4,6 +4,9 @@ import CurrencyFormat from "react-currency-format";
 import { NavLink } from "react-router-dom";
 import { Card, CardBody, CardTitle, Container, Row, Col, Nav } from "reactstrap";
 import { API_GET_OVERVIEW } from "utils/const";
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
+import TodayIcon from '@mui/icons-material/Today';
+import InsightsIcon from '@mui/icons-material/Insights';
 
 const Header = () => {
   const [dataOverview, setDataOverview] = useState([])
@@ -101,7 +104,7 @@ const Header = () => {
                       <Col className="col-auto">
                         <NavLink to={'/admin/availablePillar'} className="icon icon-shape bg-info text-white rounded-circle shadow">
                           {/* <i className="fas fa-percent" /> */}
-                          <i className="fas fa-chart-pie" />
+                         <InsightsIcon/>
 
                         </NavLink>
                       </Col>
@@ -200,7 +203,7 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <p className="icon icon-shape bg-green text-white rounded-circle shadow">
-                          <i className="fas fa-chart-pie" />
+                          <TodayIcon/>
                         </p>
                       </Col>
                     </Row>
@@ -235,7 +238,7 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <p className="icon icon-shape bg-pink text-white rounded-circle shadow">
-                          <i className="fas fa-percent" />
+                          <OnlinePredictionIcon/>
                         </p>
                       </Col>
                     </Row>

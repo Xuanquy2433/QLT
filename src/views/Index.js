@@ -351,7 +351,7 @@ const Index = (props) => {
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-light ls-1 mb-1">
-                      Thu nhập hàng tháng
+                      Thu nhập 
                     </h6>
                     <h2 className="text-white mb-0">Thu nhập {new Date().getFullYear()}{" "}</h2>
                   </div>
