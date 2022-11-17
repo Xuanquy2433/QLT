@@ -4,6 +4,9 @@ import CurrencyFormat from "react-currency-format";
 import { NavLink } from "react-router-dom";
 import { Card, CardBody, CardTitle, Container, Row, Col, Nav } from "reactstrap";
 import { API_GET_OVERVIEW } from "utils/const";
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
+import TodayIcon from '@mui/icons-material/Today';
+import InsightsIcon from '@mui/icons-material/Insights';
 
 const Header = () => {
   const [dataOverview, setDataOverview] = useState([])
@@ -74,11 +77,11 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-nowrap">Tổng số trụ: </span>
+                      <span className="text-nowrap">Tổng số trụ đã thuê: </span>
 
                       <span className="text-success mr-1">
                         {/* <i className="fa fa-arrow-up mr-1" /> */}
-                        {dataOverview.totalProduct}
+                        {dataOverview.totalHiring}/{dataOverview.totalProduct}
 
                       </span>{" "}
                     </p>
@@ -101,17 +104,17 @@ const Header = () => {
                       <Col className="col-auto">
                         <NavLink to={'/admin/availablePillar'} className="icon icon-shape bg-info text-white rounded-circle shadow">
                           {/* <i className="fas fa-percent" /> */}
-                          <i className="fas fa-chart-pie" />
+                         <InsightsIcon/>
 
                         </NavLink>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-nowrap">Tổng số trụ: </span>
+                      <span className="text-nowrap">Tổng số trụ chưa thuê: </span>
 
                       <span className="text-success mr-1">
                         {/* <i className="fa fa-arrow-up mr-1" /> */}
-                        {dataOverview.totalProduct}
+                        {dataOverview.totalAvailable}/{dataOverview.totalProduct}
 
                       </span>{" "}
                     </p>
@@ -200,7 +203,7 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <p className="icon icon-shape bg-green text-white rounded-circle shadow">
-                          <i className="fas fa-chart-pie" />
+                          <TodayIcon/>
                         </p>
                       </Col>
                     </Row>
@@ -235,16 +238,16 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <p className="icon icon-shape bg-pink text-white rounded-circle shadow">
-                          <i className="fas fa-percent" />
+                          <OnlinePredictionIcon/>
                         </p>
                       </Col>
                     </Row>
-                    {/* <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" /> to
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-1">
+                        <i className="fa fa-arrow-up mr-1" /> to
                       </span>{" "}
-                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth()}{"/"}{new Date().getFullYear()}{""}</span>
-                    </p> */}
+                      <span className="text-nowrap"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}{""}</span>
+                    </p>
                   </CardBody>
                 </Card>
               </Col>

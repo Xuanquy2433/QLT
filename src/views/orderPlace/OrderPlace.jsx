@@ -281,7 +281,7 @@ function OrderPlace() {
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button> */}
-                        <Grid item xs={8}>
+                        <Grid item xs={10}>
                             <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '5px 7px 5px 7px', marginBottom: '20px', borderRadius: '7px' }}>
                                 <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                     <SearchIcon />
@@ -296,7 +296,7 @@ function OrderPlace() {
                         {/* <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6.3vh' }} variant="contained" color="success">
                             Tìm kiếm
                         </Button> */}
-                        <Grid item xs={4}>
+                        <Grid item xs={2}>
                             <FormControl sx={{ m: 1, width: "100%" }} size="small">
                                 <InputLabel id="demo-select-small">Trạng thái</InputLabel>
                                 <Select
@@ -305,13 +305,13 @@ function OrderPlace() {
                                     value={status}
                                     label="status"
                                     onChange={handleChange}>
-                                    <MenuItem value={'ALL'}>ALL</MenuItem>
-                                    <MenuItem value={'NEW'}>NEW </MenuItem>
-                                    <MenuItem value={'CANCELLED'}>CANCELLED </MenuItem>
-                                    <MenuItem value={'DONE'}>DONE </MenuItem>
-                                    <MenuItem value={'USER_CONFIRMED'}>USER_CONFIRMED </MenuItem>
+                                    <MenuItem value={'ALL'}>Tất cả</MenuItem>
+                                    <MenuItem value={'NEW'}>Mới </MenuItem>
+                                    <MenuItem value={'CANCELLED'}>Đã hủy </MenuItem>
+                                    <MenuItem value={'DONE'}>Xong </MenuItem>
+                                    <MenuItem value={'USER_CONFIRMED'}>Đã xác nhận </MenuItem>
                                     <MenuItem value={'PAID'}>PAID </MenuItem>
-                                    <MenuItem value={'EXTEND'}>EXTEND</MenuItem>
+                                    <MenuItem value={'EXTEND'}>Gia hạn</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -352,7 +352,13 @@ function OrderPlace() {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>{formatMoney(item.total)}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.status}</TableCell>
+                                            {item.status === 'NEW' ? <TableCell sx={{ textAlign: 'center',color: 'green' }}> Mới</TableCell> : ''}
+                                            {item.status === 'DONE' ? <TableCell sx={{ textAlign: 'center' }}> Đã xong</TableCell> : ''}
+                                            {item.status === 'CANCELLED' ? <TableCell sx={{ textAlign: 'center',color: 'red' }}> Đã hủy</TableCell> : ''}
+                                            {item.status === 'PAID' ? <TableCell sx={{ textAlign: 'center' }}> Paid</TableCell> : ''}
+                                            {item.status === 'EXTEND' ? <TableCell sx={{ textAlign: 'center' }}> Gia hạn</TableCell> : ''}
+                                            {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ textAlign: 'center' }}> USER_CONFIRMED</TableCell> : ''}
+
                                             {item.status === 'NEW' || item.status === 'USER_CONFIRMED' || item.status === 'EXTEND' ?
                                                 <React.Fragment>
                                                     <TableCell sx={{ textAlign: 'center' }}>
