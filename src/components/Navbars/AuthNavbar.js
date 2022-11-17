@@ -109,19 +109,23 @@ const AdminNavbar = () => {
 
 
 
-              <NavItem >
-                <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
+              {
+                token && decoded.roles === "[ROLE_ADMIN]"
+                  ? ""
+                  : <NavItem >
+                    <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
 
-                  <Badge badgeContent={ <CartCount />} color="secondary"
-                         anchorOrigin={{
-                           vertical: 'top',
-                           horizontal: 'left',
-                         }}>
-                    <i className="ni ni-cart" />
-                  </Badge >
-                  <span className="nav-link-inner--text">Thanh Toán</span>
-                </NavLink>
-              </NavItem>
+                      <Badge badgeContent={<CartCount />} color="secondary"
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'left',
+                        }}>
+                        <i className="ni ni-cart" />
+                      </Badge >
+                      <span className="nav-link-inner--text">Thanh Toán</span>
+                    </NavLink>
+                  </NavItem>
+              }
 
 
               {token && decoded ?

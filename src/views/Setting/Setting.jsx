@@ -130,7 +130,7 @@ export default function Setting({ data, setOpen, onEdit }) {
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[6, 25, 100]}
+                        rowsPerPageOptions={[8, 25, 100]}
                         component="div"
                         count={data.length}
                         rowsPerPage={rowsPerPage}
