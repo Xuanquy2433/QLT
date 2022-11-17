@@ -12,7 +12,7 @@ function Cart() {
     }
 
     return (
-        <div style={{ marginTop: '20px', width: '80%', margin: 'auto' }} >
+        <div style={{ marginTop: '50px', width: '80%', margin: 'auto' }} >
             {token && decoded ? <CartDatabase /> : <CartLocal />}
         </div>
     )
