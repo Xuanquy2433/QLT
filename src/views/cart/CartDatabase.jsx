@@ -40,7 +40,6 @@ function CartDatabase() {
         }
     }
 
-    console.log(data);
     const handleUpdateMonth = async (item) => {
         const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month + 1), {}, {
             headers: {
@@ -49,9 +48,7 @@ function CartDatabase() {
                 'Content-Type': 'application/json'
             }
         })
-        // setMonthUpdate(monthUpdate + 1)
         setShowDate(new Date(showDate.setMonth(showDate.getMonth()+1)))
-
         getAllCart()
     }
 
@@ -138,10 +135,6 @@ function CartDatabase() {
     })
 
     const [monthUpdate, setMonthUpdate] = useState(1)
-
-
-
-    console.log('month ', monthUpdate, ' showDate ', showDate);
     useEffect(() => {
         getAllCart()
     }, [])

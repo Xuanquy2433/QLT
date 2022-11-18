@@ -21,8 +21,8 @@ function CartLocal() {
     const [dataLocal, setDataLocal] = useState(JSON.parse(localStorage.getItem('cartTemp')))
 
     const [up, setUp] = useState(1)
-    const [month, setMonth] = useState(1)
     // const [btnOrders, setBtnOrders] = useState('Đặt hàng')
+    const [showDate, setShowDate] = useState(new Date())
     const [btnDisabled, setBtnDisabled] = useState(false)
     const history = useHistory()
     let decoded;
@@ -31,7 +31,6 @@ function CartLocal() {
         decoded = jwt_decode(token);
     }
 
-    console.log('data local ', dataLocal[0]);
     const handleUpdateMonth = (id) => {
         let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
         for (let i = 0; i < dataLocal.length; i++) {
@@ -39,6 +38,7 @@ function CartLocal() {
                 dataLocal[i].month += 1
                 cartAddP[i].month += 1
                 setUp(up + 1)
+                setShowDate(new Date(showDate.setMonth(showDate.getMonth() + 1)))
                 localStorage.setItem("cartTemp", JSON.stringify(dataLocal))
                 localStorage.setItem("cartADD", JSON.stringify(cartAddP))
             }
@@ -53,13 +53,21 @@ function CartLocal() {
                     dataLocal[i].month -= 1
                     cartAddP[i].month -= 1
                     setUp(up + 1)
+                    setShowDate(new Date(showDate.setMonth(showDate.getMonth() - 1)))
                     localStorage.setItem("cartTemp", JSON.stringify(dataLocal))
                     localStorage.setItem("cartADD", JSON.stringify(cartAddP))
                 }
             }
         }
     }
-
+    const showDate2 = (d1, d2) => {
+        let date = new Date();
+        let day = date.getDate();
+        date.setMonth(date.getMonth() + d2);
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        return day + '/' + month + '/' + year;
+    }
     // const [idOrder, setIdOrder] = useState()
     const clickOrder = async () => {
         // setBtnOrders('Vui lòng chờ...')
@@ -132,7 +140,7 @@ function CartLocal() {
             }
         })
         if (response.status === 200) {
-            toast.success("Xoá thành công", { autoClose: "1500" })
+            toast.success("Xoá thành công", { autoClose: 1500 })
 
         }
     }
@@ -144,7 +152,7 @@ function CartLocal() {
         listCartItems.splice(id, 1)
         localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
         localStorage.setItem("cartADD", JSON.stringify(cartAddP))
-        toast.success("Xoá thành công", { autoClose: "1500" })
+        toast.success("Xoá thành công", { autoClose: 1500 })
     }
     return (
         <React.Fragment>
@@ -176,10 +184,6 @@ function CartLocal() {
                                                         <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Số tháng thuê</h6>
                                                         </div>
-                                                        {/* <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Description</h6>
-                                                            <h6 className="text-black mb-0">{item.product.description}</h6>
-                                                        </div> */}
                                                         <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Giá tiền</h6>
                                                         </div>
@@ -225,13 +229,6 @@ function CartLocal() {
                                                                     <i className="fas fa-plus" />
                                                                 </button>
                                                             </div>
-                                                            {/* <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-black mb-0">{item.month}</h6>
-                                                        </div> */}
-                                                            {/* <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Description</h6>
-                                                            <h6 className="text-black mb-0">{item.product.description}</h6>
-                                                        </div> */}
                                                             <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
                                                                 {/* <h6 className="text-muted">Price</h6> */}
                                                                 <h6 className="text-black mb-0">{formatMoney(item.priceProduct * item.month)}</h6>
@@ -241,6 +238,14 @@ function CartLocal() {
                                                                     <i onClick={(e) => handleRemoveCartItem(item.id)} className="fas fa-times" />
                                                                 </div>
                                                             </div>
+                                                            <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                                <div style={{ cursor: 'pointer' }} className="text-muted">
+                                                                    {/* hide this div */}
+                                                                </div>
+                                                            </div>
+                                                            <h6 style={{ fontSize: '0.8em' }} className="text-muted mt-2">Ngày bắt đầu:
+                                                                <span className="text-nowrap mr-3"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}</span>
+                                                                - <span className='ml-2'>{showDate2(0, item.month)}</span></h6>
                                                         </div>
                                                     )) :
                                                         <div style={{ width: "100%" }} >
