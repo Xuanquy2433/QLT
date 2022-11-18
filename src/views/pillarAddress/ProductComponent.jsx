@@ -275,7 +275,9 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                           borderRadius: "8px",
                           boxShadow: "none",
                         }}
-                          onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                          onClick={
+                            (e) => addCart({ ...item })
+                          } variant="contained" color="success">
                           Thêm vào thanh toán
                         </Button>
                         :
@@ -389,7 +391,7 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
             sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
             count={count} page={page} color="secondary" onChange={handleChange} />
         </Stack>
-      </ThemeProvider>
+      </ThemeProvider >
     </React.Fragment >
 
   )

@@ -63,7 +63,7 @@ function AddressDetail() {
     const [dataAddressProduct, setDataAddressProduct] = useState([])
     const [address, setAddress] = useState({})
     const id = useState(window.location.pathname.replace(/\D/g, ""));
-    console.log(id[0]);
+    // console.log(id[0]);
     let token = localStorage.getItem("token");
 
     const history = useHistory();
@@ -99,6 +99,7 @@ function AddressDetail() {
             else showError(error)
         }
     }
+
     const onClickRemoveItemCart = async (id) => {
         console.log('id cart', id);
         if (token) {
@@ -115,11 +116,30 @@ function AddressDetail() {
             }
         } else {
             console.log('delete id cart local', id);
-
             let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
-            listCartItems.splice(id, 1)
-            localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
-            toast.success("Xoá thành cônng", { autoClose: "1500" })
+            let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
+            for (let i = 0; i < listCartItems.length; i++) {
+                if (listCartItems[i].productId === id) {
+                    console.log(listCartItems[i].productId);
+                    listCartItems.splice(listCartItems[i], 1)
+                    localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
+                    getAddress()
+
+                }
+            }
+
+            for (let i = 0; i < cartAddP.length; i++) {
+                if (cartAddP[i].productId === id) {
+                    cartAddP.splice(cartAddP[i], 1)
+                    localStorage.setItem("cartADD", JSON.stringify(cartAddP))
+                    getAddress()
+                }
+            }
+            // cartAddP.splice(id, 1)
+            // listCartItems.splice(id, 1)
+            // localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
+            // localStorage.setItem("cartADD", JSON.stringify(cartAddP))
+            toast.success("Xoá thành công", { autoClose: "1500" })
             getAddress()
         }
     }

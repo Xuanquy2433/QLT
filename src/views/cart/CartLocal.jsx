@@ -144,7 +144,7 @@ function CartLocal() {
         listCartItems.splice(id, 1)
         localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
         localStorage.setItem("cartADD", JSON.stringify(cartAddP))
-        toast.success("Xoá thành cônng", { autoClose: "1500" })
+        toast.success("Xoá thành công", { autoClose: "1500" })
     }
     return (
         <React.Fragment>
