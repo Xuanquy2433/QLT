@@ -70,7 +70,7 @@ const Profile = () => {
       firstName: data.firstName || "",
       lastName: data.lastName || "",
     })
-  }, [data])
+  }, [])
 
   const onUpdate = async (data) => {
     const response = await axios.put(API_UPDATE_USER, data, {
@@ -82,6 +82,7 @@ const Profile = () => {
     })
     if (response.status === 200) {
       toast.success("Sửa thành công", { autoClose: 1500 })
+      getUserProfile()
     }
   }
 
@@ -216,7 +217,7 @@ const Profile = () => {
                 </Row>
                 <div className="text-center">
                   <h3>
-                    {editUser.firstName} {editUser.lastName}
+                    {data.firstName} {data.lastName}
                   </h3>
                   <div>
                     <Button color="info">
