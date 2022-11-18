@@ -41,9 +41,16 @@ const Profile = () => {
   const handleClose = () => setOpen(false);
 
   const [data, setData] = useState([])
+
   useEffect(() => {
     getUserProfile()
-  }, [])
+    setEditUser({
+      email: data.email || "",
+      firstName: data.firstName || "",
+      lastName: data.lastName || "",
+    })
+  }, [data])
+
   const getUserProfile = async () => {
     const response = await axios.get(API_PROFILE_GET_USER, {
       headers: {
@@ -64,13 +71,6 @@ const Profile = () => {
   })
 
   console.log(editUser.lastName);
-  useEffect(() => {
-    setEditUser({
-      email: data.email || "",
-      firstName: data.firstName || "",
-      lastName: data.lastName || "",
-    })
-  }, [])
 
   const onUpdate = async (data) => {
     const response = await axios.put(API_UPDATE_USER, data, {
