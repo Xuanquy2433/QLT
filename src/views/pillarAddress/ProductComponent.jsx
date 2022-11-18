@@ -184,7 +184,9 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
   })
 
   let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
-  console.log(listCartItems);
+  if (listCartItems == null) {
+    listCartItems = []
+  }
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -209,51 +211,146 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                   <h2 style={{ color: '#D70018' }}> {formatMoney(item.price)} VNĐ</h2>
                   <h3>Loại trụ: {item.category.name}</h3>
                   <h4> {item.description}</h4>
-                  {item.status === 'AVAILABLE' ?
-                    // && listCartItems.filter(i => i.productId === item.id).length === 0
-                    item.inCart === false ?
-                      <Button className="btn-cart-cus" sx={{
-                        '&:hover': {
-                          bgcolor: '#007784',
+                  {token ?
+                    //when already login
+                    item.status === 'AVAILABLE' ?
+                      // && listCartItems.filter(i => i.productId === item.id).length === 0
+                      item.inCart === false ?
+                        <Button className="btn-cart-cus" sx={{
+                          '&:hover': {
+                            bgcolor: '#007784',
+                            outline: "none",
+                            boxShadow: "none"
+                          },
+                          border: "3px solid #007784",
+                          fontWeight: "500", width: "100%",
+                          background: "none",
                           outline: "none",
-                          boxShadow: "none"
-                        },
-                        border: "3px solid #007784",
-                        fontWeight: "500", width: "100%",
-                        background: "none",
-                        outline: "none",
-                        color: "#007784",
-                        borderRadius: "8px",
-                        boxShadow: "none",
-                      }}
-                        onClick={(e) => addCart({ ...item })} variant="contained" color="success">
-                        Thêm vào thanh toán
-                      </Button>
+                          color: "#007784",
+                          borderRadius: "8px",
+                          boxShadow: "none",
+                        }}
+                          onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                          Thêm vào thanh toán
+                        </Button>
+                        :
+                        <Button className="btn-cart-cus" sx={{
+                          '&:hover': {
+                            bgcolor: '#007784',
+                            outline: "none",
+                            boxShadow: "none"
+                          },
+                          border: "3px solid #007784",
+                          bgcolor: '#007784',
+                          fontWeight: "500", width: "100%",
+                          outline: "none",
+                          color: "#FFFFFF",
+                          borderRadius: "8px",
+                          boxShadow: "none",
+                        }}
+                          onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
+                          Xóa khỏi thanh toán
+                        </Button>
                       :
-                      <Button className="btn-cart-cus" sx={{
-                        '&:hover': {
-                          bgcolor: '#007784',
+                      <Button style={{
+                        fontWeight: "500", width: "100%"
+                        , border: "3px solid #333", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
+                      }} disabled variant="contained" >
+                        Đã cho thuê
+                      </Button> :
+                    //when don't login
+                    item.status === 'AVAILABLE' ?
+                      listCartItems.filter(i => i.productId === item.id).length === 0 ?
+                        <Button className="btn-cart-cus" sx={{
+                          '&:hover': {
+                            bgcolor: '#007784',
+                            outline: "none",
+                            boxShadow: "none"
+                          },
+                          border: "3px solid #007784",
+                          fontWeight: "500", width: "100%",
+                          background: "none",
                           outline: "none",
-                          boxShadow: "none"
-                        },
-                        border: "3px solid #007784",
-                        bgcolor: '#007784',
-                        fontWeight: "500", width: "100%",
-                        outline: "none",
-                        color: "#FFFFFF",
-                        borderRadius: "8px",
-                        boxShadow: "none",
-                      }}
-                        onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
-                        Xóa khỏi thanh toán
+                          color: "#007784",
+                          borderRadius: "8px",
+                          boxShadow: "none",
+                        }}
+                          onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                          Thêm vào thanh toán
+                        </Button>
+                        :
+                        <Button className="btn-cart-cus" sx={{
+                          '&:hover': {
+                            bgcolor: '#007784',
+                            outline: "none",
+                            boxShadow: "none"
+                          },
+                          border: "3px solid #007784",
+                          bgcolor: '#007784',
+                          fontWeight: "500", width: "100%",
+                          outline: "none",
+                          color: "#FFFFFF",
+                          borderRadius: "8px",
+                          boxShadow: "none",
+                        }}
+                          onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
+                          Xóa khỏi thanh toán
+                        </Button> :
+                      <Button style={{
+                        fontWeight: "500", width: "100%"
+                        , border: "3px solid #333", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
+                      }} disabled variant="contained" >
+                        Đã cho thuê
                       </Button>
-                    :
-                    <Button style={{
-                      fontWeight: "500", width: "100%"
-                      , border: "3px solid #333", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
-                    }} disabled variant="contained" >
-                      Đã cho thuê
-                    </Button>}
+                  }
+
+                  {/* {!token
+                    ?
+                    item.status === 'AVAILABLE' ?
+                      listCartItems.filter(i => i.productId === item.id).length === 0 ?
+                        <Button className="btn-cart-cus" sx={{
+                          '&:hover': {
+                            bgcolor: '#007784',
+                            outline: "none",
+                            boxShadow: "none"
+                          },
+                          border: "3px solid #007784",
+                          fontWeight: "500", width: "100%",
+                          background: "none",
+                          outline: "none",
+                          color: "#007784",
+                          borderRadius: "8px",
+                          boxShadow: "none",
+                        }}
+                          onClick={(e) => addCart({ ...item })} variant="contained" color="success">
+                          Thêm vào thanh toán
+                        </Button>
+                        :
+                        <Button className="btn-cart-cus" sx={{
+                          '&:hover': {
+                            bgcolor: '#007784',
+                            outline: "none",
+                            boxShadow: "none"
+                          },
+                          border: "3px solid #007784",
+                          bgcolor: '#007784',
+                          fontWeight: "500", width: "100%",
+                          outline: "none",
+                          color: "#FFFFFF",
+                          borderRadius: "8px",
+                          boxShadow: "none",
+                        }}
+                          onClick={(e) => onClickRemoveItemCart(item.id)} variant="contained" color="success">
+                          Xóa khỏi thanh toán
+                        </Button> :
+                      <Button style={{
+                        fontWeight: "500", width: "100%"
+                        , border: "3px solid #333", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
+                      }} disabled variant="contained" >
+                        Đã cho thuê
+                      </Button> : ""
+                  } */}
+
                   {item.status === 'HIRING' && item.expiredDate !== null ? <div style={{ height: "28.5px" }}> <h4 style={{ marginTop: '15px', }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> </div> : ''}
                 </div>
                 {/* {
