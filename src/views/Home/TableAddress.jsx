@@ -35,6 +35,7 @@ import { API_CLICK_SEARCH_ADDRESS } from 'utils/const';
 import Menu from '@mui/material/Menu';
 import usePagination from 'views/pillarAddress/Pagination';
 import { formatMoney } from 'common/formatMoney';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 
 const style = {
@@ -130,6 +131,35 @@ function TableAddress() {
         setPage(p);
         _DATA.jump(p);
     };
+
+
+    const handleOnSearch = (string, results) => {
+        // onSearch will have as the first callback parameter
+        // the string searched and for the second the results.
+        setKeyword(string)
+        setShow(false)
+    }
+
+    const handleOnHover = (result) => {
+        // the item hovered
+    }
+
+    const handleOnSelect = (item) => {
+        // the item selected
+        history.push('/auth/address/' + item.id)
+    }
+
+    const handleOnFocus = () => {
+    }
+    const formatResult = (item) => {
+        return (
+            <>
+                {/* <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span> */}
+                <span style={{ display: 'block', textAlign: 'left', cursor: 'pointer' }}> {item.street}</span>
+            </>
+        )
+    }
+
     useEffect(() => {
         getAllAddRess()
     }, [])
@@ -139,18 +169,31 @@ function TableAddress() {
                 <Box sx={{ flexGrow: 1, mt: 10, marginTop: '30px !important' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
-                            <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '7px' }}>
-                                <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
+                            <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '24px' }}>
+                                {/* <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
                                     <SearchIcon onClick={onclickFilter} />
-                                </IconButton>
-                                <InputBase
+                                </IconButton> */}
+                                {/* <InputBase
                                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                     placeholder="Tìm theo từ khóa"
                                     onChange={e => {
                                         setKeyword(e.target.value)
                                         setShow(false)
                                     }}
-                                />
+                                /> */}
+                                <div style={{ width: '100%' }}>
+                                    <ReactSearchAutocomplete
+                                        items={data}
+                                        fuseOptions={{ keys: ["street"] }}
+                                        onSearch={handleOnSearch}
+                                        placeholder='Tìm kiếm theo tên đường'
+                                        onHover={handleOnHover}
+                                        onSelect={handleOnSelect}
+                                        onFocus={handleOnFocus}
+                                        autoFocus
+                                        formatResult={formatResult}
+                                    />
+                                </div>
                             </Paper>
                         </Grid>
                         <Grid item xs={3} >
