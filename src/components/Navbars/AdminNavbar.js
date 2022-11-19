@@ -133,7 +133,7 @@ const AdminNavbar = (props) => {
     return (
       <>
         {/* <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span> */}
-        <span style={{ display: 'block', textAlign: 'left',cursor: 'pointer' }}> {item.name}</span>
+        <span style={{ display: 'block', textAlign: 'left', cursor: 'pointer' }}> {item.name}</span>
       </>
     )
   }
@@ -149,7 +149,7 @@ const AdminNavbar = (props) => {
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
 
-              <div style={{ width: 400 }}>
+              <div style={{ width: 350 }}>
                 <ReactSearchAutocomplete
                   items={items}
                   onSearch={handleOnSearch}

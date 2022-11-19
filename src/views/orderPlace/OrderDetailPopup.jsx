@@ -48,10 +48,11 @@ const columnsDetail = [
 ];
 const style = {
     position: 'absolute',
-    top: '40%',
+    top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 1000,
+    maxWidth: 1000,
+    width: "95%",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,

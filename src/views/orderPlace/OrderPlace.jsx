@@ -281,7 +281,7 @@ function OrderPlace() {
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button> */}
-                        <Grid item xs={10}>
+                        <Grid item xs={9}>
                             <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '5px 7px 5px 7px', marginBottom: '20px', borderRadius: '7px' }}>
                                 <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                     <SearchIcon />
@@ -296,7 +296,7 @@ function OrderPlace() {
                         {/* <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6.3vh' }} variant="contained" color="success">
                             Tìm kiếm
                         </Button> */}
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <FormControl sx={{ m: 1, width: "100%" }} size="small">
                                 <InputLabel id="demo-select-small">Trạng thái</InputLabel>
                                 <Select
@@ -343,7 +343,7 @@ function OrderPlace() {
                                     .map((item, index) => (
                                         <TableRow hover sx={{ cursor: 'pointer' }} role="checkbox" key={index}>
                                             <TableCell sx={{ textAlign: 'left' }}>
-                                                <InfoIcon style={{color: '#1E90FF'}}  onClick={() => handleOpenDetailOrder(item.id)}/>
+                                                <InfoIcon style={{ color: '#1E90FF' }} onClick={() => handleOpenDetailOrder(item.id)} />
                                             </TableCell>
                                             {/* <TableCell>{item.id}</TableCell> */}
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
@@ -352,11 +352,11 @@ function OrderPlace() {
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>{formatMoney(item.total)}</TableCell>
                                             {item.status === 'NEW' ? <TableCell sx={{ textAlign: 'center', color: 'green' }}> Mới</TableCell> : ''}
-                                            {item.status === 'DONE' ? <TableCell sx={{ textAlign: 'center',color: 'blue' }}> Đã xong</TableCell> : ''}
+                                            {item.status === 'DONE' ? <TableCell sx={{ textAlign: 'center', color: 'blue' }}> Đã xong</TableCell> : ''}
                                             {item.status === 'CANCELLED' ? <TableCell sx={{ textAlign: 'center', color: 'red' }}> Đã hủy</TableCell> : ''}
                                             {item.status === 'PAID' ? <TableCell sx={{ textAlign: 'center', color: '#ffa700' }}> Đang thuê</TableCell> : ''}
                                             {item.status === 'EXTEND' ? <TableCell sx={{ textAlign: 'center', color: 'purple' }}> Gia hạn</TableCell> : ''}
-                                            {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ textAlign: 'center' , color: 'green'}}> Đã xác nhận </TableCell> : ''}
+                                            {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ textAlign: 'center', color: 'green' }}> Đã xác nhận </TableCell> : ''}
 
                                             {item.status === 'NEW' || item.status === 'USER_CONFIRMED' || item.status === 'EXTEND' ?
                                                 <React.Fragment>
