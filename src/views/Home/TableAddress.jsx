@@ -181,7 +181,7 @@ function TableAddress() {
                                         setShow(false)
                                     }}
                                 /> */}
-                                <div style={{ width: '100%' }}>
+                                <div style={{ width: '100%',zIndex: '10' }}>
                                     <ReactSearchAutocomplete
                                         items={data}
                                         fuseOptions={{ keys: ["street"] }}
