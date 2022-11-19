@@ -135,11 +135,7 @@ function AddressDetail() {
                     getAddress()
                 }
             }
-            // cartAddP.splice(id, 1)
-            // listCartItems.splice(id, 1)
-            // localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
-            // localStorage.setItem("cartADD", JSON.stringify(cartAddP))
-            toast.success("Xoá thành công", { autoClose: "1500" })
+            toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1500 })
             getAddress()
         }
     }

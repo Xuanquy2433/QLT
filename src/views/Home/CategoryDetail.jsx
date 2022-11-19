@@ -219,15 +219,38 @@ function CategoryDetail() {
     }
     const onClickRemoveItemCart = async (id) => {
         console.log('id cart', id);
-        const response = await axios.put(API_CART_REMOVE + id, {}, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+        if (token) {
+            const response = await axios.put(API_CART_REMOVE + id, {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (response.status === 200) {
+                toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1300 })
+                getCategory()
             }
-        })
-        if (response.status === 200) {
-            toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1300 })
+        } else {
+            console.log('delete id cart local', id);
+            let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
+            let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
+            for (let i = 0; i < listCartItems.length; i++) {
+                if (listCartItems[i].productId === id) {
+                    console.log(listCartItems[i].productId);
+                    listCartItems.splice(listCartItems[i], 1)
+                    localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
+                    getCategory()
+                }
+            }
+            for (let i = 0; i < cartAddP.length; i++) {
+                if (cartAddP[i].productId === id) {
+                    cartAddP.splice(cartAddP[i], 1)
+                    localStorage.setItem("cartADD", JSON.stringify(cartAddP))
+                    getCategory()
+                }
+            }
+            toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1500 })
             getCategory()
         }
     }
