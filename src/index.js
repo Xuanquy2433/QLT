@@ -9,6 +9,7 @@ import "assets/scss/argon-dashboard-react.scss";
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
+import AuthVerifyComponent from './AuthVerifyComponent '
 import { toast, ToastContainer } from "react-toastify";
 import AddressDetail from "views/pillarAddress/AddressDetail";
 import jwt_decode from "jwt-decode";
@@ -34,20 +35,17 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // }
 let token = localStorage.getItem('token')
 let decoded;
-
+let decode;
 if (token !== null) {
   decoded = jwt_decode(token);
+  decode = JSON.parse(atob(token.split('.')[1]));
 }
-function isTokenExpired(token) {
-  const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
-  return (Math.floor((new Date).getTime() / 1000)) >= expiry;
-}
-if (token && isTokenExpired(token)) {
+if (token && decode.exp * 1000 < new Date().getTime()) {
   localStorage.clear()
-  toast.warning('Phiên đăng nhập đã hết hạn !', { autoClose: 1000 })
+  toast.warning('Phiên đăng nhập đã hết hạn ', { autoClose: 1200 })
   setTimeout(() => {
     window.location.reload();
-  }, 1600);
+  }, 1500);
 }
 
 if (token && decoded.roles == '[ROLE_ADMIN]') {
@@ -72,6 +70,7 @@ root.render(
       pauseOnHover
     />
     <BrowserRouter >
+      <AuthVerifyComponent />
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
