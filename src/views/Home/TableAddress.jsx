@@ -154,8 +154,8 @@ function TableAddress() {
     const formatResult = (item) => {
         return (
             <>
-                {/* <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span> */}
                 <span style={{ display: 'block', textAlign: 'left', cursor: 'pointer' }}> {item.street}</span>
+                <span style={{ display: 'block', textAlign: 'left', cursor: 'pointer' }}> Khoảng giá: {formatMoney(item.minPrice)} - {formatMoney(item.maxPrice)} VNĐ </span>
             </>
         )
     }
