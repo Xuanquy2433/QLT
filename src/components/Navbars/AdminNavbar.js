@@ -16,13 +16,16 @@ import {
   Nav,
   Container,
   Media,
-  NavItem
+  NavItem,
+  Card
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
 import Notification from "./NotificationUser";
 import NotificationAdmin from "./NotificationAdmin";
 import { toast } from "react-toastify";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 const AdminNavbar = (props) => {
   const history = useHistory();
   const logout = () => {
@@ -42,28 +45,123 @@ const AdminNavbar = (props) => {
   if (token !== null) {
     decoded = jwt_decode(token);
   }
+  //autocomplete search
+  const items = [
+    {
+      id: 0,
+      name: 'Địa chỉ',
+      path: '/admin/pillars'
+    },
+    {
+      id: 1,
+      name: 'Trụ',
+      path: '/admin/product'
+    },
+    {
+      id: 2,
+      name: 'Trụ chưa cho thuê',
+      path: '/admin/availablePillar'
+    },
+    {
+      id: 3,
+      name: 'Trụ đã cho thuê',
+      path: '/admin/hiringPillar'
+    },
+    {
+      id: 4,
+      name: 'Loại trụ',
+      path: '/admin/category'
+    },
+    {
+      id: 5,
+      name: 'Khách hàng',
+      path: '/admin/customers'
+    },
+    {
+      id: 6,
+      name: 'Đơn đặt trụ',
+      path: '/admin/orderPlace'
+    },
+    {
+      id: 7,
+      name: 'Thông tin ngân hàng',
+      path: '/admin/banks'
+    },
+    {
+      id: 8,
+      name: 'Ảnh website',
+      path: '/admin/pictures'
+    },
+    {
+      id: 9,
+      name: 'Cài đặt email',
+      path: '/admin/setting'
+    },
+    {
+      id: 10,
+      name: 'Bản đồ',
+      path: '/admin/maps'
+    },
+    {
+      id: 11,
+      name: 'Bảng điều khiển',
+      path: '/admin/index'
+    },
+  ]
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+    history.push(item.path)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    return (
+      <>
+        {/* <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span> */}
+        <span style={{ display: 'block', textAlign: 'left',cursor: 'pointer' }}> {item.name}</span>
+      </>
+    )
+  }
   return (
     <>
       <Navbar className="navbar-top navcustom-ss navbar-dark" expand="md" id="navbar-main">
         <Container fluid>
           <p
             className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-
           >
             {props.brandText}
-
           </p>
-
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
-              <InputGroup className="input-group-alternative">
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="fas fa-search" />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input placeholder="Search" type="text" />
-              </InputGroup>
+
+              <div style={{ width: 400 }}>
+                <ReactSearchAutocomplete
+                  items={items}
+                  onSearch={handleOnSearch}
+                  placeholder='Tìm kiếm danh sách thành phần'
+                  onHover={handleOnHover}
+                  onSelect={handleOnSelect}
+                  onFocus={handleOnFocus}
+                  autoFocus
+                  formatResult={formatResult}
+                />
+              </div>
+
             </FormGroup>
           </Form>
           <div style={{ marginTop: '15px', cursor: 'pointer' }}>
