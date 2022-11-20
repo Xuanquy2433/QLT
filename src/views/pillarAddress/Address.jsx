@@ -146,7 +146,7 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
                                     // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
-                                            <TableCell sx={{ textAlign: 'left',color: 'blue',cursor: 'pointer' }}>
+                                            <TableCell sx={{ textAlign: 'left',color: 'green',cursor: 'pointer' }}>
                                                 <AddLocationAltIcon  onClick={() => openDetailPoint(item.id)}>
                                                 </AddLocationAltIcon>
                                             </TableCell>

@@ -25,7 +25,6 @@ import SouthIcon from '@mui/icons-material/South';
 
 import CheckIcon from '@mui/icons-material/Check';
 import ToggleButtonMui from '@mui/material/ToggleButton';
-import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import './scss.scss'
 import AddressDetail from 'views/pillarAddress/AddressDetail';
 import { API_GET_ADDRESS } from 'utils/const';
@@ -240,10 +239,9 @@ function TableAddress() {
                                         {/* <p>Mô tả: {item.description}</p> */}
                                         <p>Khoảng giá: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)} - {formatMoney(item.maxPrice)}</span> </p>
                                         <p>Trụ còn trống: <span style={{ color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
-                                        <p> <FmdGoodIcon style={{ color: 'red', cursor: 'pointer' }} /> </p>
-
                                         <NavLink to={'/auth/address/' + item.id}>
                                             <Button sx={{
+                                                mt:5,
                                                 '&:hover': {
                                                     bgcolor: '#007784',
                                                     outline: "none",

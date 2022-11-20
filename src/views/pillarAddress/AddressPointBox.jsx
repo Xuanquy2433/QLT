@@ -9,8 +9,8 @@ import TableRow from '@mui/material/TableRow';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import {Button} from "reactstrap";
-import {toast} from "react-toastify";
+import { Button } from "reactstrap";
+import { toast } from "react-toastify";
 import axios from "axios";
 import {
   API_ADD_ADDRESS_POINT, API_DELETE_ADDRESS_POINT,
@@ -18,7 +18,7 @@ import {
   API_PRODUCT_ADD, API_UPDATE_ADDRESS_POINT
 } from "../../utils/const";
 import Map from "./MapTest";
-import {DirectionsService} from "@react-google-maps/api";
+import { DirectionsService } from "@react-google-maps/api";
 
 const columnsDetail = [
   { id: 'id', label: 'Id', minWidth: 70 },
@@ -74,16 +74,16 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
   const [name, setName] = useState("");
   const [updateId, setUpdateId] = useState(null);
   const [input, setInput] = useState({
-  addressId: addressId,
-  lat: 0,
-  lng: 0,
-  name: ""
+    addressId: addressId,
+    lat: 0,
+    lng: 0,
+    name: ""
   }
-);
+  );
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const [random, setRandom] = useState(0);
-  const [updating,setUpdating] = useState(false);
+  const [updating, setUpdating] = useState(false);
 
   const fetchData = async (id) => {
     const response = await axios.get(API_GET_ADDRESS_POINT_BY_ID + id)
@@ -93,48 +93,47 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
   };
 
   useEffect(() => {
-    if(updatingStatus===false)
-    {
-      if(openDetail===true ) {
+    if (updatingStatus === false) {
+      if (openDetail === true) {
         console.log("yo")
         fetchData(addressId);
         setOpen(true);
       }
     }
-  }, [openDetail,random]);
+  }, [openDetail, random]);
 
   useEffect(() => {
-    if(updatingStatus===false) {
+    if (updatingStatus === false) {
       fetchData(addressId)
     }
   }, [random]);
 
   useEffect(() => {
 
-      setInput({
-        ...input,
-        addressId:addressId,
-        lat:lat,
-        lng:lng
-      })
+    setInput({
+      ...input,
+      addressId: addressId,
+      lat: lat,
+      lng: lng
+    })
 
 
   }, [lat, lng]);
 
 
-  const  addAddressPoint = async (addressId)=> {
+  const addAddressPoint = async (addressId) => {
     try {
-        const response = await axios.put(API_ADD_ADDRESS_POINT,JSON.stringify(input),{
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        })
-        if (response.status === 200) {
-          setRandom(Math.random());
-          clear();
-          toast.success("Thêm thành công", {autoClose: 1500})
+      const response = await axios.put(API_ADD_ADDRESS_POINT, JSON.stringify(input), {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
+      })
+      if (response.status === 200) {
+        setRandom(Math.random());
+        clear();
+        toast.success("Thêm thành công", { autoClose: 1500 })
+      }
 
     } catch (error) {
       if (error.response.data.message) {
@@ -146,13 +145,13 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
   }
 
 
-  const  addAddressPointBehind = async (addressId,pointId)=> {
+  const addAddressPointBehind = async (addressId, pointId) => {
     try {
       if (data.name === " ") {
-        toast.error("Không được để trống địa chỉ", {autoClose: "1500"})
+        toast.error("Không được để trống địa chỉ", { autoClose: "1500" })
       } else {
 
-        const response = await axios.put(API_ADD_ADDRESS_POINT+'?addressPointId='+pointId,JSON.stringify(input),{
+        const response = await axios.put(API_ADD_ADDRESS_POINT + '?addressPointId=' + pointId, JSON.stringify(input), {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -161,7 +160,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
         if (response.status === 200) {
           setRandom(Math.random());
           clear();
-          toast.success("Thêm thành công", {autoClose: 1500})
+          toast.success("Thêm thành công", { autoClose: 1500 })
         }
       }
     } catch (error) {
@@ -173,12 +172,12 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
     }
   }
 
-  const  deletePoint = async (pointId)=> {
+  const deletePoint = async (pointId) => {
     try {
       if (data.name === " ") {
-        toast.error("Không được để trống địa chỉ", {autoClose: "1500"})
+        toast.error("Không được để trống địa chỉ", { autoClose: "1500" })
       } else {
-        const response = await axios.delete(API_DELETE_ADDRESS_POINT+pointId,{
+        const response = await axios.delete(API_DELETE_ADDRESS_POINT + pointId, {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -186,7 +185,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
         })
         if (response.status === 200) {
           setRandom(Math.random());
-          toast.success("xoá thành công", {autoClose: 1500})
+          toast.success("xoá thành công", { autoClose: 1500 })
         }
       }
     } catch (error) {
@@ -203,9 +202,9 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
     setName(e.target.value);
     setInput({
       ...input,
-      addressId:addressId,
-      lat:lat,
-      lng:lng,
+      addressId: addressId,
+      lat: lat,
+      lng: lng,
       name: name
     })
   }
@@ -213,15 +212,15 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
   const directionsRenderer = new google.maps.DirectionsRenderer();
 
   function calculateAndDisplayRoute(directionsService: google.maps.DirectionsService,
-      directionsRenderer: google.maps.DirectionsRenderer) {
+    directionsRenderer: google.maps.DirectionsRenderer) {
     directionsService
-    .route({
-      origin: { lat: data[0].lat, lng: data[0].lng },
-      destination: { lat: data[data.length-1].lat, lng: data[data.length-1].lng },
-      travelMode: google.maps.TravelMode.DRIVING,
-    }
+      .route({
+        origin: { lat: data[0].lat, lng: data[0].lng },
+        destination: { lat: data[data.length - 1].lat, lng: data[data.length - 1].lng },
+        travelMode: google.maps.TravelMode.DRIVING,
+      }
 
-  )
+      )
   }
 
   function MapDraw() {
@@ -236,19 +235,19 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
     setUpdateId(data.id);
     setInput({
       ...input,
-      addressId:addressId,
-      lat:lat,
-      lng:lng,
+      addressId: addressId,
+      lat: lat,
+      lng: lng,
       name: name
     })
   }
 
-  const onUpdatePoint= async (updateId,item)=> {
+  const onUpdatePoint = async (updateId, item) => {
     try {
       if (data.name === " ") {
-        toast.error("Không được để trống địa chỉ", {autoClose: "1500"})
+        toast.error("Không được để trống địa chỉ", { autoClose: "1500" })
       } else {
-        const response = await axios.put(API_UPDATE_ADDRESS_POINT+updateId,JSON.stringify(item),{
+        const response = await axios.put(API_UPDATE_ADDRESS_POINT + updateId, JSON.stringify(item), {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -257,7 +256,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
         if (response.status === 200) {
           setRandom(Math.random());
           onCancelUpdate()
-          toast.success("Update thành công", {autoClose: 1500})
+          toast.success("Update thành công", { autoClose: 1500 })
         }
       }
     } catch (error) {
@@ -267,14 +266,14 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
         })
       }
     }
-    
+
   }
-function clear(){
+  function clear() {
     setName("");
     setLat(0);
     setLng(0);
 
-}
+  }
   function onCancelUpdate() {
     clear();
     setUpdateId(null);
@@ -283,66 +282,65 @@ function clear(){
   }
 
   useEffect(() => {
-   if(updatingStatus===true) {
-     console.log("updating")
-     onUpdatePoint(updatingItem.id,updatingItem)
-     setUpdatingStatus(false)
-   }
-  }, [updatingStatus,updatingItem]);
+    if (updatingStatus === true) {
+      console.log("updating")
+      onUpdatePoint(updatingItem.id, updatingItem)
+      setUpdatingStatus(false)
+    }
+  }, [updatingStatus, updatingItem]);
 
   return (
-      <React.Fragment>
-        <Modal
-            open={open}
-            onClose={closeDetail}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
+    <React.Fragment>
+      <Modal
+        open={open}
+        onClose={closeDetail}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
+            <TableContainer sx={{ height: '550px' }}>
+              <Table aria-label="sticky table">
+                <TableHead>
+                  <TableCell>
+                    {updating ? <input type="number" value={updateId} /> : null}
 
-            <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-              <TableContainer sx={{ height: '550px' }}>
-                <Table aria-label="sticky table">
-                  <TableHead>
-                    <TableCell>
-                      {updating?<input type="number" value={updateId}  />:null}
+                  </TableCell>
+                  <TableCell>
+                    name:
+                    <input type="text" value={name} onChange={handleChange} />
 
-                    </TableCell>
-                    <TableCell>
-                      name:
-                      <input type="text" value={name} onChange={handleChange} />
+                  </TableCell>
+                  <TableCell>
+                    lat:
+                    <input type="text" value={lat} />
 
-                    </TableCell>
-                      <TableCell>
-                          lat:
-                          <input type="text" value={lat}/>
+                  </TableCell>
 
-                      </TableCell>
+                  <TableCell>
+                    lng:
+                    <input type="text" value={lng} />
+                  </TableCell>
+                  <TableCell>
+                    {updating ? <>
+                      <Button onClick={() => { onUpdatePoint(updateId, input) }}>Update</Button>
+                      <Button onClick={() => { onCancelUpdate() }}>X</Button>
+                    </>
+                      : data.length < 2 ? <button onClick={() => addAddressPoint(addressId)}>Thêm</button> : null}
+                  </TableCell>
 
-                    <TableCell>
-                      lng:
-                      <input type="text" value={lng}/>
-                    </TableCell>
-                    <TableCell>
-                      {updating?<>
-                            <Button onClick={()=>{onUpdatePoint(updateId,input)}}>Update</Button>
-                            <Button onClick={()=>{onCancelUpdate()}}>X</Button>
-                          </>
-                          : data.length<2?<button onClick={()=>addAddressPoint(addressId)}>Thêm</button>:null}
-                    </TableCell>
-
-                    {data.map((column) => (
+                  {data.map((column) => (
                     <TableRow>
 
                       <TableCell>
-                            {column.id}
+                        {column.id}
                       </TableCell>
-                        <TableCell>
-                      {column.name}
-                        </TableCell>
-                        <TableCell>
-                      {column.lng}
-                        </TableCell>
+                      <TableCell>
+                        {column.name}
+                      </TableCell>
+                      <TableCell>
+                        {column.lng}
+                      </TableCell>
                       <TableCell>
                         {column.lat}
                       </TableCell>
@@ -350,48 +348,53 @@ function clear(){
                         {column.number}
                       </TableCell>
                       <TableCell>
-                        <button onClick={() =>addAddressPointBehind(addressId,column.id)}>add behind</button>
+                        <Button onClick={() => addAddressPointBehind(addressId, column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
+                          behind
+                        </Button>
                       </TableCell>
 
                       <TableCell>
-                        <button onClick={() =>deletePoint(column.id)}>X</button>
+                        <Button onClick={() => deletePoint(column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="warning">
+                          X
+                        </Button>
                       </TableCell>
 
                       <TableCell>
-                        <button onClick={() =>updatePoint(column)}>U</button>
+                        <Button onnClick={() => updatePoint(column)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
+                          U
+                        </Button>
                       </TableCell>
-
-
-
                     </TableRow>
-                    ))
-                    }
-                  </TableHead>
-                  <TableBody>
+                  ))
+                  }
+                </TableHead>
+                <TableBody>
 
-                  </TableBody>
-                  <button onClick={MapDraw}>test</button>
-                </Table>
-                <Map
-                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `90vh`, margin: `auto`, border: '2px solid black' }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                    setLatMap={setLat}
-                    setLngMap={setLng}
-                    data={data}
-                    setUpdatingItem={setUpdatingItem}
-                    setUpdatingStatus={setUpdatingStatus}
-                    finish={setUpdatingStatus}
-                />
-              </TableContainer>
+                </TableBody>
+                <Button onClick={MapDraw} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
+                  Test
+                </Button>
+              </Table>
+              <Map
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `90vh`, margin: `auto`, border: '2px solid black' }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+                setLatMap={setLat}
+                setLngMap={setLng}
+                data={data}
+                setUpdatingItem={setUpdatingItem}
+                setUpdatingStatus={setUpdatingStatus}
+                finish={setUpdatingStatus}
+              />
+            </TableContainer>
 
-            </Paper>
+          </Paper>
 
-          </Box>
-        </Modal>
+        </Box>
+      </Modal>
 
-      </React.Fragment >
+    </React.Fragment >
   )
 }
 

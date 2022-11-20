@@ -4,6 +4,7 @@ import TableCell from "@mui/material/TableCell";
 import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import axios from "axios";
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import { useHistory } from "react-router-dom";
 import { API_ADD_CART } from "utils/const";
 import { Button, createTheme, Pagination, Stack } from "@mui/material";
@@ -21,7 +22,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { API_WISHLIST_REMOVE } from "utils/const";
 import { API_WISHLIST_GET } from "utils/const";
 import { API_CART_REMOVE } from "utils/const";
-function ProductComponent({ product, onClickRemoveItemCart, addCart,setItem }) {
+function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) {
 
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
@@ -304,20 +305,10 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart,setItem }) {
                       }} disabled variant="contained" >
                         Đã cho thuê
                       </Button>
-
-
                   }
-                  <Button style={{
-                    fontWeight: "500", width: "100%"
-                    , border: "3px solid #333", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
-                  }} variant="contained"
-                  onClick={(e) => {
+                  <FmdGoodIcon onClick={(e) => {
                     setItem(item)
-                  }}>
-                    Chi tiết
-                  >
-                    Map
-                  </Button>
+                  }} style={{ color: 'red', cursor: 'pointer', marginTop: '10px' }} />
 
                   {item.status === 'HIRING' && item.expiredDate !== null ? <div style={{ height: "28.5px" }}> <h4 style={{ marginTop: '15px', }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> </div> : ''}
                 </div>
