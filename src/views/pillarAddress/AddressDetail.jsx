@@ -102,7 +102,7 @@ function AddressDetail() {
                     setAddress(response.data.address)
                 }
             } else {
-                const response = await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0], {
+                const response = await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0]+ "?num1=" + selected.num1 + "&num2=" + selected.num2, {
                     headers: {
                         'authorization': 'Bearer ' + token,
                         'Accept': 'application/json',
