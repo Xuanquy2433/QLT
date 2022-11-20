@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
@@ -30,6 +31,7 @@ import {
 } from "../../utils/const";
 import AddressPointBox from "./AddressPointBox";
 const columns = [
+    { id: 'add', label: 'Map', minWidth: 70 },
     { id: 'Id', label: 'Id', minWidth: 70 },
     { id: 'image', label: 'Hình ảnh', align: 'center', minWidth: 100 },
     { id: 'City', label: 'Thành phố', align: 'center', minWidth: 100 },
@@ -95,7 +97,7 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
 
     return (
         <>
-            {openDetailData? <AddressPointBox openDetail={openDetailData}  closeDetail={closeDetailData}  addressId={id} /> : null}
+            {openDetailData ? <AddressPointBox openDetail={openDetailData} closeDetail={closeDetailData} addressId={id} /> : null}
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
                     <div className='header-custom-search' style={{ marginBottom: "10px", width: '100%', display: "flex", flexDirection: "row", alignItems: "center", }}>
@@ -143,11 +145,10 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
                                 {data
                                     // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
-
                                         <TableRow hover role="checkbox" key={index}>
-                                            <TableCell sx={{ textAlign: 'left' }}>
-                                                <InfoIcon onClick={() => openDetailPoint(item.id)}>
-                                                </InfoIcon>
+                                            <TableCell sx={{ textAlign: 'left',color: 'blue',cursor: 'pointer' }}>
+                                                <AddLocationAltIcon  onClick={() => openDetailPoint(item.id)}>
+                                                </AddLocationAltIcon>
                                             </TableCell>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>

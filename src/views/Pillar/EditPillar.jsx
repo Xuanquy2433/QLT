@@ -14,7 +14,7 @@ import {
     API_GET_ADDRESS_POINT_BY_ID
 } from "../../utils/const";
 
-export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory,updated, setClickedProduct }) {
+export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory, updated, setClickedProduct }) {
     const [selected, setSelected] = useState({
         num1: 0,
         num2: 0,
@@ -54,9 +54,9 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
             status: item.status || "",
             name: item.name || "",
             price: item.price || 0,
-            lat:  item.lat ? item.lat : 0,
-            lng:  item.lng ? item.lng: 0,
-            num1:  Math.floor(item.number) || 0,
+            lat: item.lat ? item.lat : 0,
+            lng: item.lng ? item.lng : 0,
+            num1: Math.floor(item.number) || 0,
             num2: Math.ceil(item.number) || 0,
             multipartFile: item.image || ''
         })
@@ -113,7 +113,7 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
         const response = await axios.get(API_GET_ADDRESS_POINT_BY_ID + valueStateAddress)
         if (response) {
             setAddressPoint(response.data)
-            setSelected({num1: Math.floor(item.number), num2: Math.ceil(item.number), selected: true})
+            setSelected({ num1: Math.floor(item.number), num2: Math.ceil(item.number), selected: true })
         }
     }
     const fetchAddressData = async () => {
@@ -144,7 +144,7 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
         setDataEdit({ ...dataEdit, status: (valueSta) });
     }
     useEffect(() => {
-       setValueStateAddress(item.address.id)
+        setValueStateAddress(item.address.id)
     }, [item.address.id, item.address])
 
     useEffect(() => {
@@ -153,7 +153,7 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
         setValueStatus(dataEdit.status)
         setValueStateCategory(dataEdit.categoryId)
         setValueStateAddress(dataEdit.addressId)
-    }, [valueStateAddress,updated,dataEdit.status,dataEdit.addressId,dataEdit.addressId,dataAddress,dataCategory])
+    }, [valueStateAddress, updated, dataEdit.status, dataEdit.addressId, dataEdit.addressId, dataAddress, dataCategory])
 
     function onClickSelected(number1, number2) {
         setSelected({ num1: number1, num2: number2, selected: true })
@@ -164,7 +164,17 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
     useEffect(() => {
         setDataEdit({ ...dataEdit, num1: selected.num1, num2: selected.num2 })
     }, [selected])
-
+    //scroll select
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
     return (
         <Modal
             open={openEdit}
@@ -172,7 +182,6 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-
             <Box className='form-add-product'
                 sx={{
                     width: '40%',
@@ -185,9 +194,6 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                 }}
             >
                 <h2 style={{ textAlign: 'center' }}>Sửa thông tin trụ</h2>
-
-
-
                 <div className='modal-contents'>
 
                     <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex content-1">
@@ -196,17 +202,15 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                 <div>
                                     {addressPoint.length - 1 > index ?
                                         <div
-                                            onClick={() =>
-                                            {
-                                                onClickSelected(item.number,addressPoint[index + 1].number)
-
+                                            onClick={() => {
+                                                onClickSelected(item.number, addressPoint[index + 1].number)
                                             }
-                                                }
+                                            }
                                             className={dataEdit.num1 === item.number ? "point selected" : "point"}
                                         >
                                             {item.name ? item.name : ""} +
                                             {addressPoint[index + 1].name ? addressPoint[index + 1].name : ""}
-                                        </div> :null
+                                        </div> : null
                                     }
                                 </div>
                             </div>
@@ -220,6 +224,7 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                 value={dataEdit.addressId}
                                 defaultValue={addressId}
                                 label="Mã địa chỉ"
+                                MenuProps={MenuProps}
                                 onChange={handleChangeAddress}
                             >
                                 {dataAddress.map((item, index) => (
@@ -227,13 +232,14 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                 ))}
                             </Select>
                         </FormControl>
-                        <TextField  defaultValue='' value={dataEdit.lat} name="lat" style={{ margin: '5px' }} fullWidth  />
-                        <TextField  defaultValue='' value={dataEdit.lng} name="lng" style={{ margin: '5px' }} fullWidth  />
+                        <TextField defaultValue='' value={dataEdit.lat} name="lat" style={{ margin: '5px' }} fullWidth />
+                        <TextField defaultValue='' value={dataEdit.lng} name="lng" style={{ margin: '5px' }} fullWidth />
                         <FormControl fullWidth sx={{ margin: "5px" }}>
                             <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
+                                MenuProps={MenuProps}
                                 value={dataEdit.status}
                                 label="Mã địa chỉ"
                                 onChange={handlChangeStatus}
@@ -267,28 +273,28 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                 padding: 5
                             }
                         }} value={dataEdit.description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
-                     <TextField
-    inputProps={{
-       style: {
-         padding: 5
-       }
-    }} value={dataEdit.price}  type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
-                     <TextField
-    inputProps={{
-       style: {
-         padding: 5
-       }
-    }} value={dataEdit.name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
+                        <TextField
+                            inputProps={{
+                                style: {
+                                    padding: 5
+                                }
+                            }} value={dataEdit.price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
+                        <TextField
+                            inputProps={{
+                                style: {
+                                    padding: 5
+                                }
+                            }} value={dataEdit.name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
 
 
                         <img style={{ width: "20px" }} src={dataEdit.multipartFile} alt="" />
 
-                     <TextField
-    inputProps={{
-       style: {
-         padding: 5
-       }
-    }}  onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
+                        <TextField
+                            inputProps={{
+                                style: {
+                                    padding: 5
+                                }
+                            }} onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
                     </div>
                     <div className="content-2">
                         <Map

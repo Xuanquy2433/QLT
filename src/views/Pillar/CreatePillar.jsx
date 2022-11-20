@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
@@ -7,7 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import  './CreatePillar.css'
+import './CreatePillar.css'
 import axios from "axios";
 import {
     API_GET_ADDRESS_DETAIL_USER,
@@ -15,7 +15,7 @@ import {
 } from "../../utils/const";
 import Map from "./MapPillar";
 
-export default function CreatePillar({  onSubmit, open, setOpen, dataAddress, dataCategory }) {
+export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dataCategory }) {
     const [addressPoint, setAddressPoint] = useState([])
 
     const [lat, setLat] = useState(0)
@@ -38,13 +38,12 @@ export default function CreatePillar({  onSubmit, open, setOpen, dataAddress, da
         price: 0,
         lat: 0,
         lng: 0,
-        num1:0,
-        num2:0,
+        num1: 0,
+        num2: 0,
     })
 
 
-    const handleClose = () =>
-    {
+    const handleClose = () => {
         setOpen(false);
 
     }
@@ -63,8 +62,8 @@ export default function CreatePillar({  onSubmit, open, setOpen, dataAddress, da
         const response = await axios.get(API_GET_ADDRESS_POINT_BY_ID + id)
         if (response) {
             setAddressPoint(response.data)
-            setSelected({num1: response.data[0].number, num2: response.data[1].number, selected: true})
-            setData({...data, num1: response.data[0].number, num2: response.data[1].number})
+            setSelected({ num1: response.data[0].number, num2: response.data[1].number, selected: true })
+            setData({ ...data, num1: response.data[0].number, num2: response.data[1].number })
         }
     };
 
@@ -92,7 +91,7 @@ export default function CreatePillar({  onSubmit, open, setOpen, dataAddress, da
     };
 
     useEffect(() => {
-        if(valueStateAddress!==0){
+        if (valueStateAddress !== 0) {
             fetchAddressData()
             fetchData(valueStateAddress)
         }
@@ -106,6 +105,17 @@ export default function CreatePillar({  onSubmit, open, setOpen, dataAddress, da
     useEffect(() => {
         setData({ ...data, num1: selected.num1, num2: selected.num2 })
     }, [selected])
+    //scroll select
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
 
     return (
         <Modal
@@ -126,78 +136,78 @@ export default function CreatePillar({  onSubmit, open, setOpen, dataAddress, da
                 }}
             >
                 <h2 style={{ textAlign: 'center' }}>Thêm trụ</h2>
+                <div className='modal-contents'>
+                    <div style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex content-1">
+                        <TextField style={{ margin: '5px -5px 5px 5px' }} accept="image/*" name='multipartFile' onChange={(e) => setData({ ...data, multipartFile: e.target.files[0] })} multiple type="file" />
+                        <TextField onChange={onChangeText} defaultValue='' name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
+                        <TextField type="number" onChange={onChangeText} defaultValue='' name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
+                        <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
+                        <TextField defaultValue='' value={lat} name="lat" style={{ margin: '5px' }} fullWidth />
+                        <TextField defaultValue='' value={lng} name="lng" style={{ margin: '5px' }} fullWidth />
 
-                    <div className='modal-contents'>
-                        <div style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex content-1">
-                            <TextField style={{ margin: '5px -5px 5px 5px' }} accept="image/*" name='multipartFile' onChange={(e) => setData({ ...data, multipartFile: e.target.files[0] })} multiple type="file" />
-                            <TextField onChange={onChangeText} defaultValue='' name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
-                            <TextField type="number" onChange={onChangeText} defaultValue='' name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
-                            <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
-                            <TextField  defaultValue='' value={lat} name="lat" style={{ margin: '5px' }} fullWidth  />
-                            <TextField  defaultValue='' value={lng} name="lng" style={{ margin: '5px' }} fullWidth  />
+                        <FormControl fullWidth sx={{ margin: "5px" }}>
+                            <InputLabel id="demo-simple-select-label">Loại trụ</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={valueStateCategory}
+                                label="Mã địa chỉ"
+                                MenuProps={MenuProps}
+                                onChange={handleChangeCategory}
+                            >
+                                {dataCategory.map((item, index) => (
+                                    <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl fullWidth sx={{ margin: "5px" }}>
+                            <InputLabel id="demo-simple-select-label">Địa chỉ</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={valueStateAddress}
+                                MenuProps={MenuProps}
+                                label="Mã địa chỉ"
+                                onChange={handleChangeAddress}
+                            >
+                                {dataAddress.map((item, index) => (
+                                    <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
 
-                            <FormControl fullWidth sx={{ margin: "5px" }}>
-                                <InputLabel id="demo-simple-select-label">Loại trụ</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={valueStateCategory}
-                                    label="Mã địa chỉ"
-                                    onChange={handleChangeCategory}
-                                >
-                                    {dataCategory.map((item, index) => (
-                                        <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            <FormControl fullWidth sx={{ margin: "5px" }}>
-                                <InputLabel id="demo-simple-select-label">Địa chỉ</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={valueStateAddress}
-                                    label="Mã địa chỉ"
-                                    onChange={handleChangeAddress}
-                                >
-                                    {dataAddress.map((item, index) => (
-                                        <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-
-
-                            {addressPoint.map?.((item, index) => (
-                                <div key={index} style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
-                                    <div>
-                                        {addressPoint.length - 1 > index ?
-                                            <div
-                                                onClick={() =>
-                                                    setSelected({ num1: item.number, num2:addressPoint[index + 1].number, selected: true })}
-                                                className={selected.num1 === item.number ? "point selected" : "point"}
-                                            >
-                                                {item.number} +
-                                                {addressPoint[index + 1].number}
-                                            </div> :null
-                                        }
-                                    </div>
+                        {addressPoint.map?.((item, index) => (
+                            <div key={index} style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
+                                <div>
+                                    {addressPoint.length - 1 > index ?
+                                        <div
+                                            onClick={() =>
+                                                setSelected({ num1: item.number, num2: addressPoint[index + 1].number, selected: true })}
+                                            className={selected.num1 === item.number ? "point selected" : "point"}
+                                        >
+                                            {item.number} +
+                                            {addressPoint[index + 1].number}
+                                        </div> : null
+                                    }
                                 </div>
-                            ))}
-                        </div>
-                        <div className="content-2">
-                            <Map
-                                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
-                                loadingElement={<div style={{ height: `90%` }} />}
-                                containerElement={<div style={{ height: `100%`, margin: `auto`, border: '2px solid black' }} />}
-                                mapElement={<div style={{ height: `100%` }} />}
-                                setLatMap={setLat}
-                                setLngMap={setLng}
-                                data={addressPoint}
-                                productData={productData}
-                                selected={selected}
-                            />
-
-                        </div>
+                            </div>
+                        ))}
                     </div>
+                    <div className="content-2">
+                        <Map
+                            googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
+                            loadingElement={<div style={{ height: `90%` }} />}
+                            containerElement={<div style={{ height: `100%`, margin: `auto`, border: '2px solid black' }} />}
+                            mapElement={<div style={{ height: `100%` }} />}
+                            setLatMap={setLat}
+                            setLngMap={setLng}
+                            data={addressPoint}
+                            productData={productData}
+                            selected={selected}
+                        />
+
+                    </div>
+                </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
                         Đóng
