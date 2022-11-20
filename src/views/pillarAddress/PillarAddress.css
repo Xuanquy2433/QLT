@@ -57,6 +57,7 @@
    }
 
    .MuiModal-root .form-add-product{
-    width: 30%;
+    width: 90%;
+     height: 90%;
 }
 }

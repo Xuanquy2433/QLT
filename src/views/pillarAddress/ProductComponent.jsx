@@ -21,7 +21,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { API_WISHLIST_REMOVE } from "utils/const";
 import { API_WISHLIST_GET } from "utils/const";
 import { API_CART_REMOVE } from "utils/const";
-function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
+function ProductComponent({ product, onClickRemoveItemCart, addCart,setItem }) {
 
   const renderer = ({ hours, minutes, completed }) => {
     if (completed) {
@@ -304,7 +304,20 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart }) {
                       }} disabled variant="contained" >
                         Đã cho thuê
                       </Button>
+
+
                   }
+                  <Button style={{
+                    fontWeight: "500", width: "100%"
+                    , border: "3px solid #333", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
+                  }} variant="contained"
+                  onClick={(e) => {
+                    setItem(item)
+                  }}>
+                    Chi tiết
+                  >
+                    Map
+                  </Button>
 
                   {item.status === 'HIRING' && item.expiredDate !== null ? <div style={{ height: "28.5px" }}> <h4 style={{ marginTop: '15px', }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> </div> : ''}
                 </div>

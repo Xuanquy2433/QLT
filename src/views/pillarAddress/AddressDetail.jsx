@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
-import { API_GET_PILLAR } from 'utils/const';
+import {API_GET_ADDRESS_POINT_BY_ID, API_GET_PILLAR} from 'utils/const';
 import ProductComponent from "./ProductComponent";
 import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 import { useHistory } from 'react-router-dom';
@@ -19,6 +19,11 @@ import { API_GET_ADDRESS_DETAIL_NOT_TOKEN } from 'utils/const';
 import { showError } from 'utils/error';
 import { API_CART_REMOVE } from 'utils/const';
 import { API_ADD_CART } from 'utils/const';
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import {Button} from "reactstrap";
+import Map from "./UserMap";
 
 const columns = [
     {
@@ -57,7 +62,17 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
 ];
-
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 1200,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 function AddressDetail() {
     const [dataAddressProduct, setDataAddressProduct] = useState([])
@@ -65,12 +80,23 @@ function AddressDetail() {
     const id = useState(window.location.pathname.replace(/\D/g, ""));
     // console.log(id[0]);
     let token = localStorage.getItem("token");
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () =>
+    {
+        setOpen(false);
+        setItem({ id: null,
+            name: null,
+            number: null,
+            lat: null,
+            lng: null,});
+    }
 
     const history = useHistory();
     const getAddress = async (e) => {
         try {
             if (!token) {
-                const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
+                const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0]+ "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
@@ -231,26 +257,82 @@ function AddressDetail() {
             }
         }
     }
+
+    const [addressPoint, setAddressPoint] = useState([
+        {
+            id: null,
+            name: 'Tất cả',
+            number: null,
+            lat: null,
+            lng: null
+        },
+    ])
+
+    const [item, setItem] = useState({
+        id: null,
+        name: null,
+        number: null,
+        lat: null,
+        lng: null,
+    })
+
+    const [mapAddress, setMapAddress] = useState([] )
+
+
+    const [selected, setSelected] = useState({
+        num1: 0,
+        num2: 0,
+        selected: false
+    })
+
+
+
+    const fetchAddressPointData = async () => {
+        const response = await axios.get(API_GET_ADDRESS_POINT_BY_ID + id[0])
+        if (response) {
+            setAddressPoint([...addressPoint, ...response.data])
+            setMapAddress(response.data)
+            console.log('address point', addressPoint);
+        }
+    }
+
+
+    const onClickSelected = (num1, num2) => {
+        setSelected({
+            num1: num1 ===null? 0 : num1,
+            num2: num1 ===null? 0 : num2,
+            selected: true
+        })
+
+    }
     useEffect(() => {
         getAddress()
+        fetchAddressPointData()
     }, [])
+
+    useEffect(() => {
+        getAddress()
+        console.log("The value after update", selected);
+    }, [selected])
+
+    useEffect(() => {
+        if(item.id !==null){
+            handleOpen()
+            console.log("The value after update", item.lat);
+        }
+
+    }, [item.lat])
+
+
 
     return (
         <div >
             <div style={{ marginBottom: "15px" }} className='de'  >
                 {address ?
                     <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: '#E7EBF0', width: "96.5%" }} className="address-detail">
-                        {/* <div style={{ fontSize: "18px" }}>
-                        <div>{address.id}</div>
-                        <div >Thành phố: {address.city}</div>
-                        <div>Đường: {address.street}</div>
-                        <div>Địa chỉ: {address.city} {address.street}</div>
-                        <div>Mô tả: {address.description}</div>
-                    </div>
-                    <div >
-                        <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" />
-                    </div> */}
+
                         <div style={{ position: 'sticky' }} className="container">
+
                             <div className="header">
                                 <div className="header-logo">Thông tin trụ </div>
                                 <nav className="header-nav">
@@ -281,42 +363,61 @@ function AddressDetail() {
                             <div>Không có địa chỉ này !</div>
                         </div>
                         <div >
-                            {/* <img style={{ width: "200px", borderRadius: "8px" }} src={address.photosImagePath} alt="" /> */}
                         </div>
                     </div>
                 }
 
 
 
-                {/* <Paper sx={{ width: '80%', height: 500, margin: 'auto', overflow: 'hidden', mt: 3, position: 'relative' }}>
-                <TableContainer sx={{ maxHeight: 440 }}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {dataAddressProduct.length > 0 ?
-                                dataAddressProduct.map((item, index) => (
-                                    <ProductComponent key={index} product={item} />
-                                )) : <TableCell>Đương này chưa có trụ nào ! </TableCell>}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper> */}
-
             </div>
-            <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} />
+            {addressPoint.map?.((item, index) => (
+                <div key={index} style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
+                    <div>
+                        {addressPoint.length - 1 > index ?
+                            <div
+                                onClick={() =>
+                                {
+                                    onClickSelected(item.number,addressPoint[index + 1].number)
+                                }
+                                }
+                                className={
+                                item.id===null && selected.num1===0 ? "point selected" :
+                                selected.num1 === item.number ? "point selected" : "point"}
+                            >
+
+                                <div>
+                                    {
+                                        item.id ===null ? <div className="point__number">Tất cả</div> : <div className="point__number">{item.name}---{addressPoint[index + 1].name}</div>
+                                    }
+                                    </div>
+
+                            </div> :null
+                        }
+                    </div>
+                </div>
+            ))}
+
+            <div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <Map
+                            googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
+                            loadingElement={<div style={{ height: `100%` }} />}
+                            containerElement={<div style={{ height: `90vh`, margin: `auto`, border: '2px solid black' }} />}
+                            mapElement={<div style={{ height: `100%` }} />}
+                            data={mapAddress}
+                            productData={dataAddressProduct}
+                            item={item}
+                        />
+                    </Box>
+                </Modal>
+            </div>
+            <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
 
         </div>
     )

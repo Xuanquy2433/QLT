@@ -151,6 +151,14 @@ export const API_GET_CATEGORY_BY_ID = `${API}/category/`
 
 export const API_GET_CATEGORY_BY_ID_2 = `${API}/category2/`
 
+export const API_GET_ADDRESS_POINT_BY_ID = `${API}/addresspoint/address/`
+
+export const API_ADD_ADDRESS_POINT = `${API}/addresspoint/address/add/`
+
+export const API_DELETE_ADDRESS_POINT = `${API}/addresspoint/address/delete/`
+
+export const API_UPDATE_ADDRESS_POINT = `${API}/addresspoint/address/update/`
+
 
 
 

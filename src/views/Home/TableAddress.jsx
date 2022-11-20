@@ -225,7 +225,7 @@ function TableAddress() {
                     {show && <p>Tìm thấy {data.length} kết quả cho: "{keyword}"</p>}
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         {_DATA.currentData().length > 0 ? _DATA.currentData().map((item, index) => (
-                            item.totalProduct > 0 &&
+
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                                 <div style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
                                     <div style={{

@@ -11,11 +11,11 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import AuthVerifyComponent from './AuthVerifyComponent '
 import { toast, ToastContainer } from "react-toastify";
-import AddressDetail from "views/pillarAddress/AddressDetail";
+import { createRoot } from 'react-dom/client';
 import jwt_decode from "jwt-decode";
 
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+
 // localStorage.setItem("data", JSON.stringify({ role: 'admin', name: 'abc' }))
 
 // var hours = 2;
@@ -55,7 +55,7 @@ if (token && decoded.roles == '[ROLE_ADMIN]') {
 } else if (!token && !decoded) {
   document.title = "ACN | Trụ quảng cáo";
 }
-
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.Fragment>
     <ToastContainer
@@ -79,4 +79,5 @@ root.render(
       </Switch>
     </BrowserRouter>
   </React.Fragment>
+
 );

@@ -1,0 +1,23 @@
+.point {
+  border: 1px solid #000;
+  height: 20px;
+  cursor: pointer;
+}
+.selected {
+  background-color: indianred;
+}
+
+.modal-contents {
+
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+
+}
+
+.content-2{
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 20px;
+}

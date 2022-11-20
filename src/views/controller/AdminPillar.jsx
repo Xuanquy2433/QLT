@@ -28,8 +28,10 @@ function AdminProduct() {
   const [openEdit, setOpenEdit] = useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [product, setProduct] = useState(null)
 
   const [openDelete, setOpenDelete] = useState(false)
+  const [randomNumber, setRandomNumber] = useState(0)
   const handleOpenDelete = () => setOpenDelete(true);
   const handleCloseDelete = () => setOpenDelete(false);
   useEffect(() => {
@@ -78,11 +80,16 @@ function AdminProduct() {
     }
   }
 
+  useEffect(() => {
+    setSelected(product)
+  }, [product,data])
+
   const onEdit = async (item) => {
     setSelected(item)
     setOpenEdit(true)
-    console.log(item);
+    setRandomNumber(Math.floor(Math.random() * (999)))
   }
+
 
   const onSubmit = async (data) => {
     try {
@@ -92,7 +99,7 @@ function AdminProduct() {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
         const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId + '&categoryId=' + data.categoryId + '&description=' + data.description
-          + '&name=' + data.name + '&price=' + data.price, formData,
+          + '&name=' + data.name + '&price=' + data.price +'&lat=' + data.lat + '&lng=' + data.lng +'&num1=' + data.num1 + '&num2=' + data.num2, formData,
           {
             headers: { 'Content-Type': 'multipart/form-data' }
           })
@@ -100,6 +107,7 @@ function AdminProduct() {
           toast.success("Thêm thành công", { autoClose: 1500 })
           setOpen(false)
           getAllProduct()
+          setRandomNumber(Math.floor(Math.random() * (999)))
         }
       }
     } catch (error) {
@@ -132,14 +140,16 @@ function AdminProduct() {
       const formData = new FormData();
       formData.append('multipartFile', data.multipartFile);
       const response = await axios.put(API_PRODUCT_EDIT + "?addressId=" + data.addressId + "&categoryId=" + data.categoryId +
-        "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status,
+        "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status + "&lat=" + data.lat + "&lng=" + data.lng +'&num1=' + data.num1 + '&num2=' + data.num2,
+
         formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
       if (response.status === 200) {
         toast.success("Sửa thành công", { autoClose: 1500 })
         getAllProduct()
-        setOpenEdit(false)
+        setRandomNumber(Math.floor(Math.random() * (999)))
+        setOpenEdit(true)
       }
 
       //catch show error
@@ -191,8 +201,8 @@ function AdminProduct() {
   }
   return (
     <div>
-      <CreatePillar dataCategory={dataCategory} dataa={data} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
-      {selected && <EditPillar dataCategory={dataCategory} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} />}
+      <CreatePillar dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
+      {selected && <EditPillar dataCategory={dataCategory}  item={selected}  setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber}/>}
       <Pillar page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages} handleChangeRowsPerPage={handleChangeRowsPerPage}
         openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />

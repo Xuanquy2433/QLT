@@ -22,6 +22,13 @@ import { IconButton, InputBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import "./PillarAddress.css"
+import InfoIcon from "@mui/icons-material/Info";
+import axios from "axios";
+import {
+    API_GET_ADDRESS_POINT_BY_ID,
+    API_GET_DETAIL_ORDER
+} from "../../utils/const";
+import AddressPointBox from "./AddressPointBox";
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70 },
     { id: 'image', label: 'Hình ảnh', align: 'center', minWidth: 100 },
@@ -58,6 +65,9 @@ const columns = [
 
 export default function Address({ handleOpenDelete, handleCloseDelete, openDelete, search, rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
 
+    const [detailData, setDetailData] = useState([]);
+    const [openDetailData, setOpenDetailData] = useState(false);
+    const closeDetailData = () => setOpenDetailData(false);
     const style = {
         position: 'absolute',
         top: '50%',
@@ -78,9 +88,14 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
 
     const [id, setId] = useState()
 
+    function openDetailPoint(id) {
+        setId(id)
+        setOpenDetailData(true)
+    }
+
     return (
         <>
-
+            {openDetailData? <AddressPointBox openDetail={openDetailData}  closeDetail={closeDetailData}  addressId={id} /> : null}
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
                     <div className='header-custom-search' style={{ marginBottom: "10px", width: '100%', display: "flex", flexDirection: "row", alignItems: "center", }}>
@@ -128,7 +143,12 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
                                 {data
                                     // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
+
                                         <TableRow hover role="checkbox" key={index}>
+                                            <TableCell sx={{ textAlign: 'left' }}>
+                                                <InfoIcon onClick={() => openDetailPoint(item.id)}>
+                                                </InfoIcon>
+                                            </TableCell>
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>
                                                 <img style={{ width: '50px', height: '50px' }} src={item.photosImagePath} alt="" />

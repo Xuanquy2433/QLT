@@ -6,10 +6,10 @@ const ProductStatus = (params) => {
   const setProductStatus = (s) =>{
     switch (s) {
       case "AVAILABLE" :
-        setData("test available")
+        setData("Trống")
         break;
       case "HIRING":
-        setData("test hiring")
+        setData("Đang cho thuê")
         break;
     }
   }
