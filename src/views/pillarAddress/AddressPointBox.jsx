@@ -297,7 +297,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box  sx={style}>
           <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
             <TableContainer sx={{ height: '550px' }}>
               <Table aria-label="sticky table">

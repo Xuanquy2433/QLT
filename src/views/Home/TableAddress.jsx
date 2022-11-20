@@ -180,7 +180,7 @@ function TableAddress() {
                                         setShow(false)
                                     }}
                                 /> */}
-                                <div style={{ width: '100%',zIndex: '10' }}>
+                                <div style={{ width: '100%', zIndex: '10' }}>
                                     <ReactSearchAutocomplete
                                         items={data}
                                         fuseOptions={{ keys: ["street"] }}
@@ -239,9 +239,10 @@ function TableAddress() {
                                         {/* <p>Mô tả: {item.description}</p> */}
                                         <p>Khoảng giá: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)} - {formatMoney(item.maxPrice)}</span> </p>
                                         <p>Trụ còn trống: <span style={{ color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
+                                        <p style={{ fontSize: '0.9em', fontWeight: '600' }}>{item.city} City</p>
                                         <NavLink to={'/auth/address/' + item.id}>
                                             <Button sx={{
-                                                mt:5,
+                                                // mt:5,
                                                 '&:hover': {
                                                     bgcolor: '#007784',
                                                     outline: "none",

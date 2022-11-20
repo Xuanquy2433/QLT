@@ -30,6 +30,7 @@ import {
     API_GET_DETAIL_ORDER
 } from "../../utils/const";
 import AddressPointBox from "./AddressPointBox";
+import { Fragment } from 'react';
 const columns = [
     { id: 'add', label: 'Map', minWidth: 70 },
     { id: 'Id', label: 'Id', minWidth: 70 },
@@ -96,7 +97,7 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
     }
 
     return (
-        <>
+        < >
             {openDetailData ? <AddressPointBox openDetail={openDetailData} closeDetail={closeDetailData} addressId={id} /> : null}
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
@@ -146,8 +147,8 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
                                     // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
-                                            <TableCell sx={{ textAlign: 'left',color: 'green',cursor: 'pointer' }}>
-                                                <AddLocationAltIcon  onClick={() => openDetailPoint(item.id)}>
+                                            <TableCell sx={{ textAlign: 'left', color: 'green', cursor: 'pointer' }}>
+                                                <AddLocationAltIcon onClick={() => openDetailPoint(item.id)}>
                                                 </AddLocationAltIcon>
                                             </TableCell>
                                             <TableCell>{item.id}</TableCell>
