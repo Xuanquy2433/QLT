@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
-import {API_GET_ADDRESS_POINT_BY_ID, API_GET_PILLAR} from 'utils/const';
+import { API_GET_ADDRESS_POINT_BY_ID, API_GET_PILLAR } from 'utils/const';
 import ProductComponent from "./ProductComponent";
 import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 import { useHistory } from 'react-router-dom';
@@ -22,7 +22,7 @@ import { API_ADD_CART } from 'utils/const';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
 import Map from "./UserMap";
 
 const columns = [
@@ -82,27 +82,28 @@ function AddressDetail() {
     let token = localStorage.getItem("token");
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () =>
-    {
+    const handleClose = () => {
         setOpen(false);
-        setItem({ id: null,
+        setItem({
+            id: null,
             name: null,
             number: null,
             lat: null,
-            lng: null,});
+            lng: null,
+        });
     }
 
     const history = useHistory();
     const getAddress = async (e) => {
         try {
             if (!token) {
-                const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0]+ "?num1=" + selected.num1 + "&num2=" + selected.num2);
+                const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
                 }
             } else {
-                const response = await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0]+ "?num1=" + selected.num1 + "&num2=" + selected.num2, {
+                const response = await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2, {
                     headers: {
                         'authorization': 'Bearer ' + token,
                         'Accept': 'application/json',
@@ -124,7 +125,7 @@ function AddressDetail() {
             }
             if (error && error.response.status === 500 || error.response.status === 500) {
                 console.log(error);
-               setDataAddressProduct({})
+                setDataAddressProduct({})
                 console.log(dataAddressProduct);
             }
 
@@ -275,7 +276,7 @@ function AddressDetail() {
         lng: null,
     })
 
-    const [mapAddress, setMapAddress] = useState([] )
+    const [mapAddress, setMapAddress] = useState([])
 
 
     const [selected, setSelected] = useState({
@@ -297,10 +298,10 @@ function AddressDetail() {
 
 
     const onClickSelected = (num1, num2) => {
-        setSelected((old)=>{
+        setSelected((old) => {
             return {
-                num1: num1 ===old.num1? 0 : num1,
-                num2: num1 ===old.num2? 0 : num2,
+                num1: num1 === old.num1 ? 0 : num1,
+                num2: num1 === old.num2 ? 0 : num2,
                 selected: false
             }
         })
@@ -317,14 +318,12 @@ function AddressDetail() {
     }, [selected])
 
     useEffect(() => {
-        if(item.id !==null){
+        if (item.id !== null) {
             handleOpen()
             console.log("The value after update", item.lat);
         }
 
     }, [item.lat])
-
-
 
     return (
         <div >
@@ -368,49 +367,41 @@ function AddressDetail() {
                     </div>
                 }
 
-
-
             </div>
-            <div style={{ display: "flex", justifyContent: "center"}}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
                 {addressPoint.map?.((item, index) => (
-                    <div key={index}  className="form-flex">
+                    <div key={index} className="form-flex">
                         <div>
                             {addressPoint.length - 1 > index ?
                                 <div >
-                                        <div
+                                    <div
 
-                                        onClick={() =>
-                                                           {
-                                                               onClickSelected(item.number,addressPoint[index + 1].number)
-                                                           }
-                                                           }
-                                        style={{display:"flex"}}
+                                        onClick={() => {
+                                            onClickSelected(item.number, addressPoint[index + 1].number)
+                                        }
+                                        }
+                                        style={{ display: "flex" }}
 
-                                    ><div style={{padding:"5px",borderRadius: '20%', width: 'auto',backgroundColor: '#E7EBF0', margin:"10px 10px 0 10px"}}>
+                                    ><div style={{ padding: "5px", borderRadius: '20%', width: 'auto', backgroundColor: '#E7EBF0', margin: "10px 10px 0 10px" }}>
                                             {item.name}
                                         </div>
                                         <div className={
-                                            item.id===null && selected.num1===0 ? "point selected" :
+                                            item.id === null && selected.num1 === 0 ? "point selected" :
                                                 selected.num1 === item.number ? "point selected" : "point"}
-                                        style={{width: '100px',height: '10px', marginTop: '20px',}}></div>
-                                        {index === addressPoint.length -2 ?
-                                            <div style={{padding:"0px 10px",borderRadius: '20%', width: 'auto',backgroundColor: '#E7EBF0', margin:"10px 10px 0 10px"}}>
-                                                <div>{addressPoint[index+1].name}</div>
+                                            style={{ width: '100px', height: '10px', marginTop: '20px', }}></div>
+                                        {index === addressPoint.length - 2 ?
+                                            <div style={{ padding: "0px 10px", borderRadius: '20%', width: 'auto', backgroundColor: '#E7EBF0', margin: "10px 10px 0 10px" }}>
+                                                <div>{addressPoint[index + 1].name}</div>
                                             </div> : null
                                         }
-                                        </div>
+                                    </div>
                                 </div>
-                                :null
+                                : null
                             }
                         </div>
                     </div>
                 ))}
             </div>
-
-
-
-
-
 
             <div>
                 <Modal
@@ -432,9 +423,9 @@ function AddressDetail() {
                     </Box>
                 </Modal>
             </div>
-            {dataAddressProduct.length>0 ?
+            {dataAddressProduct.length > 0 ?
                 <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
-                : <div style={{ width: `100px`}}> Không có trụ ở đoạn đường này</div>
+                : <div style={{ width: `100px` }}> Không có trụ ở đoạn đường này</div>
             }
 
 
