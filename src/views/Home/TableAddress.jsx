@@ -71,7 +71,7 @@ function TableAddress() {
     // getFirstPageForHome
     const [data, setData] = useState([])
     const [sort, setSort] = React.useState('asc');
-    const [field, setField] = React.useState('street');
+    const [field, setField] = React.useState('totalProductAvailable');
     const [keyword, setKeyword] = React.useState('');
     const handleChangeField = (event) => {
         setField(event.target.value);
@@ -80,9 +80,10 @@ function TableAddress() {
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=asc&sortField=id')
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=desc&sortField=totalProductAvailable')
         if (response) {
             setData(response.data.contents)
+            console.log(response.data.contents);
         }
     }
 
@@ -95,7 +96,7 @@ function TableAddress() {
         if (field === '') {
             setField('street')
         }
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=1000&sort=' + sort + '&sortField=' + field)
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=' + sort + '&sortField=' + field)
         if (response) {
             setData(response.data.contents)
             setShow(false)
@@ -105,7 +106,7 @@ function TableAddress() {
     //click search
     const [show, setShow] = useState(false);
     const onclickSearch = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=1000&keyword=' + keyword + '&sort=asc&sortField=id')
+        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&keyword=' + keyword + '&sort=desc&sortField=totalProductAvailable')
         if (response) {
             setData(response.data.contents)
             setShow(true)
