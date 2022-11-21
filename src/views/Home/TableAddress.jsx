@@ -69,6 +69,7 @@ function TableAddress() {
     const handleClose = () => setOpen(false);
 
     // getFirstPageForHome
+    const [dataInfo, setDataInfo] = useState([])
     const [data, setData] = useState([])
     const [sort, setSort] = React.useState('asc');
     const [field, setField] = React.useState('totalProductAvailable');
@@ -80,10 +81,12 @@ function TableAddress() {
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&sort=desc&sortField=totalProductAvailable')
+        const response = await axios.get(API_GET_ADDRESS + page+'?dataPerPage=6&sort=desc&sortField=totalProductAvailable')
         if (response) {
             setData(response.data.contents)
-            console.log(response.data.contents);
+            setDataInfo(response.data.pageInfo)
+
+
         }
     }
 
@@ -106,7 +109,7 @@ function TableAddress() {
     //click search
     const [show, setShow] = useState(false);
     const onclickSearch = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=6&keyword=' + keyword + '&sort=desc&sortField=totalProductAvailable')
+        const response = await axios.get(API_GET_ADDRESS + page +'?dataPerPage=6&keyword=' + keyword + '&sort=desc&sortField=totalProductAvailable')
         if (response) {
             setData(response.data.contents)
             setShow(true)
@@ -124,12 +127,11 @@ function TableAddress() {
     //Pagination
     let [page, setPage] = useState(1);
     const PER_PAGE = 6;
-    const count = Math.ceil(data.length / PER_PAGE);
+    const count = dataInfo.lastPage;
     const _DATA = usePagination(data, PER_PAGE);
 
     const handleChange = (e, p) => {
         setPage(p);
-        _DATA.jump(p);
     };
 
 
@@ -162,7 +164,7 @@ function TableAddress() {
 
     useEffect(() => {
         getAllAddRess()
-    }, [])
+    }, [page])
     return (
         <React.Fragment>
             <Box sx={{ width: '86%', margin: 'auto' }}>
