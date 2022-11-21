@@ -122,7 +122,12 @@ function AddressDetail() {
                 })
                 history.push('/auth/pageNotFound')
             }
-            else showError(error)
+            if (error && error.response.status === 500 || error.response.status === 500) {
+                console.log(error);
+               setDataAddressProduct({})
+                console.log(dataAddressProduct);
+            }
+
         }
     }
 
@@ -259,13 +264,7 @@ function AddressDetail() {
     }
 
     const [addressPoint, setAddressPoint] = useState([
-        {
-            id: null,
-            name: 'Tất cả',
-            number: null,
-            lat: null,
-            lng: null
-        },
+
     ])
 
     const [item, setItem] = useState({
@@ -290,7 +289,7 @@ function AddressDetail() {
     const fetchAddressPointData = async () => {
         const response = await axios.get(API_GET_ADDRESS_POINT_BY_ID + id[0])
         if (response) {
-            setAddressPoint([...addressPoint, ...response.data])
+            setAddressPoint(response.data)
             setMapAddress(response.data)
             console.log('address point', addressPoint);
         }
@@ -298,10 +297,12 @@ function AddressDetail() {
 
 
     const onClickSelected = (num1, num2) => {
-        setSelected({
-            num1: num1 ===null? 0 : num1,
-            num2: num1 ===null? 0 : num2,
-            selected: true
+        setSelected((old)=>{
+            return {
+                num1: num1 ===old.num1? 0 : num1,
+                num2: num1 ===old.num2? 0 : num2,
+                selected: false
+            }
         })
 
     }
@@ -370,32 +371,46 @@ function AddressDetail() {
 
 
             </div>
-            {addressPoint.map?.((item, index) => (
-                <div key={index} style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
-                    <div>
-                        {addressPoint.length - 1 > index ?
-                            <div
-                                onClick={() =>
-                                {
-                                    onClickSelected(item.number,addressPoint[index + 1].number)
-                                }
-                                }
-                                className={
-                                item.id===null && selected.num1===0 ? "point selected" :
-                                selected.num1 === item.number ? "point selected" : "point"}
-                            >
+            <div style={{ display: "flex", justifyContent: "center"}}>
+                {addressPoint.map?.((item, index) => (
+                    <div key={index}  className="form-flex">
+                        <div>
+                            {addressPoint.length - 1 > index ?
+                                <div >
+                                        <div
 
-                                <div>
-                                    {
-                                        item.id ===null ? <div className="point__number">Tất cả</div> : <div className="point__number">{item.name}---{addressPoint[index + 1].name}</div>
-                                    }
-                                    </div>
+                                        onClick={() =>
+                                                           {
+                                                               onClickSelected(item.number,addressPoint[index + 1].number)
+                                                           }
+                                                           }
+                                        style={{display:"flex"}}
 
-                            </div> :null
-                        }
+                                    ><div style={{padding:"5px",borderRadius: '20%', width: 'auto',backgroundColor: '#E7EBF0', margin:"10px 10px 0 10px"}}>
+                                            {item.name}
+                                        </div>
+                                        <div className={
+                                            item.id===null && selected.num1===0 ? "point selected" :
+                                                selected.num1 === item.number ? "point selected" : "point"}
+                                        style={{width: '100px',height: '10px', marginTop: '20px',}}></div>
+                                        {index === addressPoint.length -2 ?
+                                            <div style={{padding:"0px 10px",borderRadius: '20%', width: 'auto',backgroundColor: '#E7EBF0', margin:"10px 10px 0 10px"}}>
+                                                <div>{addressPoint[index+1].name}</div>
+                                            </div> : null
+                                        }
+                                        </div>
+                                </div>
+                                :null
+                            }
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+
+
+
+
+
 
             <div>
                 <Modal
@@ -417,7 +432,11 @@ function AddressDetail() {
                     </Box>
                 </Modal>
             </div>
-            <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
+            {dataAddressProduct.length>0 ?
+                <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
+                : <div style={{ width: `100px`}}> Không có trụ ở đoạn đường này</div>
+            }
+
 
         </div>
     )

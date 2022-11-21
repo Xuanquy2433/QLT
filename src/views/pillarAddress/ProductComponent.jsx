@@ -331,13 +331,6 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) 
                         onClick={(e) => onHandleRemoveWishList(item.id)}
                         style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} />
                   }
-                  {/* <AiFillHeart
-                      onClick={(e) => onHandleRemoveWishList(item.id)}
-                      style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> 
-                    <AiOutlineHeart
-                      onClick={(e) => onClickAddWishList(item.id)}
-                      className="colorHeart-cus"
-                      style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> */}
                 </div>
               </div >
             ))
