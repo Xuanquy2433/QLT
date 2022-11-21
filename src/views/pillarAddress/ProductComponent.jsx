@@ -306,10 +306,6 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) 
                         Đã cho thuê
                       </Button>
                   }
-                  <FmdGoodIcon onClick={(e) => {
-                    setItem(item)
-                  }} style={{ color: 'red', cursor: 'pointer', marginTop: '10px' }} />
-
                   {item.status === 'HIRING' && item.expiredDate !== null ? <div style={{ height: "28.5px" }}> <h4 style={{ marginTop: '15px', }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> </div> : ''}
                 </div>
                 {/* {
@@ -319,18 +315,28 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) 
                       Đặt trước
                     </Button> : ''
                 } */}
-                < div style={{ fontWeight: "600", display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
-                  Yêu thích
-                  {
-                    data.filter(i => i.id === item.id).length === 0 ?
-                      <AiOutlineHeart
-                        onClick={(e) => onClickAddWishList(item.id)}
-                        className="colorHeart-cus"
-                        style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> :
-                      <AiFillHeart
-                        onClick={(e) => onHandleRemoveWishList(item.id)}
-                        style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} />
-                  }
+                <div style={{ width: '100%', display: 'flex' }}>
+                  <div style={{ width: '50%', display: "flex", alignItems: "center" }}>
+                    <FmdGoodIcon onClick={(e) => {
+                      setItem(item)
+                    }} style={{ color: 'red', cursor: 'pointer', marginTop: '10px' }} />
+                    <span onClick={(e) => {
+                      setItem(item)
+                    }} style={{ color: 'red', cursor: 'pointer', marginTop: '10px', marginLeft: '5px' }}>Vị trí</span>
+                  </div>
+                  < div style={{ width: '50%', fontWeight: "600", display: "flex", alignItems: "center", marginTop: "7px", justifyContent: "end" }}>
+                    Yêu thích
+                    {
+                      data.filter(i => i.id === item.id).length === 0 ?
+                        <AiOutlineHeart
+                          onClick={(e) => onClickAddWishList(item.id)}
+                          className="colorHeart-cus"
+                          style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} /> :
+                        <AiFillHeart
+                          onClick={(e) => onHandleRemoveWishList(item.id)}
+                          style={{ fontSize: "25px", color: "rgb(215,0,24)", cursor: "pointer" }} />
+                    }
+                  </div>
                 </div>
               </div >
             ))
