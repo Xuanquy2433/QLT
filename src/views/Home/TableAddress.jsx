@@ -70,6 +70,7 @@ function TableAddress() {
 
     // getFirstPageForHome
     const [data, setData] = useState([])
+    const [dataALL, setDataALL] = useState([])
     const [sort, setSort] = React.useState('asc');
     const [field, setField] = React.useState('totalProductAvailable');
     const [keyword, setKeyword] = React.useState('');
@@ -161,6 +162,13 @@ function TableAddress() {
     }
 
     useEffect(() => {
+        const getAll = async (e) => {
+            const response = await axios.get(API_GET_ADDRESS + '1?dataPerPage=1000&sort=desc&sortField=totalProductAvailable')
+            if (response) {
+                setDataALL(response.data.contents)
+            }
+        }
+        getAll()
         getAllAddRess()
     }, [])
     return (
@@ -183,7 +191,7 @@ function TableAddress() {
                                 /> */}
                                 <div style={{ width: '100%', zIndex: '10' }}>
                                     <ReactSearchAutocomplete
-                                        items={data}
+                                        items={dataALL}
                                         fuseOptions={{ keys: ["street"] }}
                                         onSearch={handleOnSearch}
                                         placeholder='Tìm kiếm theo tên đường'

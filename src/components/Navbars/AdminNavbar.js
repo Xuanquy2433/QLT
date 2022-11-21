@@ -174,7 +174,7 @@ const AdminNavbar = (props) => {
                 <Media className="align-items-center">
                   <span className="avatar avatar-sm rounded-circle">
                     <img
-                      alt="hihi avatar"
+                      alt=""
                       src={decoded.avatar}
                     />
                   </span>

@@ -356,7 +356,7 @@ function OrderPlace() {
                                             {item.status === 'CANCELLED' ? <TableCell sx={{ textAlign: 'center', color: 'red' }}> Đã hủy</TableCell> : ''}
                                             {item.status === 'PAID' ? <TableCell sx={{ textAlign: 'center', color: '#ffa700' }}> Đang thuê</TableCell> : ''}
                                             {item.status === 'EXTEND' ? <TableCell sx={{ textAlign: 'center', color: 'purple' }}> Gia hạn</TableCell> : ''}
-                                            {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ textAlign: 'center', color: 'green' }}> Đã xác nhận </TableCell> : ''}
+                                            {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ textAlign: 'center', color: 'orange' }}> Đã thanh toán </TableCell> : ''}
 
                                             {item.status === 'NEW' || item.status === 'USER_CONFIRMED' || item.status === 'EXTEND' ?
                                                 <React.Fragment>
