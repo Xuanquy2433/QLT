@@ -60,10 +60,9 @@ function NotificationAdmin() {
 
     return (
         <>
-
             <React.Fragment>
                 <AdminSize changeCount={(data) => setCountAdmin(data)} ></AdminSize>
-                <Stack direction="row" spacing={2}>
+                <Stack dirction="row" spacing={2}>
 
                     <div className='menu-lv2-noti'>
                         <p
@@ -94,6 +93,7 @@ function NotificationAdmin() {
                                         <div className="scrollbar" id="style-1">
                                             <ClickAwayListener onClickAway={handleClose}>
                                                 <MenuList
+                                                    style={{ width: '280px' }}
                                                     autoFocusItem={open}
                                                     onClick={handleClose}
                                                     id="composition-menu"

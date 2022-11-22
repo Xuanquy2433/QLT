@@ -148,7 +148,6 @@ const AdminNavbar = (props) => {
           </p>
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
-
               <div style={{ width: 350 }}>
                 <ReactSearchAutocomplete
                   items={items}
@@ -161,13 +160,11 @@ const AdminNavbar = (props) => {
                   formatResult={formatResult}
                 />
               </div>
-
             </FormGroup>
           </Form>
           <div style={{ marginTop: '15px', cursor: 'pointer' }}>
             <NotificationAdmin />
           </div>
-
           <Nav className="align-items-center d-none d-md-flex" navbar>
             <UncontrolledDropdown nav>
               <DropdownToggle className="pr-0" nav>
