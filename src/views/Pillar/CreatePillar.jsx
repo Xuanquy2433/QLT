@@ -132,7 +132,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
                     backgroundColor: 'white',
                     padding: '10px',
                     top: "50%",
-                    left: "50%"
+                    left: "50%",
+                    height: "96% !important"
                 }}
             >
                 <h2 style={{ textAlign: 'center' }}>Thêm trụ</h2>
@@ -197,7 +198,7 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
                         <Map
                             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                             loadingElement={<div style={{ height: `90%` }} />}
-                            containerElement={<div style={{ height: `100%`, margin: `auto`, border: '2px solid black' }} />}
+                            containerElement={<div style={{ height: `90%`, margin: `auto`, border: '2px solid black' }} />}
                             mapElement={<div style={{ height: `100%` }} />}
                             setLatMap={setLat}
                             setLngMap={setLng}
@@ -208,7 +209,11 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
 
                     </div>
                 </div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{
+                    display: "flex", position: "absolute",
+                    left: "inherit",
+                    bottom: "30px"
+                }}>
                     <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
                         Đóng
                     </Button>

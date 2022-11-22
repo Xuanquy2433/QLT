@@ -230,7 +230,7 @@ function Activity() {
         getALLOrderDetailExpired()
     }, [])
     return (
-        <div style={{marginTop : '50px'}} className='activity'>
+        <div style={{ marginTop: '50px' }} className='activity'>
             <div className='activity-content'>
                 <div className='activity-title'>
                     Xin chào  {decoded.firstName + " " + decoded.lastName}
@@ -246,6 +246,7 @@ function Activity() {
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
                             <Tab label="Trụ đang thuê" value="2" />
+                            <Tab label="Trụ đã sắp hạn" value="4" />
                             <Tab label="Trụ đã hết hạn" value="3" />
                         </TabList>
                     </Box>
@@ -361,8 +362,75 @@ function Activity() {
                                 </Button>
                             </Grid>}
                     </TabPanel>
-                    <TabPanel value='3'>
+                    <TabPanel value='4'>
                         <Expired columns3={columns3} dataOrderDetailExpired={dataOrderDetailExpred} />
+                    </TabPanel>
+                    <TabPanel value="2">
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                            <TableContainer sx={{ maxHeight: 467 }}>
+                                <Table stickyHeader aria-label="sticky table">
+                                    <TableHead>
+                                        <TableRow>
+                                            {columns2.map((column) => (
+                                                <TableCell
+                                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                    key={column.id}
+                                                    align={column.align}
+                                                    style={{ minWidth: column.minWidth }}
+                                                >
+                                                    {column.label}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {dataOrderDetail.map((item, index) => {
+                                            return (
+                                                <TableRow key={index} >
+                                                    {/* <TableCell align="left">{item.id}</TableCell> */}
+                                                    {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.product.id, month)} />
+                                                        <input onChange={e => onchangeMonth(e, item.product.id)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
+                                                    </TableCell> : <TableCell align="center"> </TableCell>}
+                                                    <TableCell align="center">{item.product.name} </TableCell>
+                                                    <TableCell align="center">{item.product.price} </TableCell>
+                                                    <TableCell align="center">{item.product.address.fullAddress} </TableCell>
+                                                    <TableCell align="center">{item.product.category.name} </TableCell>
+                                                    <TableCell align="center">{item.month} tháng </TableCell>
+                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.startDate}</Moment></TableCell>
+                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></TableCell>
+                                                    {/* <TableCell align="right">
+                                                        <NavLink to={'order/' + item.id}>
+                                                            <Button variant="contained" color="success">
+                                                                Chi tiết
+                                                            </Button>
+                                                        </NavLink>
+                                                    </TableCell> */}
+                                                </TableRow>
+                                            )
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Paper>
+                        {showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                            <Button onClick={e => {
+                                setShowCheckbox(true)
+                                setShowExtend(false)
+                            }} variant="contained" color="success">
+                                Gia hạn
+                            </Button>
+                        </Grid> :
+                            <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                                <Button onClick={handleClickOpen} variant="contained" color="success">
+                                    Xác nhận
+                                </Button>
+                                <Button sx={{ ml: 1 }} onClick={e => {
+                                    setShowExtend(true)
+                                    setShowCheckbox(false)
+                                }} variant="contained" color="error">
+                                    Đóng
+                                </Button>
+                            </Grid>}
                     </TabPanel>
                 </TabContext>
             </Box>
@@ -377,8 +445,8 @@ function Activity() {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                       Bạn có chắc chắc muốn gia hạn thêm không ?
-                       Lưu ý sau khi đồng ý không thể hoàn tác.
+                        Bạn có chắc chắc muốn gia hạn thêm không ?
+                        Lưu ý sau khi đồng ý không thể hoàn tác.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
