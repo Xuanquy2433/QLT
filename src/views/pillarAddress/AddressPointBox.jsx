@@ -229,6 +229,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
 
   function updatePoint(data) {
     setUpdating(true);
+    console.log(updating)
     setLat(data.lat);
     setLng(data.lng);
     setName(data.name);

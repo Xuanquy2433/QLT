@@ -25,7 +25,7 @@ export default function EditCategory({ openEdit, setOpenEdit, item, onSubmitEdit
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box className='form-add-product'
+                <Box className='form-add-address'
                     sx={{
                         width: '40%',
                         position: 'relative',

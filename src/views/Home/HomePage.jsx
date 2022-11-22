@@ -23,8 +23,6 @@ function HomePage() {
         <div  >
             <BannerSlide />
             <hr />
-
-            <Categories />
             <div>
                 <TableAddress />
             </div>

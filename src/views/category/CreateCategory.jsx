@@ -27,7 +27,7 @@ export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box className='form-add-product'
+                <Box className='form-add-address'
                     sx={{
                         width: '40%',
                         position: 'relative',
