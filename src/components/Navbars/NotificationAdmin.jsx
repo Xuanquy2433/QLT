@@ -78,7 +78,6 @@ function NotificationAdmin() {
                                 <span> <NotificationsNoneIcon /></span>
                                 {countAdmin !== 0 ? <span class="badge">{countAdmin}</span> : ''}
                             </p>
-                            {/* <AdminNotification changeCount={(data) => setCountAdmin(data)} /> */}
 
                         </p>
                         <Popper
