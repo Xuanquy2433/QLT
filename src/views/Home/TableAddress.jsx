@@ -229,7 +229,7 @@ function TableAddress() {
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                                 <div style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
                                     <div style={{
-                                        width: '100%', height: '260px'
+                                        width: '80%', height: '260px'
                                     }}  >
                                         <img style={{ width: '100%', height: '100%', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
 
