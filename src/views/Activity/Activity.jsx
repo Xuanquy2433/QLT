@@ -27,11 +27,11 @@ import { API_GET_EXTEND_ORDER_USER } from 'utils/const';
 import { toast } from 'react-toastify';
 import { API_EXTEND_ORDER_USER } from 'utils/const';
 import { showError } from 'utils/error';
-import Expired from './Expired';
 import { API_GET_EXPIRED_ORDER_USER } from 'utils/const';
 import { showError2 } from 'utils/error';
 import AreRenting from './AreRenting';
 import AboutToExpire from './AboutToExpire';
+import Expired from './Expired';
 
 
 const columns = [

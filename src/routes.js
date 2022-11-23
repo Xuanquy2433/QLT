@@ -20,7 +20,7 @@ import AdminAvailablePillar from "views/controller/AdminAvailablePillar";
 import AdminHiringPillar from "views/controller/AdminHiringPillar";
 import Category from "views/category/Category";
 import AdminCategory from "views/controller/AdminCategory";
-import Activity from "views/Profile/Activity";
+import Activity from "views/Activity/Activity";
 import PageNotFound from "layouts/PageNotFound";
 import ForgotPassword from "views/examples/ForgotPassword";
 import AdminBank from "views/controller/AdminBank";
