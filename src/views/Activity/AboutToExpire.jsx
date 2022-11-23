@@ -13,7 +13,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Moment from 'react-moment';
-function Expired({ columns3, dataOrderDetailExpired }) {
+function AboutToExpire({ columns4, dataOrderDetailExpired }) {
     return (
         <React.Fragment>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -21,7 +21,7 @@ function Expired({ columns3, dataOrderDetailExpired }) {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                {columns3.map((column) => (
+                                {columns4.map((column) => (
                                     <TableCell
                                         sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                         key={column.id}
@@ -58,4 +58,4 @@ function Expired({ columns3, dataOrderDetailExpired }) {
     )
 }
 
-export default Expired
+export default AboutToExpire

@@ -30,6 +30,8 @@ import { showError } from 'utils/error';
 import Expired from './Expired';
 import { API_GET_EXPIRED_ORDER_USER } from 'utils/const';
 import { showError2 } from 'utils/error';
+import AreRenting from './AreRenting';
+import AboutToExpire from './AboutToExpire';
 
 
 const columns = [
@@ -45,7 +47,7 @@ const columns = [
     { id: 's', label: 'Hành động', minWidth: 100, align: 'right', },
 ];
 
-const columns3 = [
+const columns4 = [
     // { id: 'id', label: 'Id', minWidth: 60, align: 'left' },
     { id: 'j', label: 'Tên trụ', minWidth: 100, align: 'center', },
     { id: 'code', label: 'Giá', minWidth: 100, align: 'center', },
@@ -92,8 +94,6 @@ function Activity() {
         // { id: 's', label: 'Hành động', minWidth: 100, align: 'center', },
     ];
 
-
-
     const [value, setValue] = React.useState('1');
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -121,7 +121,7 @@ function Activity() {
     }
 
     // get order detail expired
-    const [dataOrderDetailExpred, setDataOrderDetailExpired] = useState([])
+    const [dataOrderDetailExpried, setDataOrderDetailExpired] = useState([])
     const getALLOrderDetailExpired = async (e) => {
         const response = await axios.get(API_GET_EXPIRED_ORDER_USER, {
             headers: {
@@ -246,8 +246,8 @@ function Activity() {
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
                             <Tab label="Trụ đang thuê" value="2" />
-                            <Tab label="Trụ đã sắp hạn" value="4" />
-                            <Tab label="Trụ đã hết hạn" value="3" />
+                            <Tab label="Trụ đã sắp hết hạn" value="3" />
+                            <Tab label="Trụ đã hết hạn" value="4" />
                         </TabList>
                     </Box>
                     <TabPanel value="1">
@@ -292,148 +292,22 @@ function Activity() {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-
                         </Paper>
                     </TabPanel>
                     <TabPanel value="2">
-                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                            <TableContainer sx={{ maxHeight: 467 }}>
-                                <Table stickyHeader aria-label="sticky table">
-                                    <TableHead>
-                                        <TableRow>
-                                            {columns2.map((column) => (
-                                                <TableCell
-                                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                                    key={column.id}
-                                                    align={column.align}
-                                                    style={{ minWidth: column.minWidth }}
-                                                >
-                                                    {column.label}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {dataOrderDetail.map((item, index) => {
-                                            return (
-                                                <TableRow key={index} >
-                                                    {/* <TableCell align="left">{item.id}</TableCell> */}
-                                                    {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.product.id, month)} />
-                                                        <input onChange={e => onchangeMonth(e, item.product.id)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
-                                                    </TableCell> : <TableCell align="center"> </TableCell>}
-                                                    <TableCell align="center">{item.product.name} </TableCell>
-                                                    <TableCell align="center">{item.product.price} </TableCell>
-                                                    <TableCell align="center">{item.product.address.fullAddress} </TableCell>
-                                                    <TableCell align="center">{item.product.category.name} </TableCell>
-                                                    <TableCell align="center">{item.product.month} tháng </TableCell>
-                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.product.startDate}</Moment></TableCell>
-                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.product.expiredDate}</Moment></TableCell>
-                                                    {/* <TableCell align="right">
-                                                        <NavLink to={'order/' + item.id}>
-                                                            <Button variant="contained" color="success">
-                                                                Chi tiết
-                                                            </Button>
-                                                        </NavLink>
-                                                    </TableCell> */}
-                                                </TableRow>
-                                            )
-                                        })}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Paper>
-                        {showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                            <Button onClick={e => {
-                                setShowCheckbox(true)
-                                setShowExtend(false)
-                            }} variant="contained" color="success">
-                                Gia hạn
-                            </Button>
-                        </Grid> :
-                            <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                                <Button onClick={handleClickOpen} variant="contained" color="success">
-                                    Xác nhận
-                                </Button>
-                                <Button sx={{ ml: 1 }} onClick={e => {
-                                    setShowExtend(true)
-                                    setShowCheckbox(false)
-                                }} variant="contained" color="error">
-                                    Đóng
-                                </Button>
-                            </Grid>}
+                        <AreRenting columns2={columns2} dataOrderDetail={dataOrderDetail} showCheckbox={showCheckbox}
+                            onchangeMonth={onchangeMonth} showExtend={showExtend} setShowCheckbox={setShowCheckbox} setShowExtend={setShowExtend}
+                            handleClickOpen={handleClickOpen} handleChangeCheckbox={handleChangeCheckbox} month={month} />
+                    </TabPanel>
+                    <TabPanel value='3'>
+                        <AboutToExpire columns4={columns4} dataOrderDetailExpired={dataOrderDetailExpried} />
                     </TabPanel>
                     <TabPanel value='4'>
-                        <Expired columns3={columns3} dataOrderDetailExpired={dataOrderDetailExpred} />
-                    </TabPanel>
-                    <TabPanel value="2">
-                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                            <TableContainer sx={{ maxHeight: 467 }}>
-                                <Table stickyHeader aria-label="sticky table">
-                                    <TableHead>
-                                        <TableRow>
-                                            {columns2.map((column) => (
-                                                <TableCell
-                                                    sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                                    key={column.id}
-                                                    align={column.align}
-                                                    style={{ minWidth: column.minWidth }}
-                                                >
-                                                    {column.label}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {dataOrderDetail.map((item, index) => {
-                                            return (
-                                                <TableRow key={index} >
-                                                    {/* <TableCell align="left">{item.id}</TableCell> */}
-                                                    {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.product.id, month)} />
-                                                        <input onChange={e => onchangeMonth(e, item.product.id)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
-                                                    </TableCell> : <TableCell align="center"> </TableCell>}
-                                                    <TableCell align="center">{item.product.name} </TableCell>
-                                                    <TableCell align="center">{item.product.price} </TableCell>
-                                                    <TableCell align="center">{item.product.address.fullAddress} </TableCell>
-                                                    <TableCell align="center">{item.product.category.name} </TableCell>
-                                                    <TableCell align="center">{item.month} tháng </TableCell>
-                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.startDate}</Moment></TableCell>
-                                                    <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></TableCell>
-                                                    {/* <TableCell align="right">
-                                                        <NavLink to={'order/' + item.id}>
-                                                            <Button variant="contained" color="success">
-                                                                Chi tiết
-                                                            </Button>
-                                                        </NavLink>
-                                                    </TableCell> */}
-                                                </TableRow>
-                                            )
-                                        })}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Paper>
-                        {showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                            <Button onClick={e => {
-                                setShowCheckbox(true)
-                                setShowExtend(false)
-                            }} variant="contained" color="success">
-                                Gia hạn
-                            </Button>
-                        </Grid> :
-                            <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                                <Button onClick={handleClickOpen} variant="contained" color="success">
-                                    Xác nhận
-                                </Button>
-                                <Button sx={{ ml: 1 }} onClick={e => {
-                                    setShowExtend(true)
-                                    setShowCheckbox(false)
-                                }} variant="contained" color="error">
-                                    Đóng
-                                </Button>
-                            </Grid>}
+                        <Expired columns4={columns4} dataOrderDetailExpired={dataOrderDetailExpried} />
                     </TabPanel>
                 </TabContext>
             </Box>
+            {/* confirm value 2  */}
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -456,7 +330,6 @@ function Activity() {
                     </Button>
                 </DialogActions>
             </Dialog>
-
         </div>
 
     )
