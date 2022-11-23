@@ -107,7 +107,8 @@ const Profile = () => {
       >
         <Box className='form-add-product'
           sx={{
-            width: '40%',
+            width: '40% !important',
+            height: "auto !important",
             position: 'relative',
             transform: "translate(-50%, -50%)",
             backgroundColor: 'white',
