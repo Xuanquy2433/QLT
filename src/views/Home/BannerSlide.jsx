@@ -7,11 +7,11 @@ function BannerSlide() {
     var settings = {
         dots: true,
         infinite: true,
-        speed: false,
+        speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 100000000,
+        autoplaySpeed: 3000,
         pauseOnHover: false,
         slickPrev: false,
         slickNext: false,
