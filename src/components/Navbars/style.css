@@ -108,6 +108,15 @@
     -webkit-animation: spin-topbar 1s linear infinite;
     animation: spin-topbar 1s linear infinite;
 }
+
+.logo-home{
+    width: 85px !important;
+    height: auto !important;
+}
+
+
+
+
 @-webkit-keyframes spin-topbar {
     0% {
         -webkit-transform: rotate(0deg);

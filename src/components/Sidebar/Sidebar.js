@@ -178,7 +178,12 @@ const Sidebar = (props) => {
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
             <div className="music-waves-2">
-              logo
+              <img className='logo-home' style={{
+                width: "85px !important",
+                height: 'auto !important'
+              }}
+                alt="..."
+                src={require("../../assets/img/brand/1-01-01.png")} />
             </div>
           </NavbarBrand>
         ) : null}
