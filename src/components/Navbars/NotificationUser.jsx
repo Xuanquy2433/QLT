@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import './style.css'
 import Notifications from '@mui/icons-material/Notifications';
 import axios from 'axios';
 import UserNotification from 'views/Realtime/UserNotification';
 import jwt_decode from "jwt-decode";
 import { API_GET_MARK_AS_READ } from 'utils/const';
-import {alpha, styled} from "@mui/material/styles";
+import { alpha, styled } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import Badge from "@mui/material/Badge";
 import CartCount from "../../views/cart/CartCount";
@@ -82,50 +82,48 @@ function Notification() {
 
 
     return (
-    <div>
-        <div style={{display: 'none'}}>
-            <UserNotification  changeUserCount={(data) => setUserCount(data)} />
+        <div>
+            <div style={{ display: 'none' }}>
+                <UserNotification changeUserCount={(data) => setUserCount(data)} />
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center" }}
+                className="notification">
+                <Badge badgeContent={countUser} color="secondary"
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}>
+
+                </Badge >
+
+            </div>
+            <div
+                id="demo-customized-button"
+                aria-controls={open ? 'demo-customized-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                variant="contained"
+                disableElevation
+                onClick={handleClick}
+
+            >
+                <i className="ni ni-cart" />
+                <span className="nav-link-inner--text">Thông báo</span>
+
+            </div>
+            <StyledMenu
+                id="demo-customized-menu"
+                MenuListProps={{
+                    'aria-labelledby': 'demo-customized-button',
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+            >
+                <UserNotification onClickClose={handleClose} changeUserCount={(data) => setUserCount(data)} />
+            </StyledMenu>
         </div>
-
-        <div style={{display: "flex", alignItems: "center"}}
-             className="notification">
-            <Badge badgeContent={countUser} color="secondary"
-                   anchorOrigin={{
-                       vertical: 'top',
-                       horizontal: 'left',
-                   }}>
-
-            </Badge >
-
-
-
-        </div>
-        <div
-            id="demo-customized-button"
-            aria-controls={open ? 'demo-customized-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            variant="contained"
-            disableElevation
-            onClick={handleClick}
-
-        >
-            <i className="ni ni-cart" />
-            <span className="nav-link-inner--text">Thông báo</span>
-
-        </div>
-        <StyledMenu
-            id="demo-customized-menu"
-            MenuListProps={{
-                'aria-labelledby': 'demo-customized-button',
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-        >
-            <UserNotification onClickClose={handleClose} changeUserCount={(data) => setUserCount(data)} />
-        </StyledMenu>
-    </div>
     )
 }
 

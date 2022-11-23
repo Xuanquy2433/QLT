@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -11,9 +11,9 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AdminNotification from "../../views/Realtime/AdminNotification";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Notifications from "@mui/icons-material/Notifications";
-import {API_GET_MARK_AS_READ_ADMIN} from "../../utils/const";
+import { API_GET_MARK_AS_READ_ADMIN } from "../../utils/const";
 import axios from "axios";
 import Badge from "@mui/material/Badge";
 
@@ -72,29 +72,27 @@ function NotificationAdmin() {
     };
     const handleClose = () => {
         setAnchorEl(null);
-      markAsRead()
+        markAsRead()
     };
-const markAsRead = async() => {
-  await axios.post(API_GET_MARK_AS_READ_ADMIN)
-}
+    const markAsRead = async () => {
+        await axios.post(API_GET_MARK_AS_READ_ADMIN)
+    }
     return (
         <div>
-          <div style={{display: "none"}}>
-            <AdminNotification changeCount={(data) => setCountAdmin(data)} onClickClose={handleClose} />
-          </div>
-          <div style={{display: "flex", alignItems: "center"}}
-               className="notification">
-            <Badge badgeContent={countAdmin} color="secondary"
-                   anchorOrigin={{
-                     vertical: 'top',
-                     horizontal: 'left',
-                   }}>
+            <div style={{ display: "none" }}>
+                <AdminNotification changeCount={(data) => setCountAdmin(data)} onClickClose={handleClose} />
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}
+                className="notification">
+                <Badge badgeContent={countAdmin} color="secondary"
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}>
 
-            </Badge >
+                </Badge >
 
-
-
-          </div>
+            </div>
             <div
                 id="demo-customized-button"
                 aria-controls={open ? 'demo-customized-menu' : undefined}
@@ -102,11 +100,11 @@ const markAsRead = async() => {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-              <div style={{display: "flex", alignItems: "center"}}
-                   className="notification">
-              </div>
-              <i className="ni ni-cart" />
-              <span className="nav-link-inner--text">Thông báo</span>
+                <div style={{ display: "flex", alignItems: "center" }}
+                    className="notification">
+                </div>
+                <i className="ni ni-cart" />
+                {/* <span className="nav-link-inner--text">Thông báo</span> */}
             </div>
             <StyledMenu
                 id="demo-customized-menu"
@@ -118,7 +116,7 @@ const markAsRead = async() => {
                 onClose={handleClose}
 
             >
-              <AdminNotification changeCount={(data) => setCountAdmin(data)} onClickClose={handleClose} />
+                <AdminNotification changeCount={(data) => setCountAdmin(data)} onClickClose={handleClose} />
             </StyledMenu>
 
         </div>
