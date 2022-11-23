@@ -23,14 +23,17 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React, {useEffect, useState} from 'react';
 import Notification from './NotificationUser';
 import { BsSuitHeartFill } from "react-icons/bs";
-import CartCount from "../../views/cart/CartCount";
 import axios from "axios";
-import {API_GET_CART} from "../../utils/const";
+import {API, API_GET_CART} from "../../utils/const";
+import SockJS from "sockjs-client";
+import {over} from "stompjs";
 
+
+let stompClient = null;
 const AdminNavbar = () => {
   let decoded;
   const history = useHistory();
-
+  const [number, setNumber] = useState(0);
   let token = localStorage.getItem("token");
   if (token !== null) {
     decoded = jwt_decode(token);
@@ -53,7 +56,6 @@ const AdminNavbar = () => {
       history.push('/admin/index')
     }
   }
-
   const styleLab = {
     marginRight: "7px",
     fontWeight: "400",
@@ -66,6 +68,53 @@ const AdminNavbar = () => {
   }
 
 
+  if (token !== null) {
+    decoded = jwt_decode(token);
+  }
+
+  const connect = () => {
+    let Sock = new SockJS(API + '/ws');
+    stompClient = over(Sock);
+    stompClient.connect({}, onConnected, onError);
+  }
+
+  const onConnected = () => {
+    stompClient.subscribe('/user/' + Number(decoded.sub.slice(0, 1)) + '/private', onMessageReceived);
+  }
+
+  const [count, setCount] = useState(0);
+
+  const getCartCount = async() => {
+    if(token==null){
+      setCount(JSON.parse(localStorage.getItem("cartTemp")).length);
+      console.log('local',count);
+    } else {
+      const response = await axios.get(API_GET_CART, {
+        headers: {
+          'authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      if (response) {
+        setNumber(response.data.length);
+      }
+    }
+  };
+
+  const onMessageReceived = (payload) => {
+    getCartCount()
+  }
+  console.log(count)
+
+  const onError = (err) => {
+    console.log(err);
+  }
+
+  useEffect(() => {
+    connect();
+    getCartCount()
+  }, [count]);
 
 
 
@@ -125,7 +174,7 @@ const AdminNavbar = () => {
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
 
-                      <Badge badgeContent={<CartCount/>} color="secondary"
+                      <Badge badgeContent={number} color="secondary"
                         anchorOrigin={{
                           vertical: 'top',
                           horizontal: 'left',
@@ -136,7 +185,7 @@ const AdminNavbar = () => {
                     </NavLink>
                   </NavItem>
               }
-              <CartCount/>
+
 
 
 

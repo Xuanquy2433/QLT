@@ -8,7 +8,7 @@ import { API_GET_MARK_AS_READ } from 'utils/const';
 import { alpha, styled } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import Badge from "@mui/material/Badge";
-import CartCount from "../../views/cart/CartCount";
+
 
 const StyledMenu = styled((props) => (
     <Menu
