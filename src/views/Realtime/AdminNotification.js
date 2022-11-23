@@ -52,14 +52,14 @@ const AdminNotification = (params) => {
 
     return (<>
         {data.length > 0 ? data.map((data) => (
-                        <Fragment>
-                            <NavLink to={'/admin/orderPlace'}>
-                                <MenuItem sx={{ borderBottom: '1px solid #ddd' }} onClick={params.onClickClose}>
-                                    <div style={{ color: 'black' }} >{data.message}  </div>
-                                    <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
-                                </MenuItem>
-                            </NavLink>
-                        </Fragment>
+            <Fragment>
+                <NavLink to={'/admin/orderPlace'}>
+                    <MenuItem sx={{ borderBottom: '1px solid #ddd' }} onClick={params.onClickClose}>
+                        <div style={{ color: 'black' }} >{data.message}  </div>
+                        <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
+                    </MenuItem>
+                </NavLink>
+            </Fragment>
 
         )) :
 
