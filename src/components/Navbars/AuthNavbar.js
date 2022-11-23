@@ -186,7 +186,7 @@ const AdminNavbar = () => {
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
 
-                      <Badge badgeContent={ local} color="secondary"
+                      <Badge badgeContent={token ? number : local} color="secondary"
                         anchorOrigin={{
                           vertical: 'top',
                           horizontal: 'left',
