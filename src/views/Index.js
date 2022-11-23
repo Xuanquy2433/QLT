@@ -249,11 +249,11 @@ const Index = (props) => {
     }
   }
 
-  const [sort, setSort] = useState('asc');
+  const [sort, setSort] = useState('desc');
   const onChangeButtonSort = async (e) => {
     if (selected === false) {
-      setSort('desc')
-    } else setSort('asc')
+      setSort('asc')
+    } else setSort('desc')
 
     if (dateAPI1 == null || dateAPI2 == null) {
       const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
@@ -324,7 +324,7 @@ const Index = (props) => {
   useEffect(() => {
     overview()
     const onchangeHired = async (e) => {
-      const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED)
+      const response = await axios.get(API_OVERVIEW_MONTHLY_HIRED + '&sort=' + sort)
       if (response) {
         setDataOverviewOrderEachMonth(response.data)
       }
@@ -453,14 +453,8 @@ const Index = (props) => {
                     <span className="mb-0 mr-3" style={{ color: 'black', fontWeight: '600' }}>đến</span>
                     <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2' onChange={e => setDateAPI2(e.target.value)} type="date" />
                     <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" placeholder='Tìm theo địa chỉ' onChange={e => setKeyword(e.target.value)} type="text" />
-                    <Button
-                      color="primary"
-                      onClick={submitDate}
-                      size="sm"
-                    >
-                      Tìm kiếm
-                    </Button>
-                    <FormControl sx={{ backgroundColor: 'white', height: '45px', borderRadius: '5px', marginLeft: '10px' }} size="small">
+
+                    <FormControl sx={{ backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <ToggleButton
                           sx={{ height: '83%' }}
@@ -476,6 +470,14 @@ const Index = (props) => {
                         </ToggleButton>
                       </div>
                     </FormControl>
+                    <Button
+                        color="primary"
+                        onClick={submitDate}
+                        size="s"
+                        style={{ marginLeft: '20px' ,padding: '10px 20px'}}
+                    >
+                      Tìm kiếm
+                    </Button>
                   </div>
 
                 </Row>

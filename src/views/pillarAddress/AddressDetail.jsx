@@ -156,7 +156,6 @@ function AddressDetail() {
                     listCartItems.splice(listCartItems[i], 1)
                     localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
                     getAddress()
-
                 }
             }
 

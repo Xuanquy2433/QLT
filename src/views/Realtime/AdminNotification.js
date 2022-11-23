@@ -42,25 +42,27 @@ const AdminNotification = (params) => {
     }
 
     const onMessageReceived = (payload) => {
-        setData(data => [JSON.parse(payload.body), ...data])
+        console.log(data.filter((data) => data.checked === false).length)
+        getNotification();
     }
 
     const onError = (err) => {
         console.log(err);
     }
 
-    //message, date,type,status
     return (<>
         {data.length > 0 ? data.map((data) => (
-            <Fragment>
-                <NavLink to={'/admin/orderPlace'}>
-                    <MenuItem sx={{ borderBottom: '1px solid #ddd' }} >
-                        <div style={{ color: 'black' }} >{data.message}  </div>
-                        <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
-                    </MenuItem>
-                </NavLink>
-            </Fragment>
+                        <Fragment>
+                            <NavLink to={'/admin/orderPlace'}>
+                                <MenuItem sx={{ borderBottom: '1px solid #ddd' }} onClick={params.onClickClose}>
+                                    <div style={{ color: 'black' }} >{data.message}  </div>
+                                    <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
+                                </MenuItem>
+                            </NavLink>
+                        </Fragment>
+
         )) :
+
             <MenuItem >
                 <div >Hiện không có thông báo ! </div>
                 <div className='notification-time' > Bây giờ</div>

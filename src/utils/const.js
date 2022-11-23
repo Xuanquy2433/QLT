@@ -135,9 +135,9 @@ export const API_WISHLIST_GET = `${API}/wishlist/get?productId=`
 
 export const API_WISHLIST_REMOVE = `${API}/wishlist/remove?productId=`
 
-export const API_OVERVIEW_MONTHLY_EARNING = `${API}/admin/overview/month_week_earning?number=10`
+export const API_OVERVIEW_MONTHLY_EARNING = `${API}/admin/overview/month_week_earning?number=8`
 
-export const API_OVERVIEW_MONTHLY_HIRED = `${API}/admin/overview/monthly_product_hired?number=50`
+export const API_OVERVIEW_MONTHLY_HIRED = `${API}/admin/overview/monthly_product_hired?number=8`
 
 export const API_OVERVIEW_TIME_PRODUCT_HIRED= `${API}/admin/overview/time_product_hired`
 

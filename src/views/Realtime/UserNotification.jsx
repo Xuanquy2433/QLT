@@ -45,7 +45,7 @@ const UserNotification = (params) => {
     }
 
     const onMessageReceived = (payload) => {
-        setData(data => [JSON.parse(payload.body), ...data])
+       getNotification()
     }
 
     const onError = (err) => {
@@ -62,7 +62,7 @@ const UserNotification = (params) => {
             {data.length > 0 ? data?.map((data, index) => (
                 <Fragment>
                     <NavLink to={'/auth/order/' + data.targetId}>
-                        <MenuItem key={index} sx={{ borderBottom: '1px solid #ddd' }} >
+                        <MenuItem key={index} sx={{ borderBottom: '1px solid #ddd' }} onClick={params.onClickClose}>
                             <div style={{ color: 'black' }} >{data.message}  </div>
                             <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
                         </MenuItem>
