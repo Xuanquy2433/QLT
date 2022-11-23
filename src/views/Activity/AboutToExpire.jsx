@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Moment from 'react-moment';
 function AboutToExpire({ columns4, dataOrderDetailExpired }) {
+    const dateNow = null;
     return (
         <React.Fragment>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -34,22 +35,24 @@ function AboutToExpire({ columns4, dataOrderDetailExpired }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataOrderDetailExpired.map((item, index) => {
-                                return (
-                                    <TableRow key={index} >
-                                        <TableCell align="center">{item.product.name} </TableCell>
-                                        <TableCell align="center">{item.product.price} </TableCell>
-                                        <TableCell align="center">{item.product.address.fullAddress} </TableCell>
-                                        <TableCell align="center">{item.product.category.name} </TableCell>
-                                        <TableCell align="center">{item.month} tháng </TableCell>
-                                        <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.startDate}</Moment></TableCell>
-                                        <TableCell align="center">
-                                            <Moment style={{ marginRight: '5px' }} format="DD/MM/YYYY">{item.expiredDate}</Moment>
-                                            (<Moment style={{ color: 'red', fontWeight: '600' }} fromNow>{item.expiredDate}</Moment>)
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
+                            {dataOrderDetailExpired.filter((data) => data.expiredDate < dateNow)
+                                .map((item, index) => {
+                                    return (
+                                        <TableRow key={index} >
+                                            <TableCell align="center">{item.product.name} </TableCell>
+                                            <TableCell align="center">{item.product.price} </TableCell>
+                                            <TableCell align="center">{item.product.address.fullAddress} </TableCell>
+                                            <TableCell align="center">{item.product.category.name} </TableCell>
+                                            <TableCell align="center">{item.month} tháng </TableCell>
+                                            <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.startDate}</Moment></TableCell>
+                                            <TableCell align="center">
+                                                <Moment style={{ marginRight: '5px' }} format="DD/MM/YYYY">{item.expiredDate}</Moment>
+                                                (<Moment style={{ color: 'red', fontWeight: '600' }} fromNow>{item.expiredDate}</Moment>)
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                })
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
