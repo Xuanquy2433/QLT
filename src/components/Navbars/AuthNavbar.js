@@ -20,13 +20,13 @@ import { toast } from "react-toastify";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Notification from './NotificationUser';
 import { BsSuitHeartFill } from "react-icons/bs";
 import axios from "axios";
-import {API, API_GET_CART} from "../../utils/const";
+import { API, API_GET_CART } from "../../utils/const";
 import SockJS from "sockjs-client";
-import {over} from "stompjs";
+import { over } from "stompjs";
 
 
 let stompClient = null;
@@ -84,10 +84,28 @@ const AdminNavbar = () => {
 
   const [count, setCount] = useState(0);
 
-  const getCartCount = async() => {
-    if(token==null){
+  const [local, setLocal] = useState(0);
+
+
+  console.log('locccccccccccccccccccccccccccccccal ', local);
+
+
+  useEffect(() => {
+    const listenStorageChange = () => {
+      if (localStorage.getItem("countCart") === null) {
+        setLocal(0);
+      } else {
+        setLocal(localStorage.getItem("countCart"));
+      }
+    };
+    window.addEventListener("storage", listenStorageChange);
+    return () => window.removeEventListener("storage", listenStorageChange);
+  }, []);
+
+  const getCartCount = async () => {
+    if (token == null) {
       setCount(JSON.parse(localStorage.getItem("cartTemp")).length);
-      console.log('local',count);
+      console.log('local', count);
     } else {
       const response = await axios.get(API_GET_CART, {
         headers: {
@@ -116,8 +134,6 @@ const AdminNavbar = () => {
     getCartCount()
   }, [count]);
 
-
-
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -130,9 +146,9 @@ const AdminNavbar = () => {
             {/* <h3 style={{ fontSize: "2.5em", fontWeight: 800, color: 'white' }}>LOGO</h3> */}
             <div class="typed-animation">
               <h1 style={{ color: 'white', margin: "0" }} class="typed-out">
-              <img className='logo-home'
-              alt="..."
-              src={require("../../assets/img/brand/1-01-01.png")}/>
+                <img className='logo-home'
+                  alt="..."
+                  src={require("../../assets/img/brand/1-01-01.png")} />
               </h1>
             </div>
           </NavbarBrand>
@@ -174,7 +190,7 @@ const AdminNavbar = () => {
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
 
-                      <Badge badgeContent={number} color="secondary"
+                      <Badge badgeContent={ local} color="secondary"
                         anchorOrigin={{
                           vertical: 'top',
                           horizontal: 'left',

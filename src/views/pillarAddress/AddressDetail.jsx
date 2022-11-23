@@ -29,7 +29,7 @@ import Modal from "@mui/material/Modal";
 import { Button } from "reactstrap";
 import Map from "./UserMap";
 
-import {number} from "yup";
+import { number } from "yup";
 
 const columns = [
     {
@@ -99,12 +99,12 @@ function AddressDetail() {
         });
     }
 
-    const [randomNumber,setRandomNumber] = useState(0)
+    const [randomNumber, setRandomNumber] = useState(0)
 
-    const GenerateRandom =()=>{
-        let newValue =  Math.floor(Math.random() * 100)
-        while(newValue===randomNumber){
-         newValue =  Math.floor(Math.random() * 100)
+    const GenerateRandom = () => {
+        let newValue = Math.floor(Math.random() * 100)
+        while (newValue === randomNumber) {
+            newValue = Math.floor(Math.random() * 100)
         }
         setRandomNumber(newValue)
     }
@@ -174,8 +174,9 @@ function AddressDetail() {
                     console.log(listCartItems[i].productId);
                     listCartItems.splice(listCartItems[i], 1)
                     localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
+                    localStorage.setItem('countCart', JSON.stringify(listCartItems.length));
+                    window.dispatchEvent(new Event("storage"));
                     getAddress()
-
                 }
             }
 
@@ -255,6 +256,8 @@ function AddressDetail() {
                     listCartADDItem.push(itemsADD)
                     localStorage.setItem('cartTemp', JSON.stringify(listCartItem));
                     localStorage.setItem('cartADD', JSON.stringify(listCartADDItem));
+                    localStorage.setItem('countCart', JSON.stringify(listCartADDItem.length));
+                    window.dispatchEvent(new Event("storage"));
                 }
                 toast.success('Đã thêm vào danh sách thanh toán', {
                     autoClose: 1500
