@@ -84,11 +84,7 @@ const AdminNavbar = () => {
 
   const [count, setCount] = useState(0);
 
-  const [local, setLocal] = useState(0);
-
-
-  console.log('locccccccccccccccccccccccccccccccal ', local);
-
+  const [local, setLocal] = useState(localStorage.getItem("countCart"));
 
   useEffect(() => {
     const listenStorageChange = () => {
