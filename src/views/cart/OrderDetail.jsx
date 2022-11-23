@@ -125,39 +125,8 @@ function OrderDetail() {
         }
     }
 
-    const [childData, setChildData] = useState({});
-    const reOrder = async () => {
-        try {
-            var myMap = new Map()
-            childData.map((item) => {
-                myMap.set(item.productId, item.month);
-            })
-            const obj = Object.fromEntries(myMap);
+    const [id, setId] = useState(0);
 
-            const dataAPI = {
-                id: data.id,
-                productInfo: obj
-            }
-            console.log('child data, ', dataAPI);
-
-
-            const response = await axios.put(API_ORDER_RE_ORDER, dataAPI, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (response && response.status === 200) {
-                toast.success('Success', {
-                    autoClose: 3000
-                })
-            };
-
-        } catch (error) {
-            showError(error)
-        }
-    }
 
     const Completionist = () => <div>cc</div>
     const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -192,9 +161,8 @@ function OrderDetail() {
 
     useEffect(() => {
         setSize(size)
-        console.log('size', size);
         getAllOderDetail();
-    }, [size])
+    }, [size,id])
 
     const [bank, setBank] = React.useState('mbbank');
 
@@ -227,7 +195,7 @@ function OrderDetail() {
                                             </div>
 
                                             <Order order={data}
-                                                dataBack={cData => setChildData(cData)}
+                                                updatingComponent={cData => setId(cData)}
                                                 isExtended={isExtended}
                                                 orderData={(data2) => setOrder(data2)}
                                             />

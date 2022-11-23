@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
-import { API } from "../../utils/const";
+import {API, API_GET_CART} from "../../utils/const";
 import { NavLink } from 'react-router-dom';
 
 
@@ -31,6 +31,28 @@ const UserNotification = (params) => {
     }
 
 
+
+
+
+    const [count, setCount] = useState(0);
+
+    const getCartCount = async() => {
+        if(token==null){
+            setCount(JSON.parse(localStorage.getItem("cartTemp")).length);
+            console.log('local',count);
+        } else {
+            const response = await axios.get(API_GET_CART, {
+                headers: {
+                    'authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (response) {
+                setCount(response.data.length);
+            }
+        }
+    };
     const getNotification = async () => {
         const response = await axios.get(API + '/notification/?id=' + Number(decoded.sub.slice(0, 1)))
         if (response.status === 200) {
@@ -43,8 +65,14 @@ const UserNotification = (params) => {
     }
 
     const onMessageReceived = (payload) => {
-       getNotification()
+        getNotification()
+        console.log(payload)
+        if(payload.body ==="cart"){
+            getCartCount()
+
+        }
     }
+    console.log(count)
 
     const onError = (err) => {
         console.log(err);

@@ -10,7 +10,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
-import { API_GET_ADDRESS_POINT_BY_ID, API_GET_PILLAR } from 'utils/const';
+import {
+    API_GET_ADDRESS_POINT_BY_ID,
+    API_GET_CART,
+    API_GET_PILLAR
+} from 'utils/const';
 import ProductComponent from "./ProductComponent";
 import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 import { useHistory } from 'react-router-dom';
@@ -24,7 +28,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button } from "reactstrap";
 import Map from "./UserMap";
-import CartCount from "../cart/CartCount";
+
 import {number} from "yup";
 
 const columns = [
@@ -325,18 +329,18 @@ function AddressDetail() {
                 selected: false
             }
         })
-
     }
+
     useEffect(() => {
         getAddress()
         fetchAddressPointData()
+
     }, [])
 
     useEffect(() => {
         getAddress()
-
-
     }, [selected])
+
 
     useEffect(() => {
         if (item.id !== null) {
@@ -373,7 +377,7 @@ function AddressDetail() {
                                         {address.description}
                                     </div>
                                     <div>
-                                        <CartCount setRandomNumber={randomNumber} randomNumber={randomNumber}/>
+
                                     </div>
                                     <div class="line-loading"></div>
                                 </div>

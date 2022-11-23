@@ -4,10 +4,9 @@ import OrderDetailComponent from "./orderDetailComponent";
 import Moment from 'react-moment';
 import { formatMoney } from 'common/formatMoney';
 
-function Order({ order, isExtended, ya, dataBack }) {
+function Order({ order, ya,updatingComponent}) {
 
   const [isExpanded, setIsExpanded] = useState(true);
-  const [childData, setChildData] = useState({});
   const [listIds, setListIds] = useState([]);
 
 
@@ -39,16 +38,18 @@ function Order({ order, isExtended, ya, dataBack }) {
       listIds.splice(listIds.indexOf(data.id), 1)
     }
   }
-  console.log(childData);
+
 
 
 
   let idOrderInURL = window.location.pathname.replace(/\D/g, "");
 
+  useEffect(() => {
+    updatingComponent(idOrderInURL)
+  }, [idOrderInURL]);
 
   return (
     <div className="wrapper">
-      <button style={{ display: order.id === parseInt(idOrderInURL) ? "none" : "block" }}>chi tiet {order.id}</button>
       <div className={`${order.status}`} >
 
         <div onClick={() => expandOrder()}>
@@ -69,16 +70,9 @@ function Order({ order, isExtended, ya, dataBack }) {
                         <h6 className="font-weight-bold my-2">Số lượng : {order.quantity}</h6>
                         <h6 className="font-weight-bold my-2 ml-8">Trạng thái : {order.status}</h6>
 
-                        {/* <ul className="list-inline small">
-                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
-                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
-                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
-                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
-                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
-                        </ul> */}
+
                       </div>
                     </div>
-                    {/* <img src="https://i.imgur.com/6IUbEME.jpg" alt="Generic placeholder image" width="200" className="ml-lg-5 order-1 order-lg-2" /> */}
                   </div>
                   <div style={{ textAlign: 'right' }} className='mr-2'>
                     <Moment fromNow>{order.orderTime}</Moment>
