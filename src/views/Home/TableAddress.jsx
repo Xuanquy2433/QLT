@@ -26,7 +26,6 @@ import SouthIcon from '@mui/icons-material/South';
 import CheckIcon from '@mui/icons-material/Check';
 import ToggleButtonMui from '@mui/material/ToggleButton';
 import './scss.scss'
-import AddressDetail from 'views/pillarAddress/AddressDetail';
 import { API_GET_ADDRESS } from 'utils/const';
 import { API_CLICK_SEARCH_ADDRESS } from 'utils/const';
 

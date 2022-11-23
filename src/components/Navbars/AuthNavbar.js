@@ -20,10 +20,12 @@ import { toast } from "react-toastify";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Notification from './NotificationUser';
 import { BsSuitHeartFill } from "react-icons/bs";
 import CartCount from "../../views/cart/CartCount";
+import axios from "axios";
+import {API_GET_CART} from "../../utils/const";
 
 const AdminNavbar = () => {
   let decoded;
@@ -62,6 +64,10 @@ const AdminNavbar = () => {
     fontSize: "0.9rem",
     fontWeight: "400"
   }
+
+
+
+
 
   return (
     <>
@@ -119,7 +125,7 @@ const AdminNavbar = () => {
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
 
-                      <Badge badgeContent={<CartCount />} color="secondary"
+                      <Badge badgeContent={<CartCount/>} color="secondary"
                         anchorOrigin={{
                           vertical: 'top',
                           horizontal: 'left',
@@ -130,6 +136,8 @@ const AdminNavbar = () => {
                     </NavLink>
                   </NavItem>
               }
+              <CartCount/>
+
 
 
               {token && decoded ?
@@ -151,48 +159,7 @@ const AdminNavbar = () => {
                   </NavLink>
                 </NavItem>}
 
-              {/* 
-              {token && decoded ? null :
-                <NavItem>
-                  <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
-                    <i className="ni ni-key-25" />
-                    <span className="nav-link-inner--text">Đăng nhập</span>
-                  </NavLink>
-                </NavItem>} */}
 
-              {/* {token && decoded ?
-                <NavItem>
-                  <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
-                    <i className="ni ni-key-25" />
-                    <span className="nav-link-inner--text">Hồ sơ</span>
-                  </NavLink>
-                </NavItem> : ''} */}
-
-
-
-              {/* {decoded && token ? <NavItem ><NavLink
-                className="nav-link-icon"
-                tag={Link}
-              >
-                <i className="ni ni-single-02" />
-                <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
-              </NavLink> </NavItem> : ''} */}
-
-
-
-              {/* {decoded && token ?
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    to="/admin/index"
-                    tag={Link}
-                    onClick={logout}
-                  >
-                    <LogoutIcon />
-                    <span className="nav-link-inner--text">Đăng xuất</span>
-                  </NavLink>
-                </NavItem> : ''
-              } */}
 
               {token && decoded ?
                 <div className="menu">

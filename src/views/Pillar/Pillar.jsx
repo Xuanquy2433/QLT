@@ -221,8 +221,8 @@ export default function Pillar({ handleOpenDelete, openDelete, search, handleClo
                                         <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
 
                                         <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
-                                            <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
-                                            <button onClick={(e) => onDelete(id)} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+                                            <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" className="btn btn-primary">Huỷ</button>
+                                            <button onClick={(e) => onDelete(id)} style={{ width: "110px" }} type="button" className="btn btn-primary">Xác nhận</button>
                                         </div>
 
                                     </Box>

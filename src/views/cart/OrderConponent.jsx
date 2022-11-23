@@ -53,32 +53,32 @@ function Order({ order, isExtended, ya, dataBack }) {
 
         <div onClick={() => expandOrder()}>
 
-          <div class="row">
-            <div class="col" style={{ width: '100%' }}>
-              <ul class="list-group shadow">
+          <div className="row">
+            <div className="col" style={{ width: '100%' }}>
+              <ul className="list-group shadow">
 
-                <li style={{ padding: '0' }} class="list-group-item">
-                  <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                    <div class="media-body order-2 order-lg-1">
-                      <h5 class="mt-0 font-weight-bold mb-2"> Thời gian đặt:
+                <li style={{ padding: '0' }} className="list-group-item">
+                  <div className="media align-items-lg-center flex-column flex-lg-row p-3">
+                    <div className="media-body order-2 order-lg-1">
+                      <h5 className="mt-0 font-weight-bold mb-2"> Thời gian đặt:
                         <Moment format="DD/MM/YYYY">
                           {order.orderTime}
                         </Moment> </h5>
-                      <p class="font-italic text-muted mb-0 small">Tổng cộng : {formatMoney(order.total)} VNĐ</p>
-                      <div class="d-flex align-items-center mt-1">
-                        <h6 class="font-weight-bold my-2">Số lượng : {order.quantity}</h6>
-                        <h6 class="font-weight-bold my-2 ml-8">Trạng thái : {order.status}</h6>
+                      <p className="font-italic text-muted mb-0 small">Tổng cộng : {formatMoney(order.total)} VNĐ</p>
+                      <div className="d-flex align-items-center mt-1">
+                        <h6 className="font-weight-bold my-2">Số lượng : {order.quantity}</h6>
+                        <h6 className="font-weight-bold my-2 ml-8">Trạng thái : {order.status}</h6>
 
-                        {/* <ul class="list-inline small">
-                          <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                          <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                          <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                          <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                          <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        {/* <ul className="list-inline small">
+                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
+                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
+                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
+                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
+                          <li className="list-inline-item m-0"><i className="fa fa-star text-success"></i></li>
                         </ul> */}
                       </div>
                     </div>
-                    {/* <img src="https://i.imgur.com/6IUbEME.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2" /> */}
+                    {/* <img src="https://i.imgur.com/6IUbEME.jpg" alt="Generic placeholder image" width="200" className="ml-lg-5 order-1 order-lg-2" /> */}
                   </div>
                   <div style={{ textAlign: 'right' }} className='mr-2'>
                     <Moment fromNow>{order.orderTime}</Moment>

@@ -24,6 +24,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button } from "reactstrap";
 import Map from "./UserMap";
+import CartCount from "../cart/CartCount";
+import {number} from "yup";
 
 const columns = [
     {
@@ -93,6 +95,16 @@ function AddressDetail() {
         });
     }
 
+    const [randomNumber,setRandomNumber] = useState(0)
+
+    const GenerateRandom =()=>{
+        let newValue =  Math.floor(Math.random() * 100)
+        while(newValue===randomNumber){
+         newValue =  Math.floor(Math.random() * 100)
+        }
+        setRandomNumber(newValue)
+    }
+
     const history = useHistory();
     const getAddress = async (e) => {
         try {
@@ -101,6 +113,7 @@ function AddressDetail() {
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
+                    GenerateRandom()
                 }
             } else {
                 const response = await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2, {
@@ -113,6 +126,7 @@ function AddressDetail() {
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
+                    GenerateRandom()
                 }
             }
 
@@ -145,6 +159,7 @@ function AddressDetail() {
             if (response.status === 200) {
                 toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1300 })
                 getAddress()
+
             }
         } else {
             console.log('delete id cart local', id);
@@ -156,6 +171,7 @@ function AddressDetail() {
                     listCartItems.splice(listCartItems[i], 1)
                     localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
                     getAddress()
+
                 }
             }
 
@@ -164,10 +180,13 @@ function AddressDetail() {
                     cartAddP.splice(cartAddP[i], 1)
                     localStorage.setItem("cartADD", JSON.stringify(cartAddP))
                     getAddress()
+
+
                 }
             }
             toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1500 })
             getAddress()
+
         }
     }
 
@@ -204,6 +223,7 @@ function AddressDetail() {
                         autoClose: 1500
                     })
                     getAddress()
+
                     // history.push('/auth/cart')
                 };
             } else {
@@ -236,6 +256,7 @@ function AddressDetail() {
                     autoClose: 1500
                 })
                 getAddress()
+
                 // history.push('/auth/cart')
             }
         } catch (error) {
@@ -313,13 +334,14 @@ function AddressDetail() {
 
     useEffect(() => {
         getAddress()
-        console.log("The value after update", selected);
+
+
     }, [selected])
 
     useEffect(() => {
         if (item.id !== null) {
             handleOpen()
-            console.log("The value after update", item.lat);
+
         }
 
     }, [item.lat])
@@ -350,7 +372,9 @@ function AddressDetail() {
                                     <div className="product__subtitle">
                                         {address.description}
                                     </div>
-
+                                    <div>
+                                        <CartCount setRandomNumber={randomNumber} randomNumber={randomNumber}/>
+                                    </div>
                                     <div class="line-loading"></div>
                                 </div>
                             </div>

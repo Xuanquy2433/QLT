@@ -124,40 +124,13 @@ const Profile = () => {
           <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
 
           <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
-            <button onClick={handleClose} style={{ width: "110px" }} type="button" class="btn btn-primary">Huỷ</button>
-            <button onClick={handleUpdate} style={{ width: "110px" }} type="button" class="btn btn-primary">Xác nhận</button>
+            <button onClick={handleClose} style={{ width: "110px" }} type="button" className="btn btn-primary">Huỷ</button>
+            <button onClick={handleUpdate} style={{ width: "110px" }} type="button" className="btn btn-primary">Xác nhận</button>
           </div>
 
         </Box>
 
       </Modal>
-      {/* <div style={{ width: "100%" }}>
-        <div
-          className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-          style={{
-            minHeight: "400px",
-            backgroundImage:
-              "url(" + require("../../assets/img/theme/profile-cover.jpg") + ")",
-            backgroundSize: "cover",
-            backgroundPosition: "center top",
-            borderRadius: "9px"
-          }}
-        >
-          <span style={{ borderRadius: '10px' }} className="mask bg-gradient-default opacity-8" />
-          <Container className="d-flex align-items-center" fluid>
-            <Row>
-              <Col style={{ maxWidth: "100%" }} lg="7" md="10">
-                <h1 className="display-2 text-white">Xin chào {data.firstName} {data.lastName}</h1>
-                <p className="text-white mt-0 mb-5">
-                  Đây là trang cá nhân của bạn. Bạn có thể chỉnh sửa thông tin cá nhân của mình tại đây.
-                </p>
-
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      </div> */}
-      {/* Page content */}
       <Container className="mt-7" fluid>
         <Row>
           <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">

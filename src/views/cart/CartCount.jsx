@@ -2,8 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {API_GET_CART} from "../../utils/const";
 
-const CartCount = () => {
-
+const CartCount =({randomNumber,setRandomNumber})=>{
   let token = localStorage.getItem("token");
   const [count, setCount] = useState(0);
   const getCartCount = async() => {
@@ -20,15 +19,14 @@ const CartCount = () => {
       })
       if (response) {
         setCount(response.data.length);
-        console.log(count);
       }
     }
   };
 
-useEffect(() => {
+  useEffect(() => {
     getCartCount();
+  },[randomNumber])
 
-})
   return (
     <div className="cart-count">
       <span>{count}</span>

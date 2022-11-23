@@ -14,13 +14,11 @@ var stompClient = null;
 const UserNotification = (params) => {
     const [data, setData] = useState([]);
 
-
     let decoded;
     let token = localStorage.getItem("token");
     if (token !== null) {
         decoded = jwt_decode(token);
     }
-
 
     const connect = () => {
         let Sock = new SockJS(API + '/ws');
