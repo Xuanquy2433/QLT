@@ -21,7 +21,7 @@ import './activity.css'
 import axios from 'axios';
 import { API_GET_ALL_ORDER } from 'utils/const';
 import Moment from 'react-moment';
-import { Button, Grid } from '@mui/material';
+import {Button, Grid, MenuItem, Select} from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { API_GET_EXTEND_ORDER_USER } from 'utils/const';
 import { toast } from 'react-toastify';
@@ -32,6 +32,9 @@ import { showError2 } from 'utils/error';
 import AreRenting from './AreRenting';
 import AboutToExpire from './AboutToExpire';
 import Expired from './Expired';
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import OrderStatus from "../../components/OrderStatus";
 
 
 const columns = [
@@ -119,6 +122,8 @@ function Activity() {
             setData(response.data)
         }
     }
+
+
 
     // get order detail expired
     const [dataOrderDetailExpried, setDataOrderDetailExpired] = useState([])
@@ -229,6 +234,27 @@ function Activity() {
         getALLOrderDetail()
         getALLOrderDetailExpired()
     }, [])
+
+    const [status, setStatus] = React.useState('');
+    const handleChangeStatus = (event) => {
+        setStatus(event.target.value);
+        console.log('status ', status);
+    };
+    const getALLOrderWithStatus = async (e) => {
+        const response = await axios.get(API_GET_ALL_ORDER+"?status="+ status, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response) {
+            setData(response.data)
+        }
+    }
+    useEffect(() => {
+        getALLOrderWithStatus()
+    },[status])
     return (
         <div style={{ marginTop: '50px' }} className='activity'>
             <div className='activity-content'>
@@ -256,16 +282,63 @@ function Activity() {
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow>
-                                            {columns.map((column) => (
+
                                                 <TableCell
                                                     sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                                    key={column.id}
-                                                    align={column.align}
-                                                    style={{ minWidth: column.minWidth }}
+                                                    align={'center'}
+                                                    width={50}
                                                 >
-                                                    {column.label}
+                                                    Id
                                                 </TableCell>
-                                            ))}
+                                            <TableCell
+                                                sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                align={'center'}
+
+                                            >
+                                                Ngày đặt hàng
+                                            </TableCell>
+                                            <TableCell
+                                                sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                               align={'center'}
+
+                                            >
+                                                Số lượng sản phẩm
+                                            </TableCell>
+
+                                            <TableCell
+                                                align={'center'}
+
+                                            >
+                                                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+
+                                                    <Select
+                                                        labelId="demo-simple-select-standard-label"
+                                                        id="demo-simple-select-standard"
+                                                        value={status}
+                                                        onChange={handleChangeStatus}
+                                                        label="Age"
+                                                        displayEmpty
+                                                    >
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value=''>
+                                                            <em  style={{ color: 'black', fontWeight: '600', fontSize: '1em' }}>Trạng Thái</em>
+                                                        </MenuItem>
+                                                        <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"NEW"}>Mới</MenuItem>
+                                                        <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"EXTEND"}>Gia hạn</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"USER_CONFIRMED"}>Chờ admin phê duyệt</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"PAID"}>Đang thuê</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"DONE"}>Xong</MenuItem>
+                                                        <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}value={"CANCELLED"}>Đã hủy</MenuItem>
+
+                                                    </Select>
+                                                </FormControl>
+                                            </TableCell>
+                                            <TableCell
+                                                sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                align={'center'}
+                                                width={150}
+                                            >
+                                                Chi tiết
+                                            </TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -274,12 +347,9 @@ function Activity() {
                                                 <TableCell align="left">{item.id}</TableCell>
                                                 <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.orderTime}</Moment></TableCell>
                                                 <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
-                                                {item.status === 'USER_CONFIRMED' ? <TableCell sx={{ fontWeight: '600', color: 'blue' }} align="right">Chờ admin phê duyệt</TableCell> : null}
-                                                {item.status === 'NEW' ? <TableCell sx={{ fontWeight: '600', color: 'purple' }} align="right">Chờ thanh toán</TableCell> : null}
-                                                {item.status === 'DONE' ? <TableCell sx={{ fontWeight: '600', color: 'green' }} align="right">Xong</TableCell> : null}
-                                                {item.status === 'CANCELLED' ? <TableCell sx={{ fontWeight: '600', color: 'red' }} align="right">Đã hủy</TableCell> : null}
-                                                {item.status === 'PAID' ? <TableCell sx={{ fontWeight: '600', color: 'orange' }} align="right">Đang thuê</TableCell> : null}
-                                                {item.status === 'EXTEND' ? <TableCell sx={{ fontWeight: '600', color: 'pink' }} align="right">Gia hạn</TableCell> : null}
+                                                {item.status !== "" ? <TableCell>
+                                                    <OrderStatus status={item.status}></OrderStatus>
+                                                </TableCell> :null}
                                                 <TableCell align="right">
                                                     <NavLink to={'order/' + item.id}>
                                                         <Button variant="contained" color="success">

@@ -33,6 +33,7 @@ function AboutToExpire({ columns4, dataOrderDetailExpired }) {
                                         {column.label}
                                     </TableCell>
                                 ))}
+
                             </TableRow>
                         </TableHead>
                         <TableBody>
