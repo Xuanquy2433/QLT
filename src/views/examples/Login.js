@@ -65,18 +65,6 @@ const Login = () => {
             autoClose: 1500
           })
 
-          //set count cart
-          const response2 = await axios.get(API_GET_CART, {
-            headers: {
-              'authorization': 'Bearer ' + response?.data.token,
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          })
-          if (response) {
-            localStorage.setItem('countCart', JSON.stringify(response2.data.length));
-            window.dispatchEvent(new Event("storage"));
-          }
           // add cart local to database
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
             history.goBack()
@@ -96,6 +84,18 @@ const Login = () => {
                 'Content-Type': 'application/json'
               }
             });
+            //set count cart
+            const response2 = await axios.get(API_GET_CART, {
+              headers: {
+                'authorization': 'Bearer ' + response?.data.token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+            })
+            if (response) {
+              localStorage.setItem('countCart', JSON.stringify(response2.data.length));
+              window.dispatchEvent(new Event("storage"));
+            }
           }
           else if (jwt_decode(response?.data.token).roles === `[ROLE_ADMIN]`) {
             history.push('/admin/index')
