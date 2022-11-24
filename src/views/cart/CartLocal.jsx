@@ -152,6 +152,9 @@ function CartLocal() {
         listCartItems.splice(id, 1)
         localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
         localStorage.setItem("cartADD", JSON.stringify(cartAddP))
+        localStorage.setItem('countCart', JSON.stringify(cartAddP.length));
+        setDataLocal(JSON.parse(localStorage.getItem("cartTemp")))
+        window.dispatchEvent(new Event("storage"));
         toast.success("Xoá thành công", { autoClose: 1500 })
     }
     return (

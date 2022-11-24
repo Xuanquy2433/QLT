@@ -77,7 +77,7 @@ const AdminNavbar = () => {
     let Sock = new SockJS(API + '/ws');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
-    stompClient.debug = () => {};
+    stompClient.debug = () => { };
   }
 
   const onConnected = () => {
@@ -86,7 +86,7 @@ const AdminNavbar = () => {
 
   const [count, setCount] = useState(0);
 
-  const [local, setLocal] = useState(localStorage.getItem("countCart"));
+  const [local, setLocal] = useState(localStorage.getItem("countCart") || 0);
 
   useEffect(() => {
     const listenStorageChange = () => {
