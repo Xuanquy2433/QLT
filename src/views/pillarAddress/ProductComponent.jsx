@@ -207,7 +207,7 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) 
                   <img style={{ width: '100%', height: "100%", borderRadius: "8px", objectFit: "cover" }} src={item.photosImagePath} alt="" />
                 </div>
                 <div style={{ width: "100%", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-
+                  <h1>{item.id}</h1>
                   <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: '1px', color: "#444444" }}> {item.name}</h1>
                   <h2 style={{ color: '#D70018' }}> {formatMoney(item.price)} VNĐ</h2>
                   <h3>Loại trụ: {item.category.name}</h3>

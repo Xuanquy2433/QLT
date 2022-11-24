@@ -150,7 +150,7 @@ function AddressDetail() {
         }
     }
 
-    const onClickRemoveItemCart = async (id) => {
+    const onClickRemoveItemCart = async (id, index) => {
         console.log('id cart', id);
         if (token) {
             const response = await axios.put(API_CART_REMOVE + id, {}, {
@@ -171,8 +171,9 @@ function AddressDetail() {
             let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
             for (let i = 0; i < listCartItems.length; i++) {
                 if (listCartItems[i].productId === id) {
-                    console.log(listCartItems[i].productId);
-                    listCartItems.splice(listCartItems[i], 1)
+                    console.log(listCartItems[i]);
+                    listCartItems.splice(i, 1)
+                    // console.log(listCartItems.splice(i, 1));
                     localStorage.setItem("cartTemp", JSON.stringify(listCartItems))
                     localStorage.setItem('countCart', JSON.stringify(listCartItems.length));
                     window.dispatchEvent(new Event("storage"));
@@ -182,11 +183,9 @@ function AddressDetail() {
 
             for (let i = 0; i < cartAddP.length; i++) {
                 if (cartAddP[i].productId === id) {
-                    cartAddP.splice(cartAddP[i], 1)
+                    cartAddP.splice(i, 1)
                     localStorage.setItem("cartADD", JSON.stringify(cartAddP))
                     getAddress()
-
-
                 }
             }
             toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1500 })
@@ -410,9 +409,8 @@ function AddressDetail() {
                                             onClickSelected(item.number, addressPoint[index + 1].number)
                                         }
                                         }
-                                        style={{ display: "flex" }}
-
-                                    ><div style={{ padding: "5px", borderRadius: '20%', width: 'auto', backgroundColor: '#E7EBF0', margin: "10px 10px 0 10px" }}>
+                                        style={{ display: "flex" }}>
+                                        <div style={{ padding: "5px", borderRadius: '20%', width: 'auto', backgroundColor: '#E7EBF0', margin: "10px 10px 0 10px" }}>
                                             {item.name}
                                         </div>
                                         <div className={
