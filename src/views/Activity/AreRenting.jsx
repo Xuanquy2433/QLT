@@ -64,9 +64,9 @@ function AreRenting({ columns2, dataOrderDetail, showCheckbox, onchangeMonth, sh
                                         <TableCell align="center">{item.product.price} </TableCell>
                                         <TableCell align="center">{item.product.address.fullAddress} </TableCell>
                                         <TableCell align="center">{item.product.category.name} </TableCell>
-                                        <TableCell align="center">{item.month} tháng </TableCell>
-                                        <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.startDate}</Moment></TableCell>
-                                        <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></TableCell>
+                                        <TableCell align="center">{item.product.month} tháng </TableCell>
+                                        <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.product.startDate}</Moment></TableCell>
+                                        <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.product.expiredDate}</Moment></TableCell>
                                     </TableRow>
                                 )
                             })}

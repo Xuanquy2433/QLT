@@ -41,11 +41,11 @@ function Expired({ columns4, dataOrderDetailExpired }) {
                                         <TableCell align="center">{item.product.price} </TableCell>
                                         <TableCell align="center">{item.product.address.fullAddress} </TableCell>
                                         <TableCell align="center">{item.product.category.name} </TableCell>
-                                        <TableCell align="center">{item.month} tháng </TableCell>
-                                        <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.startDate}</Moment></TableCell>
+                                        <TableCell align="center">{item.product.month} tháng </TableCell>
+                                        <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.product.startDate}</Moment></TableCell>
                                         <TableCell align="center">
-                                            <Moment style={{ marginRight: '5px' }} format="DD/MM/YYYY">{item.expiredDate}</Moment>
-                                            (<Moment style={{ color: 'red', fontWeight: '600' }} fromNow>{item.expiredDate}</Moment>)
+                                            <Moment style={{ marginRight: '5px' }} format="DD/MM/YYYY">{item.product.startDate}</Moment>
+                                            (<Moment style={{ color: 'red', fontWeight: '600' }} fromNow>{item.product.expiredDate}</Moment>)
                                         </TableCell>
                                     </TableRow>
                                 )

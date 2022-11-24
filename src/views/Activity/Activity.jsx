@@ -233,10 +233,10 @@ function Activity() {
         <div style={{ marginTop: '50px' }} className='activity'>
             <div className='activity-content'>
                 <div className='activity-title'>
-                    Xin chào  {decoded.firstName + " " + decoded.lastName}
+                    Đây là trang hoạt động của bạn
                 </div>
                 <div className="activity-decription">
-                    Đây là trang hoạt động của bạn. Bạn có thể xem lịch sử đặt hàng và đơn hàng đã đặt của bạn.
+                    Bạn có thể xem lịch sử đặt hàng và đơn hàng đã đặt của bạn.
                 </div>
             </div>
 
