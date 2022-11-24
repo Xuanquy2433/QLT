@@ -31,6 +31,7 @@ import { over } from "stompjs";
 
 let stompClient = null;
 const AdminNavbar = () => {
+
   let decoded;
   const history = useHistory();
   const [number, setNumber] = useState(0);
@@ -76,6 +77,7 @@ const AdminNavbar = () => {
     let Sock = new SockJS(API + '/ws');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
+    stompClient.debug = () => {};
   }
 
   const onConnected = () => {
@@ -119,7 +121,6 @@ const AdminNavbar = () => {
   const onMessageReceived = (payload) => {
     getCartCount()
   }
-  console.log(count)
 
   const onError = (err) => {
     console.log(err);
@@ -293,33 +294,6 @@ const AdminNavbar = () => {
                 </React.Fragment>
               }
 
-              {/* <NavItem>
-                <div className="menu">
-                  <ul className="menu-item">
-                    <li className="menu-item-title">
-                      <NavLink className="menu-hover nav-link-icon">
-                        <i className="ni ni-single-02" />
-                        <span className="nav-link-inner--text">{decoded.firstName + " " + decoded.lastName}</span>
-                      </NavLink>
-                      <ul className="menu-level-2">
-                        <li className="item-menu-level-2">
-                          <NavLink className="nav-link-icon" to="/auth/profile" tag={Link}>
-                            <i className="ni ni-key-25" />
-                            <span className="nav-link-inner--text">Hồ sơ</span>
-                          </NavLink>
-                        </li>
-                        <li className="item-menu-level-2">
-                          <NavLink className="nav-link-icon" to="/admin/index" tag={Link} onClick={logout}
-                          >
-                            <ExitToAppIcon />
-                            <span className="nav-link-inner--text">Đăng xuất</span>
-                          </NavLink>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </NavItem> */}
 
 
             </Nav>

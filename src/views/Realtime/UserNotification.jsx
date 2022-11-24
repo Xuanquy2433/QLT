@@ -12,6 +12,7 @@ import { NavLink } from 'react-router-dom';
 
 var stompClient = null;
 const UserNotification = (params) => {
+
     const [data, setData] = useState([]);
 
     let decoded;
@@ -24,15 +25,12 @@ const UserNotification = (params) => {
         let Sock = new SockJS(API + '/ws');
         stompClient = over(Sock);
         stompClient.connect({}, onConnected, onError);
+        stompClient.debug = () => {};
     }
 
     const onConnected = () => {
         stompClient.subscribe('/user/' + Number(decoded.sub.slice(0, 1)) + '/private', onMessageReceived);
     }
-
-
-
-
 
     const [count, setCount] = useState(0);
 
@@ -72,11 +70,11 @@ const UserNotification = (params) => {
 
         }
     }
-    console.log(count)
 
     const onError = (err) => {
         console.log(err);
     }
+
 
     useEffect(() => {
         connect();

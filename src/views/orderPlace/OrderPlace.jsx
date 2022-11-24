@@ -273,7 +273,6 @@ function OrderPlace() {
     return (
         <>
             <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
-
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 

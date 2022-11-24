@@ -91,8 +91,9 @@ function NotificationAdmin() {
                     }}>
 
                 </Badge >
-
+              Thông báo
             </div>
+
             <div
                 id="demo-customized-button"
                 aria-controls={open ? 'demo-customized-menu' : undefined}

@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -20,46 +21,14 @@ import {
 import Map from "./MapTest";
 import { DirectionsService } from "@react-google-maps/api";
 
-const columnsDetail = [
-  { id: 'id', label: 'Id', minWidth: 70 },
-  {
-    id: 'month',
-    label: 'Số tháng thuê',
-    minWidth: 150,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  }, {
-    id: 'name',
-    label: 'Tên trụ',
-    minWidth: 170,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  }, {
-    id: 'price',
-    label: 'Giá tiền',
-    minWidth: 150,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  }, {
-    id: 'description',
-    label: 'Mô tả',
-    minWidth: 170,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  }, {
-    id: 'address',
-    label: 'Địa chỉ',
-    minWidth: 170,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-];
+
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 1300,
+  width: 1400,
+  height: 750,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -95,7 +64,6 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
   useEffect(() => {
     if (updatingStatus === false) {
       if (openDetail === true) {
-        console.log("yo")
         fetchData(addressId);
         setOpen(true);
       }
@@ -208,28 +176,11 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
       name: name
     })
   }
-  const directionsService = new google.maps.DirectionsService();
-  const directionsRenderer = new google.maps.DirectionsRenderer();
 
-  function calculateAndDisplayRoute(directionsService: google.maps.DirectionsService,
-    directionsRenderer: google.maps.DirectionsRenderer) {
-    directionsService
-      .route({
-        origin: { lat: data[0].lat, lng: data[0].lng },
-        destination: { lat: data[data.length - 1].lat, lng: data[data.length - 1].lng },
-        travelMode: google.maps.TravelMode.DRIVING,
-      }
-
-      )
-  }
-
-  function MapDraw() {
-    calculateAndDisplayRoute(directionsService, directionsRenderer);
-  }
 
   function updatePoint(data) {
     setUpdating(true);
-    console.log(updating)
+    console.log("updating")
     setLat(data.lat);
     setLng(data.lng);
     setName(data.name);
@@ -290,6 +241,9 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
     }
   }, [updatingStatus, updatingItem]);
 
+  const StyledTableCell = styled(TableCell)({
+    padding: '4px 16px',
+  })
   return (
     <React.Fragment>
       <Modal
@@ -299,87 +253,85 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
         aria-describedby="modal-modal-description"
       >
         <Box  sx={style}>
-          <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-            <TableContainer sx={{ height: '550px' }}>
-              <Table aria-label="sticky table">
+          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            <TableContainer sx={{ height: '700px' }}>
+              <Table aria-label="sticky table" sx={{height: '30%'}}>
                 <TableHead>
-                  <TableCell>
+                  <StyledTableCell>
                     {updating ? <input type="number" value={updateId} /> : null}
-
-                  </TableCell>
-                  <TableCell>
+                  </StyledTableCell>
+                  <StyledTableCell>
                     name:
                     <input type="text" value={name} onChange={handleChange} />
 
-                  </TableCell>
-                  <TableCell>
+                  </StyledTableCell>
+                  <StyledTableCell>
                     lat:
                     <input type="text" value={lat} />
 
-                  </TableCell>
+                  </StyledTableCell>
 
-                  <TableCell>
+                  <StyledTableCell>
                     lng:
                     <input type="text" value={lng} />
-                  </TableCell>
-                  <TableCell>
+                  </StyledTableCell>
+                  <StyledTableCell>
                     {updating ? <>
                       <Button onClick={() => { onUpdatePoint(updateId, input) }}>Update</Button>
                       <Button onClick={() => { onCancelUpdate() }}>X</Button>
                     </>
                       : data.length < 2 ? <button onClick={() => addAddressPoint(addressId)}>Thêm</button> : null}
-                  </TableCell>
+                  </StyledTableCell>
 
                   {data.map((column) => (
                     <TableRow>
-
-                      <TableCell>
+                      <StyledTableCell>
                         {column.id}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         {column.name}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         {column.lng}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         {column.lat}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         {column.number}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         <Button onClick={() => addAddressPointBehind(addressId, column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
-                          behind
+                          Thêm
                         </Button>
-                      </TableCell>
+                      </StyledTableCell>
 
-                      <TableCell>
+
+
+                      <StyledTableCell>
+                        <Button onnClick={() => {updatePoint(column)
+                        }
+
+                        } sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
+                          U
+                        </Button>
+                      </StyledTableCell>
+
+                      <StyledTableCell>
                         <Button onClick={() => deletePoint(column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="warning">
                           X
                         </Button>
-                      </TableCell>
-
-                      <TableCell>
-                        <Button onnClick={() => updatePoint(column)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
-                          U
-                        </Button>
-                      </TableCell>
+                      </StyledTableCell>
                     </TableRow>
                   ))
                   }
                 </TableHead>
-                <TableBody>
 
-                </TableBody>
-                <Button onClick={MapDraw} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
-                  Test
-                </Button>
               </Table>
               <Map
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `90vh`, margin: `auto`, border: '2px solid black' }} />}
+                containerElement={<div style={{ height: `70%`, margin: `auto`, border: '2px solid black' }} />}
                 mapElement={<div style={{ height: `100%` }} />}
                 setLatMap={setLat}
                 setLngMap={setLng}
