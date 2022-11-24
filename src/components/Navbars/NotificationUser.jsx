@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import './style.css'
 import Notifications from '@mui/icons-material/Notifications';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import axios from 'axios';
 import UserNotification from 'views/Realtime/UserNotification';
 import jwt_decode from "jwt-decode";
@@ -63,7 +64,6 @@ function Notification() {
 
     const markAsRead = async () => {
         const response = await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
-        console.log('go here mark as read');
     }
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -86,7 +86,6 @@ function Notification() {
             <div style={{ display: 'none' }}>
                 <UserNotification changeUserCount={(data) => setUserCount(data)} />
             </div>
-
             <div style={{ display: "flex", alignItems: "center" }}
                 className="notification">
                 <Badge badgeContent={countUser} color="secondary"
@@ -94,7 +93,6 @@ function Notification() {
                         vertical: 'top',
                         horizontal: 'left',
                     }}>
-
                 </Badge >
 
             </div>
@@ -105,12 +103,12 @@ function Notification() {
                 aria-expanded={open ? 'true' : undefined}
                 variant="contained"
                 disableElevation
+                style={{cursor: 'pointer'}}
                 onClick={handleClick}
 
             >
-                <i className="ni ni-cart" />
+                <NotificationsNoneIcon />
                 <span className="nav-link-inner--text">Thông báo</span>
-
             </div>
             <StyledMenu
                 id="demo-customized-menu"

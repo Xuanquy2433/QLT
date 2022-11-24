@@ -16,6 +16,8 @@ import Notifications from "@mui/icons-material/Notifications";
 import { API_GET_MARK_AS_READ_ADMIN } from "../../utils/const";
 import axios from "axios";
 import Badge from "@mui/material/Badge";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -89,9 +91,7 @@ function NotificationAdmin() {
                         vertical: 'top',
                         horizontal: 'left',
                     }}>
-
                 </Badge >
-              Thông báo
             </div>
 
             <div
@@ -104,7 +104,9 @@ function NotificationAdmin() {
                 <div style={{ display: "flex", alignItems: "center" }}
                     className="notification">
                 </div>
-                <i className="ni ni-cart" />
+                <div style={{ color: 'white', marginBottom: '15px' }}>
+                    <NotificationsNoneIcon />
+                </div>
                 {/* <span className="nav-link-inner--text">Thông báo</span> */}
             </div>
             <StyledMenu
@@ -115,15 +117,10 @@ function NotificationAdmin() {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-
             >
                 <AdminNotification changeCount={(data) => setCountAdmin(data)} onClickClose={handleClose} />
             </StyledMenu>
-
         </div>
-
-
-
     )
 }
 

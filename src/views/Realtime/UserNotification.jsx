@@ -25,7 +25,7 @@ const UserNotification = (params) => {
         let Sock = new SockJS(API + '/ws');
         stompClient = over(Sock);
         stompClient.connect({}, onConnected, onError);
-        stompClient.debug = () => {};
+        stompClient.debug = () => { };
     }
 
     const onConnected = () => {
@@ -82,22 +82,24 @@ const UserNotification = (params) => {
     }, []);
     //message, date,type,status
     return (
-        <>
+        <div className='scrollbarNoti' id='style-1'>
             {data.length > 0 ? data?.map((data, index) => (
                 <Fragment>
-                    <NavLink to={'/auth/order/' + data.targetId}>
-                        <MenuItem key={index} sx={{ borderBottom: '1px solid #ddd' }} onClick={params.onClickClose}>
-                            <div style={{ color: 'black' }} >{data.message}  </div>
-                            <div className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
+                    <NavLink to={'/auth/order/' + data.targetId} >
+                        <MenuItem key={index} onClick={params.onClickClose} sx={{ borderBottom: '1px solid #ddd' }}>
+                            <li>
+                                <div style={{ color: 'black' }} >{data.message}  </div>
+                                <div style={{ color: 'rgb(177, 177, 177)' }} className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
+                            </li>
                         </MenuItem>
                     </NavLink>
                 </Fragment>
             )) :
-                <MenuItem >
+                <li >
                     <div  >Hiện không có thông báo ! </div>
                     <div className='notification-time' >Bây giờ</div>
-                </MenuItem>}
-        </>
+                </li>}
+        </div>
     )
 }
 
