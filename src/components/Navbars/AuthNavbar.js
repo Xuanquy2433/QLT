@@ -48,6 +48,7 @@ const AdminNavbar = () => {
     localStorage.removeItem("cartTemp")
     localStorage.removeItem("countCart")
     localStorage.removeItem("count")
+    window.dispatchEvent(new Event("storage"));
     history.push('/auth/homePage')
     toast.success('Đăng xuất thành công !', { autoClose: 1500 })
     // window.location.reload(false)
@@ -189,7 +190,7 @@ const AdminNavbar = () => {
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
 
-                      <Badge badgeContent={token ? number : local} color="secondary"
+                      <Badge badgeContent={local} color="secondary"
                         anchorOrigin={{
                           vertical: 'top',
                           horizontal: 'left',

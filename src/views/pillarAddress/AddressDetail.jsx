@@ -163,7 +163,15 @@ function AddressDetail() {
             if (response.status === 200) {
                 toast.success("Xoá khỏi danh sách thanh toán thành công", { autoClose: 1300 })
                 getAddress()
-
+                const responseCount = await axios.get(API_GET_CART, {
+                    headers: {
+                        'authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+                window.dispatchEvent(new Event("storage"));
             }
         } else {
             console.log('delete id cart local', id);
@@ -227,7 +235,15 @@ function AddressDetail() {
                         autoClose: 1500
                     })
                     getAddress()
-
+                    const responseCount = await axios.get(API_GET_CART, {
+                        headers: {
+                            'authorization': 'Bearer ' + localStorage.getItem('token'),
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+                    window.dispatchEvent(new Event("storage"));
                     // history.push('/auth/cart')
                 };
             } else {

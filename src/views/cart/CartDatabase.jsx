@@ -151,6 +151,15 @@ function CartDatabase() {
         if (response.status === 200) {
             toast.success("Xoá thành công", { autoClose: 1000 })
             getAllCart()
+            const responseCount = await axios.get(API_GET_CART, {
+                headers: {
+                    'authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+            window.dispatchEvent(new Event("storage"));
         }
     }
 
