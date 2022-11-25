@@ -42,7 +42,6 @@ const AdminNotification = (params) => {
     }
 
     const onMessageReceived = (payload) => {
-        console.log(data.filter((data) => data.checked === false).length)
         getNotification();
     }
 

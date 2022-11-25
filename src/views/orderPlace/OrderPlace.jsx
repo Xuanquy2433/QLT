@@ -111,6 +111,7 @@ function OrderPlace() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const [size, setSize] = React.useState(0);
+    const [data, setData] = useState([])
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -127,15 +128,16 @@ function OrderPlace() {
     }, [])
 
     useEffect(() => {
-        setSize(size)
+
         getOrderUserConfirmed()
     }, [size])
 
 
-    const [data, setData] = useState([])
+
     const getOrderUserConfirmed = async (e) => {
         const response = await axios.get(API_GET_ORDER_ADMIN)
         if (response && response.status === 200) {
+            setSize(size)
             setData(response.data)
         }
     }

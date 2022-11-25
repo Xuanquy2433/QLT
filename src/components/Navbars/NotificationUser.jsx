@@ -63,7 +63,7 @@ function Notification() {
 
 
     const markAsRead = async () => {
-        const response = await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
+         await axios.post(API_GET_MARK_AS_READ + Number(decoded.sub.slice(0, 1)))
     }
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -77,7 +77,7 @@ function Notification() {
     };
 
     useEffect(() => {
-        console.log('go here');
+
     }, [countUser]);
 
 

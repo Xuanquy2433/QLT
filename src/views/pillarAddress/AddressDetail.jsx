@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './css.css'
 import './detail.scss'
+import 'react-input-range/lib/css/index.css'
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,8 +29,11 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button } from "reactstrap";
 import Map from "./UserMap";
+import Nouislider from "nouislider-react";
+import "nouislider/dist/nouislider.css";
 
 import { number } from "yup";
+import InputRange from "react-input-range";
 
 const columns = [
     {
@@ -99,28 +103,26 @@ function AddressDetail() {
         });
     }
 
-    const [randomNumber, setRandomNumber] = useState(0)
-
-    const GenerateRandom = () => {
-        let newValue = Math.floor(Math.random() * 100)
-        while (newValue === randomNumber) {
-            newValue = Math.floor(Math.random() * 100)
-        }
-        setRandomNumber(newValue)
-    }
-
     const history = useHistory();
     const getAddress = async (e) => {
         try {
             if (!token) {
-                const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
+                const response = selected.num1===0 ?
+                    await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
+                :      await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
-                    GenerateRandom()
+
                 }
             } else {
-                const response = await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2, {
+                const response = selected.num1===0? await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN, {
+                    headers: {
+                        'authorization': 'Bearer ' + token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }) : await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2, {
                     headers: {
                         'authorization': 'Bearer ' + token,
                         'Accept': 'application/json',
@@ -130,7 +132,7 @@ function AddressDetail() {
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
-                    GenerateRandom()
+
                 }
             }
 
@@ -334,31 +336,28 @@ function AddressDetail() {
         if (response) {
             setAddressPoint(response.data)
             setMapAddress(response.data)
+            setSelected({
+                num1: addressPoint[0].number,
+                num2: addressPoint[addressPoint.length-1].number,
+                selected: true
+            })
             console.log('address point', addressPoint);
         }
     }
 
 
-    const onClickSelected = (num1, num2) => {
-        setSelected((old) => {
-            return {
-                num1: num1 === old.num1 ? 0 : num1,
-                num2: num1 === old.num2 ? 0 : num2,
-                selected: false
-            }
+    const onchangeRange = (value) => {
+        setSelected({
+            num1: value[0],
+            num2: value[1],
+            selected: true
         })
     }
 
     useEffect(() => {
         getAddress()
         fetchAddressPointData()
-
     }, [])
-
-    useEffect(() => {
-        getAddress()
-    }, [selected])
-
 
     useEffect(() => {
         if (item.id !== null) {
@@ -367,6 +366,14 @@ function AddressDetail() {
         }
 
     }, [item.lat])
+
+    const onchangeRangeCom = (value) => {
+
+        console.log('value', value[0]);
+    }
+ useEffect(() => {
+     getAddress()
+    }, [selected.num1, selected.num2])
 
     return (
         <div >
@@ -378,6 +385,7 @@ function AddressDetail() {
 
                             <div className="header">
                                 <div className="header-logo">Thông tin trụ </div>
+
                                 <nav className="header-nav">
                                     <i className="ion-ios-cart" />
                                     <div />
@@ -385,8 +393,6 @@ function AddressDetail() {
                             </div>
                             <div className="product">
                                 <div style={{ backgroundImage: `url(${address.photosImagePath})` }} className="product-photo">
-                                    {/* <img style={{ width: '50%', height: '20vh' }} src={address.photosImagePath} />
-                                    <img style={{ width: '40%', height: '35vh' }} src={'https://truyenthongacn.com/wp-content/uploads/2022/04/CTY-TRUYEN-THONG-ACN-1222.png'} /> */}
                                 </div>
                                 <div className="product-detail">
                                     <h1 className="product__title">{address.street} </h1>
@@ -394,10 +400,13 @@ function AddressDetail() {
                                     <div className="product__subtitle">
                                         {address.description}
                                     </div>
+
                                     <div>
 
                                     </div>
-                                    <div class="line-loading"></div>
+                                    <div class="line-loading">
+                                        <div>yo</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -413,39 +422,54 @@ function AddressDetail() {
                 }
 
             </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-                {addressPoint.map?.((item, index) => (
-                    <div key={index} className="form-flex">
-                        <div>
-                            {addressPoint.length - 1 > index ?
-                                <div >
-                                    <div
+            {addressPoint.length - 1 > 0 ?
+                <div className='form-range'>
+                    {/*<Nouislider*/}
+                    {/*    maxValue={addressPoint[addressPoint.length-1].number}*/}
+                    {/*    minValue={1}*/}
+                    {/*    formatLabel={value => addressPoint[value-1].name}*/}
+                    {/*    onChange={value => onchangeRange(value)}*/}
+                    {/*    onChangeComplete={value => onchangeRangeCom(value)}*/}
+                    {/*    value={{min:selected.num1===0? 1 :selected.num1,*/}
+                    {/*        max:selected.num2===0?addressPoint[addressPoint.length-1].number : selected.num2 }}*/}
+                    {/*    step={1}*/}
+                    {/*    ariaControls={true}*/}
+                    {/*>*/}
 
-                                        onClick={() => {
-                                            onClickSelected(item.number, addressPoint[index + 1].number)
-                                        }
-                                        }
-                                        style={{ display: "flex" }}>
-                                        <div style={{ padding: "5px", borderRadius: '20%', width: 'auto', backgroundColor: '#E7EBF0', margin: "10px 10px 0 10px" }}>
-                                            {item.name}
-                                        </div>
-                                        <div className={
-                                            item.id === null && selected.num1 === 0 ? "point selected" :
-                                                selected.num1 === item.number ? "point selected" : "point"}
-                                            style={{ width: '100px', height: '10px', marginTop: '20px', }}></div>
-                                        {index === addressPoint.length - 2 ?
-                                            <div style={{ padding: "0px 10px", borderRadius: '20%', width: 'auto', backgroundColor: '#E7EBF0', margin: "10px 10px 0 10px" }}>
-                                                <div>{addressPoint[index + 1].name}</div>
-                                            </div> : null
-                                        }
-                                    </div>
-                                </div>
-                                : null
+                    {/*</Nouislider>*/}
+
+                    <Nouislider
+                        start={[1, addressPoint[addressPoint.length-1].number]}
+                        connect
+                        range={{
+                            min: 1,
+                            max: addressPoint[addressPoint.length-1].number
+                        }}
+
+                        pips={{ mode: "steps", values: addressPoint[addressPoint.length-1].number,
+                            density: 100,
+                            format: {
+                                to: function (value) {
+                                    return addressPoint[value-1].name;
+                                },
+                                from: function (value) {
+                                    return value;
+                                }
                             }
-                        </div>
-                    </div>
-                ))}
-            </div>
+                        }}
+
+                        clickablePips
+                        step={1}
+
+                        onUpdate={value => onchangeRange(value)}
+
+                    >
+
+                    </Nouislider>
+
+                </div> : null
+            }
+
 
             <div>
                 <Modal

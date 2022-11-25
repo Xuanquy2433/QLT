@@ -309,7 +309,7 @@ function Activity() {
                                                 align={'center'}
 
                                             >
-                                                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                                <FormControl variant="standard" sx={{  minWidth: 120, color: 'black', fontWeight: '600', fontSize: '1.1em'}}>
 
                                                     <Select
                                                         labelId="demo-simple-select-standard-label"
@@ -318,9 +318,10 @@ function Activity() {
                                                         onChange={handleChangeStatus}
                                                         label="Age"
                                                         displayEmpty
+                                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                                     >
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value=''>
-                                                            <em  style={{ color: 'black', fontWeight: '600', fontSize: '1em' }}>Trạng Thái</em>
+                                                           Trạng Thái
                                                         </MenuItem>
                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"NEW"}>Mới</MenuItem>
                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"EXTEND"}>Gia hạn</MenuItem>

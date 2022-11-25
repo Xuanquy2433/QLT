@@ -17,6 +17,7 @@ import { API_GET_MARK_AS_READ_ADMIN } from "../../utils/const";
 import axios from "axios";
 import Badge from "@mui/material/Badge";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import AdminSize from "../../views/Realtime/AdminSize";
 
 
 const StyledMenu = styled((props) => (
@@ -64,7 +65,6 @@ const StyledMenu = styled((props) => (
 
 
 function NotificationAdmin() {
-
     const [countAdmin, setCountAdmin] = React.useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -78,12 +78,16 @@ function NotificationAdmin() {
     };
     const markAsRead = async () => {
         await axios.post(API_GET_MARK_AS_READ_ADMIN)
+      setCountAdmin(0)
     }
+
     return (
         <div>
             <div style={{ display: "none" }}>
                 <AdminNotification changeCount={(data) => setCountAdmin(data)} onClickClose={handleClose} />
+
             </div>
+
             <div style={{ display: "flex", alignItems: "center" }}
                 className="notification">
                 <Badge badgeContent={countAdmin} color="secondary"
@@ -92,6 +96,7 @@ function NotificationAdmin() {
                         horizontal: 'left',
                     }}>
                 </Badge >
+
             </div>
 
             <div
