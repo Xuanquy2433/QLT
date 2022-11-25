@@ -64,7 +64,6 @@ const UserNotification = (params) => {
 
     const onMessageReceived = (payload) => {
         getNotification()
-        console.log(payload)
         if (payload.body === "cart") {
             getCartCount()
 

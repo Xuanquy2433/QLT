@@ -126,7 +126,7 @@ $second-font: 'Montserrat', sans-serif;
       }
       &:last-child {
         width: 50%;
-        height: atuo;
+        height: auto;
         animation-name: big;
         animation-duration: 6s;
         animation-iteration-count: infinite;
@@ -257,4 +257,17 @@ $second-font: 'Montserrat', sans-serif;
       }
     }
   }
+}
+
+.form-range {
+  margin: 0 auto;
+  padding: 20px 30px 0;
+
+  @media (min-width: 800px) {
+    max-width: 60%;
+  }
+}
+
+.input-range {
+  margin-bottom: 20px;
 }
