@@ -1,77 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import './css.css'
 import './detail.scss'
-import 'react-input-range/lib/css/index.css'
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+
 import axios from 'axios';
 import {
     API_GET_ADDRESS_POINT_BY_ID,
     API_GET_CART,
-    API_GET_PILLAR
 } from 'utils/const';
 import ProductComponent from "./ProductComponent";
 import { API_GET_ADDRESS_DETAIL_USER } from 'utils/const';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { API_GET_ADDRESS_DETAIL_NOT_TOKEN } from 'utils/const';
-import { showError } from 'utils/error';
 import { API_CART_REMOVE } from 'utils/const';
 import { API_ADD_CART } from 'utils/const';
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { Button } from "reactstrap";
 import Map from "./UserMap";
 import Nouislider from "nouislider-react";
-import "nouislider/dist/nouislider.css";
 
-import { number } from "yup";
-import InputRange from "react-input-range";
-
-const columns = [
-    {
-        id: 'Hình ảnh',
-        label: 'Hình ảnh',
-        minWidth: 170,
-        align: 'left',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'name',
-        label: 'Tên trụ',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'category',
-        label: 'Loai trụ',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'price',
-        label: 'Giá',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'size',
-        label: 'Hành động',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-];
 const style = {
     position: 'absolute',
     top: '50%',
@@ -104,7 +51,7 @@ function AddressDetail() {
     }
 
     const history = useHistory();
-    const getAddress = async (e) => {
+    const getAddress = async () => {
         try {
             if (!token) {
                 const response = selected.num1===0 ?
@@ -152,8 +99,7 @@ function AddressDetail() {
         }
     }
 
-    const onClickRemoveItemCart = async (id, index) => {
-        console.log('id cart', id);
+    const onClickRemoveItemCart = async (id) => {
         if (token) {
             const response = await axios.put(API_CART_REMOVE + id, {}, {
                 headers: {
@@ -214,7 +160,7 @@ function AddressDetail() {
         let listCartItem = []
         let listCartADDItem = []
 
-        if (listCart && listCartADD != undefined) {
+        if (listCart && listCartADD !== undefined) {
             listCartItem = JSON.parse(listCart)
             listCartADDItem = JSON.parse(listCartADD)
         }
@@ -367,13 +313,13 @@ function AddressDetail() {
 
     }, [item.lat])
 
-    const onchangeRangeCom = (value) => {
-
-        console.log('value', value[0]);
-    }
  useEffect(() => {
      getAddress()
     }, [selected.num1, selected.num2])
+
+    function addAdd() {
+        return undefined;
+    }
 
     return (
         <div >
@@ -405,7 +351,7 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                        <div>yo</div>
+                                <button onClick={addAdd()}>add</button>
                                     </div>
                                 </div>
                             </div>
@@ -422,22 +368,8 @@ function AddressDetail() {
                 }
 
             </div>
-            {addressPoint.length - 1 > 0 ?
+            {addressPoint.length - 1 > 1 ?
                 <div className='form-range'>
-                    {/*<Nouislider*/}
-                    {/*    maxValue={addressPoint[addressPoint.length-1].number}*/}
-                    {/*    minValue={1}*/}
-                    {/*    formatLabel={value => addressPoint[value-1].name}*/}
-                    {/*    onChange={value => onchangeRange(value)}*/}
-                    {/*    onChangeComplete={value => onchangeRangeCom(value)}*/}
-                    {/*    value={{min:selected.num1===0? 1 :selected.num1,*/}
-                    {/*        max:selected.num2===0?addressPoint[addressPoint.length-1].number : selected.num2 }}*/}
-                    {/*    step={1}*/}
-                    {/*    ariaControls={true}*/}
-                    {/*>*/}
-
-                    {/*</Nouislider>*/}
-
                     <Nouislider
                         start={[1, addressPoint[addressPoint.length-1].number]}
                         connect
@@ -457,16 +389,12 @@ function AddressDetail() {
                                 }
                             }
                         }}
-
                         clickablePips
                         step={1}
-
                         onUpdate={value => onchangeRange(value)}
 
                     >
-
                     </Nouislider>
-
                 </div> : null
             }
 
