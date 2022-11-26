@@ -116,7 +116,7 @@ function AddressDetail() {
 
                 }
             } else {
-                const response = selected.num1===0? await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN, {
+                const response = selected.num1===0? await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN +  id[0], {
                     headers: {
                         'authorization': 'Bearer ' + token,
                         'Accept': 'application/json',

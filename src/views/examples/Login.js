@@ -64,9 +64,8 @@ const Login = () => {
           toast.success('Đăng nhập thành công', {
             autoClose: 1500
           })
-          
-          // add cart local to database
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
+            //check role user
             if (localStorage.getItem('countCart') == null) {
               const response2 = await axios.get(API_GET_CART, {
                 headers: {
