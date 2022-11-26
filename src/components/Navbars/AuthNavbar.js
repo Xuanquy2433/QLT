@@ -1,4 +1,3 @@
-import { CgMenuBoxed } from 'react-icons/cg';
 import { Link, useHistory } from "react-router-dom";
 import '../Navbars/style.css'
 import Badge from '@mui/material/Badge';
@@ -25,11 +24,10 @@ import Notification from './NotificationUser';
 import { BsSuitHeartFill } from "react-icons/bs";
 import axios from "axios";
 import { API, API_GET_CART } from "../../utils/const";
-import SockJS from "sockjs-client";
-import { over } from "stompjs";
 
 
-let stompClient = null;
+
+
 const AdminNavbar = () => {
 
   let decoded;
@@ -51,8 +49,6 @@ const AdminNavbar = () => {
     window.dispatchEvent(new Event("storage"));
     history.push('/auth/homePage')
     toast.success('Đăng xuất thành công !', { autoClose: 1500 })
-    // window.location.reload(false)
-
   }
 
   const checkRole = () => {
@@ -76,16 +72,7 @@ const AdminNavbar = () => {
     decoded = jwt_decode(token);
   }
 
-  const connect = () => {
-    let Sock = new SockJS(API + '/ws');
-    stompClient = over(Sock);
-    stompClient.connect({}, onConnected, onError);
-    stompClient.debug = () => { };
-  }
 
-  const onConnected = () => {
-    stompClient.subscribe('/user/' + Number(decoded.sub.slice(0, 1)) + '/private', onMessageReceived);
-  }
 
   const [count, setCount] = useState(0);
 
@@ -120,30 +107,11 @@ const AdminNavbar = () => {
       }
     }
   };
-
-  const onMessageReceived = (payload) => {
-    getCartCount()
-  }
-
-  const onError = (err) => {
-    console.log(err);
-  }
-
-  useEffect(() => {
-    connect();
-    getCartCount()
-  }, [count]);
-
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
-            {/* <img
-              alt="..."
-              src={require("../../assets/img/brand/logoDev.png")}
-            /> */}
-            {/* <h3 style={{ fontSize: "2.5em", fontWeight: 800, color: 'white' }}>LOGO</h3> */}
             <div class="typed-animation">
               <h1 style={{ color: 'white', margin: "0" ,borderRadius: "15px "}} class="typed-out">
                 <img className='logo-home'
