@@ -141,7 +141,7 @@ const AdminNavbar = (props) => {
   }
   return (
     <>
-      <Navbar className="navbar-top navcustom-ss navbar-dark" expand="md" id="navbar-main">
+      <Navbar style={{marginBottom:'-5rem'}} className="navbar-top navcustom-ss navbar-dark" expand="md" id="navbar-main">
         <Container fluid>
           <p
             className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
