@@ -145,7 +145,7 @@ const AdminNavbar = () => {
             /> */}
             {/* <h3 style={{ fontSize: "2.5em", fontWeight: 800, color: 'white' }}>LOGO</h3> */}
             <div class="typed-animation">
-              <h1 style={{ color: 'white', margin: "0" }} class="typed-out">
+              <h1 style={{ color: 'white', margin: "0" ,borderRadius: "15px "}} class="typed-out">
                 <img className='logo-home'
                   alt="..."
                   src={require("../../assets/img/brand/1-01-01.png")} />
@@ -174,7 +174,7 @@ const AdminNavbar = () => {
                 </Col>
               </Row>
             </div>
-            <Nav className="ml-auto" navbar>
+            <Nav style={{marginRight:"40px"}} className="ml-auto" navbar >
               <NavItem>
                 <NavLink className="nav-link-icon" to="/" tag={Link}>
                   <i className="ni ni-planet" />
@@ -228,7 +228,7 @@ const AdminNavbar = () => {
 
               {token && decoded ?
                 <div className="menu">
-                  <ul className="menu-item">
+                  <ul className="menu-item" >
                     <li className="menu-item-title">
                       <NavLink onClick={checkRole} className="menu-hover nav-link-icon">
                         <i style={{ marginRight: "4px" }} className="ni ni-single-02" />

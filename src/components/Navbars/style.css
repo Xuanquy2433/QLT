@@ -126,8 +126,9 @@
 }
 
 .logo-home{
-    width: 85px !important;
-    height: auto !important;
+    width: auto !important;
+    height: 80px!important;
+    background-color: white;
 }
 
 
@@ -221,4 +222,17 @@
     text-align: center;
     line-height: 15px;
     color: white;
+}
+
+.navbar-horizontal .navbar-brand {
+    /* font-size: 0.875rem; */
+    /* font-weight: 600; */
+    /* text-transform: uppercase; */
+    /* font-size: 0.875rem; */
+    /* letter-spacing: 0.05px; */
+    /* float: left !important; */
+    position: absolute;
+    /* border-radius: 16px; */
+    left: 0;
+    top: -1.5px;
 }
