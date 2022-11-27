@@ -33,7 +33,6 @@ function HomePage() {
             <div>
                 <About />
             </div>
-
             <div className="social-button" style={{ bottom: '130px', height: '10%' }}>
                 <NavLink to={'#toHome'}>
                     <ToggleButton sx={{
