@@ -7,7 +7,7 @@ import { MenuItem } from '@mui/material';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
 import { API, API_GET_CART } from "../../utils/const";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 
 var stompClient = null;
@@ -74,6 +74,11 @@ const UserNotification = (params) => {
         console.log(err);
     }
 
+    const history = useHistory()
+    const handle = (params, data) => {
+        history.push('/auth/order/' + data.targetId)
+        params.onClickClose()
+    }
 
     useEffect(() => {
         connect();
@@ -83,18 +88,16 @@ const UserNotification = (params) => {
     return (
         <div className='scrollbarNoti' id='style-1'>
             {data.length > 0 ? data?.map((data, index) => (
-                <Fragment>
-                    <NavLink to={'/auth/order/' + data.targetId} >
-                        <MenuItem key={index} onClick={params.onClickClose} sx={{ borderBottom: '1px solid #ddd' }}>
-                            <li>
-                                <div style={{ color: 'black' }} >{data.message}  </div>
-                                <div style={{ color: 'rgb(177, 177, 177)' }} className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
-                            </li>
-                        </MenuItem>
-                    </NavLink>
+                <Fragment key={index} >
+                    <MenuItem onClick={e => handle(params, data)} sx={{ borderBottom: '1px solid #ddd' }}>
+                        <li>
+                            <div style={{ color: 'black' }} >{data.message}  </div>
+                            <div style={{ color: 'rgb(177, 177, 177)' }} className='notification-time' > <Moment fromNow>{data.date}</Moment></div>
+                        </li>
+                    </MenuItem>
                 </Fragment>
             )) :
-                <li >
+                <li>
                     <div  >Hiện không có thông báo ! </div>
                     <div className='notification-time' >Bây giờ</div>
                 </li>}

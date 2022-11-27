@@ -1,4 +1,4 @@
-import { IconButton, InputBase } from '@mui/material';
+import { IconButton, InputBase, ToggleButton } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,18 +16,36 @@ import TableProduct from './TableProduct';
 import BannerSlide from './BannerSlide';
 import About from './About';
 import Categories from './Categories';
+import NorthIcon from '@mui/icons-material/North';
+import ToggleButtonMui from '@mui/material/ToggleButton';
 
 function HomePage() {
 
     return (
         <div  >
-            <BannerSlide />
+            <div id="toHome">
+                <BannerSlide />
+            </div>
             <hr />
             <div>
                 <TableAddress />
             </div>
             <div>
                 <About />
+            </div>
+
+            <div className="social-button" style={{ bottom: '130px', height: '10%' }}>
+                <NavLink to={'#toHome'}>
+                    <ToggleButton sx={{
+                        height: '73%', backgroundColor: 'white', borderRadius: '10px',
+                        '&:hover': {
+                            color: 'grey',
+                            backgroundColor: 'white',
+                        },
+                    }} value="check">
+                        <NorthIcon />
+                    </ToggleButton>
+                </NavLink>
             </div>
             <hr />
             <div className="hotline-phone-ring-wrap">
