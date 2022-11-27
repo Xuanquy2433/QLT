@@ -6,7 +6,7 @@
     top: 20px;
     width: 96%;
     z-index: 20;
-    background-color: rgb(99, 81, 206);
+    background-color: #103f97;
     padding-left: 0 !important;
     padding-right: 0 !important;
     position: relative !important;
@@ -128,7 +128,7 @@
 
 .logo-home{
     width: auto !important;
-    height: 80px!important;
+    height: 81px !important;
     background-color: white;
 }
 

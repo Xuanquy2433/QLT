@@ -29,7 +29,7 @@ function BannerSlide() {
         getData();
     }, [])
     return (
-        <div style={{ width: '1480px', margin: 'auto' , marginTop:'-9rem' }}>
+        <div style={{ width: '1519px', margin: 'auto' , marginTop:'-9rem' }}>
             <Slider  {...settings}>
                 {data.map((i) => (
                     <div >

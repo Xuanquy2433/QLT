@@ -25,14 +25,10 @@ import { BsSuitHeartFill } from "react-icons/bs";
 import axios from "axios";
 import { API, API_GET_CART } from "../../utils/const";
 
-
-
-
 const AdminNavbar = () => {
 
   let decoded;
   const history = useHistory();
-  const [number, setNumber] = useState(0);
   let token = localStorage.getItem("token");
   if (token !== null) {
     decoded = jwt_decode(token);
@@ -72,10 +68,6 @@ const AdminNavbar = () => {
     decoded = jwt_decode(token);
   }
 
-
-
-  const [count, setCount] = useState(0);
-
   const [local, setLocal] = useState(localStorage.getItem("countCart") || 0);
 
   useEffect(() => {
@@ -90,30 +82,13 @@ const AdminNavbar = () => {
     return () => window.removeEventListener("storage", listenStorageChange);
   }, []);
 
-  const getCartCount = async () => {
-    if (token == null) {
-      setCount(JSON.parse(localStorage.getItem("cartTemp")).length);
-      console.log('local', count);
-    } else {
-      const response = await axios.get(API_GET_CART, {
-        headers: {
-          'authorization': 'Bearer ' + localStorage.getItem('token'),
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      })
-      if (response) {
-        setNumber(response.data.length);
-      }
-    }
-  };
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
             <div class="typed-animation">
-              <h1 style={{ color: 'white', margin: "0" ,borderRadius: "15px "}} class="typed-out">
+              <h1 style={{ color: 'white', margin: "0", borderRadius: "15px " }} class="typed-out">
                 <img className='logo-home'
                   alt="..."
                   src={require("../../assets/img/brand/1-01-01.png")} />
@@ -142,7 +117,7 @@ const AdminNavbar = () => {
                 </Col>
               </Row>
             </div>
-            <Nav style={{marginRight:"40px"}} className="ml-auto" navbar >
+            <Nav style={{ marginRight: "40px" }} className="ml-auto" navbar >
               <NavItem>
                 <NavLink className="nav-link-icon" to="/" tag={Link}>
                   <i className="ni ni-planet" />
@@ -150,15 +125,12 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
 
-
-
               {
                 token && decoded.roles === "[ROLE_ADMIN]"
                   ? ""
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
-
-                      <Badge badgeContent={local} color="secondary"
+                      <Badge badgeContent={local}  color="error"
                         anchorOrigin={{
                           vertical: 'top',
                           horizontal: 'left',
@@ -169,8 +141,6 @@ const AdminNavbar = () => {
                     </NavLink>
                   </NavItem>
               }
-
-
 
 
               {token && decoded ?

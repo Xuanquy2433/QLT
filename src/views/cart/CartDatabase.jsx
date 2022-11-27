@@ -15,8 +15,6 @@ import { API_UPDATE_MONTH_CART } from './../../utils/const';
 function CartDatabase() {
 
     const [data, setData] = useState([])
-
-    const [month, setMonth] = useState(1)
     // const [btnOrders, setBtnOrders] = useState('Đặt hàng')
     const [btnDisabled, setBtnDisabled] = useState(false)
     const [showDate, setShowDate] = useState(new Date())
@@ -134,7 +132,6 @@ function CartDatabase() {
         sum += (Number(item.product.price) * Number(item.month))
     })
 
-    const [monthUpdate, setMonthUpdate] = useState(1)
     useEffect(() => {
         getAllCart()
     }, [])
@@ -163,7 +160,6 @@ function CartDatabase() {
         }
     }
 
-
     return (
         <section className="h-custom" style={{ backgroundColor: "white", height: '50vh', marginBottom: '80px', borderRadius: '15px 0 0 15px' }}>
             <div style={{ backgroundColor: 'white', borderRadius: '15px 0 0 15px' }}>
@@ -179,7 +175,7 @@ function CartDatabase() {
                                         <div className="p-5">
                                             <div className="d-flex justify-content-between align-items-center mb-5">
                                                 <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
-                                                <h6 className="mb-0 text-muted" style={{fontWeight: 'bold'}}>Số lượng trụ: {data.length} </h6>
+                                                <h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {data.length} </h6>
                                             </div>
                                             {data.length ?
                                                 <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
