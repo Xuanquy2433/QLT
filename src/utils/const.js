@@ -159,7 +159,7 @@ export const API_DELETE_ADDRESS_POINT = `${API}/addresspoint/address/delete/`
 
 export const API_UPDATE_ADDRESS_POINT = `${API}/addresspoint/address/update/`
 
-
+export const API_ADD_COMBO_TO_CART = `${API}/cart/addtocart_combo`
 
 
 

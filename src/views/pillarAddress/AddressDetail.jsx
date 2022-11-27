@@ -18,6 +18,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Map from "./UserMap";
 import Nouislider from "nouislider-react";
+import {API_ADD_COMBO_TO_CART} from "../../utils/const";
 
 const style = {
     position: 'absolute',
@@ -290,7 +291,15 @@ function AddressDetail() {
             console.log('address point', addressPoint);
         }
     }
-
+    const addComboToCart = async () => {
+        const response = await axios.post(API_ADD_COMBO_TO_CART + '?addressId='+ id[0]+ '&num1='+selected.num1+'&num2='+selected.num2, {},{
+            headers: {
+                'authorization': 'Bearer ' + token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+    }
 
     const onchangeRange = (value) => {
         setSelected({
@@ -351,7 +360,7 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                <button onClick={addAdd()}>add</button>
+                                <button onClick={()=>addComboToCart()}>add</button>
                                     </div>
                                 </div>
                             </div>
