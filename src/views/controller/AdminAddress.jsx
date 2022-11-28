@@ -106,7 +106,6 @@ export default function AdminPillar() {
 
   const onEdit = async (post) => {
     setSelected(post)
-    console.log("selected", post);
     setOpenEdit(true)
   }
 
@@ -151,7 +150,6 @@ export default function AdminPillar() {
   }
 
   const onDelete = async (id) => {
-    console.log("id ", id);
     try {
       const response = await axios.delete(API_DELETE_PILLAR + id)
       if (response && response.status === 201) {

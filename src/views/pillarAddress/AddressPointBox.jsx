@@ -256,33 +256,41 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer sx={{ height: '700px' }}>
               <Table aria-label="sticky table" sx={{height: '30%'}}>
-                <TableHead>
+                <TableHead sx={{borderBottom: '2px solid black'}}>
                   <StyledTableCell>
-                    {updating ? <input type="number" value={updateId} /> : null}
+                    {updating ? updateId  : null}
                   </StyledTableCell>
                   <StyledTableCell>
                     name:
                     <input type="text" value={name} onChange={handleChange} />
-
                   </StyledTableCell>
                   <StyledTableCell>
                     lat:
                     <input type="text" value={lat} />
-
                   </StyledTableCell>
-
                   <StyledTableCell>
                     lng:
                     <input type="text" value={lng} />
                   </StyledTableCell>
-                  <StyledTableCell>
-                    {updating ? <>
-                      <Button onClick={() => { onUpdatePoint(updateId, input) }}>Update</Button>
-                      <Button onClick={() => { onCancelUpdate() }}>X</Button>
-                    </>
-                      : data.length < 2 ? <button onClick={() => addAddressPoint(addressId)}>Thêm</button> : null}
-                  </StyledTableCell>
 
+                    {updating ? <>
+                    <StyledTableCell/>
+                          <StyledTableCell/>
+                          <StyledTableCell>
+                      <Button onClick={() => { onUpdatePoint(updateId, input) }}>Update</Button>
+                            </StyledTableCell>
+                              <StyledTableCell>
+                      <Button onClick={() => { onCancelUpdate() }}>X</Button>
+                        </StyledTableCell>
+                    </>
+                      :  data.length < 2 ?
+                            <>
+                              <StyledTableCell/>
+                              <StyledTableCell> <button onClick={() => addAddressPoint(addressId)}>Thêm</button></StyledTableCell>
+                            </>
+                             : null }
+                </TableHead>
+                <TableBody>
                   {data.map((column) => (
                     <TableRow>
                       <StyledTableCell>
@@ -306,14 +314,12 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
                         </Button>
                       </StyledTableCell>
 
-
-
                       <StyledTableCell>
-                        <Button onnClick={() => {updatePoint(column)
+                        <Button onClick={() => {updatePoint(column)
                         }
 
                         } sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
-                          U
+                          Update
                         </Button>
                       </StyledTableCell>
 
@@ -325,7 +331,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
                     </TableRow>
                   ))
                   }
-                </TableHead>
+                </TableBody>
 
               </Table>
               <Map
