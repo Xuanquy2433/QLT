@@ -333,7 +333,6 @@ function Activity() {
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"PAID"}>Đang thuê</MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"DONE"}>Xong</MenuItem>
                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}value={"CANCELLED"}>Đã hủy</MenuItem>
-
                                                     </Select>
                                                 </FormControl>
                                             </TableCell>

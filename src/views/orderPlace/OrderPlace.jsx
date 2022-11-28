@@ -76,7 +76,7 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'Status',
+        id: 'status',
         label: 'Trạng thái',
         minWidth: 100,
         align: 'center',
@@ -264,8 +264,6 @@ function OrderPlace() {
         }
     };
 
-    const [keyword, setKeyword] = React.useState('');
-
     const search = async (e) => {
         const response = await axios.get(API_GET_ORDER_ADMIN + '?keyword=' + e.target.value)
         if (response && response.status === 200) {
@@ -282,7 +280,7 @@ function OrderPlace() {
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button> */}
-                        <Grid item xs={9}>
+                        <Grid item xs={8}>
                             <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '5px 7px 5px 7px', marginBottom: '20px', borderRadius: '7px' }}>
                                 <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                     <SearchIcon />
@@ -294,39 +292,17 @@ function OrderPlace() {
                                 />
                             </Paper>
                         </Grid>
-                        {/* <Button onClick={search} sx={{ width: '15%', marginLeft: '1%', height: '6.3vh' }} variant="contained" color="success">
-                            Tìm kiếm
-                        </Button> */}
-                        <Grid item xs={3}>
-                            <FormControl sx={{ m: 1, width: "100%" }} size="small">
-                                <InputLabel id="demo-select-small">Trạng thái</InputLabel>
-                                <Select
-                                    labelId="demo-select-small"
-                                    id="demo-select-small"
-                                    value={status}
-                                    label="status"
-                                    onChange={handleChange}>
-                                    <MenuItem value={'ALL'}>Tất cả</MenuItem>
-                                    <MenuItem value={'NEW'}>Mới </MenuItem>
-                                    <MenuItem value={'CANCELLED'}>Đã hủy </MenuItem>
-                                    <MenuItem value={'DONE'}>Xong </MenuItem>
-                                    <MenuItem value={'USER_CONFIRMED'}>Đã xác nhận </MenuItem>
-                                    <MenuItem value={'PAID'}>Đang thuê</MenuItem>
-                                    <MenuItem value={'EXTEND'}>Gia hạn</MenuItem>
-                                </Select>
-                            </FormControl>
+                        <Grid item xs={4} style={{display: 'flex', flexDirection:"row"}}>
+                            <input name="date1" style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date1'  type="date" />
+                            <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2'  type="date" />
                         </Grid>
-
-
                     </Grid>
-
-                    {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
-                    {/* stickyHeader */}
                     <TableContainer sx={{ minHeight: '29em' }}>
                         <Table aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (
+                                         column.id!=="status" ?
                                         <TableCell
                                             sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                             key={column.id}
@@ -335,6 +311,35 @@ function OrderPlace() {
                                         >
                                             {column.label}
                                         </TableCell>
+                                             :
+                                             <TableCell
+                                                 align={'center'}
+
+                                             >
+                                                 <FormControl variant="standard" sx={{  minWidth: 120, color: 'black', fontWeight: '600', fontSize: '1.1em'}}>
+
+                                                     <Select
+                                                         labelId="demo-simple-select-standard-label"
+                                                         id="demo-simple-select-standard"
+                                                         value={status}
+                                                         onChange={handleChange}
+                                                         label="Age"
+                                                         displayEmpty
+                                                         sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                     >
+                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value=''>
+                                                             Trạng Thái
+                                                         </MenuItem>
+                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"NEW"}>Mới</MenuItem>
+                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"EXTEND"}>Gia hạn</MenuItem>
+                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"USER_CONFIRMED"}>Chờ admin phê duyệt</MenuItem>
+                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"PAID"}>Đang thuê</MenuItem>
+                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"DONE"}>Xong</MenuItem>
+                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}value={"CANCELLED"}>Đã hủy</MenuItem>
+
+                                                     </Select>
+                                                 </FormControl>
+                                             </TableCell>
                                     ))}
                                 </TableRow>
                             </TableHead>
