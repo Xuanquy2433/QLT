@@ -18,7 +18,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Map from "./UserMap";
 import Nouislider from "nouislider-react";
-import {API_ADD_COMBO_TO_CART} from "../../utils/const";
+import { API_ADD_COMBO_TO_CART } from "../../utils/const";
+import { Button } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -56,16 +57,16 @@ function AddressDetail() {
     const getAddress = async () => {
         try {
             if (!token) {
-                const response = selected.num1===0 ?
+                const response = selected.num1 === 0 ?
                     await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
-                :      await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
+                    : await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
                 }
 
             } else {
-                const response = selected.num1===0? await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN +  id[0], {
+                const response = selected.num1 === 0 ? await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0], {
                     headers: {
                         'authorization': 'Bearer ' + token,
                         'Accept': 'application/json',
@@ -81,7 +82,7 @@ function AddressDetail() {
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
-                    setCount(response.data.product.filter(product => product.status ==="AVAILABLE" && product.inCart !==true ).length)
+                    setCount(response.data.product.filter(product => product.status === "AVAILABLE" && product.inCart !== true).length)
 
                 }
             }
@@ -287,28 +288,25 @@ function AddressDetail() {
             setMapAddress(response.data)
             setSelected({
                 num1: addressPoint[0].number,
-                num2: addressPoint[addressPoint.length-1].number,
+                num2: addressPoint[addressPoint.length - 1].number,
                 selected: true
             })
             console.log('address point', addressPoint);
         }
     }
     const addComboToCart = async () => {
-        const response = await axios.post(API_ADD_COMBO_TO_CART + '?addressId='+ id[0]+ '&num1='+selected.num1+'&num2='+selected.num2, {},{
+        const response = await axios.post(API_ADD_COMBO_TO_CART + '?addressId=' + id[0] + '&num1=' + selected.num1 + '&num2=' + selected.num2, {}, {
             headers: {
                 'authorization': 'Bearer ' + token,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
-        if(response.status === 201){
+        if (response.status === 201) {
             getAddress()
-            toast.success('Đã thêm vào danh sách thanh toán', {
-                autoClose: 1500
+            toast.success('Đã thêm tất cả trụ vào danh sách thanh toán', {
+                autoClose: 1200,
             })
-
-
-
         }
     }
 
@@ -333,8 +331,8 @@ function AddressDetail() {
 
     }, [item.lat])
 
- useEffect(() => {
-     getAddress()
+    useEffect(() => {
+        getAddress()
     }, [selected.num1, selected.num2])
 
     function addAdd() {
@@ -371,7 +369,7 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                        {count>0?   <button onClick={()=>addComboToCart()}>thêm {count} vào giỏ</button>:null}
+                                        {count > 0 ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
 
                                     </div>
                                 </div>
@@ -392,18 +390,19 @@ function AddressDetail() {
             {addressPoint.length - 1 > 1 ?
                 <div className='form-range'>
                     <Nouislider
-                        start={[1, addressPoint[addressPoint.length-1].number]}
+                        start={[1, addressPoint[addressPoint.length - 1].number]}
                         connect
                         range={{
                             min: 1,
-                            max: addressPoint[addressPoint.length-1].number
+                            max: addressPoint[addressPoint.length - 1].number
                         }}
 
-                        pips={{ mode: "steps", values: addressPoint[addressPoint.length-1].number,
+                        pips={{
+                            mode: "steps", values: addressPoint[addressPoint.length - 1].number,
                             density: 100,
                             format: {
                                 to: function (value) {
-                                    return addressPoint[value-1].name;
+                                    return addressPoint[value - 1].name;
                                 },
                                 from: function (value) {
                                     return value;
@@ -417,7 +416,6 @@ function AddressDetail() {
                     </Nouislider>
                 </div> : null
             }
-
 
             <div>
                 <Modal
@@ -441,10 +439,8 @@ function AddressDetail() {
             </div>
             {dataAddressProduct.length > 0 ?
                 <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
-                : <div style={{ width: `100px` }}> Không có trụ ở đoạn đường này</div>
+                : <div style={{ width: `300px`, margin: 'auto', color: 'white', fontSize: '1em' }}> Chưa có trụ nào ở đoạn đường này !</div>
             }
-
-
         </div>
     )
 }
