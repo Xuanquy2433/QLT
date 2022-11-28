@@ -81,7 +81,7 @@ function AddressDetail() {
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
-                    setCount(response.data.product.filter(product => product.status ==="AVAILABLE").length)
+                    setCount(response.data.product.filter(product => product.status ==="AVAILABLE" && product.inCart !==true ).length)
 
                 }
             }
@@ -301,6 +301,15 @@ function AddressDetail() {
                 'Content-Type': 'application/json'
             }
         })
+        if(response.status === 201){
+            getAddress()
+            toast.success('Đã thêm vào danh sách thanh toán', {
+                autoClose: 1500
+            })
+
+
+
+        }
     }
 
     const onchangeRange = (value) => {
@@ -362,7 +371,8 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                <button onClick={()=>addComboToCart()}>thêm {count} vào giỏ</button>
+                                        {count>0?   <button onClick={()=>addComboToCart()}>thêm {count} vào giỏ</button>:null}
+
                                     </div>
                                 </div>
                             </div>

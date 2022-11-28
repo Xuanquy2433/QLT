@@ -6,14 +6,17 @@ const ProductStatus = (params) => {
   const [status, setStatus] = useState([{
         status: "USER_CONFIRMED",
         color: "blue",
+    text: "Chờ admin phê duyệt"
       },
-        {status:"NEW",color: "purple"},
-        {status:"DONE",color: "green"},
-        {status:"CANCELLED",color: "red"},
-        {status:"PAID",color: "orange"},
-        {status:"EXTEND",color: "pink"},
+        {status:"NEW",color: "purple",text:"Mới"},
+        {status:"DONE",color: "green",text:"Đã xong"},
+        {status:"CANCELLED",color: "red",text:"Đã hủy"},
+        {status:"PAID",color: "orange",text:"Đang thuê"},
+        {status:"EXTEND",color: "pink",text:"Gia hạn"},
       ]
   );
+
+
   const setProductStatus = (s) => {
     status.some(item => item.status ===s ? setData(item) : null)
     }
@@ -25,7 +28,7 @@ const ProductStatus = (params) => {
 
   return (
         <div style={{color: data.color, fontWeight: '600',textAlign: 'center'}}>
-          {data.status}
+          {data.text}
           </div>
   )
 

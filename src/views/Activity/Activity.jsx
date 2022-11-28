@@ -259,10 +259,10 @@ function Activity() {
         <div style={{ marginTop: '50px' }} className='activity'>
             <div className='activity-content'>
                 <div className='activity-title'>
-                    Đây là trang hoạt động của bạn
+
                 </div>
                 <div className="activity-decription">
-                    Bạn có thể xem lịch sử đặt hàng và đơn hàng đã đặt của bạn.
+                    Bạn có thể xem lịch sử đặt hàng và đơn hàng đã đặt của bạn ở đây.
                 </div>
             </div>
 
@@ -272,8 +272,12 @@ function Activity() {
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
                             <Tab label="Trụ đang thuê" value="2" />
-                            <Tab label="Trụ đã sắp hết hạn" value="3" />
-                            <Tab label="Trụ đã hết hạn" value="4" />
+                            {dataOrderDetailExpried.length > 0 ?
+                                <>
+                                    <Tab label="Trụ đã sắp hết hạn" value="3"/>
+                                    <Tab label="Trụ đã hết hạn" value="4"/></>:null
+
+                            }
                         </TabList>
                     </Box>
                     <TabPanel value="1">
@@ -370,12 +374,18 @@ function Activity() {
                             onchangeMonth={onchangeMonth} showExtend={showExtend} setShowCheckbox={setShowCheckbox} setShowExtend={setShowExtend}
                             handleClickOpen={handleClickOpen} handleChangeCheckbox={handleChangeCheckbox} month={month} />
                     </TabPanel>
-                    <TabPanel value='3'>
-                        <AboutToExpire columns4={columns4} dataOrderDetailExpired={dataOrderDetailExpried} />
-                    </TabPanel>
-                    <TabPanel value='4'>
-                        <Expired columns4={columns4} dataOrderDetailExpired={dataOrderDetailExpried} />
-                    </TabPanel>
+                    {dataOrderDetailExpried.length > 0 ?
+                        <TabPanel value='3'>
+                            <AboutToExpire columns4={columns4}
+                                           dataOrderDetailExpired={dataOrderDetailExpried}/>
+                        </TabPanel> :null
+                    }
+                    {dataOrderDetailExpried.length > 0 ?
+                        <TabPanel value='4'>
+                            <Expired columns4={columns4}
+                                     dataOrderDetailExpired={dataOrderDetailExpried}/>
+                        </TabPanel>:null
+                    }
                 </TabContext>
             </Box>
             {/* confirm value 2  */}

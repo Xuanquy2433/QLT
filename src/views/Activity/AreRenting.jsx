@@ -75,12 +75,17 @@ function AreRenting({ columns2, dataOrderDetail, showCheckbox, onchangeMonth, sh
                 </TableContainer>
             </Paper>
             {showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                <Button onClick={e => {
-                    setShowCheckbox(true)
-                    setShowExtend(false)
-                }} variant="contained" color="success">
-                    Gia hạn
-                </Button>
+                    {dataOrderDetail.length > 0?
+                        < Button onClick={e => {
+                        setShowCheckbox(true)
+                        setShowExtend(false)
+                    }} variant="contained" color="success">
+                        Gia hạn
+                        </Button> :
+                        <NavLink to={'/auth/homePage'} className="text-body">
+                            <Button variant="contained" color="success" disabled>Mua hàng</Button>
+                        </NavLink>
+                    }
             </Grid> :
                 <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
                     <Button onClick={handleClickOpen} variant="contained" color="success">

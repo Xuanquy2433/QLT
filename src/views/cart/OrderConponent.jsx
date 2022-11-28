@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import OrderDetailComponent from "./orderDetailComponent";
 import Moment from 'react-moment';
 import { formatMoney } from 'common/formatMoney';
+import OrderStatus from "../../components/OrderStatus";
 
 function Order({ order, ya,updatingComponent}) {
 
@@ -68,7 +69,7 @@ function Order({ order, ya,updatingComponent}) {
                       <p className="font-italic text-muted mb-0 small">Tổng cộng : {formatMoney(order.total)} VNĐ</p>
                       <div className="d-flex align-items-center mt-1">
                         <h6 className="font-weight-bold my-2">Số lượng : {order.quantity}</h6>
-                        <h6 className="font-weight-bold my-2 ml-8">Trạng thái : {order.status}</h6>
+                        <h6 className="font-weight-bold my-2 ml-8">Trạng thái : <OrderStatus status={order.status}/></h6>
 
 
                       </div>
