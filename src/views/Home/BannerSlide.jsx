@@ -29,7 +29,7 @@ function BannerSlide() {
         getData();
     }, [])
     return (
-        <div style={{ width: '100vw', height: '100vh', overflow: "hidden", margin: 'auto', marginTop: '-9rem' }}>
+        <div style={{ width: '98.5vw', height: '100vh', overflow: "hidden", margin: 'auto', marginTop: '-9rem' }}>
             <Slider  {...settings}>
                 {data.map((i, index) => (
                     <div key={index}>
