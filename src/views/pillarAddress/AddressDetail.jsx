@@ -52,6 +52,7 @@ function AddressDetail() {
     }
 
     const history = useHistory();
+    const [count, setCount] = useState(null);
     const getAddress = async () => {
         try {
             if (!token) {
@@ -61,8 +62,8 @@ function AddressDetail() {
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
-
                 }
+
             } else {
                 const response = selected.num1===0? await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN +  id[0], {
                     headers: {
@@ -80,6 +81,7 @@ function AddressDetail() {
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
                     setAddress(response.data.address)
+                    setCount(response.data.product.filter(product => product.status ==="AVAILABLE").length)
 
                 }
             }
@@ -360,7 +362,7 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                <button onClick={()=>addComboToCart()}>add</button>
+                                <button onClick={()=>addComboToCart()}>thêm {count} vào giỏ</button>
                                     </div>
                                 </div>
                             </div>
@@ -401,7 +403,6 @@ function AddressDetail() {
                         clickablePips
                         step={1}
                         onUpdate={value => onchangeRange(value)}
-
                     >
                     </Nouislider>
                 </div> : null
