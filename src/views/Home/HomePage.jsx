@@ -37,10 +37,6 @@ function HomePage() {
     // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         document.body.scrollTop = 0;
-        rootElement.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
         document.documentElement.scrollTop = 0;
     }
     return (
@@ -83,14 +79,14 @@ function HomePage() {
                     </a>
                 </div>
             </div>
-            <div className="social-button" style={{ bottom: '130px', height: '10%' }}>
+            <div className="social-button" style={{ height: '10%' }}>
                 <NavLink to={'#toHome'}>
                     <ToggleButton onClick={topFunction} id="btn-to-top" sx={{
                         display: "none",
                         bottom: "20px",
                         right: "80px",
                         position: "fixed",
-                        transition: " all 0.5s ease",
+                        behavior: "smooth",
 
                         backgroundColor: 'white', borderRadius: '10px',
                         '&:hover': {
