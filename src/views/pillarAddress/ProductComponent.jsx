@@ -197,7 +197,7 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) 
             count={count} page={page} color="secondary" onChange={handleChange} />
         </Stack> */}
         <div style={{
-          display: "flex", width: '1300px', flexWrap: "wrap", justifyContent: "center"
+          display: "flex", width: '100%', flexWrap: "wrap", justifyContent: "center"
           , marginTop: '50px', marginBottom: '70px'
         }}>
           {
