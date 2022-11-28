@@ -32,7 +32,7 @@ import {
 import AddressPointBox from "./AddressPointBox";
 import { Fragment } from 'react';
 const columns = [
-    { id: 'add', label: 'Map', minWidth: 70 },
+    // { id: 'add', label: 'Map', minWidth: 70 },
     { id: 'Id', label: 'Id', minWidth: 70 },
     { id: 'image', label: 'Hình ảnh', align: 'center', minWidth: 100 },
     { id: 'City', label: 'Thành phố', align: 'center', minWidth: 100 },
@@ -147,10 +147,10 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
                                     // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
-                                            <TableCell sx={{ textAlign: 'left', color: 'green', cursor: 'pointer' }}>
+                                            {/* <TableCell sx={{ textAlign: 'left', color: 'green', cursor: 'pointer' }}>
                                                 <AddLocationAltIcon onClick={() => openDetailPoint(item.id)}>
                                                 </AddLocationAltIcon>
-                                            </TableCell>
+                                            </TableCell> */}
                                             <TableCell>{item.id}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>
                                                 <img style={{ width: '50px', height: '50px' }} src={item.photosImagePath} alt="" />
@@ -202,7 +202,7 @@ export default function Address({ handleOpenDelete, handleCloseDelete, openDelet
                                     aria-labelledby="modal-modal-title"
                                     aria-describedby="modal-modal-description"
                                 >
-                                  <Box className='form-add-address'
+                                    <Box className='form-add-address'
                                         sx={{
                                             width: '40%',
                                             position: 'relative',

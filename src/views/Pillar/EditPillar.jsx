@@ -232,8 +232,16 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                 ))}
                             </Select>
                         </FormControl>
-                        <TextField defaultValue='' value={dataEdit.lat} name="lat" style={{ margin: '5px' }} fullWidth />
-                        <TextField defaultValue='' value={dataEdit.lng} name="lng" style={{ margin: '5px' }} fullWidth />
+                        <TextField inputProps={{
+                            style: {
+                                padding: 7
+                            }
+                        }} defaultValue='' value={dataEdit.lat} name="lat" style={{ margin: '5px' }} fullWidth />
+                        <TextField inputProps={{
+                            style: {
+                                padding: 7
+                            }
+                        }} defaultValue='' value={dataEdit.lng} name="lng" style={{ padding: "5px 0px", margin: '5px' }} fullWidth />
                         <FormControl fullWidth sx={{ margin: "5px" }}>
                             <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
                             <Select
@@ -268,33 +276,17 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                 ))}
                             </Select>
                         </FormControl>
-                        <TextField inputProps={{
-                            style: {
-                                padding: 5
-                            }
-                        }} value={dataEdit.description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
+                        <TextField value={dataEdit.description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
                         <TextField
-                            inputProps={{
-                                style: {
-                                    padding: 5
-                                }
-                            }} value={dataEdit.price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
+                            value={dataEdit.price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
                         <TextField
-                            inputProps={{
-                                style: {
-                                    padding: 5
-                                }
-                            }} value={dataEdit.name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
+                            value={dataEdit.name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
 
 
                         <img style={{ width: "20px" }} src={dataEdit.multipartFile} alt="" />
 
                         <TextField
-                            inputProps={{
-                                style: {
-                                    padding: 5
-                                }
-                            }} onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
+                            onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
                     </div>
                     <div className="content-2">
                         <Map
