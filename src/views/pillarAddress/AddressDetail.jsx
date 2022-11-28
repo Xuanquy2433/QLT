@@ -19,6 +19,7 @@ import Modal from "@mui/material/Modal";
 import Map from "./UserMap";
 import Nouislider from "nouislider-react";
 import { API_ADD_COMBO_TO_CART } from "../../utils/const";
+import { Button } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -303,12 +304,9 @@ function AddressDetail() {
         })
         if (response.status === 201) {
             getAddress()
-            toast.success('Đã thêm vào danh sách thanh toán', {
-                autoClose: 1500
+            toast.success('Đã thêm tất cả sản phẩm vào danh sách thanh toán', {
+                autoClose: 1200,
             })
-
-
-
         }
     }
 
@@ -371,7 +369,7 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                        {count > 0 ? <button onClick={() => addComboToCart()}>thêm {count} vào giỏ</button> : null}
+                                        {count > 0 ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => addComboToCart()}>Thêm tất cả sản phẩm ({count}) </Button> : null}
 
                                     </div>
                                 </div>
@@ -419,7 +417,6 @@ function AddressDetail() {
                 </div> : null
             }
 
-
             <div>
                 <Modal
                     open={open}
@@ -442,10 +439,8 @@ function AddressDetail() {
             </div>
             {dataAddressProduct.length > 0 ?
                 <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
-                : <div style={{ width: `300px`,margin: 'auto',color: 'white',fontSize: '1em' }}> Chưa có trụ nào ở đoạn đường này !</div>
+                : <div style={{ width: `300px`, margin: 'auto', color: 'white', fontSize: '1em' }}> Chưa có trụ nào ở đoạn đường này !</div>
             }
-
-
         </div>
     )
 }
