@@ -32,10 +32,15 @@ function HomePage() {
             mybutton.style.display = "none";
         }
     }
+    var rootElement = document.documentElement;
 
     // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         document.body.scrollTop = 0;
+        rootElement.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
         document.documentElement.scrollTop = 0;
     }
     return (
@@ -85,6 +90,7 @@ function HomePage() {
                         bottom: "20px",
                         right: "80px",
                         position: "fixed",
+                        transition: " all 0.5s ease",
 
                         backgroundColor: 'white', borderRadius: '10px',
                         '&:hover': {
@@ -99,7 +105,7 @@ function HomePage() {
 
             {/* <TableProduct /> */}
 
-        </div>
+        </div >
 
 
 
