@@ -1,5 +1,6 @@
 .de {
     width: 80vw;
+    margin: auto;
 }
 .de .card {
     border: none;
