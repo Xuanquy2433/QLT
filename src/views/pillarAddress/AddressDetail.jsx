@@ -304,7 +304,7 @@ function AddressDetail() {
         })
         if (response.status === 201) {
             getAddress()
-            toast.success('Đã thêm tất cả sản phẩm vào danh sách thanh toán', {
+            toast.success('Đã thêm tất cả trụ vào danh sách thanh toán', {
                 autoClose: 1200,
             })
         }
@@ -369,7 +369,7 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                        {count > 0 ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => addComboToCart()}>Thêm tất cả sản phẩm ({count}) </Button> : null}
+                                        {count > 0 ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
 
                                     </div>
                                 </div>
