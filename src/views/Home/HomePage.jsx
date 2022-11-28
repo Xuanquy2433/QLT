@@ -20,7 +20,24 @@ import NorthIcon from '@mui/icons-material/North';
 import ToggleButtonMui from '@mui/material/ToggleButton';
 
 function HomePage() {
+    let mybutton = document.getElementById("btn-to-top");
 
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
     return (
         <div  >
             <div id="toHome">
@@ -33,19 +50,7 @@ function HomePage() {
             <div>
                 <About />
             </div>
-            <div className="social-button" style={{ bottom: '130px', height: '10%' }}>
-                <NavLink to={'#toHome'}>
-                    <ToggleButton sx={{
-                        height: '73%', backgroundColor: 'white', borderRadius: '10px',
-                        '&:hover': {
-                            color: 'grey',
-                            backgroundColor: 'white',
-                        },
-                    }} value="check">
-                        <NorthIcon />
-                    </ToggleButton>
-                </NavLink>
-            </div>
+
             <hr />
             <div className="hotline-phone-ring-wrap">
                 <div className="hotline-phone-ring">
@@ -73,7 +78,24 @@ function HomePage() {
                     </a>
                 </div>
             </div>
+            <div className="social-button" style={{ bottom: '130px', height: '10%' }}>
+                <NavLink to={'#toHome'}>
+                    <ToggleButton onClick={topFunction} id="btn-to-top" sx={{
+                        display: "none",
+                        bottom: "20px",
+                        right: "80px",
+                        position: "fixed",
 
+                        backgroundColor: 'white', borderRadius: '10px',
+                        '&:hover': {
+                            color: 'grey',
+                            backgroundColor: 'white',
+                        },
+                    }} value="check">
+                        <NorthIcon />
+                    </ToggleButton>
+                </NavLink>
+            </div>
 
             {/* <TableProduct /> */}
 
