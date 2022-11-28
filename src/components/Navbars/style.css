@@ -14,6 +14,9 @@
     margin-bottom: 12rem;
 }
 
+.navbar .container{
+    justify-content: end;
+}
 
 .menu-lv2-noti NotificationsNoneIcon {
     font-size: 30px;
