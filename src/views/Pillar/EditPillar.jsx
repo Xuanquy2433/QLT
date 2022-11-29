@@ -184,19 +184,84 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
         >
             <Box className='form-add-product'
                 sx={{
-                    width: '40%',
+                    width: '100%',
                     position: 'relative',
                     transform: "translate(-50%, -50%)",
                     backgroundColor: 'white',
                     padding: '10px',
                     top: "50%",
-                    left: "50%"
+                    left: "50%",
+                    height: "89% !important"
                 }}
             >
                 <h2 style={{ textAlign: 'center' }}>Sửa thông tin trụ</h2>
                 <div className='modal-contents'>
+                    <div style={{ display: 'flex', flexDirection: "column",maxHeight:"100%", overflowY:"auto" }} className="form-flex content-1">
+                        <TextField
+                            onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
+                        <TextField
+                            value={dataEdit.name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
+                        <img style={{ width: "20px" }} src={dataEdit.multipartFile} alt="" />
+                        <TextField
+                            value={dataEdit.price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
+                        <TextField value={dataEdit.description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
+                        <FormControl fullWidth sx={{ margin: "5px" }}>
+                            <InputLabel id="demo-simple-select-label">Loại trụ</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dataEdit.categoryId}
+                                label="Mã địa chỉ"
+                                onChange={handleChangeCategory}
+                            >
+                                {dataCategory.map((item, index) => (
+                                    <MenuItem
+                                        key={index} value={item.id}>{item.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl fullWidth sx={{ margin: "5px" }}>
+                            <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                MenuProps={MenuProps}
+                                value={dataEdit.status}
+                                label="Mã địa chỉ"
+                                onChange={handlChangeStatus}
+                            >
+                                {statusO.map((item, index) => (
+                                    <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
+                                ))}
 
-                    <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex content-1">
+                            </Select>
+                        </FormControl>
+                        <TextField inputProps={{
+                            style: {
+                                padding: 7
+                            }
+                        }} defaultValue='' value={dataEdit.lng} name="lng" style={{ padding: "5px 0px", margin: '5px' }} fullWidth />
+                        <TextField inputProps={{
+                            style: {
+                                padding: 7
+                            }
+                        }} defaultValue='' value={dataEdit.lat} name="lat" style={{ margin: '5px' }} fullWidth />
+                        <FormControl fullWidth sx={{ margin: "5px" }}>
+                            <InputLabel id="demo-simple-select-label">Mã địa chỉ</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dataEdit.addressId}
+                                defaultValue={addressId}
+                                label="Mã địa chỉ"
+                                MenuProps={MenuProps}
+                                onChange={handleChangeAddress}
+                            >
+                                {dataAddress.map((item, index) => (
+                                    <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                         {addressPoint.map?.((item, index) => (
                             <div key={index} style={{ display: 'flex', flexDirection: "column", margin: "10px" }} className="form-flex">
                                 <div>
@@ -215,78 +280,6 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                 </div>
                             </div>
                         ))}
-
-                        <FormControl fullWidth sx={{ margin: "5px" }}>
-                            <InputLabel id="demo-simple-select-label">Mã địa chỉ</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={dataEdit.addressId}
-                                defaultValue={addressId}
-                                label="Mã địa chỉ"
-                                MenuProps={MenuProps}
-                                onChange={handleChangeAddress}
-                            >
-                                {dataAddress.map((item, index) => (
-                                    <MenuItem key={index} value={item.id}>{item.city} {item.street}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <TextField inputProps={{
-                            style: {
-                                padding: 7
-                            }
-                        }} defaultValue='' value={dataEdit.lat} name="lat" style={{ margin: '5px' }} fullWidth />
-                        <TextField inputProps={{
-                            style: {
-                                padding: 7
-                            }
-                        }} defaultValue='' value={dataEdit.lng} name="lng" style={{ padding: "5px 0px", margin: '5px' }} fullWidth />
-                        <FormControl fullWidth sx={{ margin: "5px" }}>
-                            <InputLabel id="demo-simple-select-label">Mã trạng thái</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                MenuProps={MenuProps}
-                                value={dataEdit.status}
-                                label="Mã địa chỉ"
-                                onChange={handlChangeStatus}
-                            >
-                                {statusO.map((item, index) => (
-                                    <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
-                                ))}
-
-                            </Select>
-                        </FormControl>
-
-
-
-                        <FormControl fullWidth sx={{ margin: "5px" }}>
-                            <InputLabel id="demo-simple-select-label">Loại trụ</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={dataEdit.categoryId}
-                                label="Mã địa chỉ"
-                                onChange={handleChangeCategory}
-                            >
-                                {dataCategory.map((item, index) => (
-                                    <MenuItem
-                                        key={index} value={item.id}>{item.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <TextField value={dataEdit.description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
-                        <TextField
-                            value={dataEdit.price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
-                        <TextField
-                            value={dataEdit.name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
-
-
-                        <img style={{ width: "20px" }} src={dataEdit.multipartFile} alt="" />
-
-                        <TextField
-                            onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
                     </div>
                     <div className="content-2">
                         <Map
