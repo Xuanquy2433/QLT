@@ -196,12 +196,12 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
             >
                 <h2 style={{ textAlign: 'center' }}>Sửa thông tin trụ</h2>
                 <div className='modal-contents'>
-                    <div style={{ display: 'flex', flexDirection: "column",maxHeight:"100%", overflowY:"auto" }} className="form-flex content-1">
+                    <div style={{ display: 'flex', flexDirection: "column",maxHeight:"100%" }} className="form-flex content-1">
                         <TextField
                             onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image*/*" />
                         <TextField
                             value={dataEdit.name} onChange={onChangeText} name="name" style={{ margin: '5px' }} fullWidth label='Tên' />
-                        <img style={{ width: "20px" }} src={dataEdit.multipartFile} alt="" />
+                        {/* <img style={{ width: "20px" }} src={dataEdit.multipartFile} alt="" /> */}
                         <TextField
                             value={dataEdit.price} type="number" onChange={onChangeText} name="price" style={{ margin: '5px' }} fullWidth label='Giá' />
                         <TextField value={dataEdit.description} onChange={onChangeText} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />

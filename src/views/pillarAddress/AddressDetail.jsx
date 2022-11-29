@@ -30,7 +30,7 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    padding: '1px 10px 10px 10px'
 };
 
 function AddressDetail() {
@@ -425,6 +425,7 @@ function AddressDetail() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
+                        <div onClick={e => setOpen(false)} style={{ textAlign: 'right',color: 'red',cursor: 'pointer',fontWeight: '700',fontSize:'1.2em' }}>X</div>
                         <Map
                             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                             loadingElement={<div style={{ height: `100%` }} />}
@@ -439,7 +440,7 @@ function AddressDetail() {
             </div>
             {dataAddressProduct.length > 0 ?
                 <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
-                : <div style={{ width: `300px`, margin: 'auto', color: 'white', fontSize: '1em' }}> Chưa có trụ nào ở đoạn đường này !</div>
+                : <div style={{ width: `300px`, color: 'white', fontSize: '1.1em', margin: '50px auto auto auto', }}> Chưa có trụ nào ở đoạn đường này !</div>
             }
         </div>
     )

@@ -89,6 +89,8 @@ function CartDatabase() {
                     toast.success('Đặt trụ thành công', {
                         autoClose: 1500
                     })
+                    localStorage.setItem('countCart', JSON.stringify(0));
+                    window.dispatchEvent(new Event("storage"));
                     const responseCoolDown = await axios.get(API_START_COOL_DOWN + response.data.message.replace(/\D/g, ""))
                     setTimeout(() => {
                         history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))

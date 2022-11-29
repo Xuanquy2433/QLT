@@ -36,6 +36,7 @@ if (token && decoded.roles == '[ROLE_ADMIN]') {
 } else if (!token && !decoded) {
   document.title = "ACN | Trụ quảng cáo";
 }
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.Fragment>

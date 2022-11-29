@@ -183,13 +183,13 @@ export default function Pillar({ handleOpenDelete, openDelete, search, handleClo
                                                                 setId(item.id)
                                                             }}>
                                                             <DeleteIcon></DeleteIcon>
-                                                            Delete
+                                                            Xóa
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             href="#pablo"
                                                             onClick={(e) => onClickEdit(item)}>
                                                             <EditIcon></EditIcon>
-                                                            Update
+                                                            Sửa
                                                         </DropdownItem>
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
