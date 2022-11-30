@@ -34,6 +34,7 @@ import { API_GET_ORDER_ADMIN } from 'utils/const';
 import { showError } from 'utils/error';
 import AdminSize from "../Realtime/AdminSize";
 import { formatMoney } from './../../common/formatMoney';
+import moment from 'moment';
 
 const columns = [
     {
@@ -132,17 +133,112 @@ function OrderPlace() {
         getOrderUserConfirmed()
     }, [size])
 
+    let d = new Date();
+    let fromDate = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear()
 
+    const [date1, setDate1] = useState(null);
+    const [date2, setDate2] = useState(null);
+    const [keyword, setKeyword] = useState(null);
 
     const getOrderUserConfirmed = async (e) => {
-        const response = await axios.get(API_GET_ORDER_ADMIN)
+        const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY"))
         if (response && response.status === 200) {
             setSize(size)
             setData(response.data)
         }
     }
 
+    //search with date
+    const searchWithDate = async (e) => {
+        if (date1 == null) {
+            toast.warning('Vui lòng chọn thời gian bắt đầu ', { autoClose: 1200 })
+        } else if (date2 == null) {
+            toast.warning('Vui lòng chọn thời gian kết thúc ', { autoClose: 1200 })
 
+        } else {
+            if (keyword == null) {
+                const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY") + '&toDate=' + moment(date2).format("DD/MM/YYYY"))
+                if (response && response.status === 200) {
+                    setSize(size)
+                    setData(response.data)
+                    toast.success('Tìm kiếm thành công', { autoClose: 1000 })
+                }
+            } else {
+                const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY") + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&keyword=' + keyword)
+                if (response && response.status === 200) {
+                    setSize(size)
+                    setData(response.data)
+                    toast.success('Tìm kiếm thành công', { autoClose: 1000 })
+                }
+            }
+        }
+    }
+    //handle status
+    const [status, setStatus] = React.useState('');
+
+    const handleChange = async (event) => {
+        console.log('cc ', event.target.value);
+        setStatus(event.target.value);
+        if (date1 == null || date2 == null) {
+            if (keyword == null) {
+                if (event.target.value === '') {
+                    const response = await axios.get(API_GET_ORDER_ADMIN +
+                        '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY"))
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                } else {
+                    const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY") + '&status=' + event.target.value)
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                }
+            } else {
+                if (event.target.value === '') {
+                    const response = await axios.get(API_GET_ORDER_ADMIN +
+                        '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY") + '&keyword=' + keyword)
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                } else {
+                    const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY")
+                        + '&status=' + event.target.value + '&keyword=' + keyword)
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                }
+            }
+        } else {
+            if (keyword == null) {
+                if (event.target.value === '') {
+                    const response = await axios.get(API_GET_ORDER_ADMIN +
+                        '?fromDate=' + moment(date1).format("DD/MM/YYYY") + '&toDate=' + moment(date2).format("DD/MM/YYYY"))
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                } else {
+                    const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY") + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&status=' + event.target.value)
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                }
+            } else {
+                if (event.target.value === '') {
+                    const response = await axios.get(API_GET_ORDER_ADMIN +
+                        '?fromDate=' + moment(date1).format("DD/MM/YYYY") + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&keyword=' + keyword)
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                } else {
+                    const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY") + '&toDate=' + moment(date2).format("DD/MM/YYYY")
+                        + '&status=' + event.target.value + '&keyword=' + keyword)
+                    if (response && response.status === 200) {
+                        setData(response.data)
+                    }
+                }
+            }
+        }
+    };
     //handle
     const handleOpen = () => setOpen(true)
 
@@ -245,31 +341,18 @@ function OrderPlace() {
         } else toast.error('Thất bại ! ', { autoClose: 2000 })
     }
 
-    //handle status
-    const [status, setStatus] = React.useState('');
 
-    const handleChange = async (event) => {
-        setStatus(event.target.value);
-        console.log('status ', event.target.value);
-        if (event.target.value !== 'ALL') {
-            const response = await axios.get(API_GET_ORDER_ADMIN + '?status=' + event.target.value)
-            if (response && response.status === 200) {
-                setData(response.data)
-            }
-        } else {
-            const response = await axios.get(API_GET_ORDER_ADMIN)
-            if (response && response.status === 200) {
-                setData(response.data)
-            }
-        }
-    };
 
-    const search = async (e) => {
-        const response = await axios.get(API_GET_ORDER_ADMIN + '?keyword=' + e.target.value)
-        if (response && response.status === 200) {
-            setData(response.data)
-        }
-    };
+    // const search = async (e) => {
+    //     if (e.target.value == '') {
+    //         alert('cc')
+    //     } else {
+    //         const response = await axios.get(API_GET_ORDER_ADMIN + '?keyword=' + e.target.value)
+    //         if (response && response.status === 200) {
+    //             setData(response.data)
+    //         }
+    //     }
+    // };
     return (
         <>
             <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
@@ -280,7 +363,7 @@ function OrderPlace() {
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ
                         </Button> */}
-                        <Grid item xs={8}>
+                        <Grid item xs={7}>
                             <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '5px 7px 5px 7px', marginBottom: '20px', borderRadius: '7px' }}>
                                 <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                     <SearchIcon />
@@ -288,13 +371,22 @@ function OrderPlace() {
                                 <InputBase
                                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                     placeholder="Tìm kiếm mã đơn hàng"
-                                    onChange={e => search(e)}
+                                    onChange={e => setKeyword(e.target.value)}
                                 />
                             </Paper>
                         </Grid>
-                        <Grid item xs={4} style={{ display: 'flex', flexDirection: "row" }}>
-                            <input name="date1" style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date1' type="date" />
-                            <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2' type="date" />
+                        <Grid item xs={5} style={{ display: 'flex', flexDirection: "row" }}>
+                            <input onChange={e => setDate1(e.target.value)} name="date1" style={{ width: '33%', height: '6vh', padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date1' type="date" />
+                            <input onChange={e => setDate2(e.target.value)} style={{ width: '33%', height: '6vh', padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2' type="date" />
+                            <Button
+                                color="success"
+                                variant="contained"
+                                sx={{ height: '6vh', width: '34%' }}
+                                onClick={searchWithDate}
+                                style={{ marginLeft: '5px', padding: '10px 20px' }}
+                            >
+                                Tìm kiếm
+                            </Button>
                         </Grid>
                     </Grid>
                     <TableContainer sx={{ minHeight: '29em' }}>
@@ -465,7 +557,7 @@ function OrderPlace() {
                                         </TableRow>
                                     )) :
                                     <TableRow >
-                                        <TableCell style={{ borderBottom: '0px solid black' }}> <h4 style={{ fontStyle: 'italic', marginTop: '8px', position: 'absolute' }} > Hiện chưa có ai đặt hàng !</h4></TableCell>
+                                        <TableCell style={{ borderBottom: '0px solid black' }}> <h4 style={{ fontStyle: 'italic', marginTop: '8px', position: 'absolute' }} > Hiện không có đơn hàng nào !</h4></TableCell>
                                     </TableRow>}
                                 <DialogExtendTime openConfirm={openConfirmTomorrow} handleCloseConfirm={handleCloseConfirmTomorrow} idSave={idSave} extendTime={extendTime} />
                                 <DialogExtendTimeToday openConfirmToday={openConfirmToday} handleCloseConfirmToday={handleCloseConfirmToday} idSave={idSave} extendTimeToday={extendTimeToday} />

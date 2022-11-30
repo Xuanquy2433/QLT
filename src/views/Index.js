@@ -337,7 +337,7 @@ const Index = (props) => {
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-light ls-1 mb-1">
-                      Thu nhập 
+                      Thu nhập
                     </h6>
                     <h2 className="text-white mb-0">Thu nhập {new Date().getFullYear()}{" "}</h2>
                   </div>
@@ -390,7 +390,7 @@ const Index = (props) => {
             </Card>
           </Col>
           <Col xl="4">
-            <Card style={{height: '100%'}} className="shadow">
+            <Card style={{ height: '100%' }} className="shadow">
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">
                   <div className="col">
@@ -448,10 +448,10 @@ const Index = (props) => {
                       </div>
                     </FormControl>
                     <Button
-                        color="primary"
-                        onClick={submitDate}
-                        size="s"
-                        style={{ marginLeft: '20px' ,padding: '10px 20px'}}
+                      color="primary"
+                      onClick={submitDate}
+                      size="s"
+                      style={{ marginLeft: '20px', padding: '10px 20px' }}
                     >
                       Tìm kiếm
                     </Button>
