@@ -67,8 +67,6 @@ const columns = [
 ];
 
 export default function Address({ handleOpenDelete, handleCloseDelete, openDelete, search, rowsPerPage, data, onDelete, onEdit, open, setOpen, totalPages, handleChangePage, handleChangeRowsPerPage, page }) {
-
-    const [detailData, setDetailData] = useState([]);
     const [openDetailData, setOpenDetailData] = useState(false);
     const closeDetailData = () => setOpenDetailData(false);
     const style = {

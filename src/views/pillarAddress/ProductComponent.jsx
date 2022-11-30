@@ -341,11 +341,6 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) 
             ))
           }
         </div >
-        <Stack alignItems="center">
-          <Pagination
-            sx={{ button: { color: '#ffffff', width: '100%', margin: 'auto' } }}
-            count={count} page={page} color="secondary" onChange={handleChange} />
-        </Stack>
       </ThemeProvider >
     </React.Fragment >
 

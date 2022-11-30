@@ -23,7 +23,7 @@ import { OndemandVideoTwoTone, SettingsPowerRounded } from '@mui/icons-material'
 import Grid from '@mui/material/Grid';
 import AddIcon from '@mui/icons-material/Add';
 const columns = [
-    { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
+    { id: 'Id', label: 'Id', minWidth: 10, maxWidth: 70 },
     {
         id: 'Name',
         label: 'Tên loại trụ',
@@ -50,17 +50,6 @@ const columns = [
 ];
 
 export default function Category({ handleOpenDelete, search, openDelete, handleCloseDelete, data, setOpen, onEdit, onDelete, totalPages, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage }) {
-    // const [page, setPage] = React.useState(0);
-    // const [rowsPerPage, setRowsPerPage] = React.useState(6);
-
-    // const handleChangePage = (event, newPage) => {
-    //     setPage(newPage);
-    // };
-
-    // const handleChangeRowsPerPage = (event) => {
-    //     setRowsPerPage(+event.target.value);
-    //     setPage(0);
-    // };
     const handleOpen = () => setOpen(true);
     const [idDelete, setIdDelete] = React.useState(Number);
 
@@ -123,8 +112,8 @@ export default function Category({ handleOpenDelete, search, openDelete, handleC
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.name} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.description}</TableCell>
 
-                                            <TableCell sx={{ textAlign: 'right', display: "flex", justifyContent: "space-around" }}>
-                                                <DeleteIcon sx={{ cursor: 'pointer' }} onClick={e => {
+                                            <TableCell sx={{ textAlign: 'right', display: "flex", justifyContent: "center" }}>
+                                                <DeleteIcon sx={{ cursor: 'pointer', marginRight: "10px" }} onClick={e => {
                                                     handleOpenDelete()
                                                     setIdDelete(item.id)
                                                 }} />

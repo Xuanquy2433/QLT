@@ -387,7 +387,7 @@ function AddressDetail() {
                 }
 
             </div>
-            {addressPoint.length - 1 > 1 ?
+            {addressPoint.length - 1 > 0 ?
                 <div className='form-range'>
                     <Nouislider
                         start={[1, addressPoint[addressPoint.length - 1].number]}
