@@ -43,12 +43,8 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
       })
     }
   },[item])
-
-
-
   return (
     <div>
-
       <Modal
         open={openEdit}
         onClose={setOpenEdit}
@@ -67,28 +63,21 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
           }}
         >
           <h2 style={{ textAlign: 'center' }}>Sửa địa chỉ</h2>
-
-
           <div>
-
             {selectedImage===null?
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img alt="not fount" width={"130px"} src={URL.createObjectURL(selectedImage)} />
-
               </div>
                 :  <div style={{ display: "flex", justifyContent: "center" }}>
                   <img alt="not fount" width={"130px"} src={item.photosImagePath} />
-
                 </div>
             }
-
           </div>
           <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
             <TextField onChange={onChangeText} defaultValue={description} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
             <TextField onChange={onChangeText} defaultValue={street} name="street" style={{ margin: '5px' }} fullWidth label='Đườmg' />
             <TextField onChange={onChangeText} defaultValue={city} name="city" style={{ margin: '5px' }} fullWidth label='Thành phố' />
             <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }} name="multipartFile" type="file" multiple accept="image/*" />
-
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button sx={{ marginRight: "5px" }} onClick={handleCloseEdit} variant="contained" color="success">
@@ -99,10 +88,7 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
             </Button>
           </div>
         </Box>
-
       </Modal>
-
     </div>
-
   )
 }

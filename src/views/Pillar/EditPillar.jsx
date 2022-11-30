@@ -296,7 +296,7 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                             data={addressPoint}
                             productData={productData}
                             updatingProduct={item}
-                            updatingZoom={16}
+                            updatingZoom={12}
                             selected={selected}
                             setProduct={setClickedProduct}
                         />
