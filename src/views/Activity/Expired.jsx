@@ -34,7 +34,7 @@ function Expired({ columns4, dataOrderDetailExpired }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataOrderDetailExpired.map((item, index) => {
+                            {dataOrderDetailExpired.length > 0 ? dataOrderDetailExpired.map((item, index) => {
                                 return (
                                     <TableRow key={index} >
                                         <TableCell align="center">{item.product.name} </TableCell>
@@ -49,7 +49,10 @@ function Expired({ columns4, dataOrderDetailExpired }) {
                                         </TableCell>
                                     </TableRow>
                                 )
-                            })}
+                            }) :
+                                <TableRow >
+                                    <TableCell align="center">Bạn chưa có đơn hàng nào hết hạn.</TableCell>
+                                </TableRow>}
                         </TableBody>
                     </Table>
                 </TableContainer>

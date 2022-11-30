@@ -37,7 +37,7 @@ function AboutToExpire({ columns4, dataOrderDetailExpired }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataOrderDetailExpired.filter((data) => date - data.product.expiredDate < 3)
+                            {dataOrderDetailExpired.length > 0 ? dataOrderDetailExpired.filter((data) => date - data.product.expiredDate < 3)
                                 .map((item, index) => {
                                     return (
                                         <TableRow key={index} >
@@ -54,7 +54,10 @@ function AboutToExpire({ columns4, dataOrderDetailExpired }) {
                                         </TableRow>
                                     )
                                 })
-                            }
+                                :
+                                <TableRow >
+                                    <TableCell align="center">Bạn chưa có đơn hàng nào sắp hết hạn.</TableCell>
+                                </TableRow>}
                         </TableBody>
                     </Table>
                 </TableContainer>

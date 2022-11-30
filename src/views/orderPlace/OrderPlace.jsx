@@ -177,7 +177,6 @@ function OrderPlace() {
     const [status, setStatus] = React.useState('');
 
     const handleChange = async (event) => {
-        console.log('cc ', event.target.value);
         setStatus(event.target.value);
         if (date1 == null || date2 == null) {
             if (keyword == null) {

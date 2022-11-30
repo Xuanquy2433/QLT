@@ -123,8 +123,6 @@ function Activity() {
         }
     }
 
-
-
     // get order detail expired
     const [dataOrderDetailExpried, setDataOrderDetailExpired] = useState([])
     const getALLOrderDetailExpired = async (e) => {
@@ -272,12 +270,8 @@ function Activity() {
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
                             <Tab label="Trụ đang thuê" value="2" />
-                            {dataOrderDetailExpried.length > 0 ?
-                                <>
-                                    <Tab label="Trụ đã sắp hết hạn" value="3" />
-                                    <Tab label="Trụ đã hết hạn" value="4" /></> : null
-
-                            }
+                            <Tab label="Trụ đã sắp hết hạn" value="3" />
+                            <Tab label="Trụ đã hết hạn" value="4" />
                         </TabList>
                     </Box>
                     <TabPanel value="1">
@@ -373,18 +367,15 @@ function Activity() {
                             onchangeMonth={onchangeMonth} showExtend={showExtend} setShowCheckbox={setShowCheckbox} setShowExtend={setShowExtend}
                             handleClickOpen={handleClickOpen} handleChangeCheckbox={handleChangeCheckbox} month={month} />
                     </TabPanel>
-                    {dataOrderDetailExpried.length > 0 ?
-                        <TabPanel value='3'>
-                            <AboutToExpire columns4={columns4}
-                                dataOrderDetailExpired={dataOrderDetailExpried} />
-                        </TabPanel> : null
-                    }
-                    {dataOrderDetailExpried.length > 0 ?
-                        <TabPanel value='4'>
-                            <Expired columns4={columns4}
-                                dataOrderDetailExpired={dataOrderDetailExpried} />
-                        </TabPanel> : null
-                    }
+                    <TabPanel value='3'>
+                        <AboutToExpire columns4={columns4}
+                            dataOrderDetailExpired={dataOrderDetailExpried} />
+                    </TabPanel>
+
+                    <TabPanel value='4'>
+                        <Expired columns4={columns4}
+                            dataOrderDetailExpired={dataOrderDetailExpried} />
+                    </TabPanel>
                 </TabContext>
             </Box>
             {/* confirm value 2  */}
