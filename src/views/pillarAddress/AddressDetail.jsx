@@ -37,7 +37,6 @@ function AddressDetail() {
     const [dataAddressProduct, setDataAddressProduct] = useState([])
     const [address, setAddress] = useState({})
     const id = useState(window.location.pathname.replace(/\D/g, ""));
-    // console.log(id[0]);
     let token = localStorage.getItem("token");
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -57,7 +56,7 @@ function AddressDetail() {
     const getAddress = async () => {
         try {
             if (!token) {
-                const response = selected.num1 === 0 ?
+                const response = selected.num1 === 0 &&  selected.num2===0?
                     await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
                     : await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {
@@ -291,7 +290,6 @@ function AddressDetail() {
                 num2: addressPoint[addressPoint.length - 1].number,
                 selected: true
             })
-            console.log('address point', addressPoint);
         }
     }
     const addComboToCart = async () => {
@@ -319,7 +317,6 @@ function AddressDetail() {
     }
 
     useEffect(() => {
-        getAddress()
         fetchAddressPointData()
     }, [])
 
@@ -335,9 +332,6 @@ function AddressDetail() {
         getAddress()
     }, [selected.num1, selected.num2])
 
-    function addAdd() {
-        return undefined;
-    }
 
     return (
         <div >

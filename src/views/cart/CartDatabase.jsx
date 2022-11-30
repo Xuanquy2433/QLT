@@ -15,7 +15,6 @@ import { API_UPDATE_MONTH_CART } from './../../utils/const';
 function CartDatabase() {
 
     const [data, setData] = useState([])
-    // const [btnOrders, setBtnOrders] = useState('Đặt hàng')
     const [btnDisabled, setBtnDisabled] = useState(false)
     const [showDate, setShowDate] = useState(new Date())
     const history = useHistory()
