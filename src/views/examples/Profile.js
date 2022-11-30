@@ -19,7 +19,7 @@ import { Link, useHistory } from "react-router-dom";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import jwt_decode from "jwt-decode";
-import { Box, Modal } from "@mui/material";
+import { Box, Modal, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_PROFILE_GET_USER } from "utils/const";
@@ -37,19 +37,24 @@ const Profile = () => {
   console.log(token);
   console.log(decoded);
   const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true);
+
+  const handleOpen = () => {
+    setOpen(true)
+    setEditUser(
+      {
+        email: data.email || "",
+        lastName: data.lastName || "",
+        firstName: data.firstName || "",
+      }
+    )
+  }
   const handleClose = () => setOpen(false);
 
   const [data, setData] = useState([])
 
   useEffect(() => {
     getUserProfile()
-    setEditUser({
-      email: data.email || "",
-      firstName: data.firstName || "",
-      lastName: data.lastName || "",
-    })
-  }, [data])
+  }, [])
 
   const getUserProfile = async () => {
     const response = await axios.get(API_PROFILE_GET_USER, {
@@ -118,9 +123,13 @@ const Profile = () => {
             // borderRadius: "10px"
           }}
         >
-          <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Lưu ý</div>
-          <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận thay đổi ?</h2>
-
+          <div style={{ textAlign: "center", fontSize: "18px", borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Sửa thông tin</div>
+          {/* <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận thay đổi ?</h2> */}
+          <div style={{ padding: "20px 60px", margin: "auto" }}>
+            <TextField onChange={onChangeText} defaultValue={data.email} name="email" style={{ margin: '5px' }} fullWidth label='Email' />
+            <TextField onChange={onChangeText} defaultValue={data.firstName} name="firstName" style={{ margin: '5px' }} fullWidth label='Họ' />
+            <TextField onChange={onChangeText} defaultValue={data.lastName} name="lastName" style={{ margin: '5px' }} fullWidth label='Tên' />
+          </div>
           <div style={{ borderBottom: "1px solid #ddd", margin: "0px 10px" }} />
 
           <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
@@ -267,10 +276,12 @@ const Profile = () => {
                           </label>
                           <Input
                             name="email"
-                            onChange={onChangeText}
+                            readOnly={true}
+
+                            // onChange={onChangeText}
                             className="form-control-alternative"
                             id="input-email"
-                            defaultValue={editUser.email}
+                            defaultValue={data.email}
                             type="email"
                           />
                         </FormGroup>
@@ -287,9 +298,11 @@ const Profile = () => {
                           </label>
                           <Input
                             name="firstName"
-                            onChange={onChangeText}
+                            readOnly={true}
+
+                            // onChange={onChangeText}
                             className="form-control-alternative"
-                            defaultValue={editUser.firstName}
+                            defaultValue={data.firstName}
                             id="input-first-name"
                             type="text"
                           />
@@ -305,9 +318,11 @@ const Profile = () => {
                           </label>
                           <Input
                             name="lastName"
-                            onChange={onChangeText}
+                            readOnly={true}
+
+                            // onChange={onChangeText}
                             className="form-control-alternative"
-                            defaultValue={editUser.lastName}
+                            defaultValue={data.lastName}
                             id="input-last-name"
                             type="text"
                           />

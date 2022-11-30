@@ -292,9 +292,9 @@ function OrderPlace() {
                                 />
                             </Paper>
                         </Grid>
-                        <Grid item xs={4} style={{display: 'flex', flexDirection:"row"}}>
-                            <input name="date1" style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date1'  type="date" />
-                            <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2'  type="date" />
+                        <Grid item xs={4} style={{ display: 'flex', flexDirection: "row" }}>
+                            <input name="date1" style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date1' type="date" />
+                            <input style={{ padding: "5px 10px", borderRadius: "8px" }} className="mr-3" id='date2' type="date" />
                         </Grid>
                     </Grid>
                     <TableContainer sx={{ minHeight: '29em' }}>
@@ -302,44 +302,44 @@ function OrderPlace() {
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (
-                                         column.id!=="status" ?
-                                        <TableCell
-                                            sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                            key={column.id}
-                                            align={column.align}
-                                            style={{ minWidth: column.minWidth }}
-                                        >
-                                            {column.label}
-                                        </TableCell>
-                                             :
-                                             <TableCell
-                                                 align={'center'}
+                                        column.id !== "status" ?
+                                            <TableCell
+                                                sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth }}
+                                            >
+                                                {column.label}
+                                            </TableCell>
+                                            :
+                                            <TableCell
+                                                align={'center'}
 
-                                             >
-                                                 <FormControl variant="standard" sx={{  minWidth: 120, color: 'black', fontWeight: '600', fontSize: '1.1em'}}>
+                                            >
+                                                <FormControl variant="standard" sx={{ minWidth: 120, color: 'black', fontWeight: '600', fontSize: '1.1em' }}>
 
-                                                     <Select
-                                                         labelId="demo-simple-select-standard-label"
-                                                         id="demo-simple-select-standard"
-                                                         value={status}
-                                                         onChange={handleChange}
-                                                         label="Age"
-                                                         displayEmpty
-                                                         sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                                     >
-                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value=''>
-                                                             Trạng Thái
-                                                         </MenuItem>
-                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"NEW"}>Mới</MenuItem>
-                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"EXTEND"}>Gia hạn</MenuItem>
-                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"USER_CONFIRMED"}>Chờ admin phê duyệt</MenuItem>
-                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"PAID"}>Đang thuê</MenuItem>
-                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"DONE"}>Xong</MenuItem>
-                                                         <MenuItem  sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}value={"CANCELLED"}>Đã hủy</MenuItem>
+                                                    <Select
+                                                        labelId="demo-simple-select-standard-label"
+                                                        id="demo-simple-select-standard"
+                                                        value={status}
+                                                        onChange={handleChange}
+                                                        label="Age"
+                                                        displayEmpty
+                                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
+                                                    >
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value=''>
+                                                            Trạng Thái
+                                                        </MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"NEW"}>Mới</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"EXTEND"}>Gia hạn</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"USER_CONFIRMED"}>Chờ admin phê duyệt</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"PAID"}>Đang thuê</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"DONE"}>Xong</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"CANCELLED"}>Đã hủy</MenuItem>
 
-                                                     </Select>
-                                                 </FormControl>
-                                             </TableCell>
+                                                    </Select>
+                                                </FormControl>
+                                            </TableCell>
                                     ))}
                                 </TableRow>
                             </TableHead>
