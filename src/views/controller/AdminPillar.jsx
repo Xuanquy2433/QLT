@@ -150,6 +150,7 @@ function AdminProduct() {
         getAllProduct()
         setRandomNumber(Math.floor(Math.random() * (999)))
         setOpenEdit(true)
+        setSelected(null)
       }
 
       //catch show error

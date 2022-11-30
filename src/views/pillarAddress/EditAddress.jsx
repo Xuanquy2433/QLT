@@ -6,22 +6,20 @@ import Button from '@mui/material/Button';
 
 export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }) {
 
-  // const handleOpenEdit = () => setOpenEdit(true);
   const handleCloseEdit = () => setOpenEdit(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
   const [dataAddressEdit, setDataAddressEdit] = useState({
     city: item.city || '',
     street: item.street || '',
     description: item.description || '',
     multipartFile: item.image || ''
   })
-  console.log(item.image);
+
   const { city, street, description, multipartFile, image, photosImagePath } = item
 
   const onChangeText = (e) => {
-    console.log(e.target.value);
     setDataAddressEdit({ ...dataAddressEdit, [e.target.name]: e.target.value })
+    console.log(dataAddressEdit)
   }
 
   const onChangeImage = (event) => {
@@ -33,11 +31,24 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
   const onClickEdit = (e) => {
     onSubmitEdit({ ...item, ...dataAddressEdit, id: item.id })
   }
+  useEffect(() => {
+    if(item===null){
+      setSelectedImage(null)
+    } else {
+      setDataAddressEdit({
+        city: item.city || '',
+        street: item.street || '',
+        description: item.description || '',
+        multipartFile: item.image || ''
+      })
+    }
+  },[item])
 
-  console.log(dataAddressEdit);
+
 
   return (
     <div>
+
       <Modal
         open={openEdit}
         onClose={setOpenEdit}
@@ -56,13 +67,20 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
           }}
         >
           <h2 style={{ textAlign: 'center' }}>Sửa địa chỉ</h2>
+
+
           <div>
-            {selectedImage && (
+
+            {selectedImage===null?
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img alt="not fount" width={"130px"} src={URL.createObjectURL(selectedImage)} />
-                {/* <button onClick={() => setSelectedImage(null)}>Remove</button> */}
+
               </div>
-            )}
+                :  <div style={{ display: "flex", justifyContent: "center" }}>
+                  <img alt="not fount" width={"130px"} src={item.photosImagePath} />
+
+                </div>
+            }
 
           </div>
           <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
