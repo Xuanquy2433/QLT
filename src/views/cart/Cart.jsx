@@ -10,7 +10,9 @@ function Cart() {
     if (token !== null) {
         decoded = jwt_decode(token);
     }
-
+useEffect(() => {
+    document.title = 'ACN | Giỏ hàng thanh toán';
+})
     return (
         <div style={{ width: '80%', margin: '50px auto 70px auto' }} >
             {token && decoded ? <CartDatabase /> : <CartLocal />}

@@ -228,6 +228,7 @@ function Activity() {
         setOpen(false);
     };
     useEffect(() => {
+        document.title = 'ACN | Lịch sử đặt hàng';
         getALLOrder()
         getALLOrderDetail()
         getALLOrderDetailExpired()

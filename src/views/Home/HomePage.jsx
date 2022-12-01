@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 
 function HomePage() {
     useEffect(() => {
+        document.title = 'ACN | Trang chủ';
         let mybutton = document.getElementById("btn-to-top");
 
         // When the user scrolls down 20px from the top of the document, show the button

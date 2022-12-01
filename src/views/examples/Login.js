@@ -13,7 +13,7 @@ import {
   Col
 } from "reactstrap";
 import { NavLink, useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { API_SIGNIN } from "utils/const";
@@ -36,9 +36,6 @@ const Login = () => {
   if (token !== null) {
     decoded = jwt_decode(token);
   }
-  console.log('decoded', decoded);
-
-  console.log('data ,', data);
   const onLogin = async (e) => {
     e.preventDefault();
     if (data.phoneNumber === '') {
@@ -146,7 +143,9 @@ const Login = () => {
   const styledBtn = styled.input`
   border:none;
   `
-
+  useEffect(() => {
+    document.title = 'ACN | Login';
+  })
 
   return (
     <>

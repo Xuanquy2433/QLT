@@ -14,6 +14,7 @@ const Admin = (props) => {
   const location = useLocation();
 
   React.useEffect(() => {
+    document.title = 'ACN | Quản lý';
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;

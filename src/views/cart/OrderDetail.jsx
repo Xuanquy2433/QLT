@@ -144,6 +144,7 @@ function OrderDetail() {
     };
     useEffect(() => {
         // startTimer()
+        document.title = 'ACN | Chi tiết đơn hàng';
         if (data.status === 'NEW') {
             setIsConFirm(false)
         } else if (data.status === 'USER_CONFIRMED') {

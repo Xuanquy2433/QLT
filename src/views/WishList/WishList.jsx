@@ -48,6 +48,7 @@ export default function WishList() {
     }
 
     useEffect(() => {
+        document.title = 'ACN | Danh sách theo dõi';
         getWishList()
     }, [])
 

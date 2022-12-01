@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -77,6 +77,10 @@ const Register = () => {
       }
     }
   }
+
+  useEffect(() => {
+    document.title = 'ACN | Đăng ký';
+  })
 
   return (
     <>
