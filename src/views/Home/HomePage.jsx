@@ -48,7 +48,7 @@ function HomePage() {
             <div id="toHome">
                 <BannerSlide />
             </div>
-            <hr />
+
             <div>
                 <TableAddress />
             </div>
