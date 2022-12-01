@@ -35,6 +35,7 @@ import { showError } from 'utils/error';
 import AdminSize from "../Realtime/AdminSize";
 import { formatMoney } from './../../common/formatMoney';
 import moment from 'moment';
+import {parse} from "@fortawesome/fontawesome-svg-core";
 
 const columns = [
     {
@@ -129,21 +130,21 @@ function OrderPlace() {
     }, [])
 
     useEffect(() => {
-
         getOrderUserConfirmed()
     }, [size])
 
     let d = new Date();
-    let fromDate = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear()
-
+    d.setMonth(d.getMonth() -1);
+    let fromDate = d.getDate() + '/' + parseInt(d.getMonth()+1)  + '/' + d.getFullYear()
+    d.setMonth(d.getMonth() +2);
+    let toDate = d.getDate() + '/' + parseInt(d.getMonth()+1)  + '/' + d.getFullYear()
     const [date1, setDate1] = useState(null);
     const [date2, setDate2] = useState(null);
     const [keyword, setKeyword] = useState(null);
 
     const getOrderUserConfirmed = async (e) => {
-        const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY"))
+        const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + fromDate + '&toDate=' + toDate)
         if (response && response.status === 200) {
-            setSize(size)
             setData(response.data)
         }
     }
