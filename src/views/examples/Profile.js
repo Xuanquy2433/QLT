@@ -28,14 +28,11 @@ import { API_UPDATE_USER } from "utils/const";
 
 const Profile = () => {
   const user = localStorage.getItem("user");
-  console.log(decoded);
   let token = localStorage.getItem("token");
   let decoded
   if (token !== null) {
     decoded = jwt_decode(token);
   }
-  console.log(token);
-  console.log(decoded);
   const [open, setOpen] = useState(false)
 
   const handleOpen = () => {
@@ -53,6 +50,7 @@ const Profile = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
+    document.title = "ACN | Trang cá nhân"
     getUserProfile()
   }, [])
 
