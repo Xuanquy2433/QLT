@@ -145,16 +145,12 @@ function OrderDetail() {
     useEffect(() => {
         // startTimer()
         if (data.status === 'NEW') {
-            // setValueStatus('Thanh toán')
             setIsConFirm(false)
         } else if (data.status === 'USER_CONFIRMED') {
-            // setValueStatus('Vui lòng chờ admin phê duyệt đơn hàng của bạn !')
             setIsConFirm(true)
         } else if (data.status === 'CANCELLED') {
-            // setValueStatus('Bạn đã huỷ đơn hàng này')
             setIsConFirm(true)
         } else if (data.status === 'PAID') {
-            // setValueStatus('Đã xác nhận')
             setIsConFirm(true)
         }
     }, [])

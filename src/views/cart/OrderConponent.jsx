@@ -19,26 +19,6 @@ function Order({ order, ya,updatingComponent}) {
     setIsExpanded(!isExpanded);
   }
 
-  const getCheckIds = (data) => {
-    if (data.isChecked) {
-      // eslint-disable-next-line array-callback-return
-      listIds.map((item => {
-        if (item.productId === data.id) {
-          checkIdHasBeen = false
-        }
-      }))
-
-      if (checkIdHasBeen === true) {
-        setListIds([...listIds, {
-          productId: data.id,
-          month: Number(data.month)
-        }]);
-      }
-    }
-    else {
-      listIds.splice(listIds.indexOf(data.id), 1)
-    }
-  }
 
 
 
@@ -75,9 +55,9 @@ function Order({ order, ya,updatingComponent}) {
                       </div>
                     </div>
                   </div>
-                  <div style={{ textAlign: 'right' }} className='mr-2'>
-                    <Moment fromNow>{order.orderTime}</Moment>
-                  </div>
+                  {/*<div style={{ textAlign: 'right' }} className='mr-2'>*/}
+                  {/*  <Moment fromNow>{order.orderTime}</Moment>*/}
+                  {/*</div>*/}
                 </li>
               </ul>
             </div>

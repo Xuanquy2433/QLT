@@ -27,9 +27,9 @@ const ProductStatus = (params) => {
   }, [params.status])
 
   return (
-        <div style={{color: data.color, fontWeight: '600',textAlign: 'center'}}>
+        <span style={{color: data.color, fontWeight: '600',textAlign: 'center'}}>
           {data.text}
-          </div>
+          </span>
   )
 
 }
