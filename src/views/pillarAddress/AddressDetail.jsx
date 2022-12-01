@@ -369,13 +369,15 @@ function AddressDetail() {
                                     <div className="product__subtitle">
                                         {address.description}
                                     </div>
-
                                     <div>
 
                                     </div>
                                     <div class="line-loading">
                                         {count > 0 ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
-
+                                        {token == null ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => {
+                                            history.push('/auth/login')
+                                            toast.warning('Vui lòng đăng nhập để thêm hết tất cả trụ vào thanh toán' , {autoClose: 1500})
+                                        }}>Thêm tất cả trụ </Button> : null}
                                     </div>
                                 </div>
                             </div>
