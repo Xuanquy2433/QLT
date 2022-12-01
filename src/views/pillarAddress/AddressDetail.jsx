@@ -56,7 +56,7 @@ function AddressDetail() {
     const getAddress = async () => {
         try {
             if (!token) {
-                const response = selected.num1 === 0 &&  selected.num2===0?
+                const response = selected.num1 === 0 && selected.num2 === 0 ?
                     await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
                     : await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {
@@ -305,6 +305,17 @@ function AddressDetail() {
             toast.success('Đã thêm tất cả trụ vào danh sách thanh toán', {
                 autoClose: 1200,
             })
+            const responseCount = await axios.get(API_GET_CART, {
+                headers: {
+                    'authorization': 'Bearer ' + token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (responseCount) {
+                localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+                window.dispatchEvent(new Event("storage"));
+            }
         }
     }
 
@@ -419,7 +430,7 @@ function AddressDetail() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <div onClick={e => setOpen(false)} style={{ textAlign: 'right',color: 'red',cursor: 'pointer',fontWeight: '700',fontSize:'1.2em' }}>X</div>
+                        <div onClick={e => setOpen(false)} style={{ textAlign: 'right', color: 'red', cursor: 'pointer', fontWeight: '700', fontSize: '1.2em' }}>X</div>
                         <Map
                             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                             loadingElement={<div style={{ height: `100%` }} />}

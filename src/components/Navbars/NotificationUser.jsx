@@ -88,7 +88,7 @@ function Notification() {
             </div>
             <div style={{ display: "flex", alignItems: "center" }}
                 className="notification">
-                <Badge badgeContent={countUser} color="secondary"
+                <Badge badgeContent={countUser} color="error"
                     anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'left',

@@ -35,7 +35,7 @@ import { showError } from 'utils/error';
 import AdminSize from "../Realtime/AdminSize";
 import { formatMoney } from './../../common/formatMoney';
 import moment from 'moment';
-import {parse} from "@fortawesome/fontawesome-svg-core";
+import { parse } from "@fortawesome/fontawesome-svg-core";
 
 const columns = [
     {
@@ -134,10 +134,10 @@ function OrderPlace() {
     }, [size])
 
     let d = new Date();
-    d.setMonth(d.getMonth() -1);
-    let fromDate = d.getDate() + '/' + parseInt(d.getMonth()+1)  + '/' + d.getFullYear()
-    d.setMonth(d.getMonth() +2);
-    let toDate = d.getDate() + '/' + parseInt(d.getMonth()+1)  + '/' + d.getFullYear()
+    d.setMonth(d.getMonth() - 1);
+    let fromDate = d.getDate() + '/' + parseInt(d.getMonth() + 1) + '/' + d.getFullYear()
+    d.setMonth(d.getMonth() + 2);
+    let toDate = d.getDate() + '/' + parseInt(d.getMonth() + 1) + '/' + d.getFullYear()
     const [date1, setDate1] = useState(null);
     const [date2, setDate2] = useState(null);
     const [keyword, setKeyword] = useState(null);
@@ -341,18 +341,22 @@ function OrderPlace() {
         } else toast.error('Thất bại ! ', { autoClose: 2000 })
     }
 
+    const search = async (e) => {
+        if (date1 == null || date2 == null) {
+            const response = await axios.get(API_GET_ORDER_ADMIN +
+                '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY") + '&keyword=' + e.target.value)
+            if (response && response.status === 200) {
+                setData(response.data)
+            }
+        } else {
+            const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY")
+                + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&keyword=' + e.target.value)
+            if (response && response.status === 200) {
+                setData(response.data)
+            }
+        }
 
-
-    // const search = async (e) => {
-    //     if (e.target.value == '') {
-    //         alert('cc')
-    //     } else {
-    //         const response = await axios.get(API_GET_ORDER_ADMIN + '?keyword=' + e.target.value)
-    //         if (response && response.status === 200) {
-    //             setData(response.data)
-    //         }
-    //     }
-    // };
+    };
     return (
         <>
             <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
@@ -371,7 +375,10 @@ function OrderPlace() {
                                 <InputBase
                                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                     placeholder="Tìm kiếm mã đơn hàng"
-                                    onChange={e => setKeyword(e.target.value)}
+                                    onChange={e => {
+                                        setKeyword(e.target.value)
+                                        search(e)
+                                    }}
                                 />
                             </Paper>
                         </Grid>
@@ -399,17 +406,13 @@ function OrderPlace() {
                                                 sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                                 key={column.id}
                                                 align={column.align}
-                                                style={{ minWidth: column.minWidth }}
-                                            >
+                                                style={{ minWidth: column.minWidth }}>
                                                 {column.label}
                                             </TableCell>
                                             :
                                             <TableCell
-                                                align={'center'}
-
-                                            >
+                                                align={'center'}>
                                                 <FormControl variant="standard" sx={{ minWidth: 120, color: 'black', fontWeight: '600', fontSize: '1.1em' }}>
-
                                                     <Select
                                                         labelId="demo-simple-select-standard-label"
                                                         id="demo-simple-select-standard"
@@ -417,8 +420,7 @@ function OrderPlace() {
                                                         onChange={handleChange}
                                                         label="Age"
                                                         displayEmpty
-                                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
-                                                    >
+                                                        sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value=''>
                                                             Trạng Thái
                                                         </MenuItem>
@@ -428,7 +430,6 @@ function OrderPlace() {
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"PAID"}>Đang thuê</MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"DONE"}>Xong</MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"CANCELLED"}>Đã hủy</MenuItem>
-
                                                     </Select>
                                                 </FormControl>
                                             </TableCell>

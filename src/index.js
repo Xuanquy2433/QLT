@@ -29,14 +29,6 @@ if (token && decode.exp * 1000 < new Date().getTime()) {
   }, 1500);
 }
 
-if (token && decoded.roles == '[ROLE_ADMIN]') {
-  document.title = "Quản lý trụ quảng cáo | Admin";
-} else if (token && decoded.roles == '[ROLE_USER]') {
-  document.title = "ACN | Trụ quảng cáo";
-} else if (!token && !decoded) {
-  document.title = "ACN | Trụ quảng cáo";
-}
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.Fragment>

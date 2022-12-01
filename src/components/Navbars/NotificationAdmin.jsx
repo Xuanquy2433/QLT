@@ -90,7 +90,7 @@ function NotificationAdmin() {
 
             <div style={{ display: "flex", alignItems: "center" }}
                 className="notification">
-                <Badge badgeContent={countAdmin} color="secondary"
+                <Badge badgeContent={countAdmin} color="error"
                     anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'left',
