@@ -130,14 +130,21 @@ const AdminNavbar = () => {
                   ? ""
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
+                      <div style={{ display: "flex", alignItems: "center" }}
+                           className="notification">
                       <Badge badgeContent={local}  color="error"
                         anchorOrigin={{
                           vertical: 'top',
                           horizontal: 'left',
-                        }}>
+                        }}
+            >
+
                         <i className="ni ni-cart" />
                       </Badge >
-                      <span className="nav-link-inner--text">Thanh Toán</span>
+
+                        <span className="nav-link-inner--text">Thanh Toán</span>
+                      </div>
+
                     </NavLink>
                   </NavItem>
               }
