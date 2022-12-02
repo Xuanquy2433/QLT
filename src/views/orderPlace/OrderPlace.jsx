@@ -342,15 +342,16 @@ function OrderPlace() {
     }
 
     const search = async (e) => {
+
         if (date1 == null || date2 == null) {
             const response = await axios.get(API_GET_ORDER_ADMIN +
-                '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY") + '&keyword=' + e.target.value)
+                '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY") + '&keyword=' + e.target.value.replace("0", "%2b84"))
             if (response && response.status === 200) {
                 setData(response.data)
             }
         } else {
             const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY")
-                + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&keyword=' + e.target.value)
+                + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&keyword=' + e.target.value.replace("0", "%2b84"))
             if (response && response.status === 200) {
                 setData(response.data)
             }
@@ -376,7 +377,9 @@ function OrderPlace() {
                                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                     placeholder="Tìm kiếm mã đơn hàng"
                                     onChange={e => {
-                                        setKeyword(e.target.value)
+                                        const ket = e.target.value.replace("0", '%2b84');
+
+                                        setKeyword(ket)
                                         search(e)
                                     }}
                                 />
@@ -447,7 +450,7 @@ function OrderPlace() {
                                             {/* <TableCell>{item.id}</TableCell> */}
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.fullName}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber.replace("+84","0")}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>{formatMoney(item.total)}</TableCell>
                                             {item.status === 'NEW' ? <TableCell sx={{ textAlign: 'center', color: 'green' }}> Mới</TableCell> : ''}

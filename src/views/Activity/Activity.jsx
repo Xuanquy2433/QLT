@@ -22,7 +22,7 @@ import axios from 'axios';
 import { API_GET_ALL_ORDER } from 'utils/const';
 import Moment from 'react-moment';
 import { Button, Grid, MenuItem, Select } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import { API_GET_EXTEND_ORDER_USER } from 'utils/const';
 import { toast } from 'react-toastify';
 import { API_EXTEND_ORDER_USER } from 'utils/const';
@@ -69,13 +69,12 @@ const columns4 = [
         minWidth: 170,
         align: 'center',
     },
-    // { id: 's', label: 'Hành động', minWidth: 100, align: 'center', },
 ];
 
 function Activity() {
     const [showCheckbox, setShowCheckbox] = useState(false)
+    const history = useHistory();
     const columns2 = [
-        // { id: 'id', label: 'Id', minWidth: 60, align: 'left' },
         showCheckbox == true ? { id: 'id22', label: 'Số tháng', minWidth: 20, align: 'center' } : { id: 'id82', label: '', minWidth: 10, align: 'center' },
         { id: 'j', label: 'Tên trụ', minWidth: 100, align: 'center', },
         { id: 'code', label: 'Giá', minWidth: 100, align: 'center', },
@@ -175,9 +174,7 @@ function Activity() {
             }
         }
         else {
-            console.log('⛔️ Checkbox is NOT checked');
             listIds.splice(listIds.indexOf(data.id), 1)
-            console.log('list ids when remove ', listIds);
         }
     }
     const onchangeMonth = (event, id) => {
@@ -188,7 +185,6 @@ function Activity() {
             }
         }))
     }
-    console.log('list ids ', listIds);
 
     const [showExtend, setShowExtend] = useState(true)
     const extend = async () => {
@@ -210,9 +206,8 @@ function Activity() {
                 }
             });
             if (response && response.status === 200) {
-                toast.success('Gia hạn thành công ! ', {
-                    autoClose: 1500
-                })
+                const id = response.data.message.replace(/\D/g, "")
+                history.push('/auth/order/' + id)
             };
         } catch (error) {
             showError2(error)
