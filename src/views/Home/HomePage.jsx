@@ -70,7 +70,7 @@ function HomePage() {
                 </div>
                 <div className="hotline-bar">
                     <a href="tel:0987654321">
-                        <span className="text-hotline">0987.654.321</span>
+                        <span className="text-hotline">0905.184.871</span>
                     </a>
                 </div>
             </div>
