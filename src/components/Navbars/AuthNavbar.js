@@ -103,10 +103,13 @@ const AdminNavbar = () => {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link to="/">
-                    <img
-                      alt="..."
-                      src={require("../../assets/img/brand/argon-react.png")}
-                    />
+                  <div class="typed-animation">
+              <h1 style={{ color: 'white', margin: "0", borderRadius: "15px " }} class="typed-out">
+                <img className='logo-home'
+                  alt="..."
+                  src={require("../../assets/img/brand/1-01-01.png")} />
+              </h1>
+            </div>
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">
@@ -131,16 +134,16 @@ const AdminNavbar = () => {
                   : <NavItem >
                     <NavLink className="nav-link-icon" to="/auth/cart" tag={Link}>
                       <div style={{ display: "flex", alignItems: "center" }}
-                           className="notification">
-                      <Badge badgeContent={local}  color="error"
-                        anchorOrigin={{
-                          vertical: 'top',
-                          horizontal: 'left',
-                        }}
-            >
+                        className="notification">
+                        <Badge badgeContent={local} color="error"
+                          anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                          }}
+                        >
 
-                        <i className="ni ni-cart" />
-                      </Badge >
+                          <i className="ni ni-cart" />
+                        </Badge >
 
                         <span className="nav-link-inner--text">Thanh Toán</span>
                       </div>

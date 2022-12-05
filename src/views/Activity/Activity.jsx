@@ -22,7 +22,7 @@ import axios from 'axios';
 import { API_GET_ALL_ORDER } from 'utils/const';
 import Moment from 'react-moment';
 import { Button, Grid, MenuItem, Select } from '@mui/material';
-import {NavLink, useHistory} from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { API_GET_EXTEND_ORDER_USER } from 'utils/const';
 import { toast } from 'react-toastify';
 import { API_EXTEND_ORDER_USER } from 'utils/const';
@@ -250,7 +250,7 @@ function Activity() {
         getALLOrderWithStatus()
     }, [status])
     return (
-        <div style={{ marginTop: '50px' }} className='activity'>
+        <div className='activity'>
             <div className='activity-content'>
                 <div className='activity-title'>
 
@@ -280,7 +280,7 @@ function Activity() {
                                             <TableCell
                                                 sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }}
                                                 align={'center'}
-                                                width={50}
+                                                width={330}
                                             >
                                                 Id
                                             </TableCell>
@@ -301,7 +301,6 @@ function Activity() {
 
                                             <TableCell
                                                 align={'center'}
-
                                             >
                                                 <FormControl variant="standard" sx={{ minWidth: 120, color: 'black', fontWeight: '600', fontSize: '1.1em' }}>
 
@@ -336,12 +335,12 @@ function Activity() {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {data.map((item, index) => (
+                                        {data.length > 0 ? data.map((item, index) => (
                                             <TableRow key={index} >
-                                                <TableCell align="left">{item.id}</TableCell>
+                                                <TableCell align="center">{item.id}</TableCell>
                                                 <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.orderTime}</Moment></TableCell>
                                                 <TableCell align="center">{item.totalProduct} sản phẩm</TableCell>
-                                                {item.status !== "" ? <TableCell>
+                                                {item.status !== "" ? <TableCell align="center">
                                                     <OrderStatus status={item.status}></OrderStatus>
                                                 </TableCell> : null}
                                                 <TableCell align="right">
@@ -352,7 +351,10 @@ function Activity() {
                                                     </NavLink>
                                                 </TableCell>
                                             </TableRow>
-                                        ))}
+                                        )) :
+                                            <TableRow >
+                                                <TableCell align="center">Bạn chưa có đơn hàng nào, hãy <NavLink to={'/auth/homePage'}>đặt hàng</NavLink> ngay nhé ! .</TableCell>
+                                            </TableRow>}
                                     </TableBody>
                                 </Table>
                             </TableContainer>

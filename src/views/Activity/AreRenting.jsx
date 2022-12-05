@@ -53,7 +53,7 @@ function AreRenting({ columns2, dataOrderDetail, showCheckbox, onchangeMonth, sh
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataOrderDetail.map((item, index) => {
+                            {dataOrderDetail.length > 0 ? dataOrderDetail.map((item, index) => {
                                 return (
                                     <TableRow key={index} >
                                         {/* <TableCell align="left">{item.id}</TableCell> */}
@@ -69,35 +69,38 @@ function AreRenting({ columns2, dataOrderDetail, showCheckbox, onchangeMonth, sh
                                         <TableCell align="center"> <Moment format="DD/MM/YYYY">{item.product.expiredDate}</Moment></TableCell>
                                     </TableRow>
                                 )
-                            })}
+                            }) : <TableRow >
+                                <TableCell align="center">Bạn chưa thuê trụ nào.</TableCell>
+                            </TableRow>}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </Paper>
-            {showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                    {dataOrderDetail.length > 0?
+            {dataOrderDetail.length > 0 ?
+                showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                    {dataOrderDetail.length > 0 ?
                         < Button onClick={e => {
-                        setShowCheckbox(true)
-                        setShowExtend(false)
-                    }} variant="contained" color="success">
-                        Gia hạn
+                            setShowCheckbox(true)
+                            setShowExtend(false)
+                        }} variant="contained" color="success">
+                            Gia hạn
                         </Button> :
                         <NavLink to={'/auth/homePage'} className="text-body">
                             <Button variant="contained" color="success" disabled>Mua hàng</Button>
                         </NavLink>
                     }
-            </Grid> :
-                <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
-                    <Button onClick={handleClickOpen} variant="contained" color="success">
-                        Xác nhận
-                    </Button>
-                    <Button sx={{ ml: 1 }} onClick={e => {
-                        setShowExtend(true)
-                        setShowCheckbox(false)
-                    }} variant="contained" color="error">
-                        Đóng
-                    </Button>
-                </Grid>}
+                </Grid> :
+                    <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                        <Button onClick={handleClickOpen} variant="contained" color="success">
+                            Xác nhận
+                        </Button>
+                        <Button sx={{ ml: 1 }} onClick={e => {
+                            setShowExtend(true)
+                            setShowCheckbox(false)
+                        }} variant="contained" color="error">
+                            Đóng
+                        </Button>
+                    </Grid> : null}
         </Fragment>
     )
 }

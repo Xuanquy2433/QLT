@@ -51,7 +51,7 @@ function Expired({ columns4, dataOrderDetailExpired }) {
                                 )
                             }) :
                                 <TableRow >
-                                    <TableCell align="center">Bạn chưa có đơn hàng nào hết hạn.</TableCell>
+                                    <TableCell align="center">Bạn chưa có đơn hàng nào đã hết hạn.</TableCell>
                                 </TableRow>}
                         </TableBody>
                     </Table>

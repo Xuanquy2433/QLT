@@ -13,7 +13,7 @@ import {
   Col
 } from "reactstrap";
 import { NavLink, useHistory } from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { API_SIGNIN } from "utils/const";
@@ -39,16 +39,16 @@ const Login = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     if (data.phoneNumber === '') {
-      toast.error('Phone number cannot be null', {
+      toast.error('Số điện thoại không được trống', {
         autoClose: 2000
       })
     } else if (data.password === '') {
-      toast.error('Password cannot be null', {
+      toast.error('Mật khẩu không được để trống', {
         autoClose: 2000
       })
     }
     else if (data.password.length < 8) {
-      toast.error('Password must have at least 8 characters', {
+      toast.error('Mật khẩu phải lớn hơn 8 kí tự', {
         autoClose: 2000
       })
     }

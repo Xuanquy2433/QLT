@@ -51,6 +51,14 @@ const Auth = (props) => {
       else if (decoded === undefined && !decoded && history.location.pathname === '/auth/activity') {
         history.push('/auth/homePage')
         history.block(true)
+      }
+      else if (decoded === undefined && !decoded && history.location.pathname === '/auth/changePassword') {
+        history.push('/auth/homePage')
+        history.block(true)
+      }
+      else if (decoded === undefined && !decoded && history.location.pathname === '/auth/wishList') {
+        history.push('/auth/homePage')
+        history.block(true)
       } else if (prop.layout === "") {
         return (
           <Route
@@ -70,7 +78,7 @@ const Auth = (props) => {
     <>
       <div className="main-content" ref={mainContent}  >
         <AuthNavbar />
-        
+
 
         <Container className="mt--8 pb-5">
           <Row className="justify-content-center">
