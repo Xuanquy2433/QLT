@@ -103,13 +103,13 @@ const AdminNavbar = () => {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link to="/">
-                  <div class="typed-animation">
-              <h1 style={{ color: 'white', margin: "0", borderRadius: "15px " }} class="typed-out">
-                <img className='logo-home'
-                  alt="..."
-                  src={require("../../assets/img/brand/1-01-01.png")} />
-              </h1>
-            </div>
+                    <div class="typed-animation">
+                      <h1 style={{ color: 'white', margin: "0", borderRadius: "15px " }} class="typed-out">
+                        <img className='logo-home'
+                          alt="..."
+                          src={require("../../assets/img/brand/1-01-01.png")} />
+                      </h1>
+                    </div>
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">

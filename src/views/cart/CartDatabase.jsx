@@ -34,10 +34,11 @@ function CartDatabase() {
         })
         if (response) {
             setData(response.data)
-            console.log(Object.entries(response.data))
-
         }
     }
+
+
+
     const handleUpdateMonth = async (item) => {
         const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month + 1), {}, {
             headers: {
@@ -129,15 +130,23 @@ function CartDatabase() {
             }
         }
     }
+
+    //set countcart
+    let countNumber = 0
+    let arrayCart = []
+    Object.entries(data).forEach(function (value, key) {
+        countNumber = value[1].length
+        arrayCart = value[1]
+    })
+    //set total money
     let sum = 0
-    // data.map((item) => {
-    //     sum += (Number(item.product.price) * Number(item.month))
-    // })
+    arrayCart.map((item) => {
+        sum += (Number(item.product.price) * Number(item.month))
+    })
 
     useEffect(() => {
         getAllCart()
     }, [])
-
     const onClickRemoveItemCart = async (id) => {
         console.log('id cart', id);
         const response = await axios.put(API_CART_REMOVE + id, {}, {
@@ -157,72 +166,76 @@ function CartDatabase() {
                     'Content-Type': 'application/json'
                 }
             })
-            localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+            let countNumber = 0
+            Object.entries(responseCount.data).forEach(function (value, key) {
+                countNumber = value[1].length
+            })
+            localStorage.setItem('countCart', JSON.stringify(countNumber));
             window.dispatchEvent(new Event("storage"));
         }
     }
 
     function renderMap(key) {
-        return(
+        return (
             <>
                 <div>duong: {JSON.parse(key[0])[0].addressName} : from {JSON.parse(key[0])[0].name}  to {JSON.parse(key[0])[1].name}</div>
                 {key[1].map((item) =>
-                <div>
-                    <div  style={{ display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center  ">
-                        <div className="col-md-2 col-lg-2 col-xl-2">
-                            <img
-                                src={item.product.photosImagePath}
-                                className="img-fluid rounded-3"
-                                alt="Cotton T-shirt"
-                            />
-                        </div>
-                        <div className="col-md-3 col-lg-3 col-xl-3">
-                            {/* <h6 className="text-muted">Shirt</h6> */}
-                            <h6 className="text-black mb-0">{item.product.name.substring(0, 17)}</h6>
-                        </div>
-                        <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
-                            <button
-                                className="btn btn-link px-2"
-                                onClick={(e) => handleMonth(item)}
-                            >
-                                <i className="fas fa-minus" />
-                            </button>
-                            <input
-                                style={{ width: '50px' }}
-                                id="form1"
-                                min={1}
-                                name="quantity"
-                                value={item.month}
-                                type="number"
-                                className="form-control form-control-sm"
-                            />
-                            <button
-                                className="btn btn-link px-2"
-                                onClick={() => handleUpdateMonth(item)}
-                            >
-                                <i className="fas fa-plus" />
-                            </button>
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
-                            {/* <h6 className="text-muted">Price</h6> */}
-                            <h6 className="text-black mb-0">{formatMoney(item.product.price * item.month)}</h6>
-                        </div>
-                        <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                            <div style={{ cursor: 'pointer' }} className="text-muted">
-                                <i onClick={() => onClickRemoveItemCart(item.product.id)} className="fas fa-times" />
+                    <div>
+                        <div style={{ display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center  ">
+                            <div className="col-md-2 col-lg-2 col-xl-2">
+                                <img
+                                    src={item.product.photosImagePath}
+                                    className="img-fluid rounded-3"
+                                    alt="Cotton T-shirt"
+                                />
                             </div>
-                        </div>
-                        <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                            <div style={{ cursor: 'pointer' }} className="text-muted">
-                                {/* hide this div */}
+                            <div className="col-md-3 col-lg-3 col-xl-3">
+                                {/* <h6 className="text-muted">Shirt</h6> */}
+                                <h6 className="text-black mb-0">{item.product.name.substring(0, 17)}</h6>
                             </div>
-                        </div>
-                        <h6 style={{ fontSize: '0.8em' }} className="text-muted mt-2">Ngày bắt đầu:
-                            <span className="text-nowrap mr-3"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}</span>
-                            - <span className='ml-2'>{showDate2(0, item.month)}</span></h6>
+                            <div style={{ alignItems: "center", justifyContent: "end" }} className="col-md-3 col-lg-3 col-xl-3 d-flex">
+                                <button
+                                    className="btn btn-link px-2"
+                                    onClick={(e) => handleMonth(item)}
+                                >
+                                    <i className="fas fa-minus" />
+                                </button>
+                                <input
+                                    style={{ width: '50px' }}
+                                    id="form1"
+                                    min={1}
+                                    name="quantity"
+                                    value={item.month}
+                                    type="number"
+                                    className="form-control form-control-sm"
+                                />
+                                <button
+                                    className="btn btn-link px-2"
+                                    onClick={() => handleUpdateMonth(item)}
+                                >
+                                    <i className="fas fa-plus" />
+                                </button>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
+                                {/* <h6 className="text-muted">Price</h6> */}
+                                <h6 className="text-black mb-0">{formatMoney(item.product.price * item.month)}</h6>
+                            </div>
+                            <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                <div style={{ cursor: 'pointer' }} className="text-muted">
+                                    <i onClick={() => onClickRemoveItemCart(item.product.id)} className="fas fa-times" />
+                                </div>
+                            </div>
+                            <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                <div style={{ cursor: 'pointer' }} className="text-muted">
+                                    {/* hide this div */}
+                                </div>
+                            </div>
+                            <h6 style={{ fontSize: '0.8em' }} className="text-muted mt-2">Ngày bắt đầu:
+                                <span className="text-nowrap mr-3"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}</span>
+                                - <span className='ml-2'>{showDate2(0, item.month)}</span></h6>
 
+                        </div>
                     </div>
-                </div>
                 )}
 
             </>
@@ -244,7 +257,7 @@ function CartDatabase() {
                                         <div className="p-5">
                                             <div className="d-flex justify-content-between align-items-center mb-5">
                                                 <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
-                                                {/*<h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {data.length} </h6>*/}
+                                                <h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {countNumber} </h6>
                                             </div>
                                             {
                                                 <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
@@ -266,7 +279,7 @@ function CartDatabase() {
                                                     </div>
                                                     <div className="col-md-1 col-lg-1 col-xl-1">
                                                         <h6 className="text-muted"></h6>                                                        </div>
-                                                </div>  }
+                                                </div>}
                                             <div className='scrollbar' style={{ boxShadow: 'none' }} id='style-1' >
                                                 <hr className="mb-3 mt-1" />
 
@@ -275,8 +288,8 @@ function CartDatabase() {
                                                         {renderMap(key)}
                                                     </>
 
-                                                    )) : ''}
-                                                </div>
+                                                )) : ''}
+                                            </div>
 
                                             {/* <hr className="my-4" /> */}
 

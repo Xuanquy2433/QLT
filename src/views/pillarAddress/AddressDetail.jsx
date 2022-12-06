@@ -121,11 +121,15 @@ function AddressDetail() {
                         'Content-Type': 'application/json'
                     }
                 })
-                localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+
+                let countNumber = 0
+                Object.entries(responseCount.data).forEach(function (value, key) {
+                    countNumber = value[1].length
+                })
+                localStorage.setItem('countCart', JSON.stringify(countNumber));
                 window.dispatchEvent(new Event("storage"));
             }
         } else {
-            console.log('delete id cart local', id);
             let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
             let cartAddP = JSON.parse(localStorage.getItem('cartADD'))
             for (let i = 0; i < listCartItems.length; i++) {
@@ -193,7 +197,11 @@ function AddressDetail() {
                             'Content-Type': 'application/json'
                         }
                     })
-                    localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+                    let countNumber = 0
+                    Object.entries(responseCount.data).forEach(function (value, key) {
+                        countNumber = value[1].length
+                    })
+                    localStorage.setItem('countCart', JSON.stringify(countNumber));
                     window.dispatchEvent(new Event("storage"));
                     // history.push('/auth/cart')
                 };
@@ -313,7 +321,11 @@ function AddressDetail() {
                 }
             })
             if (responseCount) {
-                localStorage.setItem('countCart', JSON.stringify(responseCount.data.length));
+                let countNumber = 0
+                Object.entries(responseCount.data).forEach(function (value, key) {
+                    countNumber = value[1].length
+                })
+                localStorage.setItem('countCart', JSON.stringify(countNumber));
                 window.dispatchEvent(new Event("storage"));
             }
         }
@@ -376,7 +388,7 @@ function AddressDetail() {
                                         {count > 0 ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
                                         {token == null ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => {
                                             history.push('/auth/login')
-                                            toast.warning('Vui lòng đăng nhập để thêm hết tất cả trụ vào thanh toán' , {autoClose: 1500})
+                                            toast.warning('Vui lòng đăng nhập để thêm hết tất cả trụ vào thanh toán', { autoClose: 1500 })
                                         }}>Thêm tất cả trụ </Button> : null}
                                     </div>
                                 </div>
