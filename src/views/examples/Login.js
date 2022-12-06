@@ -101,8 +101,12 @@ const Login = () => {
                 'Content-Type': 'application/json'
               }
             })
-            if (response) {
-              localStorage.setItem('countCart', JSON.stringify(response2.data.length));
+            if (response2) {
+              let countNumber = 0
+              Object.entries(response2.data).forEach(function (value, key) {
+                countNumber = value[1].length
+              })
+              localStorage.setItem('countCart', JSON.stringify(countNumber));
               window.dispatchEvent(new Event("storage"));
             }
           }
