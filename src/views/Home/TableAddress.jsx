@@ -247,7 +247,7 @@ function TableAddress() {
                                         <p className='street-product' style={{ fontSize: '20px', paddingTop: '7px' }}>Đường:  {item.street}</p>
                                         {/* <p>Thành Phố: {item.city} </p> */}
                                         {/* <p>Mô tả: {item.description}</p> */}
-                                        <p>Giá từ: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)} - {formatMoney(item.maxPrice)}</span> </p>
+                                        <p>Giá từ: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)}</span> </p>
                                         <p>Trụ còn trống: <span style={{ color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
                                         <p style={{ fontSize: '0.9em', fontWeight: '600' }}>{item.city} City</p>
                                         <NavLink to={'/auth/address/' + item.id}>
