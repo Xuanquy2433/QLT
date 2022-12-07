@@ -63,19 +63,16 @@ const Admin = (props) => {
   }, [])
   return (
     <>
-      {
-        dataImage.map((value, index) => (
-          <Sidebar
-            {...props}
-            routes={routes}
-            logo={{
-              innerLink: "/auth/homePage",
-              imgSrc: `${value.photosImagePath}`,
-              imgAlt: "..."
-            }}
-          />
-        ))
-      }
+      <Sidebar
+        {...props}
+        routes={routes}
+        logo={{
+          innerLink: "/auth/homePage",
+          imgSrc: require("../assets/img/brand/1-01-01.png"),
+          imgAlt: "..."
+        }}
+      />
+
       <div className="main-content" ref={mainContent}>
         <AdminNavbar
           {...props}
