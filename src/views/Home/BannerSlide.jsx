@@ -29,11 +29,11 @@ function BannerSlide() {
         getData();
     }, [])
     return (
-        <div style={{ width: '98.9vw', height: '100vh', overflow: "hidden", margin: 'auto', marginTop: '-9rem' }}>
+        <div className='slide-home' style={{ width: '98.9vw', height: '100vh', overflow: "hidden", margin: 'auto', marginTop: '-9rem' }}>
             <Slider  {...settings}>
                 {data.map((i, index) => (
                     <div key={index}>
-                        <img style={{ objectFit: "cover", width: '100vw', height: '100vh', overflow: "hidden", margin: "auto !important" }} src={i.photosImagePath} alt="" />
+                        <img className='images-slide' style={{ objectFit: "cover", width: '100vw', height: '100vh', overflow: "hidden", margin: "auto !important" }} src={i.photosImagePath} alt="" />
                     </div>
                 ))}
             </Slider>

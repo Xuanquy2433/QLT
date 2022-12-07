@@ -205,7 +205,7 @@ function TableAddress() {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid item xs={3} >
+                        <Grid sx={{ display: "flex" }} item xs={3} >
                             <FormControl sx={{ width: '53%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                                     <h3 style={{ color: 'black', width: '190px', marginLeft: '10%', marginRight: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
@@ -240,18 +240,18 @@ function TableAddress() {
                                     <div className='image-product' style={{
                                         width: '80%', height: '260px'
                                     }}  >
-                                        <img style={{ width: '100%', height: '100%', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
+                                        <img style={{ objectFit: "cover", width: '100%', height: '100%', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
 
                                     </div>
-                                    <div style={{ width: '100%', justifyContent: 'center', color: 'black' }}>
-                                        <p style={{ fontSize: '20px', paddingTop: '7px' }}>Đường:  {item.street}</p>
+                                    <div className='description-pro' style={{ width: '100%', justifyContent: 'center', color: 'black' }}>
+                                        <p className='street-product' style={{ fontSize: '20px', paddingTop: '7px' }}>Đường:  {item.street}</p>
                                         {/* <p>Thành Phố: {item.city} </p> */}
                                         {/* <p>Mô tả: {item.description}</p> */}
-                                        <p>Khoảng giá: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)} - {formatMoney(item.maxPrice)}</span> </p>
+                                        <p>Giá từ: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)} - {formatMoney(item.maxPrice)}</span> </p>
                                         <p>Trụ còn trống: <span style={{ color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
                                         <p style={{ fontSize: '0.9em', fontWeight: '600' }}>{item.city} City</p>
                                         <NavLink to={'/auth/address/' + item.id}>
-                                            <Button sx={{
+                                            <Button className='btn-custom-product' sx={{
                                                 // mt:5,
                                                 '&:hover': {
                                                     bgcolor: '#007784',

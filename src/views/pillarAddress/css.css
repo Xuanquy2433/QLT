@@ -116,9 +116,35 @@ label.radio input:checked + span {
     .hoverBut .MuiGrid-root .MuiGrid-root .product{
         flex-direction: column !important;
     }
-
-
     .hoverBut .MuiGrid-root .MuiGrid-root .product .image-product{
         width: 100% !important;
+        height: 150px !important;
+    }
+
+    .hoverBut .MuiGrid-root .MuiGrid-root .product .description-pro p , span{
+        margin: 0 !important;
+        font-size: 14px !important;
+        padding: 0 !important;  
+
+    }
+
+    .hoverBut .MuiGrid-root .MuiGrid-root .product .description-pro{
+        /* height: 155px !important; */
+    }
+
+    .hoverBut .MuiGrid-root .MuiGrid-root .product .description-pro .btn-custom-product{
+        padding: 8px !important;
+        font-size: 14px;
+        width: 100% !important;
+    }
+    /* .hoverBut .MuiGrid-root .MuiGrid-root .product .description-pro  .street-product{
+        font-size: 16px !important;
+    } */
+
+    .slide-home{
+        height: 65vh !important;
+    }
+    .slide-home .slick-slider .images-slide{
+        height: 65vh !important;
     }
 }
