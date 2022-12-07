@@ -48,18 +48,30 @@ export default function AdminPictures() {
         console.log(item);
     }
 
+    let flag = false
+    data.map(item => {
+        if (item.category == 'logo') {
+            flag = true
+        }
+    })
+
     const onSubmitAdd = async (data) => {
         try {
-            const formData = new FormData();
-            formData.append('image', data.image);
-            const response = await axios.post(API_POST_PICTURES + '?category=' + data.category, formData,
-                {
-                    headers: { 'Content-Type': 'multipart/form-data' }
-                })
-            if (response && response.status === 200) {
-                toast.success("Thêm thành công", { autoClose: 1500 })
-                setOpen(false)
-                fetchAPI()
+            if (flag && data.category == 'logo') {
+                toast.warning("Chỉ có thể có 1 ảnh logo !", { autoClose: 1500 })
+            }
+            else {
+                const formData = new FormData();
+                formData.append('image', data.image);
+                const response = await axios.post(API_POST_PICTURES + '?category=' + data.category, formData,
+                    {
+                        headers: { 'Content-Type': 'multipart/form-data' }
+                    })
+                if (response && response.status === 200) {
+                    toast.success("Thêm thành công", { autoClose: 1500 })
+                    setOpen(false)
+                    fetchAPI()
+                }
             }
         } catch (error) {
             showError(error)
@@ -67,18 +79,21 @@ export default function AdminPictures() {
     }
 
     const onSubmitEdit = async (data) => {
-        console.log('on submit id ', data);
         try {
-            const formData = new FormData();
-            formData.append('image', data.image);
-            const response = await axios.post(API_UPDATE_PICTURES + data.id, formData,
-                {
-                    headers: { 'Content-Type': 'multipart/form-data' }
-                })
-            if (response && response.status === 200) {
-                toast.success("Sửa thành công", { autoClose: 1500 })
-                fetchAPI();
-                setOpenEdit(false)
+            if (flag && data.category == 'logo') {
+                toast.warning("Chỉ có thể có 1 ảnh logo !", { autoClose: 1500 })
+            } else {
+                const formData = new FormData();
+                formData.append('image', data.image);
+                const response = await axios.post(API_UPDATE_PICTURES + data.id, formData,
+                    {
+                        headers: { 'Content-Type': 'multipart/form-data' }
+                    })
+                if (response && response.status === 200) {
+                    toast.success("Sửa thành công", { autoClose: 1500 })
+                    fetchAPI();
+                    setOpenEdit(false)
+                }
             }
             //catch show error
         } catch (error) {

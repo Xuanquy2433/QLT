@@ -8,6 +8,9 @@ import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
+import { API } from "utils/const";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -47,18 +50,32 @@ const Admin = (props) => {
     }
     return "Brand";
   };
+  const [dataImage, setDataImage] = React.useState([]);
+  const getData = async () => {
+    const response = await axios.get(API + '/admin/webImage/?category=logo')
+    if (response.status === 200) {
+      setDataImage(response.data)
+    }
+  }
 
+  useEffect(() => {
+    getData();
+  }, [])
   return (
     <>
-      <Sidebar
-        {...props}
-        routes={routes}
-        logo={{
-          innerLink: "/auth/homePage",
-          imgSrc: require("../assets/img/brand/cc.png"),
-          imgAlt: "..."
-        }}
-      />
+      {
+        dataImage.map((value, index) => (
+          <Sidebar
+            {...props}
+            routes={routes}
+            logo={{
+              innerLink: "/auth/homePage",
+              imgSrc: `${value.photosImagePath}`,
+              imgAlt: "..."
+            }}
+          />
+        ))
+      }
       <div className="main-content" ref={mainContent}>
         <AdminNavbar
           {...props}

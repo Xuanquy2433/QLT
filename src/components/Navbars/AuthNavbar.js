@@ -82,6 +82,18 @@ const AdminNavbar = () => {
     return () => window.removeEventListener("storage", listenStorageChange);
   }, []);
 
+  const [dataImage, setDataImage] = React.useState([]);
+  const getData = async () => {
+    const response = await axios.get(API + '/admin/webImage/?category=logo')
+    if (response.status === 200) {
+      setDataImage(response.data)
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [])
+
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -89,9 +101,14 @@ const AdminNavbar = () => {
           <NavbarBrand to="/" tag={Link}>
             <div class="typed-animation">
               <h1 style={{ color: 'white', margin: "0", borderRadius: "15px " }} class="typed-out">
-                <img className='logo-home'
-                  alt="..."
-                  src={require("../../assets/img/brand/1-01-01.png")} />
+                {
+                  dataImage.map((value, index) => (
+                    <img className='logo-home'
+                      key={index}
+                      alt="..."
+                      src={value.photosImagePath} />
+                  ))
+                }
               </h1>
             </div>
           </NavbarBrand>
@@ -105,9 +122,14 @@ const AdminNavbar = () => {
                   <Link to="/">
                     <div class="typed-animation">
                       <h1 style={{ color: 'white', margin: "0", borderRadius: "15px " }} class="typed-out">
-                        <img className='logo-home'
-                          alt="..."
-                          src={require("../../assets/img/brand/1-01-01.png")} />
+                        {
+                          dataImage.map((value, index) => (
+                            <img className='logo-home'
+                              key={index}
+                              alt="..."
+                              src={value.photosImagePath} />
+                          ))
+                        }
                       </h1>
                     </div>
                   </Link>

@@ -19,7 +19,7 @@ function About() {
                 <div className="secondaryContainer clearfix">
                     <div className="diamondImgHolderLeft">
                         <div className="diamond">
-                            <img  style={{transform: 'rotate(-0deg)'}} src="https://st2.depositphotos.com/3591429/10464/i/950/depositphotos_104648666-stock-photo-group-of-people-brainstorming-on.jpg" alt="Ada Lovelace: superwoman" className="timelineImageLeft" />
+                            <img  style={{transform: 'rotate(-0deg)'}} src="https://sontau.com/wp-content/uploads/2022/05/ve-chung-toi.png" alt="Ada Lovelace: superwoman" className="timelineImageLeft" />
                         </div>
                     </div>
                     <div className="timelineTextRight">
@@ -32,7 +32,7 @@ function About() {
                     <div className="horizLeft2" />
                     <div className="diamondImgHolderRight">
                         <div className="diamond">
-                            <img style={{transform: 'rotate(-0deg)'}} src="https://img.freepik.com/premium-photo/about-us-multicolor-inscription-white-brick-wall-with-doodle-icons-around-about-us-concept-modern-style-illustration-with-doodle-design-icons-about-us-white-brickwall-background_226262-1853.jpg?w=2000" alt="Rosie the Riviter" className="timelineImageRight" />
+                            <img style={{transform: 'rotate(-0deg)'}} src="https://i.doanhnhansaigon.vn/2018/08/06/chienluockinhdoanh-1533523454_750x0.jpg" alt="Rosie the Riviter" className="timelineImageRight" />
                         </div>
                     </div>
                     <div className="timelineTextLeft">
@@ -41,7 +41,7 @@ function About() {
                     </div>
                     <div className="diamondImgHolderLeft">
                         <div className="diamond">
-                            <img style={{transform: 'rotate(-0deg)'}} src="https://www.impactplus.com/hubfs/blog-image-uploads/best-about-us-pages.jpg" alt="Kathleen Hanna: Riot Grrl" className="timelineImageLeft" />
+                            <img style={{transform: 'rotate(-0deg)'}} src="https://photo-cms-bizlive.epicdn.me/w1200/NSDN/he-lo-ket-qua-kinh-doanh-quy-3-co-doanh-nghiep-da-vuot-xa-chi-tieu-ca-nam-20221004153847_86279.jpg" alt="Kathleen Hanna: Riot Grrl" className="timelineImageLeft" />
                         </div>
                     </div>
                     <div className="timelineTextRight">

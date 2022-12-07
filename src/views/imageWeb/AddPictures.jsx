@@ -65,7 +65,7 @@ export default function AddPictures({ open, setOpen, onSubmitAdd }) {
                                 onChange={handleChangeCategory}>
                                 <MenuItem value={'banner'}>Ảnh banner</MenuItem>
                                 <MenuItem value={'logo'}>Ảnh logo</MenuItem>
-                                <MenuItem value={'about'}>Ảnh about us</MenuItem>
+                                {/* <MenuItem value={'about'}>Ảnh about us</MenuItem> */}
                             </Select>
                         </FormControl>
                         <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }}
