@@ -81,7 +81,7 @@ function TableAddress() {
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + page+'?dataPerPage=6&sort=desc&sortField=totalProductAvailable')
+        const response = await axios.get(API_GET_ADDRESS + page + '?dataPerPage=6&sort=desc&sortField=totalProductAvailable')
         if (response) {
             setData(response.data.contents)
             setDataInfo(response.data.pageInfo)
@@ -109,7 +109,7 @@ function TableAddress() {
     //click search
     const [show, setShow] = useState(false);
     const onclickSearch = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + page +'?dataPerPage=6&keyword=' + keyword + '&sort=desc&sortField=totalProductAvailable')
+        const response = await axios.get(API_GET_ADDRESS + page + '?dataPerPage=6&keyword=' + keyword + '&sort=desc&sortField=totalProductAvailable')
         if (response) {
             setData(response.data.contents)
             setShow(true)
@@ -174,7 +174,7 @@ function TableAddress() {
     }, [page])
     return (
         <React.Fragment>
-            <Box sx={{ width: '86%', margin: 'auto' }}>
+            <Box className="container-products" sx={{ width: '86%', margin: 'auto' }}>
                 <Box sx={{ flexGrow: 1, mt: 10, marginTop: '30px !important' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
@@ -236,8 +236,8 @@ function TableAddress() {
                         {_DATA.currentData().length > 0 ? _DATA.currentData().map((item, index) => (
 
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
-                                <div style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
-                                    <div style={{
+                                <div className='product' style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
+                                    <div className='image-product' style={{
                                         width: '80%', height: '260px'
                                     }}  >
                                         <img style={{ width: '100%', height: '100%', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />

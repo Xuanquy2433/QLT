@@ -105,3 +105,20 @@ label.radio input:checked + span {
         left: 100%;
     }
 }
+
+
+@media (max-width: 420px) {
+
+    .container-products{
+        width: 100% !important;
+        padding: 10px !important;
+    }
+    .hoverBut .MuiGrid-root .MuiGrid-root .product{
+        flex-direction: column !important;
+    }
+
+
+    .hoverBut .MuiGrid-root .MuiGrid-root .product .image-product{
+        width: 100% !important;
+    }
+}
