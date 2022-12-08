@@ -91,18 +91,22 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
 
   const addAddressPoint = async (addressId) => {
     try {
-      const response = await axios.put(API_ADD_ADDRESS_POINT, JSON.stringify(input), {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+      if (name === '') {
+        toast.warning("Không được để trống name ", {autoClose : 1500})
+      } else {
+        const response = await axios.put(API_ADD_ADDRESS_POINT, JSON.stringify(input), {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+        if (response.status === 200) {
+          setRandom(Math.random());
+          clear();
+          toast.success("Thêm thành công", { autoClose: 1500 })
         }
-      })
-      if (response.status === 200) {
-        setRandom(Math.random());
-        clear();
-        toast.success("Thêm thành công", { autoClose: 1500 })
-      }
 
+      }
     } catch (error) {
       if (error.response.data.message) {
         toast.error(`${error.response.data.message}`, {
@@ -115,7 +119,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
 
   const addAddressPointBehind = async (addressId, pointId) => {
     try {
-      if (data.name === " ") {
+      if (data.name === "") {
         toast.error("Không được để trống địa chỉ", { autoClose: "1500" })
       } else {
 
@@ -262,12 +266,12 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
               }}>X</div>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
               <TableContainer sx={{ height: '700px' }}>
-                <Table aria-label="sticky table" sx={{ height: '30%',width: '100%' }}>
+                <Table aria-label="sticky table" sx={{ height: '30%', width: '100%' }}>
                   <TableHead sx={{ borderBottom: '2px solid black' }}>
                     <StyledTableCell>
                       {updating ? updateId : null}
                     </StyledTableCell>
-                    <div style={{ display: 'flex',alignItems:'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                       <div className='mt-2 mr-5 h5 font-weight-bold'>
                         <span>Name:</span>
                         <input type="text" value={name} onChange={handleChange} />
@@ -286,10 +290,10 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
                       <StyledTableCell />
                       <StyledTableCell />
                       <StyledTableCell>
-                        <Button onClick={() => { onUpdatePoint(updateId, input) }}>Cập nhập</Button>
+                        <Button color='success' onClick={() => { onUpdatePoint(updateId, input) }}>Cập nhập</Button>
                       </StyledTableCell>
                       <StyledTableCell>
-                        <Button onClick={() => { onCancelUpdate() }}>X</Button>
+                        <Button color='warning' onClick={() => { onCancelUpdate() }}>X</Button>
                       </StyledTableCell>
                     </>
                       : data.length < 2 ?
@@ -347,7 +351,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
                 <Map
                   googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                   loadingElement={<div style={{ height: `100%` }} />}
-                  containerElement={<div style={{ height: `70%`, margin: `auto`, border: '2px solid black',width:'100%' }} />}
+                  containerElement={<div style={{ height: `70%`, margin: `auto`, border: '2px solid black', width: '100%' }} />}
                   mapElement={<div style={{ height: `100%` }} />}
                   setLatMap={setLat}
                   setLngMap={setLng}
