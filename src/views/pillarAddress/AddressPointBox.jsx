@@ -165,9 +165,13 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
     }
   }
 
-
   function handleChange(e) {
     setName(e.target.value);
+
+
+  }
+
+  useEffect(() => {
     setInput({
       ...input,
       addressId: addressId,
@@ -175,12 +179,10 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
       lng: lng,
       name: name
     })
-  }
-
-
+    console.log(name)
+  }, [name]);
   function updatePoint(data) {
     setUpdating(true);
-    console.log("updating")
     setLat(data.lat);
     setLng(data.lng);
     setName(data.name);
@@ -267,7 +269,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
             </StyledTableCell>
             <StyledTableCell>
               name:
-              <input type="text" value={name} onChange={handleChange} />
+              <input type="text" value={name}  onChange={handleChange} />
             </StyledTableCell>
             <StyledTableCell>
               lat:
