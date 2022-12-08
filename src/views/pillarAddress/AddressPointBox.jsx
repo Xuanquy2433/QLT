@@ -179,7 +179,6 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
       lng: lng,
       name: name
     })
-    console.log(name)
   }, [name]);
   function updatePoint(data) {
     setUpdating(true);
@@ -254,111 +253,116 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-<>
-  <Box  sx={style}>
-    <div onClick={() => closeDetail()}
-         style={{ position: 'absolute',color: 'red',cursor: 'pointer'
-           ,fontWeight: '700',fontSize:'1.2em',top:'0',left:"98.5%" }}>X</div>
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <>
+          <Box sx={style}>
+            <div onClick={() => closeDetail()}
+              style={{
+                position: 'absolute', color: 'red', cursor: 'pointer'
+                , fontWeight: '700', fontSize: '1.2em', top: '0', left: "98.5%"
+              }}>X</div>
+            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
 
-      <TableContainer sx={{ height: '700px' }}>
-        <Table aria-label="sticky table" sx={{height: '30%'}}>
-          <TableHead sx={{borderBottom: '2px solid black'}}>
-            <StyledTableCell>
-              {updating ? updateId  : null}
-            </StyledTableCell>
-            <StyledTableCell>
-              name:
-              <input type="text" value={name}  onChange={handleChange} />
-            </StyledTableCell>
-            <StyledTableCell>
-              lat:
-              <input type="text" value={lat} />
-            </StyledTableCell>
-            <StyledTableCell>
-              lng:
-              <input type="text" value={lng} />
-            </StyledTableCell>
+              <TableContainer sx={{ height: '700px' }}>
+                <Table aria-label="sticky table" sx={{ height: '30%' }}>
+                  <TableHead sx={{ borderBottom: '2px solid black' }}>
+                    <StyledTableCell>
+                      {updating ? updateId : null}
+                    </StyledTableCell>
+                    <div style={{ display: 'flex' }}>
+                      <div className='mt-2 mr-5 h5 font-weight-bold'>
+                        <span>Name:</span>
+                        <input type="text" value={name} onChange={handleChange} />
+                      </div>
+                      <div className='mt-2 mr-5 h5 font-weight-bold'>
+                        lat:
+                        <input type="text" value={lat} />
+                      </div>
+                      <div className='mt-2 mr-5 h5 font-weight-bold'>
+                        lng:
+                        <input type="text" value={lng} />
+                      </div>
+                    </div>
 
-            {updating ? <>
-                  <StyledTableCell/>
-                  <StyledTableCell/>
-                  <StyledTableCell>
-                    <Button onClick={() => { onUpdatePoint(updateId, input) }}>Update</Button>
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    <Button onClick={() => { onCancelUpdate() }}>X</Button>
-                  </StyledTableCell>
-                </>
-                :  data.length < 2 ?
-                    <>
-                      <StyledTableCell/>
-                      <StyledTableCell> <button onClick={() => addAddressPoint(addressId)}>Thêm</button></StyledTableCell>
+                    {updating ? <>
+                      <StyledTableCell />
+                      <StyledTableCell />
+                      <StyledTableCell>
+                        <Button onClick={() => { onUpdatePoint(updateId, input) }}>Cập nhập</Button>
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <Button onClick={() => { onCancelUpdate() }}>X</Button>
+                      </StyledTableCell>
                     </>
-                    : null }
-          </TableHead>
-          <TableBody>
-            {data.map((column) => (
-                <TableRow>
-                  <StyledTableCell>
-                    {column.id}
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    {column.name}
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    {column.lng}
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    {column.lat}
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    {column.number}
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    <Button onClick={() => addAddressPointBehind(addressId, column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
-                      Thêm
-                    </Button>
-                  </StyledTableCell>
+                      : data.length < 2 ?
+                        <>
+                          <StyledTableCell />
+                          <StyledTableCell> <Button color='success' onClick={() => addAddressPoint(addressId)}>Thêm</Button></StyledTableCell>
+                        </>
+                        : null}
+                  </TableHead>
+                  <TableBody>
+                    {data.map((column) => (
+                      <TableRow>
+                        <StyledTableCell>
+                          {column.id}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          {column.name}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          {column.lng}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          {column.lat}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          {column.number}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <Button onClick={() => addAddressPointBehind(addressId, column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
+                            Thêm
+                          </Button>
+                        </StyledTableCell>
 
-                  <StyledTableCell>
-                    <Button onClick={() => {updatePoint(column)
+                        <StyledTableCell>
+                          <Button onClick={() => {
+                            updatePoint(column)
+                          }
+
+                          } sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
+                            Sửa
+                          </Button>
+                        </StyledTableCell>
+
+                        <StyledTableCell>
+                          <Button onClick={() => deletePoint(column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="warning">
+                            X
+                          </Button>
+                        </StyledTableCell>
+                      </TableRow>
+                    ))
                     }
+                  </TableBody>
 
-                    } sx={{ height: '3.2em', width: "15%" }} variant="contained" color="success">
-                      Update
-                    </Button>
-                  </StyledTableCell>
+                </Table>
+                <Map
+                  googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
+                  loadingElement={<div style={{ height: `100%` }} />}
+                  containerElement={<div style={{ height: `70%`, margin: `auto`, border: '2px solid black' }} />}
+                  mapElement={<div style={{ height: `100%` }} />}
+                  setLatMap={setLat}
+                  setLngMap={setLng}
+                  data={data}
+                  setUpdatingItem={setUpdatingItem}
+                  setUpdatingStatus={setUpdatingStatus}
+                  finish={setUpdatingStatus}
+                />
+              </TableContainer>
 
-                  <StyledTableCell>
-                    <Button onClick={() => deletePoint(column.id)} sx={{ height: '3.2em', width: "15%" }} variant="contained" color="warning">
-                      X
-                    </Button>
-                  </StyledTableCell>
-                </TableRow>
-            ))
-            }
-          </TableBody>
+            </Paper>
 
-        </Table>
-        <Map
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `70%`, margin: `auto`, border: '2px solid black' }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            setLatMap={setLat}
-            setLngMap={setLng}
-            data={data}
-            setUpdatingItem={setUpdatingItem}
-            setUpdatingStatus={setUpdatingStatus}
-            finish={setUpdatingStatus}
-        />
-      </TableContainer>
-
-    </Paper>
-
-  </Box>
-</>
+          </Box>
+        </>
 
       </Modal>
 
