@@ -34,3 +34,14 @@
     /* margin: auto; */
     margin-left: -15px;
 }
+
+.hide {
+    display: none;
+  }
+      
+  .myDIV:hover + .hide {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: red;
+  }

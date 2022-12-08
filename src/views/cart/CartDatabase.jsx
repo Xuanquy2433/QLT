@@ -254,7 +254,7 @@ function CartDatabase() {
                             <div className="card-body p-0">
                                 <div className="row g-0">
                                     <div className="col-lg-8">
-                                        <div className="p-5">
+                                        <div className="p-5 mb-2">
                                             <div className="d-flex justify-content-between align-items-center mb-5">
                                                 <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
                                                 <h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {countNumber} </h6>
@@ -316,16 +316,17 @@ function CartDatabase() {
                                                 style={{ marginTop: '120px' }}
                                                 disabled={btnDisabled}
                                                 type="button"
-                                                className="btn btn-dark btn-block btn-lg"
+                                                className="btn btn-dark btn-block btn-lg myDIV"
                                                 data-mdb-ripple-color="dark"
                                                 onClick={clickOrder}
                                             >
 
                                                 {btnDisabled ? 'Vui lòng chờ...' : 'Đặt trụ'}
+
                                             </button> : <NavLink to={'/auth/login'}> <button type="button"
                                                 className="btn btn-dark btn-block btn-lg"
                                                 data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>}
-
+                                            <div className="hide">Nếu bạn muốn thanh toán trực tiếp tại doanh nghiệp, bạn chỉ cần nhấn đặt đơn hàng ở đây và không thao tác gì thêm !!!</div>
                                         </div>
                                     </div>
                                 </div>
