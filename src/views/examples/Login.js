@@ -79,20 +79,23 @@ const Login = () => {
             history.goBack()
             //add cart local to database
             var myMap = new Map()
-            JSON.parse(localStorage.getItem('cartADD')).map((item) => {
-              myMap.set(item.productId, item.month);
-            })
-            const obj = Object.fromEntries(myMap);
-            const dataCart = {
-              productInfo: obj
-            }
-            const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
-              headers: {
-                'authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+            if (localStorage.getItem('cartADD')) {
+              JSON.parse(localStorage.getItem('cartADD')).map((item) => {
+                myMap.set(item.productId, item.month);
+              })
+              const obj = Object.fromEntries(myMap);
+              const dataCart = {
+                productInfo: obj
               }
-            });
+              const rs = await axios.post(API_ADD_CART_LOCAL, dataCart, {
+                headers: {
+                  'authorization': 'Bearer ' + localStorage.getItem('token'),
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                }
+              });
+            }
+
             //set count cart
             const response2 = await axios.get(API_GET_CART, {
               headers: {
@@ -105,6 +108,7 @@ const Login = () => {
               let countNumber = 0
               Object.entries(response2.data).forEach(function (value, key) {
                 countNumber = value[1].length
+                console.log("this ", value[1].lengthl, value[1]);
               })
               localStorage.setItem('countCart', JSON.stringify(countNumber));
               window.dispatchEvent(new Event("storage"));
