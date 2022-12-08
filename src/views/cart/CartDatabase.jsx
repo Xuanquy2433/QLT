@@ -178,7 +178,7 @@ function CartDatabase() {
     function renderMap(key) {
         return (
             <>
-                <div>duong: {JSON.parse(key[0])[0].addressName} : from {JSON.parse(key[0])[0].name}  to {JSON.parse(key[0])[1].name}</div>
+                <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[0].name} đến {JSON.parse(key[0])[1].name}</div>
                 {key[1].map((item) =>
                     <div>
                         <div style={{ display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center  ">
