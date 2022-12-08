@@ -62,6 +62,8 @@ const Login = () => {
             autoClose: 1500
           })
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
+            history.push('/auth/homePage')
+
             //check role user
             if (localStorage.getItem('countCart') == null) {
               const response2 = await axios.get(API_GET_CART, {
@@ -76,7 +78,7 @@ const Login = () => {
                 window.dispatchEvent(new Event("storage"));
               }
             }
-            history.goBack()
+            // history.goBack()
             //add cart local to database
             var myMap = new Map()
             if (localStorage.getItem('cartADD')) {
