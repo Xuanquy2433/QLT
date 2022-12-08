@@ -24,6 +24,7 @@ import styled from "styled-components";
 import './login.css'
 import { API_ADD_CART_LOCAL } from "utils/const";
 import { API_GET_CART } from "utils/const";
+import { forEach } from "lodash";
 
 const Login = () => {
   const history = useHistory();
@@ -36,6 +37,9 @@ const Login = () => {
   if (token !== null) {
     decoded = jwt_decode(token);
   }
+
+  let arrLocations = JSON.parse(localStorage.getItem("locations"));
+  console.log("arrLocations", arrLocations);
   const onLogin = async (e) => {
     e.preventDefault();
     if (data.phoneNumber === '') {
@@ -62,8 +66,6 @@ const Login = () => {
             autoClose: 1500
           })
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
-            history.push('/auth/homePage')
-
             //check role user
             if (localStorage.getItem('countCart') == null) {
               const response2 = await axios.get(API_GET_CART, {
@@ -78,7 +80,23 @@ const Login = () => {
                 window.dispatchEvent(new Event("storage"));
               }
             }
-            // history.goBack()
+
+            for (let i = arrLocations.length - 2; i < arrLocations.length; i--) {
+              console.log(arrLocations[i]);
+              if (arrLocations[i] === "/auth/register") {
+                history.replace({ pathname: '/auth/homePage' })
+                break
+              } else if (arrLocations[i] !== "/auth/register" || arrLocations[i] !== "/auth/login") {
+                history.replace({ pathname: arrLocations[i] })
+                break
+              }
+
+
+              // history.replace({ pathname: arrLocations[i] === "auth/register" ? arrLocations[i] : '/auth/homePage' })
+
+
+            }
+
             //add cart local to database
             var myMap = new Map()
             if (localStorage.getItem('cartADD')) {

@@ -33,6 +33,21 @@ const Auth = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+  let arrLocations = []
+  let ars = localStorage.getItem("locations")
+  if (ars != null) {
+    arrLocations = JSON.parse(ars)
+  }
+  arrLocations.push(window.location.pathname)
+  console.log("arrLocations", arrLocations);
+  localStorage.setItem("locations", JSON.stringify(arrLocations))
+  // for (let i = 0; i < arrLocations.length; i++) {
+  //   if (arrLocations.length > 2) {
+  //     arrLocations.splice(i, arrLocations.length - 2)
+  //     localStorage.setItem("locations", JSON.stringify(arrLocations))
+
+  //   }
+  // }
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       console.log(window.location.pathname);
