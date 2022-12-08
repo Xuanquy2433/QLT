@@ -8,7 +8,7 @@ const ProductStatus = (params) => {
         color: "blue",
     text: "Chờ admin phê duyệt"
       },
-        {status:"NEW",color: "purple",text:"Mới"},
+        {status:"NEW",color: "purple",text:"Chờ admin xác nhận"},
         {status:"DONE",color: "green",text:"Đã xong"},
         {status:"CANCELLED",color: "red",text:"Đã hủy"},
         {status:"PAID",color: "orange",text:"Đang thuê"},
