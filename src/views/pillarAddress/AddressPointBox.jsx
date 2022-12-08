@@ -27,7 +27,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 1400,
+  width: '90vw',
   height: 750,
   bgcolor: 'background.paper',
   border: '2px solid #000',
@@ -261,14 +261,13 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
                 , fontWeight: '700', fontSize: '1.2em', top: '0', left: "98.5%"
               }}>X</div>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-
               <TableContainer sx={{ height: '700px' }}>
-                <Table aria-label="sticky table" sx={{ height: '30%' }}>
+                <Table aria-label="sticky table" sx={{ height: '30%',width: '100%' }}>
                   <TableHead sx={{ borderBottom: '2px solid black' }}>
                     <StyledTableCell>
                       {updating ? updateId : null}
                     </StyledTableCell>
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex',alignItems:'center' }}>
                       <div className='mt-2 mr-5 h5 font-weight-bold'>
                         <span>Name:</span>
                         <input type="text" value={name} onChange={handleChange} />
@@ -348,7 +347,7 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
                 <Map
                   googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                   loadingElement={<div style={{ height: `100%` }} />}
-                  containerElement={<div style={{ height: `70%`, margin: `auto`, border: '2px solid black' }} />}
+                  containerElement={<div style={{ height: `70%`, margin: `auto`, border: '2px solid black',width:'100%' }} />}
                   mapElement={<div style={{ height: `100%` }} />}
                   setLatMap={setLat}
                   setLngMap={setLng}
