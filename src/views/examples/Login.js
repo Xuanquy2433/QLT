@@ -90,11 +90,7 @@ const Login = () => {
                 history.replace({ pathname: arrLocations[i] })
                 break
               }
-
-
               // history.replace({ pathname: arrLocations[i] === "auth/register" ? arrLocations[i] : '/auth/homePage' })
-
-
             }
 
             //add cart local to database
