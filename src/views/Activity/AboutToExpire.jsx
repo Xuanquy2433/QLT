@@ -15,7 +15,6 @@ import Paper from '@mui/material/Paper';
 import Moment from 'react-moment';
 function AboutToExpire({ columns4, dataOrderDetailExpired }) {
     var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     return (
         <React.Fragment>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -37,7 +36,7 @@ function AboutToExpire({ columns4, dataOrderDetailExpired }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataOrderDetailExpired.length > 0 ? dataOrderDetailExpired.filter((data) => date - data.product.expiredDate < 3)
+                            {dataOrderDetailExpired.length > 0 ? dataOrderDetailExpired.filter((data) => Math.round((new Date(data.product.expiredDate).getTime() - today.getTime()) / (1000 * 60 * 60 * 24)) < 3)
                                 .map((item, index) => {
                                     return (
                                         <TableRow key={index} >

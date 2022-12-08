@@ -367,7 +367,7 @@ function Activity() {
                     </TabPanel>
                     <TabPanel value='3'>
                         <AboutToExpire columns4={columns4}
-                            dataOrderDetailExpired={dataOrderDetailExpried} />
+                            dataOrderDetailExpired={dataOrderDetail} />
                     </TabPanel>
 
                     <TabPanel value='4'>
