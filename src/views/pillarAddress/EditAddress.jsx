@@ -32,7 +32,7 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
     onSubmitEdit({ ...item, ...dataAddressEdit, id: item.id })
   }
   useEffect(() => {
-    if(item===null){
+    if (item === null) {
       setSelectedImage(null)
     } else {
       setDataAddressEdit({
@@ -42,7 +42,7 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
         multipartFile: item.image || ''
       })
     }
-  },[item])
+  }, [item])
   return (
     <div>
       <Modal
@@ -64,14 +64,17 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
         >
           <h2 style={{ textAlign: 'center' }}>Sửa địa chỉ</h2>
           <div>
-            {selectedImage===null?
+            {/* {selectedImage===null?
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img alt="not fount" width={"130px"} src={URL.createObjectURL(selectedImage)} />
               </div>
                 :  <div style={{ display: "flex", justifyContent: "center" }}>
                   <img alt="not fount" width={"130px"} src={item.photosImagePath} />
                 </div>
-            }
+            } */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <img alt="not fount" width={"130px"} src={item.photosImagePath} />
+            </div>
           </div>
           <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
             <TextField onChange={onChangeText} defaultValue={description} name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />

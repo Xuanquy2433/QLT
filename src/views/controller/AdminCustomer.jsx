@@ -7,7 +7,7 @@ import Customer from 'views/customer/Customer';
 import EditCustomer from 'views/customer/EditCustomer';
 
 export default function AdminCustomer() {
-
+  const [keyword, setKeyword] = useState('')
   const [data, setData] = useState([])
   const [totalPages, setTotalPages] = useState(0)
   const [page, setPage] = React.useState(0);
@@ -20,19 +20,36 @@ export default function AdminCustomer() {
   }, [])
 
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_GET_USERS + (newPage + 1) + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage)
-    if (response) {
-      setData(response.data.content)
-      setPage(newPage);
+    if (keyword == '') {
+      const response = await axios.get(API_GET_USERS + (newPage + 1) + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage)
+      if (response) {
+        setData(response.data.content)
+        setPage(newPage);
+      }
+    } else {
+      const response = await axios.get(API_GET_USERS + (newPage + 1) + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage + '&keyword=' + keyword)
+      if (response) {
+        setData(response.data.content)
+        setPage(newPage);
+      }
     }
   };
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_GET_USERS + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + event.target.value)
-    if (response) {
-      setData(response.data.content)
-      setPage(0);
-      setRowsPerPage(+event.target.value);
+    if (keyword == '') {
+      const response = await axios.get(API_GET_USERS + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + event.target.value)
+      if (response) {
+        setData(response.data.content)
+        setPage(0);
+        setRowsPerPage(+event.target.value);
+      }
+    } else {
+      const response = await axios.get(API_GET_USERS + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + event.target.value + '&keyword=' + keyword)
+      if (response) {
+        setData(response.data.content)
+        setPage(0);
+        setRowsPerPage(+event.target.value);
+      }
     }
   };
 
@@ -92,6 +109,7 @@ export default function AdminCustomer() {
   }
 
   const search = async (keyword) => {
+    setKeyword(keyword)
     const response = await axios.get(API_GET_USERS + page + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage + "&keyword=" + keyword)
     if (response) {
       setData(response.data.content)
