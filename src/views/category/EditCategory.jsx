@@ -16,7 +16,6 @@ export default function EditCategory({ openEdit, setOpenEdit, item, onSubmitEdit
 
     const handleClose = () => setOpenEdit(false)
 
-    console.log(data);
     return (
         <div>
             <Modal
@@ -42,7 +41,13 @@ export default function EditCategory({ openEdit, setOpenEdit, item, onSubmitEdit
                         <TextField onChange={onChangeText} defaultValue={description} name="name" style={{ margin: '5px' }} fullWidth label='Tên danh mục' />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <Button onClick={handleClose} sx={{ marginRight: "5px" }} variant="contained" color="success">
+                        <Button onClick={e => {
+                            handleClose()
+                            setData({
+                                name: "",
+                                description: ""
+                            })
+                        }} sx={{ marginRight: "5px" }} variant="contained" color="success">
                             Đóng
                         </Button>
                         <Button onClick={() => onSubmitEdit(data)} variant="contained" color="success">

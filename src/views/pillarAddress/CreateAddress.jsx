@@ -26,25 +26,19 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
     }
 
     const onClickAdd = (event) => {
-        onSubmit(dataAddress)
-        setOpen(false)
-        setDataAddress({
-            city: '',
-            street: '',
-            description: '',
-            multipartFile: ''
-        })
+        onSubmit(dataAddress, setDataAddress)
+        // setOpen(false)
         setSelectedImage('')
     }
     const handleClose = () => {
         setOpen(false);
+        setSelectedImage('')
         setDataAddress({
             city: '',
             street: '',
             description: '',
             multipartFile: ''
         })
-        setSelectedImage('')
     }
     return (
         <div>

@@ -73,12 +73,12 @@ export default function AdminPillar() {
     }
   }
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, setDataAddress) => {
     if (data.city === '') {
-      toast.error("City required field", { autoClose: 1500 });
+      toast.warning("Thành phố không được để trống", { autoClose: 1500 });
     }
     else if (data.street === '') {
-      toast.error("Street required field", { autoClose: 1500 });
+      toast.warning("Đường không được để trống", { autoClose: 1500 });
     }
     else {
       try {
@@ -92,6 +92,12 @@ export default function AdminPillar() {
           toast.success("Thêm thành công", { autoClose: 1500 });
           setOpenEdit(false);
           fetchAPI();
+          setDataAddress({
+            city: '',
+            street: '',
+            description: '',
+            multipartFile: ''
+          })
         }
 
         //catch show error
@@ -128,41 +134,49 @@ export default function AdminPillar() {
   }
 
   const onSubmitEdit = async (data) => {
-    try {
-      const formData = new FormData();
-      formData.append('multipartFile', data.multipartFile);
-      const response = await axios.put(API_EDIT_PILLAR + "?city=" + data.city + "&description=" + data.description + "&id=" + data.id + "&street=" + data.street, formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' }
-        })
-      if (response && response.status === 201) {
-        toast.success("Cập nhập thành công", { autoClose: 1500 });
-        fetchAPI();
-        setOpenEdit(false)
-      }
+    if (data.city === '') {
+      toast.warning("Thành phố không được để trống", { autoClose: 1500 });
+    }
+    else if (data.street === '') {
+      toast.warning("Đường không được để trống", { autoClose: 1500 });
+    }
+    else {
+      try {
+        const formData = new FormData();
+        formData.append('multipartFile', data.multipartFile);
+        const response = await axios.put(API_EDIT_PILLAR + "?city=" + data.city + "&description=" + data.description + "&id=" + data.id + "&street=" + data.street, formData,
+          {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          })
+        if (response && response.status === 201) {
+          toast.success("Cập nhập thành công", { autoClose: 1500 });
+          fetchAPI();
+          setOpenEdit(false)
+        }
 
-      //catch show error
-    } catch (error) {
-      console.log(error.response.data)
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
+        //catch show error
+      } catch (error) {
+        console.log(error.response.data)
+        if (error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error) {
+          toast.error(`${error.response.data.error}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error && error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else {
+          toast.error('Error', {
+            autoClose: 2000
+          })
+        }
       }
     }
   }

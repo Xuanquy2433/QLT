@@ -64,22 +64,46 @@ export default function AdminCategory() {
         console.log(item);
     }
 
-    const onSubmitAdd = async (data) => {
-        const response = await axios.post(API_ADD_CATEGORY, data)
-        if (response && response.status === 201) {
-            toast.success("Thêm thành công", { autoClose: 1500 })
-            setOpen(false)
-            fetchAPI()
+    const onSubmitAdd = async (data, setData) => {
+        try {
+            if (data.name == '') {
+                toast.warning("Tên không được để trống", { autoClose: 1500 });
+            }
+            else if (data.description == '') {
+                toast.warning("Mô tả không được để trống", { autoClose: 1500 });
+
+            } else {
+                const response = await axios.post(API_ADD_CATEGORY, data)
+                if (response && response.status === 201) {
+                    toast.success("Thêm thành công", { autoClose: 1500 })
+                    setOpen(false)
+                    fetchAPI()
+                    setData({
+                        name: "",
+                        description: ""
+                    })
+                }
+            }
+        } catch (error) {
+            showError(error)
         }
     }
 
     const onSubmitEdit = async (data) => {
         try {
-            const response = await axios.put(API_EDIT_CATEGORY, data)
-            if (response && response.status === 201) {
-                toast.success("Sửa thành công", { autoClose: 1500 })
-                fetchAPI();
-                setOpenEdit(false)
+            if (data.name == '') {
+                toast.warning("Tên không được để trống", { autoClose: 1500 });
+            }
+            else if (data.description == '') {
+                toast.warning("Mô tả không được để trống", { autoClose: 1500 });
+
+            } else {
+                const response = await axios.put(API_EDIT_CATEGORY, data)
+                if (response && response.status === 201) {
+                    toast.success("Sửa thành công", { autoClose: 1500 })
+                    fetchAPI();
+                    setOpenEdit(false)
+                }
             }
             //catch show error
         } catch (error) {
