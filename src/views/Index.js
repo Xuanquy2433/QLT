@@ -227,7 +227,9 @@ const Index = (props) => {
       toast.warning('Vui lòng chọn thời gian bắt đầu ', { autoClose: 1200 })
     } else if (dateAPI2 == null) {
       toast.warning('Vui lòng chọn thời gian kết thúc ', { autoClose: 1200 })
-
+    }
+    else if (dateAPI1 > dateAPI2) {
+      toast.warning('Thời gian bắt đầu không được lớn hơn thời gian kết thúc ', { autoClose: 1200 })
     } else {
       if (keyword == null) {
         const response = await axios.get(API_OVERVIEW_TIME_PRODUCT_HIRED + '?dataPerPage=' + rowsPerPage + ' &date1='
