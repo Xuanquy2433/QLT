@@ -82,13 +82,14 @@ export default function AdminPictures() {
     }
 
     const onSubmitEdit = async (data) => {
+        console.log("data edit ", data);
         try {
             if (flag && data.category == 'logo') {
                 toast.warning("Chỉ có thể có 1 ảnh logo !", { autoClose: 1500 })
             } else {
                 const formData = new FormData();
                 formData.append('image', data.image);
-                const response = await axios.post(API_UPDATE_PICTURES + data.id, formData,
+                const response = await axios.post(API_UPDATE_PICTURES + data.id + '?active=' + data.active, formData,
                     {
                         headers: { 'Content-Type': 'multipart/form-data' }
                     })

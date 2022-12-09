@@ -159,7 +159,6 @@ export default function Picture({ data, setOpen, search, onEdit, onDelete }) {
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
                                                         className="btn-icon-only text-light"
-                                                        href="#pablo"
                                                         role="button"
                                                         size="sm"
                                                         color=""
