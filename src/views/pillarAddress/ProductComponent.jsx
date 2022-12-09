@@ -302,11 +302,10 @@ function ProductComponent({ product, onClickRemoveItemCart, addCart, setItem }) 
                         fontWeight: "500", width: "100%"
                         , border: "3px solid #333", background: "none", color: "#FFFFFF", boxShadow: "none", backgroundColor: '#333'
                       }} disabled variant="contained" >
-                        {item.status === 'HIRING' && item.expiredDate !== null ? <div style={{ height: "28.5px" }}> <h4 >
-                         <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> </div> : ''}
+                        Đã cho thuê
                       </Button>
                   }
-
+                  {item.status === 'HIRING' && item.expiredDate !== null ? <div style={{ height: "28.5px" }}> <h4 style={{ marginTop: '15px', }}> Ngày hết hạn: <span style={{ color: 'red' }}> <Moment format="DD/MM/YYYY">{item.expiredDate}</Moment></span> </h4> </div> : ''}
                 </div>
                 {/* {
                   item.preOrdered === false ?
