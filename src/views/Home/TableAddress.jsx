@@ -238,17 +238,17 @@ function TableAddress() {
                             <Grid item xs={6} sx={{ mt: 1 }} key={index} >
                                 <div className='product' style={{ backgroundColor: '#E7EBF0', justifyItems: 'center', display: 'flex', flexDirection: 'row', padding: '10px', borderRadius: "8px" }}>
                                     <div className='image-product' style={{
-                                        width: '80%', height: '245px'
+                                        width: '90%', height: '215px'
                                     }}  >
                                         <img style={{ objectFit: "cover", width: '100%', height: '100%', border: '1px solid #ddd', borderRadius: "8px" }} src={item.image} alt="" />
 
                                     </div>
                                     <div className='description-pro' style={{ width: '100%', justifyContent: 'center', color: 'black' }}>
-                                        <p className='street-product' style={{ fontSize: '20px', paddingTop: '7px' }}>Đường:  {item.street}</p>
+                                        <p className='street-product' style={{ marginBottom: "0px", fontSize: '18px', paddingTop: '7px' }}>Đường:  {item.street}</p>
                                         {/* <p>Thành Phố: {item.city} </p> */}
                                         {/* <p>Mô tả: {item.description}</p> */}
-                                        <p>Giá từ: <span style={{ fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)}</span> </p>
-                                        <p>Trụ còn trống: <span style={{ color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
+                                        <p style={{ marginBottom: "5px" }}>Giá từ: <span style={{ margin: "0", fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)}</span> </p>
+                                        <p style={{ marginBottom: "10px", }}>Trụ còn trống: <span style={{ margin: "0", color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
                                         <p style={{ fontSize: '0.9em', fontWeight: '600' }}>{item.city} City</p>
                                         <NavLink to={'/auth/address/' + item.id}>
                                             <Button className='btn-custom-product' sx={{
@@ -295,7 +295,7 @@ function TableAddress() {
                         count={count} page={page} color="secondary" onChange={handleChange} />
                 </Stack>
             </Box>
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 
