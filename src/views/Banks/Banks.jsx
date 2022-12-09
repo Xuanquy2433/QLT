@@ -153,14 +153,13 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                                             }}
                                                         >
                                                             <DeleteIcon></DeleteIcon>
-                                                            Delete
-
+                                                            Xóa
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             onClick={(e) => onEdit(item)}
                                                         >
                                                             <EditIcon></EditIcon>
-                                                            Update
+                                                            Cập nhập
                                                         </DropdownItem>
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>

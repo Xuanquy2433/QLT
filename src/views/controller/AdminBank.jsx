@@ -29,11 +29,24 @@ export default function AdminBank() {
 
     const onSubmitAdd = async (data) => {
         try {
-            const response = await axios.post(API_BANK_ADD, data)
-            if (response.status === 200) {
-                setOpen(false)
-                toast.success("Thêm thành công", { autoClose: "1500" })
-                fetchAPI()
+            if (data.bankAccountName === '') {
+                toast.warning('Tên ngân hàng không được bỏ trống', { autoClose: 1500 })
+            }
+            else if (data.bankAccountNumber === '') {
+                toast.warning('Mã ngân hàng không được bỏ trống', { autoClose: 1500 })
+            }
+            else if (data.bankCode === '') {
+                toast.warning('Số tài khoản không được bỏ trống', { autoClose: 1500 })
+            }
+            else if (data.bankName === '') {
+                toast.warning('Tên chủ tài khoản không được bỏ trống', { autoClose: 1500 })
+            } else {
+                const response = await axios.post(API_BANK_ADD, data)
+                if (response.status === 200) {
+                    setOpen(false)
+                    toast.success("Thêm thành công", { autoClose: 1500 })
+                    fetchAPI()
+                }
             }
         } catch (error) {
             showError()
@@ -47,11 +60,24 @@ export default function AdminBank() {
     }
 
     const onHandleEdit = async (data) => {
-        const response = await axios.post(API_BANK_UPDATE, data)
-        if (response.status === 200) {
-            toast.success("Sửa thành công", { autoClose: 1500 })
-            fetchAPI()
-            setOpenEdit(false)
+        if (data.bankAccountName === '') {
+            toast.warning('Tên ngân hàng không được bỏ trống', { autoClose: 1500 })
+        }
+        else if (data.bankAccountNumber === '') {
+            toast.warning('Mã ngân hàng không được bỏ trống', { autoClose: 1500 })
+        }
+        else if (data.bankCode === '') {
+            toast.warning('Số tài khoản không được bỏ trống', { autoClose: 1500 })
+        }
+        else if (data.bankName === '') {
+            toast.warning('Tên chủ tài khoản không được bỏ trống', { autoClose: 1500 })
+        } else {
+            const response = await axios.post(API_BANK_UPDATE, data)
+            if (response.status === 200) {
+                toast.success("Sửa thành công", { autoClose: 1500 })
+                fetchAPI()
+                setOpenEdit(false)
+            }
         }
     }
 
@@ -60,7 +86,7 @@ export default function AdminBank() {
         const response = await axios.post(API_BANK_REMOVE + id)
         if (response.status === 200) {
             fetchAPI()
-            toast.success("Xoá thành công", { autoClose: "1500" })
+            toast.success("Xoá thành công", { autoClose: 1500 })
             setOpenDelete(false)
         }
     }
