@@ -50,7 +50,7 @@ function HomePage() {
                 <BannerSlide />
             </div>
 
-            <div>
+            <div style={{ maxWidth: "1350px", margin: "auto" }}>
                 <TableAddress />
             </div>
             <div>
@@ -77,7 +77,7 @@ function HomePage() {
             <div className="social-button">
                 <div className="social-button-content">
                     <a href="https://www.facebook.com/acn.digitalmarketing" target="_blank" className="mes">
-                        <img  src="https://nocodebuilding.com/wp-content/uploads/2020/07/fb.png" alt="Chat Messenger" />
+                        <img src="https://nocodebuilding.com/wp-content/uploads/2020/07/fb.png" alt="Chat Messenger" />
                     </a>
                     <a href="http://zalo.me/0869773152" target="_blank" className="zalo">
                         <img src="https://nocodebuilding.com/wp-content/uploads/2020/07/zl.png" alt="Chat Zalo" />
