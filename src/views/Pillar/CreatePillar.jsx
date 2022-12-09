@@ -15,7 +15,7 @@ import {
 } from "../../utils/const";
 import Map from "./MapPillar";
 
-export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dataCategory }) {
+export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dataCategory,added }) {
     const [addressPoint, setAddressPoint] = useState([])
 
     const [lat, setLat] = useState(0)
@@ -45,7 +45,19 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
 
     const handleClose = () => {
         setOpen(false);
-
+        setData({
+            addressId: 0,
+            categoryId: 0,
+            description: "",
+            status: "AVAILABLE",
+            multipartFile: '',
+            name: "",
+            price: 0,
+            lat: 0,
+            lng: 0,
+            num1: 0,
+            num2: 0,
+        })
     }
 
 
@@ -105,6 +117,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
     useEffect(() => {
         setData({ ...data, num1: selected.num1, num2: selected.num2 })
     }, [selected])
+
+
     //scroll select
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
