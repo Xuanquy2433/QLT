@@ -54,7 +54,7 @@ export default function AdminPictures() {
             flag = true
         }
     })
-
+    const [Dataa, setDataa] = useState()
     const onSubmitAdd = async (data, setDataa) => {
         try {
             if (flag && data.category == 'logo') {
@@ -129,7 +129,7 @@ export default function AdminPictures() {
         <div>
             <Picture search={search} data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
-            <AddPictures setDataa={setData} a open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
+            <AddPictures setDataa={setDataa} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
             {selected && <EditPictures data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
         </div>
     )
