@@ -22,6 +22,7 @@ function AdminProduct() {
   const [totalPages, setTotalPages] = useState(0)
   const [dataAddress, setDataAddress] = useState([])
   const [dataCategory, setDataCategory] = useState([])
+
   const [selected, setSelected] = useState(undefined)
   const [open, setOpen] = useState(false);
 
@@ -55,20 +56,41 @@ function AdminProduct() {
   }
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id")
-    if (response) {
-      setData(response.data.content)
-      setPage(0);
-      // setTotalPages(response.data.totalElements)
-      setRowsPerPage(+event.target.value);
+    if (keyword == '') {
+      const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id")
+      if (response) {
+        setData(response.data.content)
+        setPage(0);
+        // setTotalPages(response.data.totalElements)
+        setRowsPerPage(+event.target.value);
+      }
+    } else {
+      console.log("da vao search");
+      const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id&keyword=" + keyword)
+      if (response) {
+        setData(response.data.content)
+        setPage(0);
+        // setTotalPages(response.data.totalElements)
+        setRowsPerPage(+event.target.value);
+      }
     }
   };
 
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
-    if (response) {
-      setPage(newPage)
-      setData(response.data.content)
+    if (keyword == '') {
+      const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
+      if (response) {
+        setPage(newPage)
+        setData(response.data.content)
+      }
+    } else {
+      console.log("da vao search");
+
+      const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
+      if (response) {
+        setPage(newPage)
+        setData(response.data.content)
+      }
     }
   }
 
@@ -82,7 +104,7 @@ function AdminProduct() {
 
   useEffect(() => {
     setSelected(product)
-  }, [product,data])
+  }, [product, data])
 
   const onEdit = async (item) => {
     setSelected(item)
@@ -99,7 +121,7 @@ function AdminProduct() {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
         const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId + '&categoryId=' + data.categoryId + '&description=' + data.description
-          + '&name=' + data.name + '&price=' + data.price +'&lat=' + data.lat + '&lng=' + data.lng +'&num1=' + data.num1 + '&num2=' + data.num2, formData,
+          + '&name=' + data.name + '&price=' + data.price + '&lat=' + data.lat + '&lng=' + data.lng + '&num1=' + data.num1 + '&num2=' + data.num2, formData,
           {
             headers: { 'Content-Type': 'multipart/form-data' }
           })
@@ -140,7 +162,7 @@ function AdminProduct() {
       const formData = new FormData();
       formData.append('multipartFile', data.multipartFile);
       const response = await axios.put(API_PRODUCT_EDIT + "?addressId=" + data.addressId + "&categoryId=" + data.categoryId +
-        "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status + "&lat=" + data.lat + "&lng=" + data.lng +'&num1=' + data.num1 + '&num2=' + data.num2,
+        "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status + "&lat=" + data.lat + "&lng=" + data.lng + '&num1=' + data.num1 + '&num2=' + data.num2,
 
         formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -194,6 +216,7 @@ function AdminProduct() {
   }
   const search = async (keyword) => {
     console.log('key word search admin address ', keyword);
+    setKeyword(keyword)
     const response = await axios.get(API_GET_PRODUCT + page + 1 + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
     if (response) {
       setTotalPages(response.data.totalElements)
@@ -203,7 +226,7 @@ function AdminProduct() {
   return (
     <div>
       <CreatePillar dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
-      {selected && <EditPillar dataCategory={dataCategory}  item={selected}  setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber}/>}
+      {selected && <EditPillar dataCategory={dataCategory} item={selected} setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber} />}
       <Pillar page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages} handleChangeRowsPerPage={handleChangeRowsPerPage}
         openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
