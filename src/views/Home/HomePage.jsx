@@ -50,7 +50,7 @@ function HomePage() {
                 <BannerSlide />
             </div>
 
-            <div style={{ maxWidth: "1350px", margin: "auto" }}>
+            <div style={{ maxWidth: "1200px", margin: "auto" }}>
                 <TableAddress />
             </div>
             <div>

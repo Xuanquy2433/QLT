@@ -174,7 +174,7 @@ function TableAddress() {
     }, [page])
     return (
         <React.Fragment>
-            <Box className="container-products" sx={{ width: '86%', margin: 'auto' }}>
+            <Box className="container-products" sx={{ width: '100%', margin: 'auto' }}>
                 <Box className='container-search-sort' sx={{ flexGrow: 1, mt: 10, marginTop: '30px !important' }}>
                     <Grid container spacing={2}>
                         <Grid className='inp-search-pro' item xs={12}>
