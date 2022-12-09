@@ -342,22 +342,23 @@ function OrderPlace() {
     }
 
     const search = async (e) => {
-
+        // .replace("0", "%2b84")
         if (date1 == null || date2 == null) {
             const response = await axios.get(API_GET_ORDER_ADMIN +
-                '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY") + '&keyword=' + e.target.value.replace("0", "%2b84"))
+                '?fromDate=' + fromDate + '&toDate=' + moment().format("DD/MM/YYYY") + '&keyword=' + e.target.value)
             if (response && response.status === 200) {
                 setData(response.data)
             }
         } else {
             const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY")
-                + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&keyword=' + e.target.value.replace("0", "%2b84"))
+                + '&toDate=' + moment(date2).format("DD/MM/YYYY") + '&keyword=' + e.target.value)
             if (response && response.status === 200) {
                 setData(response.data)
             }
         }
 
     };
+    console.log("key ",keyword);
     return (
         <>
             <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
@@ -377,9 +378,10 @@ function OrderPlace() {
                                     sx={{ ml: 1, flex: 1, width: '90%', fontSize: '1.1em' }}
                                     placeholder="Tìm kiếm mã đơn hàng"
                                     onChange={e => {
-                                        const ket = e.target.value.replace("0", '%2b84');
+                                        // const ket = e.target.value.replace("0", '%2b84');
 
-                                        setKeyword(ket)
+                                        // setKeyword(ket)
+                                        setKeyword(e.target.value)
                                         search(e)
                                     }}
                                 />
@@ -429,7 +431,7 @@ function OrderPlace() {
                                                         </MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"NEW"}>Mới</MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"EXTEND"}>Gia hạn</MenuItem>
-                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"USER_CONFIRMED"}>Chờ admin phê duyệt</MenuItem>
+                                                        <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"USER_CONFIRMED"}>Chờ phê duyệt</MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"PAID"}>Đang thuê</MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"DONE"}>Xong</MenuItem>
                                                         <MenuItem sx={{ color: 'black', fontWeight: '600', fontSize: '1em' }} value={"CANCELLED"}>Đã hủy</MenuItem>
