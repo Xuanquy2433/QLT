@@ -15,7 +15,7 @@ export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
     }
 
     const onClickAdd = () => {
-        onSubmitAdd(data)
+        onSubmitAdd(data, setData)
     }
 
     const handleClose = () => setOpen(false)
@@ -44,7 +44,13 @@ export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
                         <TextField onChange={onChangeText} defaultValue='' name="description" style={{ margin: '5px' }} fullWidth label='Chú thích' />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <Button onClick={handleClose} sx={{ marginRight: "5px" }} variant="contained" color="success">
+                        <Button onClick={e => {
+                            handleClose()
+                            setData({
+                                name: "",
+                                description: ""
+                            })
+                        }} sx={{ marginRight: "5px" }} variant="contained" color="success">
                             Đóng
                         </Button>
                         <Button onClick={onClickAdd} variant="contained" color="success">

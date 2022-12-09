@@ -73,7 +73,7 @@ export default function AdminPillar() {
     }
   }
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data,setDataAddress) => {
     if (data.city === '') {
       toast.error("City required field", { autoClose: 1500 });
     }
@@ -92,6 +92,12 @@ export default function AdminPillar() {
           toast.success("Thêm thành công", { autoClose: 1500 });
           setOpenEdit(false);
           fetchAPI();
+          setDataAddress({
+            city: '',
+            street: '',
+            description: '',
+            multipartFile: ''
+        })
         }
 
         //catch show error
