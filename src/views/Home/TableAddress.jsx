@@ -175,9 +175,9 @@ function TableAddress() {
     return (
         <React.Fragment>
             <Box className="container-products" sx={{ width: '86%', margin: 'auto' }}>
-                <Box sx={{ flexGrow: 1, mt: 10, marginTop: '30px !important' }}>
+                <Box className='container-search-sort' sx={{ flexGrow: 1, mt: 10, marginTop: '30px !important' }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={9}>
+                        <Grid className='inp-search-pro' item xs={12}>
                             <Paper sx={{ border: "1px solid #ddd", display: 'flex', height: '45px', width: '100%', borderRadius: '24px' }}>
                                 {/* <IconButton type="button" sx={{ p: '5px', }} aria-label="search">
                                     <SearchIcon onClick={onclickFilter} />
@@ -205,10 +205,10 @@ function TableAddress() {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid sx={{ display: "flex" }} item xs={3} >
+                        <Grid className='sort-search-pro' sx={{ display: "flex" }} item xs={3} >
                             <FormControl sx={{ width: '53%', backgroundColor: 'white', height: '45px', borderRadius: '5px' }} size="small">
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <h3 style={{ color: 'black', width: '190px', marginLeft: '10%', marginRight: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
+                                    <h3 className='sort-name-pro' style={{ color: 'black', width: '190px', marginLeft: '10%', marginRight: '10%', marginTop: '10px', height: '45px', }} id="demo-select-small">Sắp xếp </h3>
                                     <ToggleButton
                                         sx={{ height: '73%' }}
                                         value="check"
