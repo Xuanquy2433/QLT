@@ -28,8 +28,24 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
     const onClickAdd = (event) => {
         onSubmit(dataAddress)
         setOpen(false)
+        setDataAddress({
+            city: '',
+            street: '',
+            description: '',
+            multipartFile: ''
+        })
+        setSelectedImage('')
     }
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setDataAddress({
+            city: '',
+            street: '',
+            description: '',
+            multipartFile: ''
+        })
+        setSelectedImage('')
+    }
     return (
         <div>
             <Modal
