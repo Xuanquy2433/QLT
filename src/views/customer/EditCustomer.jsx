@@ -11,11 +11,11 @@ import Select from '@mui/material/Select';
 export default function EditCustomer({ item, openEdit, setOpenEdit, handleCloseEdit, onSubmitEdit }) {
   const listRoles = [
     {
-      value: "ROLE_USER",
+      value: "[ROLE_USER]",
       name: "User"
     },
     {
-      value: "ROLE_ADMIN",
+      value: "[ROLE_ADMIN]",
       name: "Admin"
     }
   ]

@@ -70,11 +70,13 @@ export default function AdminCustomer() {
   // const [role, setRole] = useState('')
 
   const onSubmitEdit = async (data) => {
+    let sub = data.roleName.substr(1, data.roleName.length)
+    let roleSub = sub.substring(0, sub.length - 1)
     if (data.roleName === null) {
       toast.error("Vai trò không được để trống", { autoClose: 1500 })
     } else {
       try {
-        const response = await axios.put(API_UPDATE_ROLE + data.id + "/update?roleName=" + data.roleName)
+        const response = await axios.put(API_UPDATE_ROLE + data.id + "/update?roleName=" + roleSub)
         if (response && response.status === 200) {
           toast.success("Sửa thành công", { autoClose: "1500" })
           fetchAPI();
