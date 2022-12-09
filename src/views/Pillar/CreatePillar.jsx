@@ -15,7 +15,7 @@ import {
 } from "../../utils/const";
 import Map from "./MapPillar";
 
-export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dataCategory,added }) {
+export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dataCategory, added }) {
     const [addressPoint, setAddressPoint] = useState([])
 
     const [lat, setLat] = useState(0)
@@ -68,6 +68,19 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
     const onClickAdd = (e) => {
         e.preventDefault()
         onSubmit(data)
+        setData({
+            addressId: 0,
+            categoryId: 0,
+            description: "",
+            status: "AVAILABLE",
+            multipartFile: '',
+            name: "",
+            price: 0,
+            lat: 0,
+            lng: 0,
+            num1: 0,
+            num2: 0,
+        })
     }
 
     const fetchData = async (id) => {
@@ -152,8 +165,10 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
             >
                 <h2 style={{ textAlign: 'center' }}>Thêm trụ</h2>
                 <div className='modal-contents'>
-                    <div style={{ display: 'flex', flexDirection: "column", margin: '5px 0px',   overflowY: "auto",
-                        overflowX: "hidden", }} className="form-flex content-1">
+                    <div style={{
+                        display: 'flex', flexDirection: "column", margin: '5px 0px', overflowY: "auto",
+                        overflowX: "hidden",
+                    }} className="form-flex content-1">
                         <TextField style={{ margin: '5px 0px' }} accept="image/*" name='multipartFile' onChange={(e) => setData({ ...data, multipartFile: e.target.files[0] })} multiple type="file" />
                         <TextField onChange={onChangeText} defaultValue='' name="name" style={{ margin: '5px 0px' }} fullWidth label='Tên' />
                         <TextField type="number" onChange={onChangeText} defaultValue='' name="price" style={{ margin: '5px 0px' }} fullWidth label='Giá' />
@@ -202,7 +217,7 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
                                             className={selected.num1 === item.number ? "point selected" : "point"}
                                         >
                                             {item.name + ' '} -
-                                            {' '+addressPoint[index + 1].name}
+                                            {' ' + addressPoint[index + 1].name}
                                         </div> : null
                                     }
                                 </div>
