@@ -86,7 +86,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                     <Grid container spacing={1}>
                         <Grid item xs={2} >
                             <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "100%" }} variant="contained" color="success">
-                                Thêm tài khoản
+                                Thêm ngân hàng
                             </Button>
                             <Box onClick={handleOpen} sx={{ padding: "4px 5px", textAlign: "center", display: "block", backgroundColor: "#2e7d32", borderRadius: "8px", mr: "5px" }}>
                                 <AddIcon sx={{ color: "#FFFFFF", fontSize: "40px", width: "100%" }} />
