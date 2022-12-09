@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useEffect } from 'react';
 export default function EditBanks({ openEdit, setOpenEdit, onHandleEdit, item }) {
     const { bankName, bankCode, bankAccountNumber, bankAccountName } = item
 
@@ -20,7 +21,15 @@ export default function EditBanks({ openEdit, setOpenEdit, onHandleEdit, item })
     const onClickUpdate = () => {
         onHandleEdit({ ...data, id: (item.id) })
     }
-console.log('d',data);
+    useEffect(() => {
+        setData({
+            bankAccountName: item.bankAccountName || "",
+            bankAccountNumber: item.bankAccountNumber || "",
+            bankCode: item.bankCode || "",
+            bankName: item.bankName || "",
+        })
+    }, [item])
+    console.log('d', data);
     const handleClose = () => setOpenEdit(false)
     return (
         <div>
