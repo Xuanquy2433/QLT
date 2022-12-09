@@ -125,7 +125,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                             </TableHead>
                             <TableBody>
                                 {data
-                                    // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) => (
                                         <TableRow hover role="checkbox" key={index}>
                                             <TableCell>{item.id}</TableCell>
