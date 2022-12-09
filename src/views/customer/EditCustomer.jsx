@@ -19,21 +19,22 @@ export default function EditCustomer({ item, openEdit, setOpenEdit, handleCloseE
       name: "Admin"
     }
   ]
-  console.log(item);
+  const { firstName, roles } = item
 
+  console.log(item);
+  const [data, setData] = useState({
+    roleName: item.roles || '',
+  })
   useEffect(() => {
     setData({
       roleName: item.roles || '',
     })
   }, [item])
 
-  const { firstName, roles } = item
   console.log(item.roles);
 
   const [valueState, setValueState] = useState()
-  const [data, setData] = useState({
-    roleName: item.roles || '',
-  })
+
 
   const handleChange = (event) => {
     const value = event.target.value
@@ -75,7 +76,6 @@ export default function EditCustomer({ item, openEdit, setOpenEdit, handleCloseE
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={data.roleName}
-                defaultValue={roles}
                 label="Vai trò"
                 onChange={handleChange}
               >
