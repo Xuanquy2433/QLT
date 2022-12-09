@@ -20,7 +20,7 @@ export default function EditBanks({ openEdit, setOpenEdit, onHandleEdit, item })
     const onClickUpdate = () => {
         onHandleEdit({ ...data, id: (item.id) })
     }
-
+console.log('d',data);
     const handleClose = () => setOpenEdit(false)
     return (
         <div>

@@ -27,7 +27,7 @@ export default function AdminBank() {
         }
     }
 
-    const onSubmitAdd = async (data) => {
+    const onSubmitAdd = async (data, setData) => {
         try {
             if (data.bankAccountName === '') {
                 toast.warning('Tên chủ tài khoản không được bỏ trống', { autoClose: 1500 })
@@ -46,6 +46,12 @@ export default function AdminBank() {
                     setOpen(false)
                     toast.success("Thêm thành công", { autoClose: 1500 })
                     fetchAPI()
+                    setData({
+                        bankAccountName: "",
+                        bankAccountNumber: "",
+                        bankCode: "",
+                        bankName: ""
+                    })
                 }
             }
         } catch (error) {
@@ -59,7 +65,7 @@ export default function AdminBank() {
         setOpenEdit(true)
     }
 
-    const onHandleEdit = async (data) => {
+    const onHandleEdit = async (data, setData) => {
         if (data.bankAccountName === '') {
             toast.warning('Tên ngân hàng không được bỏ trống', { autoClose: 1500 })
         }

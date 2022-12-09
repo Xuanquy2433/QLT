@@ -16,11 +16,10 @@ export default function CreateBanks({ open, setOpen, onSubmitAdd }) {
     }
 
     const onClickAdd = () => {
-        onSubmitAdd(data)
+        onSubmitAdd(data, setData)
     }
 
     const handleClose = () => setOpen(false)
-    console.log(data);
     return (
         <div>
             <Modal
@@ -48,7 +47,15 @@ export default function CreateBanks({ open, setOpen, onSubmitAdd }) {
                         <TextField onChange={onChangeText} name="bankName" style={{ margin: '5px' }} fullWidth label='Tên ngân hàng' />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <Button onClick={handleClose} sx={{ marginRight: "5px" }} variant="contained" color="success">
+                        <Button onClick={e => {
+                            handleClose()
+                            setData({
+                                bankAccountName: "",
+                                bankAccountNumber: "",
+                                bankCode: "",
+                                bankName: ""
+                            })
+                        }} sx={{ marginRight: "5px" }} variant="contained" color="success">
                             Đóng
                         </Button>
                         <Button onClick={onClickAdd} variant="contained" color="success">

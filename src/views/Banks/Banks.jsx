@@ -164,9 +164,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </TableCell>
-
                                         </TableRow>
-
                                     ))}
                                 <Modal
                                     open={openDelete}
