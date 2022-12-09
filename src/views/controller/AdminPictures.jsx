@@ -54,8 +54,7 @@ export default function AdminPictures() {
             flag = true
         }
     })
-    const [Dataa, setDataa] = useState()
-    const onSubmitAdd = async (data, setDataa) => {
+    const onSubmitAdd = async (data, setData) => {
         try {
             if (flag && data.category == 'logo') {
                 toast.warning("Chỉ có thể có 1 ảnh logo !", { autoClose: 1500 })
@@ -71,7 +70,7 @@ export default function AdminPictures() {
                     toast.success("Thêm thành công", { autoClose: 1500 })
                     setOpen(false)
                     fetchAPI()
-                    setDataa({
+                    setData({
                         category: "",
                         image: "",
                     })
@@ -129,7 +128,7 @@ export default function AdminPictures() {
         <div>
             <Picture search={search} data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
-            <AddPictures setDataa={setDataa} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
+            <AddPictures open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
             {selected && <EditPictures data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
         </div>
     )

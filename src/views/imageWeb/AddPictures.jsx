@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-export default function AddPictures({ open, setOpen, onSubmitAdd, setDataa }) {
+export default function AddPictures({ open, setOpen, onSubmitAdd }) {
     const [data, setData] = useState({
         category: "",
         image: "",
@@ -17,7 +17,7 @@ export default function AddPictures({ open, setOpen, onSubmitAdd, setDataa }) {
     }
 
     const onClickAdd = () => {
-        onSubmitAdd(data, setDataa)
+        onSubmitAdd(data, setData)
     }
 
 
