@@ -67,20 +67,7 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
 
     const onClickAdd = (e) => {
         e.preventDefault()
-        onSubmit(data)
-        setData({
-            addressId: 0,
-            categoryId: 0,
-            description: "",
-            status: "AVAILABLE",
-            multipartFile: '',
-            name: "",
-            price: 0,
-            lat: 0,
-            lng: 0,
-            num1: 0,
-            num2: 0,
-        })
+        onSubmit(data, setData)
     }
 
     const fetchData = async (id) => {
@@ -120,7 +107,6 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
             fetchAddressData()
             fetchData(valueStateAddress)
         }
-
     }, [valueStateAddress])
 
     useEffect(() => {

@@ -19,7 +19,7 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
 
   const onChangeText = (e) => {
     setDataAddressEdit({ ...dataAddressEdit, [e.target.name]: e.target.value })
-    console.log(dataAddressEdit)
+
   }
 
   const onChangeImage = (event) => {

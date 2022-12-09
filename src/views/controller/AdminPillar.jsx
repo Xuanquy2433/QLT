@@ -113,11 +113,23 @@ function AdminProduct() {
   }
 
 
-  const onSubmit = async (data) => {
-    try {
-      if (data.name === " ") {
-        toast.error("Không được để trống địa chỉ", { autoClose: "1500" })
-      } else {
+  const onSubmit = async (data, setData) => {
+    if (data.name === "") {
+      toast.warning("Không được để trống tên địa chỉ", { autoClose: 1500 })
+    }
+    else if (data.price === "") {
+      toast.warning("Không được để trống giá", { autoClose: 1500 })
+    }
+    else if (data.description === "") {
+      toast.warning("Không được để trống chú thích", { autoClose: 1500 })
+    }
+    else if (data.addressId === 0) {
+      toast.warning("Vui lòng chọn địa chỉ", { autoClose: 1500 })
+    }
+    else if (data.categoryId === 0) {
+      toast.warning("Vui lòng chọn loại trụ", { autoClose: 1500 })
+    } else {
+      try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
         const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId + '&categoryId=' + data.categoryId + '&description=' + data.description
@@ -130,73 +142,102 @@ function AdminProduct() {
           setOpen(false)
           getAllProduct()
           setRandomNumber(Math.floor(Math.random() * (999)))
+          setData({
+            addressId: 0,
+            categoryId: 0,
+            description: "",
+            status: "AVAILABLE",
+            multipartFile: '',
+            name: "",
+            price: 0,
+            lat: 0,
+            lng: 0,
+            num1: 0,
+            num2: 0,
+          })
+        }
+
+      } catch (error) {
+        if (error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error) {
+          toast.error(`${error.response.data.error}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error && error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else {
+          toast.error('Error', {
+            autoClose: 2000
+          })
         }
       }
-    } catch (error) {
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
-      }
-
     }
   }
 
   const onSubmitEdit = async (data) => {
-    try {
-      const formData = new FormData();
-      formData.append('multipartFile', data.multipartFile);
-      const response = await axios.put(API_PRODUCT_EDIT + "?addressId=" + data.addressId + "&categoryId=" + data.categoryId +
-        "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status + "&lat=" + data.lat + "&lng=" + data.lng + '&num1=' + data.num1 + '&num2=' + data.num2,
+    if (data.name === "") {
+      toast.warning("Không được để trống tên địa chỉ", { autoClose: 1500 })
+    }
+    else if (data.price === "") {
+      toast.warning("Không được để trống giá", { autoClose: 1500 })
+    }
+    else if (data.description === "") {
+      toast.warning("Không được để trống chú thích", { autoClose: 1500 })
+    }
+    else if (data.addressId === 0) {
+      toast.warning("Vui lòng chọn địa chỉ", { autoClose: 1500 })
+    }
+    else if (data.categoryId === 0) {
+      toast.warning("Vui lòng chọn loại trụ", { autoClose: 1500 })
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append('multipartFile', data.multipartFile);
+        const response = await axios.put(API_PRODUCT_EDIT + "?addressId=" + data.addressId + "&categoryId=" + data.categoryId +
+          "&description=" + data.description + "&id=" + data.id + "&name=" + data.name + "&price=" + data.price + "&status=" + data.status + "&lat=" + data.lat + "&lng=" + data.lng + '&num1=' + data.num1 + '&num2=' + data.num2,
 
-        formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      if (response.status === 200) {
-        toast.success("Sửa thành công", { autoClose: 1500 })
-        getAllProduct()
-        setRandomNumber(Math.floor(Math.random() * (999)))
-        setOpenEdit(true)
-        setSelected(null)
-      }
+          formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
+        if (response.status === 200) {
+          toast.success("Sửa thành công", { autoClose: 1500 })
+          getAllProduct()
+          setRandomNumber(Math.floor(Math.random() * (999)))
+          setOpenEdit(true)
+          setSelected(null)
+        }
 
-      //catch show error
-    } catch (error) {
-      console.log(error.response.data)
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
+        //catch show error
+      } catch (error) {
+        console.log(error.response.data)
+        if (error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error) {
+          toast.error(`${error.response.data.error}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error && error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else {
+          toast.error('Error', {
+            autoClose: 2000
+          })
+        }
       }
     }
   }
