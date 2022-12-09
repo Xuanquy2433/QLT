@@ -13,7 +13,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Moment from 'react-moment';
-function AboutToExpire({ columns4, dataOrderDetailExpired }) {
+import { Button, Grid } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+function AboutToExpire({ columns4, dataOrderDetailExpired,setListIds, showExtend, showCheckbox, onchangeMonth, setShowCheckbox, setShowExtend, handleClickOpen, handleChangeCheckbox, month }) {
     var today = new Date();
     return (
         <React.Fragment>
@@ -40,6 +42,9 @@ function AboutToExpire({ columns4, dataOrderDetailExpired }) {
                                 .map((item, index) => {
                                     return (
                                         <TableRow key={index} >
+                                            {showCheckbox ? <TableCell sx={{ width: '9%' }} align="center"> <input style={{ float: 'left', marginTop: '5px' }} type="checkbox" onChange={e => handleChangeCheckbox(e, item.product.id, month)} />
+                                                <input onChange={e => onchangeMonth(e, item.product.id)} defaultValue={'1'} style={{ float: 'left', width: '70%', marginLeft: '6%' }} type="number" min={'1'} max={'100'} />
+                                            </TableCell> : <TableCell align="center"> </TableCell>}
                                             <TableCell align="center">{item.product.name} </TableCell>
                                             <TableCell align="center">{item.product.price} </TableCell>
                                             <TableCell align="center">{item.product.address.fullAddress} </TableCell>
@@ -61,6 +66,32 @@ function AboutToExpire({ columns4, dataOrderDetailExpired }) {
                     </Table>
                 </TableContainer>
             </Paper>
+            {dataOrderDetailExpired.length > 0 ?
+                showExtend == true ? <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                    {dataOrderDetailExpired.length > 0 ?
+                        < Button onClick={e => {
+                            setShowCheckbox(true)
+                            setShowExtend(false)
+                            setListIds([]);
+                        }} variant="contained" color="success">
+                            Gia hạn
+                        </Button> :
+                        <NavLink to={'/auth/homePage'} className="text-body">
+                            <Button variant="contained" color="success" disabled>Mua hàng</Button>
+                        </NavLink>
+                    }
+                </Grid> :
+                    <Grid sx={{ mt: 1 }} container justifyContent="flex-end">
+                        <Button onClick={handleClickOpen} variant="contained" color="success">
+                            Xác nhận
+                        </Button>
+                        <Button sx={{ ml: 1 }} onClick={e => {
+                            setShowExtend(true)
+                            setShowCheckbox(false)
+                        }} variant="contained" color="error">
+                            Đóng
+                        </Button>
+                    </Grid> : null}
         </React.Fragment>
     )
 }

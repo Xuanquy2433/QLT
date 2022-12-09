@@ -32,7 +32,7 @@ import { API_GET_EXPIRED_ORDER_USER } from 'utils/const';
 import { showError2 } from 'utils/error';
 import { Fragment } from 'react'
 
-function AreRenting({ columns2, dataOrderDetail, showCheckbox, onchangeMonth, showExtend, setShowCheckbox, setShowExtend, handleClickOpen, handleChangeCheckbox, month }) {
+function AreRenting({ columns2, dataOrderDetail, showCheckbox, setListIds, onchangeMonth, showExtend, setShowCheckbox, setShowExtend, handleClickOpen, handleChangeCheckbox, month }) {
     return (
         <Fragment>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -97,6 +97,7 @@ function AreRenting({ columns2, dataOrderDetail, showCheckbox, onchangeMonth, sh
                         <Button sx={{ ml: 1 }} onClick={e => {
                             setShowExtend(true)
                             setShowCheckbox(false)
+                            setListIds([]);
                         }} variant="contained" color="error">
                             Đóng
                         </Button>

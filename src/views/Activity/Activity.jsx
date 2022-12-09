@@ -232,7 +232,6 @@ function Activity() {
     const [status, setStatus] = React.useState('');
     const handleChangeStatus = (event) => {
         setStatus(event.target.value);
-        console.log('status ', status);
     };
     const getALLOrderWithStatus = async (e) => {
         const response = await axios.get(API_GET_ALL_ORDER + "?status=" + status, {
@@ -246,6 +245,7 @@ function Activity() {
             setData(response.data)
         }
     }
+    console.log("month ", listIds);
     useEffect(() => {
         getALLOrderWithStatus()
     }, [status])
@@ -363,11 +363,13 @@ function Activity() {
                     <TabPanel value="2">
                         <AreRenting columns2={columns2} dataOrderDetail={dataOrderDetail} showCheckbox={showCheckbox}
                             onchangeMonth={onchangeMonth} showExtend={showExtend} setShowCheckbox={setShowCheckbox} setShowExtend={setShowExtend}
-                            handleClickOpen={handleClickOpen} handleChangeCheckbox={handleChangeCheckbox} month={month} />
+                            handleClickOpen={handleClickOpen} setListIds={setListIds} handleChangeCheckbox={handleChangeCheckbox} month={month} />
                     </TabPanel>
                     <TabPanel value='3'>
-                        <AboutToExpire columns4={columns4}
-                            dataOrderDetailExpired={dataOrderDetail} />
+                        <AboutToExpire columns4={columns2}
+                            dataOrderDetailExpired={dataOrderDetail} showCheckbox={showCheckbox} showExtend={showExtend}
+                            setShowCheckbox={setShowCheckbox} setShowExtend={setShowExtend} handleClickOpen={handleClickOpen}
+                            onchangeMonth={onchangeMonth} setListIds={setListIds} handleChangeCheckbox={handleChangeCheckbox} month={month} />
                     </TabPanel>
 
                     <TabPanel value='4'>
@@ -376,7 +378,7 @@ function Activity() {
                     </TabPanel>
                 </TabContext>
             </Box>
-            {/* confirm value 2  */}
+            {/* confirm value 2,3  */}
             <Dialog
                 open={open}
                 onClose={handleClose}
