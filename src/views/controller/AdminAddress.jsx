@@ -14,6 +14,7 @@ import EditAddress from 'views/pillarAddress/EditAddress'
 
 
 export default function AdminPillar() {
+  const [keyword, setKeyword] = useState('')
   const [data, setdata] = useState([])
   const [selected, setSelected] = useState(undefined)
   const [open, setOpen] = useState(false);
@@ -31,19 +32,36 @@ export default function AdminPillar() {
   }, [])
 
   const handleChangePage = async (event, newPage) => {
-    const response = await axios.get(API_GET_ADMIN_ADDRESS + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
-    if (response) {
-      setPage(newPage);
-      setdata(response.data.content)
+    if (keyword == '') {
+      const response = await axios.get(API_GET_ADMIN_ADDRESS + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
+      if (response) {
+        setPage(newPage);
+        setdata(response.data.content)
+      }
+    } else {
+      const response = await axios.get(API_GET_ADMIN_ADDRESS + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
+      if (response) {
+        setPage(newPage);
+        setdata(response.data.content)
+      }
     }
   };
 
   const handleChangeRowsPerPage = async (event) => {
-    const response = await axios.get(API_GET_ADMIN_ADDRESS + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=id")
-    if (response) {
-      setdata(response.data.content)
-      setPage(0);
-      setRowsPerPage(+event.target.value);
+    if (keyword == '') {
+      const response = await axios.get(API_GET_ADMIN_ADDRESS + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=id")
+      if (response) {
+        setdata(response.data.content)
+        setPage(0);
+        setRowsPerPage(+event.target.value);
+      }
+    } else {
+      const response = await axios.get(API_GET_ADMIN_ADDRESS + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=id&keyword=" + keyword)
+      if (response) {
+        setdata(response.data.content)
+        setPage(0);
+        setRowsPerPage(+event.target.value);
+      }
     }
   };
 
@@ -185,6 +203,7 @@ export default function AdminPillar() {
   }
 
   const search = async (keyword) => {
+    setKeyword(keyword)
     const response = await axios.get(API_GET_ADMIN_ADDRESS + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
     if (response) {
       setdata(response.data.content)
