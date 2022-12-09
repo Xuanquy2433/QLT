@@ -111,7 +111,9 @@ export default function Customer({ onEdit, data, page, search, rowsPerPage, tota
                                             <TableCell sx={{ textAlign: 'center' }}> {item.roles}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  <Moment format="DD/MM/YYYY hh:ss">{item.createdate}</Moment></TableCell>
                                             <TableCell sx={{ textAlign: 'right' }}>
-                                                <UncontrolledDropdown>
+                                                <EditIcon sx={{ cursor: 'pointer' }} onClick={(e) => onClickEdit(item)} />
+
+                                                {/* <UncontrolledDropdown>
                                                     <DropdownToggle
                                                         className="btn-icon-only text-light"
                                                         href="#pablo"
@@ -136,7 +138,7 @@ export default function Customer({ onEdit, data, page, search, rowsPerPage, tota
                                                             Update
                                                         </DropdownItem>
                                                     </DropdownMenu>
-                                                </UncontrolledDropdown>
+                                                </UncontrolledDropdown> */}
                                             </TableCell>
                                         </TableRow>
                                     ))}
