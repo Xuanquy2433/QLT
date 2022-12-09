@@ -26,7 +26,7 @@ export default function CreatePillar({ data, onSubmit, open, setOpen }) {
     }
 
     const onClickAdd = (event) => {
-        onSubmit(dataAddress, setDataAddress)
+        onSubmit(dataAddress, setDataAddress,setOpen)
         // setOpen(false)
         setSelectedImage('')
     }

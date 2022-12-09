@@ -86,8 +86,8 @@ function OrderDetail() {
                         }
                     });
                     if (response && response.status === 200) {
-                        toast.success('Success', {
-                            autoClose: 3000
+                        toast.success('Thành công', {
+                            autoClose: 1500
                         })
                         setSize(99)
 

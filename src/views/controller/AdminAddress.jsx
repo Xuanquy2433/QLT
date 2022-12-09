@@ -73,7 +73,7 @@ export default function AdminPillar() {
     }
   }
 
-  const onSubmit = async (data, setDataAddress) => {
+  const onSubmit = async (data, setDataAddress, setOpen) => {
     if (data.city === '') {
       toast.warning("Thành phố không được để trống", { autoClose: 1500 });
     }
@@ -98,6 +98,7 @@ export default function AdminPillar() {
             description: '',
             multipartFile: ''
           })
+          setOpen(false)
         }
 
         //catch show error

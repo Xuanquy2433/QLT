@@ -14,20 +14,20 @@ import { toast, ToastContainer } from "react-toastify";
 import jwt_decode from "jwt-decode";
 
 
-let token = localStorage.getItem('token')
-let decoded;
-let decode;
-if (token !== null) {
-  decoded = jwt_decode(token);
-  decode = JSON.parse(atob(token.split('.')[1]));
-}
-if (token && decode.exp * 1000 < new Date().getTime()) {
-  localStorage.clear()
-  toast.warning('Phiên đăng nhập đã hết hạn ', { autoClose: 1200 })
-  setTimeout(() => {
-    window.location.reload();
-  }, 1500);
-}
+// let token = localStorage.getItem('token')
+// let decoded;
+// let decode;
+// if (token !== null) {
+//   decoded = jwt_decode(token);
+//   decode = JSON.parse(atob(token.split('.')[1]));
+// }
+// if (token && decode.exp * 1000 < new Date().getTime()) {
+//   localStorage.clear()
+//   toast.warning('Phiên đăng nhập đã hết hạn ', { autoClose: 1200 })
+//   setTimeout(() => {
+//     window.location.reload();
+//   }, 1500);
+// }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

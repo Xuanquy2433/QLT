@@ -70,10 +70,10 @@ export default function AdminPictures() {
                     toast.success("Thêm thành công", { autoClose: 1500 })
                     setOpen(false)
                     fetchAPI()
-                    setData({
-                        category: "",
-                        image: "",
-                    })
+                    // setData({
+                    //     category: "",
+                    //     image: "",
+                    // })
                 }
             }
         } catch (error) {
