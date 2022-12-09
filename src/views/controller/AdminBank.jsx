@@ -30,7 +30,7 @@ export default function AdminBank() {
     const onSubmitAdd = async (data) => {
         try {
             if (data.bankAccountName === '') {
-                toast.warning('Tên ngân hàng không được bỏ trống', { autoClose: 1500 })
+                toast.warning('Tên chủ tài khoản không được bỏ trống', { autoClose: 1500 })
             }
             else if (data.bankAccountNumber === '') {
                 toast.warning('Mã ngân hàng không được bỏ trống', { autoClose: 1500 })
@@ -39,7 +39,7 @@ export default function AdminBank() {
                 toast.warning('Số tài khoản không được bỏ trống', { autoClose: 1500 })
             }
             else if (data.bankName === '') {
-                toast.warning('Tên chủ tài khoản không được bỏ trống', { autoClose: 1500 })
+                toast.warning('Tên ngân hàng không được bỏ trống', { autoClose: 1500 })
             } else {
                 const response = await axios.post(API_BANK_ADD, data)
                 if (response.status === 200) {
