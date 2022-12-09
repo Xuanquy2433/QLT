@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-export default function AddPictures({ open, setOpen, onSubmitAdd }) {
+export default function AddPictures({ open, setOpen, onSubmitAdd, setDataa }) {
     const [data, setData] = useState({
         category: "",
         image: "",
@@ -17,7 +17,7 @@ export default function AddPictures({ open, setOpen, onSubmitAdd }) {
     }
 
     const onClickAdd = () => {
-        onSubmitAdd(data)
+        onSubmitAdd(data, setDataa)
     }
 
 
@@ -27,7 +27,13 @@ export default function AddPictures({ open, setOpen, onSubmitAdd }) {
         setData({ ...data, image: event.target.files[0] })
     }
 
-    const handleClose = () => setOpen(false)
+    const handleClose = () => {
+        setData({
+            category: "",
+            image: "",
+        })
+        setOpen(false)
+    }
     const [valueStateCategory, setValueStateCategory] = useState('');
     const handleChangeCategory = (event) => {
         const value = event.target.value;
@@ -43,7 +49,7 @@ export default function AddPictures({ open, setOpen, onSubmitAdd }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-               <Box className='form-add-address'
+                <Box className='form-add-address'
                     sx={{
                         width: '40%',
                         position: 'relative',
