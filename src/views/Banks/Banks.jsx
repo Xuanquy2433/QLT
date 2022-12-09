@@ -92,7 +92,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                 <AddIcon sx={{ color: "#FFFFFF", fontSize: "40px", width: "100%" }} />
                             </Box>
                         </Grid>
-                        <Grid item xs={10}>
+                        {/* <Grid item xs={10}>
                             <Paper sx={{ boxShadow: "none", border: "1px solid #ddd", display: 'flex', padding: '7px 7px 3px 7px', width: '100%', marginBottom: '20px', borderRadius: '7px' }}>
                                 <IconButton type="button" sx={{ p: '0px', }} aria-label="search">
                                     <SearchIcon />
@@ -102,7 +102,7 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                     placeholder="Tìm kiếm loại trụ"
                                 />
                             </Paper>
-                        </Grid>
+                        </Grid> */}
 
                     </Grid>
                     {/* <TextField sx={{ mt: "7px", width: "400px" }} id="outlined-basic" label="Search" variant="outlined" /> */}
