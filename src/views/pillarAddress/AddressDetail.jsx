@@ -382,7 +382,7 @@ function AddressDetail() {
                                     <img style={{ width: "100%", height: "100%", objectFit: "contain" }} src={address.photosImagePath} alt="" />
                                 </div>
                                 <div className="product-detail">
-                                    <h1 className="product__title">{address.street} </h1>
+                                    <h3 className="product__title">{address.street} </h3>
                                     <div className="product__price">Thành phố {address.city}  </div>
                                     <div className="product__subtitle">
                                         {address.description}
