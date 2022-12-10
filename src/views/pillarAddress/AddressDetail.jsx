@@ -357,10 +357,10 @@ function AddressDetail() {
 
 
     return (
-        <div >
-            <div style={{ marginBottom: "15px" }} className='de'  >
+        <div style={{ maxWidth: "1200px", margin: "auto" }} >
+            <div style={{ marginBottom: "15px", maxWidth: "1200px" }} className='de'  >
                 {address ?
-                    <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: '#E7EBF0', width: "96.5%" }} className="address-detail">
+                    <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: '#E7EBF0', width: "100%" }} className="address-detail">
 
                         <div style={{ position: 'sticky' }} className="container">
 
@@ -373,7 +373,8 @@ function AddressDetail() {
                                 </nav>
                             </div>
                             <div className="product">
-                                <div style={{ backgroundImage: `url(${address.photosImagePath})` }} className="product-photo">
+                                <div style={{}} className="product-photo">
+                                    <img style={{ width: "100%", height: "100%", objectFit: "contain" }} src={address.photosImagePath} alt="" />
                                 </div>
                                 <div className="product-detail">
                                     <h1 className="product__title">{address.street} </h1>
@@ -385,12 +386,42 @@ function AddressDetail() {
 
                                     </div>
                                     <div class="line-loading">
-                                        {count > 0 ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
-                                        {token == null ? <Button sx={{ mt: 2 }} variant="contained" color="success" onClick={() => {
+
+                                    </div>
+                                    <div style={{ margin: "auto" }}> {count > 0 ? <Button sx={{
+                                        '&:hover': {
+                                            bgcolor: '#007784',
+                                            outline: "none",
+                                            boxShadow: "none"
+                                        },
+                                        border: "3px solid #007784",
+                                        fontWeight: "500", width: "100%",
+                                        background: "#007784",
+                                        outline: "none",
+                                        color: "#FFFFFF",
+                                        borderRadius: "8px",
+                                        boxShadow: "none",
+                                        marginTop: "10px",
+
+                                    }} variant="contained" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
+                                        {token == null ? <Button sx={{
+                                            '&:hover': {
+                                                bgcolor: '#007784',
+                                                outline: "none",
+                                                boxShadow: "none"
+                                            },
+                                            border: "3px solid #007784",
+                                            fontWeight: "500", width: "100%",
+                                            background: "#007784",
+                                            outline: "none",
+                                            color: "#FFFFFF",
+                                            borderRadius: "8px",
+                                            boxShadow: "none",
+                                            marginTop: "10px",
+                                        }} variant="contained" onClick={() => {
                                             history.push('/auth/login')
                                             toast.warning('Vui lòng đăng nhập để thêm hết tất cả trụ vào thanh toán', { autoClose: 1500 })
-                                        }}>Thêm tất cả trụ </Button> : null}
-                                    </div>
+                                        }}>Thêm tất cả trụ </Button> : null}</div>
                                 </div>
                             </div>
                         </div>
