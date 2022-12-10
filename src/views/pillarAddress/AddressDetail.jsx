@@ -121,12 +121,13 @@ function AddressDetail() {
                         'Content-Type': 'application/json'
                     }
                 })
-
-                let countNumber = 0
+                let arrayCart = []
                 Object.entries(responseCount.data).forEach(function (value, key) {
-                    countNumber = value[1].length
+                    Object.entries(value[1]).forEach(function (value, key) {
+                        arrayCart.push(value[1])
+                    })
                 })
-                localStorage.setItem('countCart', JSON.stringify(countNumber));
+                localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
                 window.dispatchEvent(new Event("storage"));
             }
         } else {
@@ -197,11 +198,13 @@ function AddressDetail() {
                             'Content-Type': 'application/json'
                         }
                     })
-                    let countNumber = 0
+                    let arrayCart = []
                     Object.entries(responseCount.data).forEach(function (value, key) {
-                        countNumber = value[1].length
+                        Object.entries(value[1]).forEach(function (value, key) {
+                            arrayCart.push(value[1])
+                        })
                     })
-                    localStorage.setItem('countCart', JSON.stringify(countNumber));
+                    localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
                     window.dispatchEvent(new Event("storage"));
                     // history.push('/auth/cart')
                 };
@@ -321,11 +324,13 @@ function AddressDetail() {
                 }
             })
             if (responseCount) {
-                let countNumber = 0
+                let arrayCart = []
                 Object.entries(responseCount.data).forEach(function (value, key) {
-                    countNumber = value[1].length
+                    Object.entries(value[1]).forEach(function (value, key) {
+                        arrayCart.push(value[1])
+                    })
                 })
-                localStorage.setItem('countCart', JSON.stringify(countNumber));
+                localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
                 window.dispatchEvent(new Event("storage"));
             }
         }
