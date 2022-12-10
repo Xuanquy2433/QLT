@@ -123,12 +123,7 @@ function AdminProduct() {
     else if (data.description === "") {
       toast.warning("Không được để trống chú thích", { autoClose: 1500 })
     }
-    else if (data.addressId === 0) {
-      toast.warning("Vui lòng chọn địa chỉ", { autoClose: 1500 })
-    }
-    else if (data.categoryId === 0) {
-      toast.warning("Vui lòng chọn loại trụ", { autoClose: 1500 })
-    } else {
+    else {
       try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
@@ -143,8 +138,6 @@ function AdminProduct() {
           getAllProduct()
           setRandomNumber(Math.floor(Math.random() * (999)))
           setData({
-            addressId: 0,
-            categoryId: 0,
             description: "",
             status: "AVAILABLE",
             multipartFile: '',
@@ -192,12 +185,7 @@ function AdminProduct() {
     else if (data.description === "") {
       toast.warning("Không được để trống chú thích", { autoClose: 1500 })
     }
-    else if (data.addressId === 0) {
-      toast.warning("Vui lòng chọn địa chỉ", { autoClose: 1500 })
-    }
-    else if (data.categoryId === 0) {
-      toast.warning("Vui lòng chọn loại trụ", { autoClose: 1500 })
-    } else {
+    else {
       try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
