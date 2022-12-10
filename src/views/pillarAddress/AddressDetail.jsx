@@ -484,7 +484,7 @@ function AddressDetail() {
                         <Map
                             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                             loadingElement={<div style={{ height: `100%` }} />}
-                            containerElement={<div style={{ height: `90vh`, margin: `auto`, border: '2px solid black' }} />}
+                            containerElement={<div style={{ height: `90vh`, maxHeight: "1000px", width: "85vw", maxWidth: "1200px", margin: `auto`, border: '2px solid black' }} />}
                             mapElement={<div style={{ height: `100%` }} />}
                             data={mapAddress}
                             productData={dataAddressProduct}
