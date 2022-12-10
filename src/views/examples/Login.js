@@ -121,12 +121,13 @@ const Login = () => {
               }
             })
             if (response2) {
-              let countNumber = 0
+              let arrayCart = []
               Object.entries(response2.data).forEach(function (value, key) {
-                countNumber = value[1].length
-                console.log("this ", value[1].lengthl, value[1]);
+                Object.entries(value[1]).forEach(function (value, key) {
+                  arrayCart.push(value[1])
+                })
               })
-              localStorage.setItem('countCart', JSON.stringify(countNumber));
+              localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
               window.dispatchEvent(new Event("storage"));
             }
           }

@@ -138,7 +138,6 @@ export default function Banks({ setOpen, data, handleOpenDelete, openDelete, han
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle
                                                         className="btn-icon-only text-light"
-                                                        href="#pablo"
                                                         role="button"
                                                         size="sm"
                                                         color=""

@@ -39,7 +39,6 @@ const Auth = (props) => {
     arrLocations = JSON.parse(ars)
   }
   arrLocations.push(window.location.pathname)
-  console.log("arrLocations", arrLocations);
   localStorage.setItem("locations", JSON.stringify(arrLocations))
   // for (let i = 0; i < arrLocations.length; i++) {
   //   if (arrLocations.length > 2) {
@@ -50,7 +49,6 @@ const Auth = (props) => {
   // }
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      console.log(window.location.pathname);
       if (prop.layout === "/auth") {
         return (
           <Route

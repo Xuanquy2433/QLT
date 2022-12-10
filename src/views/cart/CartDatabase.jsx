@@ -132,12 +132,13 @@ function CartDatabase() {
     }
 
     //set countcart
-    let countNumber = 0
     let arrayCart = []
     Object.entries(data).forEach(function (value, key) {
-        countNumber = value[1].length
-        arrayCart = value[1]
+        Object.entries(value[1]).forEach(function (value, key) {
+            arrayCart.push(value[1])
+        })
     })
+
     //set total money
     let sum = 0
     arrayCart.map((item) => {
@@ -166,11 +167,13 @@ function CartDatabase() {
                     'Content-Type': 'application/json'
                 }
             })
-            let countNumber = 0
+            let arrayCart = []
             Object.entries(responseCount.data).forEach(function (value, key) {
-                countNumber = value[1].length
+                Object.entries(value[1]).forEach(function (value, key) {
+                    arrayCart.push(value[1])
+                })
             })
-            localStorage.setItem('countCart', JSON.stringify(countNumber));
+            localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
             window.dispatchEvent(new Event("storage"));
         }
     }
@@ -257,7 +260,7 @@ function CartDatabase() {
                                         <div className="p-5 mb-2">
                                             <div className="d-flex justify-content-between align-items-center mb-5">
                                                 <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
-                                                <h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {countNumber} </h6>
+                                                <h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {arrayCart.length} </h6>
                                             </div>
                                             {
                                                 <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
