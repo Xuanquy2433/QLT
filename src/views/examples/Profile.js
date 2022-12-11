@@ -110,7 +110,8 @@ const Profile = () => {
       >
         <Box className='form-add-product'
           sx={{
-            width: '40% !important',
+            maxWidth: "450px !important",
+            width: '30%',
             height: "auto !important",
             position: 'relative',
             transform: "translate(-50%, -50%)",
@@ -123,7 +124,7 @@ const Profile = () => {
         >
           <div style={{ textAlign: "center", fontSize: "18px", borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Sửa thông tin</div>
           {/* <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận thay đổi ?</h2> */}
-          <div style={{ padding: "20px 60px", margin: "auto" }}>
+          <div style={{ padding: "20px 0px", margin: "auto" }}>
             <TextField onChange={onChangeText} defaultValue={data.email} name="email" style={{ margin: '5px' }} fullWidth label='Email' />
             <TextField onChange={onChangeText} defaultValue={data.firstName} name="firstName" style={{ margin: '5px' }} fullWidth label='Họ' />
             <TextField onChange={onChangeText} defaultValue={data.lastName} name="lastName" style={{ margin: '5px' }} fullWidth label='Tên' />
