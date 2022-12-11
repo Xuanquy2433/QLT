@@ -282,6 +282,12 @@ $second-font: 'Montserrat', sans-serif;
     max-width: 410px;
   }
 
+  .de .product .btn-header-ad-detail{
+    padding: 5px !important;
+    font-size: 12px !important;
+    font-weight: 500;
+  }
+
   .de .container{
     padding-right: 0;
     padding-left: 0;
@@ -322,6 +328,11 @@ $second-font: 'Montserrat', sans-serif;
 }
 
 @media(min-width: 333px) and (max-width:500px){
+  .de .product .btn-header-ad-detail{
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    font-weight: 500;
+  }
   .de{
     width: 98vw;
     max-width: 410px;

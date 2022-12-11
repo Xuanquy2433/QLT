@@ -393,23 +393,24 @@ function AddressDetail() {
                                     <div class="line-loading">
 
                                     </div>
-                                    <div style={{ margin: "auto" }}> {count > 0 ? <Button sx={{
-                                        '&:hover': {
-                                            bgcolor: '#007784',
+                                    <div style={{ margin: "auto" }}>
+                                        {count > 0 ? <Button className="btn-header-ad-detail" sx={{
+                                            '&:hover': {
+                                                bgcolor: '#007784',
+                                                outline: "none",
+                                                boxShadow: "none"
+                                            },
+                                            border: "3px solid #007784",
+                                            fontWeight: "500", width: "100%",
+                                            background: "#007784",
                                             outline: "none",
-                                            boxShadow: "none"
-                                        },
-                                        border: "3px solid #007784",
-                                        fontWeight: "500", width: "100%",
-                                        background: "#007784",
-                                        outline: "none",
-                                        color: "#FFFFFF",
-                                        borderRadius: "8px",
-                                        boxShadow: "none",
-                                        marginTop: "10px",
+                                            color: "#FFFFFF",
+                                            borderRadius: "8px",
+                                            boxShadow: "none",
+                                            marginTop: "10px",
 
-                                    }} variant="contained" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
-                                        {token == null ? <Button sx={{
+                                        }} variant="contained" onClick={() => addComboToCart()}>Thêm tất cả trụ ({count}) </Button> : null}
+                                        {token == null ? <Button className="btn-header-ad-detail" sx={{
                                             '&:hover': {
                                                 bgcolor: '#007784',
                                                 outline: "none",
