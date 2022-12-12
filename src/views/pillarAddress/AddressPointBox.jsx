@@ -29,7 +29,7 @@ const columns = [
   {
     id: 'name',
     label: 'Tên',
-    minWidth: 90,
+    minWidth: 100,
     align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
@@ -50,8 +50,8 @@ const columns = [
   },
   {
     id: '',
-    label: 'Số lượng',
-    minWidth: 100,
+    label: '',
+    minWidth: 70,
     align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
@@ -335,11 +335,13 @@ function AddressPointBox({ openDetail, closeDetail, addressId }) {
                     : null}
               </Grid>
               <TableContainer sx={{ height: '95vh' }}>
+                <StyledTableCell>
+                  {updating ? updateId : null}
+                </StyledTableCell>
                 <Table aria-label="sticky table" >
-                  <TableHead sx={{ borderBottom: '2px solid black' }}>
-                    <StyledTableCell>
-                      {updating ? updateId : null}
-                    </StyledTableCell>
+
+                  <TableHead sx={{ borderBottom: '1px solid #ddd', borderTop: "1px solid #ddd" }}>
+
 
 
                     {/* <div className='mt-2 mr-5 h5 font-weight-bold'>
