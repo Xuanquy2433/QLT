@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import { formatMoney } from 'common/formatMoney';
 import OrderStatus from "../../components/OrderStatus";
 
-function Order({ order, ya,updatingComponent}) {
+function Order({ order, ya, updatingComponent }) {
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [listIds, setListIds] = useState([]);
@@ -49,7 +49,7 @@ function Order({ order, ya,updatingComponent}) {
                       <p className="font-italic text-muted mb-0 small">Tổng cộng : {formatMoney(order.total)} VNĐ</p>
                       <div className="d-flex align-items-center mt-1">
                         <h6 className="font-weight-bold my-2">Số lượng : {order.quantity}</h6>
-                        <h6 className="font-weight-bold my-2 ml-8">Trạng thái : <OrderStatus status={order.status}/></h6>
+                        <h6 className="font-weight-bold my-2 ml-8">Trạng thái : <OrderStatus status={order.status} /></h6>
 
 
                       </div>
@@ -71,9 +71,18 @@ function Order({ order, ya,updatingComponent}) {
           isExpanded ? "none" : "block"
       }}>
 
+        <div   className="wrapper-detail wrapper-detail-parent">
+        <div className="w-25">Tên trụ</div>
+
+          <div className="w-25">Giá tiền</div>
+          <div className="w-25"> Số tháng</div>
+          <div className="w-25"> Ngày hết hạn</div>
+
+        </div>
         {order.orderDetail?.map((orderDetail) => (
           <OrderDetailComponent
             orderDetail={orderDetail}
+            time={order.orderTime}
           />
         ))}
       </div>
