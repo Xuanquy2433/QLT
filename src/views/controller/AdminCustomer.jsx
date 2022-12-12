@@ -14,12 +14,14 @@ export default function AdminCustomer() {
   const [rowsPerPage, setRowsPerPage] = React.useState(6);
   const [selected, setSelected] = useState(undefined)
   const [openEdit, setOpenEdit] = React.useState(false)
+  const [pageCRUD, setPageCRUD] = React.useState(1);
   const handleCloseEdit = () => setOpenEdit(false)
   useEffect(() => {
     fetchAPI()
   }, [])
 
   const handleChangePage = async (event, newPage) => {
+    setPageCRUD(newPage + 1)
     if (keyword == '') {
       const response = await axios.get(API_GET_USERS + (newPage + 1) + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage)
       if (response) {
@@ -36,6 +38,7 @@ export default function AdminCustomer() {
   };
 
   const handleChangeRowsPerPage = async (event) => {
+    setPageCRUD(1)
     if (keyword == '') {
       const response = await axios.get(API_GET_USERS + 1 + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + event.target.value)
       if (response) {
@@ -61,6 +64,14 @@ export default function AdminCustomer() {
     }
   }
 
+  const fetchAPIWhenCRUD = async () => {
+    const response = await axios.get(API_GET_USERS + pageCRUD + "?sort=desc" + "&sortField=email" + "&usersPerPage=" + rowsPerPage)
+    if (response) {
+      setData(response.data.content)
+      setTotalPages(response.data.totalElements)
+    }
+  }
+
   const onEdit = async (item) => {
     setSelected(item)
     setOpenEdit(true)
@@ -79,7 +90,7 @@ export default function AdminCustomer() {
         const response = await axios.put(API_UPDATE_ROLE + data.id + "/update?roleName=" + roleSub)
         if (response && response.status === 200) {
           toast.success("Sửa thành công", { autoClose: "1500" })
-          fetchAPI();
+          fetchAPIWhenCRUD();
           setOpenEdit(false)
 
         } else if (response && response.status === 400) {
@@ -120,7 +131,6 @@ export default function AdminCustomer() {
     if (response) {
       setData(response.data.content)
       setTotalPages(response.data.totalElements)
-
     }
   }
   return (

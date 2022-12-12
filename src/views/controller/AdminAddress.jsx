@@ -27,11 +27,14 @@ export default function AdminPillar() {
   const [openDelete, setOpenDelete] = useState(false)
   const handleOpenDelete = () => setOpenDelete(true);
   const handleCloseDelete = () => setOpenDelete(false);
+  const [pageCRUD, setPageCRUD] = React.useState(1);
+
   useEffect(() => {
     fetchAPI()
   }, [])
 
   const handleChangePage = async (event, newPage) => {
+    setPageCRUD(newPage + 1)
     if (keyword == '') {
       const response = await axios.get(API_GET_ADMIN_ADDRESS + (newPage + 1) + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
       if (response) {
@@ -48,6 +51,7 @@ export default function AdminPillar() {
   };
 
   const handleChangeRowsPerPage = async (event) => {
+    setPageCRUD(1)
     if (keyword == '') {
       const response = await axios.get(API_GET_ADMIN_ADDRESS + 1 + "?dataPerPage=" + event.target.value + "&sort=desc" + "&sortField=id")
       if (response) {
@@ -67,6 +71,13 @@ export default function AdminPillar() {
 
   const fetchAPI = async (e) => {
     const response = await axios.get(API_GET_ADMIN_ADDRESS + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
+    if (response) {
+      setdata(response.data.content)
+      setTotalPages(response.data.totalElements)
+    }
+  }
+  const fetchAPIWhenCRUD = async (e) => {
+    const response = await axios.get(API_GET_ADMIN_ADDRESS + pageCRUD + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id")
     if (response) {
       setdata(response.data.content)
       setTotalPages(response.data.totalElements)
@@ -151,7 +162,7 @@ export default function AdminPillar() {
           })
         if (response && response.status === 201) {
           toast.success("Cập nhập thành công", { autoClose: 1500 });
-          fetchAPI();
+          fetchAPIWhenCRUD();
           setOpenEdit(false)
         }
 
@@ -188,7 +199,7 @@ export default function AdminPillar() {
       if (response && response.status === 201) {
         setOpenDelete(false)
         toast.success("Xóa thành công", { autoClose: 1500 });
-        fetchAPI();
+        fetchAPIWhenCRUD();
       }
       //catch show error
     } catch (error) {

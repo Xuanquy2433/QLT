@@ -28,6 +28,7 @@ function AdminProduct() {
 
   const [openEdit, setOpenEdit] = useState(false);
   const [page, setPage] = React.useState(0);
+  const [pageCRUD, setPageCRUD] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [product, setProduct] = useState(null)
 
@@ -56,6 +57,7 @@ function AdminProduct() {
   }
 
   const handleChangeRowsPerPage = async (event) => {
+    setPageCRUD(1)
     if (keyword == '') {
       const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id")
       if (response) {
@@ -77,6 +79,7 @@ function AdminProduct() {
   };
 
   const handleChangePage = async (event, newPage) => {
+    setPageCRUD(newPage + 1)
     if (keyword == '') {
       const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
       if (response) {
@@ -102,6 +105,15 @@ function AdminProduct() {
     }
   }
 
+  const getAllProductWhenCRUD = async (e) => {
+    console.log('get crud');
+    const response = await axios.get(API_GET_PRODUCT + pageCRUD + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
+    if (response) {
+      setTotalPages(response.data.totalElements)
+      setData(response.data.content)
+    }
+  }
+  console.log('ok roi ', pageCRUD);
   useEffect(() => {
     setSelected(product)
   }, [product, data])
@@ -197,7 +209,7 @@ function AdminProduct() {
         })
         if (response.status === 200) {
           toast.success("Sửa thành công", { autoClose: 1500 })
-          getAllProduct()
+          getAllProductWhenCRUD()
           setRandomNumber(Math.floor(Math.random() * (999)))
           setOpenEdit(true)
           setSelected(null)
@@ -232,12 +244,11 @@ function AdminProduct() {
 
   const onDelete = async (id) => {
     try {
-      console.log('id product delete ,', id);
       const response = await axios.delete(API_PRODUCT_DELETE + id)
       if (response.status === 200) {
         setOpenDelete(false)
         toast.success("Xóa thành công", { autoClose: 1500 })
-        getAllProduct()
+        getAllProductWhenCRUD()
       }
     } catch (error) {
       showError(error)
