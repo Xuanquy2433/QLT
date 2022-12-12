@@ -95,8 +95,8 @@ export default function EditPictures({ item, data, openEdit, setOpenEdit, onSubm
                             <MenuItem value={'false'}>Ẩn</MenuItem>
                         </Select>
                     </FormControl>
-                    <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }}
-                        name="image" type="file" multiple accept="image/*" />
+                    {/* <TextField onChange={onChangeImage} style={{ margin: '5px -5px 5px 5px' }}
+                        name="image" type="file" multiple accept="image/*" /> */}
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "center" }}>

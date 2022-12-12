@@ -53,7 +53,7 @@ export default function EditBanks({ openEdit, setOpenEdit, onHandleEdit, item })
                     <h2 style={{ textAlign: 'center' }}>Sửa thông tin tài khoản ngân hàng</h2>
                     <div style={{ display: 'flex', flexDirection: "column-reverse", margin: "10px" }} className="form-flex">
                         <TextField onChange={onChangeText} defaultValue={bankAccountName} name="bankAccountName" style={{ margin: '5px' }} fullWidth label='Tên chủ tài khoản' />
-                        <TextField onChange={onChangeText} defaultValue={bankAccountNumber} name="bankAccountNumber" style={{ margin: '5px' }} fullWidth label='Số tài khoản' />
+                        <TextField type={'number'} onChange={onChangeText} defaultValue={bankAccountNumber} name="bankAccountNumber" style={{ margin: '5px' }} fullWidth label='Số tài khoản' />
                         <TextField onChange={onChangeText} defaultValue={bankCode} name="bankCode" style={{ margin: '5px' }} fullWidth label='Mã ngân hàng' />
                         <TextField onChange={onChangeText} defaultValue={bankName} name="bankName" style={{ margin: '5px' }} fullWidth label='Tên ngân hàng' />
                     </div>

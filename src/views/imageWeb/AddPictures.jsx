@@ -68,8 +68,10 @@ export default function AddPictures({ open, setOpen, onSubmitAdd }) {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={valueStateCategory}
+                                defaultValue='banner'
                                 onChange={handleChangeCategory}>
-                                <MenuItem value={'banner'}>Ảnh banner</MenuItem>
+
+                                <MenuItem  value={'banner'}>Ảnh banner</MenuItem>
                                 <MenuItem value={'logo'}>Ảnh logo</MenuItem>
                                 {/* <MenuItem value={'about'}>Ảnh about us</MenuItem> */}
                             </Select>

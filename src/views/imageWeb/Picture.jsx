@@ -23,8 +23,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
 import AddIcon from '@mui/icons-material/Add';
+import { alpha, styled } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
+import Switch from '@mui/material/Switch';
+
+
+const label = { inputProps: { 'aria-label': 'Color switch demo' } };
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 70, maxWidth: 70 },
     {
@@ -48,7 +53,13 @@ const columns = [
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
-
+    {
+        id: 'active',
+        label: 'Hiện ảnh',
+        minWidth: 100,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    },
     {
         id: 'action',
         label: 'Hành động',
@@ -91,7 +102,7 @@ export default function Picture({ data, setOpen, search, onEdit, onDelete }) {
     const handleCloseConfirm = () => {
         setOpenConFirm(false);
     };
-
+    console.log('dât image ', data)
     return (
         <>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
@@ -147,7 +158,7 @@ export default function Picture({ data, setOpen, search, onEdit, onDelete }) {
                                             </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.image} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.category}</TableCell>
-
+                                            <TableCell sx={{ textAlign: 'center' }}> <Switch {...label} checked={item.active} color="secondary" /></TableCell>
                                             {/* <TableCell sx={{ textAlign: 'center', display: "flex", justifyContent: "space-around" }}>
                                                 <DeleteIcon sx={{ cursor: 'pointer', marginRight: '39%' }} onClick={e => {
                                                     handleClickOpenConfirm()
