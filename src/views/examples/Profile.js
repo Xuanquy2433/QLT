@@ -76,16 +76,32 @@ const Profile = () => {
   console.log(editUser.lastName);
 
   const onUpdate = async (data) => {
-    const response = await axios.put(API_UPDATE_USER, data, {
-      headers: {
-        'authorization': 'Bearer ' + token,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    if (data.email === "" || null) {
+      toast.warning("Email không được để trống", { autoClose: 1500 })
+      setOpen(true)
+    } else if (data.firstName === "" || null) {
+      toast.warning("Họ không được để trống", { autoClose: 1500 })
+      setOpen(true)
+    } else if (data.firstName === "" || null) {
+      toast.warning("Tên không được để trống", { autoClose: 1500 })
+      setOpen(true)
+    } else {
+      try {
+        const response = await axios.put(API_UPDATE_USER, data, {
+          headers: {
+            'authorization': 'Bearer ' + token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+        if (response.status === 200) {
+          toast.success("Sửa thành công", { autoClose: 1500 })
+          getUserProfile()
+          setOpen(false)
+        }
+      } catch (error) {
+
       }
-    })
-    if (response.status === 200) {
-      toast.success("Sửa thành công", { autoClose: 1500 })
-      getUserProfile()
     }
   }
 
@@ -95,7 +111,6 @@ const Profile = () => {
 
   const handleUpdate = () => {
     onUpdate({ ...editUser })
-    setOpen(false)
   }
   console.log(editUser);
 
@@ -122,7 +137,7 @@ const Profile = () => {
             // borderRadius: "10px"
           }}
         >
-          <div style={{ textAlign: "center", fontSize: "18px", borderBottom: "1px solid #ddd", margin: "0px 10px", color: "#333" }}>Sửa thông tin</div>
+          <div style={{ textAlign: "center", fontSize: "18px", margin: "0px 10px", color: "#333" }}>Sửa thông tin</div>
           {/* <h2 style={{ textAlign: 'center', margin: "60px", }}>Xác nhận thay đổi ?</h2> */}
           <div style={{ padding: "20px 0px", margin: "auto" }}>
             <TextField onChange={onChangeText} defaultValue={data.email} name="email" style={{ margin: '5px' }} fullWidth label='Email' />
