@@ -177,13 +177,14 @@ export default function WishList() {
                                                     <TableCell align="center">{item.address.fullAddress}</TableCell>
                                                     {item.status === 'AVAILABLE' ? <TableCell align="center" sx={{ color: 'green' }}>Có sẵn</TableCell> : null}
                                                     {item.status === 'HIRING' ? <TableCell align="center" sx={{ color: 'red' }}>Đã cho thuê</TableCell> : null}
+                                                    {item.status !== 'HIRING' || item.status !== 'AVAILABLE' ? <TableCell align="center" sx={{ color: 'red' }}>{item.status}</TableCell> : null}
 
                                                     <TableCell align="right">
                                                         <div className='parent' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                             {item.status === 'AVAILABLE' ?
                                                                 <div className='myDIV'>
                                                                     <AddShoppingCartIcon onClick={e => addCart(item.id)} sx={{ cursor: 'pointer', color: 'green' }} />
-                                                                </div> : <div className='mr-4'></div>   }
+                                                                </div> : <div className='mr-4'></div>}
                                                             <div className="hide">Thêm vào thanh toán.</div>
                                                             <div className='myDIVRmv'>
                                                                 <DeleteIcon sx={{ cursor: 'pointer', marginLeft: '15px' }}
