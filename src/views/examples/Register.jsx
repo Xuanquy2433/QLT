@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -23,7 +23,7 @@ import './register.css'
 
 const Register = () => {
   const history = useHistory();
-
+  const [isLoading, setIsLoading] = useState(false)
   const [user, setUser] = useState({
     email: "",
     firstName: "",
@@ -39,43 +39,48 @@ const Register = () => {
 
   const onSignup = async (e) => {
     e.preventDefault();
-    try {
-      if (user.phoneNumber.length < 10) {
-        toast.warning('Số điện thoại phải có 10 kí tự', {
-          autoClose: 3000
-        })
-      } else {
+    if (user.phoneNumber.length < 10) {
+      toast.warning('Số điện thoại phải có 10 kí tự', {
+        autoClose: 3000
+      })
+    } else {
+      setIsLoading(true)
+      try {
         const response = await axios.post(API_SIGNUP, user)
         if (response && response.status === 201) {
           toast.success('Đăng ký thành công', {
             autoClose: 3000
           })
           history.push('/auth/login')
+          setIsLoading(false)
+        }
+
+      } catch (error) {
+        setIsLoading(false)
+        console.log(error.response.data)
+        if (error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error) {
+          toast.error(`${error.response.data.error}`, {
+            autoClose: 2000
+          })
+        }
+        else if (error.response.data.error && error.response.data.message) {
+          toast.error(`${error.response.data.message}`, {
+            autoClose: 2000
+          })
+        }
+        else {
+          toast.error('Error', {
+            autoClose: 2000
+          })
         }
       }
-    } catch (error) {
-      console.log(error.response.data)
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
-      }
     }
+
   }
 
   useEffect(() => {
@@ -92,9 +97,7 @@ const Register = () => {
             </div>
           </CardHeader>
           <CardBody className="px-lg-5 ">
-            <div className="text-center text-muted mb-4">
-              <small>Vui lòng nhập thông tin của bạn</small>
-            </div>
+
             <Form role="form">
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
@@ -192,8 +195,8 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button style={{ width: "100%" }} onClick={onSignup} className="" color="primary" type="button">
-                  Đăng ký
+                <Button disabled={isLoading} style={{ width: "100%" }} onClick={onSignup} className="" color="primary" type="button">
+                  {isLoading ? "Xin chờ..." : "Đăng ký"}
                 </Button>
               </div>
             </Form>
