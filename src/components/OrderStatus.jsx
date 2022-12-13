@@ -12,7 +12,7 @@ const ProductStatus = (params) => {
         {status:"DONE",color: "green",text:"Đã xong"},
         {status:"CANCELLED",color: "red",text:"Đã hủy"},
         {status:"PAID",color: "orange",text:"Đang thuê"},
-        {status:"EXTEND",color: "pink",text:"Gia hạn"},
+        {status:"EXTEND",color: "blue",text:"Gia hạn"},
       ]
   );
 

@@ -156,6 +156,9 @@ function OrderPlace() {
         } else if (date2 == null) {
             toast.warning('Vui lòng chọn thời gian kết thúc ', { autoClose: 1200 })
 
+        }
+        else if (date1 > date2) {
+            toast.warning('Thời gian bắt đầu không được lớn hơn thời gian kết thúc ', { autoClose: 1200 })
         } else {
             if (keyword == null) {
                 const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + moment(date1).format("DD/MM/YYYY") + '&toDate=' + moment(date2).format("DD/MM/YYYY"))
@@ -358,7 +361,7 @@ function OrderPlace() {
         }
 
     };
-    console.log("key ",keyword);
+    console.log("key ", keyword);
     return (
         <>
             <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
@@ -452,7 +455,7 @@ function OrderPlace() {
                                             {/* <TableCell>{item.id}</TableCell> */}
                                             <TableCell sx={{ textAlign: 'center' }}> {item.orderCode}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.fullName}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber.replace("+84","0")}</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> {item.phoneNumber.replace("+84", "0")}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.quantity}</TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>{formatMoney(item.total)}</TableCell>
                                             {item.status === 'NEW' ? <TableCell sx={{ textAlign: 'center', color: 'green' }}> Mới</TableCell> : ''}

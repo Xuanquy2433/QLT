@@ -42,14 +42,14 @@ function Order({ order, ya, updatingComponent }) {
                 <li style={{ padding: '0' }} className="list-group-item">
                   <div className="media align-items-lg-center flex-column flex-lg-row p-3">
                     <div className="media-body order-2 order-lg-1">
-                      <h5 className="mt-0 font-weight-bold mb-2"> Thời gian đặt:
+                      <h5 className="mt-0 font-weight-bold mb-2 h4"> Thời gian đặt:
                         <Moment format="DD/MM/YYYY">
                           {order.orderTime}
                         </Moment> </h5>
                       <p className="font-italic text-muted mb-0 small">Tổng cộng : {formatMoney(order.total)} VNĐ</p>
                       <div className="d-flex align-items-center mt-1">
-                        <h6 className="font-weight-bold my-2">Số lượng : {order.quantity}</h6>
-                        <h6 className="font-weight-bold my-2 ml-8">Trạng thái : <OrderStatus status={order.status} /></h6>
+                        <h6 className="font-weight-bold my-2 h5">Số lượng : {order.quantity}</h6>
+                        <h6 className="font-weight-bold my-2 ml-8 h5">Trạng thái : <OrderStatus status={order.status} /></h6>
 
 
                       </div>
