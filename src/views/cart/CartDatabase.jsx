@@ -191,7 +191,7 @@ function CartDatabase() {
                 {key[1].map((item) =>
                     <div>
                         <div style={{ display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center  ">
-                            <div className="col-md-2 col-lg-2 col-xl-2">
+                            <div className="col-md-2 col-lg-2 col-xl-2 img-mobie">
                                 <img
                                     src={item.product.photosImagePath}
                                     className="img-fluid rounded-3"
@@ -262,28 +262,26 @@ function CartDatabase() {
                         >
                             <div className="card-body p-0">
                                 <div className="row g-0">
-                                    <div className="col-lg-8">
-                                        <div className="p-5 mb-2">
+                                    <div className="col-lg-8 col-mobie">
+                                        <div className="p-5 mb-2 margin-right-mobie">
                                             <div className="d-flex justify-content-between align-items-center mb-5">
                                                 <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
                                                 <h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {arrayCart.length} </h6>
                                             </div>
                                             {
                                                 <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
-                                                    <div className="col-md-2 col-lg-2 col-xl-2">
-
-                                                    </div>
-                                                    <div className="col-md-3 col-lg-3 col-xl-3">
+                                                    
+                                                    <div className="col-md-3 col-lg-3 col-xl-3 title-mobie">
                                                         <h6 className="text-muted">Tên sản phẩm</h6>
                                                     </div>
-                                                    <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
+                                                    <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
                                                         <h6 className="text-muted">Số tháng thuê</h6>
                                                     </div>
                                                     {/* <div className="col-md-3 col-lg-3 col-xl-3">
                                                             <h6 className="text-muted">Description</h6>
                                                             <h6 className="text-black mb-0">{item.product.description}</h6>
                                                         </div> */}
-                                                    <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
+                                                    <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
                                                         <h6 className="text-muted">Giá tiền</h6>
                                                     </div>
                                                     <div className="col-md-1 col-lg-1 col-xl-1">
