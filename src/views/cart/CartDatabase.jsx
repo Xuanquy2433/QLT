@@ -11,6 +11,7 @@ import { formatMoney } from './../../common/formatMoney';
 import CartLocal from './CartLocal'
 import { API_START_COOL_DOWN } from 'utils/const'
 import { API_UPDATE_MONTH_CART } from './../../utils/const';
+import { showError } from 'utils/error'
 
 function CartDatabase() {
 
@@ -149,39 +150,44 @@ function CartDatabase() {
         getAllCart()
     }, [])
     const onClickRemoveItemCart = async (id) => {
-        console.log('id cart', id);
-        const response = await axios.put(API_CART_REMOVE + id, {}, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        if (response.status === 200) {
-            toast.success("Xoá thành công", { autoClose: 1000 })
-            getAllCart()
-            const responseCount = await axios.get(API_GET_CART, {
+        try {
+            console.log('id cart', id);
+            const response = await axios.put(API_CART_REMOVE + id, {}, {
                 headers: {
-                    'authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Authorization': `Bearer ${token}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             })
-            let arrayCart = []
-            Object.entries(responseCount.data).forEach(function (value, key) {
-                Object.entries(value[1]).forEach(function (value, key) {
-                    arrayCart.push(value[1])
+            if (response.status === 200) {
+                toast.success("Xoá thành công", { autoClose: 1000 })
+                getAllCart()
+                const responseCount = await axios.get(API_GET_CART, {
+                    headers: {
+                        'authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
                 })
-            })
-            localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
-            window.dispatchEvent(new Event("storage"));
+                let arrayCart = []
+                Object.entries(responseCount.data).forEach(function (value, key) {
+                    Object.entries(value[1]).forEach(function (value, key) {
+                        arrayCart.push(value[1])
+                    })
+                })
+                localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
+                window.dispatchEvent(new Event("storage"));
+            }
+        } catch (error) {
+            showError(error)
         }
     }
 
     function renderMap(key) {
         return (
             <>
-                <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[0].name} đến {JSON.parse(key[0])[1].name}</div>
+                {JSON.parse(key[0]).length >= 2 ? <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[0].name} đến {JSON.parse(key[0])[0].name}</div> :
+                    <div>Đường: {JSON.parse(key[0])[0].addressName}</div>}
                 {key[1].map((item) =>
                     <div>
                         <div style={{ display: "flex", flexDirection: "row", width: "100%", borderBottom: '1px solid #ddd' }} className="row mb-4 d-flex justify-content-between align-items-center  ">
