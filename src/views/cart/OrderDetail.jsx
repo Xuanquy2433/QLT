@@ -159,7 +159,7 @@ function OrderDetail() {
     useEffect(() => {
         setSize(size)
         getAllOderDetail();
-    }, [size,id])
+    }, [size, id])
 
     const [bank, setBank] = React.useState('mbbank');
 
@@ -171,7 +171,7 @@ function OrderDetail() {
         <div style={{ backgroundColor: 'white' }}>
             <UserSize changeUserCount={(data) => setSize(data)} />
             <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
-                <div style={{ width: '1000px' }} >
+                <div style={{ width: '100%', maxWidth: "1000px" }} >
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col">
                             <div className="card">
