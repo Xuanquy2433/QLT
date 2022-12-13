@@ -79,11 +79,11 @@ const Profile = () => {
     if (data.email === "" || null) {
       toast.warning("Email không được để trống", { autoClose: 1500 })
       setOpen(true)
-    } else if (data.firstName === "" || null) {
-      toast.warning("Họ không được để trống", { autoClose: 1500 })
+    } else if (data.firstName === "" || null || data.firstName.length < 2) {
+      toast.warning("Họ không được để trống hoặc ít hơn 2 ký tự", { autoClose: 1500 })
       setOpen(true)
-    } else if (data.firstName === "" || null) {
-      toast.warning("Tên không được để trống", { autoClose: 1500 })
+    } else if (data.lastName === "" || null || data.lastName.length < 2) {
+      toast.warning("Tên không được để trống hoặc ít hơn 2 ký tự", { autoClose: 1500 })
       setOpen(true)
     } else {
       try {
@@ -196,7 +196,7 @@ const Profile = () => {
               <CardBody style={{ height: 404 }} className="pt-0 pt-md-4">
                 <Row>
                   <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
+                    {/* <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                       <div>
                         <span className="heading">22</span>
                         <span className="description">Friends</span>
@@ -209,7 +209,7 @@ const Profile = () => {
                         <span className="heading">89</span>
                         <span className="description">Comments</span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </Row>
                 <div className="text-center">
