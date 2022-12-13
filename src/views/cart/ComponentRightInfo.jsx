@@ -119,7 +119,7 @@ function ComponentRightInfo({ reOrder, data, renderer, checkout, isConfirm, valu
 
                         </form>
                         {data.status === 'NEW' ? <div style={{ color: 'yellow' }}>
-                            Vui lòng thanh toán trước: <Moment style={{ marginRight: '5px' }} format="hh:mm  DD/MM/YYYY">{data.cancelTime}</Moment>.
+                            Vui lòng thanh toán trước: <Moment style={{ marginRight: '5px' }} format="hh[ giờ] : mm[ phút] [ngày] DD/MM/YYYY">{data.cancelTime}</Moment>.
                             {/* <Countdown date={Date.now() + 3602000} renderer={renderer} /> */}
                             <h5 className='mt-3' style={{ color: 'yellow', marginTop: '5px' }}> Vui lòng liên hệ <span style={{ color: 'white' }}>0982.123.12 </span> để gia hạn thêm thời gian chờ.</h5>
                         </div> : ''}
