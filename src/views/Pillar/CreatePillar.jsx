@@ -15,7 +15,7 @@ import {
 } from "../../utils/const";
 import Map from "./MapPillar";
 
-export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dataCategory, added }) {
+export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dataCategory, added, isLoading }) {
     const [addressPoint, setAddressPoint] = useState([])
 
     const [lat, setLat] = useState(0)
@@ -233,8 +233,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
                     <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
                         Đóng
                     </Button>
-                    <Button onClick={onClickAdd} type='submit' variant="contained" color="success">
-                        Thêm
+                    <Button disabled={isLoading} onClick={onClickAdd} type='submit' variant="contained" color="success">
+                        {isLoading ? "Xin chờ..." : "Thêm"}
                     </Button>
                 </div>
 

@@ -36,6 +36,7 @@ function AdminProduct() {
   const [randomNumber, setRandomNumber] = useState(0)
   const handleOpenDelete = () => setOpenDelete(true);
   const handleCloseDelete = () => setOpenDelete(false);
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     getAllProduct()
     getAddress()
@@ -136,6 +137,7 @@ function AdminProduct() {
       toast.warning("Không được để trống chú thích", { autoClose: 1500 })
     }
     else {
+      setIsLoading(true)
       try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
@@ -149,10 +151,13 @@ function AdminProduct() {
           setOpen(false)
           getAllProduct()
           setRandomNumber(Math.floor(Math.random() * (999)))
+          setIsLoading(false)
           setData({
+            addressId: null,
             description: "",
             status: "AVAILABLE",
             multipartFile: '',
+            categoryId: null,
             name: "",
             price: 0,
             lat: 0,
@@ -163,6 +168,7 @@ function AdminProduct() {
         }
 
       } catch (error) {
+        setIsLoading(false)
         if (error.response.data.message) {
           toast.error(`${error.response.data.message}`, {
             autoClose: 2000
@@ -198,6 +204,7 @@ function AdminProduct() {
       toast.warning("Không được để trống chú thích", { autoClose: 1500 })
     }
     else {
+      setIsLoading(true)
       try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
@@ -213,10 +220,12 @@ function AdminProduct() {
           setRandomNumber(Math.floor(Math.random() * (999)))
           setOpenEdit(true)
           setSelected(null)
+          setIsLoading(false)
         }
 
         //catch show error
       } catch (error) {
+        setIsLoading(false)
         console.log(error.response.data)
         if (error.response.data.message) {
           toast.error(`${error.response.data.message}`, {
@@ -265,8 +274,8 @@ function AdminProduct() {
   }
   return (
     <div>
-      <CreatePillar dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
-      {selected && <EditPillar dataCategory={dataCategory} item={selected} setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber} />}
+      <CreatePillar isLoading={isLoading} dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
+      {selected && <EditPillar isLoading={isLoading} dataCategory={dataCategory} item={selected} setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber} />}
       <Pillar page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages} handleChangeRowsPerPage={handleChangeRowsPerPage}
         openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />

@@ -14,7 +14,7 @@ import {
     API_GET_ADDRESS_POINT_BY_ID
 } from "../../utils/const";
 
-export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory, updated, setClickedProduct }) {
+export default function EditPillar({ isLoading, item, dataAddress, openEdit, setOpenEdit, onSubmitEdit, dataCategory, updated, setClickedProduct }) {
     const [selected, setSelected] = useState({
         num1: 0,
         num2: 0,
@@ -196,7 +196,8 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
             >
                 <h2 style={{ textAlign: 'center' }}>Sửa thông tin trụ</h2>
                 <div className='modal-contents'>
-                    <div style={{ display: 'flex', flexDirection: "column",maxHeight:"100%",
+                    <div style={{
+                        display: 'flex', flexDirection: "column", maxHeight: "100%",
                         overflowY: "scroll",
                         overflowX: "hidden",
 
@@ -278,7 +279,7 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                                             className={dataEdit.num1 === item.number ? "point selected" : "point"}
                                         >
                                             {item.name ? item.name + " " : ""} -
-                                            {addressPoint[index + 1].name ? " " + addressPoint[index + 1].name  : ""}
+                                            {addressPoint[index + 1].name ? " " + addressPoint[index + 1].name : ""}
                                         </div> : null
                                     }
                                 </div>
@@ -307,8 +308,8 @@ export default function EditPillar({ item, dataAddress, openEdit, setOpenEdit, o
                     <Button sx={{ marginRight: "5px" }} onClick={handleClose} variant="contained" color="success">
                         Đóng
                     </Button>
-                    <Button onClick={onClickEdit} variant="contained" color="success">
-                        Sửa
+                    <Button disabled={isLoading} onClick={onClickEdit} variant="contained" color="success">
+                        {isLoading ? "Xin chờ..." : "Sửa"}
                     </Button>
                 </div>
             </Box>

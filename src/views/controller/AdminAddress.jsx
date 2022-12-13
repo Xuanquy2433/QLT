@@ -28,7 +28,7 @@ export default function AdminPillar() {
   const handleOpenDelete = () => setOpenDelete(true);
   const handleCloseDelete = () => setOpenDelete(false);
   const [pageCRUD, setPageCRUD] = React.useState(1);
-
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     fetchAPI()
   }, [])
@@ -92,6 +92,7 @@ export default function AdminPillar() {
       toast.warning("Đường không được để trống", { autoClose: 1500 });
     }
     else {
+      setIsLoading(true)
       try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
@@ -103,6 +104,8 @@ export default function AdminPillar() {
           toast.success("Thêm thành công", { autoClose: 1500 });
           setOpenEdit(false);
           fetchAPI();
+          setIsLoading(false)
+
           setDataAddress({
             city: '',
             street: '',
@@ -114,6 +117,7 @@ export default function AdminPillar() {
 
         //catch show error
       } catch (error) {
+        setIsLoading(false)
         console.log(error.response.data)
         if (error.response.data.message) {
           toast.error(`${error.response.data.message}`, {
@@ -153,6 +157,7 @@ export default function AdminPillar() {
       toast.warning("Đường không được để trống", { autoClose: 1500 });
     }
     else {
+      setIsLoading(true)
       try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
@@ -163,11 +168,14 @@ export default function AdminPillar() {
         if (response && response.status === 201) {
           toast.success("Cập nhập thành công", { autoClose: 1500 });
           fetchAPIWhenCRUD();
+          setIsLoading(false)
           setOpenEdit(false)
         }
 
         //catch show error
       } catch (error) {
+        setIsLoading(false)
+
         console.log(error.response.data)
         if (error.response.data.message) {
           toast.error(`${error.response.data.message}`, {
@@ -240,8 +248,8 @@ export default function AdminPillar() {
 
   return (
     <div>
-      <CreateAddress onSubmit={onSubmit} open={open} setOpen={setOpen} />
-      {selected && <EditAddress item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
+      <CreateAddress isLoading={isLoading} onSubmit={onSubmit} open={open} setOpen={setOpen} />
+      {selected && <EditAddress isLoading={isLoading} item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
       <Address search={search} open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
         page={page} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} rowsPerPage={rowsPerPage}
         openDelete={openDelete} setOpenDelete={setOpenDelete} handleOpenDelete={handleOpenDelete} handleCloseDelete={handleCloseDelete} />

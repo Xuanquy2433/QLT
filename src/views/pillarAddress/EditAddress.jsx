@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }) {
+export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit, isLoading }) {
 
   const handleCloseEdit = () => setOpenEdit(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -86,8 +86,8 @@ export default function EditPillar({ openEdit, setOpenEdit, item, onSubmitEdit }
             <Button sx={{ marginRight: "5px" }} onClick={handleCloseEdit} variant="contained" color="success">
               Đóng
             </Button>
-            <Button onClick={onClickEdit} variant="contained" color="success">
-              Xác nhận
+            <Button disabled={isLoading} onClick={onClickEdit} variant="contained" color="success">
+              {isLoading ? "Xin chờ..." : "Xác nhận"}
             </Button>
           </div>
         </Box>
