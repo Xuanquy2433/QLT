@@ -83,7 +83,7 @@ const Login = () => {
 
             for (let i = arrLocations.length - 2; i < arrLocations.length; i--) {
               console.log(arrLocations[i]);
-              if (arrLocations[i] === "/auth/register") {
+              if (arrLocations[i] === "/auth/register" || "/auth/login") {
                 history.replace({ pathname: '/auth/homePage' })
                 break
               } else if (arrLocations[i] !== "/auth/register" || arrLocations[i] !== "/auth/login") {
