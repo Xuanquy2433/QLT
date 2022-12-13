@@ -175,9 +175,9 @@ export default function WishList() {
                                                     <TableCell align="center">{formatMoney(item.price)}</TableCell>
                                                     <TableCell align="center">{item.category.name}</TableCell>
                                                     <TableCell align="center">{item.address.fullAddress}</TableCell>
-                                                    {item.status === 'AVAILABLE' ? <TableCell align="center" sx={{ color: 'green' }}>Có sẵn</TableCell> : null}
-                                                    {item.status === 'HIRING' ? <TableCell align="center" sx={{ color: 'red' }}>Đã cho thuê</TableCell> : null}
-                                                    {item.status !== 'HIRING' || item.status !== 'AVAILABLE' ? <TableCell align="center" sx={{ color: 'red' }}>{item.status}</TableCell> : null}
+                                                    {item.status === 'AVAILABLE' ? <TableCell align="center" sx={{ color: 'green',fontWeight: '600' }}>Có sẵn</TableCell> : null}
+                                                    {item.status === 'HIRING' ? <TableCell align="center" sx={{ color: 'red',fontWeight: '600' }}>Đã cho thuê</TableCell> : null}
+                                                    {item.status !== 'HIRING' && item.status !== 'AVAILABLE' ? <TableCell align="center">{item.status}</TableCell> : null}
 
                                                     <TableCell align="right">
                                                         <div className='parent' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
