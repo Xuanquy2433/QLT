@@ -266,7 +266,7 @@ function Activity() {
                         <TabList textColor='white' onChange={handleChange} aria-label="lab API tabs example ">
                             <Tab label="Đơn hàng đã đặt " value="1" />
                             <Tab label="Trụ đang thuê" value="2" />
-                            <Tab label="Trụ đã sắp hết hạn" value="3" />
+                            <Tab label="Trụ sắp hết hạn" value="3" />
                             <Tab label="Trụ đã hết hạn" value="4" />
                         </TabList>
                     </Box>
