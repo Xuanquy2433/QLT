@@ -159,7 +159,7 @@ function CartLocal() {
     }
     return (
         <React.Fragment>
-            <section className="h-custom" style={{ backgroundColor: "white", height: '50vh', marginBottom: '10px' }}>
+            <section className="h-custom" style={{ backgroundColor: "white", height: '', marginBottom: '10px' }}>
                 <div style={{ backgroundColor: 'white' }}>
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-12">

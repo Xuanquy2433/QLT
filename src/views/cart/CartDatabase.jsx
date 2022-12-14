@@ -252,7 +252,7 @@ function CartDatabase() {
     }
 
     return (
-        <section className="h-custom" style={{ backgroundColor: "white", height: '50vh', marginBottom: '10px', borderRadius: '15px 0 0 15px' }}>
+        <section className="h-custom" style={{ backgroundColor: "white", height: '', marginBottom: '10px', borderRadius: '15px 0 0 15px' }}>
             <div style={{ backgroundColor: 'white', borderRadius: '15px 0 0 15px' }}>
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12">
