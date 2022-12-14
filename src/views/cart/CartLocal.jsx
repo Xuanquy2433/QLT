@@ -271,20 +271,8 @@ function CartLocal() {
                                             </div>
                                         </div>
                                         <div className="col-lg-4 bg-grey">
-                                            <div style={{ marginTop: '50px' }} className="p-5">
-                                                {/* <h5 className="text-uppercase mb-3">Mã giảm giá</h5>
-                                                <div className="mb-5">
-                                                    <div className="form-outline">
-                                                        <input
-                                                            type="text"
-                                                            id="form3Examplea2"
-                                                            className="form-control form-control-lg"
-                                                        />
-                                                        <label className="form-label mt-2" htmlFor="form3Examplea2">
-                                                            Nhập mã của bạn
-                                                        </label>
-                                                    </div>
-                                                </div> */}
+                                            <div className="p-5">
+
                                                 <hr className="my-4" />
 
                                                 <div className="d-flex justify-content-between mb-5">

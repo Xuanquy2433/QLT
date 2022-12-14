@@ -252,7 +252,7 @@ function CartDatabase() {
     }
 
     return (
-        <section className="h-custom" style={{ backgroundColor: "white", height: '50vh', marginBottom: '80px', borderRadius: '15px 0 0 15px' }}>
+        <section className="h-custom" style={{ backgroundColor: "white", height: '50vh', marginBottom: '10px', borderRadius: '15px 0 0 15px' }}>
             <div style={{ backgroundColor: 'white', borderRadius: '15px 0 0 15px' }}>
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12">
@@ -270,7 +270,7 @@ function CartDatabase() {
                                             </div>
                                             {
                                                 <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
-                                                    
+
                                                     <div className="col-md-3 col-lg-3 col-xl-3 title-mobie">
                                                         <h6 className="text-muted">Tên sản phẩm</h6>
                                                     </div>
@@ -311,7 +311,7 @@ function CartDatabase() {
                                         </div>
                                     </div>
                                     <div className="col-lg-4 bg-grey">
-                                        <div style={{ marginTop: '50px' }} className="p-5">
+                                        <div className="p-5">
                                             <hr className="my-4" />
 
                                             <div className="d-flex justify-content-between mb-5">
