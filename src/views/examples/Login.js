@@ -143,7 +143,6 @@ const Login = () => {
       }
     }
   }
-  console.log("is load ", isLoading);
   const styledBtn = styled.input`
   border:none;
   `
