@@ -77,7 +77,7 @@ function CartDatabase() {
     // const [idOrder, setIdOrder] = useState()
     const clickOrder = async () => {
         // setBtnOrders('Vui lòng chờ...')
-        // setBtnDisabled(true)
+        setBtnDisabled(true)
         try {
             if (token) {
                 const response = await axios.post(API_PLACE_ORDER, {}, {
@@ -98,7 +98,7 @@ function CartDatabase() {
                         history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))
                     }, 2000);
 
-                    setBtnDisabled(true);
+                    setBtnDisabled(false);
                 };
                 // setBtnOrders('Vui lòng chờ...')
             } else {
@@ -319,7 +319,8 @@ function CartDatabase() {
                                                 <h5>{formatMoney(sum)}</h5>
                                             </div>
 
-                                            {token && decoded ? <button
+                                            {arrayCart.length > 0 ?
+                                             token && decoded ? <button
                                                 style={{ marginTop: '120px' }}
                                                 disabled={btnDisabled}
                                                 type="button"
@@ -332,7 +333,8 @@ function CartDatabase() {
 
                                             </button> : <NavLink to={'/auth/login'}> <button type="button"
                                                 className="btn btn-dark btn-block btn-lg"
-                                                data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>}
+                                                data-mdb-ripple-color="dark">Vui lòng đăng nhập để thuê trụ ! </button> </NavLink>: null}
+                                           
                                             <div className="hide">Nếu bạn muốn thanh toán trực tiếp tại doanh nghiệp, bạn chỉ cần nhấn đặt đơn hàng ở đây và không thao tác gì thêm !!!</div>
                                         </div>
                                     </div>
