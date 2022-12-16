@@ -25,6 +25,7 @@ import './login.css'
 import { API_ADD_CART_LOCAL } from "utils/const";
 import { API_GET_CART } from "utils/const";
 import { forEach } from "lodash";
+import { showError } from "utils/error";
 
 const Login = () => {
   const history = useHistory();
@@ -42,7 +43,6 @@ const Login = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
     if (data.phoneNumber === '') {
       toast.error('Số điện thoại không được trống', {
         autoClose: 2000
@@ -52,12 +52,8 @@ const Login = () => {
         autoClose: 2000
       })
     }
-    else if (data.password.length < 8) {
-      toast.error('Mật khẩu phải lớn hơn 8 kí tự', {
-        autoClose: 2000
-      })
-    }
     else {
+      setIsLoading(true)
       try {
         const response = await axios.post(API_SIGNIN, data);
         if (response && response.status === 200) {
@@ -143,36 +139,11 @@ const Login = () => {
         };
       } catch (error) {
         setIsLoading(false)
-
-        console.log(error.response.data)
-        if (error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-          setIsLoading(false)
-        }
-        else if (error.response.data.error) {
-          toast.error(`${error.response.data.error}`, {
-            autoClose: 2000
-          })
-          setIsLoading(false)
-        }
-        else if (error.response.data.error && error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-          setIsLoading(false)
-        }
-        else {
-          toast.error('Error', {
-            autoClose: 2000
-          })
-          setIsLoading(false)
-        }
+        showError(error)
       }
     }
   }
-
+  console.log("is load ", isLoading);
   const styledBtn = styled.input`
   border:none;
   `
