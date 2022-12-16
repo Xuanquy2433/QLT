@@ -42,7 +42,6 @@ const Login = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
     if (data.phoneNumber === '') {
       toast.error('Số điện thoại không được trống', {
         autoClose: 2000
@@ -52,12 +51,8 @@ const Login = () => {
         autoClose: 2000
       })
     }
-    else if (data.password.length < 8) {
-      toast.error('Mật khẩu phải lớn hơn 8 kí tự', {
-        autoClose: 2000
-      })
-    }
     else {
+      setIsLoading(true)
       try {
         const response = await axios.post(API_SIGNIN, data);
         if (response && response.status === 200) {
