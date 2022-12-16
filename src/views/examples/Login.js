@@ -37,11 +37,12 @@ const Login = () => {
   if (token !== null) {
     decoded = jwt_decode(token);
   }
-
+  const [isLoading, setIsLoading] = useState(false);
   let arrLocations = JSON.parse(localStorage.getItem("locations"));
-  console.log("arrLocations", arrLocations);
+
   const onLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     if (data.phoneNumber === '') {
       toast.error('Số điện thoại không được trống', {
         autoClose: 2000
@@ -65,6 +66,7 @@ const Login = () => {
           toast.success('Đăng nhập thành công', {
             autoClose: 1500
           })
+          setIsLoading(false)
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
             //check role user
             if (localStorage.getItem('countCart') == null) {
@@ -140,26 +142,32 @@ const Login = () => {
 
         };
       } catch (error) {
+        setIsLoading(false)
+
         console.log(error.response.data)
         if (error.response.data.message) {
           toast.error(`${error.response.data.message}`, {
             autoClose: 2000
           })
+          setIsLoading(false)
         }
         else if (error.response.data.error) {
           toast.error(`${error.response.data.error}`, {
             autoClose: 2000
           })
+          setIsLoading(false)
         }
         else if (error.response.data.error && error.response.data.message) {
           toast.error(`${error.response.data.message}`, {
             autoClose: 2000
           })
+          setIsLoading(false)
         }
         else {
           toast.error('Error', {
             autoClose: 2000
           })
+          setIsLoading(false)
         }
       }
     }
@@ -280,8 +288,8 @@ const Login = () => {
                 </label>
               </div> */}
               <div className="text-center">
-                <Button style={{ width: "100%" }} className="my-4" color="primary" type="submit" onClick={(e) => onLogin(e)}>
-                  Đăng nhập
+                <Button disabled={isLoading} style={{ width: "100%" }} className="my-4" color="primary" type="submit" onClick={(e) => onLogin(e)}>
+                  {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
                 </Button>
               </div>
             </Form>
