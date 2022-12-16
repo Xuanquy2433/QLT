@@ -47,13 +47,10 @@ const Login = () => {
       toast.error('Số điện thoại không được trống', {
         autoClose: 2000
       })
-      setIsLoading(false)
-
     } else if (data.password === '') {
       toast.error('Mật khẩu không được để trống', {
         autoClose: 2000
       })
-      setIsLoading(false)
     }
     else {
       setIsLoading(true)
