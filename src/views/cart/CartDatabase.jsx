@@ -241,7 +241,7 @@ function CartDatabase() {
                             style={{ borderRadius: 15 }}
                         >
                             <div className="card-body p-0">
-                                <div className="row g0">
+                                <div className="row g-0">
                                     <div className="col-lg-8 col-mobie">
                                         <div className="p-5 mb-2 margin-right-mobie">
                                             <div className="d-flex justify-content-between align-items-center mb-5">

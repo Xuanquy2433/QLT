@@ -168,7 +168,7 @@ function CartLocal() {
                                 style={{ borderRadius: 15 }}
                             >
                                 <div className="card-body p-0">
-                                    <div style={{ marginRight: "0 !important" }} className="row g-0">
+                                    <div className="row g-0">
                                         <div className="col-lg-8 col-mobie ">
                                             <div className="p-5 mb-2 margin-right-mobie">
                                                 <div className="d-flex justify-content-between align-items-center mb-5">
@@ -198,7 +198,7 @@ function CartLocal() {
                                                     <hr className="mb-3 mt-1" />
                                                     {dataLocal.length ? dataLocal.map((item, index) => (
                                                         <div key={index} style={{ display: "flex", flexDirection: "row", width: "100%" }} className="row mb-4 d-flex justify-content-between align-items-center">
-                                                            <div className="col-md-2 col-lg-2 col-xl-2 img-mobie">
+                                                            <div className="col-md-2 col-lg-2 col-xl-2">
                                                                 <img
                                                                     src={item.imageProduct}
                                                                     className="img-fluid rounded-3"
