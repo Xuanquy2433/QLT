@@ -257,11 +257,22 @@ function OrderPlace() {
 
     const confirmOrder = async (id) => {
         try {
-            const response = await axios.put(API_CONFIRM_ORDER + id + '/true')
+            const response = await
+                toast.promise(
+                    axios.put(API_CONFIRM_ORDER + id + '/true'),
+                    {
+                        pending: 'Đang xử lý ...',
+                        success: 'Thao tác thành công',
+                    },
+                    {
+                        autoClose: 2000
+                    }
+                );
+
             if (response.status === 200) {
-                toast.success('Thao tác thành công ! ', { autoClose: 2000 })
+                // toast.success('Thao tác thành công ! ', { autoClose: 2000 })
                 getOrderUserConfirmed()
-            } else toast.error('Thất bại ! ', { autoClose: 2000 })
+            }
         } catch (error) {
             showError(error)
         }
