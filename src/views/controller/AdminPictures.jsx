@@ -29,6 +29,8 @@ export default function AdminPictures() {
     const [openDelete, setOpenDelete] = useState(false)
     const handleOpenDelete = () => setOpenDelete(true);
     const handleCloseDelete = () => setOpenDelete(false);
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
         fetchAPI()
     }, [])
@@ -58,6 +60,7 @@ export default function AdminPictures() {
         // if (data.category === '') {
         //     data.category = 'banner'
         // }
+        setIsLoading(true)
         try {
             const formData = new FormData();
             formData.append('image', data.image);
@@ -69,17 +72,20 @@ export default function AdminPictures() {
                 toast.success("Thêm thành công", { autoClose: 1500 })
                 setOpen(false)
                 fetchAPI()
+                setIsLoading(false)
                 // setData({
                 //     category: "",
                 //     image: "",
                 // })
             }
         } catch (error) {
+            setIsLoading(false)
             showError(error)
         }
     }
 
     const onSubmitEdit = async (data) => {
+        setIsLoading(true)
         try {
             const formData = new FormData();
             formData.append('image', data.image);
@@ -90,11 +96,13 @@ export default function AdminPictures() {
             if (response && response.status === 200) {
                 toast.success("Sửa thành công", { autoClose: 1500 })
                 fetchAPI();
+                setIsLoading(false)
                 setOpenEdit(false)
             }
 
             //catch show error
         } catch (error) {
+            setIsLoading(false)
             showError(error)
         }
     }
@@ -123,8 +131,8 @@ export default function AdminPictures() {
         <div>
             <Picture search={search} data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
-            <AddPictures open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
-            {selected && <EditPictures data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
+            <AddPictures isLoading={isLoading} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
+            {selected && <EditPictures isLoading={isLoading} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
         </div>
     )
 }

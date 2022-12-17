@@ -158,7 +158,7 @@ export default function Picture({ data, setOpen, search, onEdit, onDelete }) {
                                             </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}>  {item.image} </TableCell>
                                             <TableCell sx={{ textAlign: 'center' }}> {item.category}</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}> <Switch {...label} checked={item.active} color="secondary" /></TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}> <Switch {...label} disabled checked={item.active} color="secondary" /></TableCell>
                                             {/* <TableCell sx={{ textAlign: 'center', display: "flex", justifyContent: "space-around" }}>
                                                 <DeleteIcon sx={{ cursor: 'pointer', marginRight: '39%' }} onClick={e => {
                                                     handleClickOpenConfirm()
