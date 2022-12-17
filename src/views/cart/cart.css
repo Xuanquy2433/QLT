@@ -69,7 +69,7 @@
     .col-mobie {
         padding: 0;
         position: relative;
-        width: auto !important;
+        /* width: auto !important; */
     }
     .img-mobie {
         width: 100px;
@@ -99,7 +99,7 @@
     .col-mobie {
         padding: 0;
         position: relative;
-        width: auto !important;
+        /* width: auto !important; */
     }
     .img-mobie {
         width: 100px;
