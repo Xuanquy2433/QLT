@@ -29,9 +29,9 @@
     padding-right: 0 !important;
 }
 
-.row {
+.h-custom  .row .card-body .g-0 {
     /* margin: auto; */
-    margin-left: -15px;
+    margin:0px !important;
 }
 
 .hide {
@@ -47,8 +47,11 @@
 }
 
 @media (min-width: 0px) and (max-width: 768px) {
+    .fw-bold{
+        font-size: 30px;
+    }
     .container-mobie {
-        width: 100% !important;
+        /* width: 100% !important; */
     }
     /* .row {
         display: block;
