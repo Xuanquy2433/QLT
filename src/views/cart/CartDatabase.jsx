@@ -173,7 +173,7 @@ function CartDatabase() {
     function renderMap(key) {
         return (
             <>
-                {JSON.parse(key[0]).length >= 2 ? <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[0].name} đến {JSON.parse(key[0])[0].name}</div> :
+                {JSON.parse(key[0]).length >= 2 ? <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[1].name} đến {JSON.parse(key[0])[0].name}</div> :
                     <div>Đường: {JSON.parse(key[0])[0].addressName}</div>}
                 {key[1].map((item) =>
                     <div>
@@ -264,10 +264,6 @@ function CartDatabase() {
                                                     <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
                                                         <h6 className="text-muted">Số tháng thuê</h6>
                                                     </div>
-                                                    {/* <div className="col-md-3 col-lg-3 col-xl-3">
-                                                            <h6 className="text-muted">Description</h6>
-                                                            <h6 className="text-black mb-0">{item.product.description}</h6>
-                                                        </div> */}
                                                     <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
                                                         <h6 className="text-muted">Giá tiền</h6>
                                                     </div>
