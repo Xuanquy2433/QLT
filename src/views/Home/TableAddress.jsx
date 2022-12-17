@@ -249,7 +249,7 @@ function TableAddress() {
                                         {/* <p>Mô tả: {item.description}</p> */}
                                         <p style={{ marginBottom: "5px" }}>Giá từ: <span style={{ margin: "0", fontSize: '20px', fontWeight: '600' }}>{formatMoney(item.minPrice)}</span> </p>
                                         <p style={{ marginBottom: "10px", }}>Trụ còn trống: <span style={{ margin: "0", color: 'red' }}>{item.totalProductAvailable}</span>/{item.totalProduct}</p>
-                                        <p style={{ fontSize: '0.9em', fontWeight: '600' }}>{item.city} City</p>
+                                        <p style={{ fontSize: '0.9em', fontWeight: '600' }}>{item.city} </p>
                                         <NavLink to={'/auth/address/' + item.id}>
                                             <Button className='btn-custom-product' sx={{
                                                 // mt:5,

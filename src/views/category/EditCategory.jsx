@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export default function EditCategory({ openEdit, setOpenEdit, item, onSubmitEdit }) {
+export default function EditCategory({ openEdit, setOpenEdit, item, onSubmitEdit, isLoading }) {
     const { name, description } = item;
     const [data, setData] = useState(item || {
         name: item.name || "",
@@ -50,8 +50,8 @@ export default function EditCategory({ openEdit, setOpenEdit, item, onSubmitEdit
                         }} sx={{ marginRight: "5px" }} variant="contained" color="success">
                             Đóng
                         </Button>
-                        <Button onClick={() => onSubmitEdit(data)} variant="contained" color="success">
-                            Sửa
+                        <Button disabled={isLoading} onClick={() => onSubmitEdit(data)} variant="contained" color="success">
+                            {isLoading ? "Xin chờ ..." : "Xác nhận"}
                         </Button>
                     </div>
 

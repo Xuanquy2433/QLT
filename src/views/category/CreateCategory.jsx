@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
+export default function CreateCategory({ open, setOpen, onSubmitAdd, isLoading }) {
     const [data, setData] = useState({
         name: "",
         description: ""
@@ -53,8 +53,8 @@ export default function CreateCategory({ open, setOpen, onSubmitAdd }) {
                         }} sx={{ marginRight: "5px" }} variant="contained" color="success">
                             Đóng
                         </Button>
-                        <Button onClick={onClickAdd} variant="contained" color="success">
-                            Thêm
+                        <Button disabled={isLoading} onClick={onClickAdd} variant="contained" color="success">
+                            {isLoading ? "Xin chờ ..." : "Xác nhận"}
                         </Button>
                     </div>
 

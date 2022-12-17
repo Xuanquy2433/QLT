@@ -8,6 +8,7 @@ import { API_CLICK_SEARCH_ADDRESS } from 'utils/const'
 import { API_ADD_PILLAR } from 'utils/const'
 import { API_DELETE_PILLAR } from 'utils/const'
 import { API_GET_PILLAR } from 'utils/const'
+import { showError } from 'utils/error'
 import Address from 'views/pillarAddress/Address'
 import CreateAddress from 'views/pillarAddress/CreateAddress'
 import EditAddress from 'views/pillarAddress/EditAddress'
@@ -118,27 +119,7 @@ export default function AdminPillar() {
         //catch show error
       } catch (error) {
         setIsLoading(false)
-        console.log(error.response.data)
-        if (error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error) {
-          toast.error(`${error.response.data.error}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error && error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else {
-          toast.error('Error', {
-            autoClose: 2000
-          })
-        }
+        showError(error)
       }
     }
 
@@ -175,28 +156,7 @@ export default function AdminPillar() {
         //catch show error
       } catch (error) {
         setIsLoading(false)
-
-        console.log(error.response.data)
-        if (error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error) {
-          toast.error(`${error.response.data.error}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error && error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else {
-          toast.error('Error', {
-            autoClose: 2000
-          })
-        }
+        showError(error)
       }
     }
   }
@@ -211,28 +171,7 @@ export default function AdminPillar() {
       }
       //catch show error
     } catch (error) {
-      console.log(error.response.data)
-      if (error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error) {
-        toast.error(`${error.response.data.error}`, {
-          autoClose: 2000
-        })
-      }
-      else if (error.response.data.error && error.response.data.message) {
-        toast.error(`${error.response.data.message}`, {
-          autoClose: 2000
-        })
-      }
-      else {
-        toast.error('Error', {
-          autoClose: 2000
-        })
-      }
-
+      showError(error)
     }
   }
 
