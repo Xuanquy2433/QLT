@@ -25,7 +25,7 @@ export default function AdminCategory() {
 
     const [openEdit, setOpenEdit] = React.useState(false)
     const handleCloseEdit = () => setOpenEdit(false)
-
+    const [isLoading, setIsLoading] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const handleOpenDelete = () => setOpenDelete(true);
     const handleCloseDelete = () => setOpenDelete(false);
@@ -83,10 +83,12 @@ export default function AdminCategory() {
                 toast.warning("Mô tả không được để trống", { autoClose: 1500 });
 
             } else {
+                setIsLoading(true)
                 const response = await axios.post(API_ADD_CATEGORY, data)
                 if (response && response.status === 201) {
                     toast.success("Thêm thành công", { autoClose: 1500 })
                     setOpen(false)
+                    setIsLoading(false)
                     fetchAPI()
                     setData({
                         name: "",
@@ -95,6 +97,7 @@ export default function AdminCategory() {
                 }
             }
         } catch (error) {
+            setIsLoading(false)
             showError(error)
         }
     }
@@ -108,15 +111,18 @@ export default function AdminCategory() {
                 toast.warning("Mô tả không được để trống", { autoClose: 1500 });
 
             } else {
+                setIsLoading(true)
                 const response = await axios.put(API_EDIT_CATEGORY, data)
                 if (response && response.status === 201) {
                     toast.success("Sửa thành công", { autoClose: 1500 })
                     fetchAPIWhenCRUD();
                     setOpenEdit(false)
+                    setIsLoading(false)
                 }
             }
             //catch show error
         } catch (error) {
+            setIsLoading(false)
             showError(error)
         }
     }
@@ -138,8 +144,8 @@ export default function AdminCategory() {
     }
     return (
         <div>
-            {selected && <EditCategory item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
-            <CreateCategory open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
+            {selected && <EditCategory isLoading={isLoading} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
+            <CreateCategory isLoading={isLoading} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
             <Category totalPages={totalPages} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} page={page} rowsPerPage={rowsPerPage} data={data} search={search} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
         </div>
