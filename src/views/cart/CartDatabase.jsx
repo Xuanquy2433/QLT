@@ -80,23 +80,30 @@ function CartDatabase() {
         setBtnDisabled(true)
         try {
             if (token) {
-                const response = await axios.post(API_PLACE_ORDER, {}, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                });
+                const response = await
+                    toast.promise(
+                        axios.post(API_PLACE_ORDER, {}, {
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            }
+                        }),
+                        {
+                            pending: 'Hệ thống đang xử lý ...',
+                            success: 'Đặt trụ thành công ',
+                        },
+                        { autoClose: 2000 }
+                    );
+
                 if (response && response.status === 200) {
-                    toast.success('Đặt trụ thành công', {
-                        autoClose: 1500
-                    })
+                    // toast.success('Đặt trụ thành công', {
+                    //     autoClose: 1500
+                    // })
                     localStorage.setItem('countCart', JSON.stringify(0));
                     window.dispatchEvent(new Event("storage"));
                     const responseCoolDown = await axios.get(API_START_COOL_DOWN + response.data.message.replace(/\D/g, ""))
-                    setTimeout(() => {
-                        history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))
-                    }, 2000);
+                    history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))
                     setBtnDisabled(false);
                 };
                 // setBtnOrders('Vui lòng chờ...')
@@ -270,7 +277,7 @@ function CartDatabase() {
                                             <div className='scrollbar' style={{ boxShadow: 'none' }} id='style-1' >
                                                 <hr className="mb-3 mt-1" />
 
-                                                {data.length > 0 ? Object.entries(data).map((key, value) => (
+                                                {arrayCart.length > 0 ? Object.entries(data).map((key, value) => (
                                                     <>
                                                         {renderMap(key)}
                                                     </>
