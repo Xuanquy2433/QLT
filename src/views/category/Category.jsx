@@ -22,6 +22,7 @@ import { data } from 'jquery';
 import { OndemandVideoTwoTone, SettingsPowerRounded } from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import AddIcon from '@mui/icons-material/Add';
+import './category.css'
 const columns = [
     { id: 'Id', label: 'Id', minWidth: 10, maxWidth: 70 },
     {
@@ -49,7 +50,7 @@ const columns = [
 
 ];
 
-export default function Category({ handleOpenDelete, search, openDelete, handleCloseDelete, data, setOpen, onEdit, onDelete, totalPages, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage }) {
+export default function Category({ showLoading, isLoading, handleOpenDelete, search, openDelete, handleCloseDelete, data, setOpen, onEdit, onDelete, totalPages, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage }) {
     const handleOpen = () => setOpen(true);
     const [idDelete, setIdDelete] = React.useState(Number);
 
@@ -58,7 +59,7 @@ export default function Category({ handleOpenDelete, search, openDelete, handleC
     }
     return (
         <>
-            <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
+            <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 category">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
 
                     <Grid container spacing={1}>
@@ -128,7 +129,7 @@ export default function Category({ handleOpenDelete, search, openDelete, handleC
                                     aria-labelledby="modal-modal-title"
                                     aria-describedby="modal-modal-description"
                                 >
-                                  <Box className='form-add-address'
+                                    <Box className='form-add-address'
                                         sx={{
                                             width: '40%',
                                             position: 'relative',
@@ -146,7 +147,8 @@ export default function Category({ handleOpenDelete, search, openDelete, handleC
 
                                         <div style={{ display: "flex", justifyContent: "center", margin: "10px" }}>
                                             <button onClick={handleCloseDelete} style={{ width: "110px" }} type="button" className="btn btn-primary">Huỷ</button>
-                                            <button onClick={(e) => onDelete(idDelete)} style={{ width: "110px" }} type="button" className="btn btn-primary">Xác nhận</button>
+                                            <button disabled={isLoading} onClick={(e) => onDelete(idDelete)} style={{ width: "110px" }} type="button" className="btn btn-primary">  {isLoading ? "Xin chờ ..." : "Xác nhận"}</button>
+                                            {/* <div className="circle-loading"></div>  */}
                                         </div>
 
                                     </Box>
