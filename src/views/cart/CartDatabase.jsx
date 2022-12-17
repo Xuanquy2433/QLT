@@ -97,7 +97,6 @@ function CartDatabase() {
                     setTimeout(() => {
                         history.push('/auth/order/' + response.data.message.replace(/\D/g, ""))
                     }, 2000);
-
                     setBtnDisabled(false);
                 };
                 // setBtnOrders('Vui lòng chờ...')
@@ -108,27 +107,8 @@ function CartDatabase() {
                 history.push('/auth/login')
             }
         } catch (error) {
-            console.log(error.response.data)
-            if (error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error) {
-                toast.error(`${error.response.data.error}`, {
-                    autoClose: 2000
-                })
-            }
-            else if (error.response.data.error && error.response.data.message) {
-                toast.error(`${error.response.data.message}`, {
-                    autoClose: 2000
-                })
-            }
-            else {
-                toast.error('Error', {
-                    autoClose: 2000
-                })
-            }
+            setBtnDisabled(false);
+            showError(error)
         }
     }
 
@@ -295,7 +275,7 @@ function CartDatabase() {
                                                         {renderMap(key)}
                                                     </>
 
-                                                )) :  <div style={{width: '39%',margin:'auto'}}>Hiện chưa có trụ nào ! </div>}
+                                                )) : <div style={{ width: '39%', margin: 'auto' }}>Hiện chưa có trụ nào ! </div>}
                                             </div>
 
                                             {/* <hr className="my-4" /> */}
