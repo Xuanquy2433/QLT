@@ -114,7 +114,18 @@ const Index = (props) => {
 
 
   const overview = async (e) => {
-    const response = await axios.get(API_GET_OVERVIEW)
+    const response = await
+      toast.promise(
+        axios.get(API_GET_OVERVIEW),
+        {
+          pending: 'Đang xử lý ... ',
+        }, {
+        style: {
+          boxShadow: '5px 5px 20px 5px #black',
+        },
+      }
+      );
+
     if (response) {
       setDataOverview(response.data)
     }
@@ -305,9 +316,6 @@ const Index = (props) => {
   arr2.forEach(function (value, key) {
     dataArr.push(JSON.parse(value[0]))
   })
-
-  console.log('data ', arr2);
-  console.log('dataArr ', dataArr);
 
   useEffect(() => {
     overview()
