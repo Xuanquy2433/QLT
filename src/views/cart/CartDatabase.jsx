@@ -12,6 +12,9 @@ import CartLocal from './CartLocal'
 import { API_START_COOL_DOWN } from 'utils/const'
 import { API_UPDATE_MONTH_CART } from './../../utils/const';
 import { showError } from 'utils/error'
+import ReactLoading from 'react-loading';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 function CartDatabase() {
 
@@ -26,6 +29,7 @@ function CartDatabase() {
     }
 
     const getAllCart = async (e) => {
+        setLoading(true);
         const response = await axios.get(API_GET_CART, {
             headers: {
                 'authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -34,6 +38,8 @@ function CartDatabase() {
             }
         })
         if (response) {
+            setLoading(false)
+
             setData(response.data)
         }
     }
@@ -41,6 +47,7 @@ function CartDatabase() {
 
 
     const handleUpdateMonth = async (item) => {
+        setLoading(true)
         const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month + 1), {}, {
             headers: {
                 'authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -48,12 +55,17 @@ function CartDatabase() {
                 'Content-Type': 'application/json'
             }
         })
+        if (response.status === 200) {
+            setLoading(false)
+        }
         setShowDate(new Date(showDate.setMonth(showDate.getMonth() + 1)))
         getAllCart()
     }
 
     const handleMonth = async (item) => {
         if (item.month > 1) {
+            setLoading(true)
+
             const response = await axios.put(API_UPDATE_MONTH_CART + item.product.id + "?day=" + (item.month - 1), {}, {
                 headers: {
                     'authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -61,10 +73,14 @@ function CartDatabase() {
                     'Content-Type': 'application/json'
                 }
             })
-            setShowDate(new Date(showDate.setMonth(showDate.getMonth() - 1)))
+            if (response.status === 200) {
+                setLoading(false)
+            }
             getAllCart()
+            setShowDate(new Date(showDate.setMonth(showDate.getMonth() - 1)))
         }
     }
+    const [loading, setLoading] = useState(false)
 
     const showDate2 = (d1, d2) => {
         let date = new Date();
@@ -143,6 +159,7 @@ function CartDatabase() {
         getAllCart()
     }, [])
     const onClickRemoveItemCart = async (id) => {
+        setLoading(true)
         try {
             console.log('id cart', id);
             const response = await axios.put(API_CART_REMOVE + id, {}, {
@@ -162,6 +179,7 @@ function CartDatabase() {
                         'Content-Type': 'application/json'
                     }
                 })
+                setLoading(false)
                 let arrayCart = []
                 Object.entries(responseCount.data).forEach(function (value, key) {
                     Object.entries(value[1]).forEach(function (value, key) {
@@ -179,6 +197,26 @@ function CartDatabase() {
     function renderMap(key) {
         return (
             <>
+                <Modal
+                    open={loading}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignContent: "center",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            width: "100%",
+                            height: "100vh",
+                            // borderRadius: "10px"
+                        }}
+                    >
+                        <ReactLoading type="spinningBubbles" color="#ffffff" height={"5%"} width={"5%"} />
+                    </Box>
+
+                </Modal>
                 {JSON.parse(key[0]).length >= 2 ? <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[1].name} đến {JSON.parse(key[0])[0].name}</div> :
                     <div>Đường: {JSON.parse(key[0])[0].addressName}</div>}
                 {key[1].map((item) =>

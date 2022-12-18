@@ -35,6 +35,7 @@ import usePagination from 'views/pillarAddress/Pagination';
 import { formatMoney } from 'common/formatMoney';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
+import ReactLoading from 'react-loading';
 
 const style = {
     position: 'absolute',
@@ -79,8 +80,11 @@ function TableAddress() {
         onChangeSearchNew()
         // onclickFilter()
     };
+    const [loading, setLoading] = useState(false)
 
     const getAllAddRess = async (e) => {
+        setLoading(true)
+
         const response = await
             toast.promise(
                 axios.get(API_GET_ADDRESS + page + '?dataPerPage=6&sort=desc&sortField=totalProductAvailable'),
@@ -93,6 +97,7 @@ function TableAddress() {
             }
             );
         if (response) {
+            setLoading(false)
             setData(response.data.contents)
             setDataInfo(response.data.pageInfo)
         }
@@ -182,6 +187,7 @@ function TableAddress() {
     }, [page])
     return (
         <React.Fragment>
+
             <Box className="container-products" sx={{ width: '100%', margin: 'auto' }}>
                 <Box className='container-search-sort' sx={{ flexGrow: 1, mt: 10, marginTop: '30px !important' }}>
                     <Grid container spacing={2}>
