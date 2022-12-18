@@ -191,6 +191,7 @@ function CartDatabase() {
             }
         } catch (error) {
             showError(error)
+            setLoading(false)
         }
     }
 
