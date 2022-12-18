@@ -218,11 +218,11 @@ function CartDatabase() {
                                     <i className="fas fa-plus" />
                                 </button>
                             </div>
-                            <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3">
+                            <div style={{ display: "flex", justifyContent: "center", }} className="col-md-3 col-lg-3 col-xl-3 cus-text-spgp">
                                 {/* <h6 className="text-muted">Price</h6> */}
-                                <h6 className="text-black mb-0">{formatMoney(item.product.price * item.month)}</h6>
+                                <h6 style={{ fontSize: "14px" }} className="text-black mb-0">{formatMoney(item.product.price * item.month)}</h6>
                             </div>
-                            <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <div className="col-md-1 col-lg-1 col-xl-1 text-end cus-text-spgp">
                                 <div style={{ cursor: 'pointer' }} className="text-muted">
                                     <i onClick={() => onClickRemoveItemCart(item.product.id)} className="fas fa-times" />
                                 </div>
@@ -232,9 +232,11 @@ function CartDatabase() {
                                     {/* hide this div */}
                                 </div>
                             </div>
-                            <h6 style={{ fontSize: '0.8em' }} className="text-muted mt-2">Ngày bắt đầu:
-                                <span className="text-nowrap mr-3"> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}</span>
-                                - <span className='ml-2'>{showDate2(0, item.month)}</span></h6>
+                            <div style={{ padding: "" }} className="date-cus-sps">Ngày bắt đầu:
+                                <span> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}
+                                    - {showDate2(0, item.month)}
+                                </span>
+                            </div>
 
                         </div>
                     </div>
@@ -261,21 +263,21 @@ function CartDatabase() {
                                                 <h1 className="fw-bold mb-0 text-black">Thanh toán</h1>
                                                 <h6 className="mb-0 text-muted" style={{ fontWeight: 'bold' }}>Số lượng trụ: {arrayCart.length} </h6>
                                             </div>
-                                            {
-                                                <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
 
-                                                    <div className="col-md-3 col-lg-3 col-xl-3 title-mobie">
-                                                        <h6 className="text-muted">Tên sản phẩm</h6>
-                                                    </div>
-                                                    <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
-                                                        <h6 className="text-muted">Số tháng thuê</h6>
-                                                    </div>
-                                                    <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
-                                                        <h6 className="text-muted">Giá tiền</h6>
-                                                    </div>
-                                                    <div className="col-md-1 col-lg-1 col-xl-1">
-                                                        <h6 className="text-muted"></h6>                                                        </div>
-                                                </div>}
+                                            <div style={{ display: "flex", flexDirection: "row", width: "100%" }} className=" row mb-2 d-flex justify-content-between align-items-center">
+
+                                                <div className="col-md-3 col-lg-3 col-xl-3 title-mobie">
+                                                    <h6 className="text-muted">Tên sản phẩm</h6>
+                                                </div>
+                                                <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
+                                                    <h6 className="text-muted">Số tháng thuê</h6>
+                                                </div>
+                                                <div style={{ display: "flex", justifyContent: "center" }} className="col-md-3 col-lg-3 col-xl-3 title-mobie">
+                                                    <h6 className="text-muted">Giá tiền</h6>
+                                                </div>
+                                                <div className="col-md-1 col-lg-1 col-xl-1">
+                                                    <h6 className="text-muted"></h6>                                                        </div>
+                                            </div>
                                             <div className='scrollbar' style={{ boxShadow: 'none' }} id='style-1' >
                                                 <hr className="mb-3 mt-1" />
 
@@ -310,7 +312,7 @@ function CartDatabase() {
 
                                             {arrayCart.length > 0 ?
                                                 token && decoded ? <button
-                                                    style={{ marginTop: '120px' }}
+                                                    style={{ marginTop: '' }}
                                                     disabled={btnDisabled}
                                                     type="button"
                                                     className="btn btn-dark btn-block btn-lg myDIV"
