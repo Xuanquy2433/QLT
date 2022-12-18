@@ -57,6 +57,76 @@ function AddressDetail() {
         try {
             if (!token) {
                 const response = selected.num1 === 0 && selected.num2 === 0 ?
+                    await
+                        toast.promise(
+                            axios.get(API_GET_ADDRESS_DETAIL_USER + id[0]),
+                            {
+                                pending: 'Đang xử lý ... ',
+                            }, {
+                            style: {
+                                boxShadow: '5px 5px 20px 5px #black',
+                            },
+                        }
+                        )
+                    : await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
+                if (response.status === 200) {
+                    setDataAddressProduct(response.data.product)
+                    setAddress(response.data.address)
+                }
+
+            } else {
+                const response = selected.num1 === 0 ?
+                    await
+                        toast.promise(
+                            axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0], {
+                                headers: {
+                                    'authorization': 'Bearer ' + token,
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                }
+                            }),
+                            {
+                                pending: 'Đang xử lý ... ',
+                            }, {
+                            style: {
+                                boxShadow: '5px 5px 20px 5px #black',
+                            },
+                        }
+                        )
+                    : await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2, {
+                        headers: {
+                            'authorization': 'Bearer ' + token,
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                if (response.status === 200) {
+                    setDataAddressProduct(response.data.product)
+                    setAddress(response.data.address)
+                    setCount(response.data.product.filter(product => product.status === "AVAILABLE" && product.inCart !== true).length)
+                }
+            }
+
+        } catch (error) {
+            if (error && error.response.status === 400 || error.response.status === 404) {
+                toast.warning('Không có địa chỉ này !', {
+                    autoClose: 3000
+                })
+                history.push('/auth/pageNotFound')
+            }
+            if (error && error.response.status === 500 || error.response.status === 500) {
+                console.log(error);
+                setDataAddressProduct({})
+                console.log(dataAddressProduct);
+            }
+
+        }
+    }
+
+    const getAddressNotPending = async () => {
+        try {
+            if (!token) {
+                const response = selected.num1 === 0 && selected.num2 === 0 ?
                     await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
                     : await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {

@@ -81,12 +81,20 @@ function TableAddress() {
     };
 
     const getAllAddRess = async (e) => {
-        const response = await axios.get(API_GET_ADDRESS + page + '?dataPerPage=6&sort=desc&sortField=totalProductAvailable')
+        const response = await
+            toast.promise(
+                axios.get(API_GET_ADDRESS + page + '?dataPerPage=6&sort=desc&sortField=totalProductAvailable'),
+                {
+                    pending: 'Đang xử lý ... ',
+                }, {
+                style: {
+                    boxShadow: '5px 5px 20px 5px #black',
+                },
+            }
+            );
         if (response) {
             setData(response.data.contents)
             setDataInfo(response.data.pageInfo)
-
-
         }
     }
 

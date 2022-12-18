@@ -93,7 +93,13 @@ function CartDatabase() {
                             pending: 'Hệ thống đang xử lý ...',
                             success: 'Đặt trụ thành công ',
                         },
-                        { autoClose: 2000 }
+                        { autoClose: 2000 },
+                        {
+                            style: {
+                                boxShadow: '5px 5px 20px 5px #black',
+                                border: '1px solid black'
+                            },
+                        }
                     );
 
                 if (response && response.status === 200) {

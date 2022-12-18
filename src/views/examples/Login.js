@@ -63,8 +63,20 @@ const Login = () => {
             autoClose: 1500
           })
           setIsLoading(false)
+          //check role user
           if (jwt_decode(response?.data.token).roles === `[ROLE_USER]`) {
-            //check role user
+            // redirect
+            for (let i = arrLocations.length - 2; i < arrLocations.length; i--) {
+              console.log(arrLocations[i]);
+              if (arrLocations[i] === "/auth/register" || arrLocations[i] === "/auth/login") {
+                history.replace({ pathname: '/auth/homePage' })
+                break
+              } else if (arrLocations[i] !== "/auth/register" || arrLocations[i] !== "/auth/login") {
+                history.replace({ pathname: arrLocations[i] })
+                break
+              }
+              // history.replace({ pathname: arrLocations[i] === "auth/register" ? arrLocations[i] : '/auth/homePage' })
+            }
             if (localStorage.getItem('countCart') == null) {
               const response2 = await axios.get(API_GET_CART, {
                 headers: {
@@ -77,18 +89,6 @@ const Login = () => {
                 localStorage.setItem('countCart', JSON.stringify(response2.data.length));
                 window.dispatchEvent(new Event("storage"));
               }
-            }
-
-            for (let i = arrLocations.length - 2; i < arrLocations.length; i--) {
-              console.log(arrLocations[i]);
-              if (arrLocations[i] === "/auth/register" || arrLocations[i] === "/auth/login") {
-                history.replace({ pathname: '/auth/homePage' })
-                break
-              } else if (arrLocations[i] !== "/auth/register" || arrLocations[i] !== "/auth/login") {
-                history.replace({ pathname: arrLocations[i] })
-                break
-              }
-              // history.replace({ pathname: arrLocations[i] === "auth/register" ? arrLocations[i] : '/auth/homePage' })
             }
 
             //add cart local to database
