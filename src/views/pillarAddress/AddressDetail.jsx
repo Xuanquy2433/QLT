@@ -20,6 +20,9 @@ import Map from "./UserMap";
 import Nouislider from "nouislider-react";
 import { API_ADD_COMBO_TO_CART } from "../../utils/const";
 import { Button } from '@mui/material';
+import { API_WISHLIST_REMOVE } from "utils/const";
+import { API_WISHLIST_GET } from "utils/const";
+import { API_WISHLIST_ADD } from "utils/const";
 
 const style = {
     position: 'absolute',
@@ -61,7 +64,7 @@ function AddressDetail() {
                         toast.promise(
                             axios.get(API_GET_ADDRESS_DETAIL_USER + id[0]),
                             {
-                                pending: 'Đang xử lý ... ',
+                                pending: 'Đang tải dữ liệu... ',
                             }, {
                             style: {
                                 boxShadow: '5px 5px 20px 5px #black',
@@ -171,8 +174,67 @@ function AddressDetail() {
 
         }
     }
+    useEffect(() => {
+        getWishList()
+    }, [])
+    const [data, setData] = useState([])
+    const getWishList = async (id) => {
+        const response = await axios.get(API_WISHLIST_GET + 0, {
+            headers: {
+                'authorization': 'Bearer ' + token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response.status === 200) {
+            setData(response.data)
+        }
+    }
+
+    let user = localStorage.getItem('user')
+
+    const onClickAddWishList = async (id) => {
+        setLoading(true)
+        if (!token && !user) {
+            history.push('/auth/login')
+            toast.warning("Vui lòng đăng nhập!")
+        } else {
+            const response = await axios.post(API_WISHLIST_ADD + id, {}, {
+                headers: {
+                    'authorization': 'Bearer ' + token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (response.status === 200) {
+                getWishList()
+                toast.success("Đã thêm vào danh sách yêu thích.", { autoClose: 1500 })
+                setLoading(false)
+            }
+        }
+
+    }
+
+    const onHandleRemoveWishList = async (id) => {
+        setLoading(true)
+        const response = await axios.post(API_WISHLIST_REMOVE + id, {}, {
+            headers: {
+                'authorization': 'Bearer ' + token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response.status === 200) {
+            getWishList()
+            toast.success("Đã xoá khỏi danh sách yêu thích.", { autoClose: "1500" })
+            setLoading(false)
+        }
+
+    }
+    const [loading, setLoading] = useState(false)
 
     const onClickRemoveItemCart = async (id) => {
+        setLoading(true)
         if (token) {
             const response = await axios.put(API_CART_REMOVE + id, {}, {
                 headers: {
@@ -199,6 +261,8 @@ function AddressDetail() {
                 })
                 localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
                 window.dispatchEvent(new Event("storage"));
+                setLoading(false)
+
             }
         } else {
             let listCartItems = JSON.parse(localStorage.getItem("cartTemp"))
@@ -230,6 +294,7 @@ function AddressDetail() {
 
     //add cart
     const addCart = async (item) => {
+        setLoading(true)
         // save product to cart local
         const { id, name } = item;
         let listCart = localStorage.getItem("cartTemp")
@@ -277,6 +342,7 @@ function AddressDetail() {
                     localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
                     window.dispatchEvent(new Event("storage"));
                     // history.push('/auth/cart')
+                    setLoading(false)
                 };
             } else {
                 // when don't login
@@ -314,6 +380,7 @@ function AddressDetail() {
                 // history.push('/auth/cart')
             }
         } catch (error) {
+            setLoading(false)
             console.log(error.response.data)
             if (error.response.data.message) {
                 toast.error(`${error.response.data.message}`, {
@@ -374,6 +441,7 @@ function AddressDetail() {
         }
     }
     const addComboToCart = async () => {
+        setLoading(true)
         const response = await axios.post(API_ADD_COMBO_TO_CART + '?addressId=' + id[0] + '&num1=' + selected.num1 + '&num2=' + selected.num2, {}, {
             headers: {
                 'authorization': 'Bearer ' + token,
@@ -403,6 +471,8 @@ function AddressDetail() {
                 localStorage.setItem('countCart', JSON.stringify(arrayCart.length));
                 window.dispatchEvent(new Event("storage"));
             }
+            setLoading(false);
+
         }
     }
 
@@ -565,7 +635,8 @@ function AddressDetail() {
                 </Modal>
             </div>
             {dataAddressProduct.length > 0 ?
-                <ProductComponent addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
+                <ProductComponent data={data} onClickAddWishList={onClickAddWishList} onHandleRemoveWishList={onHandleRemoveWishList}
+                    loading={loading} addCart={addCart} onClickRemoveItemCart={onClickRemoveItemCart} product={dataAddressProduct} setItem={setItem} />
                 : <div style={{ width: `300px`, color: 'white', fontSize: '1.1em', margin: '50px auto auto auto', }}> Chưa có trụ nào ở đoạn đường này !</div>
             }
         </div>

@@ -89,7 +89,7 @@ function TableAddress() {
             toast.promise(
                 axios.get(API_GET_ADDRESS + page + '?dataPerPage=6&sort=desc&sortField=totalProductAvailable'),
                 {
-                    pending: 'Đang xử lý ... ',
+                    pending: 'Đang tải dữ liệu... ',
                 }, {
                 style: {
                     boxShadow: '5px 5px 20px 5px #black',

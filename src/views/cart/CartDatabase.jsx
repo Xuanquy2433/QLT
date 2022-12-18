@@ -214,7 +214,7 @@ function CartDatabase() {
                             // borderRadius: "10px"
                         }}
                     >
-                        <ReactLoading type="spinningBubbles" color="#ffffff" height={"5%"} width={"5%"} />
+                        <ReactLoading type="spin" color="#ffffff" height={"3%"} width={"3%"} />
                     </Box>
 
                 </Modal>
