@@ -132,15 +132,21 @@ export default function AdminCategory() {
     const onDelete = async (id) => {
         setLoading(true)
         setIsLoading(true)
-        const response = await axios.delete(API_DELETE_CATEGORY + id)
-        if (response && response.status === 201) {
-            toast.success("Xoá thành công", { autoClose: 1500 })
-            setOpenDelete(false)
-            fetchAPIWhenCRUD()
+        try {
+            const response = await axios.delete(API_DELETE_CATEGORY + id)
+            if (response && response.status === 201) {
+                toast.success("Xoá thành công", { autoClose: 1500 })
+                setOpenDelete(false)
+                fetchAPIWhenCRUD()
+
+            }
+        } catch (e) {
             setIsLoading(false)
             setLoading(false)
         }
+
     }
+
     const search = async (keyword) => {
         // const response = await axios.get(API_GET_CATEGORY_PAGE + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
         // if (response) {
