@@ -90,7 +90,7 @@ export default function AdminCategory() {
                     toast.success("Thêm thành công", { autoClose: 1500 })
                     setOpen(false)
                     setIsLoading(false)
-                    fetchAPI()
+                    fetchAPIWhenCRUD()
                     setData({
                         name: "",
                         description: ""
