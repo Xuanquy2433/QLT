@@ -30,7 +30,7 @@ export default function AdminPictures() {
     const handleOpenDelete = () => setOpenDelete(true);
     const handleCloseDelete = () => setOpenDelete(false);
     const [isLoading, setIsLoading] = useState(false)
-
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         fetchAPI()
     }, [])
@@ -108,15 +108,18 @@ export default function AdminPictures() {
     }
 
     const onDelete = async (id) => {
+        setLoading(true)
         try {
             const response = await axios.delete(API_DELETE_PICTURES + id)
             if (response && response.status === 200) {
                 toast.success("Xoá thành công", { autoClose: 1500 })
                 setOpenDelete(false)
                 fetchAPI()
+                setLoading(false)
             }
         } catch (error) {
             showError(error)
+            setLoading(false)
         }
     }
     const search = async (keyword) => {
@@ -129,7 +132,7 @@ export default function AdminPictures() {
     }
     return (
         <div>
-            <Picture search={search} data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
+            <Picture loading={loading} search={search} data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
             <AddPictures isLoading={isLoading} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
             {selected && <EditPictures isLoading={isLoading} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}

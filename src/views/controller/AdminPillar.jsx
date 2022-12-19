@@ -37,6 +37,7 @@ function AdminProduct() {
   const handleOpenDelete = () => setOpenDelete(true);
   const handleCloseDelete = () => setOpenDelete(false);
   const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     getAllProduct()
     getAddress()
@@ -213,17 +214,21 @@ function AdminProduct() {
   }
 
   const onDelete = async (id) => {
+    setLoading(true)
     try {
       const response = await axios.delete(API_PRODUCT_DELETE + id)
       if (response.status === 200) {
         setOpenDelete(false)
         toast.success("Xóa thành công", { autoClose: 1500 })
         getAllProductWhenCRUD()
+        setLoading(false)
       }
     } catch (error) {
       showError(error)
+      setLoading(false)
     }
   }
+
   const search = async (keyword) => {
     console.log('key word search admin address ', keyword);
     setKeyword(keyword)
@@ -237,7 +242,7 @@ function AdminProduct() {
     <div>
       <CreatePillar isLoading={isLoading} dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar isLoading={isLoading} dataCategory={dataCategory} item={selected} setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber} />}
-      <Pillar page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
+      <Pillar loading={loading} page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages} handleChangeRowsPerPage={handleChangeRowsPerPage}
         openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
     </div>

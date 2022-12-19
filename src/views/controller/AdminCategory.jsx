@@ -30,6 +30,7 @@ export default function AdminCategory() {
     const [openDelete, setOpenDelete] = useState(false)
     const handleOpenDelete = () => setOpenDelete(true);
     const handleCloseDelete = () => setOpenDelete(false);
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         fetchAPI()
     }, [])
@@ -129,6 +130,7 @@ export default function AdminCategory() {
     }
 
     const onDelete = async (id) => {
+        setLoading(true)
         setIsLoading(true)
         const response = await axios.delete(API_DELETE_CATEGORY + id)
         if (response && response.status === 201) {
@@ -136,6 +138,7 @@ export default function AdminCategory() {
             setOpenDelete(false)
             fetchAPIWhenCRUD()
             setIsLoading(false)
+            setLoading(false)
         }
     }
     const search = async (keyword) => {
@@ -149,7 +152,7 @@ export default function AdminCategory() {
         <div>
             {selected && <EditCategory isLoading={isLoading} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
             <CreateCategory isLoading={isLoading} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
-            <Category showLoading={showLoading} isLoading={isLoading} totalPages={totalPages} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} page={page} rowsPerPage={rowsPerPage} data={data} search={search} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
+            <Category loading={loading} showLoading={showLoading} isLoading={isLoading} totalPages={totalPages} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} page={page} rowsPerPage={rowsPerPage} data={data} search={search} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
         </div>
     )

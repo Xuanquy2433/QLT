@@ -30,6 +30,7 @@ export default function AdminPillar() {
   const handleCloseDelete = () => setOpenDelete(false);
   const [pageCRUD, setPageCRUD] = React.useState(1);
   const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     fetchAPI()
   }, [])
@@ -162,16 +163,19 @@ export default function AdminPillar() {
   }
 
   const onDelete = async (id) => {
+    setLoading(true)
     try {
       const response = await axios.delete(API_DELETE_PILLAR + id)
       if (response && response.status === 201) {
         setOpenDelete(false)
         toast.success("Xóa thành công", { autoClose: 1500 });
         fetchAPIWhenCRUD();
+        setLoading(false)
       }
       //catch show error
     } catch (error) {
       showError(error)
+      setLoading(false)
     }
   }
 
@@ -189,7 +193,7 @@ export default function AdminPillar() {
     <div>
       <CreateAddress isLoading={isLoading} onSubmit={onSubmit} open={open} setOpen={setOpen} />
       {selected && <EditAddress isLoading={isLoading} item={selected} onSubmitEdit={onSubmitEdit} openEdit={openEdit} setOpenEdit={setOpenEdit} />}
-      <Address search={search} open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
+      <Address loading={loading} search={search} open={open} setOpen={setOpen} data={data} onDelete={onDelete} onEdit={onEdit} totalPages={totalPages}
         page={page} handleChangePage={handleChangePage} handleChangeRowsPerPage={handleChangeRowsPerPage} rowsPerPage={rowsPerPage}
         openDelete={openDelete} setOpenDelete={setOpenDelete} handleOpenDelete={handleOpenDelete} handleCloseDelete={handleCloseDelete} />
     </div>

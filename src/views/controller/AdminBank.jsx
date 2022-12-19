@@ -17,7 +17,7 @@ export default function AdminBank() {
     const [openEdit, setOpenEdit] = useState(false)
     const [selected, setSelected] = useState(undefined)
     const [isLoading, setIsLoading] = useState(false)
-
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         fetchAPI()
     }, [])
@@ -100,18 +100,20 @@ export default function AdminBank() {
     }
 
     const onDelete = async (id) => {
+        setLoading(true)
         console.log(id);
         const response = await axios.post(API_BANK_REMOVE + id)
         if (response.status === 200) {
             fetchAPI()
             toast.success("Xoá thành công", { autoClose: 1500 })
             setOpenDelete(false)
+            setLoading(false)
         }
     }
 
     return (
         <div>
-            <Banks onEdit={onEdit} data={data} setOpen={setOpen} onDelete={onDelete}
+            <Banks loading={loading} onEdit={onEdit} data={data} setOpen={setOpen} onDelete={onDelete}
                 handleOpenDelete={handleOpenDelete} openDelete={openDelete} handleCloseDelete={handleCloseDelete} />
             <CreateBanks isLoading={isLoading} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
             {selected && <EditBanks isLoading={isLoading} onHandleEdit={onHandleEdit} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} />
