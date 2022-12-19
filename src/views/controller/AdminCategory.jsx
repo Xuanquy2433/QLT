@@ -145,7 +145,6 @@ export default function AdminCategory() {
             setIsLoading(false)
             setLoading(false)
         }
-
     }
 
     const search = async (keyword) => {
