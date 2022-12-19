@@ -138,7 +138,8 @@ export default function AdminCategory() {
                 toast.success("Xoá thành công", { autoClose: 1500 })
                 setOpenDelete(false)
                 fetchAPIWhenCRUD()
-
+                setIsLoading(false)
+                setLoading(false)
             }
         } catch (e) {
             setIsLoading(false)
