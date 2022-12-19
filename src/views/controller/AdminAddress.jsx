@@ -105,9 +105,8 @@ export default function AdminPillar() {
         if (response && response.status === 201) {
           toast.success("Thêm thành công", { autoClose: 1500 });
           setOpenEdit(false);
-          fetchAPI();
+          fetchAPIWhenCRUD();
           setIsLoading(false)
-
           setDataAddress({
             city: '',
             street: '',

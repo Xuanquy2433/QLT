@@ -150,7 +150,7 @@ function AdminProduct() {
         if (response.status === 201) {
           toast.success("Thêm thành công", { autoClose: 1500 })
           setOpen(false)
-          getAllProduct()
+          getAllProductWhenCRUD()
           setRandomNumber(Math.floor(Math.random() * (999)))
           setIsLoading(false)
           setData({
