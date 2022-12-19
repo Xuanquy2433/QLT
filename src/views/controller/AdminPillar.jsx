@@ -169,26 +169,7 @@ function AdminProduct() {
 
       } catch (error) {
         setIsLoading(false)
-        if (error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error) {
-          toast.error(`${error.response.data.error}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error && error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else {
-          toast.error('Error', {
-            autoClose: 2000
-          })
-        }
+        showError(error)
       }
     }
   }
@@ -226,27 +207,7 @@ function AdminProduct() {
         //catch show error
       } catch (error) {
         setIsLoading(false)
-        console.log(error.response.data)
-        if (error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error) {
-          toast.error(`${error.response.data.error}`, {
-            autoClose: 2000
-          })
-        }
-        else if (error.response.data.error && error.response.data.message) {
-          toast.error(`${error.response.data.message}`, {
-            autoClose: 2000
-          })
-        }
-        else {
-          toast.error('Error', {
-            autoClose: 2000
-          })
-        }
+        showError(error)
       }
     }
   }
