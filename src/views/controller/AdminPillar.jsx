@@ -131,12 +131,13 @@ function AdminProduct() {
     if (data.name === "") {
       toast.warning("Không được để trống tên địa chỉ", { autoClose: 1500 })
     }
-    else if (data.price === "") {
+    else if (data.price === 0) {
       toast.warning("Không được để trống giá", { autoClose: 1500 })
     }
     else if (data.description === "") {
       toast.warning("Không được để trống chú thích", { autoClose: 1500 })
     }
+
     else {
       setIsLoading(true)
       try {
