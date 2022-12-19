@@ -234,8 +234,8 @@ function AddressDetail() {
     const [loading, setLoading] = useState(false)
 
     const onClickRemoveItemCart = async (id) => {
-        setLoading(true)
         if (token) {
+            setLoading(true)
             const response = await axios.put(API_CART_REMOVE + id, {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -294,7 +294,6 @@ function AddressDetail() {
 
     //add cart
     const addCart = async (item) => {
-        setLoading(true)
         // save product to cart local
         const { id, name } = item;
         let listCart = localStorage.getItem("cartTemp")
@@ -310,6 +309,7 @@ function AddressDetail() {
         let checkCartHasBeen = true
         try {
             if (token) {
+                setLoading(true)
                 // when already login
                 const response = await axios.post(API_ADD_CART, {
                     month: 1,
