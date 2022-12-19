@@ -93,6 +93,9 @@ export default function AdminPillar() {
     else if (data.street === '') {
       toast.warning("Đường không được để trống", { autoClose: 1500 });
     }
+    else if (data.description === '') {
+      toast.warning("Mô tả không được để trống", { autoClose: 1500 });
+    }
     else {
       setIsLoading(true)
       try {
@@ -133,6 +136,9 @@ export default function AdminPillar() {
   const onSubmitEdit = async (data) => {
     if (data.city === '') {
       toast.warning("Thành phố không được để trống", { autoClose: 1500 });
+    }
+    else if (data.street === '') {
+      toast.warning("Đường không được để trống", { autoClose: 1500 });
     }
     else if (data.street === '') {
       toast.warning("Đường không được để trống", { autoClose: 1500 });
