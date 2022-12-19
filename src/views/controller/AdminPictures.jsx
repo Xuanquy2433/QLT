@@ -122,6 +122,7 @@ export default function AdminPictures() {
             setLoading(false)
         }
     }
+    console.log('ff ',data)
     const search = async (keyword) => {
         // const response = await axios.get(API_GET_ADMIN_ADDRESS + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
         // if (response) {

@@ -155,11 +155,11 @@ function AdminProduct() {
           setRandomNumber(Math.floor(Math.random() * (999)))
           setIsLoading(false)
           setData({
-            addressId: null,
+            addressId: 0,
             description: "",
             status: "AVAILABLE",
             multipartFile: '',
-            categoryId: null,
+            categoryId: 0,
             name: "",
             price: 0,
             lat: 0,
