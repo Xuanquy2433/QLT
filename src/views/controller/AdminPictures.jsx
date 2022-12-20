@@ -122,7 +122,6 @@ export default function AdminPictures() {
             setLoading(false)
         }
     }
-    console.log('ff ',data)
     const search = async (keyword) => {
         // const response = await axios.get(API_GET_ADMIN_ADDRESS + page + 1 + "?dataPerPage=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
         // if (response) {
@@ -135,7 +134,7 @@ export default function AdminPictures() {
         <div>
             <Picture loading={loading} search={search} data={data} setOpen={setOpen} onEdit={onEdit} onDelete={onDelete}
                 openDelete={openDelete} handleCloseDelete={handleCloseDelete} handleOpenDelete={handleOpenDelete} />
-            <AddPictures isLoading={isLoading} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
+            <AddPictures key={Date.now()} isLoading={isLoading} open={open} setOpen={setOpen} onSubmitAdd={onSubmitAdd} />
             {selected && <EditPictures isLoading={isLoading} data={data} item={selected} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} />}
         </div>
     )

@@ -132,9 +132,9 @@ function OrderPlace() {
         getOrderUserConfirmed()
     }, [])
 
-    useEffect(() => {
-        getOrderUserConfirmed()
-    }, [size])
+    // useEffect(() => {
+    //     getOrderUserConfirmed()
+    // }, [size])
 
     let d = new Date();
     d.setMonth(d.getMonth() - 1);
@@ -146,7 +146,19 @@ function OrderPlace() {
     const [keyword, setKeyword] = useState(null);
 
     const getOrderUserConfirmed = async (e) => {
-        const response = await axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + fromDate + '&toDate=' + toDate)
+        const response = await
+            toast.promise(
+                axios.get(API_GET_ORDER_ADMIN + '?fromDate=' + fromDate + '&toDate=' + toDate),
+                {
+                    pending: 'Đang tải dữ liệu ...',
+                },
+                {
+                    style: {
+                        border: '1px solid black'
+                    }
+                }
+            );
+
         if (response && response.status === 200) {
             setData(response.data)
         }
@@ -394,7 +406,6 @@ function OrderPlace() {
         }
 
     };
-    console.log("key ", keyword);
     return (
         <>
             <Modal
@@ -420,7 +431,6 @@ function OrderPlace() {
             <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-
                     <Grid container spacing={1} xs={12} style={{ width: '100%', display: "flex", flexDirection: "row" }}>
                         {/* <Button onClick={handleOpen} sx={{ padding: "10px 5px", marginRight: '2%', height: '3.2em', width: "15%" }} variant="contained" color="success">
                             Thêm Trụ

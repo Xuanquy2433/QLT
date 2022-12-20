@@ -61,17 +61,16 @@ function AddressDetail() {
             if (!token) {
                 const response = selected.num1 === 0 && selected.num2 === 0 ?
                     await
-                        // toast.promise(
+                        toast.promise(
                             axios.get(API_GET_ADDRESS_DETAIL_USER + id[0])
-
-                        //    ,{
-                        //         pending: 'Đang tải dữ liệu... ',
-                        //     }, {
-                        //     style: {
-                        //         boxShadow: '5px 5px 20px 5px #black',
-                        //     },
-                        // }
-                        // )
+                           ,{
+                                pending: 'Đang tải dữ liệu... ',
+                            }, {
+                            style: {
+                                boxShadow: '5px 5px 20px 5px #black',
+                            },
+                        }
+                        )
                     : await axios.get(API_GET_ADDRESS_DETAIL_USER + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2);
                 if (response.status === 200) {
                     setDataAddressProduct(response.data.product)
@@ -81,7 +80,7 @@ function AddressDetail() {
             } else {
                 const response = selected.num1 === 0 ?
                     await
-                        // toast.promise(
+                        toast.promise(
                             axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0], {
                                 headers: {
                                     'authorization': 'Bearer ' + token,
@@ -89,15 +88,15 @@ function AddressDetail() {
                                     'Content-Type': 'application/json'
                                 }
                             })
-                        //     ,
-                        //     {
-                        //         pending: 'Đang xử lý ... ',
-                        //     }, {
-                        //     style: {
-                        //         boxShadow: '5px 5px 20px 5px #black',
-                        //     },
-                        // }
-                        // )
+                            ,
+                            {
+                                pending: 'Đang xử lý ... ',
+                            }, {
+                            style: {
+                                boxShadow: '5px 5px 20px 5px #black',
+                            },
+                        }
+                        )
                     : await axios.get(API_GET_ADDRESS_DETAIL_NOT_TOKEN + id[0] + "?num1=" + selected.num1 + "&num2=" + selected.num2, {
                         headers: {
                             'authorization': 'Bearer ' + token,

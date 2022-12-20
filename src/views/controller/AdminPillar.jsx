@@ -69,7 +69,6 @@ function AdminProduct() {
         setRowsPerPage(+event.target.value);
       }
     } else {
-      console.log("da vao search");
       const response = await axios.get(API_GET_PRODUCT + 1 + "?quantity=" + event.target.value + "&sort=desc" + "&sortField=id&keyword=" + keyword)
       if (response) {
         setData(response.data.content)
@@ -89,8 +88,6 @@ function AdminProduct() {
         setData(response.data.content)
       }
     } else {
-      console.log("da vao search");
-
       const response = await axios.get(API_GET_PRODUCT + (newPage + 1) + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
       if (response) {
         setPage(newPage)
@@ -108,14 +105,12 @@ function AdminProduct() {
   }
 
   const getAllProductWhenCRUD = async (e) => {
-    console.log('get crud');
     const response = await axios.get(API_GET_PRODUCT + pageCRUD + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id")
     if (response) {
       setTotalPages(response.data.totalElements)
       setData(response.data.content)
     }
   }
-  console.log('ok roi ', pageCRUD);
   useEffect(() => {
     setSelected(product)
   }, [product, data])
@@ -154,7 +149,6 @@ function AdminProduct() {
           getAllProductWhenCRUD()
           setRandomNumber(Math.floor(Math.random() * (999)))
           setIsLoading(false)
-
           setData({
             description: "",
             status: "AVAILABLE",
@@ -166,7 +160,6 @@ function AdminProduct() {
             num1: 0,
             num2: 0,
           })
-          toast.success("Thêm thành công", { autoClose: 1500 })
           setOpen(false)
           getAllProductWhenCRUD()
           setRandomNumber(Math.floor(Math.random() * (999)))
@@ -236,7 +229,6 @@ function AdminProduct() {
   }
 
   const search = async (keyword) => {
-    console.log('key word search admin address ', keyword);
     setKeyword(keyword)
     const response = await axios.get(API_GET_PRODUCT + page + 1 + "?quantity=" + rowsPerPage + "&sort=desc" + "&sortField=id&keyword=" + keyword)
     if (response) {
