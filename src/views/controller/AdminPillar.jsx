@@ -136,8 +136,10 @@ function AdminProduct() {
 
     else {
       setIsLoading(true)
-      if(data.addressId === undefined||data.categoryId === undefined){
+      if(data.addressId === undefined){
         data.addressId = 0
+      }
+      if(data.categoryId === undefined){
         data.categoryId = 0
       }
       try {
