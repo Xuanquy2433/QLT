@@ -15,6 +15,7 @@ import { API_GET_ADMIN_ADDRESS } from 'utils/const'
 import { showError } from 'utils/error'
 import { API_GET_ALL_ADDRESS } from 'utils/const'
 import { API_GET_ALL_CATEGORY } from 'utils/const'
+import login from "../examples/Login";
 
 function AdminProduct() {
   const [keyword, setKeyword] = useState('')
@@ -135,10 +136,14 @@ function AdminProduct() {
 
     else {
       setIsLoading(true)
+      if(data.addressId === undefined||data.categoryId === undefined){
+        data.addressId = 0
+        data.categoryId = 0
+      }
       try {
         const formData = new FormData();
         formData.append('multipartFile', data.multipartFile);
-        const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId + '&categoryId=' + data.categoryId + '&description=' + data.description
+        const response = await axios.post(API_PRODUCT_ADD + '?addressId=' + data.addressId+ '&categoryId=' + data.categoryId + '&description=' + data.description
           + '&name=' + data.name + '&price=' + data.price + '&lat=' + data.lat + '&lng=' + data.lng + '&num1=' + data.num1 + '&num2=' + data.num2, formData,
           {
             headers: { 'Content-Type': 'multipart/form-data' }
@@ -238,7 +243,6 @@ function AdminProduct() {
   }
   return (
     <div>
-      <CreatePillar key={Date.now()} isLoading={isLoading} dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       <CreatePillar isLoading={isLoading} dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} added={randomNumber} />
       {selected && <EditPillar isLoading={isLoading} dataCategory={dataCategory} item={selected} setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber} />}
       <Pillar loading={loading} page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}

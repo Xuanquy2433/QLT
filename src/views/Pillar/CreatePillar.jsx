@@ -59,8 +59,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
             num1: 0,
             num2: 0,
         })
-        setValueStateAddress('')
-        setValueStateCategory('')
+        setValueStateAddress(0)
+        setValueStateCategory(0)
     }
 
 
@@ -84,8 +84,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
 
 
     useEffect(() => {
-        setValueStateAddress(null)
-        setValueStateCategory(null)
+        setValueStateAddress(0)
+        setValueStateCategory(0)
         setAddressPoint([])
 
     }, [added])
