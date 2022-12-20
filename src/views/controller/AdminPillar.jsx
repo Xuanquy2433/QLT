@@ -149,11 +149,6 @@ function AdminProduct() {
             headers: { 'Content-Type': 'multipart/form-data' }
           })
         if (response.status === 201) {
-          toast.success("Thêm thành công", { autoClose: 1500 })
-          setOpen(false)
-          getAllProductWhenCRUD()
-          setRandomNumber(Math.floor(Math.random() * (999)))
-          setIsLoading(false)
           setData({
             addressId: 0,
             description: "",
@@ -167,6 +162,12 @@ function AdminProduct() {
             num1: 0,
             num2: 0,
           })
+          toast.success("Thêm thành công", { autoClose: 1500 })
+          setOpen(false)
+          getAllProductWhenCRUD()
+          setRandomNumber(Math.floor(Math.random() * (999)))
+          setIsLoading(false)
+
         }
 
       } catch (error) {
@@ -241,7 +242,7 @@ function AdminProduct() {
   }
   return (
     <div>
-      <CreatePillar isLoading={isLoading} dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
+      <CreatePillar key={Date.now()} isLoading={isLoading} dataCategory={dataCategory} onSubmit={onSubmit} open={open} setOpen={setOpen} dataAddress={dataAddress} />
       {selected && <EditPillar isLoading={isLoading} dataCategory={dataCategory} item={selected} setClickedProduct={setProduct} openEdit={openEdit} setOpenEdit={setOpenEdit} onSubmitEdit={onSubmitEdit} dataAddress={dataAddress} updated={randomNumber} />}
       <Pillar loading={loading} page={page} search={search} rowsPerPage={rowsPerPage} onDelete={onDelete} onEdit={onEdit} data={data} setOpen={setOpen}
         handleChangePage={handleChangePage} totalPages={totalPages} handleChangeRowsPerPage={handleChangeRowsPerPage}
