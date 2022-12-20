@@ -36,6 +36,8 @@ import AdminSize from "../Realtime/AdminSize";
 import { formatMoney } from './../../common/formatMoney';
 import moment from 'moment';
 import { parse } from "@fortawesome/fontawesome-svg-core";
+import Box from '@mui/material/Box';
+import ReactLoading from 'react-loading';
 
 const columns = [
     {
@@ -114,6 +116,7 @@ function OrderPlace() {
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const [size, setSize] = React.useState(0);
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -256,6 +259,7 @@ function OrderPlace() {
     };
 
     const confirmOrder = async (id) => {
+        setLoading(true)
         try {
             const response = await
                 toast.promise(
@@ -272,9 +276,11 @@ function OrderPlace() {
             if (response.status === 200) {
                 // toast.success('Thao tác thành công ! ', { autoClose: 2000 })
                 getOrderUserConfirmed()
+                setLoading(false)
             }
         } catch (error) {
             showError(error)
+            setLoading(false)
         }
     }
     const [openRefuseOrder, setOpenRefuseOrder] = React.useState(false);
@@ -287,15 +293,21 @@ function OrderPlace() {
         setOpenRefuseOrder(false);
     };
     const refuseOrder = async (id) => {
+        setLoading(true)
         try {
             const response = await axios.put(API_CONFIRM_ORDER + id + '/false')
             if (response.status === 200) {
                 toast.success('Thao tác thành công ! ', { autoClose: 2000 })
                 getOrderUserConfirmed()
+                setLoading(false)
                 // Sidebar
-            } else toast.error('Thất bại ! ', { autoClose: 2000 })
+            } else {
+                toast.error('Thất bại ! ', { autoClose: 2000 })
+                setLoading(false)
+            }
         } catch (error) {
             showError(error)
+            setLoading(false)
         }
     }
 
@@ -338,21 +350,31 @@ function OrderPlace() {
     const [idSave, setIdSave] = React.useState(Number);
 
     const extendTime = async (id) => {
+        setLoading(true)
         const response = await axios.post(API_EXTEND_TIME + id + '?day=tomorrow')
         if (response.status === 200) {
             toast.success('Thao tác thành công ! ', { autoClose: 1500 })
             getOrderUserConfirmed()
+            setLoading(false)
             // Sidebar
-        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+        } else {
+            toast.error('Thất bại ! ', { autoClose: 2000 })
+            setLoading(false)
+        }
     }
 
     const extendTimeToday = async (id) => {
+        setLoading(true)
         const response = await axios.post(API_EXTEND_TIME + id)
         if (response.status === 200) {
             toast.success('Thao tác thành công ! ', { autoClose: 1500 })
             getOrderUserConfirmed()
+            setLoading(false)
             // Sidebar
-        } else toast.error('Thất bại ! ', { autoClose: 2000 })
+        } else {
+            toast.error('Thất bại ! ', { autoClose: 2000 })
+            setLoading(false)
+        }
     }
 
     const search = async (e) => {
@@ -375,6 +397,26 @@ function OrderPlace() {
     console.log("key ", keyword);
     return (
         <>
+            <Modal
+                open={loading}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignContent: "center",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "100%",
+                        height: "100vh",
+                        // borderRadius: "10px"
+                    }}
+                >
+                    <ReactLoading type="spinningBubbles" color="#ffffff" height={"5%"} width={"5%"} />
+                </Box>
+
+            </Modal>
             <AdminSize changeCount={(data) => setSize(data)} ></AdminSize>
             <Container fluid style={{ height: "200px" }} className="header bg-gradient-info pb-8 pt-5 pt-md-8 ">
                 <Paper sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
