@@ -42,7 +42,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
         num2: 0,
     })
 
-
+    const [valueStateAddress, setValueStateAddress] = useState(0);
+    const [valueStateCategory, setValueStateCategory] = useState(0);
     const handleClose = () => {
         setOpen(false);
         setData({
@@ -58,6 +59,8 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
             num1: 0,
             num2: 0,
         })
+        setValueStateAddress('')
+        setValueStateCategory('')
     }
 
 
@@ -79,9 +82,13 @@ export default function CreatePillar({ onSubmit, open, setOpen, dataAddress, dat
         }
     };
 
-    const [valueStateAddress, setValueStateAddress] = useState(0);
-    const [valueStateCategory, setValueStateCategory] = useState(0);
 
+    useEffect(() => {
+        setValueStateAddress(null)
+        setValueStateCategory(null)
+        setAddressPoint([])
+
+    }, [added])
 
     const fetchAddressData = async () => {
         const response = await axios.get(API_GET_ADDRESS_DETAIL_USER + valueStateAddress)
