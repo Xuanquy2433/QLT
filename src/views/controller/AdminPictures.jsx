@@ -57,9 +57,9 @@ export default function AdminPictures() {
         }
     })
     const onSubmitAdd = async (data, setData) => {
-        // if (data.category === '') {
-        //     data.category = 'banner'
-        // }
+        if (data.category === undefined) {
+            data.category = 0
+        }
         setIsLoading(true)
         try {
             const formData = new FormData();

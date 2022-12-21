@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { useEffect } from 'react';
 
 export default function AddPictures({ open, setOpen, onSubmitAdd, isLoading }) {
     const [data, setData] = useState({
@@ -33,7 +34,12 @@ export default function AddPictures({ open, setOpen, onSubmitAdd, isLoading }) {
             image: "",
         })
         setOpen(false)
+        setValueStateCategory(0)
     }
+    useEffect(() => {
+        setValueStateCategory(0)
+    }, [])
+
     const [valueStateCategory, setValueStateCategory] = useState('');
     const handleChangeCategory = (event) => {
         const value = event.target.value;

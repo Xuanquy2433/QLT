@@ -218,7 +218,7 @@ function CartDatabase() {
                     </Box>
 
                 </Modal>
-                {JSON.parse(key[0]).length >= 2 ? <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[1].name} đến {JSON.parse(key[0])[0].name}</div> :
+                {JSON.parse(key[0]).length >= 2 ? <div>Đường: {JSON.parse(key[0])[0].addressName} - từ {JSON.parse(key[0])[0].name} đến {JSON.parse(key[0])[1].name}</div> :
                     <div>Đường: {JSON.parse(key[0])[0].addressName}</div>}
                 {key[1].map((item) =>
                     <div>
@@ -273,7 +273,7 @@ function CartDatabase() {
                             </div>
                             <div style={{ padding: "" }} className="date-cus-sps">Ngày bắt đầu:
                                 <span> {new Date().getDate()}{"/"}{new Date().getMonth() + 1}{"/"}{new Date().getFullYear()}
-                                    - {showDate2(0, item.month)}
+                                     <span> - </span> {showDate2(0, item.month)}
                                 </span>
                             </div>
 
