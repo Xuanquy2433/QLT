@@ -37,7 +37,7 @@ export default function AddPictures({ open, setOpen, onSubmitAdd, isLoading }) {
         setValueStateCategory(0)
     }
     useEffect(() => {
-        setValueStateCategory(0)
+        // setValueStateCategory(0)
     }, [])
 
     const [valueStateCategory, setValueStateCategory] = useState('');
