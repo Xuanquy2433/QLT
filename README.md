@@ -1,2 +1,2 @@
-# QLT
-# backend: https://github.com/Bakabot307/chothuecot.git
+# QLT - Frontend
+# backend: https://github.com/xqsadness/QLT-Backend
